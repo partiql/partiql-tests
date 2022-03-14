@@ -1,0 +1,65 @@
+
+pass::parser::test{
+    name: 'literal - int',
+    query: '5'
+}
+
+pass::parser::test{
+    name: 'literal - null',
+    query: 'null'
+}
+
+pass::parser::test{
+    name: 'literal - missing',
+    query: 'missing'
+}
+
+pass::parser::test{
+    name: 'literal - list',
+    query: '[a, 5]'
+}
+
+pass::parser::test{
+    name: 'literal - list with binary operation',
+    query: '[a, 5, (b + 6)]'
+}
+
+pass::parser::test{
+    name: 'literal - list function',
+    query: 'LIST(a, 5)'
+}
+
+pass::parser::test{
+    name: 'literal - sexp function',
+    query: 'SEXP(a, 5)'
+}
+
+pass::parser::test{
+    name: 'literal - sexp function with binary operation',
+    query: 'SEXP(a, 5, (b + 6))'
+}
+
+pass::parser::test{
+    name: 'literal - struct',
+    query: "{'x':a, 'y':5 }"
+}
+
+pass::parser::test{
+    name: 'literal - struct with binary operation',
+    query: "{'x':a, 'y':5, 'z':(b + 6)}"
+}
+
+pass::parser::test{
+    name: 'literal - nested empty list',
+    query: '[[]]'
+}
+
+pass::parser::test{
+    name: 'literal - nested empty bag',
+    query: '<<<<>>>>'
+}
+
+pass::parser::test{
+    name: 'literal - nested empty struct',
+    query: "{'a':{}}"
+}

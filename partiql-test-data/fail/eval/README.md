@@ -1,0 +1,1 @@
+Tests in this directory should have queries that error during evaluation.

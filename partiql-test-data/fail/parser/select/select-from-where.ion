@@ -1,0 +1,6 @@
+
+
+fail::parser::test::{
+    name: 'SELECT with multiple SELECT stars',
+    query: 'SELECT *, * FROM table1'
+}
