@@ -1,1 +1,1 @@
-Tests in this directory have queries that can be parsed without error.
+Tests in this directory have statements that can be parsed without error.
