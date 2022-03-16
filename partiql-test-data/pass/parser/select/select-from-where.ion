@@ -1,5 +1,1 @@
-
-pass::parser::test{
-    name: 'SELECT with single FROM',
-    query: 'SELECT a FROM table1'
-}
+'SELECT with single FROM'::parse::"SELECT a FROM table1"

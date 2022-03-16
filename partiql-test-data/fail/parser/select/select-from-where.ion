@@ -1,6 +1,1 @@
-
-
-fail::parser::test::{
-    name: 'SELECT with multiple SELECT stars',
-    query: 'SELECT *, * FROM table1'
-}
+fail::'SFW without WHERE expression'::parse::"SELECT * FROM foo WHERE"

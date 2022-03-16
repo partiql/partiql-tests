@@ -1,0 +1,15 @@
+'literal'::[
+    'int'::parse::"5",
+    'null'::parse::"null",
+    'missing'::parse::"missing",
+    'list'::parse::"[a, 5]",
+    'list with binary operation'::parse::"[a, 5, (b + 6)]",
+    'list function'::parse::"LIST(a, 5)",
+    'sexp function'::parse::"SEXP(a, 5)",
+    'sexp function with binary operation'::parse::"SEXP(a, 5, (b + 6))",
+    'struct'::parse::"{'x':a, 'y':5 }",
+    'struct with binary operation'::parse::"{'x':a, 'y':5, 'z':(b + 6)}",
+    'nested empty list'::parse::"[[]]",
+    'nested empty bag'::parse::"<<<<>>>>",
+    'nested empty struct'::parse::"{'a':{}}",
+]
