@@ -1,1 +1,7 @@
-'SELECT with single FROM'::parse::"SELECT a FROM table1"
+parse::{
+    name: "SELECT with single FROM",
+    statement: "SELECT a FROM table1",
+    assert: {
+        result: Ok
+    }
+}

@@ -1,1 +1,7 @@
-fail::'SFW without WHERE expression'::parse::"SELECT * FROM foo WHERE"
+parse::{
+    name: "SFW without WHERE expression",
+    statement: "SELECT * FROM foo WHERE",
+    assert: {
+        result: ParserError
+    }
+}

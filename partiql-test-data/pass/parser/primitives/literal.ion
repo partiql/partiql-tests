@@ -1,15 +1,93 @@
 'literal'::[
-    'int'::parse::"5",
-    'null'::parse::"null",
-    'missing'::parse::"missing",
-    'list'::parse::"[a, 5]",
-    'list with binary operation'::parse::"[a, 5, (b + 6)]",
-    'list function'::parse::"LIST(a, 5)",
-    'sexp function'::parse::"SEXP(a, 5)",
-    'sexp function with binary operation'::parse::"SEXP(a, 5, (b + 6))",
-    'struct'::parse::"{'x':a, 'y':5 }",
-    'struct with binary operation'::parse::"{'x':a, 'y':5, 'z':(b + 6)}",
-    'nested empty list'::parse::"[[]]",
-    'nested empty bag'::parse::"<<<<>>>>",
-    'nested empty struct'::parse::"{'a':{}}",
+    parse::{
+        name: "int",
+        statement: "5",
+        assert: {
+            result: Ok
+        }
+    },
+    parse::{
+        name: "null",
+        statement: "null",
+        assert: {
+            result: Ok
+        }
+    },
+    parse::{
+        name: "missing",
+        statement: "missing",
+        assert: {
+            result: Ok
+        }
+    },
+    parse::{
+        name: "list",
+        statement: "[a, 5]",
+        assert: {
+            result: Ok
+        }
+    },
+    parse::{
+        name: "list with binary operation",
+        statement: "[a, 5, (b + 6)]",
+        assert: {
+            result: Ok
+        }
+    },
+    parse::{
+        name: "list function",
+        statement: "LIST(a, 5)",
+        assert: {
+            result: Ok
+        }
+    },
+    parse::{
+        name: "sexp function",
+        statement: "SEXP(a, 5)",
+        assert: {
+            result: Ok
+        }
+    },
+    parse::{
+        name: "sexp function with binary operation",
+        statement: "SEXP(a, 5, (b + 6))",
+        assert: {
+            result: Ok
+        }
+    },
+    parse::{
+        name: "struct",
+        statement: "{'x':a, 'y':5 }",
+        assert: {
+            result: Ok
+        }
+    },
+    parse::{
+        name: "struct with binary operation",
+        statement: "{'x':a, 'y':5, 'z':(b + 6)}",
+        assert: {
+            result: Ok
+        }
+    },
+    parse::{
+        name: "nested empty list",
+        statement: "[[]]",
+        assert: {
+            result: Ok
+        }
+    },
+    parse::{
+        name: "nested empty bag",
+        statement: "<<<<>>>>",
+        assert: {
+            result: Ok
+        }
+    },
+    parse::{
+        name: "nested empty struct",
+        statement: "{'a':{}}",
+        assert: {
+            result: Ok
+        }
+    },
 ]
