@@ -1,11 +1,21 @@
-## My Project
+## PartiQL Test Data
 
-TODO: Fill this README out!
+The `partiql-test-data` folder contains language-neutral test data used to check conformance to the [PartiQL 
+specification](https://partiql.org/assets/PartiQL-Specification.pdf).
 
-Be sure to:
+Consumers of this repository must assume additional nested subfolders may be added, and should therefore recurse down 
+from the desired folder, if appropriate.
 
-* Change the title in this README
-* Edit your repository description on GitHub
+The test data is partitioned into the following directories:
+
+- `pass` - all tests in this directory should have a valid PartiQL statement that does not result in an error
+- `fail` - all tests in this directory should have a PartiQL statement that results in an error when run
+
+Subdirectories:
+- `pass/parser` - statements that can parse without error
+- `fail/parser` - statements that give an error when parsed
+- `pass/eval` - statements that can be evaluated successfully and return the same result as the expected result
+- `fail/eval` - statements that throw an error during evaluation
 
 ## Security
 
