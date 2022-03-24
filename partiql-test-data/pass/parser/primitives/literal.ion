@@ -2,92 +2,118 @@
     parse::{
         name: "int",
         statement: "5",
-        assert: {
-            result: Ok
-        }
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
     },
     parse::{
         name: "null",
         statement: "null",
-        assert: {
-            result: Ok
-        }
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
     },
     parse::{
         name: "missing",
         statement: "missing",
-        assert: {
-            result: Ok
-        }
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
     },
     parse::{
         name: "list",
         statement: "[a, 5]",
-        assert: {
-            result: Ok
-        }
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
     },
     parse::{
         name: "list with binary operation",
         statement: "[a, 5, (b + 6)]",
-        assert: {
-            result: Ok
-        }
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
     },
     parse::{
         name: "list function",
         statement: "LIST(a, 5)",
-        assert: {
-            result: Ok
-        }
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
     },
     parse::{
         name: "sexp function",
         statement: "SEXP(a, 5)",
-        assert: {
-            result: Ok
-        }
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
     },
     parse::{
         name: "sexp function with binary operation",
         statement: "SEXP(a, 5, (b + 6))",
-        assert: {
-            result: Ok
-        }
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
     },
     parse::{
         name: "struct",
         statement: "{'x':a, 'y':5 }",
-        assert: {
-            result: Ok
-        }
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
     },
     parse::{
         name: "struct with binary operation",
         statement: "{'x':a, 'y':5, 'z':(b + 6)}",
-        assert: {
-            result: Ok
-        }
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
     },
     parse::{
         name: "nested empty list",
         statement: "[[]]",
-        assert: {
-            result: Ok
-        }
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
     },
     parse::{
         name: "nested empty bag",
         statement: "<<<<>>>>",
-        assert: {
-            result: Ok
-        }
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
     },
     parse::{
         name: "nested empty struct",
         statement: "{'a':{}}",
-        assert: {
-            result: Ok
-        }
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
     },
 ]

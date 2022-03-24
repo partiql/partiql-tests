@@ -1,4 +1,4 @@
-##`partiql-tests` Schema Proposal
+## `partiql-tests` Schema Proposal
 
 TODO:
 - add ISL definitions for this schema proposal
@@ -23,11 +23,15 @@ The following is an abstraction to describe current and future tests we will hav
     name: <string>,
     statement: <string>,
     <other fields relevant for corresponding test_category>
-    assert: <struct>
+    assert: <list<struct>>
 }
 ```
 
+The `assert` list provides flexibility for future tests to check for additional expected behaviors when running a test.
+
 ---
+
+### Parser Tests
 
 Tests whether a given PartiQL statement successfully parses (no syntax error). For now, composed of these properties:
 
@@ -40,20 +44,24 @@ Tests whether a given PartiQL statement successfully parses (no syntax error). F
 parse::{
     name: <string>,
     statement: <string>,
-    assert: {
-        result: Ok
-        // in the future, could add an `ast` field to check the statement parses to the expected ast
-    }
+    assert: [
+        {
+           result: ParseOk
+        },
+        // in the future, could add an assertion checking the statement parses to the expected ast
+    ]
 }
 
 // parse 'fail' test
 parse::{
     name: <string>,
     statement: <string>,
-    assert: {
-        result: ParseError
-        // in the future, can also add a field for `error_code` or other error details
-    }
+    assert: [
+        {
+            result: ParseError
+        },
+        // in the future, can also add an assertion checking for `error_code` or other error details
+    ]
 }
 ```
 
@@ -61,7 +69,7 @@ parse::{
 
 ### Evaluation Tests
 
-Tests whether a given PartiQL statement evaluates to the expected result. For now composed of these properties:
+Tests whether a given PartiQL statement evaluates to the expected result. For now, composed of these properties:
 
 - test name (string)
 - PartiQL statement (string)
@@ -92,10 +100,12 @@ eval::{
     name: <string>,
     statement: <string>,
     env: <symbol | struct>,
-    options: <list<symbol>>
-    asssertion: {
-        result: <ion>
-    }
+    options: <list<symbol>>,
+    assert: [
+        {
+            result: <ion>
+        },
+    ]
 }
 
 // eval 'fail' test
@@ -104,16 +114,18 @@ eval::{
     statement: <string>,
     env: <symbol | struct>,
     options: <list<symbol>>,
-    assert: {
-        result: EvaluationError
-        // in the future, can also add a field for `error_code` or other error details
-    }
+    assert: [
+        {
+            result: EvaluationError
+        },
+        // in the future, can also add an assertion checking for `error_code` or other error details
+    ]
 }
 ```
 
 ---
 
-###Additional inclusions
+### Additional inclusions
 The concept of namespacing tests can help categorize groups of tests and can reduce duplication in test names. This can 
 be used by the test runner to prepend additional text to a test name. E.g. namespace of "literals" can be prepended to test names of "int" and "null" to get "literals - int" and 
 "literals - null"
@@ -124,9 +136,11 @@ be used by the test runner to prepend additional text to a test name. E.g. names
     parse::{
         name: <string>,
         statement: <string>,
-        assert: {
-            result: Ok
-        }
+        assert: [
+            {
+                result: ParseOk
+            }
+        ]
     },
     ...
 ]

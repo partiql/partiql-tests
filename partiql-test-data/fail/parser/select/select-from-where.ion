@@ -1,7 +1,9 @@
 parse::{
     name: "SFW without WHERE expression",
     statement: "SELECT * FROM foo WHERE",
-    assert: {
-        result: ParserError
-    }
+    assert: [
+        {
+            result: ParserError
+        },
+    ]
 }
