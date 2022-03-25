@@ -23,7 +23,7 @@ The following is an abstraction to describe current and future tests we will hav
     name: <string>,
     statement: <string>,
     <other fields relevant for corresponding test_category>
-    assert: <struct | <list<struct>>>
+    assert: <struct> | <list<struct>>
 }
 ```
 
@@ -128,7 +128,7 @@ env: { 'table1': [{a:1}, {a:2}, {a:3}] }
 eval::{
     name: <string>,
     statement: <string>,
-    env: <symbol | struct>,
+    env: <symbol> | <struct>,
     options: <list<symbol>>,
     assert: {
         result: <ion>
@@ -139,7 +139,7 @@ eval::{
 eval::{
     name: <string>,
     statement: <string>,
-    env: <symbol | struct>,
+    env: <symbol> | <struct>,
     options: <list<symbol>>,
     assert: {
         result: EvaluationError
