@@ -3,5 +3,5 @@ parse::{
     statement: "SELECT * FROM foo WHERE",
     assert: {
         result: ParserError
-    }
+    },
 }
