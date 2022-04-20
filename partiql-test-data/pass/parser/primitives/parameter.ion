@@ -1,0 +1,17 @@
+parse::{
+    name: "parameter expression",
+    statement: "?",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "SELECT with parameter and literals",
+    statement: "SELECT ?, f.a from foo f where f.bar = ? and f.spam = 'eggs' and f.baz = ?",
+    assert: {
+        result: ParseOk
+    }
+}

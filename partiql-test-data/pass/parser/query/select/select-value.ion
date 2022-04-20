@@ -1,0 +1,30 @@
+'select-value'::[
+    parse::{
+        name: "SELECT VALUE with single FROM",
+        statement: "SELECT VALUE a FROM table1",
+        assert: {
+            result: ParseOk
+        }
+    },
+    parse::{
+        name: "SELECT VALUE with single aliased FROM",
+        statement: "SELECT VALUE v FROM table1 AS v",
+        assert: {
+            result: ParseOk
+        }
+    },
+    parse::{
+        name: "SELECT ALL VALUE",
+        statement: "SELECT ALL VALUE v FROM table1 AS v",
+        assert: {
+            result: ParseOk
+        }
+    },
+    parse::{
+        name: "SELECT DISTINCT VALUE",
+        statement: "SELECT DISTINCT VALUE v FROM table1 AS v",
+        assert: {
+            result: ParseOk
+        }
+    },
+]

@@ -1,0 +1,137 @@
+parse::{
+    name: "call empty",
+    statement: "foobar()",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "call one argument",
+    statement: "foobar(1)",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "call two arguments",
+    statement: "foobar(1, 2)",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "call with multiple",
+    statement: "foobar(1, 2, 3)",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "call with case insensitive function name",
+    statement: "mY_fUnCtIoN(a)",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+
+'substring'::[
+    parse::{
+        name: "call SUBSTRING sql92 syntax",
+        statement: "substring('test' from 100)",
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
+    },
+    parse::{
+        name: "call SUBSTRING sql92 syntax with length",
+        statement: "substring('test' from 100 for 50)",
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
+    },
+    parse::{
+        name: "call SUBSTRING normal syntax",
+        statement: "substring('test', 100)",
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
+    },
+    parse::{
+        name: "call SUBSTRING normal syntax with length",
+        statement: "substring('test', 100, 50)",
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
+    },
+]
+
+'trim'::[
+    parse::{
+        name: "call TRIM single argument",
+        statement: "trim('test')",
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
+    },
+    parse::{
+        name: "call TRIM two arguments default specification",
+        statement: "trim(' ' from 'test')",
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
+    },
+    parse::{
+        name: "call TRIM two arguments using BOTH",
+        statement: "trim(both from 'test')",
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
+    },
+    parse::{
+        name: "call TRIM two arguments using LEADING",
+        statement: "trim(leading from 'test')",
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
+    },
+    parse::{
+        name: "call TRIM two arguments using TRAILING",
+        statement: "trim(trailing from 'test')",
+        assert: [
+            {
+                result: ParseOk
+            },
+        ]
+    },
+]
