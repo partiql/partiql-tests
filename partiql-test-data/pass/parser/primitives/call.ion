@@ -50,42 +50,46 @@ parse::{
 
 
 'substring'::[
-    parse::{
-        name: "call SUBSTRING sql92 syntax",
-        statement: "substring('test' from 100)",
-        assert: [
-            {
-                result: ParseOk
-            },
-        ]
-    },
-    parse::{
-        name: "call SUBSTRING sql92 syntax with length",
-        statement: "substring('test' from 100 for 50)",
-        assert: [
-            {
-                result: ParseOk
-            },
-        ]
-    },
-    parse::{
-        name: "call SUBSTRING normal syntax",
-        statement: "substring('test', 100)",
-        assert: [
-            {
-                result: ParseOk
-            },
-        ]
-    },
-    parse::{
-        name: "call SUBSTRING normal syntax with length",
-        statement: "substring('test', 100, 50)",
-        assert: [
-            {
-                result: ParseOk
-            },
-        ]
-    },
+    'sql92'::[
+        parse::{
+            name: "call SUBSTRING sql92 syntax",
+            statement: "substring('test' from 100)",
+            assert: [
+                {
+                    result: ParseOk
+                },
+            ]
+        },
+        parse::{
+            name: "call SUBSTRING sql92 syntax with length",
+            statement: "substring('test' from 100 for 50)",
+            assert: [
+                {
+                    result: ParseOk
+                },
+            ]
+        },
+    ],
+    'function-argument-list'::[
+        parse::{
+            name: "call SUBSTRING function argument list syntax",
+            statement: "substring('test', 100)",
+            assert: [
+                {
+                    result: ParseOk
+                },
+            ]
+        },
+        parse::{
+            name: "call SUBSTRING function argument list syntax with length",
+            statement: "substring('test', 100, 50)",
+            assert: [
+                {
+                    result: ParseOk
+                },
+            ]
+        },
+    ]
 ]
 
 'trim'::[
