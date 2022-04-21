@@ -70,7 +70,7 @@ parse::{
             ]
         },
     ],
-    'function-argument-list'::[
+    'partiql'::[
         parse::{
             name: "call SUBSTRING function argument list syntax",
             statement: "substring('test', 100)",
