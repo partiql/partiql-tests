@@ -1,0 +1,39 @@
+parse::{
+    name: "COUNT aggregate function call",
+    statement: "COUNT(a)",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "SUM DISTINCT aggregate function call",
+    statement: "SUM(DISTINCT a)",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "COUNT star aggregate function call",
+    statement: "COUNT(*)",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "COUNT DISTINCT aggregate function call",
+    statement: "COUNT(DISTINCT a)",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}

@@ -1,0 +1,57 @@
+'union-sql'::[
+    parse::{
+        name: "a UNION b",
+        statement: "a UNION b",
+        assert: {
+            result: ParseOk
+        }
+    },
+    parse::{
+        name: "UNION SELECT precedence",
+        statement: "SELECT * FROM foo UNION SELECT * FROM bar",
+        assert: {
+            result: ParseOk
+        }
+    },
+    parse::{
+        name: "a UNION ALL b",
+        statement: "a UNION ALL b",
+        assert: {
+            result: ParseOk
+        }
+    },
+]
+
+'except-sql'::[
+    parse::{
+        name: "a EXCEPT b",
+        statement: "a EXCEPT b",
+        assert: {
+            result: ParseOk
+        }
+    },
+    parse::{
+        name: "a EXCEPT ALL b",
+        statement: "a EXCEPT ALL b",
+        assert: {
+            result: ParseOk
+        }
+    },
+]
+
+'intersect-sql'::[
+    parse::{
+        name: "a INTERSECT b",
+        statement: "a INTERSECT b",
+        assert: {
+            result: ParseOk
+        }
+    },
+    parse::{
+        name: "a INTERSECT ALL b",
+        statement: "a INTERSECT ALL b",
+        assert: {
+            result: ParseOk
+        }
+    },
+]

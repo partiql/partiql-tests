@@ -1,0 +1,69 @@
+parse::{
+    name: "neg call",
+    statement: "-baz()",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "pos neg call",
+    statement: "+(-baz())",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "pos neg call no spaces",
+    statement: "+-baz()",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "unary ion int literal",
+    statement: "-1",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "unary ion float literal",
+    statement: "+-+-+-`-5e0`",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "unary ion timestamp literal",
+    statement: "+-`2017-01-01`",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "unary NOT literal",
+    statement: "not 1",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}

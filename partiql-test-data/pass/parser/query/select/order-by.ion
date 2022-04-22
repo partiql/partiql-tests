@@ -1,0 +1,51 @@
+'order-by'::[
+    parse::{
+        name: "ORDER BY single id",
+        statement: "SELECT a FROM tb WHERE hk = 1 ORDER BY rk1",
+        assert: {
+            result: ParseOk
+        }
+    },
+    parse::{
+        name: "ORDER BY multiple ids",
+        statement: "SELECT a FROM tb WHERE hk = 1 ORDER BY rk1, rk2, rk3",
+        assert: {
+            result: ParseOk
+        }
+    },
+    parse::{
+        name: "ORDER BY single id DESC",
+        statement: "SELECT a FROM tb WHERE hk = 1 ORDER BY rk1 DESC",
+        assert: {
+            result: ParseOk
+        }
+    },
+    parse::{
+        name: "ORDER BY multiple ids with ordering spec",
+        statement: "SELECT a FROM tb WHERE hk = 1 ORDER BY rk1 ASC, rk2 DESC",
+        assert: {
+            result: ParseOk
+        }
+    },
+    parse::{
+        name: "ORDER BY ASC with nulls spec",
+        statement: "SELECT x FROM tb ORDER BY rk1 asc NULLS FIRST, rk2 asc NULLS LAST",
+        assert: {
+            result: ParseOk
+        }
+    },
+    parse::{
+        name: "ORDER BY DESC with nulls spec",
+        statement: "SELECT x FROM tb ORDER BY rk1 desc NULLS FIRST, rk2 desc NULLS LAST",
+        assert: {
+            result: ParseOk
+        }
+    },
+    parse::{
+        name: "ORDER BY with ordering and null spec",
+        statement: "SELECT x FROM tb ORDER BY rk1 desc NULLS FIRST, rk2 asc NULLS LAST, rk3 desc NULLS LAST, rk4 asc NULLS FIRST",
+        assert: {
+            result: ParseOk
+        }
+    },
+]

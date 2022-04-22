@@ -1,0 +1,31 @@
+parse::{
+    name: "SELECT comma CROSS JOIN two tables",
+    statement: "SELECT a FROM table1, table2",
+    assert: {
+        result: ParseOk
+    }
+}
+
+parse::{
+    name: "SELECT comma CROSS JOIN three tables",
+    statement: "SELECT a FROM table1, table2, table3",
+    assert: {
+        result: ParseOk
+    }
+}
+
+parse::{
+    name: "SELECT multiple with CROSS JOIN and simple WHERE",
+    statement: "SELECT a, b FROM table1 as t1, table2 WHERE f(t1)",
+    assert: {
+        result: ParseOk
+    }
+}
+
+parse::{
+    name: "SELECT multiple with CROSS JOIN and simple WHERE no AS alias",
+    statement: "SELECT a a1, b b1 FROM table1 t1, table2 WHERE f(t1)",
+    assert: {
+        result: ParseOk
+    }
+}

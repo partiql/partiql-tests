@@ -1,0 +1,139 @@
+parse::{
+    name: "dot case one insensitive component",
+    statement: "a.b",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "dot case two insensitive components",
+    statement: "a.b.c",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "dot case three insensitive components",
+    statement: "a.b.c.d",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "dot case sensitive",
+    statement: ''' "a"."b" ''',
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "dot case sensitive component",
+    statement: ''' a."b" ''',
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "group dot",
+    statement: "(a).b",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "path with one square bracket",
+    statement: "a[5]",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "path with three square brackets",
+    statement: "a[5]['b'][(a + 3)]",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "dot star",
+    statement: "a.*",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "dot two star",
+    statement: "a.b.*",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "dot wildcard",
+    statement: "a[*]",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "dot two wildcard",
+    statement: "a.b[*]",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "path with call and dot star",
+    statement: "foo(x, y).a.*.b",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "dot and bracket star",
+    statement: "x.a[*].b",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
