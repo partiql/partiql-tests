@@ -1,6 +1,6 @@
 parse::{
-    name: "neg call",
-    statement: "-baz()",
+    name: "plus operator",
+    statement: "a + b",
     assert: [
         {
             result: ParseOk
@@ -9,8 +9,8 @@ parse::{
 }
 
 parse::{
-    name: "pos neg call",
-    statement: "+(-baz())",
+    name: "minus operator",
+    statement: "a - b",
     assert: [
         {
             result: ParseOk
@@ -19,8 +19,8 @@ parse::{
 }
 
 parse::{
-    name: "pos neg call no spaces",
-    statement: "+-baz()",
+    name: "times operator",
+    statement: "a * b",
     assert: [
         {
             result: ParseOk
@@ -29,8 +29,8 @@ parse::{
 }
 
 parse::{
-    name: "unary ion int literal",
-    statement: "-1",
+    name: "divide operator",
+    statement: "a / b",
     assert: [
         {
             result: ParseOk
@@ -39,8 +39,8 @@ parse::{
 }
 
 parse::{
-    name: "unary ion float literal",
-    statement: "+-+-+-`-5e0`",
+    name: "modulo operator",
+    statement: "a % b",
     assert: [
         {
             result: ParseOk
@@ -49,8 +49,8 @@ parse::{
 }
 
 parse::{
-    name: "unary ion timestamp literal",
-    statement: "+-`2017-01-01`",
+    name: "arithmetic operators chained together",
+    statement: "a + b - c * d / e % f",
     assert: [
         {
             result: ParseOk

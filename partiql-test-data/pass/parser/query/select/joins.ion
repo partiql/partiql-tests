@@ -29,3 +29,41 @@ parse::{
         result: ParseOk
     }
 }
+
+'correlated-joins'::[
+    parse::{
+        name: "SELECT correlated JOIN",
+        statement: "SELECT a, b FROM stuff s, @s WHERE f(s)",
+        assert: {
+            result: ParseOk
+        }
+    },
+    parse::{
+        name: "SELECT correlated with explicit CROSS JOIN",
+        statement: "SELECT a, b FROM stuff s CROSS JOIN @s WHERE f(s)",
+        assert: {
+            result: ParseOk
+        }
+    },
+    parse::{
+        name: "SELECT correlated with explicit LEFT CROSS JOIN",
+        statement: "SELECT a, b FROM stuff s LEFT CROSS JOIN @s WHERE f(s)",
+        assert: {
+            result: ParseOk
+        }
+    },
+    parse::{
+        name: "SELECT correlated with explicit LEFT OUTER JOIN and ON",
+        statement: "SELECT a, b FROM stuff s LEFT JOIN @s ON f(s)",
+        assert: {
+            result: ParseOk
+        }
+    },
+    parse::{
+        name: "SELECT correlated JOIN with explicit INNER JOIN",
+        statement: "SELECT a, b FROM stuff s INNER CROSS JOIN @s WHERE f(s)",
+        assert: {
+            result: ParseOk
+        }
+    },
+]

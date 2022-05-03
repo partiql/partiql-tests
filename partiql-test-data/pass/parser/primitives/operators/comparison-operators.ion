@@ -1,0 +1,79 @@
+parse::{
+    name: "eq operator",
+    statement: "a = b",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "neq operator",
+    statement: "a != b",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "neq operator other form",
+    statement: "a <> b",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "gt operator",
+    statement: "a > b",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "lt operator",
+    statement: "a < b",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "gte operator",
+    statement: "a >= b",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "lte operator",
+    statement: "a <= b",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "comparison ops with logical ops",
+    statement: "a = b AND NOT c != d OR e <> f AND g > h OR NOT NOT i < j AND k >= l OR m <= n",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}

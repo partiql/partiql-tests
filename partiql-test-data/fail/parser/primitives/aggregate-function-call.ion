@@ -1,0 +1,127 @@
+parse::{
+    name: "AVG no args",
+    statement: "AVG()",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "AVG too many args",
+    statement: "AVG(a, b)",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "AVG with star",
+    statement: "AVG(*)",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "MAX no args",
+    statement: "MAX()",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "MAX too many args",
+    statement: "MAX(a, b)",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "MAX with star",
+    statement: "MAX(*)",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "MIN no args",
+    statement: "MIN()",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "MIN too many args",
+    statement: "MIN(a, b)",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "MIN with star",
+    statement: "MIN(*)",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "SUM no args",
+    statement: "SUM()",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "SUM too many args",
+    statement: "SUM(a, b)",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "SUM with star",
+    statement: "SUM(*)",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "COUNT no args",
+    statement: "COUNT()",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "COUNT too many args",
+    statement: "COUNT(a, b)",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "COUNT DISTINCT star",
+    statement: "COUNT(DISTINCT *)",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "COUNT ALL star",
+    statement: "COUNT(ALL *)",
+    assert: {
+        result: ParseError
+    },
+}

@@ -1,0 +1,152 @@
+parse::{
+    name: "INNER CROSS JOIN with ON condition",
+    statement: "SELECT * FROM foo INNER CROSS JOIN bar ON true",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "LEFT CROSS JOIN with ON condition",
+    statement: "SELECT * FROM foo LEFT CROSS JOIN bar ON true",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "RIGHT CROSS JOIN with ON condition",
+    statement: "SELECT * FROM foo RIGHT CROSS JOIN bar ON true",
+    assert: {
+        result: ParseError
+    },
+}
+
+// From pg 181 of sql92 spec, <join specification> must be specified for qualified joins
+parse::{
+    name: "INNER JOIN without ON condition",
+    statement: "SELECT * FROM foo INNER JOIN bar",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "LEFT JOIN without ON condition",
+    statement: "SELECT * FROM foo LEFT JOIN bar",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "RIGHT JOIN without ON condition",
+    statement: "SELECT * FROM foo RIGHT JOIN bar",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "JOIN without ON condition",
+    statement: "SELECT * FROM foo JOIN bar",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "paren INNER JOIN without ON clause",
+    statement: "SELECT * FROM foo INNER JOIN (bar INNER JOIN baz ON true)",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "SELECT with RIGHT CROSS JOIN",
+    statement: "SELECT x FROM stuff s RIGHT CROSS JOIN foo f",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "SELECT with FULL OUTER JOIN and ON condition",
+    statement: "SELECT x FROM stuff s FULL OUTER JOIN foo f ON s = f",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "SELECT single join parens test",
+    statement: "SELECT x FROM (A INNER JOIN B ON A = B)",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "SELECT single join multi parens",
+    statement: "SELECT x FROM (((A INNER JOIN B ON A = B)))",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "SELECT two joins natural order parens",
+    statement: "SELECT x FROM (A INNER JOIN B ON A = B) INNER JOIN C ON B = C",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "SELECT two joins specified order parens",
+    statement: "SELECT x FROM A INNER JOIN (B INNER JOIN C ON B = C) ON A = B",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "SELECT three joins specified order parens",
+    statement: "SELECT x FROM A INNER JOIN (B INNER JOIN (C INNER JOIN D ON C = D) ON B = C) ON A = B",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "SELECT literal wrapped in parens",
+    statement: "SELECT x FROM A INNER JOIN (1) ON true",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "SELECT subquery wrapped in parens",
+    statement: "SELECT x FROM A INNER JOIN (SELECT x FROM 1) ON true",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "SELECT with multiple JOINS and implicit CROSS JOIN",
+    statement: "SELECT x FROM a, b CROSS JOIN c LEFT JOIN d ON e RIGHT OUTER CROSS JOIN f OUTER JOIN g ON h",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "SELECT with multiple JOINS and explicit CROSS JOIN",
+    statement: "SELECT x FROM a INNER CROSS JOIN b CROSS JOIN c LEFT JOIN d ON e RIGHT OUTER CROSS JOIN f OUTER JOIN g ON h",
+    assert: {
+        result: ParseError
+    },
+}

@@ -1,0 +1,23 @@
+parse::{
+    name: "invalid cast type parameter",
+    statement: "CAST(5 AS VARCHAR(a))",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "CAST expected left paren",
+    statement: "CAST 5 as integer",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "CAST given keyword as type arg",
+    statement: "CAST(5 AS SELECT)",
+    assert: {
+        result: ParseError
+    },
+}

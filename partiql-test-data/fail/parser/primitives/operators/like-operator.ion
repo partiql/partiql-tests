@@ -1,0 +1,47 @@
+parse::{
+    name: "LIKE wrong order of args",
+    statement: "SELECT a, b FROM data WHERE LIKE a b",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "LIKE expected expression following ESCAPE",
+    statement: "SELECT a, b FROM data WHERE a LIKE b ESCAPE",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "LIKE missing rhs argument",
+    statement: "SELECT a, b FROM data WHERE a LIKE",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "LIKE col name LIKE col name ESCAPE typo",
+    statement: "SELECT a, b FROM data WHERE a LIKE b ECSAPE '\\'",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "LIKE ESCAPE before LIKE",
+    statement: "SELECT a, b FROM data WHERE ESCAPE '\\' a LIKE b",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "LIKE ESCAPE as second argument",
+    statement: "SELECT a, b FROM data WHERE a LIKE ESCAPE '\\' b",
+    assert: {
+        result: ParseError
+    },
+}

@@ -1,0 +1,31 @@
+parse::{
+    name: "CASE expected WHEN clause",
+    statement: "CASE name ELSE 1 END",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "CASE only with END",
+    statement: "CASE END",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "searched CASE no when with ELSE",
+    statement: "CASE ELSE 1 END",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "simple CASE no when with ELSE",
+    statement: "CASE name ELSE 1 END",
+    assert: {
+        result: ParseError
+    },
+}
