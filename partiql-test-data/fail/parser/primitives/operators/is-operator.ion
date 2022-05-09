@@ -1,12 +1,4 @@
 parse::{
-    name: "IS operator expects type name",
-    statement: "NULL IS `null`",
-    assert: {
-        result: ParseError
-    },
-}
-
-parse::{
     name: "IS NOT operator expects type name",
     statement: "NULL IS NOT `null`",
     assert: {
@@ -23,8 +15,8 @@ parse::{
 }
 
 parse::{
-    name: "IS operator parens around type name",
-    statement: "a IS (MISSING)",
+    name: "IS NOT operator parens around type name",
+    statement: "a IS NOT (MISSING)",
     assert: {
         result: ParseError
     },

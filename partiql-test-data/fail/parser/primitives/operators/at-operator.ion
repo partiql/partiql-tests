@@ -21,11 +21,3 @@ parse::{
         result: ParseError
     },
 }
-
-parse::{
-    name: "double at operator on identifier",
-    statement: "@ @a",
-    assert: {
-        result: ParseError
-    },
-}

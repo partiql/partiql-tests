@@ -96,6 +96,26 @@ parse::{
 
 ---
 
+### Semantic Tests
+
+Currently have a set of `fail` tests that error on the provided statement. These tests should error at some stage 
+between parsing and evaluation. It's up to the implementation to decide at what stage these statements should error.
+
+For now, composed of the same properties as the `parse` `fail` tests. The only differences are the outer test annotation 
+(i.e. `semantic`) and the `assert`'s error (i.e. `SemanticError`).
+
+```
+semantic::{
+    name: <string>,
+    statement: <string>,
+    assert: {
+        result: SemanticError
+    },
+}
+```
+
+---
+
 ### Evaluation Tests
 
 Tests whether a given PartiQL statement evaluates to the expected result. For now, composed of these properties:

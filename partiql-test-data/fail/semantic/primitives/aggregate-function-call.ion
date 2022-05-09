@@ -1,127 +1,127 @@
-parse::{
+semantic::{
     name: "AVG no args",
     statement: "AVG()",
     assert: {
-        result: ParseError
+        result: SemanticError
     },
 }
 
-parse::{
+semantic::{
     name: "AVG too many args",
     statement: "AVG(a, b)",
     assert: {
-        result: ParseError
+        result: SemanticError
     },
 }
 
-parse::{
+semantic::{
     name: "AVG with star",
     statement: "AVG(*)",
     assert: {
-        result: ParseError
+        result: SemanticError
     },
 }
 
-parse::{
+semantic::{
     name: "MAX no args",
     statement: "MAX()",
     assert: {
-        result: ParseError
+        result: SemanticError
     },
 }
 
-parse::{
+semantic::{
     name: "MAX too many args",
     statement: "MAX(a, b)",
     assert: {
-        result: ParseError
+        result: SemanticError
     },
 }
 
-parse::{
+semantic::{
     name: "MAX with star",
     statement: "MAX(*)",
     assert: {
-        result: ParseError
+        result: SemanticError
     },
 }
 
-parse::{
+semantic::{
     name: "MIN no args",
     statement: "MIN()",
     assert: {
-        result: ParseError
+        result: SemanticError
     },
 }
 
-parse::{
+semantic::{
     name: "MIN too many args",
     statement: "MIN(a, b)",
     assert: {
-        result: ParseError
+        result: SemanticError
     },
 }
 
-parse::{
+semantic::{
     name: "MIN with star",
     statement: "MIN(*)",
     assert: {
-        result: ParseError
+        result: SemanticError
     },
 }
 
-parse::{
+semantic::{
     name: "SUM no args",
     statement: "SUM()",
     assert: {
-        result: ParseError
+        result: SemanticError
     },
 }
 
-parse::{
+semantic::{
     name: "SUM too many args",
     statement: "SUM(a, b)",
     assert: {
-        result: ParseError
+        result: SemanticError
     },
 }
 
-parse::{
+semantic::{
     name: "SUM with star",
     statement: "SUM(*)",
     assert: {
-        result: ParseError
+        result: SemanticError
     },
 }
 
-parse::{
+semantic::{
     name: "COUNT no args",
     statement: "COUNT()",
     assert: {
-        result: ParseError
+        result: SemanticError
     },
 }
 
-parse::{
+semantic::{
     name: "COUNT too many args",
     statement: "COUNT(a, b)",
     assert: {
-        result: ParseError
+        result: SemanticError
     },
 }
 
-parse::{
+semantic::{
     name: "COUNT DISTINCT star",
     statement: "COUNT(DISTINCT *)",
     assert: {
-        result: ParseError
+        result: SemanticError
     },
 }
 
-parse::{
+semantic::{
     name: "COUNT ALL star",
     statement: "COUNT(ALL *)",
     assert: {
-        result: ParseError
+        result: SemanticError
     },
 }

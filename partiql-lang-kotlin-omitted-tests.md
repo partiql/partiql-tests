@@ -7,12 +7,11 @@ Tests excluded:
   - [SqlParserCustomTypeCatalogTests.kt](https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf65c60b2a3b79/lang/test/org/partiql/lang/syntax/SqlParserCustomTypeCatalogTests.kt) 
 - ORDER BY tests testing defaults for sort spec and null spec
   - https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf65c60b2a3b79/lang/test/org/partiql/lang/syntax/SqlParserTest.kt#L1793-L1888
-  - dependent on when parsed ast checking is added
+  - dependent on when parsed ast checking is added or up to the implementation to test via correspondence (see comment here https://github.com/partiql/partiql-tests/pull/11/files#r865515909)
+    - alternatively, this may be better tested in the evaluator
 - Many nested NOT regression test
   - https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf65c60b2a3b79/lang/test/org/partiql/lang/syntax/SqlParserTest.kt#L4239-L4271
   - performance test shouldn't be included in parse tests
-- `expectedSelectMissingFrom` -- not part of the PartiQL spec
-https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf65c60b2a3b79/lang/test/org/partiql/lang/errors/ParserErrorsTest.kt#L403-L415
 - LET clause parsing (not part of spec formally yet)
   - https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf65c60b2a3b79/lang/test/org/partiql/lang/syntax/SqlParserTest.kt#L4066-L4128
   - `expectedAsForLet` https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf65c60b2a3b79/lang/test/org/partiql/lang/errors/ParserErrorsTest.kt#L431-L443
@@ -53,7 +52,9 @@ https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf
 https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf65c60b2a3b79/lang/test/org/partiql/lang/errors/ParserErrorsTest.kt#L1966-L1978
 - `*` and path `*` with other select list items
 https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf65c60b2a3b79/lang/test/org/partiql/lang/errors/ParserErrorsTest.kt#L1903-L1936
-
+- `callTrimSpecificationMissingFrom` -- PostgreSQL supports; unsure of utility of creating this fail test
+  - https://github.com/~~partiql~~/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf65c60b2a3b79/lang/test/org/partiql/lang/errors/ParserErrorsTest.kt#L683-L696
+  - More details provided by Josh in this comment on the ambiguity https://github.com/partiql/partiql-tests/pull/11/files#r865505304
 Repeated tests (tests repeated at some other place):
 - `expectedExpectedTypeName`
 https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf65c60b2a3b79/lang/test/org/partiql/lang/errors/ParserErrorsTest.kt#L78-L90

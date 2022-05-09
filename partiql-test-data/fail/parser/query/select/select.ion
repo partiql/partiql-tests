@@ -61,3 +61,11 @@ parse::{
         result: ParseError
     },
 }
+
+parse::{
+    name: "SELECT query missing FROM",
+    statement: "SELECT a  DATA",
+    assert: {
+        result: ParseError
+    },
+}

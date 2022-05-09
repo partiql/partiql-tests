@@ -14,6 +14,7 @@ The test data is partitioned into the following directories:
 Subdirectories:
 - `pass/parser` - statements that can parse without error
 - `fail/parser` - statements that give an error when parsed
+- `fail/semantic` - statements that give an error at some stage between parsing and evaluation
 - `pass/eval` - statements that can be evaluated successfully and return the same result as the expected result
 - `fail/eval` - statements that throw an error during evaluation
 
