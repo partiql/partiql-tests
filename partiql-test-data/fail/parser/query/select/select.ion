@@ -1,0 +1,71 @@
+parse::{
+    name: "SFW without WHERE expression",
+    statement: "SELECT * FROM foo WHERE",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "SELECT without comma between projection items",
+    statement: "SELECT a  data",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "AT before AS alias",
+    statement: "SELECT ord, val FROM table1 AT ord AS val",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "SELECT missing projection",
+    statement: "SELECT FROM table1",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "SELECT list with extra comma",
+    statement: "SELECT a, FROM {'a' : 1}",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "SELECT projection with empty parens",
+    statement: "SELECT () FROM data",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "expected identifier for AS alias",
+    statement: "SELECT a AS true FROM data",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "expected identifier for AT alias",
+    statement: "SELECT a FROM data AT true",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "SELECT query missing FROM",
+    statement: "SELECT a  DATA",
+    assert: {
+        result: ParseError
+    },
+}

@@ -1,0 +1,111 @@
+trim::[
+    semantic::{
+        name: "TRIM too many arguments",
+        statement: "TRIM(BOTH ' ' FROM 'test' 2)",
+        assert: {
+            result: SemanticError
+        },
+    },
+    semantic::{
+        name: "TRIM with BOTH missing FROM",
+        statement: "TRIM(BOTH 'test')",
+        assert: {
+            result: SemanticError
+        },
+    },
+    semantic::{
+        name: "TRIM and remove without FROM",
+        statement: "trim(both '' 'test')",
+        assert: {
+            result: SemanticError
+        },
+    },
+    semantic::{
+        name: "TRIM without string",
+        statement: "TRIM(FROM)",
+        assert: {
+            result: SemanticError
+        },
+    },
+    semantic::{
+        name: "TRIM no args",
+        statement: "TRIM()",
+        assert: {
+            result: SemanticError
+        },
+    },
+    semantic::{
+        name: "TRIM all args but string",
+        statement: "TRIM(TRAILING '' FROM)",
+        assert: {
+            result: SemanticError
+        },
+    },
+    semantic::{
+        name: "TRIM two args no FROM",
+        statement: "TRIM(' ' '   1   ')",
+        assert: {
+            result: SemanticError
+        },
+    },
+    semantic::{
+        name: "TRIM spec and FROM no string",
+        statement: "TRIM(TRAILING FROM)",
+        assert: {
+            result: SemanticError
+        },
+    },
+]
+
+extract::[
+    semantic::{
+        name: "EXTRACT missing FROM",
+        statement: "EXTRACT(YEAR b)",
+        assert: {
+            result: SemanticError
+        },
+    },
+    semantic::{
+        name: "EXTRACT missing FROM with comma",
+        statement: "EXTRACT(YEAR, b)",
+        assert: {
+            result: SemanticError
+        },
+    },
+    semantic::{
+        name: "EXTRACT missing second argument",
+        statement: "EXTRACT(YEAR from)",
+        assert: {
+            result: SemanticError
+        },
+    },
+    semantic::{
+        name: "EXTRACT missing date time part",
+        statement: "EXTRACT(FROM b)",
+        assert: {
+            result: SemanticError
+        },
+    },
+    semantic::{
+        name: "EXTRACT with only second argument",
+        statement: "EXTRACT(b)",
+        assert: {
+            result: SemanticError
+        },
+    },
+    semantic::{
+        name: "EXTRACT with only date time part",
+        statement: "EXTRACT(YEAR)",
+        assert: {
+            result: SemanticError
+        },
+    },
+]
+
+semantic::{
+    name: "function call not COUNT with star",
+    statement: "F(*)",
+    assert: {
+        result: SemanticError
+    },
+}
