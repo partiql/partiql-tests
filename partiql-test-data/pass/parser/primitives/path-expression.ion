@@ -149,8 +149,18 @@ parse::{
 }
 
 parse::{
-    name: "path expression on tuple",
+    name: "path expression on tuple with string",
     statement: "{'a': 1, 'b': 1}.'a'",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "path expression on tuple with quoted identifier",
+    statement: ''' {'a': 1, 'b': 1}."a" ''',
     assert: [
         {
             result: ParseOk
