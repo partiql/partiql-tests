@@ -137,3 +137,53 @@ parse::{
         },
     ]
 }
+
+parse::{
+    name: "path expression on tuple",
+    statement: "{'a': 1, 'b': 1}.a",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "path expression on tuple",
+    statement: "{'a': 1, 'b': 1}.'a'",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "path expression on select query",
+    statement: "(SELECT a from en).b",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "tuple navigation with array notation",
+    statement: "{'a': 1, 'b': 2}['a']",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
+
+parse::{
+    name: "tuple navigation with array notation with CAST",
+    statement: " {'attr': 1, 'b':2}[CAST('at' || 'tr' AS STRING)]",
+    assert: [
+        {
+            result: ParseOk
+        },
+    ]
+}
