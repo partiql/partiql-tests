@@ -170,7 +170,7 @@ parse::{
 
 parse::{
     name: "path expression on select query",
-    statement: "(SELECT a from en).b",
+    statement: "(SELECT a FROM en).b",
     assert: [
         {
             result: ParseOk
