@@ -13,3 +13,35 @@ parse::{
         result: ParseError
     },
 }
+
+parse::{
+    name: "invalid path with invalid array path",
+    statement: "a.b.['item']",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "invalid path with dot star array nested",
+    statement: "a.b.[*]",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "invalid path with tuple nested",
+    statement: "a.b.{'a': 1, 'b': 2}.a",
+    assert: {
+        result: ParseError
+    },
+}
+
+parse::{
+    name: "invalid path with array nested",
+    statement: "a.b.[1, 2, 3][2]",
+    assert: {
+        result: ParseError
+    },
+}
