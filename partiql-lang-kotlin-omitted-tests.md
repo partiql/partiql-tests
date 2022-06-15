@@ -30,6 +30,9 @@ https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf
 - semicolon semantic tests
   - https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf65c60b2a3b79/lang/test/org/partiql/lang/errors/ParserErrorsTest.kt#L1860-L1886
   - https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf65c60b2a3b79/lang/test/org/partiql/lang/syntax/SqlParserTest.kt#L4025-L4064
+- TIME constructor with additional arguments
+  - AM/PM: https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf65c60b2a3b79/lang/test/org/partiql/lang/syntax/SqlParserDateTimeTests.kt#L420-L437
+  - specifying timezone abbreviations (e.g. PST): https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf65c60b2a3b79/lang/test/org/partiql/lang/syntax/SqlParserDateTimeTests.kt#L685-L693
 
 Unsure if should be included:
 - `expectedCastAsIntArity`, `expectedCastAsRealArity` -- type supplied with parameter; not sure is parse error
@@ -66,6 +69,4 @@ https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf
 https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf65c60b2a3b79/lang/test/org/partiql/lang/errors/ParserErrorsTest.kt#L1627-L1639
 
 To be included:
-- DATE and TIME tests from [SqlParserDateTimeTests.kt](https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf65c60b2a3b79/lang/test/org/partiql/lang/syntax/SqlParserDateTimeTests.kt)
-and [ParserErrorsTest.kt](https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf65c60b2a3b79/lang/test/org/partiql/lang/errors/ParserErrorsTest.kt#L2848-L3099)
 - Operator precedence tests from [SqlParserPrecedenceTest.kt](https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf65c60b2a3b79/lang/test/org/partiql/lang/syntax/SqlParserPrecedenceTest.kt)
