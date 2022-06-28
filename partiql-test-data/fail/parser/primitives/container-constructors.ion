@@ -1,7 +1,7 @@
-parse::{
+{
     name: "VALUES constructor expect left paren",
     statement: "VALUES 1,2)",
     assert: {
-        result: ParseError
+        result: SyntaxFail
     },
 }

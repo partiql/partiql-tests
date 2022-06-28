@@ -1,19 +1,19 @@
-parse::{
+{
     name: "identifier case insensitive",
     statement: "kumo",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "identifier case sensitive",
     statement: ''' "kumo" ''',
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }

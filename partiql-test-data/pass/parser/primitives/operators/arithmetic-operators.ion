@@ -1,59 +1,59 @@
-parse::{
+{
     name: "plus operator",
     statement: "a + b",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "minus operator",
     statement: "a - b",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "times operator",
     statement: "a * b",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "divide operator",
     statement: "a / b",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "modulo operator",
     statement: "a % b",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "arithmetic operators chained together",
     statement: "a + b - c * d / e % f",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }

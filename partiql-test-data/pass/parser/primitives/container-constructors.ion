@@ -1,40 +1,40 @@
 'row-value-constructor'::[
-    parse::{
+    {
         name: "row value constructor with simple expressions",
         statement: "(1, 2, 3, 4)",
         assert: [
             {
-                result: ParseOk
+                result: SyntaxSuccess
             },
         ]
     },
-    parse::{
+    {
         name: "row value constructor with row value constructors",
         statement: "((1, 2), (3, 4))",
         assert: [
             {
-                result: ParseOk
+                result: SyntaxSuccess
             },
         ]
     }
 ]
 
 'table-value-constructor'::[
-    parse::{
+    {
         name: "table value constructor with row value constructors",
         statement: "VALUES (1, 2), (3, 4)",
         assert: [
             {
-                result: ParseOk
+                result: SyntaxSuccess
             },
         ]
     },
-    parse::{
+    {
         name: "table value constructor with singleton row value constructors",
         statement: "VALUES (1), (2), (3)",
         assert: [
             {
-                result: ParseOk
+                result: SyntaxSuccess
             },
         ]
     }

@@ -1,100 +1,100 @@
-parse::{
+{
     name: "SELECT with single FROM",
     statement: "SELECT a FROM table1",
     assert: {
-        result: ParseOk
+        result: SyntaxSuccess
     }
 }
 
-parse::{
+{
     name: "SELECT star with single FROM",
     statement: "SELECT * FROM table1",
     assert: {
-        result: ParseOk
+        result: SyntaxSuccess
     }
 }
 
-parse::{
+{
     name: "SELECT alias dot star",
     statement: "SELECT t.* FROM table1 AS t",
     assert: {
-        result: ParseOk
+        result: SyntaxSuccess
     }
 }
 
-parse::{
+{
     name: "SELECT path alias dot star",
     statement: "SELECT a.b.* FROM table1 AS t",
     assert: {
-        result: ParseOk
+        result: SyntaxSuccess
     }
 }
 
-parse::{
+{
     name: "SELECT with FROM AT",
     statement: "SELECT ord FROM table1 AT ord",
     assert: {
-        result: ParseOk
+        result: SyntaxSuccess
     }
 }
 
-parse::{
+{
     name: "SELECT with FROM AS and AT",
     statement: "SELECT ord, val FROM table1 AS val AT ord",
     assert: {
-        result: ParseOk
+        result: SyntaxSuccess
     }
 }
 
-parse::{
+{
     name: "SELECT with FROM id BY",
     statement: "SELECT * FROM table1 BY uid",
     assert: {
-        result: ParseOk
+        result: SyntaxSuccess
     }
 }
 
-parse::{
+{
     name: "SELECT with FROM AT id BY",
     statement: "SELECT * FROM table1 AT ord BY uid",
     assert: {
-        result: ParseOk
+        result: SyntaxSuccess
     }
 }
 
-parse::{
+{
     name: "SELECT with FROM AS id BY",
     statement: "SELECT * FROM table1 AS t BY uid",
     assert: {
-        result: ParseOk
+        result: SyntaxSuccess
     }
 }
 
-parse::{
+{
     name: "SELECT with FROM AS and AT id BY",
     statement: "SELECT * FROM table1 AS val AT ord BY uid",
     assert: {
-        result: ParseOk
+        result: SyntaxSuccess
     }
 }
 
-parse::{
+{
     name: "SELECT WHERE MISSING",
     statement: "SELECT a FROM stuff WHERE b IS MISSING",
     assert: {
-        result: ParseOk
+        result: SyntaxSuccess
     }
 }
 
-parse::{
+{
     name: "SELECT list with aggregate wildcard function calls",
     statement: "SELECT sum(a) + count(*), AVG(b), MIN(c), MAX(d + e) FROM foo",
     assert: {
-        result: ParseOk
+        result: SyntaxSuccess
     }
 }
 
-parse::{
+{
     name: "paths and select",
     statement: '''
                SELECT process(t).a[0] AS a, t2.b AS b
@@ -102,22 +102,22 @@ parse::{
                WHERE test(t2.name, t1.name) AND t1.id = t2.id
                ''',
     assert: {
-        result: ParseOk
+        result: SyntaxSuccess
     }
 }
 
-parse::{
+{
     name: "nested SELECT no WHERE",
     statement: "SELECT * FROM (SELECT * FROM x).a",
     assert: {
-        result: ParseOk
+        result: SyntaxSuccess
     }
 }
 
-parse::{
+{
     name: "nested SELECT",
     statement: "SELECT * FROM (SELECT * FROM x WHERE b).a",
     assert: {
-        result: ParseOk
+        result: SyntaxSuccess
     }
 }

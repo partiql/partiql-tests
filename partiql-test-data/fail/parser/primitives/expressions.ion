@@ -1,31 +1,31 @@
-parse::{
+{
     name: "missing right paren",
     statement: "(1 + 2",
     assert: {
-        result: ParseError
+        result: SyntaxFail
     },
 }
 
-parse::{
+{
     name: "missing operation between literals",
     statement: "5 5",
     assert: {
-        result: ParseError
+        result: SyntaxFail
     },
 }
 
-parse::{
+{
     name: "semicolon inside expression",
     statement: "(1;)",
     assert: {
-        result: ParseError
+        result: SyntaxFail
     },
 }
 
-parse::{
+{
     name: "VALUE as top-level expression",
     statement: "VALUE 1",
     assert: {
-        result: ParseError
+        result: SyntaxFail
     },
 }

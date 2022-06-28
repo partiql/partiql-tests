@@ -1,23 +1,23 @@
-parse::{
+{
     name: "IS NOT operator expects type name",
     statement: "NULL IS NOT `null`",
     assert: {
-        result: ParseError
+        result: SyntaxFail
     },
 }
 
-parse::{
+{
     name: "IS operator parens around type name",
     statement: "a IS (MISSING)",
     assert: {
-        result: ParseError
+        result: SyntaxFail
     },
 }
 
-parse::{
+{
     name: "IS NOT operator parens around type name",
     statement: "a IS NOT (MISSING)",
     assert: {
-        result: ParseError
+        result: SyntaxFail
     },
 }

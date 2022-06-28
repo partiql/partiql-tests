@@ -1,7 +1,7 @@
-semantic::{
+{
     name: "invalid cast type parameter",
     statement: "CAST(5 AS VARCHAR(a))",
     assert: {
-        result: SemanticError
+        result: StaticAnalysisFail
     },
 }

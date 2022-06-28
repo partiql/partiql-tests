@@ -1,58 +1,58 @@
 substring::[
     sql92::[
-        parse::{
+        {
             name: "SUBSTRING sql92 syntax missing left paren",
             statement: "SELECT SUBSTRING FROM 'asdf' FOR 1) FROM foo",
             assert: {
-                result: ParseError
+                result: SyntaxFail
             },
         },
-        parse::{
+        {
             name: "SUBSTRING sql92 syntax missing FROM or comma",
             statement: "SELECT SUBSTRING('str' 1) FROM foo",
             assert: {
-                result: ParseError
+                result: SyntaxFail
             },
         },
-        parse::{
+        {
             name: "SUBSTRING sql92 syntax without length and missing right paren",
             statement: "SELECT SUBSTRING('str' FROM 1 FROM foo",
             assert: {
-                result: ParseError
+                result: SyntaxFail
             },
         },
-        parse::{
+        {
             name: "SUBSTRING sql92 syntax with length missing right paren",
             statement: "SELECT SUBSTRING('str' FROM 1 FOR 1 FROM foo",
             assert: {
-                result: ParseError
+                result: SyntaxFail
             },
         }
     ],
     partiql::[
-        parse::{
+        {
             name: "SUBSTRING without length missing right paren",
             statement: "SELECT SUBSTRING('str', 1 FROM foo",
             assert: {
-                result: ParseError
+                result: SyntaxFail
             },
         },
-        parse::{
+        {
             name: "SUBSTRING missing right paren",
             statement: "SELECT SUBSTRING('str', 1, 1 FROM foo",
             assert: {
-                result: ParseError
+                result: SyntaxFail
             },
         }
     ]
 ]
 
 trim::[
-    parse::{
+    {
         name: "TRIM no left paren",
         statement: "TRIM ' ')",
         assert: {
-            result: ParseError
+            result: SyntaxFail
         },
     },
 ]

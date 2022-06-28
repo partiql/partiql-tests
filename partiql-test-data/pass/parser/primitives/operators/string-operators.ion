@@ -1,19 +1,19 @@
-parse::{
+{
     name: "concat operator",
     statement: "a || b",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "chained concat operator",
     statement: "a || b || c || d || e",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }

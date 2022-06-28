@@ -1,239 +1,239 @@
-parse::{
+{
     name: "TIME constructor",
     statement: "TIME '02:30:59'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME no space between keyword and quote",
     statement: "TIME'02:30:59",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME constructor with precision argument",
     statement: "TIME (3) '12:59:31'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME constructor with precision argument no spaces between keyword and time string",
     statement: "TIME(3)'12:59:31'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME nano precision",
     statement: "TIME '23:59:59.9999'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME nano precision with precision argument",
     statement: "TIME (7) '23:59:59.123456789'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME nano precision with zero precision argument",
     statement: "TIME (0) '23:59:59.123456789'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME with negative offset",
     statement: "TIME '02:30:59-05:30'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME with positive offset",
     statement: "TIME '02:30:59+05:30'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME with positive zero offset",
     statement: "TIME '02:30:59+00:00'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME with negative zero offset",
     statement: "TIME '02:30:59-00:00'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME with offset and precision",
     statement: "TIME (3) '12:59:31+10:30'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME with offset, precision, and nano seconds",
     statement: "TIME (7) '23:59:59.123456789+01:00'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME WITH TIME ZONE",
     statement: "TIME WITH TIME ZONE '02:30:59'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME WITH TIME ZONE no space between keyword and quote",
     statement: "TIME WITH TIME ZONE'02:30:59'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME WITH TIME ZONE with precision",
     statement: "TIME (3) WITH TIME ZONE '12:59:31'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME WITH TIME ZONE with precision and no spaces between precision and keyword",
     statement: "TIME(3)WITH TIME ZONE '12:59:31'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME WITH TIME ZONE with nano seconds",
     statement: "TIME WITH TIME ZONE '23:59:59.9999'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME WITH TIME ZONE with nano seconds and precision",
     statement: "TIME (7) WITH TIME ZONE '23:59:59.123456789'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME WITH TIME ZONE with nano seconds, precision, and offset",
     statement: "TIME (5) WITH TIME ZONE '23:59:59.9999-11:59'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME with nano precision greater than 10",
     statement: "TIME '23:59:59.1234567890'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME with nano precision greater than 10 and offset",
     statement: "TIME '23:59:59.1234567890+18:00'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME WITH TIME ZONE with nano precision greater than 10 and offset",
     statement: "TIME WITH TIME ZONE '23:59:59.1234567890+18:00'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "TIME WITHOUT TIME ZONE",
     statement: "TIME WITHOUT TIME ZONE '23:59:59.99999'",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }

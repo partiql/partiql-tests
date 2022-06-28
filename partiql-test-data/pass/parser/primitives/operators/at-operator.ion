@@ -1,19 +1,19 @@
-parse::{
+{
     name: "at operator on identifier",
     statement: "@a",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
 
-parse::{
+{
     name: "at operator on path",
     statement: "@a.b",
     assert: [
         {
-            result: ParseOk
+            result: SyntaxSuccess
         },
     ]
 }
