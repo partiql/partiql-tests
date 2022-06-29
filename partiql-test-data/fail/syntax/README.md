@@ -1,1 +1,1 @@
-Tests in this directory should have statements that error during parsing.
+Tests in this directory should have statements have at least one syntax violation.

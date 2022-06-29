@@ -15,21 +15,17 @@ type::{
 
 type::{
     name: TestCase,
-    type: { one_of: [PassParseTestCase, FailParseTestCase, FailSemanticTestCase] }
-}
-
-type::{
-    name: PassParseTestCase,
     type: struct,
-    annotations: required::[parse],
     fields: {
         name: { type: string, occurs: required },
-        statement: { type: string, occurs: required },
+        statement: { type: string, occurs: required }, // partiql-tests#17 may change this definition to a list
         assert: {
             type: {
                 one_of: [
-                    ParseOkAssertion,
-                    { type: list, contains: [{result: ParseOk}] }
+                    SyntaxSuccessAssertion,
+                    SyntaxFailAssertion,
+                    StaticAnalysisFail,
+                    { type: list, element: Assertion }
                 ]
             },
             occurs: required
@@ -38,64 +34,37 @@ type::{
 }
 
 type::{
-    name: FailParseTestCase,
-    type: struct,
-    annotations: required::[parse],
-    fields: {
-        name: { type: string, occurs: required },
-        statement: { type: string, occurs: required },
-        assert: {
-            type: {
-                one_of: [
-                    ParseErrorAssertion,
-                    { type: list, contains: [{result: ParseError}] }
-                ]
-            },
-            occurs: required
-        }
+    name: Assertion,
+    type: {
+        one_of: [
+            SyntaxSuccessAssertion,
+            SyntaxFailAssertion,
+            StaticAnalysisFail
+        ]
     }
 }
 
 type::{
-    name: FailSemanticTestCase,
+    name: SyntaxSuccessAssertion,
     type: struct,
-    annotations: required::[semantic],
     fields: {
-        name: { type: string, occurs: required },
-        statement: { type: string, occurs: required },
-        assert: {
-            type: {
-                one_of: [
-                    SemanticErrorAssertion,
-                    { type: list, contains: [{result: SemanticError}] }
-                ]
-            },
-            occurs: required
-        }
+        result: { type: symbol, valid_values: [SyntaxSuccess], occurs: required }
     }
 }
 
 type::{
-    name: ParseOkAssertion,
+    name: SyntaxFailAssertion,
     type: struct,
     fields: {
-        result: { type: symbol, valid_values: [ParseOk], occurs: required }
+        result: { type: symbol, valid_values: [SyntaxFail], occurs: required }
     }
 }
 
 type::{
-    name: ParseErrorAssertion,
+    name: StaticAnalysisFail,
     type: struct,
     fields: {
-        result: { type: symbol, valid_values: [ParseError], occurs: required }
-    }
-}
-
-type::{
-    name: SemanticErrorAssertion,
-    type: struct,
-    fields: {
-        result: { type: symbol, valid_values: [SemanticError], occurs: required }
+        result: { type: symbol, valid_values: [StaticAnalysisFail], occurs: required }
     }
 }
 
