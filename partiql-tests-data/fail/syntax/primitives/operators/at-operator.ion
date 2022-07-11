@@ -1,0 +1,23 @@
+{
+    name: "at operator without identifier",
+    statement: "@",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "at operator on non identifier",
+    statement: "@(a)",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "double at operator on identifier",
+    statement: "@ @a",
+    assert: {
+        result: SyntaxFail
+    },
+}

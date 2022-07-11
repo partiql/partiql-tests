@@ -1,7 +1,0 @@
-parse::{
-    name: "PIVOT no AT",
-    statement: "PIVOT v FROM data",
-    assert: {
-        result: ParseError
-    },
-}

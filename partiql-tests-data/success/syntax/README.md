@@ -1,0 +1,1 @@
+Tests in this directory have statements that do not have any syntax problems.

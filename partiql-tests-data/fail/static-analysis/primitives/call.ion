@@ -1,0 +1,111 @@
+trim::[
+    {
+        name: "TRIM too many arguments",
+        statement: "TRIM(BOTH ' ' FROM 'test' 2)",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name: "TRIM with BOTH missing FROM",
+        statement: "TRIM(BOTH 'test')",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name: "TRIM and remove without FROM",
+        statement: "trim(both '' 'test')",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name: "TRIM without string",
+        statement: "TRIM(FROM)",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name: "TRIM no args",
+        statement: "TRIM()",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name: "TRIM all args but string",
+        statement: "TRIM(TRAILING '' FROM)",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name: "TRIM two args no FROM",
+        statement: "TRIM(' ' '   1   ')",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name: "TRIM spec and FROM no string",
+        statement: "TRIM(TRAILING FROM)",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+]
+
+extract::[
+    {
+        name: "EXTRACT missing FROM",
+        statement: "EXTRACT(YEAR b)",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name: "EXTRACT missing FROM with comma",
+        statement: "EXTRACT(YEAR, b)",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name: "EXTRACT missing second argument",
+        statement: "EXTRACT(YEAR from)",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name: "EXTRACT missing date time part",
+        statement: "EXTRACT(FROM b)",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name: "EXTRACT with only second argument",
+        statement: "EXTRACT(b)",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name: "EXTRACT with only date time part",
+        statement: "EXTRACT(YEAR)",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+]
+
+{
+    name: "function call not COUNT with star",
+    statement: "F(*)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}

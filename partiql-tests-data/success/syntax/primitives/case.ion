@@ -1,0 +1,59 @@
+'searched-case'::[
+    {
+        name: "searched CASE single WHEN no ELSE",
+        statement: "CASE WHEN name = 'zoe' THEN 1 END",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "searched CASE single WHEN with ELSE",
+        statement: "CASE WHEN name = 'zoe' THEN 1 ELSE 0 END",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "searched CASE multi WHEN with ELSE",
+        statement: "CASE WHEN name = 'zoe' THEN 1 WHEN name > 'kumo' THEN 2 ELSE 0 END",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    }
+]
+
+'simple-case'::[
+    {
+        name: "simple CASE single WHEN no ELSE",
+        statement: "CASE name WHEN 'zoe' THEN 1 END",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "simple CASE single WHEN with ELSE",
+        statement: "CASE name WHEN 'zoe' THEN 1 ELSE 0 END",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "simple CASE multi WHEN with ELSE ",
+        statement: "CASE name WHEN 'zoe' THEN 1 WHEN 'kumo' THEN 2 WHEN 'mary' THEN 3 ELSE 0 END",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    }
+]

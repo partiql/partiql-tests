@@ -1,0 +1,47 @@
+{
+    name: "invalid path component too many dots",
+    statement: "x...a",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "invalid path component keyword in path",
+    statement: '''SELECT foo.id, foo.table FROM `[{id: 1, table: "foos"}]` AS foo''',
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "invalid path with invalid array path",
+    statement: "a.b.['item']",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "invalid path with dot star array nested",
+    statement: "a.b.[*]",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "invalid path with tuple nested",
+    statement: "a.b.{'a': 1, 'b': 2}.a",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "invalid path with array nested",
+    statement: "a.b.[1, 2, 3][2]",
+    assert: {
+        result: SyntaxFail
+    },
+}

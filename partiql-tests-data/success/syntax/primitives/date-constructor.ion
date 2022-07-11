@@ -1,0 +1,59 @@
+{
+    name: "DATE constructor",
+    statement: "DATE '2012-01-01'",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "DATE leap date",
+    statement: "DATE '2012-02-29'",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "DATE first date",
+    statement: "DATE '0000-01-01'",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "DATE last date",
+    statement: "DATE '9999-12-31'",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "DATE no space between keyword and quote",
+    statement: "DATE'1992-11-30'",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "DATE in SELECT",
+    statement: "SELECT DATE '2021-03-10' FROM foo",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    name: "identifier case insensitive",
+    statement: "kumo",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "identifier case sensitive",
+    statement: ''' "kumo" ''',
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}

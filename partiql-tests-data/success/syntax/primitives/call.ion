@@ -1,0 +1,141 @@
+{
+    name: "call empty",
+    statement: "foobar()",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "call one argument",
+    statement: "foobar(1)",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "call two arguments",
+    statement: "foobar(1, 2)",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "call with multiple",
+    statement: "foobar(1, 2, 3)",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "call with case insensitive function name",
+    statement: "mY_fUnCtIoN(a)",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+
+'substring'::[
+    'sql92'::[
+        {
+            name: "call SUBSTRING sql92 syntax",
+            statement: "substring('test' from 100)",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "call SUBSTRING sql92 syntax with length",
+            statement: "substring('test' from 100 for 50)",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+    ],
+    'partiql'::[
+        {
+            name: "call SUBSTRING function argument list syntax",
+            statement: "substring('test', 100)",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "call SUBSTRING function argument list syntax with length",
+            statement: "substring('test', 100, 50)",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+    ]
+]
+
+'trim'::[
+    {
+        name: "call TRIM single argument",
+        statement: "trim('test')",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "call TRIM two arguments default specification",
+        statement: "trim(' ' from 'test')",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "call TRIM two arguments using BOTH",
+        statement: "trim(both from 'test')",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "call TRIM two arguments using LEADING",
+        statement: "trim(leading from 'test')",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "call TRIM two arguments using TRAILING",
+        statement: "trim(trailing from 'test')",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+]

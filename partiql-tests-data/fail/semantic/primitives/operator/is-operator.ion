@@ -1,7 +1,0 @@
-semantic::{
-    name: "IS operator expects type name",
-    statement: "NULL IS `null`",
-    assert: {
-        result: SemanticError
-    },
-}

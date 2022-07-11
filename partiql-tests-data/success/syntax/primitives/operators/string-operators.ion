@@ -1,0 +1,19 @@
+{
+    name: "concat operator",
+    statement: "a || b",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "chained concat operator",
+    statement: "a || b || c || d || e",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}

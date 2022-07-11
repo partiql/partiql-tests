@@ -1,0 +1,47 @@
+'limit'::[
+    {
+        name: "SELECT LIMIT",
+        statement: "SELECT * FROM a LIMIT 10",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "SELECT WHERE LIMIT",
+        statement: "SELECT * FROM a WHERE a = 5 LIMIT 10",
+        assert: {
+            result: SyntaxSuccess
+        }
+    }
+]
+
+'offset'::[
+    {
+        name: "SELECT OFFSET",
+        statement: "SELECT x FROM a OFFSET 5",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "SELECT LIMIT OFFSET",
+        statement: "SELECT x FROM a LIMIT 7 OFFSET 5",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "SELECT WHERE LIMIT OFFSET",
+        statement: "SELECT x FROM a WHERE y = 10 LIMIT 7 OFFSET 5",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "SELECT ORDER BY LIMIT OFFSET",
+        statement: "SELECT x FROM a ORDER BY y DESC LIMIT 10 OFFSET 5",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+]

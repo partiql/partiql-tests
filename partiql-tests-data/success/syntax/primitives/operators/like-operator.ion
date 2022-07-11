@@ -1,0 +1,88 @@
+/*
+    From SQL92 https://www.contrib.andrew.cmu.edu/~shadow/sql/sql1992.txt
+        <like predicate>   ::= <match value> [ NOT ] LIKE <pattern>
+                                   [ ESCAPE <escape character> ]
+        <match value>      ::= <character value expression>
+        <pattern>          ::= <character value expression>
+        <escape character> ::= <character value expression>
+*/
+
+{
+    name: "col name LIKE string",
+    statement: "a LIKE '_AAA%'",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "col name LIKE col name",
+    statement: "a LIKE b",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "path LIKE path",
+    statement: "a.name LIKE b.pattern",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "col name LIKE string escape",
+    statement: "a LIKE '_AAA%' ESCAPE '['",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "col name NOT LIKE string",
+    statement: "a NOT LIKE '_AAA%'",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "col name LIKE col name escape",
+    statement: "a LIKE b ESCAPE '\\'",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "col name LIKE col name escape non lit",
+    statement: "a LIKE b ESCAPE c",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "col name LIKE col name escape path",
+    statement: "a LIKE b ESCAPE x.c",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}

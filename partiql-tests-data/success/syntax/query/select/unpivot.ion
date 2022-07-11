@@ -1,0 +1,31 @@
+{
+    name: "SELECT with FROM UNPIVOT",
+    statement: "SELECT * FROM UNPIVOT item",
+    assert: {
+        result: SyntaxSuccess
+    }
+}
+
+{
+    name: "SELECT with FROM UNPIVOT with AT",
+    statement: "SELECT ord FROM UNPIVOT item AT name",
+    assert: {
+        result: SyntaxSuccess
+    }
+}
+
+{
+    name: "SELECT with FROM UNPIVOT with AS",
+    statement: "SELECT ord FROM UNPIVOT item AS val",
+    assert: {
+        result: SyntaxSuccess
+    }
+}
+
+{
+    name: "SELECT with FROM UNPIVOT with AS and AT",
+    statement: "SELECT ord FROM UNPIVOT item AS val AT name",
+    assert: {
+        result: SyntaxSuccess
+    }
+}

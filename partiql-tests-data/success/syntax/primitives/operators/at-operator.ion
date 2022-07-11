@@ -1,0 +1,19 @@
+{
+    name: "at operator on identifier",
+    statement: "@a",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "at operator on path",
+    statement: "@a.b",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}

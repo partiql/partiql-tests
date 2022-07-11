@@ -1,0 +1,79 @@
+{
+    name: "call EXTRACT YEAR",
+    statement: "extract(year from a)",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "call EXTRACT MONTH",
+    statement: "extract(month from a)",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "call EXTRACT DAY",
+    statement: "extract(day from a)",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "call EXTRACT HOUR",
+    statement: "extract(hour from a)",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "call EXTRACT MINUTE",
+    statement: "extract(minute from a)",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "call EXTRACT SECOND",
+    statement: "extract(second from a)",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "call EXTRACT TIMEZONE_HOUR",
+    statement: "extract(timezone_hour from a)",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "call EXTRACT TIMEZONE_MINUTE",
+    statement: "extract(timezone_minute from a)",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}

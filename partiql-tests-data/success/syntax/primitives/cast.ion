@@ -1,0 +1,79 @@
+{
+    name: "CAST as VARCHAR",
+    statement: "CAST(5 AS VARCHAR)",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "CAST as VARCHAR with length",
+    statement: "CAST(5 AS VARCHAR(5))",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "CAST as DECIMAL",
+    statement: "CAST(a AS DECIMAL)",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "CAST as DECIMAL scale only",
+    statement: "CAST(a AS DECIMAL(1))",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "CAST as DECIMAL scale and precision",
+    statement: "CAST(a AS DECIMAL(1, 2))",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "CAST as NUMERIC",
+    statement: "CAST(a AS NUMERIC)",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "CAST as NUMERIC scale only",
+    statement: "CAST(a AS NUMERIC(1))",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "CAST as NUMERIC scale and precision",
+    statement: "CAST(a AS NUMERIC(1, 2))",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}

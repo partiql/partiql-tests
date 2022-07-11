@@ -1,0 +1,31 @@
+{
+    name: "SELECT ALL with single FROM",
+    statement: "SELECT ALL a FROM table1",
+    assert: {
+        result: SyntaxSuccess
+    }
+}
+
+{
+    name: "SELECT ALL star with single FROM",
+    statement: "SELECT ALL * FROM table1",
+    assert: {
+        result: SyntaxSuccess
+    }
+}
+
+{
+    name: "SELECT DISTINCT with single FROM",
+    statement: "SELECT DISTINCT a FROM table1",
+    assert: {
+        result: SyntaxSuccess
+    }
+}
+
+{
+    name: "SELECT DISTINCT star with single FROM",
+    statement: "SELECT DISTINCT * FROM table1",
+    assert: {
+        result: SyntaxSuccess
+    }
+}

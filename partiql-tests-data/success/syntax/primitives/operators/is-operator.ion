@@ -1,0 +1,59 @@
+{
+    name: "NULL IS NULL",
+    statement: "null IS NULL",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "MISSING IS MISSING",
+    statement: "mIsSiNg IS MISSING",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "CALL IS VARCHAR",
+    statement: "f() IS VARCHAR(200)",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "NULL IS NOT NULL",
+    statement: "null IS NOT NULL",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "MISSING IS NOT MISSING",
+    statement: "mIsSiNg IS NOT MISSING",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "CALL IS NOT VARACHAR",
+    statement: "f() IS NOT VARCHAR(200)",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}

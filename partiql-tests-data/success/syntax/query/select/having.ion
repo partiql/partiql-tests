@@ -1,0 +1,23 @@
+'having'::[
+    {
+        name: "HAVING minimal",
+        statement: "SELECT a FROM data HAVING a = b",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "HAVING with WHERE",
+        statement: "SELECT a FROM data WHERE a = b HAVING c = d",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "HAVING with WHERE and GROUP BY",
+        statement: "SELECT g FROM data WHERE a = b GROUP BY c, d GROUP AS g HAVING d > 6",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+]

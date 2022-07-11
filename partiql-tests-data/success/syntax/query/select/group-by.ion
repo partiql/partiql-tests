@@ -1,0 +1,23 @@
+'group-by'::[
+    {
+        name: "GROUP BY single id",
+        statement: "SELECT a FROM data GROUP BY a",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "GROUP BY single expr",
+        statement: "SELECT a + b FROM data GROUP BY a + b",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "GROUP PARTIAL BY multi aliased and group aliased",
+        statement: "SELECT g FROM data GROUP PARTIAL BY a AS x, b + c AS y, foo(d) AS z GROUP AS g",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+]

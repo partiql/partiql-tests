@@ -1,0 +1,15 @@
+{
+    name: "CAST expected left paren",
+    statement: "CAST 5 as integer",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "CAST given keyword as type arg",
+    statement: "CAST(5 AS SELECT)",
+    assert: {
+        result: SyntaxFail
+    },
+}

@@ -1,0 +1,41 @@
+'row-value-constructor'::[
+    {
+        name: "row value constructor with simple expressions",
+        statement: "(1, 2, 3, 4)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "row value constructor with row value constructors",
+        statement: "((1, 2), (3, 4))",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    }
+]
+
+'table-value-constructor'::[
+    {
+        name: "table value constructor with row value constructors",
+        statement: "VALUES (1, 2), (3, 4)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "table value constructor with singleton row value constructors",
+        statement: "VALUES (1), (2), (3)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    }
+]

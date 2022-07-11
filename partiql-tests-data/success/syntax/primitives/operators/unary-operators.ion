@@ -1,0 +1,59 @@
+{
+    name: "neg call",
+    statement: "-baz()",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "pos neg call",
+    statement: "+(-baz())",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "pos neg call no spaces",
+    statement: "+-baz()",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "unary ion int literal",
+    statement: "-1",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "unary ion float literal",
+    statement: "+-+-+-`-5e0`",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "unary ion timestamp literal",
+    statement: "+-`2017-01-01`",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}

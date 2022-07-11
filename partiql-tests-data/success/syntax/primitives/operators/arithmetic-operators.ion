@@ -1,0 +1,59 @@
+{
+    name: "plus operator",
+    statement: "a + b",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "minus operator",
+    statement: "a - b",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "times operator",
+    statement: "a * b",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "divide operator",
+    statement: "a / b",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "modulo operator",
+    statement: "a % b",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "arithmetic operators chained together",
+    statement: "a + b - c * d / e % f",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}

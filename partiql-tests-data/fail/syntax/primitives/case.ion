@@ -1,0 +1,31 @@
+{
+    name: "CASE expected WHEN clause",
+    statement: "CASE name ELSE 1 END",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "CASE only with END",
+    statement: "CASE END",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "searched CASE no when with ELSE",
+    statement: "CASE ELSE 1 END",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "simple CASE no when with ELSE",
+    statement: "CASE name ELSE 1 END",
+    assert: {
+        result: SyntaxFail
+    },
+}

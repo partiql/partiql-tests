@@ -1,0 +1,31 @@
+{
+    name: "IS operator expects type name",
+    statement: "NULL IS `null`",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "IS NOT operator expects type name",
+    statement: "NULL IS NOT `null`",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "IS operator parens around type name",
+    statement: "a IS (MISSING)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "IS NOT operator parens around type name",
+    statement: "a IS NOT (MISSING)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}

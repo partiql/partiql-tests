@@ -1,0 +1,7 @@
+{
+    name: "BETWEEN operator missing AND",
+    statement: "5 BETWEEN 1  10",
+    assert: {
+        result: SyntaxFail
+    },
+}

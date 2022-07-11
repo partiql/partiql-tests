@@ -1,0 +1,29 @@
+{
+    name: "IN operator with implicit values",
+    statement: "a IN (1, 2, 3, 4)",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "NOT IN operator with implicit values",
+    statement: "a NOT IN (1, 2, 3, 4)",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "IN operator with implicit values row constructor",
+    statement: "(a, b) IN ((1, 2), (3, 4))",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}

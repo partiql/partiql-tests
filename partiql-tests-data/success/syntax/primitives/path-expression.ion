@@ -1,0 +1,256 @@
+pathexpr::[
+    nested::[
+        {
+            name: "dot case one insensitive component",
+            statement: "a.b",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "dot case two insensitive components",
+            statement: "a.b.c",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "dot case three insensitive components",
+            statement: "a.b.c.d",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "dot case sensitive",
+            statement: ''' "a"."b" ''',
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "dot case sensitive component",
+            statement: ''' a."b" ''',
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "path with one square bracket",
+            statement: "a[5]",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "complicated nested path",
+            statement: ''' a.b.c['item']."d"[5].e['s'].f[1+2] ''',
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "path with at identifer",
+            statement: "@a.b[*]",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "dot star",
+            statement: "a.*",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "dot two star",
+            statement: "a.b.*",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "dot wildcard",
+            statement: "a[*]",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "dot two wildcard",
+            statement: "a.b[*]",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "dot and bracket star",
+            statement: "x.a[*].b",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        }
+    ],
+    'function-call'::[
+        {
+            name: "path with call",
+            statement: "foo(x, y).a",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "path with call nested with star and array",
+            statement: "foo(x, y)[*].*.b[5]",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        }
+    ],
+    'tuple-nested'::[
+        {
+            name: "path expression on tuple",
+            statement: "{'a': 1, 'b': 1}.a",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "path expression on tuple with string",
+            statement: "{'a': 1, 'b': 1}.'a'",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "path expression on tuple with dot star",
+            statement: ''' {'a': 1, 'b': 1}.* ''',
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "tuple navigation with array notation",
+            statement: "{'a': 1, 'b': 2}['a']",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "tuple navigation with array case sensitive",
+            statement: ''' {'a': 1, 'b': 2}["A"] ''',
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "tuple navigation with array concat",
+            statement: ''' {'a': 1, 'b': 2}[v || w] ''',
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "tuple navigation with array notation with CAST",
+            statement: " {'attr': 1, 'b':2}[CAST('at' || 'tr' AS STRING)]",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        }
+    ],
+    'query'::[
+        {
+            name: "group dot",
+            statement: "(a).b",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "path expression on select query",
+            statement: "(SELECT a FROM en).b",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        }
+    ],
+    'array'::[
+        {
+            name: "array with literal index",
+            statement: "[1,2,3][0]",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "array with expression index",
+            statement: "[1,2,3][1+1]",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        },
+        {
+            name: "array with star index",
+            statement: "[1,2,3][*]",
+            assert: [
+                {
+                    result: SyntaxSuccess
+                },
+            ]
+        }
+    ]
+]
+

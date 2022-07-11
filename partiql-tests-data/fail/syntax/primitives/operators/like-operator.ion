@@ -1,0 +1,47 @@
+{
+    name: "LIKE wrong order of args",
+    statement: "SELECT a, b FROM data WHERE LIKE a b",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "LIKE expected expression following ESCAPE",
+    statement: "SELECT a, b FROM data WHERE a LIKE b ESCAPE",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "LIKE missing rhs argument",
+    statement: "SELECT a, b FROM data WHERE a LIKE",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "LIKE col name LIKE col name ESCAPE typo",
+    statement: "SELECT a, b FROM data WHERE a LIKE b ECSAPE '\\'",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "LIKE ESCAPE before LIKE",
+    statement: "SELECT a, b FROM data WHERE ESCAPE '\\' a LIKE b",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "LIKE ESCAPE as second argument",
+    statement: "SELECT a, b FROM data WHERE a LIKE ESCAPE '\\' b",
+    assert: {
+        result: SyntaxFail
+    },
+}

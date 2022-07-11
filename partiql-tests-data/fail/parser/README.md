@@ -1,1 +1,0 @@
-Tests in this directory should have statements that error during parsing.

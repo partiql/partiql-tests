@@ -1,0 +1,127 @@
+{
+    name: "AVG no args",
+    statement: "AVG()",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "AVG too many args",
+    statement: "AVG(a, b)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "AVG with star",
+    statement: "AVG(*)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "MAX no args",
+    statement: "MAX()",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "MAX too many args",
+    statement: "MAX(a, b)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "MAX with star",
+    statement: "MAX(*)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "MIN no args",
+    statement: "MIN()",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "MIN too many args",
+    statement: "MIN(a, b)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "MIN with star",
+    statement: "MIN(*)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "SUM no args",
+    statement: "SUM()",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "SUM too many args",
+    statement: "SUM(a, b)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "SUM with star",
+    statement: "SUM(*)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "COUNT no args",
+    statement: "COUNT()",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "COUNT too many args",
+    statement: "COUNT(a, b)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "COUNT DISTINCT star",
+    statement: "COUNT(DISTINCT *)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "COUNT ALL star",
+    statement: "COUNT(ALL *)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}

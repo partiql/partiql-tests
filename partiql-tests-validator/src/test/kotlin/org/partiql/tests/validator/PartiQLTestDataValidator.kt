@@ -30,7 +30,7 @@ import kotlin.test.assertTrue
 private val PARTIQL_TEST_DATA_DIR = System.getenv("PARTIQL_TESTS_DATA")
 
 /**
- * Validates all the PartiQL conformance test data in [PARTIQL_TEST_DATA_DIR] conform to the test data schema.
+ * Checks all the PartiQL conformance test data in [PARTIQL_TEST_DATA_DIR] conforms to the test data schema.
  */
 class PartiQLTestDataValidator {
 
@@ -73,14 +73,14 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testPassParse() {
+    fun testSyntaxSuccess() {
         val testData =
             """
-            parse::{
+            {
                 name: "some string",
                 statement: "some string",
                 assert: {
-                    result: ParseOk
+                    result: SyntaxSuccess
                 }
             }
             """
@@ -89,14 +89,14 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testFailParse() {
+    fun testSyntaxFail() {
         val testData =
             """
-            parse::{
+            {
                 name: "some string",
                 statement: "some string",
                 assert: {
-                    result: ParseError
+                    result: SyntaxFail
                 }
             }
             """
@@ -105,14 +105,14 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testFailSemantic() {
+    fun testStaticAnalysisFail() {
         val testData =
             """
-            semantic::{
+            {
                 name: "some string",
                 statement: "some string",
                 assert: {
-                    result: SemanticError
+                    result: StaticAnalysisFail
                 }
             }
             """
@@ -121,15 +121,15 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testPassParseAssertList() {
+    fun testSyntaxSuccessAssertList() {
         val testData =
             """
-            parse::{
+            {
                 name: "some string",
                 statement: "some string",
                 assert: [
                     {
-                        result: ParseOk
+                        result: SyntaxSuccess
                     }
                 ]
             }
@@ -139,15 +139,15 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testFailParseAssertList() {
+    fun testSyntaxFailAssertList() {
         val testData =
             """
-            parse::{
+            {
                 name: "some string",
                 statement: "some string",
                 assert: [
                     {
-                        result: ParseError
+                        result: SyntaxFail
                     }
                 ]
             }
@@ -157,15 +157,15 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testFailSemanticAssertList() {
+    fun testStaticAnalysisFailAssertList() {
         val testData =
             """
-            semantic::{
+            {
                 name: "some string",
                 statement: "some string",
                 assert: [
                     {
-                        result: SemanticError
+                        result: StaticAnalysisFail
                     }
                 ]
             }
@@ -175,35 +175,35 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testMultipleParseTests() {
+    fun testMultipleSyntaxTests() {
         val testData =
             """
             'some-namespace'::[
-                parse::{
+                {
                     name: "some string in namespace 1",
                     statement: "some string in namespace 1",
                     assert: [
                         {
-                            result: ParseOk
+                            result: SyntaxSuccess
                         }
                     ]
                 },
-                parse::{
+                {
                     name: "some string in namespace 2",
                     statement: "some string in namespace 2",
                     assert: [
                         {
-                            result: ParseOk
+                            result: SyntaxSuccess
                         }
                     ]
                 }
             ]
-            parse::{
+            {
                 name: "some string outside namespace",
                 statement: "some string outside namespace",
                 assert: [
                     {
-                        result: ParseOk
+                        result: SyntaxSuccess
                     }
                 ]
             }
@@ -220,43 +220,43 @@ class PartiQLTestDataValidator {
                 'ns-2'::[
                     'ns-3'::[
                         'ns-4'::[
-                            parse::{
+                            {
                                 name: "some string in namespace 4",
                                 statement: "some string in namespace 4",
                                 assert: {
-                                    result: ParseOk
+                                    result: SyntaxSuccess
                                 }
                             }
                         ],
-                        parse::{
+                        {
                             name: "some string in namespace 3",
                             statement: "some string in namespace 3",
                             assert: {
-                                result: ParseOk
+                                result: SyntaxSuccess
                             }
                         }
                     ],
-                    parse::{
+                    {
                         name: "some string in namespace 2",
                         statement: "some string in namespace 2",
                         assert: {
-                            result: ParseOk
+                            result: SyntaxSuccess
                         }
                     }
                 ],
-                parse::{
+                {
                     name: "some string in namespace 1",
                     statement: "some string in namespace 1",
                     assert: {
-                        result: ParseOk
+                        result: SyntaxSuccess
                     }
                 }
             ]
-            parse::{
+            {
                 name: "some string outside namespace",
                 statement: "some string outside namespace",
                 assert: {
-                    result: ParseOk
+                    result: SyntaxSuccess
                 }
             }
             """
@@ -269,11 +269,11 @@ class PartiQLTestDataValidator {
         // ISL structs types are open content by default. Currently, see no reason to restrict these structs
         val testData =
             """
-            parse::{
+            {
                 name: "some string",
                 statement: "some string",
                 assert: {
-                    result: ParseOk
+                    result: SyntaxSuccess
                 },
                 some_other_field: "some other string"
             }
@@ -287,11 +287,11 @@ class PartiQLTestDataValidator {
         // ISL structs types are open content by default. Currently, see no reason to restrict these structs
         val testData =
             """
-            parse::{
+            {
                 name: "some string",
                 statement: "some string",
                 assert: {
-                    result: ParseOk,
+                    result: SyntaxSuccess,
                     some_other_field: "some other string"
                 }
             }
@@ -301,18 +301,18 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testAllowOtherAssertionInAssertList() {
+    fun testMultipleAssertions() {
         val testData =
             """
-            parse::{
+            {
                 name: "some string",
                 statement: "some string",
                 assert: [
                     {
-                        result: ParseOk,
+                        result: SyntaxSuccess
                     },
                     {
-                        some_other_assertion: "some other string"
+                        result: StaticAnalysisFail
                     }
                 ]
             }
@@ -323,15 +323,20 @@ class PartiQLTestDataValidator {
 
     // Negative tests
     @Test
-    fun testWrongAnnotationPassParse() {
+    fun testDisallowUndefinedAssertions() {
         val testData =
             """
-            wrong_annotation::{
+            {
                 name: "some string",
                 statement: "some string",
-                assert: {
-                    result: ParseOk
-                }
+                assert: [
+                    {
+                        result: SyntaxSuccess,
+                    },
+                    {
+                        some_undefined_assertion: "some other string"
+                    }
+                ]
             }
             """
         val dataInIon = ion.loader.load(testData)
@@ -339,46 +344,14 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testWrongAssertResultPassParse() {
+    fun testWrongAssertResultSyntaxSuccess() {
         val testData =
             """
-            parse::{
+            {
                 name: "some string",
                 statement: "some string",
                 assert: {
-                    result: ParseOOk
-                }
-            }
-            """
-        val dataInIon = ion.loader.load(testData)
-        assertViolationsOccurred(dataInIon)
-    }
-
-    @Test
-    fun testWrongAssertResultFailParse() {
-        val testData =
-            """
-            parse::{
-                name: "some string",
-                statement: "some string",
-                assert: {
-                    result: SemanticError
-                }
-            }
-            """
-        val dataInIon = ion.loader.load(testData)
-        assertViolationsOccurred(dataInIon)
-    }
-
-    @Test
-    fun testWrongAssertResultFailSemantic() {
-        val testData =
-            """
-            semantic::{
-                name: "some string",
-                statement: "some string",
-                assert: {
-                    result: ParseError
+                    result: SyntaxSucesssssss
                 }
             }
             """
@@ -390,11 +363,11 @@ class PartiQLTestDataValidator {
     fun testWrongNameType() {
         val testData =
             """
-            parse::{
+            {
                 name: not_a_string,
                 statement: "some string",
                 assert: {
-                    result: ParseOk
+                    result: SyntaxSuccess
                 }
             }
             """
@@ -406,11 +379,11 @@ class PartiQLTestDataValidator {
     fun testWrongStatementType() {
         val testData =
             """
-            parse::{
+            {
                 name: "some string",
                 statement: not_a_string,
                 assert: {
-                    result: ParseOk
+                    result: SyntaxSuccess
                 }
             }
             """
@@ -422,13 +395,13 @@ class PartiQLTestDataValidator {
     fun testWrongAssertType() {
         val testData =
             """
-            parse::{
+            {
                 name: "some string",
                 statement: "some string",
                 assert: [
                     [
                         {
-                            result: ParseOk
+                            result: SyntaxSuccess
                         }
                     ]
                 ]
@@ -442,10 +415,10 @@ class PartiQLTestDataValidator {
     fun testNoNameField() {
         val testData =
             """
-            parse::{
+            {
                 statement: "some string",
                 assert: {
-                    result: ParseOk
+                    result: SyntaxSuccess
                 }
             }
             """
@@ -457,10 +430,10 @@ class PartiQLTestDataValidator {
     fun testNoStatementField() {
         val testData =
             """
-            parse::{
+            {
                 name: "some string",
                 assert: {
-                    result: ParseOk
+                    result: SyntaxSuccess
                 }
             }
             """
@@ -472,9 +445,23 @@ class PartiQLTestDataValidator {
     fun testNoAssertField() {
         val testData =
             """
-            parse::{
+            {
                 name: "some string",
                 statement: "some string"
+            }
+            """
+        val dataInIon = ion.loader.load(testData)
+        assertViolationsOccurred(dataInIon)
+    }
+
+    @Test
+    fun testNoResultInAssertField() {
+        val testData =
+            """
+            {
+                name: "some string",
+                statement: "some string",
+                assert: { }
             }
             """
         val dataInIon = ion.loader.load(testData)
@@ -485,11 +472,11 @@ class PartiQLTestDataValidator {
     fun testMalformedIon() {
         val testData =
             """
-            parse::{
+            {
                 name: "some string",
                 statement: "some string"
                 assert: {
-                    result: ParseOk
+                    result: SyntaxSuccess
                 }
             """
         assertThrows<IonException> {

@@ -1,0 +1,157 @@
+{
+    name: "SELECT comma CROSS JOIN two tables",
+    statement: "SELECT a FROM table1, table2",
+    assert: {
+        result: SyntaxSuccess
+    }
+}
+
+{
+    name: "SELECT comma CROSS JOIN three tables",
+    statement: "SELECT a FROM table1, table2, table3",
+    assert: {
+        result: SyntaxSuccess
+    }
+}
+
+{
+    name: "SELECT multiple with CROSS JOIN and simple WHERE",
+    statement: "SELECT a, b FROM table1 as t1, table2 WHERE f(t1)",
+    assert: {
+        result: SyntaxSuccess
+    }
+}
+
+{
+    name: "SELECT multiple with CROSS JOIN and simple WHERE no AS alias",
+    statement: "SELECT a a1, b b1 FROM table1 t1, table2 WHERE f(t1)",
+    assert: {
+        result: SyntaxSuccess
+    }
+}
+
+{
+    name: "SELECT with RIGHT CROSS JOIN",
+    statement: "SELECT x FROM stuff s RIGHT CROSS JOIN foo f",
+    assert: {
+        result: SyntaxSuccess
+    },
+}
+
+{
+    name: "SELECT with FULL OUTER JOIN and ON condition",
+    statement: "SELECT x FROM stuff s FULL OUTER JOIN foo f ON s = f",
+    assert: {
+        result: SyntaxSuccess
+    },
+}
+
+{
+    name: "SELECT single join parens test",
+    statement: "SELECT x FROM (A INNER JOIN B ON A = B)",
+    assert: {
+        result: SyntaxSuccess
+    },
+}
+
+{
+    name: "SELECT single join multi parens",
+    statement: "SELECT x FROM (((A INNER JOIN B ON A = B)))",
+    assert: {
+        result: SyntaxSuccess
+    },
+}
+
+{
+    name: "SELECT two joins natural order parens",
+    statement: "SELECT x FROM (A INNER JOIN B ON A = B) INNER JOIN C ON B = C",
+    assert: {
+        result: SyntaxSuccess
+    },
+}
+
+{
+    name: "SELECT two joins specified order parens",
+    statement: "SELECT x FROM A INNER JOIN (B INNER JOIN C ON B = C) ON A = B",
+    assert: {
+        result: SyntaxSuccess
+    },
+}
+
+{
+    name: "SELECT three joins specified order parens",
+    statement: "SELECT x FROM A INNER JOIN (B INNER JOIN (C INNER JOIN D ON C = D) ON B = C) ON A = B",
+    assert: {
+        result: SyntaxSuccess
+    },
+}
+
+{
+    name: "SELECT literal wrapped in parens",
+    statement: "SELECT x FROM A INNER JOIN (1) ON true",
+    assert: {
+        result: SyntaxSuccess
+    },
+}
+
+{
+    name: "SELECT subquery wrapped in parens",
+    statement: "SELECT x FROM A INNER JOIN (SELECT x FROM 1) ON true",
+    assert: {
+        result: SyntaxSuccess
+    },
+}
+
+{
+    name: "SELECT with multiple JOINS and implicit CROSS JOIN",
+    statement: "SELECT x FROM a, b CROSS JOIN c LEFT JOIN d ON e RIGHT OUTER CROSS JOIN f OUTER JOIN g ON h",
+    assert: {
+        result: SyntaxSuccess
+    },
+}
+
+{
+    name: "SELECT with multiple JOINS and explicit CROSS JOIN",
+    statement: "SELECT x FROM a INNER CROSS JOIN b CROSS JOIN c LEFT JOIN d ON e RIGHT OUTER CROSS JOIN f OUTER JOIN g ON h",
+    assert: {
+        result: SyntaxSuccess
+    },
+}
+
+'correlated-joins'::[
+    {
+        name: "SELECT correlated JOIN",
+        statement: "SELECT a, b FROM stuff s, @s WHERE f(s)",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "SELECT correlated with explicit CROSS JOIN",
+        statement: "SELECT a, b FROM stuff s CROSS JOIN @s WHERE f(s)",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "SELECT correlated with explicit LEFT CROSS JOIN",
+        statement: "SELECT a, b FROM stuff s LEFT CROSS JOIN @s WHERE f(s)",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "SELECT correlated with explicit LEFT OUTER JOIN and ON",
+        statement: "SELECT a, b FROM stuff s LEFT JOIN @s ON f(s)",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "SELECT correlated JOIN with explicit INNER JOIN",
+        statement: "SELECT a, b FROM stuff s INNER CROSS JOIN @s WHERE f(s)",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+]

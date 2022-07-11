@@ -1,0 +1,64 @@
+{
+    name: "INNER CROSS JOIN with extraneous ON condition",
+    statement: "SELECT * FROM foo INNER CROSS JOIN bar ON true",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "LEFT CROSS JOIN with extraneous ON condition",
+    statement: "SELECT * FROM foo LEFT CROSS JOIN bar ON true",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "RIGHT CROSS JOIN with extraneous ON condition",
+    statement: "SELECT * FROM foo RIGHT CROSS JOIN bar ON true",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+// From pg 181 of sql92 spec, <join specification> must be specified for qualified joins
+{
+    name: "INNER JOIN missing required ON condition",
+    statement: "SELECT * FROM foo INNER JOIN bar",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "LEFT JOIN missing required ON condition",
+    statement: "SELECT * FROM foo LEFT JOIN bar",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "RIGHT JOIN missing required ON condition",
+    statement: "SELECT * FROM foo RIGHT JOIN bar",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "JOIN missing required ON condition",
+    statement: "SELECT * FROM foo JOIN bar",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "paren INNER JOIN missing required ON clause",
+    statement: "SELECT * FROM foo INNER JOIN (bar INNER JOIN baz ON true)",
+    assert: {
+        result: SyntaxFail
+    },
+}

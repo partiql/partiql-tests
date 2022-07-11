@@ -1,0 +1,31 @@
+{
+    name: "missing right paren",
+    statement: "(1 + 2",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "missing operation between literals",
+    statement: "5 5",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "semicolon inside expression",
+    statement: "(1;)",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "VALUE as top-level expression",
+    statement: "VALUE 1",
+    assert: {
+        result: SyntaxFail
+    },
+}

@@ -1,0 +1,39 @@
+{
+    name: "unary NOT literal",
+    statement: "not 1",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "chained logical AND",
+    statement: "a AND b AND c",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "chained logical OR",
+    statement: "a OR b OR c",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
+
+{
+    name: "chained logical ops",
+    statement: "NOT NOT a AND b OR c OR NOT d AND NOT NOT NOT e",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}

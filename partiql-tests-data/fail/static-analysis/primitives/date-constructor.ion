@@ -1,0 +1,127 @@
+{
+    name: "invalid DATE day out of range for January",
+    statement: "DATE '2021-01-32'",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "invalid DATE day out of range for February leap year",
+    statement: "DATE '2012-02-30'",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "invalid DATE day out of range for February non leap year",
+    statement: "DATE '2021-02-29'",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "invalid DATE day out of range for March",
+    statement: "DATE '2021-03-32'",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "invalid DATE day out of range for April",
+    statement: "DATE '2021-04-31'",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "invalid DATE day out of range for May",
+    statement: "DATE '2021-05-32'",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "invalid DATE day out of range for June",
+    statement: "DATE '2021-06-31'",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "invalid DATE day out of range for July",
+    statement: "DATE '2021-07-32'",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "invalid DATE day out of range for August",
+    statement: "DATE '2021-08-32'",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "invalid DATE day out of range for September",
+    statement: "DATE '2021-09-31'",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "invalid DATE day out of range for October",
+    statement: "DATE '2021-10-32'",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "invalid DATE day out of range for November",
+    statement: "DATE '2021-11-31'",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "invalid DATE day out of range for December",
+    statement: "DATE '2021-12-32'",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "invalid DATE month above upper bound",
+    statement: "DATE '2021-13-01'",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "invalid DATE month of zero",
+    statement: "DATE '2021-00-01'",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "invalid DATE day of zero",
+    statement: "DATE '2021-01-00'",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
