@@ -1,4 +1,18 @@
-package validator
+/*
+ * Copyright 2022 Amazon.com, Inc. or its affiliates.  All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at:
+ *
+ *       http://aws.amazon.com/apache2.0/
+ *
+ *  or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+ *  language governing permissions and limitations under the License.
+ */
+
+package org.partiql.tests.validator
 
 import com.amazon.ion.IonException
 import com.amazon.ion.IonValue
@@ -8,24 +22,31 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ArgumentsSource
 import java.io.File
+import java.nio.file.Paths
 import kotlin.test.Test
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
-private const val PARTIQL_TEST_DATA_DIR = "../partiql-test-data"
+private val PARTIQL_TEST_DATA_DIR = System.getenv("PARTIQL_TESTS_DATA")
 
 /**
  * Checks all the PartiQL conformance test data in [PARTIQL_TEST_DATA_DIR] conforms to the test data schema.
  */
 class PartiQLTestDataValidator {
+
     private val ion = IonSystemBuilder.standard().build()
     private val iss = IonSchemaSystemBuilder.standard().build()
-    private val schema = iss.newSchema(File("$PARTIQL_TEST_DATA_DIR/partiql_test_schema.isl").readText()).getType("PartiQLTestDocument")
+
+    private var schema =
+        iss.newSchema(Paths.get(PARTIQL_TEST_DATA_DIR, "partiql-tests-schema.isl").toFile().readText()).getType("PartiQLTestDocument")
 
     private fun assertNoViolations(dataInIon: IonValue) {
         val violations = schema?.validate(dataInIon)
         assertNotNull(violations)
-        assertTrue(violations.violations.isEmpty(), "Violations occurred when validating the test data to the schema. See violations:\n$violations")
+        assertTrue(
+            violations.violations.isEmpty(),
+            "Violations occurred when validating the test data to the schema. See violations:\n$violations"
+        )
     }
 
     private fun assertViolationsOccurred(dataInIon: IonValue) {
