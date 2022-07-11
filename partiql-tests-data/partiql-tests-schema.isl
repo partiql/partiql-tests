@@ -22,9 +22,7 @@ type::{
         assert: {
             type: {
                 one_of: [
-                    SyntaxSuccessAssertion,
-                    SyntaxFailAssertion,
-                    StaticAnalysisFail,
+                    Assertion,
                     { type: list, element: Assertion }
                 ]
             },
@@ -39,7 +37,7 @@ type::{
         one_of: [
             SyntaxSuccessAssertion,
             SyntaxFailAssertion,
-            StaticAnalysisFail
+            StaticAnalysisFailAssertion
         ]
     }
 }
@@ -61,7 +59,7 @@ type::{
 }
 
 type::{
-    name: StaticAnalysisFail,
+    name: StaticAnalysisFailAssertion,
     type: struct,
     fields: {
         result: { type: symbol, valid_values: [StaticAnalysisFail], occurs: required }
