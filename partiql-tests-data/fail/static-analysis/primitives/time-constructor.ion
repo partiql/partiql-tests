@@ -151,30 +151,6 @@
 }
 
 {
-    name: "invalid TIME precision in square brackets",
-    statement: "TIME [4] '23:59:59.99999'",
-    assert: {
-        result: StaticAnalysisFail
-    },
-}
-
-{
-    name: "invalid TIME precision in curly braces",
-    statement: "TIME {4} '23:59:59.99999'",
-    assert: {
-        result: StaticAnalysisFail
-    },
-}
-
-{
-    name: "invalid TIME precision not in parens",
-    statement: "TIME 4 '23:59:59.99999'",
-    assert: {
-        result: StaticAnalysisFail
-    },
-}
-
-{
     name: "invalid TIME precision as string",
     statement: "TIME ('4') '23:59:59.99999'",
     assert: {
