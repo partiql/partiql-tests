@@ -15,14 +15,6 @@
 }
 
 {
-    name: "invalid TIME with STRING literal",
-    statement: "TIME 'time_string'",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
     name: "invalid TIME with DECIMAL",
     statement: "TIME 123.23",
     assert: {
@@ -39,152 +31,8 @@
 }
 
 {
-    name: "invalid TIME with DATE string",
-    statement: "TIME '2012-12-12'",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
-    name: "invalid TIME with just the hour",
-    statement: "TIME '12'",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
-    name: "invalid TIME with just the hour and minute",
-    statement: "TIME '12:30'",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
-    name: "invalid TIME with nano missing a component",
-    statement: "TIME '59.12345'",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
-    name: "invalid TIME without padding of hour",
-    statement: "TIME '1:30:38'",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
-    name: "invalid TIME too many properties",
-    statement: "TIME '12.123:45.123:54.123'",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
-    name: "invalid TIME minus before hours",
-    statement: "TIME '-19:45:13'",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
-    name: "invalid TIME missing plus or minus before offset",
-    statement: "TIME '23:59:59.99999 05:30'",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
-    name: "invalid TIME offset with DECIMAL",
-    statement: "TIME '23:59:59+05:30.00'",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
-    name: "invalid TIME with unmatched left paren",
-    statement: "TIME ( '23:59:59.99999'",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
-    name: "invalid TIME with no precision value",
-    statement: "TIME () '23:59:59.99999'",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
-    name: "invalid TIME precision in square brackets",
-    statement: "TIME [4] '23:59:59.99999'",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
-    name: "invalid TIME precision in curly braces",
-    statement: "TIME {4} '23:59:59.99999'",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
-    name: "invalid TIME precision not in parens",
-    statement: "TIME 4 '23:59:59.99999'",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
-    name: "invalid TIME precision as string",
-    statement: "TIME ('4') '23:59:59.99999'",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
-    name: "invalid TIME precision as string literal",
-    statement: "TIME ('four') '23:59:59.99999'",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
     name: "invalid TIME WITH TIME ZONE missing time string",
     statement: "TIME WITH TIME ZONE",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
-    name: "invalid TIME WITH TIME ZONE without seconds specified",
-    statement: "TIME WITH TIME ZONE '12:20'",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
-    name: "invalid TIME WITH TIME ZONE with nano missing a component",
-    statement: "TIME WITH TIME ZONE '59.12345'",
     assert: {
         result: SyntaxFail
     },
@@ -241,22 +89,6 @@
 {
     name: "invalid TIME WITH TIME ZONE precision after WITH TIME TIME ZONE",
     statement: "TIME WITH TIME ZONE (4) '23:59:59.99999'",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
-    name: "invalid TIME WITH TIME ZONE with STRING literal",
-    statement: "TIME WITH TIME ZONE 'time_string'",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
-    name: "invalid TIME WITH TIME ZONE mistyped offset",
-    statement: "TIME WITH TIME ZONE '23:59:59-18-01'",
     assert: {
         result: SyntaxFail
     },
