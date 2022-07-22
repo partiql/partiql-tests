@@ -142,4 +142,25 @@ partiql::[
             result: SyntaxSuccess
         },
     },
+    {
+        name: "SELECT VALUE query missing FROM",
+        statement: "SELECT VALUE event.id",
+        assert: {
+            result: SyntaxSuccess
+        },
+    },
+    {
+        name: "SELECT with case missing FROM with WHERE eq",
+        statement: ''' SELECT event.id WHERE event.type = 'SAVE' ''',
+        assert: {
+            result: SyntaxSuccess
+        },
+    },
+    {
+        name: "SELECT with case missing FROM with WHERE ne",
+        statement: ''' SELECT event.id WHERE event.type != 'SAVE' ''',
+        assert: {
+            result: SyntaxSuccess
+        },
+    }
 ]
