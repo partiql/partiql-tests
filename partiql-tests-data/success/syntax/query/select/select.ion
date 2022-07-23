@@ -121,3 +121,46 @@
         result: SyntaxSuccess
     }
 }
+
+partiql::[
+    {
+        name: "SELECT query missing FROM",
+        statement: "SELECT a  DATA",
+        assert: {
+            result: SyntaxSuccess
+        },
+    },
+    {
+        name: "SELECT with case missing FROM",
+        statement: '''SELECT a,
+                     CASE WHEN a=1 THEN 'one'
+                          WHEN a=2 THEN 'two'
+                          ELSE 'other'
+                     END
+                     FROM test''',
+        assert: {
+            result: SyntaxSuccess
+        },
+    },
+    {
+        name: "SELECT VALUE query missing FROM",
+        statement: "SELECT VALUE event.id",
+        assert: {
+            result: SyntaxSuccess
+        },
+    },
+    {
+        name: "SELECT with case missing FROM with WHERE eq",
+        statement: ''' SELECT event.id WHERE event.type = 'SAVE' ''',
+        assert: {
+            result: SyntaxSuccess
+        },
+    },
+    {
+        name: "SELECT with case missing FROM with WHERE ne",
+        statement: ''' SELECT event.id WHERE event.type != 'SAVE' ''',
+        assert: {
+            result: SyntaxSuccess
+        },
+    }
+]

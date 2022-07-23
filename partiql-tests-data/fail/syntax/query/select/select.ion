@@ -8,7 +8,7 @@
 
 {
     name: "SELECT without comma between projection items",
-    statement: "SELECT a  data",
+    statement: "SELECT a b  data",
     assert: {
         result: SyntaxFail
     },
@@ -57,14 +57,6 @@
 {
     name: "expected identifier for AT alias",
     statement: "SELECT a FROM data AT true",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
-    name: "SELECT query missing FROM",
-    statement: "SELECT a  DATA",
     assert: {
         result: SyntaxFail
     },

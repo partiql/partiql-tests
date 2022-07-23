@@ -10,7 +10,7 @@
 
 {
     name: "TIME no space between keyword and quote",
-    statement: "TIME'02:30:59",
+    statement: "TIME'02:30:59'",
     assert: [
         {
             result: SyntaxSuccess
