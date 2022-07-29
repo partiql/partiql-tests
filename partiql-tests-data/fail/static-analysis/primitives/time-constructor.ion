@@ -198,3 +198,26 @@
     },
 }
 
+{
+    name: "invalid TIME WITH TIME ZONE precision after WITH",
+    statement: "TIME WITH (4) TIME ZONE '23:59:59.99999'",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "invalid TIME WITH TIME ZONE precision after WITH TIME",
+    statement: "TIME WITH TIME (4) ZONE '23:59:59.99999'",
+    assert: {
+        result: SyntaxFail
+    },
+}
+
+{
+    name: "invalid TIME WITH TIME ZONE precision after WITH TIME TIME ZONE",
+    statement: "TIME WITH TIME ZONE (4) '23:59:59.99999'",
+    assert: {
+        result: SyntaxFail
+    },
+}
