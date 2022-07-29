@@ -36,7 +36,6 @@ https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf
 - SQL parameter tests—pending [#23](https://github.com/partiql/partiql-docs/issues/23):
   - https://github.com/partiql/partiql-lang-kotlin/blob/0b4540f474caff7dba1d6c327e0e85012402829b/lang/test/org/partiql/lang/syntax/SqlParserTest.kt#L1105-L1108
   - https://github.com/partiql/partiql-lang-kotlin/blob/main/lang/test/org/partiql/lang/syntax/SqlParserTest.kt#L1598-L1672
-  - 
 
 Unsure if should be included:
 - `expectedCastAsIntArity`, `expectedCastAsRealArity` -- type supplied with parameter; not sure is parse error
