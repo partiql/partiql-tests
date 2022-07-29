@@ -33,6 +33,9 @@ https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf
 - TIME constructor with additional arguments
   - AM/PM: https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf65c60b2a3b79/lang/test/org/partiql/lang/syntax/SqlParserDateTimeTests.kt#L420-L437
   - specifying timezone abbreviations (e.g. PST): https://github.com/partiql/partiql-lang-kotlin/blob/34625c68dbcbaf7b8ae60df7a4cf65c60b2a3b79/lang/test/org/partiql/lang/syntax/SqlParserDateTimeTests.kt#L685-L693
+- SQL parameter tests—pending [#23](https://github.com/partiql/partiql-docs/issues/23):
+  - https://github.com/partiql/partiql-lang-kotlin/blob/0b4540f474caff7dba1d6c327e0e85012402829b/lang/test/org/partiql/lang/syntax/SqlParserTest.kt#L1105-L1108
+  - https://github.com/partiql/partiql-lang-kotlin/blob/main/lang/test/org/partiql/lang/syntax/SqlParserTest.kt#L1598-L1672
 
 Unsure if should be included:
 - `expectedCastAsIntArity`, `expectedCastAsRealArity` -- type supplied with parameter; not sure is parse error
