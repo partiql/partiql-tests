@@ -1,17 +1,1 @@
-{
-    name: "parameter expression",
-    statement: "?",
-    assert: [
-        {
-            result: SyntaxSuccess
-        },
-    ]
-}
-
-{
-    name: "SELECT with parameter and literals",
-    statement: "SELECT ?, f.a from foo f where f.bar = ? and f.spam = 'eggs' and f.baz = ?",
-    assert: {
-        result: SyntaxSuccess
-    }
-}
+// TODO: Add any required tests one is completed https://github.com/partiql/partiql-docs/issues/23
