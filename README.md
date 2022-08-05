@@ -1,6 +1,6 @@
 ## PartiQL Test Data
 
-The `partiql-test-data` folder contains language-neutral test data used to check conformance to the [PartiQL 
+The `partiql-tests-data` folder contains language-neutral test data used to check conformance to the [PartiQL 
 specification](https://partiql.org/assets/PartiQL-Specification.pdf).
 
 Consumers of this repository must assume additional nested subfolders may be added, and should therefore recurse down 
@@ -25,4 +25,3 @@ See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more inform
 ## License
 
 This project is licensed under the Apache-2.0 License.
-

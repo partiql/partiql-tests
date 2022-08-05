@@ -1,0 +1,31 @@
+envs::{
+    ints: [1, 2, 3],
+    simple_struct: {
+        'a': 1,
+        'b': 2
+    }
+}
+
+{
+    name: "equiv wildcard steps collection",
+    statement: "ints[*]",
+    assert: {
+        result: EvaluationSuccess,
+        output: $bag::[1, 2, 3],
+        equiv: [
+            "SELECT VALUE v FROM ints AS v"
+        ]
+    }
+}
+
+{
+    name: "equiv wildcard steps struct",
+    statement: "simple_struct.*",
+    assert: {
+        result: EvaluationSuccess,
+        output: $bag::[1, 2],
+        equiv: [
+            "SELECT VALUE v FROM UNPIVOT simple_struct AS v"
+        ]
+    }
+}
