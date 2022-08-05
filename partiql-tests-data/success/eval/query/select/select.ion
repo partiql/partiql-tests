@@ -35,27 +35,17 @@ envs::{
     statement: "SELECT r.v FROM sensors AS s, s.readings AS r",
     env: {
         sensors: [
-            {readings: [{v: 1.3}, {v: 2}]},
-            {readings: [{v: 0.7}, {v: 0.8}, {v: 0.9}]}
+            {readings: [{v: 5.0}, {v: 78.2}]}
         ]
     },
     assert: {
         result: EvaluationSuccess,
         output: $bag::[
             {
-                v: 1.3
+                v: 5.0
             },
             {
-                v: 2
-            },
-            {
-                v: 0.7
-            },
-            {
-                v: 0.8
-            },
-            {
-                v: 0.9
+                v: 78.2
             }
         ]
     }

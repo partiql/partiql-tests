@@ -73,7 +73,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testSyntaxSuccess() {
+    fun testSyntaxSuccessSchema() {
         val testData =
             """
             {
@@ -89,7 +89,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testSyntaxFail() {
+    fun testSyntaxFailSchema() {
         val testData =
             """
             {
@@ -105,7 +105,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testStaticAnalysisFail() {
+    fun testStaticAnalysisFailSchema() {
         val testData =
             """
             {
@@ -121,7 +121,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testSyntaxSuccessAssertList() {
+    fun testSyntaxSuccessAssertListSchema() {
         val testData =
             """
             {
@@ -139,7 +139,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testSyntaxFailAssertList() {
+    fun testSyntaxFailAssertListSchema() {
         val testData =
             """
             {
@@ -157,7 +157,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testStaticAnalysisFailAssertList() {
+    fun testStaticAnalysisFailAssertListSchema() {
         val testData =
             """
             {
@@ -175,7 +175,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testMultipleSyntaxTests() {
+    fun testMultipleSyntaxSuccessSchemas() {
         val testData =
             """
             'some-namespace'::[
@@ -213,7 +213,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testNestedNamespaces() {
+    fun testNestedNamespacesSchema() {
         val testData =
             """
             'ns-1'::[
@@ -265,7 +265,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testMultipleAssertions() {
+    fun testMultipleAssertionsSchema() {
         val testData =
             """
             {
@@ -286,7 +286,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testGlobalEnvs() {
+    fun testGlobalEnvsSchema() {
         val testData =
             """
             envs::{
@@ -299,7 +299,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testEvaluationSuccess() {
+    fun testEvaluationSuccessSchema() {
         val testData =
             """
             {
@@ -316,7 +316,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testEvaluationFail() {
+    fun testEvaluationFailSchema() {
         val testData =
             """
             {
@@ -332,7 +332,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testEvaluationSuccessWithEquivalence() {
+    fun testEvaluationSuccessSchemaWithEquivalence() {
         val testData =
             """
             {
@@ -354,7 +354,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testEvaluationWithOptionalFields() {
+    fun testEvaluationSuccessSchemaWithOptionalFields() {
         val testData =
             """
             {
@@ -374,7 +374,7 @@ class PartiQLTestDataValidator {
 
     // Negative tests
     @Test
-    fun testNonSpecifiedFieldInStruct() {
+    fun testNonSpecifiedFieldInStructSchema() {
         val testData =
             """
             {
@@ -391,7 +391,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testOtherNonSpecifiedFieldInAssertStruct() {
+    fun testOtherNonSpecifiedFieldInAssertStructSchema() {
         val testData =
             """
             {
@@ -408,7 +408,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testDisallowUndefinedAssertions() {
+    fun testDisallowUndefinedAssertionsInSchema() {
         val testData =
             """
             {
@@ -429,7 +429,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testWrongAssertResultSyntaxSuccess() {
+    fun testWrongAssertResultSyntaxSuccessSchema() {
         val testData =
             """
             {
@@ -445,7 +445,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testWrongNameType() {
+    fun testWrongNameTypeInSchema() {
         val testData =
             """
             {
@@ -461,7 +461,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testWrongStatementType() {
+    fun testWrongStatementTypeInSchema() {
         val testData =
             """
             {
@@ -477,7 +477,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testWrongAssertType() {
+    fun testWrongAssertTypeInSchema() {
         val testData =
             """
             {
@@ -497,7 +497,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testNoNameField() {
+    fun testNoNameFieldInSchema() {
         val testData =
             """
             {
@@ -512,7 +512,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testNoStatementField() {
+    fun testNoStatementFieldInSchema() {
         val testData =
             """
             {
@@ -527,7 +527,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testNoAssertField() {
+    fun testNoAssertFieldInSchema() {
         val testData =
             """
             {
@@ -540,7 +540,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testNoResultInAssertField() {
+    fun testNoResultInAssertFieldSchema() {
         val testData =
             """
             {
@@ -570,7 +570,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testNoOutputInEvaluationSuccess() {
+    fun testNoOutputInEvaluationSuccessSchema() {
         val testData =
             """
             {
@@ -586,7 +586,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testNoOutputInEvaluationSuccessWithEquivalentStatement() {
+    fun testNoOutputInEvaluationSuccessSchemaWithEquivalentStatement() {
         val testData =
             """
             {
@@ -605,7 +605,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testEvaluationFailWithUnexpectedOutput() {
+    fun testEvaluationFailSchemaWithUnexpectedOutput() {
         val testData =
             """
             {
@@ -622,7 +622,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testIncorrectEnvAnnotation() {
+    fun testIncorrectEnvAnnotationInSchema() {
         val testData =
             """
             envssss::{
