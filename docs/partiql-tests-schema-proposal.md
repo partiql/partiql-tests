@@ -212,23 +212,23 @@ result or have the same plan. Users can specify an equivalence class as follows.
 
 ```
 equiv_class::{
-    id: <symbol>,               // identifier that can be referred to in equivalence assertions
+    id: <symbol>,               // identifier that can be referred to in tests (e.g. evaluation)
     statements: <list<string>>  // list of equivalent PartiQL statements as strings
 }
 ```
 
-Evaluation tests can refer to the equivalence classes specified in the file/namespace and make assertions that the
-statements evaluate to the same result.
+Evaluation tests can check that an equivalence class defined in the file/namespace have statements that evaluate to the
+same result by referencing the equivalence class' symbol identifier in the `statement` field.
 
 ```
 // evaluation equivalence test
 {
-    // same fields for evaluation success test
-    ...
+    name: <string>,
+    statement: <symbol>     // identifier to equivalence class
+    ...                     // same other evaluation test fields    
     assert: {
         result: EvaluationSuccess,
-        output: <ion>,
-        equiv_class: symbol     // identifier to equivalence class
+        output: <ion>
     }
 }
 ```
@@ -248,11 +248,10 @@ equiv_class::{
 // evaluation test with equivalence class assertion
 {
     name: "equivalence class test sample",
-    statement: "10",
+    statement: ten,
     assert: {
         result: EvaluationSuccess,
-        output: 10,
-        equiv_class: ten
+        output: 10
     }
 }
 ```

@@ -354,11 +354,10 @@ class PartiQLTestDataValidator {
             """
             {
                 name: "some name",
-                statement: "some statement",
+                statement: some_equivalence_class,
                 assert: {
                     result: EvaluationSuccess,
                     output: some_output,
-                    equiv_class: some_equiv_class
                 }
             }
             """
@@ -479,7 +478,7 @@ class PartiQLTestDataValidator {
             """
             {
                 name: "some string",
-                statement: not_a_string,
+                statement: 123.4567,
                 assert: {
                     result: SyntaxSuccess
                 }

@@ -38,7 +38,15 @@ type::{
     type: struct,
     fields: {
         name: { type: string, occurs: required },
-        statement: { type: string, occurs: required },
+        statement: {
+            type: {
+                one_of: [
+                    string,
+                    symbol      // to reference an equiv_class identifier
+                ]
+            },
+            occurs: required
+        },
         env: { type: struct, occurs: optional },
         options: { type: struct, occurs: optional },
         assert: {
@@ -99,8 +107,7 @@ type::{
     type: struct,
     fields: {
         result: { type: symbol, valid_values: [EvaluationSuccess], occurs: required },
-        output: { occurs: required },
-        equiv_class: { type: symbol, occurs: optional }
+        output: { occurs: required }
     },
     content: closed
 }

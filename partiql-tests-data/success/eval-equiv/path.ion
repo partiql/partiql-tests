@@ -24,20 +24,18 @@ equiv_class::{
 
 {
     name: "equiv wildcard steps collection",
-    statement: "ints[*]",
+    statement: wildcard_steps_collection,
     assert: {
         result: EvaluationSuccess,
-        output: $bag::[1, 2, 3],
-        equiv_class: wildcard_steps_collection
+        output: $bag::[1, 2, 3]
     }
 }
 
 {
     name: "equiv wildcard steps struct",
-    statement: "simple_struct.*",
+    statement: wildcard_steps_struct,
     assert: {
         result: EvaluationSuccess,
-        output: $bag::[1, 2],
-        equiv_class: wildcard_steps_struct
+        output: $bag::[1, 2]
     }
 }
