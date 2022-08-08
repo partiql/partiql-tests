@@ -1,9 +1,5 @@
 ## `partiql-tests` Schema Proposal
 
-TODO:
-- add ISL definitions for this schema proposal
-- move the doc to `partiql-docs`
-
 `partiql-tests`' data format should have the following goals in mind:
 1. ease of writing -- it should be easy to understand the test schema and create new tests.
 2. ease of integrating to test runner implementations -- it should be easy to parse the created test data.
@@ -13,6 +9,7 @@ As of this proposal, we want to test these categories:
 - syntax
 - static analysis and type-checking
 - end-to-end evaluation
+- equivalence
 
 ---
 
@@ -119,13 +116,43 @@ For now, composed of the same properties as the `syntax` `fail` tests. The only 
 
 Tests whether a given PartiQL statement evaluates to the expected result. For now, composed of these properties:
 
-- test name (string)
-- PartiQL statement (string)
-- [optional] input evaluation environment (symbol or struct) — defaults to empty environment
-- expected evaluation result (Ion) — only for success tests
-- [optional] evaluation options (list of symbols) other than the defaults -- could also be represented using a struct
-    - e.g. `TYPING_MODE_PERMISSIVE`
-- assert (struct or list of structs) with an evaluation assertion
+- test `name` - string
+- PartiQL `statement` - string
+- [optional] input evaluation environment, `env` - struct
+  - defaults to using environments specified in file (i.e. `envs`). If `envs` is unspecified, defaults to an empty
+  environment with no bindings
+- [optional] evaluation `options` other than the defaults - struct
+    - e.g. typing mode - strict vs permissive (permissive may be most useful)
+- `assert` - struct or list of structs
+  - `result` key maps to symbol
+    - `EvaluatorSuccess` if evaluation succeeds for statement
+    - `EvaluatorFail` if evaluation fails for statement
+  - expected `output` of evaluation (only for `EvaluatorSuccess` `result`s)
+
+```
+// eval 'success' test
+{
+    name: <string>,
+    statement: <string>,
+    env: <struct>,        // optional
+    options: <struct>,    // optional
+    assert: {
+        result: EvaluationSuccess,
+        output: <ion>
+    },
+}
+
+// eval 'fail' test
+{
+    name: <string>,
+    statement: <string>,
+    env: <struct>,        // optional
+    options: <struct>,    // optional
+    assert: {
+        result: EvaluationFail
+    }
+}
+```
 
 For ease of writing evaluation tests, it’s necessary to provide a way to specify environments that can be referred to 
 outside a given test.
@@ -137,32 +164,94 @@ envs::{
   'table2': ...
 }
 
-// environment for test can be specified using one of `envs` in the file:
-env: table1
-// or specified explicitly with a struct
-env: { 'table1': [{a:1}, {a:2}, {a:3}] }
+// environment for test can be specified using one of the `envs` in the namespace/file
+{
+   name: "test using environment symbol",
+   statement: "SELECT * FROM table1",
+   ...
+}
+// or specified explicitly using the inlined `env`
+{
+   name: "test using explicit environement",
+   statement: "SELECT * FROM table1",
+   env: { table1: [{a:1}, {a:2}, {a:3}] }
+   ...
+}
 ```
 
+#### Modeling PartiQL Types in Ion
+PartiQL's type system encompasses Ion's types with a few additional types (e.g. missing, bag, date, time). There are a 
+few approaches we could take to model PartiQL data:
+- Annotations (using Ion)
+- S-expressions (using Ion)
+- PartiQL object notation
+
+Of the above options, we've decided to go with the annotation approach. Values of these additional types will be denoted
+using a `$<partiql_type>` annotation. This will be used for the output result and environments.
+
 ```
-// eval 'success' test
+// bag -- list annotated with $bag
+$bag::[1, 2, 3]
+
+// missing -- null value annotated with $missing
+$missing::null
+
+// date -- string annotated with $date
+$date::'2022-02-22'
+
+// time -- string annotated with $time
+$time::'02:30:59'
+```
+
+---
+
+### Equivalence
+The PartiQL specification mentions some PartiQL statements that could be rewritten using a different PartiQL syntax 
+(e.g. wildcard expressions). A common use case could be to assert that such PartiQL statements evaluate to the same 
+result or have the same plan. Users can specify an equivalence class as follows.
+
+```
+equiv_class::{
+    id: <symbol>,               // identifier that can be referred to in tests (e.g. evaluation)
+    statements: <list<string>>  // list of equivalent PartiQL statements as strings
+}
+```
+
+Evaluation tests can check that an equivalence class defined in the file/namespace have statements that evaluate to the
+same result by referencing the equivalence class' symbol identifier in the `statement` field.
+
+```
+// evaluation equivalence test
 {
     name: <string>,
-    statement: <string>,
-    env: <symbol> | <struct>,
-    options: <list<symbol>>,
+    statement: <symbol>     // identifier to equivalence class
+    ...                     // same other evaluation test fields    
     assert: {
-        result: <ion>
-    },
+        result: EvaluationSuccess,
+        output: <ion>
+    }
+}
+```
+
+As a simple example, the following would be how to write an evaluation equivalence test:
+```
+// equivalence class definition
+equiv_class::{
+    id: ten,
+    statements: [
+        "5 * 2",
+        "20 / 2",
+        "1 + 2 + 3 + 4",
+    ]
 }
 
-// eval 'fail' test
+// evaluation test with equivalence class assertion
 {
-    name: <string>,
-    statement: <string>,
-    env: <symbol> | <struct>,
-    options: <list<symbol>>,
+    name: "equivalence class test sample",
+    statement: ten,
     assert: {
-        result: EvaluationFail
+        result: EvaluationSuccess,
+        output: 10
     }
 }
 ```

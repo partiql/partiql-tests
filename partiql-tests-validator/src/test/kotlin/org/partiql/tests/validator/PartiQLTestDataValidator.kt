@@ -73,7 +73,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testSyntaxSuccess() {
+    fun testSyntaxSuccessSchema() {
         val testData =
             """
             {
@@ -89,7 +89,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testSyntaxFail() {
+    fun testSyntaxFailSchema() {
         val testData =
             """
             {
@@ -105,7 +105,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testStaticAnalysisFail() {
+    fun testStaticAnalysisFailSchema() {
         val testData =
             """
             {
@@ -121,7 +121,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testSyntaxSuccessAssertList() {
+    fun testSyntaxSuccessAssertListSchema() {
         val testData =
             """
             {
@@ -139,7 +139,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testSyntaxFailAssertList() {
+    fun testSyntaxFailAssertListSchema() {
         val testData =
             """
             {
@@ -157,7 +157,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testStaticAnalysisFailAssertList() {
+    fun testStaticAnalysisFailAssertListSchema() {
         val testData =
             """
             {
@@ -175,7 +175,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testMultipleSyntaxTests() {
+    fun testMultipleSyntaxSuccessSchemas() {
         val testData =
             """
             'some-namespace'::[
@@ -213,7 +213,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testNestedNamespaces() {
+    fun testNestedNamespacesSchema() {
         val testData =
             """
             'ns-1'::[
@@ -265,43 +265,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testAllowOpenContent() {
-        // ISL structs types are open content by default. Currently, see no reason to restrict these structs
-        val testData =
-            """
-            {
-                name: "some string",
-                statement: "some string",
-                assert: {
-                    result: SyntaxSuccess
-                },
-                some_other_field: "some other string"
-            }
-            """
-        val dataInIon = ion.loader.load(testData)
-        assertNoViolations(dataInIon)
-    }
-
-    @Test
-    fun testAllowOpenContentInAssert() {
-        // ISL structs types are open content by default. Currently, see no reason to restrict these structs
-        val testData =
-            """
-            {
-                name: "some string",
-                statement: "some string",
-                assert: {
-                    result: SyntaxSuccess,
-                    some_other_field: "some other string"
-                }
-            }
-            """
-        val dataInIon = ion.loader.load(testData)
-        assertNoViolations(dataInIon)
-    }
-
-    @Test
-    fun testMultipleAssertions() {
+    fun testMultipleAssertionsSchema() {
         val testData =
             """
             {
@@ -321,9 +285,142 @@ class PartiQLTestDataValidator {
         assertNoViolations(dataInIon)
     }
 
+    @Test
+    fun testGlobalEnvsSchema() {
+        val testData =
+            """
+            envs::{
+                table1: [{a: 1}, {a: 2}, {a: 3}],
+                table2: {some_key: some_value}
+            }
+            """
+        val dataInIon = ion.loader.load(testData)
+        assertNoViolations(dataInIon)
+    }
+
+    @Test
+    fun testEvaluationSuccessSchema() {
+        val testData =
+            """
+            {
+                name: "some name",
+                statement: "some statement",
+                assert: {
+                    result: EvaluationSuccess,
+                    output: some_output
+                }
+            }
+            """
+        val dataInIon = ion.loader.load(testData)
+        assertNoViolations(dataInIon)
+    }
+
+    @Test
+    fun testEvaluationFailSchema() {
+        val testData =
+            """
+            {
+                name: "some name",
+                statement: "some statement",
+                assert: {
+                    result: EvaluationFail
+                }
+            }
+            """
+        val dataInIon = ion.loader.load(testData)
+        assertNoViolations(dataInIon)
+    }
+
+    @Test
+    fun testEquivalenceTestSchema() {
+        val testData =
+            """
+            equiv_class::{
+                id: some_identifier,
+                statements: [
+                    "some statement",
+                    "some equivalent statement 1",
+                    "some equivalent statement 2"
+                ]
+            }
+            """
+        val dataInIon = ion.loader.load(testData)
+        assertNoViolations(dataInIon)
+    }
+
+    @Test
+    fun testEvaluationSuccessSchemaWithEquivalence() {
+        val testData =
+            """
+            {
+                name: "some name",
+                statement: some_equivalence_class,
+                assert: {
+                    result: EvaluationSuccess,
+                    output: some_output,
+                }
+            }
+            """
+        val dataInIon = ion.loader.load(testData)
+        assertNoViolations(dataInIon)
+    }
+
+    @Test
+    fun testEvaluationSuccessSchemaWithOptionalFields() {
+        val testData =
+            """
+            {
+                name: "some name",
+                statement: "some statement",
+                env: { some_key: some_value },
+                options: { some_option_key: some_option_value },
+                assert: {
+                    result: EvaluationSuccess,
+                    output: some_output
+                }
+            }
+            """
+        val dataInIon = ion.loader.load(testData)
+        assertNoViolations(dataInIon)
+    }
+
     // Negative tests
     @Test
-    fun testDisallowUndefinedAssertions() {
+    fun testNonSpecifiedFieldInStructSchema() {
+        val testData =
+            """
+            {
+                name: "some string",
+                statement: "some string",
+                assert: {
+                    result: SyntaxSuccess
+                },
+                some_other_field: "some other string"
+            }
+            """
+        val dataInIon = ion.loader.load(testData)
+        assertViolationsOccurred(dataInIon)
+    }
+
+    @Test
+    fun testOtherNonSpecifiedFieldInAssertStructSchema() {
+        val testData =
+            """
+            {
+                name: "some string",
+                statement: "some string",
+                assert: {
+                    result: SyntaxSuccess,
+                    some_other_field: "some other string"
+                }
+            }
+            """
+        val dataInIon = ion.loader.load(testData)
+        assertViolationsOccurred(dataInIon)
+    }
+
+    @Test
+    fun testDisallowUndefinedAssertionsInSchema() {
         val testData =
             """
             {
@@ -344,7 +441,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testWrongAssertResultSyntaxSuccess() {
+    fun testWrongAssertResultSyntaxSuccessSchema() {
         val testData =
             """
             {
@@ -360,7 +457,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testWrongNameType() {
+    fun testWrongNameTypeInSchema() {
         val testData =
             """
             {
@@ -376,12 +473,12 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testWrongStatementType() {
+    fun testWrongStatementTypeInSchema() {
         val testData =
             """
             {
                 name: "some string",
-                statement: not_a_string,
+                statement: 123.4567,
                 assert: {
                     result: SyntaxSuccess
                 }
@@ -392,7 +489,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testWrongAssertType() {
+    fun testWrongAssertTypeInSchema() {
         val testData =
             """
             {
@@ -412,7 +509,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testNoNameField() {
+    fun testNoNameFieldInSchema() {
         val testData =
             """
             {
@@ -427,7 +524,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testNoStatementField() {
+    fun testNoStatementFieldInSchema() {
         val testData =
             """
             {
@@ -442,7 +539,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testNoAssertField() {
+    fun testNoAssertFieldInSchema() {
         val testData =
             """
             {
@@ -455,7 +552,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testNoResultInAssertField() {
+    fun testNoResultInAssertFieldSchema() {
         val testData =
             """
             {
@@ -482,5 +579,87 @@ class PartiQLTestDataValidator {
         assertThrows<IonException> {
             ion.loader.load(testData)
         }
+    }
+
+    @Test
+    fun testNoOutputInEvaluationSuccessSchema() {
+        val testData =
+            """
+            {
+                name: "some name",
+                statement: "some statement",
+                assert: {
+                    result: EvaluationSuccess
+                }
+            }
+            """
+        val dataInIon = ion.loader.load(testData)
+        assertViolationsOccurred(dataInIon)
+    }
+
+    @Test
+    fun testNoOutputInEvaluationSuccessSchemaWithEquivalenceClass() {
+        val testData =
+            """
+            {
+                name: "some name",
+                statement: "some statement",
+                assert: {
+                    result: EvaluationSuccess,
+                    equiv_class: some_equivalence_class
+                }
+            }
+            """
+        val dataInIon = ion.loader.load(testData)
+        assertViolationsOccurred(dataInIon)
+    }
+
+    @Test
+    fun testEvaluationFailSchemaWithUnexpectedOutput() {
+        val testData =
+            """
+            {
+                name: "some name",
+                statement: "some statement",
+                assert: {
+                    result: EvaluationFail,
+                    output: some_unexpected_output
+                }
+            }
+            """
+        val dataInIon = ion.loader.load(testData)
+        assertViolationsOccurred(dataInIon)
+    }
+
+    @Test
+    fun testIncorrectEnvAnnotationInSchema() {
+        val testData =
+            """
+            envssss::{
+                ints: [1, 2, 3],
+                simple_struct: {
+                    'a': 1,
+                    'b': 2
+                }
+            }
+            """
+        val dataInIon = ion.loader.load(testData)
+        assertViolationsOccurred(dataInIon)
+    }
+
+    @Test
+    fun testIncorrectEquivalenceClassAnnotationInSchema() {
+        val testData =
+            """
+            equiv_clas::{
+                id: some_id,
+                statements: [
+                    "some statement",
+                    "some equivalent statement"
+                ]
+            }
+            """
+        val dataInIon = ion.loader.load(testData)
+        assertViolationsOccurred(dataInIon)
     }
 }
