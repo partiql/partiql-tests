@@ -4,7 +4,7 @@ schema_header::{
 type::{
     name: PartiQLTestDocument,
     type: document,
-    element: { one_of: [TestCase, Namespace, Environments] },
+    element: { one_of: [TestCase, Namespace, Environments, EquivalenceClass] },
     content: closed
 }
 
@@ -20,6 +20,17 @@ type::{
     type: struct,
     annotations: required::[envs],
     content: closed
+}
+
+type::{
+    name: EquivalenceClass,
+    type: struct,
+    annotations: required::[equiv_class],
+    content: closed,
+    fields: {
+        id: symbol,
+        statements: { type: list, element: string }
+    }
 }
 
 type::{
@@ -89,7 +100,7 @@ type::{
     fields: {
         result: { type: symbol, valid_values: [EvaluationSuccess], occurs: required },
         output: { occurs: required },
-        equiv: { type: list, element: string, occurs: optional }
+        equiv_class: { type: symbol, occurs: optional }
     },
     content: closed
 }

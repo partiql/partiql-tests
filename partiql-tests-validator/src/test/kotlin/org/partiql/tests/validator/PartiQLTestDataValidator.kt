@@ -332,6 +332,23 @@ class PartiQLTestDataValidator {
     }
 
     @Test
+    fun testEquivalenceTestSchema() {
+        val testData =
+            """
+            equiv_class::{
+                id: some_identifier,
+                statements: [
+                    "some statement",
+                    "some equivalent statement 1",
+                    "some equivalent statement 2"
+                ]
+            }
+            """
+        val dataInIon = ion.loader.load(testData)
+        assertNoViolations(dataInIon)
+    }
+
+    @Test
     fun testEvaluationSuccessSchemaWithEquivalence() {
         val testData =
             """
@@ -341,11 +358,7 @@ class PartiQLTestDataValidator {
                 assert: {
                     result: EvaluationSuccess,
                     output: some_output,
-                    equiv: [
-                        "some equivalent statement 1",
-                        "some equivalent statement 2",
-                        "some equivalent statement 3"
-                    ]
+                    equiv_class: some_equiv_class
                 }
             }
             """
@@ -586,7 +599,7 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun testNoOutputInEvaluationSuccessSchemaWithEquivalentStatement() {
+    fun testNoOutputInEvaluationSuccessSchemaWithEquivalenceClass() {
         val testData =
             """
             {
@@ -594,9 +607,7 @@ class PartiQLTestDataValidator {
                 statement: "some statement",
                 assert: {
                     result: EvaluationSuccess,
-                    equiv: [
-                        "some equivalent statement"
-                    ]
+                    equiv_class: some_equivalence_class
                 }
             }
             """
@@ -631,6 +642,22 @@ class PartiQLTestDataValidator {
                     'a': 1,
                     'b': 2
                 }
+            }
+            """
+        val dataInIon = ion.loader.load(testData)
+        assertViolationsOccurred(dataInIon)
+    }
+
+    @Test
+    fun testIncorrectEquivalenceClassAnnotationInSchema() {
+        val testData =
+            """
+            equiv_clas::{
+                id: some_id,
+                statements: [
+                    "some statement",
+                    "some equivalent statement"
+                ]
             }
             """
         val dataInIon = ion.loader.load(testData)

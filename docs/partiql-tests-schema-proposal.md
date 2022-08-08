@@ -125,7 +125,7 @@ Tests whether a given PartiQL statement evaluates to the expected result. For no
     - e.g. typing mode - strict vs permissive (permissive may be most useful)
 - `assert` - struct or list of structs
   - `result` key maps to symbol
-    - `EvaluatorSuccess` if evluation succeeds for statement
+    - `EvaluatorSuccess` if evaluation succeeds for statement
     - `EvaluatorFail` if evaluation fails for statement
   - expected `output` of evaluation (only for `EvaluatorSuccess` `result`s)
 
@@ -180,8 +180,8 @@ envs::{
 ```
 
 #### Modeling PartiQL Types in Ion
-There are a few approaches we could take when modeling PartiQL data. PartiQL's type system encompasses Ion's types with
-a few additional types. These include
+PartiQL's type system encompasses Ion's types with a few additional types (e.g. missing, bag, date, time). There are a 
+few approaches we could take to model PartiQL data:
 - Annotations (using Ion)
 - S-expressions (using Ion)
 - PartiQL object notation
@@ -205,42 +205,57 @@ $time::'02:30:59'
 
 ---
 
-### Equivalence Tests
+### Equivalence
 The PartiQL specification mentions some PartiQL statements that could be rewritten using a different PartiQL syntax 
-(e.g. wildcard expressions). Rather than having to rewrite an evaluation test to assert on the same result, test writers
-can provide a list of PartiQL statements within an `EvaluationSuccess` assertion that evaluate to the same result.
+(e.g. wildcard expressions). A common use case could be to assert that such PartiQL statements evaluate to the same 
+result or have the same plan. Users can specify an equivalence class as follows.
+
+```
+equiv_class::{
+    id: <symbol>,               // identifier that can be referred to in equivalence assertions
+    statements: <list<string>>  // list of equivalent PartiQL statements as strings
+}
+```
+
+Evaluation tests can refer to the equivalence classes specified in the file/namespace and make assertions that the
+statements evaluate to the same result.
 
 ```
 // evaluation equivalence test
 {
-    name: <string>,
-    statement: <string>,
-    env: <struct>,        // optional
-    options: <struct>,    // optional
+    // same fields for evaluation success test
+    ...
     assert: {
         result: EvaluationSuccess,
         output: <ion>,
-        equiv: <list<string>>   // list of equivalent PartiQL statements as strings
+        equiv_class: symbol     // identifier to equivalence class
     }
 }
 ```
 
 As a simple example, the following would be how to write an evaluation equivalence test:
 ```
+// equivalence class definition
+equiv_class::{
+    id: ten,
+    statements: [
+        "5 * 2",
+        "20 / 2",
+        "1 + 2 + 3 + 4",
+    ]
+}
+
+// evaluation test with equivalence class assertion
 {
-    name: "equiv test sample",
+    name: "equivalence class test sample",
     statement: "10",
     assert: {
         result: EvaluationSuccess,
         output: 10,
-        equiv: [
-            "5 * 2",
-            "20 / 2"
-        ]
+        equiv_class: ten
     }
 }
 ```
-
 
 ---
 
