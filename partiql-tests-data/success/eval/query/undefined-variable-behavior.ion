@@ -1,0 +1,42 @@
+undefined_variable_behavior::[
+  // ported tests run using UndefinedVariableBehavior.MISSING option rather than UndefinedVariableBehavior.ERROR
+  // https://github.com/partiql/partiql-lang-kotlin/blob/main/lang/src/org/partiql/lang/eval/CompileOptions.kt#L27-L36
+  // TODO: decide on default option https://github.com/partiql/partiql-tests/issues/25
+  {
+    name:"undefinedUnqualifiedVariableWithUndefinedVariableBehaviorMissing",
+    statement:"undefined_variable",
+    assert:{
+      result:EvaluationSuccess,
+      output:$missing::null
+    }
+  },
+  {
+    name:"undefinedUnqualifiedVariableIsNullExprWithUndefinedVariableBehaviorMissing",
+    statement:"undefined_variable IS NULL",
+    assert:{
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"undefinedUnqualifiedVariableIsMissingExprWithUndefinedVariableBehaviorMissing",
+    statement:"undefined_variable IS MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"undefinedUnqualifiedVariableInSelectWithUndefinedVariableBehaviorMissing",
+    statement:"SELECT s.a, s.undefined_variable, s.b FROM `[{a:100, b:200}]` s",
+    assert:{
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          a:100,
+          b:200
+        }
+      ]
+    }
+  }
+]

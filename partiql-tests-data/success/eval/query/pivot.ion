@@ -1,0 +1,64 @@
+envs::{
+  animals:[
+    {
+      name:"Kumo",
+      type:"dog"
+    },
+    {
+      name:"Mochi",
+      type:"dog"
+    },
+    {
+      name:"Lilikoi",
+      type:"unicorn"
+    }
+  ],
+}
+
+pivot::[
+  {
+    name:"pivotFrom",
+    statement:"PIVOT a.\"type\" AT a.name FROM animals AS a",
+    assert:{
+      result:EvaluationSuccess,
+      output:{
+        Kumo:"dog",
+        Mochi:"dog",
+        Lilikoi:"unicorn"
+      }
+    }
+  },
+  {
+    name:"pivotLiteralFieldNameFrom",
+    statement:"PIVOT a.name AT 'name' FROM animals AS a",
+    assert:{
+      result:EvaluationSuccess,
+      output:{
+        name:"Kumo",
+        name:"Mochi",
+        name:"Lilikoi"
+      }
+    }
+  },
+  {
+    name:"pivotBadFieldType",
+    statement:"PIVOT a.name AT i FROM animals AS a AT i",
+    assert:{
+      result:EvaluationSuccess,
+      output:{
+      }
+    }
+  },
+  {
+    name:"pivotUnpivotWithWhereLimit",
+    statement:"PIVOT val AT 'new_' || name FROM UNPIVOT `{a:1, b:2, c:3, d:4, e:5, f: 6}` AS val AT name WHERE name <> 'b' AND val <> 3 LIMIT 3",
+    assert:{
+      result:EvaluationSuccess,
+      output:{
+        new_a:1,
+        new_d:4,
+        new_e:5
+      }
+    }
+  }
+]

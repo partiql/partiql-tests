@@ -1,0 +1,256 @@
+envs::{
+  d:3.,
+  f:2e0,
+  i:1,
+}
+
+nary::[
+  {
+    name:"unaryPlus",
+    statement:"+i",
+    assert:{
+      result:EvaluationSuccess,
+      output:1
+    }
+  },
+  {
+    name:"unaryMinus",
+    statement:"-f",
+    assert:{
+      result:EvaluationSuccess,
+      output:-2e0
+    }
+  },
+  {
+    name:"binaryAddWith2Terms",
+    statement:"1 + 1",
+    assert:{
+      result:EvaluationSuccess,
+      output:2
+    }
+  },
+  {
+    name:"binaryAddWith3Terms",
+    statement:"1 + 1 + 1",
+    assert:{
+      result:EvaluationSuccess,
+      output:3
+    }
+  },
+  {
+    name:"addIntFloat",
+    statement:"i + f",
+    assert:{
+      result:EvaluationSuccess,
+      output:3e0
+    }
+  },
+  {
+    name:"subIntFloatDecimal",
+    statement:"i - f - d",
+    assert:{
+      result:EvaluationSuccess,
+      output:-4.
+    }
+  },
+  {
+    name:"repeatingDecimal",
+    statement:"4.0000 / 3.0",
+    assert:{
+      result:EvaluationSuccess,
+      output:1.3333333333333333333333333333333333333
+    }
+  },
+  {
+    name:"repeatingDecimalHigherPrecision",
+    statement:"4.000000000000000000000000000000000000/3.0",
+    assert:{
+      result:EvaluationSuccess,
+      output:1.3333333333333333333333333333333333333
+    }
+  },
+  {
+    name:"divDecimalInt",
+    statement:"d / 2",
+    assert:{
+      result:EvaluationSuccess,
+      output:1.5
+    }
+  },
+  {
+    name:"subtractionOutOfAllowedPrecision",
+    statement:"1e100 - 1e-100",
+    assert:{
+      result:EvaluationSuccess,
+      output:10000000000000000000000000000000000000d63
+    }
+  },
+  {
+    name:"bigDecimals",
+    statement:"9223372036854775807.0 + 100.0",
+    assert:{
+      result:EvaluationSuccess,
+      output:9223372036854775907.0
+    }
+  },
+  {
+    name:"mulFloatIntInt",
+    statement:"f * 2 * 4",
+    assert:{
+      result:EvaluationSuccess,
+      output:16e0
+    }
+  },
+  {
+    name:"modIntInt",
+    statement:"3 % 2",
+    assert:{
+      result:EvaluationSuccess,
+      output:1
+    }
+  },
+  {
+    name:"equalIntFloat",
+    statement:"1 = 1e0",
+    assert:{
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"equalIntFloatFalse",
+    statement:"1 = 1e1",
+    assert:{
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"notEqualIntInt",
+    statement:"1 != 2",
+    assert:{
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"notEqualIntFloat",
+    statement:"1 != `2e0`",
+    assert:{
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"notEqualIntFloatFalse",
+    statement:"1 != `1e0`",
+    assert:{
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"equalListDifferentTypesTrue",
+    statement:"[1, `2e0`, 'hello'] = [1.0, 2, `hello`]",
+    assert:{
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"equalListDifferentLengthsShortFirst",
+    statement:"[1.0, 2] = [1.0, 2, `hello`]",
+    assert:{
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"equalListDifferentLengthsLongFirst",
+    statement:"[1, `2e0`, 'hello'] = [1, `2e0`]",
+    assert:{
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"symbolEquality",
+    statement:"'A' = 'A'",
+    assert:{
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"symbolCaseEquality",
+    statement:"'A' = 'a'",
+    assert:{
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"moreIntFloat",
+    statement:"3 > `2e0`",
+    assert:{
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"moreIntFloatFalse",
+    statement:"1 > `2e0`",
+    assert:{
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"lessIntFloat",
+    statement:"1 < `2e0`",
+    assert:{
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"lessIntFloatFalse",
+    statement:"3 < `2e0`",
+    assert:{
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"moreEqIntFloat",
+    statement:"3 >= `2e0`",
+    assert:{
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"moreEqIntFloatFalse",
+    statement:"1 >= `2e0`",
+    assert:{
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"lessEqIntFloat",
+    statement:"1 <= `2e0`",
+    assert:{
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"lessEqIntFloatFalse",
+    statement:"5 <= `2e0`",
+    assert:{
+      result:EvaluationSuccess,
+      output:false
+    }
+  }
+]

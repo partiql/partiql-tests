@@ -1,0 +1,29 @@
+floatN::[
+  // following tests ignore the type parameter of FLOAT, which is the default option in `partiql-lang-kotlin`'s
+  // TypedOpBehavior mode, `TypedOpBehavior.LEGACY`
+  // TODO: decide on default option https://github.com/partiql/partiql-tests/issues/25
+  {
+    name:"castAsFloat1",
+    statement:"CAST(1.234 AS FLOAT(1))",
+    assert:{
+      result:EvaluationSuccess,
+      output:1.234e0
+    }
+  },
+  {
+    name:"canCastAsFloat1",
+    statement:"CAN_CAST(1.234 AS FLOAT(1))",
+    assert:{
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"isFloat1",
+    statement:"`1.234e0` IS FLOAT(1)",
+    assert:{
+      result:EvaluationSuccess,
+      output:true
+    }
+  }
+]

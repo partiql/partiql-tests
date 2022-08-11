@@ -1,0 +1,125 @@
+bagOperators::[
+  {
+    name:"outerUnionDistinct",
+    statement:"<< 1, 2, 2, 3, 3, 3 >> OUTER UNION << 1, 2, 3, 3 >>",
+    assert:{
+      result:EvaluationSuccess,
+      output:$bag::[
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    name:"outerUnionAll",
+    statement:"<< 1, 2, 2, 3, 3, 3 >> OUTER UNION ALL << 1, 2, 3, 3 >>",
+    assert:{
+      result:EvaluationSuccess,
+      output:$bag::[
+        1,
+        2,
+        2,
+        3,
+        3,
+        3
+      ]
+    }
+  },
+  {
+    name:"outerIntersectDistinct",
+    statement:"<< 1, 2, 2, 3, 3, 3 >> OUTER INTERSECT << 1, 2, 3, 3 >>",
+    assert:{
+      result:EvaluationSuccess,
+      output:$bag::[
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    name:"outerIntersectAll",
+    statement:"<< 1, 2, 2, 3, 3, 3 >> OUTER INTERSECT ALL << 1, 2, 3, 3 >>",
+    assert:{
+      result:EvaluationSuccess,
+      output:$bag::[
+        1,
+        2,
+        3,
+        3
+      ]
+    }
+  },
+  {
+    name:"outerExceptDistinct",
+    statement:"<< 1, 1, 1, 2 >> OUTER EXCEPT << 1 >>",
+    assert:{
+      result:EvaluationSuccess,
+      output:$bag::[
+        1,
+        2
+      ]
+    }
+  },
+  {
+    name:"outerExceptAll",
+    statement:"<< 1, 1, 1, 2 >> OUTER EXCEPT ALL << 1 >>",
+    assert:{
+      result:EvaluationSuccess,
+      output:$bag::[
+        1,
+        1,
+        2
+      ]
+    }
+  },
+  {
+    name:"outerUnionCoerceScalar",
+    statement:"1 OUTER UNION 2",
+    assert:{
+      result:EvaluationSuccess,
+      output:$bag::[
+        1,
+        2
+      ]
+    }
+  },
+  {
+    name:"outerUnionCoerceStruct",
+    statement:"{'a': 1} OUTER UNION {'b': 2}",
+    assert:{
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          a:1
+        },
+        {
+          b:2
+        }
+      ]
+    }
+  },
+  {
+    name:"outerUnionCoerceNullMissing",
+    statement:"NULL OUTER UNION MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      output:$bag::[
+      ]
+    }
+  },
+  {
+    name:"outerUnionCoerceList",
+    statement:"[ 1, 1, 1 ] OUTER UNION ALL [ 1, 2 ]",
+    assert:{
+      result:EvaluationSuccess,
+      output:$bag::[
+        1,
+        1,
+        1,
+        2
+      ]
+    }
+  }
+]

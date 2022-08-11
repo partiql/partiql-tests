@@ -1,0 +1,138 @@
+'projection iteration behavior unfiltered'::[
+  // `partiql-lang-kotlin` makes additional assertions on the ordering for these tests
+  // https://github.com/partiql/partiql-lang-kotlin/blob/main/lang/test/org/partiql/lang/eval/EvaluatorTestSuite.kt#L1059-L1104
+  {
+    name:"undefinedUnqualifiedVariable_inSelect_withProjectionOption",
+    statement:"SELECT s.a, s.undefined_variable, s.b FROM `[{a:100, b:200}]` s",
+    assert:{
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          a:100,
+          b:200
+        }
+      ]
+    }
+  },
+  {
+    name:"projectionIterationBehaviorUnfiltered_select_list",
+    statement:"select x.someColumn from <<{'someColumn': MISSING}>> AS x",
+    assert:{
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          someColumn:$missing::null
+        }
+      ]
+    }
+  },
+  {
+    name:"projectionIterationBehaviorUnfiltered_select_star",
+    statement:"select * from <<{'someColumn': MISSING}>>",
+    assert:{
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          someColumn:$missing::null
+        }
+      ]
+    }
+  }
+]
+
+'project various container types'::[
+  {
+    name:"projectOfListOfList",
+    statement:"SELECT * FROM [ [1,2] ] as foo",
+    assert:{
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          _1:[
+            1,
+            2
+          ]
+        }
+      ]
+    }
+  },
+  {
+    name:"projectOfBagOfBag",
+    statement:"SELECT * FROM << <<1,2>> >> as foo",
+    assert:{
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          _1:$bag::[
+            1,
+            2
+          ]
+        }
+      ]
+    }
+  },
+  {
+    name:"projectOfListOfBag",
+    statement:"SELECT * FROM [ <<1,2>> ] as foo",
+    assert:{
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          _1:$bag::[
+            1,
+            2
+          ]
+        }
+      ]
+    }
+  },
+  {
+    name:"projectOfBagOfList",
+    statement:"SELECT * FROM << [1,2] >> as foo",
+    assert:{
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          _1:[
+            1,
+            2
+          ]
+        }
+      ]
+    }
+  },
+  {
+    name:"projectOfSexp",
+    statement:"SELECT * FROM `(1 2)` as foo",
+    assert:{
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          _1:(
+            1
+            2
+          )
+        }
+      ]
+    }
+  },
+  {
+    name:"projectOfUnpivotPath",
+    statement:"SELECT * FROM <<{'name': 'Marrowstone Brewing'}, {'name': 'Tesla'}>>.*",
+    assert:{
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          _1:$bag::[
+            {
+              name:"Marrowstone Brewing"
+            },
+            {
+              name:"Tesla"
+            }
+          ]
+        }
+      ]
+    }
+  }
+]
