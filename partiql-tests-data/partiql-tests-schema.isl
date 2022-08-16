@@ -48,7 +48,6 @@ type::{
             occurs: required
         },
         env: { type: struct, occurs: optional },
-        options: { type: struct, occurs: optional },
         assert: {
             type: {
                 one_of: [
@@ -71,6 +70,22 @@ type::{
             StaticAnalysisFailAssertion,
             EvaluationSuccessAssertion,
             EvaluationFailAssertion
+        ]
+    }
+}
+
+type::{
+    name: EvaluationMode,
+    type: symbol,
+    valid_values: [EvalModeError, EvalModeCoerce]
+}
+
+type::{
+    name: EvaluationModeSymbolOrList,
+    type: {
+        one_of: [
+            EvaluationMode,
+            { type: list, element: EvaluationMode }
         ]
     }
 }
@@ -107,7 +122,8 @@ type::{
     type: struct,
     fields: {
         result: { type: symbol, valid_values: [EvaluationSuccess], occurs: required },
-        output: { occurs: required }
+        output: { occurs: required },
+        evalMode: { type: EvaluationModeSymbolOrList, occurs: required }
     },
     content: closed
 }
@@ -116,7 +132,8 @@ type::{
     name: EvaluationFailAssertion,
     type: struct,
     fields: {
-        result: { type: symbol, valid_values: [EvaluationFail], occurs: required }
+        result: { type: symbol, valid_values: [EvaluationFail], occurs: required },
+        evalMode: { type: EvaluationModeSymbolOrList, occurs: required }
     },
     content: closed
 }

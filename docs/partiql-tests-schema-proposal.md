@@ -14,7 +14,7 @@ As of this proposal, we want to test these categories:
 ---
 
 The following is an abstraction to describe current and future tests we will have in the `partiql-tests` suite
-```
+```ion
 {
     name: <string>,
     statement: <string>,
@@ -36,7 +36,7 @@ Tests whether a given PartiQL statement is syntactically valid. For now, compose
 - PartiQL statement (string)
 - assert (struct or list of structs) with a syntax assertion
 
-```
+```ion
 // syntax 'success' test with one assertion
 {
     name: <string>,
@@ -58,7 +58,7 @@ Tests whether a given PartiQL statement is syntactically valid. For now, compose
 
 The `assert` field could also be a list of structs if more test assertions are added in the future.
 
-```
+```ion
 // syntax 'success' test with multiple assertions
 {
     ...
@@ -100,7 +100,7 @@ between parsing and evaluation. It's up to the implementation to decide at what 
 For now, composed of the same properties as the `syntax` `fail` tests. The only difference is the `assert`'s error 
 (i.e. `StaticAnalysisFail`).
 
-```
+```ion
 {
     name: <string>,
     statement: <string>,
@@ -121,22 +121,23 @@ Tests whether a given PartiQL statement evaluates to the expected result. For no
 - [optional] input evaluation environment, `env` - struct
   - defaults to using environments specified in file (i.e. `envs`). If `envs` is unspecified, defaults to an empty
   environment with no bindings
-- [optional] evaluation `options` other than the defaults - struct
-    - e.g. typing mode - strict vs permissive (permissive may be most useful)
 - `assert` - struct or list of structs
   - `result` key maps to symbol
     - `EvaluatorSuccess` if evaluation succeeds for statement
     - `EvaluatorFail` if evaluation fails for statement
+  - `evalMode` - evaluation mode to run the tests (symbol or list of symbols)
+    - `EvalModeCoerce` - dynamic type mismatch returns `MISSING`
+    - `EvalModeError` - dynamic type mismatch errors
   - expected `output` of evaluation (only for `EvaluatorSuccess` `result`s)
 
-```
+```ion
 // eval 'success' test
 {
     name: <string>,
     statement: <string>,
     env: <struct>,        // optional
-    options: <struct>,    // optional
     assert: {
+        evalMode: <symbol> | <list<symbol>>,
         result: EvaluationSuccess,
         output: <ion>
     },
@@ -147,8 +148,8 @@ Tests whether a given PartiQL statement evaluates to the expected result. For no
     name: <string>,
     statement: <string>,
     env: <struct>,        // optional
-    options: <struct>,    // optional
     assert: {
+        evalMode: <symbol> | <list<symbol>>,
         result: EvaluationFail
     }
 }
@@ -158,7 +159,7 @@ For ease of writing evaluation tests, it’s necessary to provide a way to speci
 outside a given test.
 
 Specifying environments available for a given file:
-```
+```ion
 envs::{
   'table1': [{a:1}, {a:2}, {a:3}],
   'table2': ...
@@ -189,7 +190,7 @@ few approaches we could take to model PartiQL data:
 Of the above options, we've decided to go with the annotation approach. Values of these additional types will be denoted
 using a `$<partiql_type>` annotation. This will be used for the output result and environments.
 
-```
+```ion
 // bag -- list annotated with $bag
 $bag::[1, 2, 3]
 
@@ -205,12 +206,76 @@ $time::'02:30:59'
 
 ---
 
+#### PartiQL Evaluation Modes
+The PartiQL specification defines two dynamic type mismatching evaluation modes (i.e. when a PartiQL statement is run 
+without schema). As defined in the PartiQL specification, these modes are:
+- Permissive mode -- dynamic typing mismatches are neglected and PartiQL returns `MISSING`
+- Type checking mode -- dynamic type mismatches result in evaluation errors
+
+The naming of these modes can be somewhat confusing especially "type checking mode", which is sometimes referred to as
+`STRICT` mode in the specification and Kotlin reference implementation. For the purposes of this document and the
+conformance tests, we will refer to permissive mode as `EvalModeCoerce` and type checking mode as `EvalModeError`. 
+These names can be changed in the future once we improve the terminology in the specification.
+
+```ion
+// Test case using `EvalModeCoerce`
+{
+    name: "coerce eval mode tuple navigation missing attribute dot notation",
+    statement: "{'a':1, 'b':2}.noSuchAttribute",
+    assert: {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+    }
+}
+
+// Test case using `EvalModeError`
+{
+    name: "error eval mode tuple navigation missing attribute dot notation",
+    statement: "{'a':1, 'b':2}.noSuchAttribute",
+    assert: {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+    }
+}
+
+// Test case using both eval modes in assertions
+{
+    name: "tuple navigation missing attribute dot notation",
+    statement: "{'a':1, 'b':2}.noSuchAttribute",
+    assert: [
+        {
+            evalMode: EvalModeError,
+            result: EvaluationFail
+        },
+        {
+            evalMode: EvalModeCoerce,
+            result: EvaluationSuccess,
+            output: $missing::null
+        },
+    ]
+}
+
+// Test case using both eval modes in assertions with same result
+{
+    name: "tuple navigation for attribute dot notation",
+    statement: "{'a':1, 'b':2}.a",
+    assert: {
+        evalMode: [EvalModeError, EvalModeCoerce],
+        result: EvaluationSuccess,
+        output: 1
+    }
+}
+```
+
+---
+
 ### Equivalence
 The PartiQL specification mentions some PartiQL statements that could be rewritten using a different PartiQL syntax 
 (e.g. wildcard expressions). A common use case could be to assert that such PartiQL statements evaluate to the same 
 result or have the same plan. Users can specify an equivalence class as follows.
 
-```
+```ion
 equiv_class::{
     id: <symbol>,               // identifier that can be referred to in tests (e.g. evaluation)
     statements: <list<string>>  // list of equivalent PartiQL statements as strings
@@ -220,7 +285,7 @@ equiv_class::{
 Evaluation tests can check that an equivalence class defined in the file/namespace have statements that evaluate to the
 same result by referencing the equivalence class' symbol identifier in the `statement` field.
 
-```
+```ion
 // evaluation equivalence test
 {
     name: <string>,
@@ -234,7 +299,7 @@ same result by referencing the equivalence class' symbol identifier in the `stat
 ```
 
 As a simple example, the following would be how to write an evaluation equivalence test:
-```
+```ion
 // equivalence class definition
 equiv_class::{
     id: ten,
@@ -263,7 +328,7 @@ The concept of namespacing tests can help categorize groups of tests and can red
 be used by the test runner to prepend additional text to a test name. E.g. namespace of "literals" can be prepended to test names of "int" and "null" to get "literals - int" and 
 "literals - null"
 
-```
+```ion
 // namespacing/grouping (using a symbol annotation)
 <namespace_symbol>::[
     {
