@@ -215,7 +215,8 @@ without schema). As defined in the PartiQL specification, these modes are:
 The naming of these modes can be somewhat confusing especially "type checking mode", which is sometimes referred to as
 `STRICT` mode in the specification and Kotlin reference implementation. For the purposes of this document and the
 conformance tests, we will refer to permissive mode as `EvalModeCoerce` and type checking mode as `EvalModeError`. 
-These names can be changed in the future once we improve the terminology in the specification.
+These names can be changed in the future once we improve the terminology in the specification (see 
+[partiql-docs#24](https://github.com/partiql/partiql-docs/issues/24)).
 
 ```ion
 // Test case using `EvalModeCoerce`
