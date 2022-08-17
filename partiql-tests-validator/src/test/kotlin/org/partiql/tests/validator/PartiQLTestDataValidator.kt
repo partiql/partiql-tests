@@ -306,6 +306,7 @@ class PartiQLTestDataValidator {
                 name: "some name",
                 statement: "some statement",
                 assert: {
+                    evalMode: EvalModeCoerce,
                     result: EvaluationSuccess,
                     output: some_output
                 }
@@ -323,6 +324,7 @@ class PartiQLTestDataValidator {
                 name: "some name",
                 statement: "some statement",
                 assert: {
+                    evalMode: EvalModeError,
                     result: EvaluationFail
                 }
             }
@@ -356,6 +358,7 @@ class PartiQLTestDataValidator {
                 name: "some name",
                 statement: some_equivalence_class,
                 assert: {
+                    evalMode: [EvalModeCoerce, EvalModeError],
                     result: EvaluationSuccess,
                     output: some_output,
                 }
@@ -373,8 +376,8 @@ class PartiQLTestDataValidator {
                 name: "some name",
                 statement: "some statement",
                 env: { some_key: some_value },
-                options: { some_option_key: some_option_value },
                 assert: {
+                    evalMode: [EvalModeCoerce, EvalModeError],
                     result: EvaluationSuccess,
                     output: some_output
                 }
@@ -589,7 +592,41 @@ class PartiQLTestDataValidator {
                 name: "some name",
                 statement: "some statement",
                 assert: {
+                    evalMode: [EvalModeCoerce, EvalModeError],
                     result: EvaluationSuccess
+                }
+            }
+            """
+        val dataInIon = ion.loader.load(testData)
+        assertViolationsOccurred(dataInIon)
+    }
+
+    @Test
+    fun testNoEvalModeInEvaluationSuccessSchema() {
+        val testData =
+            """
+            {
+                name: "some name",
+                statement: "some statement",
+                assert: {
+                    result: EvaluationSuccess,
+                    output: 'some_output'
+                }
+            }
+            """
+        val dataInIon = ion.loader.load(testData)
+        assertViolationsOccurred(dataInIon)
+    }
+
+    @Test
+    fun testNoEvalModeInEvaluationFailSchema() {
+        val testData =
+            """
+            {
+                name: "some name",
+                statement: "some statement",
+                assert: {
+                    result: EvaluationFail,
                 }
             }
             """

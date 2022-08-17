@@ -26,6 +26,7 @@ equiv_class::{
     name: "equiv wildcard steps collection",
     statement: wildcard_steps_collection,
     assert: {
+        evalMode: [EvalModeCoerce, EvalModeError],
         result: EvaluationSuccess,
         output: $bag::[1, 2, 3]
     }
@@ -35,6 +36,7 @@ equiv_class::{
     name: "equiv wildcard steps struct",
     statement: wildcard_steps_struct,
     assert: {
+        evalMode: [EvalModeCoerce, EvalModeError],
         result: EvaluationSuccess,
         output: $bag::[1, 2]
     }

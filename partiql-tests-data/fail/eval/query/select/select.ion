@@ -2,6 +2,7 @@
     name: "select star from non existent binding",
     statement: "SELECT * FROM non_existent_binding",
     assert: {
-        result: EvaluationFail  // example fails in type-checking mode TBD on default evaluation mode (https://github.com/partiql/partiql-tests/issues/25)
+        evalMode: EvalModeError,
+        result: EvaluationFail
     }
 }

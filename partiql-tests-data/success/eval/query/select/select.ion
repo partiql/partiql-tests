@@ -9,6 +9,7 @@ envs::{
     name: "SELECT path",
     statement: "SELECT r.v FROM sensors AS s, s.readings AS r",
     assert: {
+        evalMode: [EvalModeCoerce, EvalModeError],
         result: EvaluationSuccess,
         output: $bag::[
             {
@@ -39,6 +40,7 @@ envs::{
         ]
     },
     assert: {
+        evalMode: [EvalModeCoerce, EvalModeError],
         result: EvaluationSuccess,
         output: $bag::[
             {
