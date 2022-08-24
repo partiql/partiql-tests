@@ -88,7 +88,7 @@
         }
     },
     // no sample environment provided in spec. also the first spec path collection expression
-    // is wrong. see TODO: add issue link
+    // is wrong. see https://github.com/partiql/partiql-spec/issues/28
     equiv_class::{
         id: path_collection_expression_with_wildcard_steps,
         statements: [
