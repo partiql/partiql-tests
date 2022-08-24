@@ -1,8 +1,0 @@
-{
-    name: "select star from non existent binding",
-    statement: "SELECT * FROM non_existent_binding",
-    assert: {
-        evalMode: EvalModeError,
-        result: EvaluationFail
-    }
-}

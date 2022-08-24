@@ -11,7 +11,7 @@ type::{
 type::{
     name: Namespace,
     type: list,
-    element: { one_of: [TestCase, Namespace] },
+    element: { one_of: [TestCase, Namespace, Environments, EquivalenceClass] },
     content: closed
 }
 
@@ -122,7 +122,7 @@ type::{
     type: struct,
     fields: {
         result: { type: symbol, valid_values: [EvaluationSuccess], occurs: required },
-        output: { occurs: required },
+        output: nullable::{ occurs: required },
         evalMode: { type: EvaluationModeSymbolOrList, occurs: required }
     },
     content: closed
