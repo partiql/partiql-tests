@@ -34,6 +34,7 @@ joins::[
     name:"selectCrossProduct",
     statement:"SELECT * FROM animals, animal_types",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {

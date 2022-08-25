@@ -9,6 +9,7 @@ logical::[
     name:"notTrue",
     statement:"not true",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:false
     }
@@ -17,6 +18,7 @@ logical::[
     name:"notFalse",
     statement:"not false",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:true
     }
@@ -25,6 +27,7 @@ logical::[
     name:"andTrueFalse",
     statement:"true and false",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:false
     }
@@ -33,6 +36,7 @@ logical::[
     name:"andTrueTrue",
     statement:"true and true",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:true
     }
@@ -41,6 +45,7 @@ logical::[
     name:"orTrueFalse",
     statement:"true or false",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:true
     }
@@ -49,6 +54,7 @@ logical::[
     name:"orFalseFalse",
     statement:"false or false",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:false
     }
@@ -57,6 +63,7 @@ logical::[
     name:"comparisonsConjuctTrue",
     statement:"i < f and f < d",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:true
     }
@@ -65,6 +72,7 @@ logical::[
     name:"comparisonsDisjunctFalse",
     statement:"i < f and (f > d or i > d)",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:false
     }

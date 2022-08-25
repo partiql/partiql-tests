@@ -5,6 +5,7 @@
     name:"undefinedUnqualifiedVariable_inSelect_withProjectionOption",
     statement:"SELECT s.a, s.undefined_variable, s.b FROM `[{a:100, b:200}]` s",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -18,6 +19,7 @@
     name:"projectionIterationBehaviorUnfiltered_select_list",
     statement:"select x.someColumn from <<{'someColumn': MISSING}>> AS x",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -30,6 +32,7 @@
     name:"projectionIterationBehaviorUnfiltered_select_star",
     statement:"select * from <<{'someColumn': MISSING}>>",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -45,6 +48,7 @@
     name:"projectOfListOfList",
     statement:"SELECT * FROM [ [1,2] ] as foo",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -60,6 +64,7 @@
     name:"projectOfBagOfBag",
     statement:"SELECT * FROM << <<1,2>> >> as foo",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -75,6 +80,7 @@
     name:"projectOfListOfBag",
     statement:"SELECT * FROM [ <<1,2>> ] as foo",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -90,6 +96,7 @@
     name:"projectOfBagOfList",
     statement:"SELECT * FROM << [1,2] >> as foo",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -105,6 +112,7 @@
     name:"projectOfSexp",
     statement:"SELECT * FROM `(1 2)` as foo",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -120,6 +128,7 @@
     name:"projectOfUnpivotPath",
     statement:"SELECT * FROM <<{'name': 'Marrowstone Brewing'}, {'name': 'Tesla'}>>.*",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {

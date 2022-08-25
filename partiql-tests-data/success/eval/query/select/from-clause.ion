@@ -87,6 +87,7 @@ envs::{
     name:"selectFromScalarAndAtUnpivotWildCardOverScalar",
     statement:"SELECT VALUE [n, v] FROM (100).* AS v AT n",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         [
@@ -100,6 +101,7 @@ envs::{
     name:"selectFromListAndAtUnpivotWildCardOverScalar",
     statement:"SELECT VALUE [n, (SELECT VALUE [i, x] FROM @v AS x AT i)] FROM [100, 200].*.*.* AS v AT n",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         [
@@ -122,6 +124,7 @@ envs::{
     name:"selectFromBagAndAtUnpivotWildCardOverScalar",
     statement:"SELECT VALUE [n, (SELECT VALUE [i IS MISSING, i, x] FROM @v AS x AT i)] FROM <<100, 200>>.* AS v AT n",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         [
@@ -146,6 +149,7 @@ envs::{
     name:"selectPathUnpivotWildCardOverStructMultiple",
     statement:"SELECT name, val FROM a.*.*.*.* AS val AT name",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -163,6 +167,7 @@ envs::{
     name:"selectStarSingleSourceHoisted",
     statement:"SELECT * FROM stores[*].books[*] AS b WHERE b.price >= 9.0",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -194,6 +199,7 @@ envs::{
     name:"ordinalAccessWithNegativeIndex",
     statement:"SELECT temp[-2] FROM <<[1,2,3,4]>> AS temp",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -205,6 +211,7 @@ envs::{
     name:"ordinalAccessWithNegativeIndexAndBindings",
     statement:"SELECT temp[-2] FROM [[1,2,3,4]] AS temp",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -219,6 +226,7 @@ envs::{
     name:"rangeOverScalar",
     statement:"SELECT VALUE v FROM 1 AS v",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         1
@@ -229,6 +237,7 @@ envs::{
     name:"rangeTwiceOverScalar",
     statement:"SELECT VALUE [v1, v2] FROM 1 AS v1, @v1 AS v2",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         [
@@ -242,6 +251,7 @@ envs::{
     name:"rangeOverSexp",
     statement:"SELECT VALUE v FROM `(a b c)` AS v",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         (
@@ -256,6 +266,7 @@ envs::{
     name:"rangeOverStruct",
     statement:"SELECT VALUE v FROM `{a:5}` AS v",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -268,6 +279,7 @@ envs::{
     name:"rangeOverList",
     statement:"SELECT VALUE v FROM `[1, 2, 3]` AS v",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         1,
@@ -280,6 +292,7 @@ envs::{
     name:"rangeOverListWithAt",
     statement:"SELECT VALUE i FROM `[1, 2, 3]` AT i",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         0,
@@ -292,6 +305,7 @@ envs::{
     name:"rangeOverListWithAsAndAt",
     statement:"SELECT VALUE [i, v] FROM `[1, 2, 3]` AS v AT i",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         [
@@ -313,6 +327,7 @@ envs::{
     name:"rangeOverListConstructorWithAt",
     statement:"SELECT VALUE i FROM [1, 2, 3] AT i",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         0,
@@ -325,6 +340,7 @@ envs::{
     name:"rangeOverListConstructorWithAsAndAt",
     statement:"SELECT VALUE [i, v] FROM [1, 2, 3] AS v AT i",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         [
@@ -346,6 +362,7 @@ envs::{
     name:"rangeOverBagWithAt",
     statement:"SELECT VALUE [i, v] FROM <<1, 2, 3>> AS v AT i",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         [
@@ -367,6 +384,7 @@ envs::{
     name:"rangeOverNestedWithAt",
     statement:"SELECT VALUE [i, v] FROM (SELECT VALUE v FROM `[1, 2, 3]` AS v) AS v AT i",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         [

@@ -6,6 +6,7 @@ floatN::[
     name:"castAsFloat1",
     statement:"CAST(1.234 AS FLOAT(1))",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:1.234e0
     }
@@ -14,6 +15,7 @@ floatN::[
     name:"canCastAsFloat1",
     statement:"CAN_CAST(1.234 AS FLOAT(1))",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:true
     }
@@ -22,6 +24,7 @@ floatN::[
     name:"isFloat1",
     statement:"`1.234e0` IS FLOAT(1)",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:true
     }

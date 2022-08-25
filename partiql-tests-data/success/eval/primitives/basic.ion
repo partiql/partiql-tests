@@ -16,6 +16,7 @@ basic::[
     name:"literal",
     statement:"5",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:5
     }
@@ -24,6 +25,7 @@ basic::[
     name:"identifier",
     statement:"i",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:1
     }
@@ -32,6 +34,7 @@ basic::[
     name:"identifierCaseMismatch",
     statement:"I",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:1
     }
@@ -40,6 +43,7 @@ basic::[
     name:"quotedIdentifier",
     statement:"\"i\"",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:1
     }
@@ -48,6 +52,7 @@ basic::[
     name:"lexicalScope",
     statement:"@i",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:1
     }
@@ -56,6 +61,7 @@ basic::[
     name:"functionCall",
     statement:"exists(select * from [1])",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:true
     }
@@ -64,6 +70,7 @@ basic::[
     name:"grouping",
     statement:"((i))",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:1
     }
@@ -72,6 +79,7 @@ basic::[
     name:"emptyListLiteral",
     statement:"[]",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:[
       ]
@@ -81,6 +89,7 @@ basic::[
     name:"listLiteral",
     statement:"[i, f, d]",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:[
         1,
@@ -93,6 +102,7 @@ basic::[
     name:"rowValueConstructor",
     statement:"(i, f, d)",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:[
         1,
@@ -105,6 +115,7 @@ basic::[
     name:"emptyBagLiteral",
     statement:"<<>>",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
       ]
@@ -114,6 +125,7 @@ basic::[
     name:"bagLiteral",
     statement:"<<i, f, d>>",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         1,
@@ -126,6 +138,7 @@ basic::[
     name:"tableValueConstructor",
     statement:"VALUES (i), (f, d)",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         [
@@ -142,6 +155,7 @@ basic::[
     name:"emptyStructLiteral",
     statement:"{}",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:{
       }
@@ -151,6 +165,7 @@ basic::[
     name:"structLiteral",
     statement:"{'a':i, 'b':f, 'c':d, 'd': 1}",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:{
         a:1,
@@ -164,6 +179,7 @@ basic::[
     name:"decimalRoundUp",
     statement:"1.9999999999999999999999999999999999999999999999",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:2.0000000000000000000000000000000000000
     }
@@ -172,6 +188,7 @@ basic::[
     name:"decimalRoundDown",
     statement:"1.00000000000000000000000000000000000000000001",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:1.0000000000000000000000000000000000000
     }
@@ -183,6 +200,7 @@ basic::[
     name:"plus with mixed StaticType",
     statement:"SELECT VALUE v + 1 FROM numbers as v",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         2,
@@ -197,6 +215,7 @@ basic::[
     name:"minus with mixed StaticType",
     statement:"SELECT VALUE v - 1 FROM numbers as v",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         0,
@@ -211,6 +230,7 @@ basic::[
     name:"multiplication with mixed StaticType",
     statement:"SELECT VALUE v * 2 FROM numbers as v",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         2,
@@ -225,6 +245,7 @@ basic::[
     name:"division with mixed StaticType",
     statement:"SELECT VALUE v / 2 FROM numbers as v",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         0,
@@ -239,6 +260,7 @@ basic::[
     name:"modulo with mixed StaticType",
     statement:"SELECT VALUE v % 2 FROM numbers as v",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         1,
@@ -253,6 +275,7 @@ basic::[
     name:"unary plus with mixed StaticType",
     statement:"SELECT VALUE +v FROM numbers as v",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         1,
@@ -267,6 +290,7 @@ basic::[
     name:"unary minus with mixed StaticType",
     statement:"SELECT VALUE -v FROM numbers as v",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         -1,
@@ -281,6 +305,7 @@ basic::[
     name:"function call with mixed StaticType",
     statement:"SELECT VALUE CAST(v/2 AS INT) FROM numbers as v",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         0,
@@ -295,6 +320,7 @@ basic::[
     name:"arithmetic with null/missing",
     statement:"SELECT VALUE 1 + v FROM << null, missing, 1 >> AS v",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         null,

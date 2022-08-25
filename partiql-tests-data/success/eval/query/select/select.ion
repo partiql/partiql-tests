@@ -171,6 +171,7 @@ envs::{
     name:"explicitAliasSelectSingleSource",
     statement:"SELECT id AS name FROM stores",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -189,6 +190,7 @@ envs::{
     name:"selectImplicitAndExplicitAliasSingleSourceHoisted",
     statement:"SELECT title AS name, price FROM stores[*].books[*] AS b WHERE b.price >= 9.0",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -210,6 +212,7 @@ envs::{
     name:"syntheticColumnNameInSelect",
     statement:"SELECT i+1 FROM <<100>> i",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -222,6 +225,7 @@ envs::{
     name:"properAliasFromPathInSelect",
     statement:"SELECT s.id, s.books[1].title FROM stores AS s WHERE s.id = '5'",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -235,6 +239,7 @@ envs::{
     name:"selectListWithMissing",
     statement:"SELECT a.x AS x, a.y AS y FROM `[{x:5}, {y:6}]` AS a",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -253,6 +258,7 @@ select_where::[
     name:"selectWhereStringEqualsSameCase",
     statement:"SELECT * FROM animals as a WHERE a.name = 'Kumo'",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -266,6 +272,7 @@ select_where::[
     name:"selectWhereStrinEqualsDifferentCase",
     statement:"SELECT * FROM animals as a WHERE a.name = 'KUMO'",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
       ]
@@ -278,6 +285,7 @@ select_join::[
     name:"selectJoin",
     statement:"SELECT * FROM animals AS a, animal_types AS t WHERE a.type = t.id",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -305,6 +313,7 @@ select_join::[
     name:"selectCorrelatedJoin",
     statement:"SELECT s.id AS id, b.title AS title FROM stores AS s, @s.books AS b WHERE b IS NULL OR b.price > 5",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -330,6 +339,7 @@ select_join::[
     name:"selectCorrelatedLeftJoin",
     statement:"SELECT s.id AS id, b.title AS title FROM stores AS s LEFT CROSS JOIN @s.books AS b WHERE b IS NULL",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -342,6 +352,7 @@ select_join::[
     name:"selectCorrelatedLeftJoinOnClause",
     statement:"SELECT s.id AS id, b.title AS title FROM stores AS s LEFT OUTER JOIN @s.books AS b ON b.price > 9",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -365,6 +376,7 @@ select_join::[
     name:"selectJoinOnClauseScoping", // note that d is a global which should be shadowed by the last from source
     statement:"SELECT VALUE [a, b, d] FROM [1, 3] AS a INNER JOIN [1, 2, 3] AS b ON b < d LEFT JOIN [1.1, 2.1] AS d ON b < d AND a <= d",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         [
@@ -399,6 +411,7 @@ select_join::[
     name:"selectNonCorrelatedJoin", // Note that the joined s is coming from the global scope without @-operator
     statement:"SELECT s.id AS id, v AS title FROM stores AS s, s AS v",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -420,6 +433,7 @@ select_join::[
     name:"selectCorrelatedUnpivot",
     statement:"SELECT n1, n2, n3, n4, val FROM UNPIVOT a AS b AT n1, UNPIVOT @b AS c AT n2, UNPIVOT @c AS d AT n3, UNPIVOT @d AS val AT n4",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -443,6 +457,7 @@ select_join::[
     name:"nestedSelectJoinWithUnpivot",
     statement:"SELECT col, val FROM (SELECT * FROM animals AS aa, animal_types AS tt WHERE aa.type = tt.id) AS a, UNPIVOT @a AS val AT col WHERE col != 'id'",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -488,6 +503,7 @@ select_join::[
     name:"nestedSelectJoinLimit",
     statement:"SELECT col, val FROM (SELECT * FROM animals AS aa, animal_types AS tt WHERE aa.type = tt.id) AS a, UNPIVOT @a AS val AT col WHERE col != 'id' LIMIT 6 - 3",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -509,6 +525,7 @@ select_join::[
     name:"correlatedJoinWithShadowedAttributes",
     statement:"SELECT VALUE v FROM `[{v:5}]` AS item, @item.v AS v",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         5
@@ -519,6 +536,7 @@ select_join::[
     name:"correlatedJoinWithoutLexicalScope",
     statement:"SELECT VALUE b FROM `[{b:5}]` AS item, item.b AS b",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         5
@@ -529,6 +547,7 @@ select_join::[
     name:"joinWithShadowedGlobal", // 'a' is a global variable
     statement:"SELECT VALUE b FROM `[{b:5}]` AS a, a.b AS b",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -549,6 +568,7 @@ select_join::[
     name:"wildcardOrderedNames",
     statement:"SELECT * FROM <<{'a': 1, 'b': 2 }>> AS f",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -562,6 +582,7 @@ select_join::[
     name:"aliasWildcardOrderedNames",
     statement:"SELECT f.* FROM <<{'a': 1, 'b': 2 }>> AS f",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -575,6 +596,7 @@ select_join::[
     name:"aliasWildcardOrderedNamesSelectList",
     statement:"SELECT f.a, f.* FROM <<{'a': 1, 'b': 2 }>> AS f",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -589,6 +611,7 @@ select_join::[
     name:"aliasOrderedNamesSelectList",
     statement:"SELECT f.a, f.b FROM <<{'a': 1, 'b': 2 }>> AS f",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -605,6 +628,7 @@ select_join::[
     name:"selectDistinct",
     statement:"SELECT DISTINCT t.a FROM `[{a: 1}, {a: 2}, {a: 1}]` t",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -620,6 +644,7 @@ select_join::[
     name:"selectDistinctWithAggregate",
     statement:"SELECT SUM(DISTINCT t.a) AS a FROM `[{a:10}, {a:1}, {a:10}, {a:3}]` t",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -632,6 +657,7 @@ select_join::[
     name:"selectDistinctSubQuery",
     statement:"SELECT * FROM (SELECT DISTINCT t.a FROM `[{a: 1}, {a: 2}, {a: 1}]` t)",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -647,6 +673,7 @@ select_join::[
     name:"selectDistinctWithSubQuery",
     statement:"SELECT DISTINCT * FROM (SELECT t.a FROM `[{a: 1}, {a: 2}, {a: 1}]` t)",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -662,6 +689,7 @@ select_join::[
     name:"selectDistinctAggregationWithGroupBy",
     statement:"SELECT t.a, COUNT(DISTINCT t.b) AS c FROM `[{a:1, b:10}, {a:1, b:10}, {a:1, b:20}, {a:2, b:10}, {a:2, b:10}]` t GROUP by t.a",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -679,6 +707,7 @@ select_join::[
     name:"selectDistinctWithGroupBy",
     statement:"SELECT DISTINCT t.a, COUNT(t.b) AS c FROM `[{a:1, b:10}, {a:1, b:10}, {a:1, b:20}, {a:2, b:10}, {a:2, b:10}]` t GROUP by t.a",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -696,6 +725,7 @@ select_join::[
     name:"selectDistinctWithJoin",
     statement:"SELECT DISTINCT * FROM `[1, 1, 1, 1, 2]` t1, `[2, 2, 2, 2, 1]` t2",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -721,6 +751,7 @@ select_join::[
     name:"selectDistinctStarMixed",
     statement:"SELECT DISTINCT * FROM [ 1, 1, 2, [1], [1], [1, 2], <<>>, <<>>, MISSING, NULL, NULL, MISSING, {'a':1}, {'a':1}, {'a':2}]",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -762,6 +793,7 @@ select_join::[
     name:"selectDistinctStarScalars",
     statement:"SELECT DISTINCT * FROM [1, 1, 2]",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -777,6 +809,7 @@ select_join::[
     name:"selectDistinctStarStructs",
     statement:"SELECT DISTINCT * FROM [ {'a':1}, {'a':1}, {'a':2} ]",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -792,6 +825,7 @@ select_join::[
     name:"selectDistinctStarUnknowns",
     statement:"SELECT DISTINCT * FROM [MISSING, NULL, NULL, MISSING]",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -806,6 +840,7 @@ select_join::[
     name:"selectDistinctStarBags",
     statement:"SELECT DISTINCT * FROM [ <<>>, <<>>, <<1>>, <<1>>, <<1, 2>>, <<2, 1>>, <<3, 4>>]",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -836,6 +871,7 @@ select_join::[
     name:"selectDistinctStarLists",
     statement:"SELECT DISTINCT * FROM [[1], [1], [1, 2]]",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -856,6 +892,7 @@ select_join::[
     name:"selectDistinctStarIntegers",
     statement:"SELECT DISTINCT * FROM [ 1, 1, 2 ]",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -871,6 +908,7 @@ select_join::[
     name:"selectDistinctValue",
     statement:"SELECT DISTINCT VALUE t FROM [1,2,3,1,1,1,1,1] t",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         1,
@@ -883,6 +921,7 @@ select_join::[
     name:"selectDistinctExpressionAndWhere",
     statement:"SELECT DISTINCT (t.a + t.b) as c FROM `[{a: 1, b: 1}, {a: 2, b: 0}, {a: 0, b: 2}, {a: 2, b: 2}, {a: 0, b: 99}]` t WHERE t.a > 0",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -898,6 +937,7 @@ select_join::[
     name:"selectDistinctExpression",
     statement:"SELECT DISTINCT (t.a || t.b) as c FROM `[{a: \"1\", b: \"1\"}, {a: \"11\", b: \"\"}, {a: \"\", b: \"11\"}, {a: \"2\", b: \"2\"}]` t",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {

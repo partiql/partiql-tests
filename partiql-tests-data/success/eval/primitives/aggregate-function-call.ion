@@ -13,6 +13,7 @@ aggregates::[
     name:"topLevelCountDistinct",
     statement:"COUNT(DISTINCT [1,1,1,1,2])",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:2
     }
@@ -21,6 +22,7 @@ aggregates::[
     name:"topLevelCount",
     statement:"COUNT(numbers)",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:5
     }
@@ -29,6 +31,7 @@ aggregates::[
     name:"topLevelAllCount",
     statement:"COUNT(ALL numbers)",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:5
     }
@@ -37,6 +40,7 @@ aggregates::[
     name:"topLevelSum",
     statement:"SUM(numbers)",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:15.0
     }
@@ -45,6 +49,7 @@ aggregates::[
     name:"topLevelAllSum",
     statement:"SUM(ALL numbers)",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:15.0
     }
@@ -53,6 +58,7 @@ aggregates::[
     name:"topLevelDistinctSum",
     statement:"SUM(DISTINCT [1,1,1,1,1,1,1,2])",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:3
     }
@@ -61,6 +67,7 @@ aggregates::[
     name:"topLevelMin",
     statement:"MIN(numbers)",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:1
     }
@@ -69,6 +76,7 @@ aggregates::[
     name:"topLevelDistinctMin",
     statement:"MIN(DISTINCT numbers)",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:1
     }
@@ -77,6 +85,7 @@ aggregates::[
     name:"topLevelAllMin",
     statement:"MIN(ALL numbers)",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:1
     }
@@ -85,6 +94,7 @@ aggregates::[
     name:"topLevelMax",
     statement:"MAX(numbers)",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:5.
     }
@@ -93,6 +103,7 @@ aggregates::[
     name:"topLevelDistinctMax",
     statement:"MAX(DISTINCT numbers)",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:5.
     }
@@ -101,6 +112,7 @@ aggregates::[
     name:"topLevelAllMax",
     statement:"MAX(ALL numbers)",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:5.
     }
@@ -109,6 +121,7 @@ aggregates::[
     name:"topLevelAvg",
     statement:"AVG(numbers)",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:3.0
     }
@@ -117,6 +130,7 @@ aggregates::[
     name:"topLevelDistinctAvg",
     statement:"AVG(DISTINCT [1,1,1,1,1,3])",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:2.
     }
@@ -125,6 +139,7 @@ aggregates::[
     name:"topLevelAvgOnlyInt",
     statement:"AVG([2,2,2,4])",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:2.5
     }
@@ -133,6 +148,7 @@ aggregates::[
     name:"selectValueAggregate",
     statement:"SELECT VALUE COUNT(v) + SUM(v) FROM <<numbers, numbers>> AS v",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         20.0,
@@ -144,6 +160,7 @@ aggregates::[
     name:"selectListCountStar",
     statement:"SELECT COUNT(*) AS c FROM <<numbers, numbers>> AS v",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -156,6 +173,7 @@ aggregates::[
     name:"selectListCountVariable",
     statement:"SELECT COUNT(v) AS c FROM <<numbers, numbers>> AS v",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -168,6 +186,7 @@ aggregates::[
     name:"selectListMultipleAggregates",
     statement:"SELECT COUNT(*) AS c, AVG(v * 2) + SUM(v + v) AS result FROM numbers AS v",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -181,6 +200,7 @@ aggregates::[
     name:"selectListMultipleAggregatesNestedQuery",
     statement:"SELECT VALUE (SELECT MAX(v2 * v2) + MIN(v2 * 2) * v1 AS result FROM numbers AS v2) FROM numbers AS v1",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         $bag::[
@@ -215,6 +235,7 @@ aggregates::[
     name:"aggregateInSubqueryOfSelect",
     statement:"SELECT foo.cnt FROM (SELECT COUNT(*) AS cnt FROM [1, 2, 3]) AS foo",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -227,6 +248,7 @@ aggregates::[
     name:"aggregateInSubqueryOfSelectValue",
     statement:"SELECT VALUE foo.cnt FROM (SELECT COUNT(*) AS cnt FROM [1, 2, 3]) AS foo",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         3
@@ -237,6 +259,7 @@ aggregates::[
     name:"aggregateWithAliasingInSubqueryOfSelectValue",
     statement:"SELECT VALUE foo.cnt FROM (SELECT COUNT(baz.bar) AS cnt FROM << { 'bar': 1 }, { 'bar': 2 } >> AS baz) AS foo",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         2

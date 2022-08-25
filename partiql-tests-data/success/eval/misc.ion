@@ -96,6 +96,7 @@ uncategorized::[
     name:"variableShadow",  // Note that i, f, d, and s are defined in the global environment
     statement:"SELECT f, d, s FROM i AS f, f AS d, @f AS s WHERE f = 1 AND d = 2e0 and s = 1",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -110,6 +111,7 @@ uncategorized::[
     name:"selectValueStructConstructorWithMissing",
     statement:"SELECT VALUE {'x': a.x, 'y': a.y} FROM `[{x:5}, {y:6}]` AS a",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -125,6 +127,7 @@ uncategorized::[
     name:"selectIndexStruct",
     statement:"SELECT VALUE x[0] FROM (SELECT s.id FROM stores AS s) AS x",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         "5",
@@ -137,6 +140,7 @@ uncategorized::[
     name:"selectStarSingleSource",
     statement:"SELECT * FROM animals",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -158,6 +162,7 @@ uncategorized::[
     name:"implicitAliasSelectSingleSource",
     statement:"SELECT id FROM stores",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -176,6 +181,7 @@ uncategorized::[
     name:"selectValues",
     statement:"SELECT VALUE id FROM stores",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         "5",
@@ -188,6 +194,7 @@ uncategorized::[
     name:"explicitAliasSelectSingleSourceWithWhere",
     statement:"SELECT id AS name FROM stores WHERE id = '5'",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -202,6 +209,7 @@ uncategorized::[
     name:"undefinedQualifiedVariableWithUndefinedVariableBehaviorError",
     statement:"SELECT t.a, t.undefined_field FROM `[{a:100, b:200}]` as t",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -214,6 +222,7 @@ uncategorized::[
     name:"emptySymbol",
     statement:"SELECT \"\" FROM `{'': 1}`",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
@@ -226,6 +235,7 @@ uncategorized::[
     name:"emptySymbolInGlobals",
     statement:"SELECT * FROM \"\"",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {

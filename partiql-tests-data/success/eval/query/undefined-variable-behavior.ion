@@ -6,6 +6,7 @@ undefined_variable_behavior::[
     name:"undefinedUnqualifiedVariableWithUndefinedVariableBehaviorMissing",
     statement:"undefined_variable",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$missing::null
     }
@@ -14,6 +15,7 @@ undefined_variable_behavior::[
     name:"undefinedUnqualifiedVariableIsNullExprWithUndefinedVariableBehaviorMissing",
     statement:"undefined_variable IS NULL",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:true
     }
@@ -22,6 +24,7 @@ undefined_variable_behavior::[
     name:"undefinedUnqualifiedVariableIsMissingExprWithUndefinedVariableBehaviorMissing",
     statement:"undefined_variable IS MISSING",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:true
     }
@@ -30,6 +33,7 @@ undefined_variable_behavior::[
     name:"undefinedUnqualifiedVariableInSelectWithUndefinedVariableBehaviorMissing",
     statement:"SELECT s.a, s.undefined_variable, s.b FROM `[{a:100, b:200}]` s",
     assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
         {
