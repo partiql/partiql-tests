@@ -1,0 +1,582 @@
+'section-4'::[
+    equiv_class::{
+        id: tuple_path_navigation,
+        statements: [
+            "{'a': 1, 'b': 2}.a",
+            "{'a': 1, 'b': 2}.\"a\""
+        ]
+    },
+    {
+        name: "equiv tuple path navigation",
+        statement: tuple_path_navigation,
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: 1
+        }
+    },
+
+    equiv_class::{
+        id: tuple_navigation_with_array_notation,
+        statements: [
+            "{'a': 1, 'b': 2}['a']",
+            "{'a': 1, 'b': 2}.'a'",
+        ]
+    },
+    {
+        name: "equiv tuple path navigation",
+        statement: tuple_navigation_with_array_notation,
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: 1
+        }
+    },
+
+    equiv_class::{
+        id: wildcard_steps_collection,
+        statements: [
+            "[1, 2, 3][*]",
+            "SELECT VALUE v FROM [1, 2, 3] AS v",
+        ]
+    },
+    {
+        name: "equiv wildcard steps collection",
+        statement: wildcard_steps_collection,
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[1, 2, 3]
+        }
+    },
+
+    equiv_class::{
+        id: wildcard_steps_struct,
+        statements: [
+            "{'a':1, 'b':2}.*",
+            "SELECT VALUE v FROM UNPIVOT {'a':1, 'b':2} AS v"
+        ]
+    },
+    {
+        name: "equiv wildcard steps struct",
+        statement: wildcard_steps_struct,
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[1, 2]
+        }
+    },
+
+    equiv_class::{
+        id: path_expression_with_wildcard_steps,
+        statements: [
+            "SELECT VALUE foo FROM e.* AS foo",
+            "SELECT VALUE foo FROM (SELECT VALUE v FROM UNPIVOT e AS v) AS foo",
+            "SELECT VALUE foo FROM UNPIVOT e AS foo"
+        ]
+    },
+    {
+        name: "equiv path expression with wildcard steps",
+        statement: path_expression_with_wildcard_steps,
+        env: {
+            e:  {a: 1, b: 2}
+        },
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[1, 2]
+        }
+    },
+    // no sample environment provided in spec. also the first spec path collection expression
+    // is wrong. see https://github.com/partiql/partiql-spec/issues/28
+    equiv_class::{
+        id: path_collection_expression_with_wildcard_steps,
+        statements: [
+            "tables.items[*].product.*[*].nest",
+            "SELECT VALUE v2.nest FROM tables.items AS v1, UNPIVOT @v1.product AS v2"
+        ]
+    },
+    {
+        name: "equiv path collection expression with wildcard steps",
+        statement: path_collection_expression_with_wildcard_steps,
+        env: {
+            tables: {
+                items: [
+                    { product: { someKey1: { nest: 1 } } },
+                    { product: { someKey2: { nest: 2 } } }
+                ]
+            }
+        },
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[1, 2]
+        }
+    },
+]
+'section-5'::[
+    equiv_class::{
+        id: attribute_value_pair_non_tuple_non_missing,
+        statements: [
+            "SELECT * FROM UNPIVOT x AS v AT n",
+            "SELECT * FROM UNPIVOT {'_1': x} AS v AT n"
+        ]
+    },
+    {
+        name: "equiv attribute value pair unpivot non-missing",
+        statement: attribute_value_pair_non_tuple_non_missing,
+        env: { x: 1 },
+        assert: [
+            {
+                evalMode: EvalModeCoerce,
+                result: EvaluationSuccess,
+                output: $bag::[{_1: 1, n: "_1"}]
+            },
+            {
+                evalMode: EvalModeError,
+                result: EvaluationFail,
+            }
+        ]
+    },
+    equiv_class::{
+        id: attribute_value_pair_missing,
+        statements: [
+            "SELECT * FROM UNPIVOT x AS v AT n",
+            "SELECT * FROM UNPIVOT {} AS v AT n"
+        ]
+    },
+    {
+        name: "equiv attribute value pair unpivot missing",
+        statement: attribute_value_pair_missing,
+        env: { x: $missing::null },
+        assert: [
+            {
+                evalMode: EvalModeCoerce,
+                result: EvaluationSuccess,
+                output: $bag::[]
+            },
+            {
+                evalMode: EvalModeError,
+                result: EvaluationFail,
+            },
+        ]
+    },
+    equiv_class::{
+        id: comma_cross_join_and_join_and_lateral,
+        statements: [
+            "SELECT * FROM customers AS c, orders AS o",
+            "SELECT * FROM customers AS c CROSS JOIN orders AS o",
+            "SELECT * FROM customers AS c JOIN orders AS o ON true",
+            "SELECT * FROM customers AS c LATERAL orders AS o"  // # 5.7 SQL's LATERAL
+        ]
+    },
+    {
+        name: "equiv of comma, cross join, and join",
+        statement: comma_cross_join_and_join,
+        env: {
+             customers: [
+                {id: 5, name: "Joe"},
+                {id: 7, name: "Mary"}
+            ],
+            orders: [
+                {custId: 7, productId: 101},
+                {custId: 7, productId: 523}
+            ]
+        },
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                {
+                  id: 5,
+                  name: "Joe",
+                  custId: 7,
+                  productId: 101
+                },
+                {
+                  id: 5,
+                  name: "Joe",
+                  custId: 7,
+                  productId: 523
+                },
+                {
+                  id: 7,
+                  name: "Mary",
+                  custId: 7,
+                  productId: 101
+                },
+                {
+                  id: 7,
+                  name: "Mary",
+                  custId: 7,
+                  productId: 523
+                }
+            ]
+        }
+    },
+    equiv_class::{
+        id: unnesting_tuple_in_from_source,
+        statements: [
+            "SELECT s, r FROM sensors AS s, s.readings AS r",
+            "SELECT s, r FROM sensors AS s CROSS JOIN s.readings AS r",
+            "SELECT s, r FROM sensors AS s JOIN s.readings AS r ON true",
+        ]
+    },
+    {
+        name: "equiv unnesting tuple in from source",
+        statement: unnesting_tuple_in_from_source,
+        env: {
+            sensors: [
+                {readings: [{v: 1.3}, {v: 2}]},
+                {readings: [{v: 0.7}, {v: 0.8}, {v: 0.9}]}
+            ]
+        },
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                { s: { readings: [ { v: 1.3 }, { v: 2 } ] }, r: { v: 1.3 } },
+                { s: { readings: [ { v: 1.3 }, { v: 2 } ] }, r: { v: 2 } },
+                { s: { readings: [ { v: 0.7 }, { v: 0.8 }, { v: 0.9 } ] }, r: { v: 0.7 } },
+                { s: { readings: [ { v: 0.7 }, { v: 0.8 }, { v: 0.9 } ] }, r: { v: 0.8 } },
+                { s: { readings: [ { v: 0.7 }, { v: 0.8 }, { v: 0.9 } ] }, r: { v: 0.9 } }
+            ]
+        }
+    },
+    equiv_class::{
+        id: left_join,
+        statements: [
+            "SELECT s, r FROM sensors AS s LEFT CROSS JOIN s.readings AS r",
+            "SELECT s, r FROM sensors AS s LEFT JOIN s.readings AS r ON true",
+        ]
+    },
+    {
+        name: "equiv left join",
+        statement: left_join,
+        env: {
+            sensors: [
+                {readings: [{v: 1.3}, {v: 2}]},
+                {readings: [{v: 0.7}, {v: 0.8}, {v: 0.9}]},
+                {readings: []},
+            ]
+        },
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                { s: { readings: [ { v: 1.3 }, { v: 2 } ] }, r: { v: 1.3 } },
+                { s: { readings: [ { v: 1.3 }, { v: 2 } ] }, r: { v: 2 } },
+                { s: { readings: [ { v: 0.7 }, { v: 0.8 }, { v: 0.9 } ] }, r: { v: 0.7 } },
+                { s: { readings: [ { v: 0.7 }, { v: 0.8 }, { v: 0.9 } ] }, r: { v: 0.8 } },
+                { s: { readings: [ { v: 0.7 }, { v: 0.8 }, { v: 0.9 } ] }, r: { v: 0.9 } },
+                { s: { readings: [ ] }, r: null }
+            ]
+        }
+    }
+]
+'section-6'::[
+    equiv_class::{
+        id: array_constructor,
+        statements: [
+            "SELECT VALUE [v.a, v.b] FROM [{'a':1, 'b':1}, {'a':2, 'b':2}] AS V",
+            "SELECT VALUE (v.a, v.b) FROM [{'a':1, 'b':1}, {'a':2, 'b':2}] AS V"
+        ]
+    },
+    {
+        name: "equiv array constructor",
+        statement: array_constructor,
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[[1, 1], [2, 2]]
+        }
+    },
+    equiv_class::{
+        id: tupleunion_select_list,
+        statements: [
+            "SELECT v1.*, e2 AS a, v3.* FROM t",
+            '''
+            SELECT VALUE TUPLEUNION(
+                CASE WHEN v1 IS TUPLE THEN v1 ELSE {'_1': v1} END,
+                {'a':e2},
+                CASE WHEN v3 IS TUPLE THEN v3 ELSE {'_2': v3} END
+            )
+            FROM t
+            '''
+        ]
+    },
+    {
+        name: "equiv tupleunion with select list",
+        statement: tupleunion_select_list,
+        env: {
+            t: [{v1: {b: 2}, e2: 1, v3: {c: 3}}]
+        },
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                {
+                    b: 2,
+                    a: 1,
+                    c: 3
+                }
+            ]
+        }
+    },
+    equiv_class::{
+        id: nested_subquery_in_select_value,
+        statements: [
+            '''
+            SELECT VALUE {'sensor': s.sensor,
+                          'readings': (SELECT VALUE l.co
+                                       FROM logs AS l
+                                       WHERE l.sensor = s.sensor
+                                       )
+                         }
+            FROM sensors AS s
+            ''',
+            '''
+            SELECT s.sensor AS sensor,
+                   (SELECT VALUE l.co
+                    FROM logs AS l
+                    WHERE l.sensor = s.sensor
+                    ) AS readings
+            FROM sensors AS s
+            '''
+        ]
+    },
+    {
+        name: "equiv nested subquery in select value",
+        statement: nested_subquery_in_select_value,
+        env: {
+            sensors: [{sensor:1}, {'sensor':2}],
+            logs: [{sensor:1, co:0.4}, {sensor:1, co:0.2}, {sensor:2, co:0.3}]
+        },
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                {sensor:1, readings:$bag::[0.4, 0.2]},
+                {sensor:2, readings:$bag::[0.3]}
+            ]
+        }
+    }
+]
+
+'section-9'::[
+    envs::{
+        // no sample environment provided in spec
+        anotherDataSet: [
+            {
+                a: 1,
+                b: 11,
+                foo: 111,
+                sthelse: "one"
+            },
+            {
+                a: 2,
+                b: 22,
+                foo: 222,
+                sthelse: "two"
+            }
+        ],
+        someDataSet: [
+            {
+                c: 1,
+                d: 11,
+                sth: "one",
+                bar: 1111
+            },
+            {
+                c: 3,
+                d: 33,
+                sth: "three",
+                bar: 3333
+            }
+        ]
+    },
+    equiv_class::{
+        id: coercion_select_subquery_into_scalar,
+        statements: [
+            '''
+            SELECT v.foo,
+                   (SELECT w.bar
+                    FROM someDataSet w
+                    WHERE w.sth = v.sthelse) AS bar
+            FROM anotherDataSet v
+            ''',
+            '''
+            SELECT VALUE {'foo': v.foo
+                          'bar': COLL_TO_SCALAR(SELECT VALUE {'bar': w.bar}
+                                                FROM someDataSet w
+                                                WHERE w.sth = v.sthelse)}
+            '''
+        ]
+    },
+    {
+        name: "equiv coercion of a SELECT subquery into a scalar",
+        statement: coercion_select_subquery_into_scalar,
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[{foo: 111, bar: 1111}]
+        }
+    },
+    equiv_class::{
+        id: coercion_select_subquery_into_array,
+        statements: [
+            '''
+            SELECT v.foo
+            FROM anotherDataSet v
+            WHERE (v.a, v.b) = (SELECT w.c, w,d
+                                FROM someDataSet w
+                                WHERE w.sth = v.sthelse)
+            ''',
+            '''
+            SELECT VALUE {'foo': v.foo}
+            FROM anotherDataSet v
+            WHERE (v.a, v.b) = (SELECT VALUE [w.c, w,d]
+                                FROM someDataSet w
+                                WHERE w.sth = v.sthelse)
+            '''
+        ]
+    },
+    {
+        name: "equiv coercion of a SELECT subquery into an array",
+        statement: coercion_select_subquery_into_array,
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[{foo: 111}]
+        }
+    },
+]
+
+'section-11'::[
+    envs::{
+        sensors: [{sensor:1}, {'sensor':2}],
+        logs: [{sensor:1, co:0.4}, {sensor:1, co:0.2}, {sensor:2, co:0.3}]
+    },
+    equiv_class::{
+        id: group_all,
+        statements: [
+            '''
+            SELECT VALUE {'largeco': COLL_COUNT(g)}
+            FROM logs AS l
+            WHERE l.co > 1.5
+            GROUP ALL AS g''',
+            '''
+            SELECT COUNT(*) AS largeco
+            FROM logs AS l
+            WHERE l.co > 1.5
+            ''',
+            '''
+            <<
+                {'largeco': COLL_COUNT(SELECT VALUE l
+                                       FROM logs AS l
+                                       WHERE l.co > 1.5
+                                       )
+                }
+            >>''',
+            '''
+            SELECT COUNT(g) AS largeco
+            FROM logs AS l
+            WHERE l.co > 1.5
+            '''
+        ]
+    },
+    {
+        name: "equiv group_all",
+        statement: group_all,
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[{largeco: 0}]
+        }
+    },
+    equiv_class::{
+        id: group_by_with_aggregates,
+        statements: [
+            '''
+            SELECT VALUE {'sensor': sensor,
+                          'avg': COLL_AVG(SELECT VALUE v.l.co FROM g AS v),
+                          'count': COLL_COUNT(g) }
+            FROM logs AS l
+            GROUP BY l.sensor AS sensor GROUP AS g
+            ''',
+            '''
+            SELECT l.sensor AS sensor,
+            AVG(l.co) AS "avg",
+            COUNT(*) AS "count"
+            FROM logs AS l
+            GROUP BY l.sensor
+            '''
+        ]
+    },
+    {
+        name: "equiv group by with aggregates",
+        statement: group_by_with_aggregates,
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[{sensor:1, avg:0.3, count: 2},
+                           {sensor:2, avg:0.3, count: 1}
+            ]
+        }
+    },
+    equiv_class::{
+        id: aliases_from_select_clause,
+        statements: [
+            '''
+            SELECT p.tag || ':' || p.name AS tagname, AVG(p.age) AS average
+            FROM people AS p
+            GROUP BY tagname
+            ''',
+            '''
+            SELECT p.tag || ':' || p.name AS tagname, AVG(p.age) AS average
+            FROM people AS p
+            GROUP BY p.tag || ':' || p.name
+            '''
+        ]
+    },
+    {
+        name: "equiv group by with aggregates",
+        statement: aliases_from_select_clause,
+        env: {
+            people: $bag::[{name: "zoe", age: 10, tag: "child"},
+                           {name: "zoe", age: 20, tag: "adult"},
+                           {name: "bill", age: 30, tag: "adult"}
+            ]
+        },
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[{tagname: "child:zoe", average: 10},
+                {tagname: "adult:zoe", average: 20},
+                {tagname: "adult:bill", average: 30}
+            ]
+        }
+    },
+]
+
+'section-12'::[
+    equiv_class::{
+        id: coercions_explicit_literals,
+        statements: [
+            "SELECT * FROM foo WHERE 9 < '10'",
+            "SELECT * FROM foo WHERE 9 < 10"
+        ]
+    },
+    {
+        name: "equiv coercions with explicit literals",
+        statement: coercions_explicit_literals,
+        env: {
+            foo: 1
+        },
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[{_1: 1}]
+        }
+    },
+]

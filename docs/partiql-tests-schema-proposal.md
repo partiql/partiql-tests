@@ -155,8 +155,7 @@ Tests whether a given PartiQL statement evaluates to the expected result. For no
 }
 ```
 
-For ease of writing evaluation tests, it’s necessary to provide a way to specify environments that can be referred to 
-outside a given test.
+For ease of writing evaluation tests, it must be possible to declare environments which can be used by multiple test cases.
 
 Specifying environments available for a given file:
 ```ion

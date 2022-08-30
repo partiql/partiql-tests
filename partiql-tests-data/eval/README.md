@@ -1,0 +1,1 @@
+Tests in this directory should have statements that can be evaluated and return the same result as the expected result (i.e. successful result or error).
