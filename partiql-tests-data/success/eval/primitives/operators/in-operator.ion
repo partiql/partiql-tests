@@ -74,7 +74,6 @@ envs::{
     5,
     2e0
   ],
-
 }
 
 in::[
@@ -179,23 +178,21 @@ in::[
     }
   },
   {
-    // expected output is different depending on the TypingMode
-    // TODO: decide on default option https://github.com/partiql/partiql-tests/issues/25
-    name:"notInPredicateSingleExpr",
-    statement:"SELECT VALUE b.title FROM stores[*].books[*] AS b WHERE b.price NOT IN 5",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        "A",
-        "B",
-        "C",
-        "D",
-        "A",
-        "E",
-        "F"
-      ]
-    }
+    // expected output is different depending on the TypingMode. Kotlin's LEGACY mode returns false if RHS is not a
+    // bag, list, or sexp
+    name: "notInPredicateSingleExpr",
+    statement: "SELECT VALUE b.title FROM stores[*].books[*] AS b WHERE b.price NOT IN 5",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ],
   },
   {
     name:"notInPredicateSingleItemListVar",

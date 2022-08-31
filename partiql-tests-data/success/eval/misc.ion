@@ -204,21 +204,6 @@ uncategorized::[
     }
   },
   {
-    // `partiql-lang-kotlin` uses UndefinedVariableBehavior.ERROR, which doesn't affect qualified field names
-    // TODO: decide on default options for https://github.com/partiql/partiql-tests/issues/25
-    name:"undefinedQualifiedVariableWithUndefinedVariableBehaviorError",
-    statement:"SELECT t.a, t.undefined_field FROM `[{a:100, b:200}]` as t",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        {
-          a:100
-        }
-      ]
-    }
-  },
-  {
     name:"emptySymbol",
     statement:"SELECT \"\" FROM `{'': 1}`",
     assert:{

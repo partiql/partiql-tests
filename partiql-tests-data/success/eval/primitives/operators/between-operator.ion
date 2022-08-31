@@ -1,3 +1,9 @@
+envs::{
+  d: 3.,
+  f: 2e0,
+  i: 1,
+}
+
 between::[
   {
     name:"betweenPredicate",
