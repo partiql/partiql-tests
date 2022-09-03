@@ -1,0 +1,514 @@
+envs::{
+  a:{
+    b:{
+      c:{
+        d:{
+          e:5,
+          f:6
+        }
+      }
+    }
+  },
+  b:{
+    c:100
+  },
+  e:[
+    {
+      books:[
+        "b1",
+        "b2"
+      ]
+    }
+  ],
+  s:"hello",
+  someList:[
+    {
+      a:1
+    },
+    {
+      a:2
+    },
+    {
+      a:3
+    }
+  ],
+  stores:[
+    {
+      id:"5",
+      books:[
+        {
+          title:"A",
+          price:5.0,
+          categories:[
+            "sci-fi",
+            "action"
+          ]
+        },
+        {
+          title:"B",
+          price:2.0,
+          categories:[
+            "sci-fi",
+            "comedy"
+          ]
+        },
+        {
+          title:"C",
+          price:7.0,
+          categories:[
+            "action",
+            "suspense"
+          ]
+        },
+        {
+          title:"D",
+          price:9.0,
+          categories:[
+            "suspense"
+          ]
+        }
+      ]
+    },
+    {
+      id:"6",
+      books:[
+        {
+          title:"A",
+          price:5.0,
+          categories:[
+            "sci-fi",
+            "action"
+          ]
+        },
+        {
+          title:"E",
+          price:9.5,
+          categories:[
+            "fantasy",
+            "comedy"
+          ]
+        },
+        {
+          title:"F",
+          price:10.0,
+          categories:[
+            "history"
+          ]
+        }
+      ]
+    },
+    {
+      id:"7",
+      books:[
+      ]
+    }
+  ],
+  friends:{
+    kumo:{
+      type:"DOG",
+      likes:{
+        mochi:{
+          type:"dog"
+        },
+        zoe:{
+          type:"human"
+        }
+      }
+    },
+    mochi:{
+      type:"DOG",
+      likes:{
+        kumo:{
+          type:"dog"
+        },
+        brownie:{
+          type:"cat"
+        }
+      }
+    }
+  }
+}
+
+path::[
+  {
+    name:"pathSimpleDotOnly",
+    statement:"b.c",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:100
+    }
+  },
+  {
+    name:"pathDotOnly",
+    statement:"a.b.c.d.e",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:5
+    }
+  },
+  {
+    name:"pathDotMissingAttribute",
+    statement:"a.z IS MISSING",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"pathMissingDotName",
+    statement:"(MISSING).a IS MISSING",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"pathNullDotName",
+    statement:"(NULL).a IS MISSING",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"pathIndexing",
+    statement:"stores[0].books[2].title",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:"C"
+    }
+  },
+  {
+    name:"pathIndexListLiteral",
+    statement:"[1, 2, 3][1]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:2
+    }
+  },
+  {
+    name:"pathIndexBagLiteral",
+    statement:"<<1, 2, 3>>[1]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$missing::null
+    }
+  },
+  {
+    name:"pathFieldStructLiteral",
+    statement:"{'a': 1, 'b': 2, 'b': 3}.a",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:1
+    }
+  },
+  {
+    name:"pathIndexStructLiteral",
+    statement:"{'a': 1, 'b': 2, 'b': 3}[1]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:2
+    }
+  },
+  {
+    name:"pathIndexStructOutOfBoundsLowLiteral",
+    statement:"{'a': 1, 'b': 2, 'b': 3}[-1]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$missing::null
+    }
+  },
+  {
+    name:"pathIndexStructOutOfBoundsHighLiteral",
+    statement:"{'a': 1, 'b': 2, 'b': 3}[3]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$missing::null
+    }
+  },
+  {
+    name:"pathUnpivotWildcard",
+    statement:"friends.kumo.likes.*",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          type:"dog"
+        },
+        {
+          type:"human"
+        }
+      ]
+    }
+  },
+  {
+    name:"pathUnpivotWildcardFieldsAfter",
+    statement:"friends.kumo.likes.*.type",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        "dog",
+        "human"
+      ]
+    }
+  },
+  {
+    name:"pathSimpleWildcard",
+    statement:"someList[*].a",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    name:"selectValuePath",
+    statement:"SELECT VALUE v1.books FROM e AS v1",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        [
+          "b1",
+          "b2"
+        ]
+      ]
+    }
+  },
+  {
+    name:"pathWildcardPath",
+    statement:"e[*].books",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        [
+          "b1",
+          "b2"
+        ]
+      ]
+    }
+  },
+  {
+    name:"pathWildcard",
+    statement:"stores[0].books[*].title",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    }
+  },
+  {
+    name:"pathDoubleWildCard",
+    statement:"stores[*].books[*].title",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        "A",
+        "B",
+        "C",
+        "D",
+        "A",
+        "E",
+        "F"
+      ]
+    }
+  },
+  {
+    name:"pathDoubleUnpivotWildCard",
+    statement:"friends.*.likes.*.type",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        "dog",
+        "human",
+        "dog",
+        "cat"
+      ]
+    }
+  },
+  {
+    name:"pathWildCardOverScalar",
+    statement:"s[*]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        "hello"
+      ]
+    }
+  },
+  {
+    name:"pathUnpivotWildCardOverScalar",
+    statement:"s.*",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        "hello"
+      ]
+    }
+  },
+  {
+    name:"pathWildCardOverScalarMultiple",
+    statement:"(100)[*][*][*]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        100
+      ]
+    }
+  },
+  {
+    name:"pathUnpivotWildCardOverScalarMultiple",
+    statement:"(100).*.*.*",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        100
+      ]
+    }
+  },
+  {
+    name:"pathWildCardOverStructMultiple",
+    statement:"a[*][*][*][*]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          b:{
+            c:{
+              d:{
+                e:5,
+                f:6
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    name:"pathUnpivotWildCardOverStructMultiple",
+    statement:"a.*.*.*.*",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        5,
+        6
+      ]
+    }
+  }
+]
+
+pathUnpivotMissing::[
+  {
+    name:"unpivotMissing",
+    statement:"SELECT * FROM UNPIVOT MISSING",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+      ]
+    }
+  },
+  {
+    name:"unpivotEmptyStruct",
+    statement:"SELECT * FROM UNPIVOT {}",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+      ]
+    }
+  },
+  {
+    name:"unpivotStructWithMissingField",
+    statement:"SELECT * FROM UNPIVOT { 'a': MISSING }",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+      ]
+    }
+  },
+  {
+    name:"unpivotMissingWithAsAndAt",
+    statement:"SELECT unnestIndex, unnestValue FROM UNPIVOT MISSING AS unnestValue AT unnestIndex",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+      ]
+    }
+  },
+  {
+    name:"unpivotMissingCrossJoinWithAsAndAt",
+    statement:"SELECT unnestIndex, unnestValue FROM MISSING, UNPIVOT MISSING AS unnestValue AT unnestIndex",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+      ]
+    }
+  },
+  {
+    name:"pathUnpivotEmptyStruct1",
+    statement:"{}.*.*.bar",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+      ]
+    }
+  },
+  {
+    name:"pathUnpivotEmptyStruct2",
+    statement:"{}.*.bar.*",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+      ]
+    }
+  },
+  {
+    name:"pathUnpivotEmptyStruct3",
+    statement:"{}.*.bar.*.baz",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+      ]
+    }
+  }
+]

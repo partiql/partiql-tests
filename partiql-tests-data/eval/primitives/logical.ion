@@ -1,0 +1,80 @@
+envs::{
+  d:3.,
+  f:2e0,
+  i:1,
+}
+
+logical::[
+  {
+    name:"notTrue",
+    statement:"not true",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"notFalse",
+    statement:"not false",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"andTrueFalse",
+    statement:"true and false",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"andTrueTrue",
+    statement:"true and true",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"orTrueFalse",
+    statement:"true or false",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"orFalseFalse",
+    statement:"false or false",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"comparisonsConjuctTrue",
+    statement:"i < f and f < d",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"comparisonsDisjunctFalse",
+    statement:"i < f and (f > d or i > d)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  }
+]

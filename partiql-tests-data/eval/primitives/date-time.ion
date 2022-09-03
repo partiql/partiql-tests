@@ -1,0 +1,38 @@
+regression::[
+  {
+    name:"dateTimePartsAsVariableNames",
+    statement:"SELECT VALUE [year, month, day, hour, minute, second] FROM 1968 AS year, 4 AS month, 3 as day, 12 as hour, 31 as minute, 59 as second",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        [
+          1968,
+          4,
+          3,
+          12,
+          31,
+          59
+        ]
+      ]
+    }
+  },
+  {
+    name:"dateTimePartsAsStructFieldNames",
+    statement:"SELECT VALUE [x.year, x.month, x.day, x.hour, x.minute, x.second] FROM << { 'year': 1968, 'month': 4, 'day': 3, 'hour': 12, 'minute': 31, 'second': 59 }>> AS x",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        [
+          1968,
+          4,
+          3,
+          12,
+          31,
+          59
+        ]
+      ]
+    }
+  }
+]

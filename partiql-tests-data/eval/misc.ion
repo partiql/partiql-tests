@@ -1,0 +1,232 @@
+envs::{
+  '':1,
+  d:3.,
+  f:2e0,
+  i:1,
+  s:"hello",
+  animals:[
+    {
+      name:"Kumo",
+      type:"dog"
+    },
+    {
+      name:"Mochi",
+      type:"dog"
+    },
+    {
+      name:"Lilikoi",
+      type:"unicorn"
+    }
+  ],
+  stores:[
+    {
+      id:"5",
+      books:[
+        {
+          title:"A",
+          price:5.0,
+          categories:[
+            "sci-fi",
+            "action"
+          ]
+        },
+        {
+          title:"B",
+          price:2.0,
+          categories:[
+            "sci-fi",
+            "comedy"
+          ]
+        },
+        {
+          title:"C",
+          price:7.0,
+          categories:[
+            "action",
+            "suspense"
+          ]
+        },
+        {
+          title:"D",
+          price:9.0,
+          categories:[
+            "suspense"
+          ]
+        }
+      ]
+    },
+    {
+      id:"6",
+      books:[
+        {
+          title:"A",
+          price:5.0,
+          categories:[
+            "sci-fi",
+            "action"
+          ]
+        },
+        {
+          title:"E",
+          price:9.5,
+          categories:[
+            "fantasy",
+            "comedy"
+          ]
+        },
+        {
+          title:"F",
+          price:10.0,
+          categories:[
+            "history"
+          ]
+        }
+      ]
+    },
+    {
+      id:"7",
+      books:[
+      ]
+    }
+  ],
+}
+
+uncategorized::[
+  {
+    name:"variableShadow",  // Note that i, f, d, and s are defined in the global environment
+    statement:"SELECT f, d, s FROM i AS f, f AS d, @f AS s WHERE f = 1 AND d = 2e0 and s = 1",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          f:1,
+          d:2e0,
+          s:1
+        }
+      ]
+    }
+  },
+  {
+    name:"selectValueStructConstructorWithMissing",
+    statement:"SELECT VALUE {'x': a.x, 'y': a.y} FROM `[{x:5}, {y:6}]` AS a",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          x:5
+        },
+        {
+          y:6
+        }
+      ]
+    }
+  },
+  {
+    name:"selectIndexStruct",
+    statement:"SELECT VALUE x[0] FROM (SELECT s.id FROM stores AS s) AS x",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        "5",
+        "6",
+        "7"
+      ]
+    }
+  },
+  {
+    name:"selectStarSingleSource",
+    statement:"SELECT * FROM animals",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          name:"Kumo",
+          type:"dog"
+        },
+        {
+          name:"Mochi",
+          type:"dog"
+        },
+        {
+          name:"Lilikoi",
+          type:"unicorn"
+        }
+      ]
+    }
+  },
+  {
+    name:"implicitAliasSelectSingleSource",
+    statement:"SELECT id FROM stores",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          id:"5"
+        },
+        {
+          id:"6"
+        },
+        {
+          id:"7"
+        }
+      ]
+    }
+  },
+  {
+    name:"selectValues",
+    statement:"SELECT VALUE id FROM stores",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        "5",
+        "6",
+        "7"
+      ]
+    }
+  },
+  {
+    name:"explicitAliasSelectSingleSourceWithWhere",
+    statement:"SELECT id AS name FROM stores WHERE id = '5'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          name:"5"
+        }
+      ]
+    }
+  },
+  {
+    name:"emptySymbol",
+    statement:"SELECT \"\" FROM `{'': 1}`",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          '':1
+        }
+      ]
+    }
+  },
+  {
+    name:"emptySymbolInGlobals",
+    statement:"SELECT * FROM \"\"",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          _1:1
+        }
+      ]
+    }
+  }
+]

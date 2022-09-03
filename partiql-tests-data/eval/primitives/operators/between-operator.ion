@@ -1,0 +1,60 @@
+envs::{
+  d: 3.,
+  f: 2e0,
+  i: 1,
+}
+
+between::[
+  {
+    name:"betweenPredicate",
+    statement:"SELECT VALUE x FROM << -1.0000, i, f, d, 100e0 >> AS x WHERE x BETWEEN 1.000001 AND 3.0000000",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        2e0,
+        3.
+      ]
+    }
+  },
+  {
+    name:"notBetweenPredicate",
+    statement:"SELECT VALUE x FROM << -1.0000, i, f, d, 100e0 >> AS x WHERE x NOT BETWEEN 1.000001 AND 3.0000000",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        -1.0000,
+        1,
+        100.
+      ]
+    }
+  },
+  {
+    name:"betweenStringsPredicate",
+    statement:"SELECT VALUE x FROM << 'APPLE', 'AZURE', 'B', 'XZ', 'ZOE', 'YOYO' >> AS x WHERE x BETWEEN 'B' AND 'Y'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        "B",
+        "XZ"
+      ]
+    }
+  },
+  {
+    name:"notBetweenStringsPredicate",
+    statement:"SELECT VALUE x FROM << 'APPLE', 'AZURE', 'B', 'XZ', 'Z', 'ZOE', 'YOYO' >> AS x WHERE x NOT BETWEEN 'B' AND 'Y'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        "APPLE",
+        "AZURE",
+        "Z",
+        "ZOE",
+        "YOYO"
+      ]
+    }
+  }
+]

@@ -1,0 +1,71 @@
+undefined_variable_behavior::[
+  // ported tests run using UndefinedVariableBehavior.MISSING option.
+  // https://github.com/partiql/partiql-lang-kotlin/blob/main/lang/src/org/partiql/lang/eval/CompileOptions.kt#L27-L36
+  // EvalModeCoerce will return missing for undefined variable references. EvalModeError will give an error for
+  // undefined variable references
+  {
+    name:"undefinedUnqualifiedVariableWithUndefinedVariableBehaviorMissing",
+    statement:"undefined_variable",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail,
+      }
+    ]
+  },
+  {
+    name:"undefinedUnqualifiedVariableIsNullExprWithUndefinedVariableBehaviorMissing",
+    statement:"undefined_variable IS NULL",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:true
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail,
+      }
+    ]
+  },
+  {
+    name:"undefinedUnqualifiedVariableIsMissingExprWithUndefinedVariableBehaviorMissing",
+    statement:"undefined_variable IS MISSING",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:true
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail,
+      }
+    ]
+  },
+  {
+    name:"undefinedUnqualifiedVariableInSelectWithUndefinedVariableBehaviorMissing",
+    statement:"SELECT s.a, s.undefined_variable, s.b FROM `[{a:100, b:200}]` s",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          {
+            a:100,
+            b:200
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail,
+      }
+    ]
+  }
+]

@@ -1,0 +1,332 @@
+envs::{
+  d:3.,
+  f:2e0,
+  i:1,
+  numbers:[
+    1,
+    2.0,
+    3e0,
+    4,
+    5.
+  ],
+}
+
+basic::[
+  {
+    name:"literal",
+    statement:"5",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:5
+    }
+  },
+  {
+    name:"identifier",
+    statement:"i",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:1
+    }
+  },
+  {
+    name:"identifierCaseMismatch",
+    statement:"I",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:1
+    }
+  },
+  {
+    name:"quotedIdentifier",
+    statement:"\"i\"",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:1
+    }
+  },
+  {
+    name:"lexicalScope",
+    statement:"@i",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:1
+    }
+  },
+  {
+    name:"functionCall",
+    statement:"exists(select * from [1])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"grouping",
+    statement:"((i))",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:1
+    }
+  },
+  {
+    name:"emptyListLiteral",
+    statement:"[]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[
+      ]
+    }
+  },
+  {
+    name:"listLiteral",
+    statement:"[i, f, d]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[
+        1,
+        2e0,
+        3.
+      ]
+    }
+  },
+  {
+    name:"rowValueConstructor",
+    statement:"(i, f, d)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[
+        1,
+        2e0,
+        3.
+      ]
+    }
+  },
+  {
+    name:"emptyBagLiteral",
+    statement:"<<>>",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+      ]
+    }
+  },
+  {
+    name:"bagLiteral",
+    statement:"<<i, f, d>>",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        1,
+        2e0,
+        3.
+      ]
+    }
+  },
+  {
+    name:"tableValueConstructor",
+    statement:"VALUES (i), (f, d)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        [
+          1
+        ],
+        [
+          2e0,
+          3.
+        ]
+      ]
+    }
+  },
+  {
+    name:"emptyStructLiteral",
+    statement:"{}",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:{
+      }
+    }
+  },
+  {
+    name:"structLiteral",
+    statement:"{'a':i, 'b':f, 'c':d, 'd': 1}",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:{
+        a:1,
+        b:2e0,
+        c:3.,
+        d:1
+      }
+    }
+  },
+  {
+    name:"decimalRoundUp",
+    statement:"1.9999999999999999999999999999999999999999999999",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:2.0000000000000000000000000000000000000
+    }
+  },
+  {
+    name:"decimalRoundDown",
+    statement:"1.00000000000000000000000000000000000000000001",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:1.0000000000000000000000000000000000000
+    }
+  }
+]
+
+'arithmetic with mixed type'::[
+  {
+    name:"plus with mixed StaticType",
+    statement:"SELECT VALUE v + 1 FROM numbers as v",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        2,
+        3.0,
+        4e0,
+        5,
+        6.
+      ]
+    }
+  },
+  {
+    name:"minus with mixed StaticType",
+    statement:"SELECT VALUE v - 1 FROM numbers as v",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        0,
+        1.0,
+        2e0,
+        3,
+        4.
+      ]
+    }
+  },
+  {
+    name:"multiplication with mixed StaticType",
+    statement:"SELECT VALUE v * 2 FROM numbers as v",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        2,
+        4.0,
+        6e0,
+        8,
+        10.
+      ]
+    }
+  },
+  {
+    name:"division with mixed StaticType",
+    statement:"SELECT VALUE v / 2 FROM numbers as v",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        0,
+        1.0,
+        1.5e0,
+        2,
+        2.5
+      ]
+    }
+  },
+  {
+    name:"modulo with mixed StaticType",
+    statement:"SELECT VALUE v % 2 FROM numbers as v",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        1,
+        0.0,
+        1e0,
+        0,
+        1.
+      ]
+    }
+  },
+  {
+    name:"unary plus with mixed StaticType",
+    statement:"SELECT VALUE +v FROM numbers as v",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        1,
+        2.0,
+        3e0,
+        4,
+        5.
+      ]
+    }
+  },
+  {
+    name:"unary minus with mixed StaticType",
+    statement:"SELECT VALUE -v FROM numbers as v",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        -1,
+        -2.0,
+        -3e0,
+        -4,
+        -5.
+      ]
+    }
+  },
+  {
+    name:"function call with mixed StaticType",
+    statement:"SELECT VALUE CAST(v/2 AS INT) FROM numbers as v",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        0,
+        1,
+        1,
+        2,
+        2
+      ]
+    }
+  },
+  {
+    name:"arithmetic with null/missing",
+    statement:"SELECT VALUE 1 + v FROM << null, missing, 1 >> AS v",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        null,
+        null,
+        2
+      ]
+    }
+  }
+]
