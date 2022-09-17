@@ -116,6 +116,7 @@ envs::{
     c:100
   },
   d:3.,
+  someAlias:"hello",
 }
 
 {
@@ -408,8 +409,8 @@ select_join::[
     }
   },
   {
-    name:"selectNonCorrelatedJoin", // Note that the joined s is coming from the global scope without @-operator
-    statement:"SELECT s.id AS id, v AS title FROM stores AS s, s AS v",
+    name:"selectNonCorrelatedJoin", // Note that the joined someAlias is coming from the global scope without @-operator
+    statement:"SELECT someAlias.id AS id, v AS title FROM stores AS someAlias, someAlias AS v",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,

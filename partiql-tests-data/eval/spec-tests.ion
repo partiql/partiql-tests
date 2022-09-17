@@ -245,7 +245,7 @@
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
             result: EvaluationSuccess,
-            output: $bag::[{price: 840.05, sym: "amzn"}, {price: 31.06, sym: "tdc"}]
+            output: $bag::[{price: 840.05, symbol: "amzn"}, {price: 31.06, symbol: "tdc"}]
         }
     }
 ]
