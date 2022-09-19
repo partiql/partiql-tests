@@ -39,3 +39,8 @@ tasks.test {
     useJUnitPlatform()
     environment("PARTIQL_EVAL_TESTS_DATA", file("../partiql-tests-data/eval/").absolutePath)
 }
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
