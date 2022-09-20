@@ -15,6 +15,14 @@ import org.partiql.lang.eval.name
 import org.partiql.lang.eval.namedValue
 import org.partiql.lang.eval.stringValue
 
+const val BAG_ANNOTATION = "\$bag"
+const val MISSING_ANNOTATION = "\$missing"
+
+/**
+ * Converts the conformance test's encoding of PartiQL values in Ion to an [ExprValue]. The conformance tests have a
+ * slightly different encoding than the default conversion function provided by [ExprValueFactory]. E.g. Ion value
+ * annotation for bag.
+ */
 internal fun IonValue.toExprValue(exprValueFactory: ExprValueFactory): ExprValue {
     // Need to create a different IonValue to ExprValue conversion function because the default provided by
     // `ExprValueFactory`'s [newFromIonValue] relies on a different encoding of PartiQL-specific types than the
@@ -22,13 +30,13 @@ internal fun IonValue.toExprValue(exprValueFactory: ExprValueFactory): ExprValue
     val elem = this
     val annotations = elem.typeAnnotations
     return when {
-        (elem is IonList) && annotations.contains("\$bag") -> {
+        (elem is IonList) && annotations.contains(BAG_ANNOTATION) -> {
             val elemsAsExprValues = elem.map {
                 it.toExprValue(exprValueFactory)
             }
             exprValueFactory.newBag(elemsAsExprValues)
         }
-        elem is IonNull && elem.hasTypeAnnotation("\$missing") -> exprValueFactory.missingValue
+        elem is IonNull && elem.hasTypeAnnotation(MISSING_ANNOTATION) -> exprValueFactory.missingValue
         // TODO: other PartiQL types not in Ion
         elem is IonList -> exprValueFactory.newList(elem.map { it.toExprValue(exprValueFactory) })
         elem is IonSexp -> exprValueFactory.newSexp(elem.map { it.toExprValue(exprValueFactory) })
@@ -39,12 +47,15 @@ internal fun IonValue.toExprValue(exprValueFactory: ExprValueFactory): ExprValue
     }
 }
 
+/**
+ * Converts an [ExprValue] to the conformance test suite's modeling of PartiQL values in Ion.
+ */
 internal fun ExprValue.toIonValue(ion: IonSystem): IonValue {
     fun <S : IonSequence> ExprValue.foldToIonSequence(initial: S): S =
         this.fold(initial) { seq, el -> seq.apply { add(el.toIonValue(ion)) } }
 
     return when (this.type) {
-        ExprValueType.MISSING -> ion.singleValue("\$missing::null").clone()
+        ExprValueType.MISSING -> ion.singleValue("$MISSING_ANNOTATION::null").clone()
         ExprValueType.NULL,
         ExprValueType.BOOL,
         ExprValueType.INT,
@@ -63,7 +74,7 @@ internal fun ExprValue.toIonValue(ion: IonSystem): IonValue {
             struct.apply { add(el.name!!.stringValue(), el.toIonValue(ion)) }
         }
         ExprValueType.BAG -> {
-            val bag = ion.newEmptyList().apply { addTypeAnnotation("\$bag") }
+            val bag = ion.newEmptyList().apply { addTypeAnnotation(BAG_ANNOTATION) }
             this.foldToIonSequence(bag)
         }
     }

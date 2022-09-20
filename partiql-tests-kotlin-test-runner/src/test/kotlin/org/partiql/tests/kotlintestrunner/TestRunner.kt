@@ -25,11 +25,14 @@ import org.partiql.lang.eval.TypingMode
 import java.io.File
 
 private val PARTIQL_EVAL_TEST_DATA_DIR = System.getenv("PARTIQL_EVAL_TESTS_DATA")
+private val PARTIQL_EVAL_EQUIV_TEST_DATA_DIR = System.getenv("PARTIQL_EVAL_EQUIV_TESTS_DATA")
+
 private val ION = IonSystemBuilder.standard().build()
 
 private val COERCE_EVAL_MODE_COMPILE_OPTIONS = CompileOptions.build { typingMode(TypingMode.PERMISSIVE) }
 private val ERROR_EVAL_MODE_COMPILE_OPTIONS = CompileOptions.build { typingMode(TypingMode.LEGACY) }
-private val LANG_KOTLIN_SKIP_LIST = listOf(
+
+private val LANG_KOTLIN_EVAL_SKIP_LIST = listOf(
     // from the spec: no explicit CAST to string means the query is "treated as an array navigation with wrongly typed
     // data" and will return `MISSING`
     Pair("tuple navigation with array notation without explicit CAST to string", COERCE_EVAL_MODE_COMPILE_OPTIONS),
@@ -97,6 +100,46 @@ private val LANG_KOTLIN_SKIP_LIST = listOf(
     Pair("notInPredicateSingleExpr", ERROR_EVAL_MODE_COMPILE_OPTIONS),
 )
 
+private val LANG_KOTLIN_EVAL_EQUIV_SKIP_LIST = listOf(
+    // plk gives a parser error for tuple path navigation in which the path expression is a string literal
+    // e.g. { 'a': 1, 'b': 2}.'a' -> 1 (see section 4 of spec)
+    Pair("equiv tuple path navigation with array notation", COERCE_EVAL_MODE_COMPILE_OPTIONS),
+    Pair("equiv tuple path navigation with array notation", ERROR_EVAL_MODE_COMPILE_OPTIONS),
+
+    // plk doesn't support a STRICT/ERROR mode.
+    Pair("equiv attribute value pair unpivot non-missing", ERROR_EVAL_MODE_COMPILE_OPTIONS),
+    Pair("equiv attribute value pair unpivot missing", ERROR_EVAL_MODE_COMPILE_OPTIONS),
+
+    // plk doesn't support `LATERAL` keyword which results in a parser error
+    Pair("equiv of comma, cross join, and join", COERCE_EVAL_MODE_COMPILE_OPTIONS),
+    Pair("equiv of comma, cross join, and join", ERROR_EVAL_MODE_COMPILE_OPTIONS),
+
+    // plk doesn't support `TUPLEUNION` function which results in an evaluation error
+    Pair("equiv tupleunion with select list", COERCE_EVAL_MODE_COMPILE_OPTIONS),
+    Pair("equiv tupleunion with select list", ERROR_EVAL_MODE_COMPILE_OPTIONS),
+
+    // plk doesn't support coercion of subqueries which results in different outputs
+    Pair("equiv coercion of a SELECT subquery into a scalar", COERCE_EVAL_MODE_COMPILE_OPTIONS),
+    Pair("equiv coercion of a SELECT subquery into a scalar", ERROR_EVAL_MODE_COMPILE_OPTIONS),
+    Pair("equiv coercion of a SELECT subquery into an array", COERCE_EVAL_MODE_COMPILE_OPTIONS),
+    Pair("equiv coercion of a SELECT subquery into an array", ERROR_EVAL_MODE_COMPILE_OPTIONS),
+    Pair("equiv coercions with explicit literals", COERCE_EVAL_MODE_COMPILE_OPTIONS),
+    Pair("equiv coercions with explicit literals", ERROR_EVAL_MODE_COMPILE_OPTIONS),
+
+    // plk doesn't support `GROUP ALL` and `COLL_*` aggregate functions. Currently, results in a parser error
+    Pair("equiv group_all", COERCE_EVAL_MODE_COMPILE_OPTIONS),
+    Pair("equiv group_all", ERROR_EVAL_MODE_COMPILE_OPTIONS),
+
+    // plk doesn't support `COLL_*` aggregate functions. Currently, results in an evaluation error
+    Pair("equiv group by with aggregates", COERCE_EVAL_MODE_COMPILE_OPTIONS),
+    Pair("equiv group by with aggregates", ERROR_EVAL_MODE_COMPILE_OPTIONS),
+
+    // plk doesn't support using aliases created in select list in `GROUP BY` (and `ORDER BY`). GH issue to track:
+    // https://github.com/partiql/partiql-lang-kotlin/issues/571
+    Pair("equiv aliases from select clause", COERCE_EVAL_MODE_COMPILE_OPTIONS),
+    Pair("equiv aliases from select clause", ERROR_EVAL_MODE_COMPILE_OPTIONS),
+)
+
 /**
  * Checks all the PartiQL conformance test data in [PARTIQL_EVAL_TEST_DATA_DIR] conforms to the test data schema.
  */
@@ -108,7 +151,7 @@ class TestRunner {
             env = ION.newEmptyStruct(),
             namespaces = mutableListOf(),
             testCases = mutableListOf(),
-            equivClasses = mutableListOf()
+            equivClasses = mutableMapOf()
         )
         dataInIon.forEach { d ->
             parseNamespace(emptyNamespace, d)
@@ -134,6 +177,8 @@ class TestRunner {
         val allTestCases = filesAsNamespaces.flatMap { ns ->
             allTestsFromNamespace(ns)
         }.filter {
+            // Currently, just filtering the expected failing tests defined by the `skipList`. As an enhancement to the
+            // test runner, we could instead run the failing tests to assert they still fail.
             !skipList.contains(Pair(it.name, it.compileOptions))
         }
         return allTestCases
@@ -170,9 +215,44 @@ class TestRunner {
         }
     }
 
+    private fun runEvalEquivTestCase(evalEquivTestCase: EvalEquivTestCase) {
+        val compilerPipeline = CompilerPipeline.builder(ION).compileOptions(evalEquivTestCase.compileOptions).build()
+        val globals = evalEquivTestCase.env.toExprValue(compilerPipeline.valueFactory).bindings
+        val session = EvaluationSession.build { globals(globals) }
+        val statements = evalEquivTestCase.statements
+
+        statements.forEach { statement ->
+            val expression = compilerPipeline.compile(statement)
+            try {
+                val actualResult = expression.eval(session)
+                when (evalEquivTestCase.assertion) {
+                    is Assertion.EvaluationSuccess -> {
+                        val actualResultAsIon = actualResult.toIonValue(ION)
+                        if (!PartiQLEqualityChecker().areEqual(evalEquivTestCase.assertion.expectedResult, actualResultAsIon)) {
+                            error("Expected and actual results differ:\nExpected: ${evalEquivTestCase.assertion.expectedResult}\nActual:   $actualResultAsIon\nMode: ${evalEquivTestCase.compileOptions.typingMode}")
+                        }
+                    }
+                    is Assertion.EvaluationFailure -> {
+                        error("Expected error to be thrown but none was thrown.\n${evalEquivTestCase.name}\nActual result: ${actualResult.toIonValue(ION)}")
+                    }
+                }
+            } catch (e: SqlException) {
+                when (evalEquivTestCase.assertion) {
+                    is Assertion.EvaluationSuccess -> {
+                        error("Expected success but exception thrown: $e")
+                    }
+                    is Assertion.EvaluationFailure -> {
+                        // Expected failure and test threw when evaluated
+                    }
+                }
+            }
+        }
+    }
+
+    // Tests the eval tests with the Kotlin implementation
     @ParameterizedTest
     @ArgumentsSource(EvalTestCases::class)
-    fun validatePartiQLTestData(tc: TestCase) {
+    fun validatePartiQLEvalTestData(tc: TestCase) {
         when (tc) {
             is EvalTestCase -> TestRunner().runEvalTestCase(tc)
             else -> error("Unsupported test case category")
@@ -181,7 +261,23 @@ class TestRunner {
 
     class EvalTestCases : ArgumentsProviderBase() {
         override fun getParameters(): List<Any> {
-            return TestRunner().loadTests(PARTIQL_EVAL_TEST_DATA_DIR, LANG_KOTLIN_SKIP_LIST)
+            return TestRunner().loadTests(PARTIQL_EVAL_TEST_DATA_DIR, LANG_KOTLIN_EVAL_SKIP_LIST)
+        }
+    }
+
+    // Tests the eval equivalence tests with the Kotlin implementation
+    @ParameterizedTest
+    @ArgumentsSource(EvalEquivTestCases::class)
+    fun validatePartiQLEvalEquivTestData(tc: TestCase) {
+        when (tc) {
+            is EvalEquivTestCase -> TestRunner().runEvalEquivTestCase(tc)
+            else -> error("Unsupported test case category")
+        }
+    }
+
+    class EvalEquivTestCases : ArgumentsProviderBase() {
+        override fun getParameters(): List<Any> {
+            return TestRunner().loadTests(PARTIQL_EVAL_EQUIV_TEST_DATA_DIR, LANG_KOTLIN_EVAL_EQUIV_SKIP_LIST)
         }
     }
 }

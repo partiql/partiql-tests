@@ -8,7 +8,7 @@ data class Namespace(
     var env: IonStruct,
     val namespaces: MutableList<Namespace>,
     val testCases: MutableList<TestCase>,
-    val equivClasses: MutableList<EquivalenceClass>
+    val equivClasses: MutableMap<String, List<String>>
 )
 
 data class EquivalenceClass(val id: String, val statements: List<String>)
@@ -16,6 +16,7 @@ data class EquivalenceClass(val id: String, val statements: List<String>)
 sealed class Assertion {
     data class EvaluationSuccess(val expectedResult: IonValue) : Assertion()
     object EvaluationFailure : Assertion()
+    // TODO: other assertion and test categories: https://github.com/partiql/partiql-tests/issues/35
 }
 
 sealed class TestCase {
@@ -35,7 +36,7 @@ data class EvalTestCase(
 
 data class EvalEquivTestCase(
     override val name: String,
-    val equivClass: EquivalenceClass,
+    val statements: List<String>,
     override val env: IonStruct,
     override val compileOptions: CompileOptions,
     override val assertion: Assertion

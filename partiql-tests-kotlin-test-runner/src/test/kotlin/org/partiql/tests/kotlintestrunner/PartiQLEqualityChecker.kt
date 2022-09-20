@@ -10,6 +10,13 @@ import com.amazon.ion.IonType
 import com.amazon.ion.IonValue
 import java.lang.IllegalArgumentException
 
+/**
+ * Checks the equality of two PartiQL values defined using its [IonValue] representation. This definition first requires
+ * the types to the same, whereas PartiQL's equal operator can assert equivalence with implicit type coercion. This
+ * differs from Ion's definition of equality in the following ways:
+ * 1. Bag comparison checks ignore ordering of IonLists
+ * 2. Null checks check for `missing` annotation
+ */
 class PartiQLEqualityChecker {
     fun areEqual(left: IonValue, right: IonValue): Boolean {
         if (left.type != right.type) {
@@ -68,7 +75,7 @@ class PartiQLEqualityChecker {
 
     private fun IonList.isBag(): Boolean =
         this.typeAnnotations.size == 1 &&
-            this.typeAnnotations[0] == "\$bag"
+            this.typeAnnotations[0] == BAG_ANNOTATION
 
     private fun ptsSequenceEquals(left: IonSequence, right: IonSequence): Boolean =
         left.size == right.size &&
@@ -94,6 +101,6 @@ class PartiQLEqualityChecker {
         }
 
     private fun IonValue.isMissing(): Boolean = this.isNullValue &&
-        this.hasTypeAnnotation("\$missing") &&
+        this.hasTypeAnnotation(MISSING_ANNOTATION) &&
         this.typeAnnotations.size == 1
 }
