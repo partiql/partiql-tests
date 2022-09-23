@@ -32,6 +32,17 @@ private val ION = IonSystemBuilder.standard().build()
 private val COERCE_EVAL_MODE_COMPILE_OPTIONS = CompileOptions.build { typingMode(TypingMode.PERMISSIVE) }
 private val ERROR_EVAL_MODE_COMPILE_OPTIONS = CompileOptions.build { typingMode(TypingMode.LEGACY) }
 
+/*
+The skip lists defined in this file show how the current Kotlin implementation diverges from the PartiQL spec. Most of
+the divergent behavior is due to `partiql-lang-kotlin` not having a STRICT/ERROR typing mode.  The [LEGACY typing mode](https://github.com/partiql/partiql-lang-kotlin/blob/main/lang/src/org/partiql/lang/eval/CompileOptions.kt#L53-L62)
+(which is closer to STRICT/ERROR but not a complete match) was used for testing the STRICT/ERROR typing mode behavior.
+
+A lot of the other behavior differences is due to not supporting some syntax mentioned in the spec (like `COLL_*`
+aggregation functions) and due to not supporting coercions.
+
+The remaining divergent behavior causing certain conformance tests to fail are likely bugs. Tracking issue:
+https://github.com/partiql/partiql-lang-kotlin/issues/804.
+ */
 private val LANG_KOTLIN_EVAL_SKIP_LIST = listOf(
     // from the spec: no explicit CAST to string means the query is "treated as an array navigation with wrongly typed
     // data" and will return `MISSING`

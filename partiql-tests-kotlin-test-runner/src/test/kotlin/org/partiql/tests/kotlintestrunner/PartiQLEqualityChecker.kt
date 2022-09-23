@@ -12,7 +12,7 @@ import java.lang.IllegalArgumentException
 
 /**
  * Checks the equality of two PartiQL values defined using its [IonValue] representation. This definition first requires
- * the types to the same, whereas PartiQL's equal operator can assert equivalence with implicit type coercion. This
+ * the types to be the same, whereas PartiQL's equal operator can assert equivalence with implicit type coercion. This
  * differs from Ion's definition of equality in the following ways:
  * 1. Bag comparison checks ignore ordering of IonLists
  * 2. Null checks check for `missing` annotation
