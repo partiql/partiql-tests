@@ -21,11 +21,7 @@
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:$bag::[
-        {
-          someColumn:$missing::null
-        }
-      ]
+      output:$bag::[{}]
     }
   },
   {
@@ -36,7 +32,7 @@
       result:EvaluationSuccess,
       output:$bag::[
         {
-          someColumn:$missing::null
+          _1:{}
         }
       ]
     }

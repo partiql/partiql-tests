@@ -324,7 +324,7 @@ basic::[
       result:EvaluationSuccess,
       output:$bag::[
         null,
-        null,
+        $missing::null,
         2
       ]
     }

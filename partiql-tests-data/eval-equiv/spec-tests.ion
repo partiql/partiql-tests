@@ -24,7 +24,7 @@
         ]
     },
     {
-        name: "equiv tuple path navigation",
+        name: "equiv tuple path navigation with array notation",
         statement: tuple_navigation_with_array_notation,
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
@@ -172,7 +172,7 @@
     },
     {
         name: "equiv of comma, cross join, and join",
-        statement: comma_cross_join_and_join,
+        statement: comma_cross_join_and_join_and_lateral,
         env: {
              customers: [
                 {id: 5, name: "Joe"},
@@ -540,7 +540,7 @@
         ]
     },
     {
-        name: "equiv group by with aggregates",
+        name: "equiv aliases from select clause",
         statement: aliases_from_select_clause,
         env: {
             people: $bag::[{name: "zoe", age: 10, tag: "child"},

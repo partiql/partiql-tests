@@ -245,7 +245,7 @@
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
             result: EvaluationSuccess,
-            output: $bag::[{price: 840.05, sym: "amzn"}, {price: 31.06, sym: "tdc"}]
+            output: $bag::[{price: 840.05, symbol: "amzn"}, {price: 31.06, symbol: "tdc"}]
         }
     }
 ]
@@ -388,32 +388,20 @@
     {
         name: "cast and operations with missing argument",
         statement: "SELECT VALUE {'a':3*v.a, 'b':3*(CAST(v.b AS INTEGER))} FROM [{'a':1, 'b':'1'}, {'a':2}] v",
-        assert: [
-            {
-                evalMode: EvalModeCoerce,
-                result: EvaluationSuccess,
-                output: $bag::[{a:3, b:3}, {a:6}]
-            },
-            {
-                evalMode: EvalModeError,
-                result: EvaluationFail,
-            },
-        ]
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[{a:3, b:3}, {a:6}]
+        }
     },
     {
         name: "missing value in arithmetic expression",
         statement: "5 + missing",
-        assert: [
-            {
-                evalMode: EvalModeCoerce,
-                result: EvaluationSuccess,
-                output: $missing::null
-            },
-            {
-                evalMode: EvalModeError,
-                result: EvaluationFail,
-            },
-        ]
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $missing::null
+        }
     },
     {
         name: "data type mismatch in comparison expression",
