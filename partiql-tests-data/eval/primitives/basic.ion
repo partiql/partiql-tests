@@ -319,25 +319,14 @@ basic::[
   {
     name:"arithmetic with null/missing",
     statement:"SELECT VALUE 1 + v FROM << null, missing, 1 >> AS v",
-    assert:[
-      {
-        evalMode:EvalModeCoerce,
-        result:EvaluationSuccess,
-        output:$bag::[
-          null,
-          $missing::null,
-          2
-        ]
-      },
-      {
-        evalMode:EvalModeError,
-        result:EvaluationSuccess,
-        output:$bag::[
-          null,
-          null,
-          2
-        ]
-      }
-    ]
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        null,
+        $missing::null,
+        2
+      ]
+    }
   }
 ]

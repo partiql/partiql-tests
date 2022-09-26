@@ -63,6 +63,7 @@ private val LANG_KOTLIN_EVAL_SKIP_LIST = listOf(
     Pair("cast and operations with missing argument", ERROR_EVAL_MODE_COMPILE_OPTIONS),
     Pair("missing value in arithmetic expression", ERROR_EVAL_MODE_COMPILE_OPTIONS),
     Pair("equality of scalar missing", ERROR_EVAL_MODE_COMPILE_OPTIONS),
+    Pair("arithmetic with null/missing", ERROR_EVAL_MODE_COMPILE_OPTIONS),
 
     // TODO: clarify behavior. spec (section 8) says it should return NULL based on 3-value logic
     Pair("missing and true", COERCE_EVAL_MODE_COMPILE_OPTIONS),
