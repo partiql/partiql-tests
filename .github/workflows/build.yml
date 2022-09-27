@@ -25,8 +25,3 @@ jobs:
         - name: Validate Tests
           working-directory: ./partiql-tests-validator
           run: gradle build
-
-        - name: Validate Ported Tests with Kotlin Test Runner
-          working-directory: ./partiql-tests-kotlin-test-runner
-          run: gradle build
-
