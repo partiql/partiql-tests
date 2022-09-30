@@ -3445,7 +3445,7 @@ char_length::[
     }
   },
   {
-    name:"char_length null and missing propagation{in:\"missing\",result:(success null)}",
+    name:"char_length null and missing propagation{in:\"missing\",result:(success missing::null)}",
     statement:"char_length(missing)",
     assert:{
       result:EvaluationSuccess,
@@ -3453,7 +3453,7 @@ char_length::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -3469,7 +3469,7 @@ char_length::[
     }
   },
   {
-    name:"character_length null and missing propagation{in:\"missing\",result:(success null)}",
+    name:"character_length null and missing propagation{in:\"missing\",result:(success missing::null)}",
     statement:"character_length(missing)",
     assert:{
       result:EvaluationSuccess,
@@ -3477,7 +3477,7 @@ char_length::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -4866,7 +4866,7 @@ date_add::[
     }
   },
   {
-    name:"date_add null and missing propagation{time_part:year,quantity:\"missing\",timestamp:\"`2017T`\",result:(success null)}",
+    name:"date_add null and missing propagation{time_part:year,quantity:\"missing\",timestamp:\"`2017T`\",result:(success missing::null)}",
     statement:"date_add(year, missing, `2017T`)",
     assert:{
       result:EvaluationSuccess,
@@ -4874,11 +4874,11 @@ date_add::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
-    name:"date_add null and missing propagation{time_part:year,quantity:1,timestamp:\"missing\",result:(success null)}",
+    name:"date_add null and missing propagation{time_part:year,quantity:1,timestamp:\"missing\",result:(success missing::null)}",
     statement:"date_add(year, 1, missing)",
     assert:{
       result:EvaluationSuccess,
@@ -4886,11 +4886,11 @@ date_add::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
-    name:"date_add null and missing propagation{time_part:year,quantity:\"null\",timestamp:\"missing\",result:(success null)}",
+    name:"date_add null and missing propagation{time_part:year,quantity:\"null\",timestamp:\"missing\",result:(success missing::null)}",
     statement:"date_add(year, null, missing)",
     assert:{
       result:EvaluationSuccess,
@@ -4898,11 +4898,11 @@ date_add::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
-    name:"date_add null and missing propagation{time_part:year,quantity:\"missing\",timestamp:\"null\",result:(success null)}",
+    name:"date_add null and missing propagation{time_part:year,quantity:\"missing\",timestamp:\"null\",result:(success missing::null)}",
     statement:"date_add(year, missing, null)",
     assert:{
       result:EvaluationSuccess,
@@ -4910,7 +4910,7 @@ date_add::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -5792,7 +5792,7 @@ trim::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -5840,7 +5840,7 @@ trim::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -5852,7 +5852,7 @@ trim::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -5864,7 +5864,7 @@ trim::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -5912,7 +5912,7 @@ trim::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -5924,7 +5924,7 @@ trim::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -5936,7 +5936,7 @@ trim::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -5984,7 +5984,7 @@ trim::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -5996,7 +5996,7 @@ trim::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -6008,7 +6008,7 @@ trim::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -6020,7 +6020,7 @@ trim::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -6032,7 +6032,7 @@ trim::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -6044,7 +6044,7 @@ trim::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -6056,7 +6056,7 @@ trim::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -6068,7 +6068,7 @@ trim::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -6080,7 +6080,7 @@ trim::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -6128,7 +6128,7 @@ trim::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -6140,7 +6140,7 @@ trim::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -6152,7 +6152,7 @@ trim::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7255,7 +7255,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7267,7 +7267,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7279,7 +7279,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7291,7 +7291,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7303,7 +7303,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7339,7 +7339,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7375,7 +7375,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7387,7 +7387,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7399,7 +7399,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7411,7 +7411,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7423,7 +7423,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7435,7 +7435,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7447,7 +7447,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7459,7 +7459,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7471,7 +7471,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7483,7 +7483,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7495,7 +7495,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7507,7 +7507,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7519,7 +7519,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7543,7 +7543,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7579,7 +7579,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7591,7 +7591,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7603,7 +7603,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -7615,7 +7615,7 @@ substring::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -9630,7 +9630,7 @@ upper::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -11426,7 +11426,7 @@ lower::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -13042,7 +13042,7 @@ to_timestamp::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -13090,7 +13090,7 @@ to_timestamp::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -13102,7 +13102,7 @@ to_timestamp::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -13114,7 +13114,7 @@ to_timestamp::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -13126,7 +13126,7 @@ to_timestamp::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -13138,7 +13138,7 @@ to_timestamp::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -15678,7 +15678,7 @@ size::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -17723,7 +17723,7 @@ date_diff::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -17735,7 +17735,7 @@ date_diff::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -17747,7 +17747,7 @@ date_diff::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -17759,7 +17759,7 @@ date_diff::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -18580,7 +18580,7 @@ extract::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -22194,7 +22194,7 @@ to_string::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -22206,7 +22206,7 @@ to_string::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -22218,7 +22218,7 @@ to_string::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -22230,7 +22230,7 @@ to_string::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -22242,7 +22242,7 @@ to_string::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
