@@ -22232,7 +22232,7 @@ concat::[
     }
   },
   {
-    name:"|| valid cases{lparam:\"null\",rparam:\"missing\",result:null}",
+    name:"|| valid cases{lparam:\"null\",rparam:\"missing\",result:missing::null}",
     statement:"null || missing",
     assert:{
       result:EvaluationSuccess,
@@ -22240,11 +22240,11 @@ concat::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
-    name:"|| valid cases{lparam:\"missing\",rparam:\"null\",result:null}",
+    name:"|| valid cases{lparam:\"missing\",rparam:\"null\",result:missing::null}",
     statement:"missing || null",
     assert:{
       result:EvaluationSuccess,
@@ -22252,11 +22252,11 @@ concat::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
-    name:"|| valid cases{lparam:\"missing\",rparam:\"'b'\",result:null}",
+    name:"|| valid cases{lparam:\"missing\",rparam:\"'b'\",result:missing::null}",
     statement:"missing || 'b'",
     assert:{
       result:EvaluationSuccess,
@@ -22264,11 +22264,11 @@ concat::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
-    name:"|| valid cases{lparam:\"'a'\",rparam:\"missing\",result:null}",
+    name:"|| valid cases{lparam:\"'a'\",rparam:\"missing\",result:missing::null}",
     statement:"'a' || missing",
     assert:{
       result:EvaluationSuccess,
@@ -22276,11 +22276,11 @@ concat::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
-    name:"|| valid cases{lparam:\"missing\",rparam:\"missing\",result:null}",
+    name:"|| valid cases{lparam:\"missing\",rparam:\"missing\",result:missing::null}",
     statement:"missing || missing",
     assert:{
       result:EvaluationSuccess,
@@ -22288,7 +22288,7 @@ concat::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   }
 ]
@@ -84374,7 +84374,7 @@ string::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -84410,7 +84410,7 @@ string::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -84422,7 +84422,7 @@ string::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -84458,7 +84458,7 @@ string::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -84470,7 +84470,7 @@ string::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
