@@ -1,0 +1,883 @@
+char_length::[
+  {
+    name:"char_length wrong number of arguments{sql:\"char_length()\"}",
+    statement:"char_length()",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"char_length wrong number of arguments{sql:\"char_length('', '')\"}",
+    statement:"char_length('', '')",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"char_length wrong number of arguments{sql:\"char_length('', 1)\"}",
+    statement:"char_length('', 1)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  }
+]
+
+date_add::[
+  {
+    name:"date_add wrong number of arguments{sql:\"date_add()\"}",
+    statement:"date_add()",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"date_add wrong number of arguments{sql:\"date_add(year)\"}",
+    statement:"date_add(year)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"date_add wrong number of arguments{sql:\"date_add(year, 1)\"}",
+    statement:"date_add(year, 1)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"date_add wrong number of arguments{sql:\"date_add(year, 1, `2017T`, 1)\"}",
+    statement:"date_add(year, 1, `2017T`, 1)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"date_add wrong number of arguments{sql:\"date_add(year, 1, `2017T`, `2017T`)\"}",
+    statement:"date_add(year, 1, `2017T`, `2017T`)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  }
+]
+
+exists::[
+  {
+    name:"exists wrong number of arguments{sql:\"exists()\"}",
+    statement:"exists()",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"exists wrong number of arguments{sql:\"exists(`[]`, 1)\"}",
+    statement:"exists(`[]`, 1)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  }
+]
+
+trim::[
+  {
+    name:"trim wrong number of arguments{sql:\"trim()\"}",
+    statement:"trim()",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"trim wrong number of arguments{sql:\"trim('', '')\"}",
+    statement:"trim('', '')",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"trim wrong number of arguments{sql:\"trim(leading '')\"}",
+    statement:"trim(leading '')",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"trim wrong number of arguments{sql:\"trim(foobar from '')\"}",
+    statement:"trim(foobar from '')",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"trim wrong number of arguments{spec:\"1\",to_remove:\"''\",target:\"''\"}",
+    statement:"trim(1 '' from '')",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"trim wrong number of arguments{spec:\"foobar\",to_remove:\"''\",target:\"''\"}",
+    statement:"trim(foobar '' from '')",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"trim wrong number of arguments{spec:\"'foobar'\",to_remove:\"''\",target:\"''\"}",
+    statement:"trim('foobar' '' from '')",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"trim wrong number of arguments{spec:\"leading\",to_remove:\"1\",target:\"''\"}",
+    statement:"trim(leading 1 from '')",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"trim wrong number of arguments{spec:\"leading\",to_remove:\"foobar\",target:\"''\"}",
+    statement:"trim(leading foobar from '')",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"trim wrong number of arguments{spec:\"leading\",to_remove:\"''\",target:\"1\"}",
+    statement:"trim(leading '' from 1)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"trim wrong number of arguments{spec:\"leading\",to_remove:\"''\",target:\"foobar\"}",
+    statement:"trim(leading '' from foobar)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  }
+]
+
+coalesce::[
+  {
+    name:"coalesce wrong number of arguments",
+    statement:"coalesce()",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  }
+]
+
+substring::[
+  {
+    name:"substring wrong number of arguments{sql:\"substring('')\"}",
+    statement:"substring('')",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"substring wrong number of arguments{sql:\"substring('', 1, 1, 1)\"}",
+    statement:"substring('', 1, 1, 1)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"substring wrong number of arguments{sql:\"substring('', 1, 1, '')\"}",
+    statement:"substring('', 1, 1, '')",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+]
+
+nullif::[
+  {
+    name:"nullif wrong number of arguments{sql:\"nullif()\"}",
+    statement:"nullif()",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"nullif wrong number of arguments{sql:\"nullif(1)\"}",
+    statement:"nullif(1)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"nullif wrong number of arguments{sql:\"nullif(1, 1, 1)\"}",
+    statement:"nullif(1, 1, 1)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  }
+]
+
+upper::[
+  {
+    name:"upper wrong number of arguments{sql:\"upper()\"}",
+    statement:"upper()",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"upper wrong number of arguments{sql:\"upper('', '')\"}",
+    statement:"upper('', '')",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"upper wrong number of arguments{sql:\"upper('', 1)\"}",
+    statement:"upper('', 1)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+]
+
+lower::[
+  {
+    name:"lower wrong number of arguments{sql:\"lower()\"}",
+    statement:"lower()",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"lower wrong number of arguments{sql:\"lower('', '')\"}",
+    statement:"lower('', '')",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"lower wrong number of arguments{sql:\"lower('', 1)\"}",
+    statement:"lower('', 1)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+]
+
+to_timestamp::[
+  {
+    name:"to_timestamp wrong number of arguments{sql:\"to_timestamp()\"}",
+    statement:"to_timestamp()",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"to_timestamp wrong number of arguments{sql:\"to_timestamp('', 'y', '')\"}",
+    statement:"to_timestamp('', 'y', '')",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"to_timestamp wrong number of arguments{sql:\"to_timestamp('', 'y', 1)\"}",
+    statement:"to_timestamp('', 'y', 1)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+]
+
+size::[
+  {
+    name:"size wrong number of arguments{sql:\"size()\"}",
+    statement:"size()",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"size wrong number of arguments{sql:\"size(`[]`, `[]`)\"}",
+    statement:"size(`[]`, `[]`)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"size wrong number of arguments{sql:\"size(`[]`, 1)\"}",
+    statement:"size(`[]`, 1)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+]
+
+date_diff::[
+  {
+    name:"date_diff wrong number of arguments{sql:\"date_diff()\"}",
+    statement:"date_diff()",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"date_diff wrong number of arguments{sql:\"date_diff(year)\"}",
+    statement:"date_diff(year)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"date_diff wrong number of arguments{sql:\"date_diff(year, `2017T`)\"}",
+    statement:"date_diff(year, `2017T`)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"date_diff wrong number of arguments{sql:\"date_diff(year, `2017T`, `2017T`, `2017T`)\"}",
+    statement:"date_diff(year, `2017T`, `2017T`, `2017T`)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"date_diff wrong number of arguments{sql:\"date_diff(year, `2017T`, `2017T`, 1)\"}",
+    statement:"date_diff(year, `2017T`, `2017T`, 1)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+]
+
+extract::[
+  {
+    name:"extract wrong number of arguments{sql:\"extract()\"}",
+    statement:"extract()",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"extract wrong number of arguments{sql:\"extract(year)\"}",
+    statement:"extract(year)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"extract wrong number of arguments{sql:\"extract(year from)\"}",
+    statement:"extract(year from)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"extract wrong number of arguments{sql:\"extract(`2017T`)\"}",
+    statement:"extract(`2017T`)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"extract wrong number of arguments{sql:\"extract(from `2017T`)\"}",
+    statement:"extract(from `2017T`)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"extract wrong number of arguments{sql:\"extract(year from `2017T`, 1)\"}",
+    statement:"extract(year from `2017T`, 1)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"extract wrong number of arguments{sql:\"extract(year, `2017T`)\"}",
+    statement:"extract(year, `2017T`)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+]
+
+to_string::[
+  {
+    name:"to_string wrong number of arguments{sql:\"to_string()\"}",
+    statement:"to_string()",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"to_string wrong number of arguments{sql:\"to_string(`2017T`)\"}",
+    statement:"to_string(`2017T`)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"to_string wrong number of arguments{sql:\"to_string(`2017T`, 'y', 1)\"}",
+    statement:"to_string(`2017T`, 'y', 1)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"to_string wrong number of arguments{sql:\"to_string(`2017T`, 'y', 'y')\"}",
+    statement:"to_string(`2017T`, 'y', 'y')",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  }
+]
+
+
