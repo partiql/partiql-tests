@@ -4868,126 +4868,6 @@ date_add::[
       output:$missing::null
     }
   },
-  {
-    name:"date_add invalid quantity{time_part:\"year\",quantity:9999}",
-    statement:"date_add(year, 9999, `9999-12-31T23:59:59Z`)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"date_add invalid quantity{time_part:\"second\",quantity:1}",
-    statement:"date_add(second, 1, `9999-12-31T23:59:59Z`)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"date_add invalid quantity{time_part:\"year\",quantity:-10000}",
-    statement:"date_add(year, -10000, `9999-12-31T23:59:59Z`)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"date_add invalid time part{time_part:\"'foobar'\"}",
-    statement:"date_add('foobar', 1, `1986T`)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"date_add invalid time part{time_part:1}",
-    statement:"date_add(1, 1, `1986T`)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"date_add invalid time part{time_part:[]}",
-    statement:"date_add([], 1, `1986T`)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"date_add invalid time part{time_part:\"timezone_hour\"}",
-    statement:"date_add(timezone_hour, 1, `1986T`)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"date_add invalid time part{time_part:\"timezone_minute\"}",
-    statement:"date_add(timezone_minute, 1, `1986T`)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
 ]
 coalesce::[
   {
@@ -5392,7 +5272,7 @@ trim::[
   },
   {
     name:"trim valid cases{spec:\"leading\",to_remove:\"\\u8a71 \",target:\"\\u8a71\\u8a71 \\u8a71\\u8a71\\u8a71\\u8a71\\u8a71\\u8a71\\u8cbb\\u8c37\\u6599\\u6751\\u80fd\\u8a71\\u8a71\\u8a71\\u8a71 \\u8a71\\u8a71\\u8a71\\u8a71    \",result:\"\\u8cbb\\u8c37\\u6599\\u6751\\u80fd\\u8a71\\u8a71\\u8a71\\u8a71 \\u8a71\\u8a71\\u8a71\\u8a71    \"}",
-    statement:"trim(leading '話 ' from '話話 話話話話話話費谷料村能話話話話 話話話話 ')",
+    statement:"trim(leading '話 ' from '話話 話話話話話話費谷料村能話話話話 話話話話    ')",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -17162,126 +17042,6 @@ date_diff::[
       output:$missing::null
     }
   },
-  {
-    name:"date_diff wrong type of arguments{time_part:\"1\",left:\"`2017T`\",right:\"`2017T`\"}",
-    statement:"date_diff(1, `2017T`, `2017T`)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"date_diff wrong type of arguments{time_part:\"year\",left:\"1\",right:\"`2017T`\"}",
-    statement:"date_diff(year, 1, `2017T`)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"date_diff wrong type of arguments{time_part:\"year\",left:\"`2017T`\",right:\"1\"}",
-    statement:"date_diff(year, `2017T`, 1)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"date_diff invalid arguments{time_part:\"'foobar'\"}",
-    statement:"date_diff('foobar', `2001T`, `1986T`)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"date_diff invalid arguments{time_part:1}",
-    statement:"date_diff(1, `2001T`, `1986T`)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"date_diff invalid arguments{time_part:[]}",
-    statement:"date_diff([], `2001T`, `1986T`)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"date_diff invalid arguments{time_part:\"timezone_hour\"}",
-    statement:"date_diff(timezone_hour, `2001T`, `1986T`)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"date_diff invalid arguments{time_part:\"timezone_minute\"}",
-    statement:"date_diff(timezone_minute, `2001T`, `1986T`)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  }
 ]
 extract::[
   {
@@ -17908,81 +17668,6 @@ extract::[
       output:$missing::null
     }
   },
-  {
-    name:"extract wrong type of arguments{first:\"year\",second:\"1\"}",
-    statement:"extract(year from 1)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"extract wrong type of arguments{first:1,second:\"`2017T`\"}",
-    statement:"extract(1 from `2017T`)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"extract invalid time part{time_part:\"foo\",tt:\"IDENTIFIER\",tv:foo}",
-    statement:"extract(foo from `2017T`)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"extract invalid time part{time_part:\"null\",tt:\"NULL\",tv:null}",
-    statement:"extract(null from `2017T`)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"extract invalid time part{time_part:\"missing\",tt:\"MISSING\",tv:null}",
-    statement:"extract(missing from `2017T`)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  }
 ]
 to_string::[
   {
@@ -23697,15 +23382,15 @@ join::[
       ],
       output:$bag::[
         {
-          id:bb,
+          name:"bb",
           n:12,
-          id:bb,
+          name:"bb",
           n:13
         },
         {
-          id:cc,
+          name:"cc",
           n:22,
-          id:cc,
+          name:"cc",
           n:23
         }
       ]
@@ -88463,7 +88148,12 @@ bool::[
   },
   {
     name:"group by with shadowing aliased group expression",
-    statement:"SELECT rep FROM sales_report GROUP BY rep || '_changed' as rep --Note: \"rep\" shadows sales_report.rep HAVING rep = 'Meg_changed'",
+    statement:'''
+        SELECT rep
+        FROM sales_report
+        GROUP BY rep || '_changed' as rep --Note: "rep" shadows sales_report.rep
+        HAVING rep = 'Meg_changed'
+    ''',
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -88553,81 +88243,6 @@ bool::[
       ]
     }
   },
-  {
-    name:"having without group by",
-    statement:"SELECT rep, SUM(total_sales) as total FROM sales_report HAVING rep = \"Meg\"",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"GROUP BY binding referenced in FROM clause",
-    statement:"SELECT * FROM sales_report, gb_binding WHERE fiscal_year >= `2001T` GROUP BY rep AS gb_binding",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"GROUP BY binding referenced in WHERE clause",
-    statement:"SELECT * FROM sales_report, gb_binding WHERE gb_binding = 1 GROUP BY rep AS gb_binding",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"GROUP AS binding referenced in FROM clause",
-    statement:"SELECT * FROM sales_report, gba_binding WHERE fiscal_year >= `2001T` GROUP BY rep GROUP AS gba_binding",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"GROUP AS binding referenced in WHERE clause",
-    statement:"SELECT * FROM sales_report, gba_binding WHERE gba_binding = 1 GROUP BY rep GROUP AS gba_binding",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  }
 ]
 'select-distinct'::[
   envs::{
@@ -88831,8 +88446,9 @@ bool::[
       ],
       output:$bag::[
         {
-          id:'Enterprise", registry: "NCC-1701-D',
-          id:Enterprise,
+          id:'Enterprise',
+          registry: "NCC-1701-D",
+          id:'Enterprise',
           registry:"NCC-1701-D"
         }
       ]
@@ -88851,10 +88467,11 @@ bool::[
         {
           first_name:"Jean Luc",
           last_name:"Picard",
-          id:'Enterprise", registry: "NCC-1701-D',
+          id:'Enterprise',
+          registry: "NCC-1701-D",
           first_name:"Jean Luc",
           last_name:"Picard",
-          id:Enterprise,
+          id:'Enterprise',
           registry:"NCC-1701-D"
         }
       ]
@@ -88877,156 +88494,6 @@ bool::[
       ]
     }
   },
-  {
-    name:"foo[*] is disallowed",
-    statement:"SELECT foo[*] FROM foo",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"foo.*.bar is disallowed",
-    statement:"SELECT foo.*.bar FROM foo",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"foo['a'].* is disallowed",
-    statement:"SELECT foo['a'].* FROM foo",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"foo[a].* is disallowed",
-    statement:"SELECT foo[a].* FROM foo",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"foo[1].* is disallowed",
-    statement:"SELECT foo[1].* FROM foo",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"disallowed uses of *, *",
-    statement:"SELECT *, * FROM <<1>>",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"disallowed uses of *, alias.*",
-    statement:"SELECT *, foo.* FROM <<{ a: 1 }>> as foo",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"disallowed uses of alias.*, *",
-    statement:"SELECT foo.*, * FROM <<{ a: 1 }>> as foo",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"disallowed uses of <expr>, *",
-    statement:"SELECT 1, * FROM <<{ a: 1 }>>",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"disallowed uses of *, <expr>",
-    statement:"SELECT *, 1 FROM <<{ a: 1 }>>",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  }
 ]
 'select-distinct-value'::[
   envs::{
@@ -90628,98 +90095,6 @@ like::[
       ]
     }
   },
-  {
-    name:"Incorrect type for text",
-    statement:"SELECT * FROM `[true]` WHERE 1 LIKE '1'",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"Incorrect type for pattern",
-    statement:"SELECT * FROM `[true]` WHERE 'a' LIKE 2",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"Incorrect type for Escape",
-    statement:"SELECT * FROM `[true]` WHERE 'a' LIKE 'a' ESCAPE 3",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"More than one character given for ESCAPE",
-    statement:"SELECT * FROM `[true]` WHERE 'a' LIKE 'a' ESCAPE 'aa'",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  }
-]
-'repeated-field-on-struct'::[
-  {
-    name:"repeated field on struct is ambiguous{identifier:\"REPEATED\",cn:9,bn:\"REPEATED\"}",
-    statement:"SELECT REPEATED FROM `[{repeated:1, repeated:2}]`",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"repeated field on struct is ambiguous{identifier:\" \\\"repeated\\\" \",cn:10,bn:\"repeated\"}",
-    statement:"SELECT \"repeated\" FROM `[{repeated:1, repeated:2}]`",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  }
 ]
 'empty-string-for-like-pattern'::[
   envs::{

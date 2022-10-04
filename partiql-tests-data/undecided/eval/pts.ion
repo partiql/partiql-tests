@@ -1,5 +1,5 @@
 int::[
-  // Would these give a compile-time error? Would COERCE mode error at compil-time?
+  // Would these give a compile-time error? Would COERCE mode error at compile-time?
   {
     name:"int overflow and underflow conditions{sql:\"9223372036854775808\"}",
     statement:"9223372036854775808",
@@ -49,6 +49,218 @@ int::[
         }
       ]
     },
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  }
+]
+
+'invalid-runtime-arguments'::[
+  'date_add'::[
+    {
+      name:"date_add invalid quantity{time_part:\"year\",quantity:9999}",
+      statement:"date_add(year, 9999, `9999-12-31T23:59:59Z`)",
+      assert:[
+        {
+          evalMode:EvalModeError,
+          result:EvaluationFail
+        },
+        {
+          result:EvaluationSuccess,
+          evalMode:EvalModeCoerce,
+          output:$missing::null
+        }
+      ]
+    },
+    {
+      name:"date_add invalid quantity{time_part:\"second\",quantity:1}",
+      statement:"date_add(second, 1, `9999-12-31T23:59:59Z`)",
+      assert:[
+        {
+          evalMode:EvalModeError,
+          result:EvaluationFail
+        },
+        {
+          result:EvaluationSuccess,
+          evalMode:EvalModeCoerce,
+          output:$missing::null
+        }
+      ]
+    },
+    {
+      name:"date_add invalid quantity{time_part:\"year\",quantity:-10000}",
+      statement:"date_add(year, -10000, `9999-12-31T23:59:59Z`)",
+      assert:[
+        {
+          evalMode:EvalModeError,
+          result:EvaluationFail
+        },
+        {
+          result:EvaluationSuccess,
+          evalMode:EvalModeCoerce,
+          output:$missing::null
+        }
+      ]
+    }
+  ],
+  'date_diff'::[
+    {
+      name:"date_diff invalid arguments{time_part:\"timezone_hour\"}",
+      statement:"date_diff(timezone_hour, `2001T`, `1986T`)",
+      assert:[
+        {
+          evalMode:EvalModeError,
+          result:EvaluationFail
+        },
+        {
+          result:EvaluationSuccess,
+          evalMode:EvalModeCoerce,
+          output:$missing::null
+        }
+      ]
+    },
+    {
+      name:"date_diff invalid arguments{time_part:\"timezone_minute\"}",
+      statement:"date_diff(timezone_minute, `2001T`, `1986T`)",
+      assert:[
+        {
+          evalMode:EvalModeError,
+          result:EvaluationFail
+        },
+        {
+          result:EvaluationSuccess,
+          evalMode:EvalModeCoerce,
+          output:$missing::null
+        }
+      ]
+    }
+  ],
+  like::[
+    {
+      name:"More than one character given for ESCAPE",
+      statement:"SELECT * FROM `[true]` WHERE 'a' LIKE 'a' ESCAPE 'aa'",
+      assert:[
+        {
+          evalMode:EvalModeError,
+          result:EvaluationFail
+        },
+        {
+          result:EvaluationSuccess,
+          evalMode:EvalModeCoerce,
+          output:$missing::null
+        }
+      ]
+    }
+  ]
+]
+
+'simple-group-by'::[
+  // For the following tests, should it result in an error in COERCE mode?
+  {
+    name:"having without group by",
+    statement:"SELECT rep, SUM(total_sales) as total FROM sales_report HAVING rep = \"Meg\"",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"GROUP BY binding referenced in FROM clause",
+    statement:"SELECT * FROM sales_report, gb_binding WHERE fiscal_year >= `2001T` GROUP BY rep AS gb_binding",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"GROUP BY binding referenced in WHERE clause",
+    statement:"SELECT * FROM sales_report, gb_binding WHERE gb_binding = 1 GROUP BY rep AS gb_binding",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"GROUP AS binding referenced in FROM clause",
+    statement:"SELECT * FROM sales_report, gba_binding WHERE fiscal_year >= `2001T` GROUP BY rep GROUP AS gba_binding",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"GROUP AS binding referenced in WHERE clause",
+    statement:"SELECT * FROM sales_report, gba_binding WHERE gba_binding = 1 GROUP BY rep GROUP AS gba_binding",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  }
+]
+
+'repeated-field-on-struct'::[
+  // binding tuples names are unique as per section 3.2. unsure about COERCE/PERMISSIVE mode behavior
+  {
+    name:"repeated field on struct is ambiguous{identifier:\"REPEATED\",cn:9,bn:\"REPEATED\"}",
+    statement:"SELECT REPEATED FROM `[{repeated:1, repeated:2}]`",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"repeated field on struct is ambiguous{identifier:\" \\\"repeated\\\" \",cn:10,bn:\"repeated\"}",
+    statement:"SELECT \"repeated\" FROM `[{repeated:1, repeated:2}]`",
     assert:[
       {
         evalMode:EvalModeError,

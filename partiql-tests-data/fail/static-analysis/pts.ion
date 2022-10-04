@@ -433,3 +433,259 @@ wrong_num_function_args::[
     }
   ]
 ]
+
+invalid_function_args::[
+  date_add::[
+    {
+      name:"date_add invalid time part{time_part:\"'foobar'\"}",
+      statement:"date_add('foobar', 1, `1986T`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"date_add invalid time part{time_part:1}",
+      statement:"date_add(1, 1, `1986T`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"date_add invalid time part{time_part:[]}",
+      statement:"date_add([], 1, `1986T`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"date_add invalid time part{time_part:\"timezone_hour\"}",
+      statement:"date_add(timezone_hour, 1, `1986T`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"date_add invalid time part{time_part:\"timezone_minute\"}",
+      statement:"date_add(timezone_minute, 1, `1986T`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+  ],
+  date_diff::[
+    {
+      name:"date_diff wrong type of arguments{time_part:\"1\",left:\"`2017T`\",right:\"`2017T`\"}",
+      statement:"date_diff(1, `2017T`, `2017T`)",
+      assert:[
+        {
+          evalMode:EvalModeError,
+          result:EvaluationFail
+        },
+        {
+          result:EvaluationSuccess,
+          evalMode:EvalModeCoerce,
+          output:$missing::null
+        }
+      ]
+    },
+    {
+      name:"date_diff wrong type of arguments{time_part:\"year\",left:\"1\",right:\"`2017T`\"}",
+      statement:"date_diff(year, 1, `2017T`)",
+      assert:[
+        {
+          evalMode:EvalModeError,
+          result:EvaluationFail
+        },
+        {
+          result:EvaluationSuccess,
+          evalMode:EvalModeCoerce,
+          output:$missing::null
+        }
+      ]
+    },
+    {
+      name:"date_diff wrong type of arguments{time_part:\"year\",left:\"`2017T`\",right:\"1\"}",
+      statement:"date_diff(year, `2017T`, 1)",
+      assert:[
+        {
+          evalMode:EvalModeError,
+          result:EvaluationFail
+        },
+        {
+          result:EvaluationSuccess,
+          evalMode:EvalModeCoerce,
+          output:$missing::null
+        }
+      ]
+    },
+    {
+      name:"date_diff invalid arguments{time_part:\"'foobar'\"}",
+      statement:"date_diff('foobar', `2001T`, `1986T`)",
+      assert:[
+        {
+          evalMode:EvalModeError,
+          result:EvaluationFail
+        },
+        {
+          result:EvaluationSuccess,
+          evalMode:EvalModeCoerce,
+          output:$missing::null
+        }
+      ]
+    },
+    {
+      name:"date_diff invalid arguments{time_part:1}",
+      statement:"date_diff(1, `2001T`, `1986T`)",
+      assert:[
+        {
+          evalMode:EvalModeError,
+          result:EvaluationFail
+        },
+        {
+          result:EvaluationSuccess,
+          evalMode:EvalModeCoerce,
+          output:$missing::null
+        }
+      ]
+    },
+    {
+      name:"date_diff invalid arguments{time_part:[]}",
+      statement:"date_diff([], `2001T`, `1986T`)",
+      assert:[
+        {
+          evalMode:EvalModeError,
+          result:EvaluationFail
+        },
+        {
+          result:EvaluationSuccess,
+          evalMode:EvalModeCoerce,
+          output:$missing::null
+        }
+      ]
+    },
+  ],
+  extract::[
+    {
+      name:"extract wrong type of arguments{first:\"year\",second:\"1\"}",
+      statement:"extract(year from 1)",
+      assert:[
+        {
+          evalMode:EvalModeError,
+          result:EvaluationFail
+        },
+        {
+          result:EvaluationSuccess,
+          evalMode:EvalModeCoerce,
+          output:$missing::null
+        }
+      ]
+    },
+    {
+      name:"extract wrong type of arguments{first:1,second:\"`2017T`\"}",
+      statement:"extract(1 from `2017T`)",
+      assert:[
+        {
+          evalMode:EvalModeError,
+          result:EvaluationFail
+        },
+        {
+          result:EvaluationSuccess,
+          evalMode:EvalModeCoerce,
+          output:$missing::null
+        }
+      ]
+    },
+    {
+      name:"extract invalid time part{time_part:\"foo\",tt:\"IDENTIFIER\",tv:foo}",
+      statement:"extract(foo from `2017T`)",
+      assert:[
+        {
+          evalMode:EvalModeError,
+          result:EvaluationFail
+        },
+        {
+          result:EvaluationSuccess,
+          evalMode:EvalModeCoerce,
+          output:$missing::null
+        }
+      ]
+    },
+    {
+      name:"extract invalid time part{time_part:\"null\",tt:\"NULL\",tv:null}",
+      statement:"extract(null from `2017T`)",
+      assert:[
+        {
+          evalMode:EvalModeError,
+          result:EvaluationFail
+        },
+        {
+          result:EvaluationSuccess,
+          evalMode:EvalModeCoerce,
+          output:$missing::null
+        }
+      ]
+    },
+    {
+      name:"extract invalid time part{time_part:\"missing\",tt:\"MISSING\",tv:null}",
+      statement:"extract(missing from `2017T`)",
+      assert:[
+        {
+          evalMode:EvalModeError,
+          result:EvaluationFail
+        },
+        {
+          result:EvaluationSuccess,
+          evalMode:EvalModeCoerce,
+          output:$missing::null
+        }
+      ]
+    }
+  ],
+  like::[
+    {
+      name:"Incorrect type for text",
+      statement:"SELECT * FROM `[true]` WHERE 1 LIKE '1'",
+      assert:[
+        {
+          evalMode:EvalModeError,
+          result:EvaluationFail
+        },
+        {
+          result:EvaluationSuccess,
+          evalMode:EvalModeCoerce,
+          output:$missing::null
+        }
+      ]
+    },
+    {
+      name:"Incorrect type for pattern",
+      statement:"SELECT * FROM `[true]` WHERE 'a' LIKE 2",
+      assert:[
+        {
+          evalMode:EvalModeError,
+          result:EvaluationFail
+        },
+        {
+          result:EvaluationSuccess,
+          evalMode:EvalModeCoerce,
+          output:$missing::null
+        }
+      ]
+    },
+    {
+      name:"Incorrect type for Escape",
+      statement:"SELECT * FROM `[true]` WHERE 'a' LIKE 'a' ESCAPE 3",
+      assert:[
+        {
+          evalMode:EvalModeError,
+          result:EvaluationFail
+        },
+        {
+          result:EvaluationSuccess,
+          evalMode:EvalModeCoerce,
+          output:$missing::null
+        }
+      ]
+    },
+  ]
+]
