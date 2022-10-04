@@ -1,0 +1,50 @@
+bool::[
+  {
+    name:"boolean literals{sql:\"true\",r:true}",
+    statement:"true",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"boolean literals{sql:\"false\",r:false}",
+    statement:"false",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"boolean literals{sql:\"NOT true\",r:false}",
+    statement:"NOT true",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"boolean literals{sql:\"NOT false\",r:true}",
+    statement:"NOT false",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  }
+]

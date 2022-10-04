@@ -267,3 +267,795 @@ aggregates::[
     }
   }
 ]
+
+max::[
+  envs::{
+    data:[
+      1,
+      1,
+      1,
+      2
+    ]
+  },
+  {
+    name:"max top level{agg:'MAX(data)',result:(success 2)}",
+    statement:"MAX(data)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"max top level{agg:'MAX(ALL data)',result:(success 2)}",
+    statement:"MAX(ALL data)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"max top level{agg:'MAX(DISTINCT data)',result:(success 2)}",
+    statement:"MAX(DISTINCT data)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"max select{agg:'MAX(d)',result:2}",
+    statement:"SELECT MAX(d) AS a FROM data d",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:2
+        }
+      ]
+    }
+  },
+  {
+    name:"max select{agg:'MAX(ALL d)',result:2}",
+    statement:"SELECT MAX(ALL d) AS a FROM data d",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:2
+        }
+      ]
+    }
+  },
+  {
+    name:"max select{agg:'MAX(DISTINCT d)',result:2}",
+    statement:"SELECT MAX(DISTINCT d) AS a FROM data d",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:2
+        }
+      ]
+    }
+  },
+  {
+    name:"max group by{agg:'MAX(t.b)',expectedF1:2,expectedF2:4}",
+    statement:"SELECT t.a, MAX(t.b) as c FROM << {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 2}, {'a': 'f2', 'b': 2}, {'a': 'f2', 'b': 4} >> AS t GROUP BY t.a",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:"f1",
+          c:2
+        },
+        {
+          a:"f2",
+          c:4
+        }
+      ]
+    }
+  },
+  {
+    name:"max group by{agg:'MAX(ALL t.b)',expectedF1:2,expectedF2:4}",
+    statement:"SELECT t.a, MAX(ALL t.b) as c FROM << {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 2}, {'a': 'f2', 'b': 2}, {'a': 'f2', 'b': 4} >> AS t GROUP BY t.a",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:"f1",
+          c:2
+        },
+        {
+          a:"f2",
+          c:4
+        }
+      ]
+    }
+  },
+  {
+    name:"max group by{agg:'MAX(DISTINCT t.b)',expectedF1:2,expectedF2:4}",
+    statement:"SELECT t.a, MAX(DISTINCT t.b) as c FROM << {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 2}, {'a': 'f2', 'b': 2}, {'a': 'f2', 'b': 4} >> AS t GROUP BY t.a",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:"f1",
+          c:2
+        },
+        {
+          a:"f2",
+          c:4
+        }
+      ]
+    }
+  }
+]
+
+avg::[
+  envs::{
+    data:[
+      1,
+      1,
+      1,
+      2
+    ]
+  },
+  {
+    name:"avg top level{agg:'AVG(data)',result:(success 1.25)}",
+    statement:"AVG(data)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1.25
+    }
+  },
+  {
+    name:"avg top level{agg:'AVG(ALL data)',result:(success 1.25)}",
+    statement:"AVG(ALL data)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1.25
+    }
+  },
+  {
+    name:"avg top level{agg:'AVG(DISTINCT data)',result:(success 1.5)}",
+    statement:"AVG(DISTINCT data)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1.5
+    }
+  },
+  {
+    name:"avg select{agg:'AVG(d)',result:1.25}",
+    statement:"SELECT AVG(d) AS a FROM data d",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:1.25
+        }
+      ]
+    }
+  },
+  {
+    name:"avg select{agg:'AVG(ALL d)',result:1.25}",
+    statement:"SELECT AVG(ALL d) AS a FROM data d",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:1.25
+        }
+      ]
+    }
+  },
+  {
+    name:"avg select{agg:'AVG(DISTINCT d)',result:1.5}",
+    statement:"SELECT AVG(DISTINCT d) AS a FROM data d",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:1.5
+        }
+      ]
+    }
+  },
+  {
+    name:"avg group by{agg:'AVG(t.b)',expectedF1:1.25,expectedF2:3.}",
+    statement:"SELECT t.a, AVG(t.b) as c FROM << {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 2}, {'a': 'f2', 'b': 2}, {'a': 'f2', 'b': 4} >> AS t GROUP BY t.a",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:"f1",
+          c:1.25
+        },
+        {
+          a:"f2",
+          c:3.
+        }
+      ]
+    }
+  },
+  {
+    name:"avg group by{agg:'AVG(ALL t.b)',expectedF1:1.25,expectedF2:3.}",
+    statement:"SELECT t.a, AVG(ALL t.b) as c FROM << {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 2}, {'a': 'f2', 'b': 2}, {'a': 'f2', 'b': 4} >> AS t GROUP BY t.a",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:"f1",
+          c:1.25
+        },
+        {
+          a:"f2",
+          c:3.
+        }
+      ]
+    }
+  },
+  {
+    name:"avg group by{agg:'AVG(DISTINCT t.b)',expectedF1:1.5,expectedF2:3.}",
+    statement:"SELECT t.a, AVG(DISTINCT t.b) as c FROM << {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 2}, {'a': 'f2', 'b': 2}, {'a': 'f2', 'b': 4} >> AS t GROUP BY t.a",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:"f1",
+          c:1.5
+        },
+        {
+          a:"f2",
+          c:3.
+        }
+      ]
+    }
+  }
+]
+
+count::[
+  envs::{
+    data:[
+      1,
+      1,
+      1,
+      2
+    ]
+  },
+  {
+    name:"count top level{agg:'COUNT(data)',result:(success 4)}",
+    statement:"COUNT(data)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:4
+    }
+  },
+  {
+    name:"count top level{agg:'COUNT(ALL data)',result:(success 4)}",
+    statement:"COUNT(ALL data)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:4
+    }
+  },
+  {
+    name:"count top level{agg:'COUNT(DISTINCT data)',result:(success 2)}",
+    statement:"COUNT(DISTINCT data)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"count select{agg:'COUNT(d)',result:4}",
+    statement:"SELECT COUNT(d) AS a FROM data d",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:4
+        }
+      ]
+    }
+  },
+  {
+    name:"count select{agg:'COUNT(ALL d)',result:4}",
+    statement:"SELECT COUNT(ALL d) AS a FROM data d",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:4
+        }
+      ]
+    }
+  },
+  {
+    name:"count select{agg:'COUNT(DISTINCT d)',result:2}",
+    statement:"SELECT COUNT(DISTINCT d) AS a FROM data d",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:2
+        }
+      ]
+    }
+  },
+  {
+    name:"count group by{agg:'COUNT(t.b)',expectedF1:4,expectedF2:2}",
+    statement:"SELECT t.a, COUNT(t.b) as c FROM << {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 2}, {'a': 'f2', 'b': 2}, {'a': 'f2', 'b': 4} >> AS t GROUP BY t.a",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:"f1",
+          c:4
+        },
+        {
+          a:"f2",
+          c:2
+        }
+      ]
+    }
+  },
+  {
+    name:"count group by{agg:'COUNT(ALL t.b)',expectedF1:4,expectedF2:2}",
+    statement:"SELECT t.a, COUNT(ALL t.b) as c FROM << {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 2}, {'a': 'f2', 'b': 2}, {'a': 'f2', 'b': 4} >> AS t GROUP BY t.a",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:"f1",
+          c:4
+        },
+        {
+          a:"f2",
+          c:2
+        }
+      ]
+    }
+  },
+  {
+    name:"count group by{agg:'COUNT(DISTINCT t.b)',expectedF1:2,expectedF2:2}",
+    statement:"SELECT t.a, COUNT(DISTINCT t.b) as c FROM << {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 2}, {'a': 'f2', 'b': 2}, {'a': 'f2', 'b': 4} >> AS t GROUP BY t.a",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:"f1",
+          c:2
+        },
+        {
+          a:"f2",
+          c:2
+        }
+      ]
+    }
+  }
+]
+
+sum::[
+  envs::{
+    data:[
+      1,
+      1,
+      1,
+      2
+    ]
+  },
+  {
+    name:"sum top level{agg:'SUM(data)',result:(success 5)}",
+    statement:"SUM(data)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:5
+    }
+  },
+  {
+    name:"sum top level{agg:'SUM(ALL data)',result:(success 5)}",
+    statement:"SUM(ALL data)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:5
+    }
+  },
+  {
+    name:"sum top level{agg:'SUM(DISTINCT data)',result:(success 3)}",
+    statement:"SUM(DISTINCT data)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:3
+    }
+  },
+  {
+    name:"sum select{agg:'SUM(d)',result:5}",
+    statement:"SELECT SUM(d) AS a FROM data d",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:5
+        }
+      ]
+    }
+  },
+  {
+    name:"sum select{agg:'SUM(ALL d)',result:5}",
+    statement:"SELECT SUM(ALL d) AS a FROM data d",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:5
+        }
+      ]
+    }
+  },
+  {
+    name:"sum select{agg:'SUM(DISTINCT d)',result:3}",
+    statement:"SELECT SUM(DISTINCT d) AS a FROM data d",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:3
+        }
+      ]
+    }
+  },
+  {
+    name:"sum group by{agg:'SUM(t.b)',expectedF1:5,expectedF2:6}",
+    statement:"SELECT t.a, SUM(t.b) as c FROM << {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 2}, {'a': 'f2', 'b': 2}, {'a': 'f2', 'b': 4} >> AS t GROUP BY t.a",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:"f1",
+          c:5
+        },
+        {
+          a:"f2",
+          c:6
+        }
+      ]
+    }
+  },
+  {
+    name:"sum group by{agg:'SUM(ALL t.b)',expectedF1:5,expectedF2:6}",
+    statement:"SELECT t.a, SUM(ALL t.b) as c FROM << {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 2}, {'a': 'f2', 'b': 2}, {'a': 'f2', 'b': 4} >> AS t GROUP BY t.a",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:"f1",
+          c:5
+        },
+        {
+          a:"f2",
+          c:6
+        }
+      ]
+    }
+  },
+  {
+    name:"sum group by{agg:'SUM(DISTINCT t.b)',expectedF1:3,expectedF2:6}",
+    statement:"SELECT t.a, SUM(DISTINCT t.b) as c FROM << {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 2}, {'a': 'f2', 'b': 2}, {'a': 'f2', 'b': 4} >> AS t GROUP BY t.a",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:"f1",
+          c:3
+        },
+        {
+          a:"f2",
+          c:6
+        }
+      ]
+    }
+  }
+]
+
+min::[
+  envs::{
+    data:[
+      1,
+      1,
+      1,
+      2
+    ]
+  },
+  {
+    name:"min top level{agg:'MIN(data)',result:(success 1)}",
+    statement:"MIN(data)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"min top level{agg:'MIN(ALL data)',result:(success 1)}",
+    statement:"MIN(ALL data)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"min top level{agg:'MIN(DISTINCT data)',result:(success 1)}",
+    statement:"MIN(DISTINCT data)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"min select{agg:'MIN(d)',result:1}",
+    statement:"SELECT MIN(d) AS a FROM data d",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:1
+        }
+      ]
+    }
+  },
+  {
+    name:"min select{agg:'MIN(ALL d)',result:1}",
+    statement:"SELECT MIN(ALL d) AS a FROM data d",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:1
+        }
+      ]
+    }
+  },
+  {
+    name:"min select{agg:'MIN(DISTINCT d)',result:1}",
+    statement:"SELECT MIN(DISTINCT d) AS a FROM data d",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:1
+        }
+      ]
+    }
+  },
+  {
+    name:"min group by{agg:'MIN(t.b)',expectedF1:1,expectedF2:2}",
+    statement:"SELECT t.a, MIN(t.b) as c FROM << {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 2}, {'a': 'f2', 'b': 2}, {'a': 'f2', 'b': 4} >> AS t GROUP BY t.a",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:"f1",
+          c:1
+        },
+        {
+          a:"f2",
+          c:2
+        }
+      ]
+    }
+  },
+  {
+    name:"min group by{agg:'MIN(ALL t.b)',expectedF1:1,expectedF2:2}",
+    statement:"SELECT t.a, MIN(ALL t.b) as c FROM << {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 2}, {'a': 'f2', 'b': 2}, {'a': 'f2', 'b': 4} >> AS t GROUP BY t.a",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:"f1",
+          c:1
+        },
+        {
+          a:"f2",
+          c:2
+        }
+      ]
+    }
+  },
+  {
+    name:"min group by{agg:'MIN(DISTINCT t.b)',expectedF1:1,expectedF2:2}",
+    statement:"SELECT t.a, MIN(DISTINCT t.b) as c FROM << {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 1}, {'a': 'f1', 'b': 2}, {'a': 'f2', 'b': 2}, {'a': 'f2', 'b': 4} >> AS t GROUP BY t.a",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:"f1",
+          c:1
+        },
+        {
+          a:"f2",
+          c:2
+        }
+      ]
+    }
+  }
+]
+
+

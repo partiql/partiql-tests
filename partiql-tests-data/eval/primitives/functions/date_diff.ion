@@ -1,0 +1,2006 @@
+date_diff::[
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017T\",right:\"2017T\"}",
+    statement:"date_diff(year, `2017T`, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"month\",left:\"2017T\",right:\"2017T\"}",
+    statement:"date_diff(month, `2017T`, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"day\",left:\"2017T\",right:\"2017T\"}",
+    statement:"date_diff(day, `2017T`, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"hour\",left:\"2017T\",right:\"2017T\"}",
+    statement:"date_diff(hour, `2017T`, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"minute\",left:\"2017T\",right:\"2017T\"}",
+    statement:"date_diff(minute, `2017T`, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"second\",left:\"2017T\",right:\"2017T\"}",
+    statement:"date_diff(second, `2017T`, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017-01T\",right:\"2017-01T\"}",
+    statement:"date_diff(year, `2017-01T`, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"month\",left:\"2017-01T\",right:\"2017-01T\"}",
+    statement:"date_diff(month, `2017-01T`, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"day\",left:\"2017-01T\",right:\"2017-01T\"}",
+    statement:"date_diff(day, `2017-01T`, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"hour\",left:\"2017-01T\",right:\"2017-01T\"}",
+    statement:"date_diff(hour, `2017-01T`, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"minute\",left:\"2017-01T\",right:\"2017-01T\"}",
+    statement:"date_diff(minute, `2017-01T`, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"second\",left:\"2017-01T\",right:\"2017-01T\"}",
+    statement:"date_diff(second, `2017-01T`, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017-01-02T\",right:\"2017-01-02T\"}",
+    statement:"date_diff(year, `2017-01-02T`, `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"month\",left:\"2017-01-02T\",right:\"2017-01-02T\"}",
+    statement:"date_diff(month, `2017-01-02T`, `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"day\",left:\"2017-01-02T\",right:\"2017-01-02T\"}",
+    statement:"date_diff(day, `2017-01-02T`, `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"hour\",left:\"2017-01-02T\",right:\"2017-01-02T\"}",
+    statement:"date_diff(hour, `2017-01-02T`, `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"minute\",left:\"2017-01-02T\",right:\"2017-01-02T\"}",
+    statement:"date_diff(minute, `2017-01-02T`, `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"second\",left:\"2017-01-02T\",right:\"2017-01-02T\"}",
+    statement:"date_diff(second, `2017-01-02T`, `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017-01-02T03:04Z\",right:\"2017-01-02T03:04Z\"}",
+    statement:"date_diff(year, `2017-01-02T03:04Z`, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"month\",left:\"2017-01-02T03:04Z\",right:\"2017-01-02T03:04Z\"}",
+    statement:"date_diff(month, `2017-01-02T03:04Z`, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"day\",left:\"2017-01-02T03:04Z\",right:\"2017-01-02T03:04Z\"}",
+    statement:"date_diff(day, `2017-01-02T03:04Z`, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"hour\",left:\"2017-01-02T03:04Z\",right:\"2017-01-02T03:04Z\"}",
+    statement:"date_diff(hour, `2017-01-02T03:04Z`, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"minute\",left:\"2017-01-02T03:04Z\",right:\"2017-01-02T03:04Z\"}",
+    statement:"date_diff(minute, `2017-01-02T03:04Z`, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"second\",left:\"2017-01-02T03:04Z\",right:\"2017-01-02T03:04Z\"}",
+    statement:"date_diff(second, `2017-01-02T03:04Z`, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017-01-02T03:04:05Z\",right:\"2017-01-02T03:04:05Z\"}",
+    statement:"date_diff(year, `2017-01-02T03:04:05Z`, `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"month\",left:\"2017-01-02T03:04:05Z\",right:\"2017-01-02T03:04:05Z\"}",
+    statement:"date_diff(month, `2017-01-02T03:04:05Z`, `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"day\",left:\"2017-01-02T03:04:05Z\",right:\"2017-01-02T03:04:05Z\"}",
+    statement:"date_diff(day, `2017-01-02T03:04:05Z`, `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"hour\",left:\"2017-01-02T03:04:05Z\",right:\"2017-01-02T03:04:05Z\"}",
+    statement:"date_diff(hour, `2017-01-02T03:04:05Z`, `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"minute\",left:\"2017-01-02T03:04:05Z\",right:\"2017-01-02T03:04:05Z\"}",
+    statement:"date_diff(minute, `2017-01-02T03:04:05Z`, `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"second\",left:\"2017-01-02T03:04:05Z\",right:\"2017-01-02T03:04:05Z\"}",
+    statement:"date_diff(second, `2017-01-02T03:04:05Z`, `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017-01-02T03:04:05.007Z\",right:\"2017-01-02T03:04:05.007Z\"}",
+    statement:"date_diff(year, `2017-01-02T03:04:05.007Z`, `2017-01-02T03:04:05.007Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"month\",left:\"2017-01-02T03:04:05.007Z\",right:\"2017-01-02T03:04:05.007Z\"}",
+    statement:"date_diff(month, `2017-01-02T03:04:05.007Z`, `2017-01-02T03:04:05.007Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"day\",left:\"2017-01-02T03:04:05.007Z\",right:\"2017-01-02T03:04:05.007Z\"}",
+    statement:"date_diff(day, `2017-01-02T03:04:05.007Z`, `2017-01-02T03:04:05.007Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"hour\",left:\"2017-01-02T03:04:05.007Z\",right:\"2017-01-02T03:04:05.007Z\"}",
+    statement:"date_diff(hour, `2017-01-02T03:04:05.007Z`, `2017-01-02T03:04:05.007Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"minute\",left:\"2017-01-02T03:04:05.007Z\",right:\"2017-01-02T03:04:05.007Z\"}",
+    statement:"date_diff(minute, `2017-01-02T03:04:05.007Z`, `2017-01-02T03:04:05.007Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"second\",left:\"2017-01-02T03:04:05.007Z\",right:\"2017-01-02T03:04:05.007Z\"}",
+    statement:"date_diff(second, `2017-01-02T03:04:05.007Z`, `2017-01-02T03:04:05.007Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017-01-02T03:04:05.007+08:09\",right:\"2017-01-02T03:04:05.007+08:09\"}",
+    statement:"date_diff(year, `2017-01-02T03:04:05.007+08:09`, `2017-01-02T03:04:05.007+08:09`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"month\",left:\"2017-01-02T03:04:05.007+08:09\",right:\"2017-01-02T03:04:05.007+08:09\"}",
+    statement:"date_diff(month, `2017-01-02T03:04:05.007+08:09`, `2017-01-02T03:04:05.007+08:09`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"day\",left:\"2017-01-02T03:04:05.007+08:09\",right:\"2017-01-02T03:04:05.007+08:09\"}",
+    statement:"date_diff(day, `2017-01-02T03:04:05.007+08:09`, `2017-01-02T03:04:05.007+08:09`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"hour\",left:\"2017-01-02T03:04:05.007+08:09\",right:\"2017-01-02T03:04:05.007+08:09\"}",
+    statement:"date_diff(hour, `2017-01-02T03:04:05.007+08:09`, `2017-01-02T03:04:05.007+08:09`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"minute\",left:\"2017-01-02T03:04:05.007+08:09\",right:\"2017-01-02T03:04:05.007+08:09\"}",
+    statement:"date_diff(minute, `2017-01-02T03:04:05.007+08:09`, `2017-01-02T03:04:05.007+08:09`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"second\",left:\"2017-01-02T03:04:05.007+08:09\",right:\"2017-01-02T03:04:05.007+08:09\"}",
+    statement:"date_diff(second, `2017-01-02T03:04:05.007+08:09`, `2017-01-02T03:04:05.007+08:09`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1),time_part:\"year\",left:\"2017T\",right:\"2018T\"}",
+    statement:"date_diff(year, `2017T`, `2018T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 12),time_part:\"month\",left:\"2017T\",right:\"2018T\"}",
+    statement:"date_diff(month, `2017T`, `2018T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:12
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 365),time_part:\"day\",left:\"2017T\",right:\"2018T\"}",
+    statement:"date_diff(day, `2017T`, `2018T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:365
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 8760),time_part:\"hour\",left:\"2017T\",right:\"2018T\"}",
+    statement:"date_diff(hour, `2017T`, `2018T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:8760
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 525600),time_part:\"minute\",left:\"2017T\",right:\"2018T\"}",
+    statement:"date_diff(minute, `2017T`, `2018T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:525600
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 31536000),time_part:\"second\",left:\"2017T\",right:\"2018T\"}",
+    statement:"date_diff(second, `2017T`, `2018T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:31536000
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017-01T\",right:\"2017-02T\"}",
+    statement:"date_diff(year, `2017-01T`, `2017-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1),time_part:\"month\",left:\"2017-01T\",right:\"2017-02T\"}",
+    statement:"date_diff(month, `2017-01T`, `2017-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 31),time_part:\"day\",left:\"2017-01T\",right:\"2017-02T\"}",
+    statement:"date_diff(day, `2017-01T`, `2017-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:31
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 744),time_part:\"hour\",left:\"2017-01T\",right:\"2017-02T\"}",
+    statement:"date_diff(hour, `2017-01T`, `2017-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:744
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 44640),time_part:\"minute\",left:\"2017-01T\",right:\"2017-02T\"}",
+    statement:"date_diff(minute, `2017-01T`, `2017-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:44640
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 2678400),time_part:\"second\",left:\"2017-01T\",right:\"2017-02T\"}",
+    statement:"date_diff(second, `2017-01T`, `2017-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2678400
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017-01-02T\",right:\"2017-01-03T\"}",
+    statement:"date_diff(year, `2017-01-02T`, `2017-01-03T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"month\",left:\"2017-01-02T\",right:\"2017-01-03T\"}",
+    statement:"date_diff(month, `2017-01-02T`, `2017-01-03T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1),time_part:\"day\",left:\"2017-01-02T\",right:\"2017-01-03T\"}",
+    statement:"date_diff(day, `2017-01-02T`, `2017-01-03T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 24),time_part:\"hour\",left:\"2017-01-02T\",right:\"2017-01-03T\"}",
+    statement:"date_diff(hour, `2017-01-02T`, `2017-01-03T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:24
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1440),time_part:\"minute\",left:\"2017-01-02T\",right:\"2017-01-03T\"}",
+    statement:"date_diff(minute, `2017-01-02T`, `2017-01-03T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1440
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 86400),time_part:\"second\",left:\"2017-01-02T\",right:\"2017-01-03T\"}",
+    statement:"date_diff(second, `2017-01-02T`, `2017-01-03T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:86400
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017-01-02T03:04Z\",right:\"2017-01-02T04:04Z\"}",
+    statement:"date_diff(year, `2017-01-02T03:04Z`, `2017-01-02T04:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"month\",left:\"2017-01-02T03:04Z\",right:\"2017-01-02T04:04Z\"}",
+    statement:"date_diff(month, `2017-01-02T03:04Z`, `2017-01-02T04:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"day\",left:\"2017-01-02T03:04Z\",right:\"2017-01-02T04:04Z\"}",
+    statement:"date_diff(day, `2017-01-02T03:04Z`, `2017-01-02T04:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1),time_part:\"hour\",left:\"2017-01-02T03:04Z\",right:\"2017-01-02T04:04Z\"}",
+    statement:"date_diff(hour, `2017-01-02T03:04Z`, `2017-01-02T04:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 60),time_part:\"minute\",left:\"2017-01-02T03:04Z\",right:\"2017-01-02T04:04Z\"}",
+    statement:"date_diff(minute, `2017-01-02T03:04Z`, `2017-01-02T04:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:60
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 3600),time_part:\"second\",left:\"2017-01-02T03:04Z\",right:\"2017-01-02T04:04Z\"}",
+    statement:"date_diff(second, `2017-01-02T03:04Z`, `2017-01-02T04:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:3600
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017-01-02T03:04Z\",right:\"2017-01-02T03:05Z\"}",
+    statement:"date_diff(year, `2017-01-02T03:04Z`, `2017-01-02T03:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"month\",left:\"2017-01-02T03:04Z\",right:\"2017-01-02T03:05Z\"}",
+    statement:"date_diff(month, `2017-01-02T03:04Z`, `2017-01-02T03:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"day\",left:\"2017-01-02T03:04Z\",right:\"2017-01-02T03:05Z\"}",
+    statement:"date_diff(day, `2017-01-02T03:04Z`, `2017-01-02T03:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"hour\",left:\"2017-01-02T03:04Z\",right:\"2017-01-02T03:05Z\"}",
+    statement:"date_diff(hour, `2017-01-02T03:04Z`, `2017-01-02T03:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1),time_part:\"minute\",left:\"2017-01-02T03:04Z\",right:\"2017-01-02T03:05Z\"}",
+    statement:"date_diff(minute, `2017-01-02T03:04Z`, `2017-01-02T03:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 60),time_part:\"second\",left:\"2017-01-02T03:04Z\",right:\"2017-01-02T03:05Z\"}",
+    statement:"date_diff(second, `2017-01-02T03:04Z`, `2017-01-02T03:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:60
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017-01-02T03:04:05Z\",right:\"2017-01-02T03:04:06Z\"}",
+    statement:"date_diff(year, `2017-01-02T03:04:05Z`, `2017-01-02T03:04:06Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"month\",left:\"2017-01-02T03:04:05Z\",right:\"2017-01-02T03:04:06Z\"}",
+    statement:"date_diff(month, `2017-01-02T03:04:05Z`, `2017-01-02T03:04:06Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"day\",left:\"2017-01-02T03:04:05Z\",right:\"2017-01-02T03:04:06Z\"}",
+    statement:"date_diff(day, `2017-01-02T03:04:05Z`, `2017-01-02T03:04:06Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"hour\",left:\"2017-01-02T03:04:05Z\",right:\"2017-01-02T03:04:06Z\"}",
+    statement:"date_diff(hour, `2017-01-02T03:04:05Z`, `2017-01-02T03:04:06Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"minute\",left:\"2017-01-02T03:04:05Z\",right:\"2017-01-02T03:04:06Z\"}",
+    statement:"date_diff(minute, `2017-01-02T03:04:05Z`, `2017-01-02T03:04:06Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1),time_part:\"second\",left:\"2017-01-02T03:04:05Z\",right:\"2017-01-02T03:04:06Z\"}",
+    statement:"date_diff(second, `2017-01-02T03:04:05Z`, `2017-01-02T03:04:06Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017-01-02T03:04:05.007Z\",right:\"2017-01-02T03:04:05.008Z\"}",
+    statement:"date_diff(year, `2017-01-02T03:04:05.007Z`, `2017-01-02T03:04:05.008Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"month\",left:\"2017-01-02T03:04:05.007Z\",right:\"2017-01-02T03:04:05.008Z\"}",
+    statement:"date_diff(month, `2017-01-02T03:04:05.007Z`, `2017-01-02T03:04:05.008Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"day\",left:\"2017-01-02T03:04:05.007Z\",right:\"2017-01-02T03:04:05.008Z\"}",
+    statement:"date_diff(day, `2017-01-02T03:04:05.007Z`, `2017-01-02T03:04:05.008Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"hour\",left:\"2017-01-02T03:04:05.007Z\",right:\"2017-01-02T03:04:05.008Z\"}",
+    statement:"date_diff(hour, `2017-01-02T03:04:05.007Z`, `2017-01-02T03:04:05.008Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"minute\",left:\"2017-01-02T03:04:05.007Z\",right:\"2017-01-02T03:04:05.008Z\"}",
+    statement:"date_diff(minute, `2017-01-02T03:04:05.007Z`, `2017-01-02T03:04:05.008Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"second\",left:\"2017-01-02T03:04:05.007Z\",right:\"2017-01-02T03:04:05.008Z\"}",
+    statement:"date_diff(second, `2017-01-02T03:04:05.007Z`, `2017-01-02T03:04:05.008Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -1),time_part:\"year\",left:\"2018T\",right:\"2017T\"}",
+    statement:"date_diff(year, `2018T`, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -12),time_part:\"month\",left:\"2018T\",right:\"2017T\"}",
+    statement:"date_diff(month, `2018T`, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-12
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -365),time_part:\"day\",left:\"2018T\",right:\"2017T\"}",
+    statement:"date_diff(day, `2018T`, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-365
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -8760),time_part:\"hour\",left:\"2018T\",right:\"2017T\"}",
+    statement:"date_diff(hour, `2018T`, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-8760
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -525600),time_part:\"minute\",left:\"2018T\",right:\"2017T\"}",
+    statement:"date_diff(minute, `2018T`, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-525600
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -31536000),time_part:\"second\",left:\"2018T\",right:\"2017T\"}",
+    statement:"date_diff(second, `2018T`, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-31536000
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017-02T\",right:\"2017-01T\"}",
+    statement:"date_diff(year, `2017-02T`, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -1),time_part:\"month\",left:\"2017-02T\",right:\"2017-01T\"}",
+    statement:"date_diff(month, `2017-02T`, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -31),time_part:\"day\",left:\"2017-02T\",right:\"2017-01T\"}",
+    statement:"date_diff(day, `2017-02T`, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-31
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -744),time_part:\"hour\",left:\"2017-02T\",right:\"2017-01T\"}",
+    statement:"date_diff(hour, `2017-02T`, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-744
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -44640),time_part:\"minute\",left:\"2017-02T\",right:\"2017-01T\"}",
+    statement:"date_diff(minute, `2017-02T`, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-44640
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -2678400),time_part:\"second\",left:\"2017-02T\",right:\"2017-01T\"}",
+    statement:"date_diff(second, `2017-02T`, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-2678400
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017-01-03T\",right:\"2017-01-02T\"}",
+    statement:"date_diff(year, `2017-01-03T`, `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"month\",left:\"2017-01-03T\",right:\"2017-01-02T\"}",
+    statement:"date_diff(month, `2017-01-03T`, `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -1),time_part:\"day\",left:\"2017-01-03T\",right:\"2017-01-02T\"}",
+    statement:"date_diff(day, `2017-01-03T`, `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -24),time_part:\"hour\",left:\"2017-01-03T\",right:\"2017-01-02T\"}",
+    statement:"date_diff(hour, `2017-01-03T`, `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-24
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -1440),time_part:\"minute\",left:\"2017-01-03T\",right:\"2017-01-02T\"}",
+    statement:"date_diff(minute, `2017-01-03T`, `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1440
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -86400),time_part:\"second\",left:\"2017-01-03T\",right:\"2017-01-02T\"}",
+    statement:"date_diff(second, `2017-01-03T`, `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-86400
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017-01-02T04:04Z\",right:\"2017-01-02T03:04Z\"}",
+    statement:"date_diff(year, `2017-01-02T04:04Z`, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"month\",left:\"2017-01-02T04:04Z\",right:\"2017-01-02T03:04Z\"}",
+    statement:"date_diff(month, `2017-01-02T04:04Z`, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"day\",left:\"2017-01-02T04:04Z\",right:\"2017-01-02T03:04Z\"}",
+    statement:"date_diff(day, `2017-01-02T04:04Z`, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -1),time_part:\"hour\",left:\"2017-01-02T04:04Z\",right:\"2017-01-02T03:04Z\"}",
+    statement:"date_diff(hour, `2017-01-02T04:04Z`, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -60),time_part:\"minute\",left:\"2017-01-02T04:04Z\",right:\"2017-01-02T03:04Z\"}",
+    statement:"date_diff(minute, `2017-01-02T04:04Z`, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-60
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -3600),time_part:\"second\",left:\"2017-01-02T04:04Z\",right:\"2017-01-02T03:04Z\"}",
+    statement:"date_diff(second, `2017-01-02T04:04Z`, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-3600
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017-01-02T03:05Z\",right:\"2017-01-02T03:04Z\"}",
+    statement:"date_diff(year, `2017-01-02T03:05Z`, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"month\",left:\"2017-01-02T03:05Z\",right:\"2017-01-02T03:04Z\"}",
+    statement:"date_diff(month, `2017-01-02T03:05Z`, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"day\",left:\"2017-01-02T03:05Z\",right:\"2017-01-02T03:04Z\"}",
+    statement:"date_diff(day, `2017-01-02T03:05Z`, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"hour\",left:\"2017-01-02T03:05Z\",right:\"2017-01-02T03:04Z\"}",
+    statement:"date_diff(hour, `2017-01-02T03:05Z`, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -1),time_part:\"minute\",left:\"2017-01-02T03:05Z\",right:\"2017-01-02T03:04Z\"}",
+    statement:"date_diff(minute, `2017-01-02T03:05Z`, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -60),time_part:\"second\",left:\"2017-01-02T03:05Z\",right:\"2017-01-02T03:04Z\"}",
+    statement:"date_diff(second, `2017-01-02T03:05Z`, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-60
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017-01-02T03:04:06Z\",right:\"2017-01-02T03:04:05Z\"}",
+    statement:"date_diff(year, `2017-01-02T03:04:06Z`, `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"month\",left:\"2017-01-02T03:04:06Z\",right:\"2017-01-02T03:04:05Z\"}",
+    statement:"date_diff(month, `2017-01-02T03:04:06Z`, `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"day\",left:\"2017-01-02T03:04:06Z\",right:\"2017-01-02T03:04:05Z\"}",
+    statement:"date_diff(day, `2017-01-02T03:04:06Z`, `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"hour\",left:\"2017-01-02T03:04:06Z\",right:\"2017-01-02T03:04:05Z\"}",
+    statement:"date_diff(hour, `2017-01-02T03:04:06Z`, `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"minute\",left:\"2017-01-02T03:04:06Z\",right:\"2017-01-02T03:04:05Z\"}",
+    statement:"date_diff(minute, `2017-01-02T03:04:06Z`, `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success -1),time_part:\"second\",left:\"2017-01-02T03:04:06Z\",right:\"2017-01-02T03:04:05Z\"}",
+    statement:"date_diff(second, `2017-01-02T03:04:06Z`, `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017-01-02T03:04:05.008Z\",right:\"2017-01-02T03:04:05.007Z\"}",
+    statement:"date_diff(year, `2017-01-02T03:04:05.008Z`, `2017-01-02T03:04:05.007Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"month\",left:\"2017-01-02T03:04:05.008Z\",right:\"2017-01-02T03:04:05.007Z\"}",
+    statement:"date_diff(month, `2017-01-02T03:04:05.008Z`, `2017-01-02T03:04:05.007Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"day\",left:\"2017-01-02T03:04:05.008Z\",right:\"2017-01-02T03:04:05.007Z\"}",
+    statement:"date_diff(day, `2017-01-02T03:04:05.008Z`, `2017-01-02T03:04:05.007Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"hour\",left:\"2017-01-02T03:04:05.008Z\",right:\"2017-01-02T03:04:05.007Z\"}",
+    statement:"date_diff(hour, `2017-01-02T03:04:05.008Z`, `2017-01-02T03:04:05.007Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"minute\",left:\"2017-01-02T03:04:05.008Z\",right:\"2017-01-02T03:04:05.007Z\"}",
+    statement:"date_diff(minute, `2017-01-02T03:04:05.008Z`, `2017-01-02T03:04:05.007Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"second\",left:\"2017-01-02T03:04:05.008Z\",right:\"2017-01-02T03:04:05.007Z\"}",
+    statement:"date_diff(second, `2017-01-02T03:04:05.008Z`, `2017-01-02T03:04:05.007Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017-01-02T03:04+01:02\",right:\"2017-01-02T03:04+00:00\"}",
+    statement:"date_diff(year, `2017-01-02T03:04+01:02`, `2017-01-02T03:04+00:00`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"month\",left:\"2017-01-02T03:04+00:02\",right:\"2017-01-02T03:04+00:00\"}",
+    statement:"date_diff(month, `2017-01-02T03:04+00:02`, `2017-01-02T03:04+00:00`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 0),time_part:\"day\",left:\"2017-01-02T01:00+10:00\",right:\"2017-01-02T01:00+00:00\"}",
+    statement:"date_diff(day, `2017-01-02T01:00+10:00`, `2017-01-02T01:00+00:00`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1),time_part:\"hour\",left:\"2017-01-02T03:04+01:02\",right:\"2017-01-02T03:04+00:00\"}",
+    statement:"date_diff(hour, `2017-01-02T03:04+01:02`, `2017-01-02T03:04+00:00`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 2),time_part:\"minute\",left:\"2017-01-02T03:04+00:02\",right:\"2017-01-02T03:04+00:00\"}",
+    statement:"date_diff(minute, `2017-01-02T03:04+00:02`, `2017-01-02T03:04+00:00`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1),time_part:\"month\",left:\"2017T\",right:\"2017-02T\"}",
+    statement:"date_diff(month, `2017T`, `2017-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1),time_part:\"day\",left:\"2017T\",right:\"2017-01-02T\"}",
+    statement:"date_diff(day, `2017T`, `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1),time_part:\"hour\",left:\"2017T\",right:\"2017-01-01T01:00Z\"}",
+    statement:"date_diff(hour, `2017T`, `2017-01-01T01:00Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1),time_part:\"minute\",left:\"2017T\",right:\"2017-01-01T00:01Z\"}",
+    statement:"date_diff(minute, `2017T`, `2017-01-01T00:01Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1),time_part:\"second\",left:\"2017T\",right:\"2017-01-01T00:00:01Z\"}",
+    statement:"date_diff(second, `2017T`, `2017-01-01T00:00:01Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1),time_part:\"day\",left:\"2017-01T\",right:\"2017-01-02T\"}",
+    statement:"date_diff(day, `2017-01T`, `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1),time_part:\"hour\",left:\"2017-01T\",right:\"2017-01-01T01:00Z\"}",
+    statement:"date_diff(hour, `2017-01T`, `2017-01-01T01:00Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1),time_part:\"minute\",left:\"2017-01T\",right:\"2017-01-01T00:01Z\"}",
+    statement:"date_diff(minute, `2017-01T`, `2017-01-01T00:01Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1),time_part:\"second\",left:\"2017-01T\",right:\"2017-01-01T00:00:01Z\"}",
+    statement:"date_diff(second, `2017-01T`, `2017-01-01T00:00:01Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1),time_part:\"hour\",left:\"2017-01-01T\",right:\"2017-01-01T01:00Z\"}",
+    statement:"date_diff(hour, `2017-01-01T`, `2017-01-01T01:00Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1),time_part:\"minute\",left:\"2017-01-01T\",right:\"2017-01-01T00:01Z\"}",
+    statement:"date_diff(minute, `2017-01-01T`, `2017-01-01T00:01Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1),time_part:\"second\",left:\"2017-01-01T\",right:\"2017-01-01T00:00:01Z\"}",
+    statement:"date_diff(second, `2017-01-01T`, `2017-01-01T00:00:01Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 1),time_part:\"second\",left:\"2017-01-01T00:00Z\",right:\"2017-01-01T00:00:01Z\"}",
+    statement:"date_diff(second, `2017-01-01T00:00Z`, `2017-01-01T00:00:01Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 366),time_part:\"day\",left:\"2016-01-01T\",right:\"2017-01-01T\"}",
+    statement:"date_diff(day, `2016-01-01T`, `2017-01-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:366
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 8784),time_part:\"hour\",left:\"2016-01-01T\",right:\"2017-01-01T\"}",
+    statement:"date_diff(hour, `2016-01-01T`, `2017-01-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:8784
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 527040),time_part:\"minute\",left:\"2016-01-01T\",right:\"2017-01-01T\"}",
+    statement:"date_diff(minute, `2016-01-01T`, `2017-01-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:527040
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 31622400),time_part:\"second\",left:\"2016-01-01T\",right:\"2017-01-01T\"}",
+    statement:"date_diff(second, `2016-01-01T`, `2017-01-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:31622400
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 31),time_part:\"day\",left:\"2017-01-01T\",right:\"2017-02-01T\"}",
+    statement:"date_diff(day, `2017-01-01T`, `2017-02-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:31
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 28),time_part:\"day\",left:\"2017-02-01T\",right:\"2017-03-01T\"}",
+    statement:"date_diff(day, `2017-02-01T`, `2017-03-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:28
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 29),time_part:\"day\",left:\"2016-02-01T\",right:\"2016-03-01T\"}",
+    statement:"date_diff(day, `2016-02-01T`, `2016-03-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:29
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 31),time_part:\"day\",left:\"2017-03-01T\",right:\"2017-04-01T\"}",
+    statement:"date_diff(day, `2017-03-01T`, `2017-04-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:31
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 30),time_part:\"day\",left:\"2017-04-01T\",right:\"2017-05-01T\"}",
+    statement:"date_diff(day, `2017-04-01T`, `2017-05-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:30
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 31),time_part:\"day\",left:\"2017-05-01T\",right:\"2017-06-01T\"}",
+    statement:"date_diff(day, `2017-05-01T`, `2017-06-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:31
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 30),time_part:\"day\",left:\"2017-06-01T\",right:\"2017-07-01T\"}",
+    statement:"date_diff(day, `2017-06-01T`, `2017-07-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:30
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 31),time_part:\"day\",left:\"2017-07-01T\",right:\"2017-08-01T\"}",
+    statement:"date_diff(day, `2017-07-01T`, `2017-08-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:31
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 31),time_part:\"day\",left:\"2017-08-01T\",right:\"2017-09-01T\"}",
+    statement:"date_diff(day, `2017-08-01T`, `2017-09-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:31
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 30),time_part:\"day\",left:\"2017-09-01T\",right:\"2017-10-01T\"}",
+    statement:"date_diff(day, `2017-09-01T`, `2017-10-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:30
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 31),time_part:\"day\",left:\"2017-10-01T\",right:\"2017-11-01T\"}",
+    statement:"date_diff(day, `2017-10-01T`, `2017-11-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:31
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 30),time_part:\"day\",left:\"2017-11-01T\",right:\"2017-12-01T\"}",
+    statement:"date_diff(day, `2017-11-01T`, `2017-12-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:30
+    }
+  },
+  {
+    name:"date_diff valid cases{result:(success 31),time_part:\"day\",left:\"2017-12-01T\",right:\"2018-01-01T\"}",
+    statement:"date_diff(day, `2017-12-01T`, `2018-01-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:31
+    }
+  },
+  {
+    name:"date_diff null and missing propagation{result:(success null),time_part:\"year\",left:\"null\",right:\"`2017T`\"}",
+    statement:"date_diff(year, null, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"date_diff null and missing propagation{result:(success null),time_part:\"year\",left:\"`2017T`\",right:\"null\"}",
+    statement:"date_diff(year, `2017T`, null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"date_diff null and missing propagation{result:(success null),time_part:\"year\",left:\"missing\",right:\"`2017T`\"}",
+    statement:"date_diff(year, missing, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"date_diff null and missing propagation{result:(success null),time_part:\"year\",left:\"`2017T`\",right:\"missing\"}",
+    statement:"date_diff(year, `2017T`, missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"date_diff null and missing propagation{result:(success null),time_part:\"year\",left:\"null\",right:\"missing\"}",
+    statement:"date_diff(year, null, missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"date_diff null and missing propagation{result:(success null),time_part:\"year\",left:\"missing\",right:\"null\"}",
+    statement:"date_diff(year, missing, null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+]

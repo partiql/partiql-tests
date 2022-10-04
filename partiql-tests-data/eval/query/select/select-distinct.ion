@@ -1,0 +1,94 @@
+'select-distinct'::[
+  envs::{
+    myTable:[
+      {
+        a:1,
+        b:1
+      },
+      {
+        a:2
+      },
+      {
+        a:1
+      },
+      {
+        a:1
+      },
+      {
+        a:1
+      }
+    ]
+  },
+  {
+    name:"distinct star single table",
+    statement:"SELECT DISTINCT * FROM myTable",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:1,
+          b:1
+        },
+        {
+          a:2
+        },
+        {
+          a:1
+        }
+      ]
+    }
+  },
+  {
+    name:"distinct column single table",
+    statement:"SELECT DISTINCT a FROM myTable",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          a:1
+        },
+        {
+          a:2
+        }
+      ]
+    }
+  }
+]
+
+'select-distinct-value'::[
+  envs::{
+    myList:[
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2
+    ]
+  },
+  {
+    name:"distinct value single table",
+    statement:"SELECT DISTINCT VALUE l FROM myList l",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        1,
+        2
+      ]
+    }
+  }
+]

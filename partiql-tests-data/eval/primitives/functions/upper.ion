@@ -1,0 +1,1646 @@
+upper::[
+  {
+    name:"upper valid cases{in:\" !\\\"#%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\",result:\" !\\\"#%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\\]^_`ABCDEFGHIJKLMNOPQRSTUVWXYZ{|}~\"}",
+    statement:"upper(' !\"#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:" !\"#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`ABCDEFGHIJKLMNOPQRSTUVWXYZ{|}~"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\xa1\\xa2\\xa3\\xa4\\xa5\\xa6\\xa7\\xa8\\xa9\\xaa\\xab\\xac\\xad\\xae\\xaf\\xb0\\xb1\\xb2\\xb3\\xb4\\xb5\\xb6\\xb7\\xb8\\xb9\\xba\\xbb\\xbc\\xbd\\xbe\\xbf\\xc0\\xc1\\xc2\\xc3\\xc4\\xc5\\xc6\\xc7\\xc8\\xc9\\xca\\xcb\\xcc\\xcd\\xce\\xcf\\xd0\\xd1\\xd2\\xd3\\xd4\\xd5\\xd6\\xd7\\xd8\\xd9\\xda\\xdb\\xdc\\xdd\\xde\\xe0\\xe1\\xe2\\xe3\\xe4\\xe5\\xe6\\xe7\\xe8\\xe9\\xea\\xeb\\xec\\xed\\xee\\xef\\xf0\\xf1\\xf2\\xf3\\xf4\\xf5\\xf6\\xf7\\xf8\\xf9\\xfa\\xfb\\xfc\\xfd\\xfe\\xff\",result:\"\\xa1\\xa2\\xa3\\xa4\\xa5\\xa6\\xa7\\xa8\\xa9\\xaa\\xab\\xac\\xad\\xae\\xaf\\xb0\\xb1\\xb2\\xb3\\xb4\\u039c\\xb6\\xb7\\xb8\\xb9\\xba\\xbb\\xbc\\xbd\\xbe\\xbf\\xc0\\xc1\\xc2\\xc3\\xc4\\xc5\\xc6\\xc7\\xc8\\xc9\\xca\\xcb\\xcc\\xcd\\xce\\xcf\\xd0\\xd1\\xd2\\xd3\\xd4\\xd5\\xd6\\xd7\\xd8\\xd9\\xda\\xdb\\xdc\\xdd\\xde\\xc0\\xc1\\xc2\\xc3\\xc4\\xc5\\xc6\\xc7\\xc8\\xc9\\xca\\xcb\\xcc\\xcd\\xce\\xcf\\xd0\\xd1\\xd2\\xd3\\xd4\\xd5\\xd6\\xf7\\xd8\\xd9\\xda\\xdb\\xdc\\xdd\\xde\\u0178\"}",
+    statement:"upper('¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"¡¢£¤¥¦§¨©ª«¬­®¯°±²³´Μ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ÷ØÙÚÛÜÝÞŸ"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u0100\\u0101\\u0102\\u0103\\u0104\\u0105\\u0106\\u0107\\u0108\\u0109\\u010a\\u010b\\u010c\\u010d\\u010e\\u010f\\u0110\\u0111\\u0112\\u0113\\u0114\\u0115\\u0116\\u0117\\u0118\\u0119\\u011a\\u011b\\u011c\\u011d\\u011e\\u011f\\u0120\\u0121\\u0122\\u0123\\u0124\\u0125\\u0126\\u0127\\u0128\\u0129\\u012a\\u012b\\u012c\\u012d\\u012e\\u012f\\u0131\\u0132\\u0133\\u0134\\u0135\\u0136\\u0137\\u0138\\u0139\\u013a\\u013b\\u013c\\u013d\\u013e\\u013f\\u0140\\u0141\\u0142\\u0143\\u0144\\u0145\\u0146\\u0147\\u0148\\u014a\\u014b\\u014c\\u014d\\u014e\\u014f\\u0150\\u0151\\u0152\\u0153\\u0154\\u0155\\u0156\\u0157\\u0158\\u0159\\u015a\\u015b\\u015c\\u015d\\u015e\\u015f\\u0160\\u0161\\u0162\\u0163\\u0164\\u0165\\u0166\\u0167\\u0168\\u0169\\u016a\\u016b\\u016c\\u016d\\u016e\\u016f\\u0170\\u0171\\u0172\\u0173\\u0174\\u0175\\u0176\\u0177\\u0178\\u0179\\u017a\\u017b\\u017c\\u017d\\u017e\",result:\"\\u0100\\u0100\\u0102\\u0102\\u0104\\u0104\\u0106\\u0106\\u0108\\u0108\\u010a\\u010a\\u010c\\u010c\\u010e\\u010e\\u0110\\u0110\\u0112\\u0112\\u0114\\u0114\\u0116\\u0116\\u0118\\u0118\\u011a\\u011a\\u011c\\u011c\\u011e\\u011e\\u0120\\u0120\\u0122\\u0122\\u0124\\u0124\\u0126\\u0126\\u0128\\u0128\\u012a\\u012a\\u012c\\u012c\\u012e\\u012eI\\u0132\\u0132\\u0134\\u0134\\u0136\\u0136\\u0138\\u0139\\u0139\\u013b\\u013b\\u013d\\u013d\\u013f\\u013f\\u0141\\u0141\\u0143\\u0143\\u0145\\u0145\\u0147\\u0147\\u014a\\u014a\\u014c\\u014c\\u014e\\u014e\\u0150\\u0150\\u0152\\u0152\\u0154\\u0154\\u0156\\u0156\\u0158\\u0158\\u015a\\u015a\\u015c\\u015c\\u015e\\u015e\\u0160\\u0160\\u0162\\u0162\\u0164\\u0164\\u0166\\u0166\\u0168\\u0168\\u016a\\u016a\\u016c\\u016c\\u016e\\u016e\\u0170\\u0170\\u0172\\u0172\\u0174\\u0174\\u0176\\u0176\\u0178\\u0179\\u0179\\u017b\\u017b\\u017d\\u017d\"}",
+    statement:"upper('ĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįıĲĳĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇňŊŋŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽž')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"ĀĀĂĂĄĄĆĆĈĈĊĊČČĎĎĐĐĒĒĔĔĖĖĘĘĚĚĜĜĞĞĠĠĢĢĤĤĦĦĨĨĪĪĬĬĮĮIĲĲĴĴĶĶĸĹĹĻĻĽĽĿĿŁŁŃŃŅŅŇŇŊŊŌŌŎŎŐŐŒŒŔŔŖŖŘŘŚŚŜŜŞŞŠŠŢŢŤŤŦŦŨŨŪŪŬŬŮŮŰŰŲŲŴŴŶŶŸŹŹŻŻŽŽ"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u0180\\u0181\\u0182\\u0183\\u0184\\u0185\\u0186\\u0187\\u0188\\u0189\\u018a\\u018b\\u018c\\u018d\\u018e\\u018f\\u0190\\u0191\\u0192\\u0193\\u0194\\u0195\\u0196\\u0197\\u0198\\u0199\\u019a\\u019b\\u019c\\u019d\\u019e\\u019f\\u01a0\\u01a1\\u01a2\\u01a3\\u01a4\\u01a5\\u01a6\\u01a7\\u01a8\\u01a9\\u01aa\\u01ab\\u01ac\\u01ad\\u01ae\\u01af\\u01b0\\u01b1\\u01b2\\u01b3\\u01b4\\u01b5\\u01b6\\u01b7\\u01b8\\u01b9\\u01ba\\u01bb\\u01bc\\u01bd\\u01be\\u01bf\\u01c0\\u01c1\\u01c2\\u01c3\\u01c4\\u01c5\\u01c6\\u01c7\\u01c8\\u01c9\\u01ca\\u01cb\\u01cc\\u01cd\\u01ce\\u01cf\\u01d0\\u01d1\\u01d2\\u01d3\\u01d4\\u01d5\\u01d6\\u01d7\\u01d8\\u01d9\\u01da\\u01db\\u01dc\\u01dd\\u01de\\u01df\\u01e0\\u01e1\\u01e2\\u01e3\\u01e4\\u01e5\\u01e6\\u01e7\\u01e8\\u01e9\\u01ea\\u01eb\\u01ec\\u01ed\\u01ee\\u01ef\\u01f0\\u01f1\\u01f2\\u01f3\\u01f4\\u01f5\\u01f6\\u01f7\\u01f8\\u01f9\\u01fa\\u01fb\\u01fc\\u01fd\\u01fe\\u01ff\\u0200\\u0201\\u0202\\u0203\\u0204\\u0205\\u0206\\u0207\\u0208\\u0209\\u020a\\u020b\\u020c\\u020d\\u020e\\u020f\\u0210\\u0211\\u0212\\u0213\\u0214\\u0215\\u0216\\u0217\\u0218\\u0219\\u021a\\u021b\\u021c\\u021d\\u021e\\u021f\\u0220\\u0221\\u0222\\u0223\\u0224\\u0225\\u0226\\u0227\\u0228\\u0229\\u022a\\u022b\\u022c\\u022d\\u022e\\u022f\\u0230\\u0231\\u0232\\u0233\\u0234\\u0235\\u0236\\u0237\\u0238\\u0239\\u023a\\u023b\\u023c\\u023d\\u023e\\u023f\\u0240\\u0241\\u0242\\u0243\\u0244\\u0245\\u0246\\u0247\\u0248\\u0249\\u024a\\u024b\\u024c\\u024d\\u024e\\u024f\",result:\"\\u0243\\u0181\\u0182\\u0182\\u0184\\u0184\\u0186\\u0187\\u0187\\u0189\\u018a\\u018b\\u018b\\u018d\\u018e\\u018f\\u0190\\u0191\\u0191\\u0193\\u0194\\u01f6\\u0196\\u0197\\u0198\\u0198\\u023d\\u019b\\u019c\\u019d\\u0220\\u019f\\u01a0\\u01a0\\u01a2\\u01a2\\u01a4\\u01a4\\u01a6\\u01a7\\u01a7\\u01a9\\u01aa\\u01ab\\u01ac\\u01ac\\u01ae\\u01af\\u01af\\u01b1\\u01b2\\u01b3\\u01b3\\u01b5\\u01b5\\u01b7\\u01b8\\u01b8\\u01ba\\u01bb\\u01bc\\u01bc\\u01be\\u01f7\\u01c0\\u01c1\\u01c2\\u01c3\\u01c4\\u01c4\\u01c4\\u01c7\\u01c7\\u01c7\\u01ca\\u01ca\\u01ca\\u01cd\\u01cd\\u01cf\\u01cf\\u01d1\\u01d1\\u01d3\\u01d3\\u01d5\\u01d5\\u01d7\\u01d7\\u01d9\\u01d9\\u01db\\u01db\\u018e\\u01de\\u01de\\u01e0\\u01e0\\u01e2\\u01e2\\u01e4\\u01e4\\u01e6\\u01e6\\u01e8\\u01e8\\u01ea\\u01ea\\u01ec\\u01ec\\u01ee\\u01eeJ\\u030c\\u01f1\\u01f1\\u01f1\\u01f4\\u01f4\\u01f6\\u01f7\\u01f8\\u01f8\\u01fa\\u01fa\\u01fc\\u01fc\\u01fe\\u01fe\\u0200\\u0200\\u0202\\u0202\\u0204\\u0204\\u0206\\u0206\\u0208\\u0208\\u020a\\u020a\\u020c\\u020c\\u020e\\u020e\\u0210\\u0210\\u0212\\u0212\\u0214\\u0214\\u0216\\u0216\\u0218\\u0218\\u021a\\u021a\\u021c\\u021c\\u021e\\u021e\\u0220\\u0221\\u0222\\u0222\\u0224\\u0224\\u0226\\u0226\\u0228\\u0228\\u022a\\u022a\\u022c\\u022c\\u022e\\u022e\\u0230\\u0230\\u0232\\u0232\\u0234\\u0235\\u0236\\u0237\\u0238\\u0239\\u023a\\u023b\\u023b\\u023d\\u023e\\u2c7e\\u2c7f\\u0241\\u0241\\u0243\\u0244\\u0245\\u0246\\u0246\\u0248\\u0248\\u024a\\u024a\\u024c\\u024c\\u024e\\u024e\"}",
+    statement:"upper('ƀƁƂƃƄƅƆƇƈƉƊƋƌƍƎƏƐƑƒƓƔƕƖƗƘƙƚƛƜƝƞƟƠơƢƣƤƥƦƧƨƩƪƫƬƭƮƯưƱƲƳƴƵƶƷƸƹƺƻƼƽƾƿǀǁǂǃǄǅǆǇǈǉǊǋǌǍǎǏǐǑǒǓǔǕǖǗǘǙǚǛǜǝǞǟǠǡǢǣǤǥǦǧǨǩǪǫǬǭǮǯǰǱǲǳǴǵǶǷǸǹǺǻǼǽǾǿȀȁȂȃȄȅȆȇȈȉȊȋȌȍȎȏȐȑȒȓȔȕȖȗȘșȚțȜȝȞȟȠȡȢȣȤȥȦȧȨȩȪȫȬȭȮȯȰȱȲȳȴȵȶȷȸȹȺȻȼȽȾȿɀɁɂɃɄɅɆɇɈɉɊɋɌɍɎɏ')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"ɃƁƂƂƄƄƆƇƇƉƊƋƋƍƎƏƐƑƑƓƔǶƖƗƘƘȽƛƜƝȠƟƠƠƢƢƤƤƦƧƧƩƪƫƬƬƮƯƯƱƲƳƳƵƵƷƸƸƺƻƼƼƾǷǀǁǂǃǄǄǄǇǇǇǊǊǊǍǍǏǏǑǑǓǓǕǕǗǗǙǙǛǛƎǞǞǠǠǢǢǤǤǦǦǨǨǪǪǬǬǮǮJ̌ǱǱǱǴǴǶǷǸǸǺǺǼǼǾǾȀȀȂȂȄȄȆȆȈȈȊȊȌȌȎȎȐȐȒȒȔȔȖȖȘȘȚȚȜȜȞȞȠȡȢȢȤȤȦȦȨȨȪȪȬȬȮȮȰȰȲȲȴȵȶȷȸȹȺȻȻȽȾⱾⱿɁɁɃɄɅɆɆɈɈɊɊɌɌɎɎ"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u2c60\\u2c61\\u2c62\\u2c63\\u2c64\\u2c65\\u2c66\\u2c67\\u2c68\\u2c69\\u2c6a\\u2c6b\\u2c6c\\u2c6d\\u2c6e\\u2c6f\\u2c70\\u2c71\\u2c72\\u2c73\\u2c74\\u2c75\\u2c76\\u2c77\\u2c78\\u2c79\\u2c7a\\u2c7b\\u2c7c\\u2c7d\\u2c7e\\u2c7f\",result:\"\\u2c60\\u2c60\\u2c62\\u2c63\\u2c64\\u023a\\u023e\\u2c67\\u2c67\\u2c69\\u2c69\\u2c6b\\u2c6b\\u2c6d\\u2c6e\\u2c6f\\u2c70\\u2c71\\u2c72\\u2c72\\u2c74\\u2c75\\u2c75\\u2c77\\u2c78\\u2c79\\u2c7a\\u2c7b\\u2c7c\\u2c7d\\u2c7e\\u2c7f\"}",
+    statement:"upper('ⱠⱡⱢⱣⱤⱥⱦⱧⱨⱩⱪⱫⱬⱭⱮⱯⱰⱱⱲⱳⱴⱵⱶⱷⱸⱹⱺⱻⱼⱽⱾⱿ')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"ⱠⱠⱢⱣⱤȺȾⱧⱧⱩⱩⱫⱫⱭⱮⱯⱰⱱⱲⱲⱴⱵⱵⱷⱸⱹⱺⱻⱼⱽⱾⱿ"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u8a71\\u5bb6\\u8eab\\u5727\\u8cbb\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\\u3041\\u3066\\u30c8\\u30ad\\u307b\\u30c3\\u0394\\u03d5\\u03be\\u0391\",result:\"\\u8a71\\u5bb6\\u8eab\\u5727\\u8cbb\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\\u3041\\u3066\\u30c8\\u30ad\\u307b\\u30c3\\u0394\\u03a6\\u039e\\u0391\"}",
+    statement:"upper('話家身圧費谷料村能計税金ぁてトキほッΔϕξΑ')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"話家身圧費谷料村能計税金ぁてトキほッΔΦΞΑ"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"undefined\",result:\"UNDEFINED\"}",
+    statement:"upper('undefined')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"UNDEFINED"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"undef\",result:\"UNDEF\"}",
+    statement:"upper('undef')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"UNDEF"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"null\",result:\"NULL\"}",
+    statement:"upper('null')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"NULL"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"NULL\",result:\"NULL\"}",
+    statement:"upper('NULL')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"NULL"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"(null)\",result:\"(NULL)\"}",
+    statement:"upper('(null)')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"(NULL)"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"nil\",result:\"NIL\"}",
+    statement:"upper('nil')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"NIL"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"NIL\",result:\"NIL\"}",
+    statement:"upper('NIL')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"NIL"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"true\",result:\"TRUE\"}",
+    statement:"upper('true')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"TRUE"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"false\",result:\"FALSE\"}",
+    statement:"upper('false')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"FALSE"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"True\",result:\"TRUE\"}",
+    statement:"upper('True')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"TRUE"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"False\",result:\"FALSE\"}",
+    statement:"upper('False')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"FALSE"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"TRUE\",result:\"TRUE\"}",
+    statement:"upper('TRUE')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"TRUE"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"FALSE\",result:\"FALSE\"}",
+    statement:"upper('FALSE')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"FALSE"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"None\",result:\"NONE\"}",
+    statement:"upper('None')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"NONE"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"hasOwnProperty\",result:\"HASOWNPROPERTY\"}",
+    statement:"upper('hasOwnProperty')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"HASOWNPROPERTY"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999\",result:\"999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999\"}",
+    statement:"upper('999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"123456789012345678901234567890123456789\",result:\"123456789012345678901234567890123456789\"}",
+    statement:"upper('123456789012345678901234567890123456789')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"123456789012345678901234567890123456789"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"0\",result:\"0\"}",
+    statement:"upper('0')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1\",result:\"1\"}",
+    statement:"upper('1')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1.00\",result:\"1.00\"}",
+    statement:"upper('1.00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1.00"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1.00\",result:\"1.00\"}",
+    statement:"upper('$1.00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"$1.00"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1/2\",result:\"1/2\"}",
+    statement:"upper('1/2')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1/2"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1E2\",result:\"1E2\"}",
+    statement:"upper('1E2')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1E2"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1E02\",result:\"1E02\"}",
+    statement:"upper('1E02')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1E02"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1E+02\",result:\"1E+02\"}",
+    statement:"upper('1E+02')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1E+02"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"-1\",result:\"-1\"}",
+    statement:"upper('-1')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"-1"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"-1.00\",result:\"-1.00\"}",
+    statement:"upper('-1.00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"-1.00"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"-1.00\",result:\"-1.00\"}",
+    statement:"upper('-$1.00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"-$1.00"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"-1/2\",result:\"-1/2\"}",
+    statement:"upper('-1/2')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"-1/2"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"-1E2\",result:\"-1E2\"}",
+    statement:"upper('-1E2')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"-1E2"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"-1E02\",result:\"-1E02\"}",
+    statement:"upper('-1E02')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"-1E02"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"-1E+02\",result:\"-1E+02\"}",
+    statement:"upper('-1E+02')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"-1E+02"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1/0\",result:\"1/0\"}",
+    statement:"upper('1/0')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1/0"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"0/0\",result:\"0/0\"}",
+    statement:"upper('0/0')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0/0"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"-2147483648/-1\",result:\"-2147483648/-1\"}",
+    statement:"upper('-2147483648/-1')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"-2147483648/-1"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"-9223372036854775808/-1\",result:\"-9223372036854775808/-1\"}",
+    statement:"upper('-9223372036854775808/-1')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"-9223372036854775808/-1"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"-0\",result:\"-0\"}",
+    statement:"upper('-0')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"-0"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"-0.0\",result:\"-0.0\"}",
+    statement:"upper('-0.0')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"-0.0"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"+0\",result:\"+0\"}",
+    statement:"upper('+0')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+0"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"+0.0\",result:\"+0.0\"}",
+    statement:"upper('+0.0')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+0.0"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"0.00\",result:\"0.00\"}",
+    statement:"upper('0.00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0.00"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"0..0\",result:\"0..0\"}",
+    statement:"upper('0..0')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0..0"
+    }
+  },
+  {
+    name:"upper valid cases{in:\".\",result:\".\"}",
+    statement:"upper('.')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"."
+    }
+  },
+  {
+    name:"upper valid cases{in:\"0.0.0\",result:\"0.0.0\"}",
+    statement:"upper('0.0.0')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0.0.0"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"0,00\",result:\"0,00\"}",
+    statement:"upper('0,00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0,00"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"0,,0\",result:\"0,,0\"}",
+    statement:"upper('0,,0')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0,,0"
+    }
+  },
+  {
+    name:"upper valid cases{in:\",\",result:\",\"}",
+    statement:"upper(',')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:","
+    }
+  },
+  {
+    name:"upper valid cases{in:\"0,0,0\",result:\"0,0,0\"}",
+    statement:"upper('0,0,0')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0,0,0"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"0.0/0\",result:\"0.0/0\"}",
+    statement:"upper('0.0/0')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0.0/0"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1.0/0.0\",result:\"1.0/0.0\"}",
+    statement:"upper('1.0/0.0')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1.0/0.0"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"0.0/0.0\",result:\"0.0/0.0\"}",
+    statement:"upper('0.0/0.0')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0.0/0.0"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1,0/0,0\",result:\"1,0/0,0\"}",
+    statement:"upper('1,0/0,0')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1,0/0,0"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"0,0/0,0\",result:\"0,0/0,0\"}",
+    statement:"upper('0,0/0,0')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0,0/0,0"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"--1\",result:\"--1\"}",
+    statement:"upper('--1')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"--1"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"-\",result:\"-\"}",
+    statement:"upper('-')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"-"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"-.\",result:\"-.\"}",
+    statement:"upper('-.')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"-."
+    }
+  },
+  {
+    name:"upper valid cases{in:\"-,\",result:\"-,\"}",
+    statement:"upper('-,')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"-,"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"NaN\",result:\"NAN\"}",
+    statement:"upper('NaN')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"NAN"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"Infinity\",result:\"INFINITY\"}",
+    statement:"upper('Infinity')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"INFINITY"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"-Infinity\",result:\"-INFINITY\"}",
+    statement:"upper('-Infinity')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"-INFINITY"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"INF\",result:\"INF\"}",
+    statement:"upper('INF')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"INF"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1#INF\",result:\"1#INF\"}",
+    statement:"upper('1#INF')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1#INF"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"-1#IND\",result:\"-1#IND\"}",
+    statement:"upper('-1#IND')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"-1#IND"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1#QNAN\",result:\"1#QNAN\"}",
+    statement:"upper('1#QNAN')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1#QNAN"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1#SNAN\",result:\"1#SNAN\"}",
+    statement:"upper('1#SNAN')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1#SNAN"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1#IND\",result:\"1#IND\"}",
+    statement:"upper('1#IND')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1#IND"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"0x0\",result:\"0X0\"}",
+    statement:"upper('0x0')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0X0"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"0xffffffff\",result:\"0XFFFFFFFF\"}",
+    statement:"upper('0xffffffff')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0XFFFFFFFF"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"0xffffffffffffffff\",result:\"0XFFFFFFFFFFFFFFFF\"}",
+    statement:"upper('0xffffffffffffffff')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0XFFFFFFFFFFFFFFFF"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"0xabad1dea\",result:\"0XABAD1DEA\"}",
+    statement:"upper('0xabad1dea')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0XABAD1DEA"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1,000.00\",result:\"1,000.00\"}",
+    statement:"upper('1,000.00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1,000.00"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1 000.00\",result:\"1 000.00\"}",
+    statement:"upper('1 000.00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1 000.00"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1,000,000.00\",result:\"1,000,000.00\"}",
+    statement:"upper('1,000,000.00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1,000,000.00"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1 000 000.00\",result:\"1 000 000.00\"}",
+    statement:"upper('1 000 000.00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1 000 000.00"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1.000,00\",result:\"1.000,00\"}",
+    statement:"upper('1.000,00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1.000,00"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1 000,00\",result:\"1 000,00\"}",
+    statement:"upper('1 000,00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1 000,00"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1.000.000,00\",result:\"1.000.000,00\"}",
+    statement:"upper('1.000.000,00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1.000.000,00"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"1 000 000,00\",result:\"1 000 000,00\"}",
+    statement:"upper('1 000 000,00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1 000 000,00"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"01000\",result:\"01000\"}",
+    statement:"upper('01000')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"01000"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"08\",result:\"08\"}",
+    statement:"upper('08')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"08"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"09\",result:\"09\"}",
+    statement:"upper('09')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"09"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"2.2250738585072011e-308\",result:\"2.2250738585072011E-308\"}",
+    statement:"upper('2.2250738585072011e-308')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"2.2250738585072011E-308"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",result:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\"}",
+    statement:"upper('ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"<>?:\\\"{}|_+\",result:\"<>?:\\\"{}|_+\"}",
+    statement:"upper('<>?:\"{}|_+')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"<>?:\"{}|_+"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"!@#%^&*()`~\",result:\"!@#%^&*()`~\"}",
+    statement:"upper('!@#$%^&*()`~')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"!@#$%^&*()`~"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u03a9\\u2248\\xe7\\u221a\\u222b\\u02dc\\xb5\\u2264\\u2265\\xf7\",result:\"\\u03a9\\u2248\\xc7\\u221a\\u222b\\u02dc\\u039c\\u2264\\u2265\\xf7\"}",
+    statement:"upper('Ω≈ç√∫˜µ≤≥÷')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Ω≈Ç√∫˜Μ≤≥÷"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\xe5\\xdf\\u2202\\u0192\\xa9\\u02d9\\u2206\\u02da\\xac\\u2026\\xe6\",result:\"\\xc5SS\\u2202\\u0191\\xa9\\u02d9\\u2206\\u02da\\xac\\u2026\\xc6\"}",
+    statement:"upper('åß∂ƒ©˙∆˚¬…æ')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"ÅSS∂Ƒ©˙∆˚¬…Æ"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u0153\\u2211\\xb4\\xae\\u2020\\xa5\\xa8\\u02c6\\xf8\\u03c0\\u201c\\u2018\",result:\"\\u0152\\u2211\\xb4\\xae\\u2020\\xa5\\xa8\\u02c6\\xd8\\u03a0\\u201c\\u2018\"}",
+    statement:"upper('œ∑´®†¥¨ˆøπ“‘')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Œ∑´®†¥¨ˆØΠ“‘"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\xa1\\u2122\\xa3\\xa2\\u221e\\xa7\\xb6\\u2022\\xaa\\xba\\u2013\\u2260\",result:\"\\xa1\\u2122\\xa3\\xa2\\u221e\\xa7\\xb6\\u2022\\xaa\\xba\\u2013\\u2260\"}",
+    statement:"upper('¡™£¢∞§¶•ªº–≠')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"¡™£¢∞§¶•ªº–≠"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\xb8\\u02db\\xc7\\u25ca\\u0131\\u02dc\\xc2\\xaf\\u02d8\\xbf\",result:\"\\xb8\\u02db\\xc7\\u25caI\\u02dc\\xc2\\xaf\\u02d8\\xbf\"}",
+    statement:"upper('¸˛Ç◊ı˜Â¯˘¿')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"¸˛Ç◊I˜Â¯˘¿"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\xc5\\xcd\\xce\\xcf\\u02dd\\xd3\\xd4\\uf8ff\\xd2\\xda\\xc6\\u2603\",result:\"\\xc5\\xcd\\xce\\xcf\\u02dd\\xd3\\xd4\\uf8ff\\xd2\\xda\\xc6\\u2603\"}",
+    statement:"upper('ÅÍÎÏ˝ÓÔÒÚÆ☃')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"ÅÍÎÏ˝ÓÔÒÚÆ☃"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u0152\\u201e\\xb4\\u2030\\u02c7\\xc1\\xa8\\u02c6\\xd8\\u220f\\u201d\\u2019\",result:\"\\u0152\\u201e\\xb4\\u2030\\u02c7\\xc1\\xa8\\u02c6\\xd8\\u220f\\u201d\\u2019\"}",
+    statement:"upper('Œ„´‰ˇÁ¨ˆØ∏”’')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Œ„´‰ˇÁ¨ˆØ∏”’"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"`\\u2044\\u20ac\\u2039\\u203a\\ufb01\\ufb02\\u2021\\xb0\\xb7\\u201a\\u2014\\xb1\",result:\"`\\u2044\\u20ac\\u2039\\u203aFIFL\\u2021\\xb0\\xb7\\u201a\\u2014\\xb1\"}",
+    statement:"upper('`⁄€‹›ﬁﬂ‡°·‚—±')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"`⁄€‹›FIFL‡°·‚—±"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u215b\\u215c\\u215d\\u215e\",result:\"\\u215b\\u215c\\u215d\\u215e\"}",
+    statement:"upper('⅛⅜⅝⅞')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"⅛⅜⅝⅞"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u0660\\u0661\\u0662\\u0663\\u0664\\u0665\\u0666\\u0667\\u0668\\u0669\",result:\"\\u0660\\u0661\\u0662\\u0663\\u0664\\u0665\\u0666\\u0667\\u0668\\u0669\"}",
+    statement:"upper('٠١٢٣٤٥٦٧٨٩')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"٠١٢٣٤٥٦٧٨٩"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u7530\\u4e2d\\u3055\\u3093\\u306b\\u3042\\u3052\\u3066\\u4e0b\\u3055\\u3044\",result:\"\\u7530\\u4e2d\\u3055\\u3093\\u306b\\u3042\\u3052\\u3066\\u4e0b\\u3055\\u3044\"}",
+    statement:"upper('田中さんにあげて下さい')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"田中さんにあげて下さい"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u30d1\\u30fc\\u30c6\\u30a3\\u30fc\\u3078\\u884c\\u304b\\u306a\\u3044\\u304b\",result:\"\\u30d1\\u30fc\\u30c6\\u30a3\\u30fc\\u3078\\u884c\\u304b\\u306a\\u3044\\u304b\"}",
+    statement:"upper('パーティーへ行かないか')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"パーティーへ行かないか"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u548c\\u88fd\\u6f22\\u8a9e\",result:\"\\u548c\\u88fd\\u6f22\\u8a9e\"}",
+    statement:"upper('和製漢語')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"和製漢語"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u90e8\\u843d\\u683c\",result:\"\\u90e8\\u843d\\u683c\"}",
+    statement:"upper('部落格')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"部落格"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\uc0ac\\ud68c\\uacfc\\ud559\\uc6d0 \\uc5b4\\ud559\\uc5f0\\uad6c\\uc18c\",result:\"\\uc0ac\\ud68c\\uacfc\\ud559\\uc6d0 \\uc5b4\\ud559\\uc5f0\\uad6c\\uc18c\"}",
+    statement:"upper('사회과학원 어학연구소')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"사회과학원 어학연구소"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\ucc26\\ucc28\\ub97c \\ud0c0\\uace0 \\uc628 \\ud3b2\\uc2dc\\ub9e8\\uacfc \\uc45b\\ub2e4\\ub9ac \\ub620\\ubc29\\uac01\\ud558\",result:\"\\ucc26\\ucc28\\ub97c \\ud0c0\\uace0 \\uc628 \\ud3b2\\uc2dc\\ub9e8\\uacfc \\uc45b\\ub2e4\\ub9ac \\ub620\\ubc29\\uac01\\ud558\"}",
+    statement:"upper('찦차를 타고 온 펲시맨과 쑛다리 똠방각하')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"찦차를 타고 온 펲시맨과 쑛다리 똠방각하"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u793e\\u6703\\u79d1\\u5b78\\u9662\\u8a9e\\u5b78\\u7814\\u7a76\\u6240\",result:\"\\u793e\\u6703\\u79d1\\u5b78\\u9662\\u8a9e\\u5b78\\u7814\\u7a76\\u6240\"}",
+    statement:"upper('社會科學院語學研究所')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"社會科學院語學研究所"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\uc6b8\\ub780\\ubc14\\ud1a0\\ub974\",result:\"\\uc6b8\\ub780\\ubc14\\ud1a0\\ub974\"}",
+    statement:"upper('울란바토르')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"울란바토르"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\U0002070e\\U00020731\\U00020779\\U00020c53\\U00020c78\\U00020c96\\U00020ccf\",result:\"\\U0002070e\\U00020731\\U00020779\\U00020c53\\U00020c78\\U00020c96\\U00020ccf\"}",
+    statement:"upper('𠜎𠜱𠝹𠱓𠱸𠲖𠳏')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"𠜎𠜱𠝹𠱓𠱸𠲖𠳏"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u023a\",result:\"\\u023a\"}",
+    statement:"upper('Ⱥ')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Ⱥ"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u023e\",result:\"\\u023e\"}",
+    statement:"upper('Ⱦ')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Ⱦ"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u30fd\\u0f3c\\u0e88\\u0644\\u035c\\u0e88\\u0f3d\\uff89 \\u30fd\\u0f3c\\u0e88\\u0644\\u035c\\u0e88\\u0f3d\\uff89\",result:\"\\u30fd\\u0f3c\\u0e88\\u0644\\u035c\\u0e88\\u0f3d\\uff89 \\u30fd\\u0f3c\\u0e88\\u0644\\u035c\\u0e88\\u0f3d\\uff89\"}",
+    statement:"upper('ヽ༼ຈل͜ຈ༽ﾉ ヽ༼ຈل͜ຈ༽ﾉ')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"ヽ༼ຈل͜ຈ༽ﾉ ヽ༼ຈل͜ຈ༽ﾉ"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"(\\uff61\\u25d5 \\u2200 \\u25d5\\uff61)\",result:\"(\\uff61\\u25d5 \\u2200 \\u25d5\\uff61)\"}",
+    statement:"upper('(｡◕ ∀ ◕｡)')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"(｡◕ ∀ ◕｡)"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\uff40\\uff68(\\xb4\\u2200\\uff40\\u2229\",result:\"\\uff40\\uff68(\\xb4\\u2200\\uff40\\u2229\"}",
+    statement:"upper('｀ｨ(´∀｀∩')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"｀ｨ(´∀｀∩"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"__\\uff9b(,_,*)\",result:\"__\\uff9b(,_,*)\"}",
+    statement:"upper('__ﾛ(,_,*)')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"__ﾛ(,_,*)"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u30fb(\\uffe3\\u2200\\uffe3)\\u30fb:*:\",result:\"\\u30fb(\\uffe3\\u2200\\uffe3)\\u30fb:*:\"}",
+    statement:"upper('・(￣∀￣)・:*:')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"・(￣∀￣)・:*:"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\uff9f\\uff65\\u273f\\u30fe\\u2572(\\uff61\\u25d5\\u203f\\u25d5\\uff61)\\u2571\\u273f\\uff65\\uff9f\",result:\"\\uff9f\\uff65\\u273f\\u30fe\\u2572(\\uff61\\u25d5\\u203f\\u25d5\\uff61)\\u2571\\u273f\\uff65\\uff9f\"}",
+    statement:"upper('ﾟ･✿ヾ╲(｡◕‿◕｡)╱✿･ﾟ')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"ﾟ･✿ヾ╲(｡◕‿◕｡)╱✿･ﾟ"
+    }
+  },
+  {
+    name:"upper valid cases{in:\",\\u3002\\u30fb:*:\\u30fb\\u309c\\u2019( \\u263b \\u03c9 \\u263b )\\u3002\\u30fb:*:\\u30fb\\u309c\\u2019\",result:\",\\u3002\\u30fb:*:\\u30fb\\u309c\\u2019( \\u263b \\u03a9 \\u263b )\\u3002\\u30fb:*:\\u30fb\\u309c\\u2019\"}",
+    statement:"upper(',。・:*:・゜’( ☻ ω ☻ )。・:*:・゜’')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:",。・:*:・゜’( ☻ Ω ☻ )。・:*:・゜’"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"(\\u256f\\xb0\\u25a1\\xb0\\uff09\\u256f\\ufe35 \\u253b\\u2501\\u253b)\",result:\"(\\u256f\\xb0\\u25a1\\xb0\\uff09\\u256f\\ufe35 \\u253b\\u2501\\u253b)\"}",
+    statement:"upper('(╯°□°）╯︵ ┻━┻)')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"(╯°□°）╯︵ ┻━┻)"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"(\\uff89\\u0ca5\\u76ca\\u0ca5\\uff09\\uff89\\ufeff \\u253b\\u2501\\u253b\",result:\"(\\uff89\\u0ca5\\u76ca\\u0ca5\\uff09\\uff89\\ufeff \\u253b\\u2501\\u253b\"}",
+    statement:"upper('(ﾉಥ益ಥ）ﾉ﻿ ┻━┻')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"(ﾉಥ益ಥ）ﾉ﻿ ┻━┻"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u252c\\u2500\\u252c\\u30ce( \\xba _ \\xba\\u30ce)\",result:\"\\u252c\\u2500\\u252c\\u30ce( \\xba _ \\xba\\u30ce)\"}",
+    statement:"upper('┬─┬ノ( º _ ºノ)')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"┬─┬ノ( º _ ºノ)"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"( \\u0361\\xb0 \\u035c\\u0296 \\u0361\\xb0)\",result:\"( \\u0361\\xb0 \\u035c\\u0296 \\u0361\\xb0)\"}",
+    statement:"upper('( ͡° ͜ʖ ͡°)')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"( ͡° ͜ʖ ͡°)"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\U0001f60d\",result:\"\\U0001f60d\"}",
+    statement:"upper('😍')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"😍"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\U0001f469\\U0001f3fd\",result:\"\\U0001f469\\U0001f3fd\"}",
+    statement:"upper('👩🏽')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"👩🏽"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\U0001f47e \\U0001f647 \\U0001f481 \\U0001f645 \\U0001f646 \\U0001f64b \\U0001f64e \\U0001f64d\",result:\"\\U0001f47e \\U0001f647 \\U0001f481 \\U0001f645 \\U0001f646 \\U0001f64b \\U0001f64e \\U0001f64d\"}",
+    statement:"upper('👾 🙇 💁 🙅 🙆 🙋 🙎 🙍')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"👾 🙇 💁 🙅 🙆 🙋 🙎 🙍"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\U0001f435 \\U0001f648 \\U0001f649 \\U0001f64a\",result:\"\\U0001f435 \\U0001f648 \\U0001f649 \\U0001f64a\"}",
+    statement:"upper('🐵 🙈 🙉 🙊')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"🐵 🙈 🙉 🙊"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u2764\\ufe0f \\U0001f494 \\U0001f48c \\U0001f495 \\U0001f49e \\U0001f493 \\U0001f497 \\U0001f496 \\U0001f498 \\U0001f49d \\U0001f49f \\U0001f49c \\U0001f49b \\U0001f49a \\U0001f499\",result:\"\\u2764\\ufe0f \\U0001f494 \\U0001f48c \\U0001f495 \\U0001f49e \\U0001f493 \\U0001f497 \\U0001f496 \\U0001f498 \\U0001f49d \\U0001f49f \\U0001f49c \\U0001f49b \\U0001f49a \\U0001f499\"}",
+    statement:"upper('❤️ 💔 💌 💕 💞 💓 💗 💖 💘 💝 💟 💜 💛 💚 💙')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"❤️ 💔 💌 💕 💞 💓 💗 💖 💘 💝 💟 💜 💛 💚 💙"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\u270b\\U0001f3ff \\U0001f4aa\\U0001f3ff \\U0001f450\\U0001f3ff \\U0001f64c\\U0001f3ff \\U0001f44f\\U0001f3ff \\U0001f64f\\U0001f3ff\",result:\"\\u270b\\U0001f3ff \\U0001f4aa\\U0001f3ff \\U0001f450\\U0001f3ff \\U0001f64c\\U0001f3ff \\U0001f44f\\U0001f3ff \\U0001f64f\\U0001f3ff\"}",
+    statement:"upper('✋🏿 💪🏿 👐🏿 🙌🏿 👏🏿 🙏🏿')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"✋🏿 💪🏿 👐🏿 🙌🏿 👏🏿 🙏🏿"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\U0001f6be \\U0001f192 \\U0001f193 \\U0001f195 \\U0001f196 \\U0001f197 \\U0001f199 \\U0001f3e7\",result:\"\\U0001f6be \\U0001f192 \\U0001f193 \\U0001f195 \\U0001f196 \\U0001f197 \\U0001f199 \\U0001f3e7\"}",
+    statement:"upper('🚾 🆒 🆓 🆕 🆖 🆗 🆙 🏧')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"🚾 🆒 🆓 🆕 🆖 🆗 🆙 🏧"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"0\\ufe0f\\u20e3 1\\ufe0f\\u20e3 2\\ufe0f\\u20e3 3\\ufe0f\\u20e3 4\\ufe0f\\u20e3 5\\ufe0f\\u20e3 6\\ufe0f\\u20e3 7\\ufe0f\\u20e3 8\\ufe0f\\u20e3 9\\ufe0f\\u20e3 \\U0001f51f\",result:\"0\\ufe0f\\u20e3 1\\ufe0f\\u20e3 2\\ufe0f\\u20e3 3\\ufe0f\\u20e3 4\\ufe0f\\u20e3 5\\ufe0f\\u20e3 6\\ufe0f\\u20e3 7\\ufe0f\\u20e3 8\\ufe0f\\u20e3 9\\ufe0f\\u20e3 \\U0001f51f\"}",
+    statement:"upper('0️⃣ 1️⃣ 2️⃣ 3️⃣ 4️⃣ 5️⃣ 6️⃣ 7️⃣ 8️⃣ 9️⃣ 🔟')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0️⃣ 1️⃣ 2️⃣ 3️⃣ 4️⃣ 5️⃣ 6️⃣ 7️⃣ 8️⃣ 9️⃣ 🔟"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\U0001f1fa\\U0001f1f8\\U0001f1f7\\U0001f1fa\\U0001f1f8 \\U0001f1e6\\U0001f1eb\\U0001f1e6\\U0001f1f2\\U0001f1f8\",result:\"\\U0001f1fa\\U0001f1f8\\U0001f1f7\\U0001f1fa\\U0001f1f8 \\U0001f1e6\\U0001f1eb\\U0001f1e6\\U0001f1f2\\U0001f1f8\"}",
+    statement:"upper('🇺🇸🇷🇺🇸 🇦🇫🇦🇲🇸')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"🇺🇸🇷🇺🇸 🇦🇫🇦🇲🇸"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\U0001f1fa\\U0001f1f8\\U0001f1f7\\U0001f1fa\\U0001f1f8\\U0001f1e6\\U0001f1eb\\U0001f1e6\\U0001f1f2\",result:\"\\U0001f1fa\\U0001f1f8\\U0001f1f7\\U0001f1fa\\U0001f1f8\\U0001f1e6\\U0001f1eb\\U0001f1e6\\U0001f1f2\"}",
+    statement:"upper('🇺🇸🇷🇺🇸🇦🇫🇦🇲')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"🇺🇸🇷🇺🇸🇦🇫🇦🇲"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\U0001f1fa\\U0001f1f8\\U0001f1f7\\U0001f1fa\\U0001f1f8\\U0001f1e6\",result:\"\\U0001f1fa\\U0001f1f8\\U0001f1f7\\U0001f1fa\\U0001f1f8\\U0001f1e6\"}",
+    statement:"upper('🇺🇸🇷🇺🇸🇦')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"🇺🇸🇷🇺🇸🇦"
+    }
+  },
+  {
+    name:"upper valid cases{in:\"\\uff34\\uff48\\uff45 \\uff51\\uff55\\uff49\\uff43\\uff4b \\uff42\\uff52\\uff4f\\uff57\\uff4e \\uff46\\uff4f\\uff58 \\uff4a\\uff55\\uff4d\\uff50\\uff53 \\uff2f\\uff36\\uff25\\uff32 \\uff34\\uff28\\uff25 \\uff4c\\uff41\\uff5a\\uff59 \\uff44\\uff4f\\uff47\",result:\"\\uff34\\uff28\\uff25 \\uff31\\uff35\\uff29\\uff23\\uff2b \\uff22\\uff32\\uff2f\\uff37\\uff2e \\uff26\\uff2f\\uff38 \\uff2a\\uff35\\uff2d\\uff30\\uff33 \\uff2f\\uff36\\uff25\\uff32 \\uff34\\uff28\\uff25 \\uff2c\\uff21\\uff3a\\uff39 \\uff24\\uff2f\\uff27\"}",
+    statement:"upper('Ｔｈｅ ｑｕｉｃｋ ｂｒｏｗｎ ｆｏｘ ｊｕｍｐｓ ＯＶＥＲ ＴＨＥ ｌａｚｙ ｄｏｇ')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"ＴＨＥ ＱＵＩＣＫ ＢＲＯＷＮ ＦＯＸ ＪＵＭＰＳ ＯＶＥＲ ＴＨＥ ＬＡＺＹ ＤＯＧ"
+    }
+  },
+  {
+    name:"upper null and missing propagation{param:\"null\"}",
+    statement:"upper(null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"upper null and missing propagation{param:\"missing\"}",
+    statement:"upper(missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+]

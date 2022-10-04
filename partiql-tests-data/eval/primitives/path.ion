@@ -512,3 +512,255 @@ pathUnpivotMissing::[
     }
   }
 ]
+
+'path-expressions'::[
+  envs::{
+    test_struct:{
+      unambiguous_field:"this is unambiguous_field",
+      ambiguous_field:"this is ambiguous_field (lowercase)",
+      AMBIGUOUS_FIELD:"this is AMBIGUOUS_FIELD (uppercase)",
+      unambiguous_lookup_field:"this is unambiguous_lookup_field",
+      ambiguous_lookup_field:"this is ambiguous_lookup_field (lowercase)",
+      AMBIGUOUS_LOOKUP_FIELD:"this is AMBIGUOUS_LOOKUP_FIELD (uppercase)"
+    },
+    unambiguous_variable:"unambiguous_lookup_field",
+    ambiguous_case_variable:"ambiguous_lookup_field",
+    AMBIGUOUS_CASE_VARIABLE:"AMBIGUOUS_LOOKUP_FIELD",
+    table1:[
+      {
+        f:"this is from table1"
+      }
+    ],
+    table2:[
+      {
+        f:"this is from table2"
+      }
+    ]
+  },
+  {
+    name:"dotted path expression with unquoted identifiers accesses field unambiguous_field (lowercase)",
+    statement:"test_struct.unambiguous_field",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"this is unambiguous_field"
+    }
+  },
+  {
+    name:"dotted path expression with unquoted identifiers accesses field UNAMBIGUOUS_FIELD (uppercase)",
+    statement:"test_struct.UNAMBIGUOUS_FIELD",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"this is unambiguous_field"
+    }
+  },
+  {
+    name:"dotted path expression with quoted field name accesses field unambiguous_field (lowercase)",
+    statement:"test_struct.\"unambiguous_field\"",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"this is unambiguous_field"
+    }
+  },
+  {
+    name:"dotted path expression with quoted field name accesses field UNAMBIGUOUS_FIELD (uppercase)",
+    statement:"test_struct.\"UNAMBIGUOUS_FIELD\"",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"dotted path expression with quoted field name accesses field ambiguous_field (lowercase)",
+    statement:"test_struct.\"ambiguous_field\"",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"this is ambiguous_field (lowercase)"
+    }
+  },
+  {
+    name:"dotted path expression with quoted field name accesses field AMBIGUOUS_FIELD (uppercase)",
+    statement:"test_struct.\"AMBIGUOUS_FIELD\"",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"this is AMBIGUOUS_FIELD (uppercase)"
+    }
+  },
+  {
+    name:"subscript with variable in lowercase",
+    statement:"test_struct[unambiguous_variable]",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"this is unambiguous_lookup_field"
+    }
+  },
+  {
+    name:"subscript with variable in uppercase",
+    statement:"test_struct[UNAMBIGUOUS_VARIABLE]",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"this is unambiguous_lookup_field"
+    }
+  },
+  {
+    name:"subscript with variable in mixed case",
+    statement:"test_struct[uNaMbiGuOuS_VaRiAbLE]",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"this is unambiguous_lookup_field"
+    }
+  },
+  {
+    name:"subscript with literal string in lowercase",
+    statement:"test_struct['ambiguous_lookup_field']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"this is ambiguous_lookup_field (lowercase)"
+    }
+  },
+  {
+    name:"subscript with literal string in uppercase",
+    statement:"test_struct['AMBIGUOUS_LOOKUP_FIELD']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"this is AMBIGUOUS_LOOKUP_FIELD (uppercase)"
+    }
+  },
+  {
+    name:"subscript with non-existent variable in lowercase",
+    statement:"test_struct[unambiguous_field]",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"subscript with non-existent variable in uppercase",
+    statement:"test_struct[TEST_FIELD]",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"path expression with table alias in uppercase",
+    statement:"SELECT AN_ALIAS.f FROM table1 as an_alias",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          f:"this is from table1"
+        }
+      ]
+    }
+  },
+  {
+    name:"path expression with table alias in lowercase",
+    statement:"SELECT an_alias.f FROM table1 as AN_ALIAS",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          f:"this is from table1"
+        }
+      ]
+    }
+  },
+  {
+    name:"path expression with ambiguous table alias (lowercase)",
+    statement:"SELECT \"an_alias\".f FROM table1 AS an_alias, table2 AS AN_ALIAS",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          f:"this is from table1"
+        }
+      ]
+    }
+  },
+  {
+    name:"path expression with ambiguous table alias (uppercase)",
+    statement:"SELECT \"AN_ALIAS\".f FROM table1 AS an_alias, table2 AS AN_ALIAS",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          f:"this is from table2"
+        }
+      ]
+    }
+  }
+]

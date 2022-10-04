@@ -1,0 +1,638 @@
+'null'::[
+  {
+    name:"null pass through{sql:\"`null.null`\",result:null}",
+    statement:"`null.null`",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"null pass through{sql:\"`null.bool`\",result:null.bool}",
+    statement:"`null.bool`",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null.bool
+    }
+  },
+  {
+    name:"null pass through{sql:\"`null.int`\",result:null.int}",
+    statement:"`null.int`",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null.int
+    }
+  },
+  {
+    name:"null pass through{sql:\"`null.decimal`\",result:null.decimal}",
+    statement:"`null.decimal`",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null.decimal
+    }
+  },
+  {
+    name:"null pass through{sql:\"`null.string`\",result:null.string}",
+    statement:"`null.string`",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null.string
+    }
+  },
+  {
+    name:"null pass through{sql:\"`null.symbol`\",result:null.symbol}",
+    statement:"`null.symbol`",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null.symbol
+    }
+  },
+  {
+    name:"null pass through{sql:\"`null.clob`\",result:null.clob}",
+    statement:"`null.clob`",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null.clob
+    }
+  },
+  {
+    name:"null pass through{sql:\"`null.blob`\",result:null.blob}",
+    statement:"`null.blob`",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null.blob
+    }
+  },
+  {
+    name:"null pass through{sql:\"`null.list`\",result:null.list}",
+    statement:"`null.list`",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null.list
+    }
+  },
+  {
+    name:"null pass through{sql:\"`null.struct`\",result:null.struct}",
+    statement:"`null.struct`",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null.struct
+    }
+  },
+  {
+    name:"null pass through{sql:\"`null.sexp`\",result:null.sexp}",
+    statement:"`null.sexp`",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null.sexp
+    }
+  },
+  {
+    name:"null comparison{sql:\"NULL\",result:null}",
+    statement:"NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"null comparison{sql:\"MISSING\",result:missing::null}",
+    statement:"MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"null comparison{sql:\"NULL IS NULL\",result:true}",
+    statement:"NULL IS NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"null comparison{sql:\"MISSING IS NULL\",result:true}",
+    statement:"MISSING IS NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"null comparison{sql:\"NULL IS MISSING\",result:false}",
+    statement:"NULL IS MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"null comparison{sql:\"MISSING IS MISSING\",result:true}",
+    statement:"MISSING IS MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.null` IS NULL\",result:true}",
+    statement:"`null.null` IS NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.bool` IS NULL\",result:true}",
+    statement:"`null.bool` IS NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.int` IS NULL\",result:true}",
+    statement:"`null.int` IS NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.decimal` IS NULL\",result:true}",
+    statement:"`null.decimal` IS NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.string` IS NULL\",result:true}",
+    statement:"`null.string` IS NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.symbol` IS NULL\",result:true}",
+    statement:"`null.symbol` IS NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.clob` IS NULL\",result:true}",
+    statement:"`null.clob` IS NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.blob` IS NULL\",result:true}",
+    statement:"`null.blob` IS NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.list` IS NULL\",result:true}",
+    statement:"`null.list` IS NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.struct` IS NULL\",result:true}",
+    statement:"`null.struct` IS NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.sexp` IS NULL\",result:true}",
+    statement:"`null.sexp` IS NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"null comparison{sql:\"NULL = NULL\",result:null}",
+    statement:"NULL = NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"null comparison{sql:\"MISSING = NULL\",result:missing::null}",
+    statement:"MISSING = NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"null comparison{sql:\"NULL = MISSING\",result:missing::null}",
+    statement:"NULL = MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.null` = NULL\",result:null}",
+    statement:"`null.null` = NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.bool` = NULL\",result:null}",
+    statement:"`null.bool` = NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.int` = NULL\",result:null}",
+    statement:"`null.int` = NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.decimal` = NULL\",result:null}",
+    statement:"`null.decimal` = NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.string` = NULL\",result:null}",
+    statement:"`null.string` = NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.symbol` = NULL\",result:null}",
+    statement:"`null.symbol` = NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.clob` = NULL\",result:null}",
+    statement:"`null.clob` = NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.blob` = NULL\",result:null}",
+    statement:"`null.blob` = NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.list` = NULL\",result:null}",
+    statement:"`null.list` = NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.struct` = NULL\",result:null}",
+    statement:"`null.struct` = NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.sexp` = NULL\",result:null}",
+    statement:"`null.sexp` = NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.null` = MISSING\",result:missing::null}",
+    statement:"`null.null` = MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.bool` = MISSING\",result:missing::null}",
+    statement:"`null.bool` = MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.int` = MISSING\",result:missing::null}",
+    statement:"`null.int` = MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.decimal` = MISSING\",result:missing::null}",
+    statement:"`null.decimal` = MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.string` = MISSING\",result:missing::null}",
+    statement:"`null.string` = MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.symbol` = MISSING\",result:missing::null}",
+    statement:"`null.symbol` = MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.clob` = MISSING\",result:missing::null}",
+    statement:"`null.clob` = MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.blob` = MISSING\",result:missing::null}",
+    statement:"`null.blob` = MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.list` = MISSING\",result:missing::null}",
+    statement:"`null.list` = MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.struct` = MISSING\",result:missing::null}",
+    statement:"`null.struct` = MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"null comparison{sql:\"`null.sexp` = MISSING\",result:missing::null}",
+    statement:"`null.sexp` = MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  }
+]

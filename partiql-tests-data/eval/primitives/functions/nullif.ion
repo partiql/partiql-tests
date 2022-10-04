@@ -1,0 +1,159 @@
+nullif::[
+  {
+    name:"nullif valid cases{first:\"1\",second:\"1\",result:null}",
+    statement:"nullif(1, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"nullif valid cases{first:\"1.0\",second:\"1\",result:null}",
+    statement:"nullif(1.0, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"nullif valid cases{first:\"1\",second:\"2\",result:1}",
+    statement:"nullif(1, 2)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"nullif valid cases{first:\"2\",second:\"'2'\",result:2}",
+    statement:"nullif(2, '2')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"nullif valid cases{first:\"{}\",second:\"{}\",result:null}",
+    statement:"nullif({}, {})",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"nullif valid cases{first:\"[]\",second:\"[]\",result:null}",
+    statement:"nullif([], [])",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"nullif valid cases{first:\"{}\",second:\"[]\",result:{}}",
+    statement:"nullif({}, [])",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+      }
+    }
+  },
+  {
+    name:"nullif valid cases{first:\"1\",second:\"null\",result:1}",
+    statement:"nullif(1, null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"nullif valid cases{first:\"null\",second:\"1\",result:null}",
+    statement:"nullif(null, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"nullif valid cases{first:\"null\",second:\"null\",result:null}",
+    statement:"nullif(null, null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"nullif valid cases{first:\"1\",second:\"missing\",result:1}",
+    statement:"nullif(1, missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"nullif valid cases{first:\"missing\",second:\"1\",result:missing::null}",
+    statement:"nullif(missing, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"nullif valid cases{first:\"missing\",second:\"missing\",result:null}",
+    statement:"nullif(missing, missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+]

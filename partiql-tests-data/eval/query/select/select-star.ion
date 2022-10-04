@@ -1,0 +1,187 @@
+'select-star'::[
+  envs::{
+    personnel:[
+      {
+        first_name:"Jean Luc",
+        last_name:"Picard"
+      }
+    ],
+    ships:[
+      {
+        id:Enterprise,
+        registry:"NCC-1701-D"
+      }
+    ],
+    ranks:{
+      commander:{
+        first_name:"William",
+        last_name:"Riker"
+      }
+    }
+  },
+  {
+    name:"* with no aliases on a single table (personnel)",
+    statement:"SELECT * FROM personnel",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          first_name:"Jean Luc",
+          last_name:"Picard"
+        }
+      ]
+    }
+  },
+  {
+    name:"* with no aliases on a single table (ships)",
+    statement:"SELECT * FROM ships",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          id:Enterprise,
+          registry:"NCC-1701-D"
+        }
+      ]
+    }
+  },
+  {
+    name:"* with multiple tables",
+    statement:"SELECT * FROM personnel, ships",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          first_name:"Jean Luc",
+          last_name:"Picard",
+          id:Enterprise,
+          registry:"NCC-1701-D"
+        }
+      ]
+    }
+  },
+  {
+    name:"alias.* on a single table (personnel)",
+    statement:"SELECT p.* FROM personnel AS p",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          first_name:"Jean Luc",
+          last_name:"Picard"
+        }
+      ]
+    }
+  },
+  {
+    name:"alias.* on a single table (ships)",
+    statement:"SELECT s.* FROM ships AS s",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          id:Enterprise,
+          registry:"NCC-1701-D"
+        }
+      ]
+    }
+  },
+  {
+    name:"alias.* with multiple tables",
+    statement:"SELECT p.*, s.* FROM ships AS s, personnel AS p",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          first_name:"Jean Luc",
+          last_name:"Picard",
+          id:Enterprise,
+          registry:"NCC-1701-D"
+        }
+      ]
+    }
+  },
+  {
+    name:"Two alias.* on a single table",
+    statement:"SELECT s.*, s.* FROM ships AS s",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          id:'Enterprise',
+          registry: "NCC-1701-D",
+          id:'Enterprise',
+          registry:"NCC-1701-D"
+        }
+      ]
+    }
+  },
+  {
+    name:"Doubled alias.* with multiple tables",
+    statement:"SELECT p.*, p.*, s.*, s.* FROM ships AS s, personnel AS p",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          first_name:"Jean Luc",
+          last_name:"Picard",
+          id:'Enterprise',
+          registry: "NCC-1701-D",
+          first_name:"Jean Luc",
+          last_name:"Picard",
+          id:'Enterprise',
+          registry:"NCC-1701-D"
+        }
+      ]
+    }
+  },
+  {
+    name:"alias1.alias2.*",
+    statement:"SELECT r.commander.* FROM ranks as r",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          first_name:"William",
+          last_name:"Riker"
+        }
+      ]
+    }
+  },
+]

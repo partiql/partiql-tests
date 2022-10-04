@@ -1,0 +1,58 @@
+'empty-symbol'::[
+  {
+    name:"Empty Symbol in table",
+    statement:"SELECT \"\" FROM `{'': 1}`",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          '':1
+        }
+      ]
+    }
+  },
+  {
+    name:"Empty Symbol in globals",
+    statement:"SELECT * FROM \"\"",
+    env:{
+      '':1
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          _1:1
+        }
+      ]
+    }
+  },
+  {
+    name:"Empty Symbol in alias",
+    statement:"SELECT t.v as \"\" FROM my_table as t",
+    env:{
+      my_table:{
+        v:1
+      }
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          '':1
+        }
+      ]
+    }
+  }
+]
