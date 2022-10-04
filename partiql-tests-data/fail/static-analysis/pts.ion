@@ -476,216 +476,454 @@ invalid_function_args::[
     {
       name:"date_diff wrong type of arguments{time_part:\"1\",left:\"`2017T`\",right:\"`2017T`\"}",
       statement:"date_diff(1, `2017T`, `2017T`)",
-      assert:[
-        {
-          evalMode:EvalModeError,
-          result:EvaluationFail
-        },
-        {
-          result:EvaluationSuccess,
-          evalMode:EvalModeCoerce,
-          output:$missing::null
-        }
-      ]
+      assert: {
+        result: StaticAnalysisFail
+      },
     },
     {
       name:"date_diff wrong type of arguments{time_part:\"year\",left:\"1\",right:\"`2017T`\"}",
       statement:"date_diff(year, 1, `2017T`)",
-      assert:[
-        {
-          evalMode:EvalModeError,
-          result:EvaluationFail
-        },
-        {
-          result:EvaluationSuccess,
-          evalMode:EvalModeCoerce,
-          output:$missing::null
-        }
-      ]
+      assert: {
+        result: StaticAnalysisFail
+      },
     },
     {
       name:"date_diff wrong type of arguments{time_part:\"year\",left:\"`2017T`\",right:\"1\"}",
       statement:"date_diff(year, `2017T`, 1)",
-      assert:[
-        {
-          evalMode:EvalModeError,
-          result:EvaluationFail
-        },
-        {
-          result:EvaluationSuccess,
-          evalMode:EvalModeCoerce,
-          output:$missing::null
-        }
-      ]
+      assert: {
+        result: StaticAnalysisFail
+      },
     },
     {
       name:"date_diff invalid arguments{time_part:\"'foobar'\"}",
       statement:"date_diff('foobar', `2001T`, `1986T`)",
-      assert:[
-        {
-          evalMode:EvalModeError,
-          result:EvaluationFail
-        },
-        {
-          result:EvaluationSuccess,
-          evalMode:EvalModeCoerce,
-          output:$missing::null
-        }
-      ]
+      assert: {
+        result: StaticAnalysisFail
+      },
     },
     {
       name:"date_diff invalid arguments{time_part:1}",
       statement:"date_diff(1, `2001T`, `1986T`)",
-      assert:[
-        {
-          evalMode:EvalModeError,
-          result:EvaluationFail
-        },
-        {
-          result:EvaluationSuccess,
-          evalMode:EvalModeCoerce,
-          output:$missing::null
-        }
-      ]
+      assert: {
+        result: StaticAnalysisFail
+      },
     },
     {
       name:"date_diff invalid arguments{time_part:[]}",
       statement:"date_diff([], `2001T`, `1986T`)",
-      assert:[
-        {
-          evalMode:EvalModeError,
-          result:EvaluationFail
-        },
-        {
-          result:EvaluationSuccess,
-          evalMode:EvalModeCoerce,
-          output:$missing::null
-        }
-      ]
+      assert: {
+        result: StaticAnalysisFail
+      },
     },
   ],
   extract::[
     {
       name:"extract wrong type of arguments{first:\"year\",second:\"1\"}",
       statement:"extract(year from 1)",
-      assert:[
-        {
-          evalMode:EvalModeError,
-          result:EvaluationFail
-        },
-        {
-          result:EvaluationSuccess,
-          evalMode:EvalModeCoerce,
-          output:$missing::null
-        }
-      ]
+      assert: {
+        result: StaticAnalysisFail
+      },
     },
     {
       name:"extract wrong type of arguments{first:1,second:\"`2017T`\"}",
       statement:"extract(1 from `2017T`)",
-      assert:[
-        {
-          evalMode:EvalModeError,
-          result:EvaluationFail
-        },
-        {
-          result:EvaluationSuccess,
-          evalMode:EvalModeCoerce,
-          output:$missing::null
-        }
-      ]
+      assert: {
+        result: StaticAnalysisFail
+      },
     },
     {
       name:"extract invalid time part{time_part:\"foo\",tt:\"IDENTIFIER\",tv:foo}",
       statement:"extract(foo from `2017T`)",
-      assert:[
-        {
-          evalMode:EvalModeError,
-          result:EvaluationFail
-        },
-        {
-          result:EvaluationSuccess,
-          evalMode:EvalModeCoerce,
-          output:$missing::null
-        }
-      ]
+      assert: {
+        result: StaticAnalysisFail
+      },
     },
     {
       name:"extract invalid time part{time_part:\"null\",tt:\"NULL\",tv:null}",
       statement:"extract(null from `2017T`)",
-      assert:[
-        {
-          evalMode:EvalModeError,
-          result:EvaluationFail
-        },
-        {
-          result:EvaluationSuccess,
-          evalMode:EvalModeCoerce,
-          output:$missing::null
-        }
-      ]
+      assert: {
+        result: StaticAnalysisFail
+      },
     },
     {
       name:"extract invalid time part{time_part:\"missing\",tt:\"MISSING\",tv:null}",
       statement:"extract(missing from `2017T`)",
-      assert:[
-        {
-          evalMode:EvalModeError,
-          result:EvaluationFail
-        },
-        {
-          result:EvaluationSuccess,
-          evalMode:EvalModeCoerce,
-          output:$missing::null
-        }
-      ]
+      assert: {
+        result: StaticAnalysisFail
+      },
     }
   ],
   like::[
     {
       name:"Incorrect type for text",
       statement:"SELECT * FROM `[true]` WHERE 1 LIKE '1'",
-      assert:[
-        {
-          evalMode:EvalModeError,
-          result:EvaluationFail
-        },
-        {
-          result:EvaluationSuccess,
-          evalMode:EvalModeCoerce,
-          output:$missing::null
-        }
-      ]
+      assert: {
+        result: StaticAnalysisFail
+      },
     },
     {
       name:"Incorrect type for pattern",
       statement:"SELECT * FROM `[true]` WHERE 'a' LIKE 2",
-      assert:[
-        {
-          evalMode:EvalModeError,
-          result:EvaluationFail
-        },
-        {
-          result:EvaluationSuccess,
-          evalMode:EvalModeCoerce,
-          output:$missing::null
-        }
-      ]
+      assert: {
+        result: StaticAnalysisFail
+      },
     },
     {
       name:"Incorrect type for Escape",
       statement:"SELECT * FROM `[true]` WHERE 'a' LIKE 'a' ESCAPE 3",
-      assert:[
-        {
-          evalMode:EvalModeError,
-          result:EvaluationFail
-        },
-        {
-          result:EvaluationSuccess,
-          evalMode:EvalModeCoerce,
-          output:$missing::null
-        }
-      ]
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+  ],
+  char_length::[
+    {
+      name:"char_length wrong types{in:\"1\"}",
+      statement:"char_length(1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"char_length wrong types{in:\"`2000T`\"}",
+      statement:"char_length(`2000T`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"char_length wrong types{in:\"1.0\"}",
+      statement:"char_length(1.0)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"char_length wrong types{in:\"1e0\"}",
+      statement:"char_length(1e0)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"char_length wrong types{in:\"true\"}",
+      statement:"char_length(true)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"char_length wrong types{in:\"[]\"}",
+      statement:"char_length([])",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"char_length wrong types{in:\"`()`\"}",
+      statement:"char_length(`()`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"char_length wrong types{in:\"<<>>\"}",
+      statement:"char_length(<<>>)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"char_length wrong types{in:\"`{}`\"}",
+      statement:"char_length(`{}`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"character_length wrong types{in:\"1\"}",
+      statement:"character_length(1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"character_length wrong types{in:\"`2000T`\"}",
+      statement:"character_length(`2000T`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"character_length wrong types{in:\"1.0\"}",
+      statement:"character_length(1.0)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"character_length wrong types{in:\"1e0\"}",
+      statement:"character_length(1e0)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"character_length wrong types{in:\"true\"}",
+      statement:"character_length(true)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"character_length wrong types{in:\"[]\"}",
+      statement:"character_length([])",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"character_length wrong types{in:\"`()`\"}",
+      statement:"character_length(`()`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"character_length wrong types{in:\"<<>>\"}",
+      statement:"character_length(<<>>)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"character_length wrong types{in:\"`{}`\"}",
+      statement:"character_length(`{}`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+  ],
+  substring::[
+    {
+      name:"substring wrong type of arguments{sql:\"substring('', `{}`)\"}",
+      statement:"substring('', `{}`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"substring wrong type of arguments{sql:\"substring(1, 1)\"}",
+      statement:"substring(1, 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"substring wrong type of arguments{sql:\"substring(1, 1, 1)\"}",
+      statement:"substring(1, 1, 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"substring wrong type of arguments{sql:\"substring('', [], 1)\"}",
+      statement:"substring('', [], 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"substring wrong type of arguments{sql:\"substring('', 1.1, 1)\"}",
+      statement:"substring('', 1.1, 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"substring wrong type of arguments{sql:\"substring('', 1e1, 1)\"}",
+      statement:"substring('', 1e1, 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"substring wrong type of arguments{sql:\"substring('', 1, 1.1)\"}",
+      statement:"substring('', 1, 1.1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+  ],
+  upper::[
+    {
+      name:"upper wrong type of arguments{param:\"1\"}",
+      statement:"upper(1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"upper wrong type of arguments{param:\"1.0\"}",
+      statement:"upper(1.0)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"upper wrong type of arguments{param:\"1e0\"}",
+      statement:"upper(1e0)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"upper wrong type of arguments{param:\"`()`\"}",
+      statement:"upper(`()`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"upper wrong type of arguments{param:\"true\"}",
+      statement:"upper(true)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"upper wrong type of arguments{param:\"`[]`\"}",
+      statement:"upper(`[]`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"upper wrong type of arguments{param:\"`{}`\"}",
+      statement:"upper(`{}`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    }
+  ],
+  lower::[
+    {
+      name:"lower wrong type of arguments{param:\"1\"}",
+      statement:"lower(1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"lower wrong type of arguments{param:\"1.0\"}",
+      statement:"lower(1.0)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"lower wrong type of arguments{param:\"1e0\"}",
+      statement:"lower(1e0)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"lower wrong type of arguments{param:\"`()`\"}",
+      statement:"lower(`()`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"lower wrong type of arguments{param:\"true\"}",
+      statement:"lower(true)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"lower wrong type of arguments{param:\"`[]`\"}",
+      statement:"lower(`[]`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"lower wrong type of arguments{param:\"`{}`\"}",
+      statement:"lower(`{}`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    }
+  ],
+  to_timestamp::[
+    {
+      name:"to_timestamp wrong type of arguments{sql:\"to_timestamp(1, 'y')\"}",
+      statement:"to_timestamp(1, 'y')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"to_timestamp wrong type of arguments{sql:\"to_timestamp('', 1)\"}",
+      statement:"to_timestamp('', 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"to_timestamp wrong type of arguments{sql:\"to_timestamp(1)\"}",
+      statement:"to_timestamp(1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+  ],
+  size::[
+    {
+      name:"size wrong type of arguments{param:1,actual:\"INT\"}",
+      statement:"size(1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"size wrong type of arguments{param:\"''\",actual:\"STRING\"}",
+      statement:"size('')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    }
+  ],
+  to_string::[
+    {
+      name:"to_string wrong types{timestamp:\"`1986`\",pattern:\"'y'\"}",
+      statement:"to_string(`1986`, 'y')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"to_string wrong types{timestamp:\"'some string'\",pattern:\"'y'\"}",
+      statement:"to_string('some string', 'y')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"to_string wrong types{timestamp:\"1\",pattern:\"'y'\"}",
+      statement:"to_string(1, 'y')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"to_string wrong types{timestamp:\"`2017T`\",pattern:\"1\"}",
+      statement:"to_string(`2017T`, 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
     },
   ]
 ]
