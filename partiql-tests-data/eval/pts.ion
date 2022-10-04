@@ -77271,7 +77271,7 @@ select::[
   },
   {
     name:"big list of naughty strings{str:\"\\t\\v\\f \\x85 \\u1680\\u2002\\u2003\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u200b\\u2028\\u2029\\u202f\\u205f\\u3000\"}",
-    statement:"{ `literal`: ' \x85             ​    　', `variable`: env_str, `concatenated`: env_str || env_str }",
+    statement:"{ `literal`: '\t\v\f \x85             ​    　', `variable`: env_str, `concatenated`: env_str || env_str }",
     env:{
       env_str:"\t\v\f \x85             ​    　"
     },
@@ -83589,8 +83589,7 @@ select::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:[
-      ]
+      output:null.list
     }
   },
   {
@@ -83602,8 +83601,7 @@ select::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:{
-      }
+      output:null.struct
     }
   },
   {
@@ -83615,8 +83613,7 @@ select::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:(
-      )
+      output:null.sexp
     }
   },
   {
@@ -83836,7 +83833,7 @@ select::[
     }
   },
   {
-    name:"null comparison{sql:\"MISSING = NULL\",result:null}",
+    name:"null comparison{sql:\"MISSING = NULL\",result:missing::null}",
     statement:"MISSING = NULL",
     assert:{
       result:EvaluationSuccess,
@@ -83844,11 +83841,11 @@ select::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
-    name:"null comparison{sql:\"NULL = MISSING\",result:null}",
+    name:"null comparison{sql:\"NULL = MISSING\",result:missing::null}",
     statement:"NULL = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -83856,7 +83853,7 @@ select::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
@@ -83992,7 +83989,7 @@ select::[
     }
   },
   {
-    name:"null comparison{sql:\"`null.null` = MISSING\",result:null}",
+    name:"null comparison{sql:\"`null.null` = MISSING\",result:missing::null}",
     statement:"`null.null` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -84000,11 +83997,11 @@ select::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
-    name:"null comparison{sql:\"`null.bool` = MISSING\",result:null}",
+    name:"null comparison{sql:\"`null.bool` = MISSING\",result:missing::null}",
     statement:"`null.bool` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -84012,11 +84009,11 @@ select::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
-    name:"null comparison{sql:\"`null.int` = MISSING\",result:null}",
+    name:"null comparison{sql:\"`null.int` = MISSING\",result:missing::null}",
     statement:"`null.int` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -84024,11 +84021,11 @@ select::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
-    name:"null comparison{sql:\"`null.decimal` = MISSING\",result:null}",
+    name:"null comparison{sql:\"`null.decimal` = MISSING\",result:missing::null}",
     statement:"`null.decimal` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -84036,11 +84033,11 @@ select::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
-    name:"null comparison{sql:\"`null.string` = MISSING\",result:null}",
+    name:"null comparison{sql:\"`null.string` = MISSING\",result:missing::null}",
     statement:"`null.string` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -84048,11 +84045,11 @@ select::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
-    name:"null comparison{sql:\"`null.symbol` = MISSING\",result:null}",
+    name:"null comparison{sql:\"`null.symbol` = MISSING\",result:missing::null}",
     statement:"`null.symbol` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -84060,11 +84057,11 @@ select::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
-    name:"null comparison{sql:\"`null.clob` = MISSING\",result:null}",
+    name:"null comparison{sql:\"`null.clob` = MISSING\",result:missing::null}",
     statement:"`null.clob` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -84072,11 +84069,11 @@ select::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
-    name:"null comparison{sql:\"`null.blob` = MISSING\",result:null}",
+    name:"null comparison{sql:\"`null.blob` = MISSING\",result:missing::null}",
     statement:"`null.blob` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -84084,11 +84081,11 @@ select::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
-    name:"null comparison{sql:\"`null.list` = MISSING\",result:null}",
+    name:"null comparison{sql:\"`null.list` = MISSING\",result:missing::null}",
     statement:"`null.list` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -84096,11 +84093,11 @@ select::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
-    name:"null comparison{sql:\"`null.struct` = MISSING\",result:null}",
+    name:"null comparison{sql:\"`null.struct` = MISSING\",result:missing::null}",
     statement:"`null.struct` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -84108,11 +84105,11 @@ select::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
   {
-    name:"null comparison{sql:\"`null.sexp` = MISSING\",result:null}",
+    name:"null comparison{sql:\"`null.sexp` = MISSING\",result:missing::null}",
     statement:"`null.sexp` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -84120,7 +84117,7 @@ select::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   }
 ]
@@ -85323,36 +85320,6 @@ int::[
       ],
       output:-9223372036854775808
     }
-  },
-  {
-    name:"int overflow and underflow conditions{sql:\"9223372036854775808\"}",
-    statement:"9223372036854775808",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"int overflow and underflow conditions{sql:\"-9223372036854775809\"}",
-    statement:"-9223372036854775809",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
   },
   {
     name:"int overflow and underflow conditions{sql:\"max_int + 1\"}",
@@ -87540,21 +87507,6 @@ bool::[
   },
   {
     name:"path expression with ambiguous table alias (lowercase)",
-    statement:"SELECT an_alias.f FROM table1 AS an_alias, table2 AS AN_ALIAS",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ]
-  },
-  {
-    name:"path expression with mbiguous table alias (lowercase)",
     statement:"SELECT \"an_alias\".f FROM table1 AS an_alias, table2 AS AN_ALIAS",
     assert:{
       result:EvaluationSuccess,

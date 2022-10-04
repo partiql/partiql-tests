@@ -1,0 +1,64 @@
+int::[
+  // Would these give a compile-time error? Would COERCE mode error at compil-time?
+  {
+    name:"int overflow and underflow conditions{sql:\"9223372036854775808\"}",
+    statement:"9223372036854775808",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"int overflow and underflow conditions{sql:\"-9223372036854775809\"}",
+    statement:"-9223372036854775809",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+]
+
+'path-expressions'::[
+  // Should the following error in COERCE mode or return MISSING? Or some other behavior
+  {
+    name:"path expression with ambiguous table alias (lowercase)",
+    statement:"SELECT an_alias.f FROM table1 AS an_alias, table2 AS AN_ALIAS",
+    env: {
+      table1:[
+        {
+          f:"this is from table1"
+        }
+      ],
+      table2:[
+        {
+          f:"this is from table2"
+        }
+      ]
+    },
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  }
+]
