@@ -1,0 +1,25 @@
+wrong_num_function_args::[
+  nullif::[
+    {
+      name:"nullif wrong number of arguments{sql:\"nullif()\"}",
+      statement:"nullif()",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"nullif wrong number of arguments{sql:\"nullif(1)\"}",
+      statement:"nullif(1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"nullif wrong number of arguments{sql:\"nullif(1, 1, 1)\"}",
+      statement:"nullif(1, 1, 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    }
+  ],
+]

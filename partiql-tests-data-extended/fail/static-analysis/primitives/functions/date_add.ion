@@ -1,0 +1,79 @@
+wrong_num_function_args::[
+  date_add::[
+    {
+      name:"date_add wrong number of arguments{sql:\"date_add()\"}",
+      statement:"date_add()",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"date_add wrong number of arguments{sql:\"date_add(year)\"}",
+      statement:"date_add(year)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"date_add wrong number of arguments{sql:\"date_add(year, 1)\"}",
+      statement:"date_add(year, 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"date_add wrong number of arguments{sql:\"date_add(year, 1, `2017T`, 1)\"}",
+      statement:"date_add(year, 1, `2017T`, 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"date_add wrong number of arguments{sql:\"date_add(year, 1, `2017T`, `2017T`)\"}",
+      statement:"date_add(year, 1, `2017T`, `2017T`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    }
+],
+]
+
+invalid_function_args::[
+  date_add::[
+    {
+      name:"date_add invalid time part{time_part:\"'foobar'\"}",
+      statement:"date_add('foobar', 1, `1986T`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"date_add invalid time part{time_part:1}",
+      statement:"date_add(1, 1, `1986T`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"date_add invalid time part{time_part:[]}",
+      statement:"date_add([], 1, `1986T`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"date_add invalid time part{time_part:\"timezone_hour\"}",
+      statement:"date_add(timezone_hour, 1, `1986T`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"date_add invalid time part{time_part:\"timezone_minute\"}",
+      statement:"date_add(timezone_minute, 1, `1986T`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+  ],
+]

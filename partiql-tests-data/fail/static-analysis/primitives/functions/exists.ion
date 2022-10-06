@@ -1,0 +1,18 @@
+wrong_num_function_args::[
+  exists::[
+    {
+      name:"exists wrong number of arguments{sql:\"exists()\"}",
+      statement:"exists()",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"exists wrong number of arguments{sql:\"exists(`[]`, 1)\"}",
+      statement:"exists(`[]`, 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    }
+  ],
+]

@@ -1,0 +1,11 @@
+wrong_num_function_args::[
+  coalesce::[
+    {
+      name:"coalesce wrong number of arguments",
+      statement:"coalesce()",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    }
+  ],
+]

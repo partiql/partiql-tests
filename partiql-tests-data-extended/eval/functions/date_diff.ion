@@ -1,4 +1,4 @@
-date_diff::[
+date_diff_valid::[
   {
     name:"date_diff valid cases{result:(success 0),time_part:\"year\",left:\"2017T\",right:\"2017T\"}",
     statement:"date_diff(year, `2017T`, `2017T`)",
@@ -2003,4 +2003,29 @@ date_diff::[
       output:$missing::null
     }
   },
+]
+
+date_diff_invalid::[
+  {
+    name:"date_diff invalid arguments{time_part:\"timezone_hour\"}",
+    statement:"date_diff(timezone_hour, `2001T`, `1986T`)",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"date_diff invalid arguments{time_part:\"timezone_minute\"}",
+    statement:"date_diff(timezone_minute, `2001T`, `1986T`)",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  }
 ]

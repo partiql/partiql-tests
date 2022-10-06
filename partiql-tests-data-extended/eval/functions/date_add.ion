@@ -1,4 +1,4 @@
-date_add::[
+date_add_valid::[
   {
     name:"date_add valid cases{time_part:year,quantity:1,timestamp:\"2017T\",result:(success 2018T)}",
     statement:"date_add(year, 1, `2017T`)",
@@ -1115,4 +1115,40 @@ date_add::[
       output:$missing::null
     }
   },
+]
+
+date_add_invalid::[
+  {
+    name:"date_add invalid quantity{time_part:\"year\",quantity:9999}",
+    statement:"date_add(year, 9999, `9999-12-31T23:59:59Z`)",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"date_add invalid quantity{time_part:\"second\",quantity:1}",
+    statement:"date_add(second, 1, `9999-12-31T23:59:59Z`)",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"date_add invalid quantity{time_part:\"year\",quantity:-10000}",
+    statement:"date_add(year, -10000, `9999-12-31T23:59:59Z`)",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  }
 ]

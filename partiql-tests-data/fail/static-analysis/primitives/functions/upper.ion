@@ -1,0 +1,79 @@
+wrong_num_function_args::[
+  upper::[
+    {
+      name:"upper wrong number of arguments{sql:\"upper()\"}",
+      statement:"upper()",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"upper wrong number of arguments{sql:\"upper('', '')\"}",
+      statement:"upper('', '')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"upper wrong number of arguments{sql:\"upper('', 1)\"}",
+      statement:"upper('', 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+  ],
+]
+
+invalid_function_args::[
+  upper::[
+    {
+      name:"upper wrong type of arguments{param:\"1\"}",
+      statement:"upper(1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"upper wrong type of arguments{param:\"1.0\"}",
+      statement:"upper(1.0)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"upper wrong type of arguments{param:\"1e0\"}",
+      statement:"upper(1e0)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"upper wrong type of arguments{param:\"`()`\"}",
+      statement:"upper(`()`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"upper wrong type of arguments{param:\"true\"}",
+      statement:"upper(true)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"upper wrong type of arguments{param:\"`[]`\"}",
+      statement:"upper(`[]`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"upper wrong type of arguments{param:\"`{}`\"}",
+      statement:"upper(`{}`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    }
+  ],
+]

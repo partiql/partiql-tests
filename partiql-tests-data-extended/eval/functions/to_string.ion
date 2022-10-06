@@ -1,4 +1,4 @@
-to_string::[
+to_string_valid::[
   {
     name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0001T\",pattern:\"y\",result:\"1\"}",
     statement:"to_string(`0001T`, 'y')",
@@ -3658,5 +3658,195 @@ to_string::[
       ],
       output:"1969-07-20T20:18:00+08:00"
     }
+  },
+]
+
+to_string_invalid::[
+  {
+    name:"to_string invalid pattern{pattern:\"not_a_pattern\",cn:1}",
+    statement:"to_string(`2000T`, 'not_a_pattern')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"G\",cn:1}",
+    statement:"to_string(`2000T`, 'G')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"u\",cn:1}",
+    statement:"to_string(`2000T`, 'u')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"Q\",cn:1}",
+    statement:"to_string(`2000T`, 'Q')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"q\",cn:1}",
+    statement:"to_string(`2000T`, 'q')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"w\",cn:1}",
+    statement:"to_string(`2000T`, 'w')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"W\",cn:1}",
+    statement:"to_string(`2000T`, 'W')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"E\",cn:1}",
+    statement:"to_string(`2000T`, 'E')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"e\",cn:1}",
+    statement:"to_string(`2000T`, 'e')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"c\",cn:1}",
+    statement:"to_string(`2000T`, 'c')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"F\",cn:1}",
+    statement:"to_string(`2000T`, 'F')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"k\",cn:1}",
+    statement:"to_string(`2000T`, 'k')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"K\",cn:1}",
+    statement:"to_string(`2000T`, 'K')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"A\",cn:1}",
+    statement:"to_string(`2000T`, 'A')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"V\",cn:1}",
+    statement:"to_string(`2000T`, 'V')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"z\",cn:1}",
+    statement:"to_string(`2000T`, 'z')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"p\",cn:1}",
+    statement:"to_string(`2000T`, 'p')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
   },
 ]

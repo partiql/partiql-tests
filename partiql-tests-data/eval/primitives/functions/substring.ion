@@ -1295,4 +1295,19 @@ substring::[
       output:$missing::null
     }
   },
+  {
+    name:"substring invalid quantity",
+    statement:"substring('1', 4, -11)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  }
 ]

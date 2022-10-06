@@ -1019,3 +1019,46 @@
     }
   },
 ]
+
+'simple-group-by-fail'::[
+  {
+    name:"having without group by",
+    statement:"SELECT rep, SUM(total_sales) as total FROM sales_report HAVING rep = \"Meg\"",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"GROUP BY binding referenced in FROM clause",
+    statement:"SELECT * FROM sales_report, gb_binding WHERE fiscal_year >= `2001T` GROUP BY rep AS gb_binding",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"GROUP BY binding referenced in WHERE clause",
+    statement:"SELECT * FROM sales_report, gb_binding WHERE gb_binding = 1 GROUP BY rep AS gb_binding",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"GROUP AS binding referenced in FROM clause",
+    statement:"SELECT * FROM sales_report, gba_binding WHERE fiscal_year >= `2001T` GROUP BY rep GROUP AS gba_binding",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"GROUP AS binding referenced in WHERE clause",
+    statement:"SELECT * FROM sales_report, gba_binding WHERE gba_binding = 1 GROUP BY rep GROUP AS gba_binding",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  }
+]

@@ -764,3 +764,44 @@ pathUnpivotMissing::[
     }
   }
 ]
+
+'repeated-field-on-struct'::[
+  // Following tests are implementation-dependent for COERCE eval mode when tuples are unordered per section 4 of the
+  // spec
+  {
+    name:"repeated field on struct is ambiguous{identifier:\"REPEATED\",cn:9,bn:\"REPEATED\"}",
+    statement:"SELECT REPEATED FROM `[{repeated:1, repeated:2}]`",
+    assert:{
+      evalMode:EvalModeError,
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"repeated field on struct is ambiguous{identifier:\" \\\"repeated\\\" \",cn:10,bn:\"repeated\"}",
+    statement:"SELECT \"repeated\" FROM `[{repeated:1, repeated:2}]`",
+    assert:{
+      evalMode:EvalModeError,
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"path expression with ambiguous table alias (lowercase)",
+    statement:"SELECT an_alias.f FROM table1 AS an_alias, table2 AS AN_ALIAS",
+    env: {
+      table1:[
+        {
+          f:"this is from table1"
+        }
+      ],
+      table2:[
+        {
+          f:"this is from table2"
+        }
+      ]
+    },
+    assert:{
+      evalMode:EvalModeError,
+      result:EvaluationFail
+    }
+  }
+]

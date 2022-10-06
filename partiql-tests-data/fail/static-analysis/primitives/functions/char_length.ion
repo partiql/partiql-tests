@@ -1,0 +1,156 @@
+wrong_num_function_args::[
+  char_length::[
+    {
+      name:"char_length wrong number of arguments{sql:\"char_length()\"}",
+      statement:"char_length()",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"char_length wrong number of arguments{sql:\"char_length('', '')\"}",
+      statement:"char_length('', '')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"char_length wrong number of arguments{sql:\"char_length('', 1)\"}",
+      statement:"char_length('', 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    }
+  ],
+]
+
+invalid_function_args::[
+  char_length::[
+    {
+      name:"char_length wrong types{in:\"1\"}",
+      statement:"char_length(1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"char_length wrong types{in:\"`2000T`\"}",
+      statement:"char_length(`2000T`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"char_length wrong types{in:\"1.0\"}",
+      statement:"char_length(1.0)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"char_length wrong types{in:\"1e0\"}",
+      statement:"char_length(1e0)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"char_length wrong types{in:\"true\"}",
+      statement:"char_length(true)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"char_length wrong types{in:\"[]\"}",
+      statement:"char_length([])",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"char_length wrong types{in:\"`()`\"}",
+      statement:"char_length(`()`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"char_length wrong types{in:\"<<>>\"}",
+      statement:"char_length(<<>>)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"char_length wrong types{in:\"`{}`\"}",
+      statement:"char_length(`{}`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"character_length wrong types{in:\"1\"}",
+      statement:"character_length(1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"character_length wrong types{in:\"`2000T`\"}",
+      statement:"character_length(`2000T`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"character_length wrong types{in:\"1.0\"}",
+      statement:"character_length(1.0)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"character_length wrong types{in:\"1e0\"}",
+      statement:"character_length(1e0)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"character_length wrong types{in:\"true\"}",
+      statement:"character_length(true)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"character_length wrong types{in:\"[]\"}",
+      statement:"character_length([])",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"character_length wrong types{in:\"`()`\"}",
+      statement:"character_length(`()`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"character_length wrong types{in:\"<<>>\"}",
+      statement:"character_length(<<>>)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"character_length wrong types{in:\"`{}`\"}",
+      statement:"character_length(`{}`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+  ],
+]

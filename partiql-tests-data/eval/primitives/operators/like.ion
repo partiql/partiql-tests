@@ -1609,5 +1609,16 @@ like::[
         }
       ]
     }
-  }
+  },
+  {
+      name:"More than one character given for ESCAPE",
+      statement:"SELECT * FROM `[true]` WHERE 'a' LIKE 'a' ESCAPE 'aa'",
+      assert:{
+        evalMode:[
+          EvalModeError,
+          EvalModeCoerce
+        ],
+        result:EvaluationFail
+      },
+    }
 ]

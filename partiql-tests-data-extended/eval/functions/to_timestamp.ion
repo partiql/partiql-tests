@@ -1,4 +1,4 @@
-to_timestamp::[
+to_timestamp_valid::[
   {
     name:"to_timestamp valid cases{string:\"1\",pattern:\"y\",result:0001T}",
     statement:"to_timestamp('1', 'y')",
@@ -1560,3 +1560,1636 @@ to_timestamp::[
     }
   },
 ]
+
+to_timestamp_invalid::[
+  // Invalid args
+  {
+    name:"to_timestamp invalid pattern{pattern:\"L\"}",
+    statement:"to_timestamp('doesnt matter', 'L')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"O\"}",
+    statement:"to_timestamp('doesnt matter', 'O')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"G\"}",
+    statement:"to_timestamp('doesnt matter', 'G')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"u\"}",
+    statement:"to_timestamp('doesnt matter', 'u')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"Q\"}",
+    statement:"to_timestamp('doesnt matter', 'Q')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"q\"}",
+    statement:"to_timestamp('doesnt matter', 'q')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"w\"}",
+    statement:"to_timestamp('doesnt matter', 'w')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"W\"}",
+    statement:"to_timestamp('doesnt matter', 'W')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"E\"}",
+    statement:"to_timestamp('doesnt matter', 'E')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"e\"}",
+    statement:"to_timestamp('doesnt matter', 'e')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"c\"}",
+    statement:"to_timestamp('doesnt matter', 'c')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"F\"}",
+    statement:"to_timestamp('doesnt matter', 'F')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"k\"}",
+    statement:"to_timestamp('doesnt matter', 'k')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"K\"}",
+    statement:"to_timestamp('doesnt matter', 'K')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"A\"}",
+    statement:"to_timestamp('doesnt matter', 'A')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"V\"}",
+    statement:"to_timestamp('doesnt matter', 'V')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"z\"}",
+    statement:"to_timestamp('doesnt matter', 'z')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"p\"}",
+    statement:"to_timestamp('doesnt matter', 'p')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"foobar\"}",
+    statement:"to_timestamp('doesnt matter', 'foobar')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"y MMMMM\"}",
+    statement:"to_timestamp('doesnt matter', 'y MMMMM')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"M\",fields:\"YEAR\"}",
+    statement:"to_timestamp('doesnt matter', 'M')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"dd\",fields:\"YEAR, MONTH_OF_YEAR\"}",
+    statement:"to_timestamp('doesnt matter', 'dd')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"h\",fields:\"YEAR, MONTH_OF_YEAR, DAY_OF_MONTH\"}",
+    statement:"to_timestamp('doesnt matter', 'h')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"hh\",fields:\"YEAR, MONTH_OF_YEAR, DAY_OF_MONTH\"}",
+    statement:"to_timestamp('doesnt matter', 'hh')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"X\",fields:\"YEAR, MONTH_OF_YEAR, DAY_OF_MONTH, HOUR_OF_DAY\"}",
+    statement:"to_timestamp('doesnt matter', 'X')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"XX\",fields:\"YEAR, MONTH_OF_YEAR, DAY_OF_MONTH, HOUR_OF_DAY\"}",
+    statement:"to_timestamp('doesnt matter', 'XX')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"XXX\",fields:\"YEAR, MONTH_OF_YEAR, DAY_OF_MONTH, HOUR_OF_DAY\"}",
+    statement:"to_timestamp('doesnt matter', 'XXX')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"x\",fields:\"YEAR, MONTH_OF_YEAR, DAY_OF_MONTH, HOUR_OF_DAY\"}",
+    statement:"to_timestamp('doesnt matter', 'x')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"xx\",fields:\"YEAR, MONTH_OF_YEAR, DAY_OF_MONTH, HOUR_OF_DAY\"}",
+    statement:"to_timestamp('doesnt matter', 'xx')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"xxx\",fields:\"YEAR, MONTH_OF_YEAR, DAY_OF_MONTH, HOUR_OF_DAY\"}",
+    statement:"to_timestamp('doesnt matter', 'xxx')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"y X\",fields:\"MONTH_OF_YEAR, DAY_OF_MONTH, HOUR_OF_DAY\"}",
+    statement:"to_timestamp('doesnt matter', 'y X')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"y M X\",fields:\"DAY_OF_MONTH, HOUR_OF_DAY\"}",
+    statement:"to_timestamp('doesnt matter', 'y M X')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"y M d X\",fields:\"HOUR_OF_DAY\"}",
+    statement:"to_timestamp('doesnt matter', 'y M d X')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"y a\",fields:\"MONTH_OF_YEAR, DAY_OF_MONTH, HOUR_OF_DAY\"}",
+    statement:"to_timestamp('doesnt matter', 'y a')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"y M a\",fields:\"DAY_OF_MONTH, HOUR_OF_DAY\"}",
+    statement:"to_timestamp('doesnt matter', 'y M a')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid pattern{pattern:\"y M d a\",fields:\"HOUR_OF_DAY\"}",
+    statement:"to_timestamp('doesnt matter', 'y M d a')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y\"}",
+    statement:"to_timestamp('some text', 'y')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"yy\"}",
+    statement:"to_timestamp('some text', 'yy')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"yyyy\"}",
+    statement:"to_timestamp('some text', 'yyyy')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y M\"}",
+    statement:"to_timestamp('some text', 'y M')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y MM\"}",
+    statement:"to_timestamp('some text', 'y MM')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y MMM\"}",
+    statement:"to_timestamp('some text', 'y MMM')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y MMMM\"}",
+    statement:"to_timestamp('some text', 'y MMMM')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y M d\"}",
+    statement:"to_timestamp('some text', 'y M d')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y M dd\"}",
+    statement:"to_timestamp('some text', 'y M dd')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y M d h m a\"}",
+    statement:"to_timestamp('some text', 'y M d h m a')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y M d hh m a\"}",
+    statement:"to_timestamp('some text', 'y M d hh m a')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y M d H m\"}",
+    statement:"to_timestamp('some text', 'y M d H m')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y M d H mm\"}",
+    statement:"to_timestamp('some text', 'y M d H mm')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y M d H m s\"}",
+    statement:"to_timestamp('some text', 'y M d H m s')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y M d H m ss\"}",
+    statement:"to_timestamp('some text', 'y M d H m ss')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y M d H m s S\"}",
+    statement:"to_timestamp('some text', 'y M d H m s S')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y M d H m s SSS\"}",
+    statement:"to_timestamp('some text', 'y M d H m s SSS')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y M d H m s n\"}",
+    statement:"to_timestamp('some text', 'y M d H m s n')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y M d H m s X\"}",
+    statement:"to_timestamp('some text', 'y M d H m s X')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y M d H m s XX\"}",
+    statement:"to_timestamp('some text', 'y M d H m s XX')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y M d H m s XXX\"}",
+    statement:"to_timestamp('some text', 'y M d H m s XXX')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y M d H m s x\"}",
+    statement:"to_timestamp('some text', 'y M d H m s x')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y M d H m s xx\"}",
+    statement:"to_timestamp('some text', 'y M d H m s xx')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"some text\",pattern:\"y M d H m s xxx\"}",
+    statement:"to_timestamp('some text', 'y M d H m s xxx')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"-1\",pattern:\"y\"}",
+    statement:"to_timestamp('-1', 'y')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"0\",pattern:\"y\"}",
+    statement:"to_timestamp('0', 'y')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10000\",pattern:\"y\"}",
+    statement:"to_timestamp('10000', 'y')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"9\",pattern:\"yy\"}",
+    statement:"to_timestamp('9', 'yy')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"010\",pattern:\"yy\"}",
+    statement:"to_timestamp('010', 'yy')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"010\",pattern:\"yyyy\"}",
+    statement:"to_timestamp('010', 'yyyy')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"00010\",pattern:\"yyyy\"}",
+    statement:"to_timestamp('00010', 'yyyy')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10\",pattern:\"y M\"}",
+    statement:"to_timestamp('10', 'y M')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 -1\",pattern:\"y M\"}",
+    statement:"to_timestamp('10 -1', 'y M')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 13\",pattern:\"y M\"}",
+    statement:"to_timestamp('10 13', 'y M')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1\",pattern:\"y MM\"}",
+    statement:"to_timestamp('10 1', 'y MM')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 001\",pattern:\"y MM\"}",
+    statement:"to_timestamp('10 001', 'y MM')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1\",pattern:\"y MMM\"}",
+    statement:"to_timestamp('10 1', 'y MMM')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 Fub\",pattern:\"y MMM\"}",
+    statement:"to_timestamp('10 Fub', 'y MMM')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1\",pattern:\"y MMMM\"}",
+    statement:"to_timestamp('10 1', 'y MMMM')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 Fubruary\",pattern:\"y MMMM\"}",
+    statement:"to_timestamp('10 Fubruary', 'y MMMM')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1\",pattern:\"y M d\"}",
+    statement:"to_timestamp('10 1', 'y M d')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 40\",pattern:\"y M d\"}",
+    statement:"to_timestamp('10 1 40', 'y M d')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 -1\",pattern:\"y M d\"}",
+    statement:"to_timestamp('10 1 -1', 'y M d')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1\",pattern:\"y M dd\"}",
+    statement:"to_timestamp('10 1 1', 'y M dd')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 001\",pattern:\"y M dd\"}",
+    statement:"to_timestamp('10 1 001', 'y M dd')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1\",pattern:\"y M d H m\"}",
+    statement:"to_timestamp('10 1 1', 'y M d H m')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 -1 1\",pattern:\"y M d H m\"}",
+    statement:"to_timestamp('10 1 1 -1 1', 'y M d H m')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 25 1\",pattern:\"y M d H m\"}",
+    statement:"to_timestamp('10 1 1 25 1', 'y M d H m')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1\",pattern:\"y M d HH m\"}",
+    statement:"to_timestamp('10 1 1 1 1', 'y M d HH m')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 001 1\",pattern:\"y M d HH m\"}",
+    statement:"to_timestamp('10 1 1 001 1', 'y M d HH m')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1\",pattern:\"y M d H m\"}",
+    statement:"to_timestamp('10 1 1 1', 'y M d H m')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 -1\",pattern:\"y M d H m\"}",
+    statement:"to_timestamp('10 1 1 1 -1', 'y M d H m')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 61\",pattern:\"y M d H m\"}",
+    statement:"to_timestamp('10 1 1 1 61', 'y M d H m')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1\",pattern:\"y M d H mm\"}",
+    statement:"to_timestamp('10 1 1 1 1', 'y M d H mm')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 001\",pattern:\"y M d H mm\"}",
+    statement:"to_timestamp('10 1 1 1 001', 'y M d H mm')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 AM\",pattern:\"y M d h m a\"}",
+    statement:"to_timestamp('10 1 1 AM', 'y M d h m a')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 -1 1 AM\",pattern:\"y M d h m a\"}",
+    statement:"to_timestamp('10 1 1 -1 1 AM', 'y M d h m a')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 13 1 AM\",pattern:\"y M d h m a\"}",
+    statement:"to_timestamp('10 1 1 13 1 AM', 'y M d h m a')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 AM\",pattern:\"y M d hh m a\"}",
+    statement:"to_timestamp('10 1 1 1 1 AM', 'y M d hh m a')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 001 1 AM\",pattern:\"y M d hh m a\"}",
+    statement:"to_timestamp('10 1 1 001 1 AM', 'y M d hh m a')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1\",pattern:\"y M d H m s\"}",
+    statement:"to_timestamp('10 1 1 1 1', 'y M d H m s')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 -1\",pattern:\"y M d H m s\"}",
+    statement:"to_timestamp('10 1 1 1 1 -1', 'y M d H m s')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 25 1 61\",pattern:\"y M d H m s\"}",
+    statement:"to_timestamp('10 1 1 25 1 61', 'y M d H m s')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 1\",pattern:\"y M d HH m ss\"}",
+    statement:"to_timestamp('10 1 1 1 1 1', 'y M d HH m ss')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 001\",pattern:\"y M d HH m ss\"}",
+    statement:"to_timestamp('10 1 1 1 1 001', 'y M d HH m ss')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1\",pattern:\"y M d H m s S\"}",
+    statement:"to_timestamp('10 1 1 1 1', 'y M d H m s S')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 1 -0.1\",pattern:\"y M d H m s S\"}",
+    statement:"to_timestamp('10 1 1 1 1 1 -0.1', 'y M d H m s S')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 1 1.0\",pattern:\"y M d H m s S\"}",
+    statement:"to_timestamp('10 1 1 1 1 1 1.0', 'y M d H m s S')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 1 0.1\",pattern:\"y M d H m s SS\"}",
+    statement:"to_timestamp('10 1 1 1 1 1 0.1', 'y M d H m s SS')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 1 0.001\",pattern:\"y M d H m s SS\"}",
+    statement:"to_timestamp('10 1 1 1 1 1 0.001', 'y M d H m s SS')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1\",pattern:\"y M d H m s n\"}",
+    statement:"to_timestamp('10 1 1 1 1', 'y M d H m s n')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 1 -1\",pattern:\"y M d H m s n\"}",
+    statement:"to_timestamp('10 1 1 1 1 1 -1', 'y M d H m s n')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 1 1000000000\",pattern:\"y M d H m s n\"}",
+    statement:"to_timestamp('10 1 1 1 1 1 1000000000', 'y M d H m s n')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 +24\",pattern:\"y M d H m X\"}",
+    statement:"to_timestamp('10 1 1 1 1 +24', 'y M d H m X')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 -24\",pattern:\"y M d H m X\"}",
+    statement:"to_timestamp('10 1 1 1 1 -24', 'y M d H m X')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 05\",pattern:\"y M d H m X\"}",
+    statement:"to_timestamp('10 1 1 1 1 05', 'y M d H m X')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 +1\",pattern:\"y M d H m X\"}",
+    statement:"to_timestamp('10 1 1 1 1 +1', 'y M d H m X')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 +1000000\",pattern:\"y M d H m X\"}",
+    statement:"to_timestamp('10 1 1 1 1 +1000000', 'y M d H m X')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 -1\",pattern:\"y M d H m X\"}",
+    statement:"to_timestamp('10 1 1 1 1 -1', 'y M d H m X')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 Z\",pattern:\"y M d H m x\"}",
+    statement:"to_timestamp('10 1 1 1 1 Z', 'y M d H m x')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 +24\",pattern:\"y M d H m x\"}",
+    statement:"to_timestamp('10 1 1 1 1 +24', 'y M d H m x')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 -24\",pattern:\"y M d H m x\"}",
+    statement:"to_timestamp('10 1 1 1 1 -24', 'y M d H m x')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 05\",pattern:\"y M d H m x\"}",
+    statement:"to_timestamp('10 1 1 1 1 05', 'y M d H m x')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 +1\",pattern:\"y M d H m x\"}",
+    statement:"to_timestamp('10 1 1 1 1 +1', 'y M d H m x')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 +1000000\",pattern:\"y M d H m x\"}",
+    statement:"to_timestamp('10 1 1 1 1 +1000000', 'y M d H m x')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 -1\",pattern:\"y M d H m x\"}",
+    statement:"to_timestamp('10 1 1 1 1 -1', 'y M d H m x')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 +2400\",pattern:\"y M d H m XX\"}",
+    statement:"to_timestamp('10 1 1 1 1 +2400', 'y M d H m XX')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 -2400\",pattern:\"y M d H m XX\"}",
+    statement:"to_timestamp('10 1 1 1 1 -2400', 'y M d H m XX')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 0500\",pattern:\"y M d H m XX\"}",
+    statement:"to_timestamp('10 1 1 1 1 0500', 'y M d H m XX')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 +100\",pattern:\"y M d H m XX\"}",
+    statement:"to_timestamp('10 1 1 1 1 +100', 'y M d H m XX')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 -100\",pattern:\"y M d H m XX\"}",
+    statement:"to_timestamp('10 1 1 1 1 -100', 'y M d H m XX')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 -10000\",pattern:\"y M d H m XX\"}",
+    statement:"to_timestamp('10 1 1 1 1 -10000', 'y M d H m XX')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 Z\",pattern:\"y M d H m xx\"}",
+    statement:"to_timestamp('10 1 1 1 1 Z', 'y M d H m xx')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 +2400\",pattern:\"y M d H m xx\"}",
+    statement:"to_timestamp('10 1 1 1 1 +2400', 'y M d H m xx')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 -2400\",pattern:\"y M d H m xx\"}",
+    statement:"to_timestamp('10 1 1 1 1 -2400', 'y M d H m xx')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 0500\",pattern:\"y M d H m xx\"}",
+    statement:"to_timestamp('10 1 1 1 1 0500', 'y M d H m xx')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 +100\",pattern:\"y M d H m xx\"}",
+    statement:"to_timestamp('10 1 1 1 1 +100', 'y M d H m xx')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 -100\",pattern:\"y M d H m xx\"}",
+    statement:"to_timestamp('10 1 1 1 1 -100', 'y M d H m xx')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 -10000\",pattern:\"y M d H m xx\"}",
+    statement:"to_timestamp('10 1 1 1 1 -10000', 'y M d H m xx')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 +24:00\",pattern:\"y M d H m XXX\"}",
+    statement:"to_timestamp('10 1 1 1 1 +24:00', 'y M d H m XXX')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 -24:00\",pattern:\"y M d H m XXX\"}",
+    statement:"to_timestamp('10 1 1 1 1 -24:00', 'y M d H m XXX')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 05:00\",pattern:\"y M d H m XXX\"}",
+    statement:"to_timestamp('10 1 1 1 1 05:00', 'y M d H m XXX')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 +1:00\",pattern:\"y M d H m XXX\"}",
+    statement:"to_timestamp('10 1 1 1 1 +1:00', 'y M d H m XXX')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 -1:00\",pattern:\"y M d H m XXX\"}",
+    statement:"to_timestamp('10 1 1 1 1 -1:00', 'y M d H m XXX')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 -001:00\",pattern:\"y M d H m XXX\"}",
+    statement:"to_timestamp('10 1 1 1 1 -001:00', 'y M d H m XXX')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 Z\",pattern:\"y M d H m xxx\"}",
+    statement:"to_timestamp('10 1 1 1 1 Z', 'y M d H m xxx')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 +24:00\",pattern:\"y M d H m xxx\"}",
+    statement:"to_timestamp('10 1 1 1 1 +24:00', 'y M d H m xxx')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 -24:00\",pattern:\"y M d H m xxx\"}",
+    statement:"to_timestamp('10 1 1 1 1 -24:00', 'y M d H m xxx')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 05:00\",pattern:\"y M d H m xxx\"}",
+    statement:"to_timestamp('10 1 1 1 1 05:00', 'y M d H m xxx')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 +1:00\",pattern:\"y M d H m xxx\"}",
+    statement:"to_timestamp('10 1 1 1 1 +1:00', 'y M d H m xxx')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 -1:00\",pattern:\"y M d H m xxx\"}",
+    statement:"to_timestamp('10 1 1 1 1 -1:00', 'y M d H m xxx')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_timestamp invalid string{string:\"10 1 1 1 1 -001:00\",pattern:\"y M d H m xxx\"}",
+    statement:"to_timestamp('10 1 1 1 1 -001:00', 'y M d H m xxx')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  }
+]
+

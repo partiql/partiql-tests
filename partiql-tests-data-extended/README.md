@@ -1,0 +1,1 @@
+Directory contains tests that are not formally part of the PartiQL specification or SQL-92.

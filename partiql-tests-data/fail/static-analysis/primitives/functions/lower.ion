@@ -1,0 +1,79 @@
+wrong_num_function_args::[
+  lower::[
+    {
+      name:"lower wrong number of arguments{sql:\"lower()\"}",
+      statement:"lower()",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"lower wrong number of arguments{sql:\"lower('', '')\"}",
+      statement:"lower('', '')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"lower wrong number of arguments{sql:\"lower('', 1)\"}",
+      statement:"lower('', 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+  ],
+]
+
+invalid_function_args::[
+  lower::[
+    {
+      name:"lower wrong type of arguments{param:\"1\"}",
+      statement:"lower(1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"lower wrong type of arguments{param:\"1.0\"}",
+      statement:"lower(1.0)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"lower wrong type of arguments{param:\"1e0\"}",
+      statement:"lower(1e0)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"lower wrong type of arguments{param:\"`()`\"}",
+      statement:"lower(`()`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"lower wrong type of arguments{param:\"true\"}",
+      statement:"lower(true)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"lower wrong type of arguments{param:\"`[]`\"}",
+      statement:"lower(`[]`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"lower wrong type of arguments{param:\"`{}`\"}",
+      statement:"lower(`{}`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    }
+  ],
+]

@@ -1,0 +1,153 @@
+// The following tests will error as in `partiql-lang-kotlin` in both typing modes.
+// TODO: as part of https://github.com/partiql/partiql-tests/issues/39, define modeling of different
+// numeric semantics in the conformance tests
+int_overflow_error::[
+  envs::{
+    max_int:9223372036854775807,
+    min_int:-9223372036854775808,
+    one_tenth_of_max_int:922337203685477580,
+    one_tenth_of_min_int:-922337203685477580
+  },
+  {
+    name:"int overflow and underflow conditions{sql:\"9223372036854775808\"}",
+    statement:"9223372036854775808",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"int overflow and underflow conditions{sql:\"-9223372036854775809\"}",
+    statement:"-9223372036854775809",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"int overflow and underflow conditions{sql:\"max_int + 1\"}",
+    statement:"max_int + 1",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"int overflow and underflow conditions{sql:\"min_int + -1\"}",
+    statement:"min_int + -1",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"int overflow and underflow conditions{sql:\"min_int - 1\"}",
+    statement:"min_int - 1",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"int overflow and underflow conditions{sql:\"max_int - -1\"}",
+    statement:"max_int - -1",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"int overflow and underflow conditions{sql:\"one_tenth_of_max_int * 11\"}",
+    statement:"one_tenth_of_max_int * 11",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"int overflow and underflow conditions{sql:\"one_tenth_of_min_int * -11\"}",
+    statement:"one_tenth_of_min_int * -11",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"int overflow and underflow conditions{sql:\"min_int / - 1\"}",
+    statement:"min_int / - 1",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"cast to int overflow / underflow{value:\"`2e100`\",target:\"FLOAT\"}",
+    statement:"cast(`2e100` as INT)",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"cast to int overflow / underflow{value:\"`-2e100`\",target:\"FLOAT\"}",
+    statement:"cast(`-2e100` as INT)",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"cast to int overflow / underflow{value:\"2e100\",target:\"DECIMAL\"}",
+    statement:"cast(2e100 as INT)",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"cast to int overflow / underflow{value:\"-2e100\",target:\"DECIMAL\"}",
+    statement:"cast(-2e100 as INT)",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"cast to int overflow / underflow{value:\"'92233720368547758070'\",target:\"STRING\"}",
+    statement:"cast('92233720368547758070' as INT)",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"cast to int overflow / underflow{value:\"'-92233720368547758070'\",target:\"STRING\"}",
+    statement:"cast('-92233720368547758070' as INT)",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+]
+
+// The following tests will error as in `partiql-lang-kotlin` in both typing modes.
+// TODO: as part of https://github.com/partiql/partiql-tests/issues/39, define modeling of different
+// numeric semantics in the conformance tests
+division_by_zero_error::[
+  {
+    name:"divide by zero{sql:\"1 / 0\"}",
+    statement:"1 / 0",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"divide by zero{sql:\"1 % 0\"}",
+    statement:"1 % 0",
+    assert:{
+      evalMode:[EvalModeError, EvalModeCoerce],
+      result:EvaluationFail
+    },
+  },
+]
