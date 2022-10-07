@@ -1562,7 +1562,6 @@ to_timestamp_valid::[
 ]
 
 to_timestamp_invalid::[
-  // Invalid args
   {
     name:"to_timestamp invalid pattern{pattern:\"L\"}",
     statement:"to_timestamp('doesnt matter', 'L')",
@@ -3192,4 +3191,3 @@ to_timestamp_invalid::[
     },
   }
 ]
-
