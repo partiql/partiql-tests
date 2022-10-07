@@ -122,7 +122,7 @@ type::{
     type: struct,
     fields: {
         result: { type: symbol, valid_values: [EvaluationSuccess], occurs: required },
-        output: nullable::{ occurs: required },
+        output: { type: $any, occurs: required },
         evalMode: { type: EvaluationModeSymbolOrList, occurs: required }
     },
     content: closed
