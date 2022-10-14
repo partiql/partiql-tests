@@ -122,6 +122,10 @@ type::{
     type: struct,
     fields: {
         result: { type: symbol, valid_values: [EvaluationSuccess], occurs: required },
+        // TODO: while the following is a way to specify a nullable, required field, it's less intuitive than using
+        // the `nullable` annotation (i.e. `nullable::{ occurs: required }`). Once the bug mentioned in
+        // https://github.com/amzn/ion-schema-kotlin/issues/169 is fixed, change the following to us the `nullable`
+        // annotation.
         output: { type: $any, occurs: required },
         evalMode: { type: EvaluationModeSymbolOrList, occurs: required }
     },
