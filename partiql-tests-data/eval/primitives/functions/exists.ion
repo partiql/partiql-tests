@@ -1,0 +1,194 @@
+exists::[
+  {
+    name:"exists valid cases{param:\"`[]`\",result:false}",
+    statement:"exists(`[]`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"exists valid cases{param:\"`()`\",result:false}",
+    statement:"exists(`()`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"exists valid cases{param:\"`{}`\",result:false}",
+    statement:"exists(`{}`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"exists valid cases{param:\"<<>>\",result:false}",
+    statement:"exists(<<>>)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"exists valid cases{param:\"`[1]`\",result:true}",
+    statement:"exists(`[1]`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"exists valid cases{param:\"`(1)`\",result:true}",
+    statement:"exists(`(1)`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"exists valid cases{param:\"`{a: 1}`\",result:true}",
+    statement:"exists(`{a: 1}`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"exists valid cases{param:\"<<1>>\",result:true}",
+    statement:"exists(<<1>>)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"exists valid cases{param:\"`[null]`\",result:true}",
+    statement:"exists(`[null]`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"exists valid cases{param:\"`[missing]`\",result:true}",
+    statement:"exists(`[missing]`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"exists valid cases{param:\"`(null)`\",result:true}",
+    statement:"exists(`(null)`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"exists valid cases{param:\"`(missing)`\",result:true}",
+    statement:"exists(`(missing)`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"exists valid cases{param:\"`{a: null}`\",result:true}",
+    statement:"exists(`{a: null}`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"exists valid cases{param:\"`{a: missing}`\",result:true}",
+    statement:"exists(`{a: missing}`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"exists valid cases{param:\"<<null>>\",result:true}",
+    statement:"exists(<<null>>)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"exists valid cases{param:\"<<missing>>\",result:true}",
+    statement:"exists(<<missing>>)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+]

@@ -1,0 +1,1154 @@
+date_add_valid::[
+  {
+    name:"date_add valid cases{time_part:year,quantity:1,timestamp:\"2017T\",result:(success 2018T)}",
+    statement:"date_add(year, 1, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2018T
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:month,quantity:1,timestamp:\"2017T\",result:(success 2017-02T)}",
+    statement:"date_add(month, 1, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02T
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:day,quantity:1,timestamp:\"2017T\",result:(success 2017-01-02)}",
+    statement:"date_add(day, 1, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-02
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:hour,quantity:1,timestamp:\"2017T\",result:(success 2017-01-01T01:00-00:00)}",
+    statement:"date_add(hour, 1, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-01T01:00-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:minute,quantity:1,timestamp:\"2017T\",result:(success 2017-01-01T00:01-00:00)}",
+    statement:"date_add(minute, 1, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-01T00:01-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:second,quantity:1,timestamp:\"2017T\",result:(success 2017-01-01T00:00:01-00:00)}",
+    statement:"date_add(second, 1, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-01T00:00:01-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:year,quantity:1,timestamp:\"2017-01T\",result:(success 2018-01T)}",
+    statement:"date_add(year, 1, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2018-01T
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:month,quantity:1,timestamp:\"2017-01T\",result:(success 2017-02T)}",
+    statement:"date_add(month, 1, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02T
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:day,quantity:1,timestamp:\"2017-01T\",result:(success 2017-01-02)}",
+    statement:"date_add(day, 1, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-02
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:hour,quantity:1,timestamp:\"2017-01T\",result:(success 2017-01-01T01:00-00:00)}",
+    statement:"date_add(hour, 1, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-01T01:00-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:minute,quantity:1,timestamp:\"2017-01T\",result:(success 2017-01-01T00:01-00:00)}",
+    statement:"date_add(minute, 1, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-01T00:01-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:second,quantity:1,timestamp:\"2017-01T\",result:(success 2017-01-01T00:00:01-00:00)}",
+    statement:"date_add(second, 1, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-01T00:00:01-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:year,quantity:1,timestamp:\"2017-01-02T\",result:(success 2018-01-02)}",
+    statement:"date_add(year, 1, `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2018-01-02
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:month,quantity:1,timestamp:\"2017-01-02T\",result:(success 2017-02-02)}",
+    statement:"date_add(month, 1, `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-02
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:day,quantity:1,timestamp:\"2017-01-02T\",result:(success 2017-01-03)}",
+    statement:"date_add(day, 1, `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-03
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:hour,quantity:1,timestamp:\"2017-01-02T\",result:(success 2017-01-02T01:00-00:00)}",
+    statement:"date_add(hour, 1, `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-02T01:00-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:minute,quantity:1,timestamp:\"2017-01-02T\",result:(success 2017-01-02T00:01-00:00)}",
+    statement:"date_add(minute, 1, `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-02T00:01-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:second,quantity:1,timestamp:\"2017-01-02T\",result:(success 2017-01-02T00:00:01-00:00)}",
+    statement:"date_add(second, 1, `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-02T00:00:01-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:year,quantity:1,timestamp:\"2017-01-02T03:04Z\",result:(success 2018-01-02T03:04Z)}",
+    statement:"date_add(year, 1, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2018-01-02T03:04Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:month,quantity:1,timestamp:\"2017-01-02T03:04Z\",result:(success 2017-02-02T03:04Z)}",
+    statement:"date_add(month, 1, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-02T03:04Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:day,quantity:1,timestamp:\"2017-01-02T03:04Z\",result:(success 2017-01-03T03:04Z)}",
+    statement:"date_add(day, 1, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-03T03:04Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:hour,quantity:1,timestamp:\"2017-01-02T03:04Z\",result:(success 2017-01-02T04:04Z)}",
+    statement:"date_add(hour, 1, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-02T04:04Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:minute,quantity:1,timestamp:\"2017-01-02T03:04Z\",result:(success 2017-01-02T03:05Z)}",
+    statement:"date_add(minute, 1, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-02T03:05Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:second,quantity:1,timestamp:\"2017-01-02T03:04Z\",result:(success 2017-01-02T03:04:01Z)}",
+    statement:"date_add(second, 1, `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-02T03:04:01Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:year,quantity:1,timestamp:\"2017-01-02T03:04:05Z\",result:(success 2018-01-02T03:04:05Z)}",
+    statement:"date_add(year, 1, `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2018-01-02T03:04:05Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:month,quantity:1,timestamp:\"2017-01-02T03:04:05Z\",result:(success 2017-02-02T03:04:05Z)}",
+    statement:"date_add(month, 1, `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-02T03:04:05Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:day,quantity:1,timestamp:\"2017-01-02T03:04:05Z\",result:(success 2017-01-03T03:04:05Z)}",
+    statement:"date_add(day, 1, `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-03T03:04:05Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:hour,quantity:1,timestamp:\"2017-01-02T03:04:05Z\",result:(success 2017-01-02T04:04:05Z)}",
+    statement:"date_add(hour, 1, `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-02T04:04:05Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:minute,quantity:1,timestamp:\"2017-01-02T03:04:05Z\",result:(success 2017-01-02T03:05:05Z)}",
+    statement:"date_add(minute, 1, `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-02T03:05:05Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:second,quantity:1,timestamp:\"2017-01-02T03:04:05Z\",result:(success 2017-01-02T03:04:06Z)}",
+    statement:"date_add(second, 1, `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-02T03:04:06Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:year,quantity:1,timestamp:\"2017-01-02T03:04:05.006Z\",result:(success 2018-01-02T03:04:05.006Z)}",
+    statement:"date_add(year, 1, `2017-01-02T03:04:05.006Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2018-01-02T03:04:05.006Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:month,quantity:1,timestamp:\"2017-01-02T03:04:05.006Z\",result:(success 2017-02-02T03:04:05.006Z)}",
+    statement:"date_add(month, 1, `2017-01-02T03:04:05.006Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-02T03:04:05.006Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:day,quantity:1,timestamp:\"2017-01-02T03:04:05.006Z\",result:(success 2017-01-03T03:04:05.006Z)}",
+    statement:"date_add(day, 1, `2017-01-02T03:04:05.006Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-03T03:04:05.006Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:hour,quantity:1,timestamp:\"2017-01-02T03:04:05.006Z\",result:(success 2017-01-02T04:04:05.006Z)}",
+    statement:"date_add(hour, 1, `2017-01-02T03:04:05.006Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-02T04:04:05.006Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:minute,quantity:1,timestamp:\"2017-01-02T03:04:05.006Z\",result:(success 2017-01-02T03:05:05.006Z)}",
+    statement:"date_add(minute, 1, `2017-01-02T03:04:05.006Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-02T03:05:05.006Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:second,quantity:1,timestamp:\"2017-01-02T03:04:05.006Z\",result:(success 2017-01-02T03:04:06.006Z)}",
+    statement:"date_add(second, 1, `2017-01-02T03:04:05.006Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-02T03:04:06.006Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:month,quantity:12,timestamp:\"2017T\",result:(success 2018-01T)}",
+    statement:"date_add(month, 12, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2018-01T
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:day,quantity:420,timestamp:\"2017T\",result:(success 2018-02-25)}",
+    statement:"date_add(day, 420, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2018-02-25
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:hour,quantity:10080,timestamp:\"2017T\",result:(success 2018-02-25T00:00-00:00)}",
+    statement:"date_add(hour, 10080, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2018-02-25T00:00-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:minute,quantity:604800,timestamp:\"2017T\",result:(success 2018-02-25T00:00-00:00)}",
+    statement:"date_add(minute, 604800, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2018-02-25T00:00-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:second,quantity:36288000,timestamp:\"2017T\",result:(success 2018-02-25T00:00:00-00:00)}",
+    statement:"date_add(second, 36288000, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2018-02-25T00:00:00-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:day,quantity:35,timestamp:\"2017-01T\",result:(success 2017-02-05)}",
+    statement:"date_add(day, 35, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-05
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:hour,quantity:840,timestamp:\"2017-01T\",result:(success 2017-02-05T00:00-00:00)}",
+    statement:"date_add(hour, 840, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-05T00:00-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:minute,quantity:50400,timestamp:\"2017-01T\",result:(success 2017-02-05T00:00-00:00)}",
+    statement:"date_add(minute, 50400, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-05T00:00-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:second,quantity:3024000,timestamp:\"2017-01T\",result:(success 2017-02-05T00:00:00-00:00)}",
+    statement:"date_add(second, 3024000, `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-05T00:00:00-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:hour,quantity:24,timestamp:\"2017-02-03T\",result:(success 2017-02-04T00:00-00:00)}",
+    statement:"date_add(hour, 24, `2017-02-03T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-04T00:00-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:minute,quantity:1440,timestamp:\"2017-02-03T\",result:(success 2017-02-04T00:00-00:00)}",
+    statement:"date_add(minute, 1440, `2017-02-03T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-04T00:00-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:second,quantity:86400,timestamp:\"2017-02-03T\",result:(success 2017-02-04T00:00:00-00:00)}",
+    statement:"date_add(second, 86400, `2017-02-03T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-04T00:00:00-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:minute,quantity:60,timestamp:\"2017-02-04T05:06Z\",result:(success 2017-02-04T06:06Z)}",
+    statement:"date_add(minute, 60, `2017-02-04T05:06Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-04T06:06Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:second,quantity:3600,timestamp:\"2017-02-04T05:06Z\",result:(success 2017-02-04T06:06:00Z)}",
+    statement:"date_add(second, 3600, `2017-02-04T05:06Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-04T06:06:00Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:second,quantity:60,timestamp:\"2017-02-04T05:06Z\",result:(success 2017-02-04T05:07:00Z)}",
+    statement:"date_add(second, 60, `2017-02-04T05:06Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-04T05:07:00Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:year,quantity:-1,timestamp:\"2017T\",result:(success 2016T)}",
+    statement:"date_add(year, -1, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2016T
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:month,quantity:-1,timestamp:\"2017T\",result:(success 2016-12T)}",
+    statement:"date_add(month, -1, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2016-12T
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:day,quantity:-1,timestamp:\"2017T\",result:(success 2016-12-31)}",
+    statement:"date_add(day, -1, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2016-12-31
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:hour,quantity:-1,timestamp:\"2017T\",result:(success 2016-12-31T23:00-00:00)}",
+    statement:"date_add(hour, -1, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2016-12-31T23:00-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:minute,quantity:-1,timestamp:\"2017T\",result:(success 2016-12-31T23:59-00:00)}",
+    statement:"date_add(minute, -1, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2016-12-31T23:59-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:second,quantity:-1,timestamp:\"2017T\",result:(success 2016-12-31T23:59:59-00:00)}",
+    statement:"date_add(second, -1, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2016-12-31T23:59:59-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:year,quantity:-1,timestamp:\"2017-02T\",result:(success 2016-02T)}",
+    statement:"date_add(year, -1, `2017-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2016-02T
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:month,quantity:-1,timestamp:\"2017-02T\",result:(success 2017-01T)}",
+    statement:"date_add(month, -1, `2017-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01T
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:day,quantity:-1,timestamp:\"2017-02T\",result:(success 2017-01-31)}",
+    statement:"date_add(day, -1, `2017-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-31
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:hour,quantity:-1,timestamp:\"2017-02T\",result:(success 2017-01-31T23:00-00:00)}",
+    statement:"date_add(hour, -1, `2017-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-31T23:00-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:minute,quantity:-1,timestamp:\"2017-02T\",result:(success 2017-01-31T23:59-00:00)}",
+    statement:"date_add(minute, -1, `2017-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-31T23:59-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:second,quantity:-1,timestamp:\"2017-02T\",result:(success 2017-01-31T23:59:59-00:00)}",
+    statement:"date_add(second, -1, `2017-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-31T23:59:59-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:year,quantity:-1,timestamp:\"2017-02-03T\",result:(success 2016-02-03)}",
+    statement:"date_add(year, -1, `2017-02-03T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2016-02-03
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:month,quantity:-1,timestamp:\"2017-02-03T\",result:(success 2017-01-03)}",
+    statement:"date_add(month, -1, `2017-02-03T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-03
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:day,quantity:-1,timestamp:\"2017-02-03T\",result:(success 2017-02-02)}",
+    statement:"date_add(day, -1, `2017-02-03T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-02
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:hour,quantity:-1,timestamp:\"2017-02-03T\",result:(success 2017-02-02T23:00-00:00)}",
+    statement:"date_add(hour, -1, `2017-02-03T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-02T23:00-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:minute,quantity:-1,timestamp:\"2017-02-03T\",result:(success 2017-02-02T23:59-00:00)}",
+    statement:"date_add(minute, -1, `2017-02-03T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-02T23:59-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:second,quantity:-1,timestamp:\"2017-02-03T\",result:(success 2017-02-02T23:59:59-00:00)}",
+    statement:"date_add(second, -1, `2017-02-03T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-02T23:59:59-00:00
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:year,quantity:-1,timestamp:\"2017-02-03T04:05Z\",result:(success 2016-02-03T04:05Z)}",
+    statement:"date_add(year, -1, `2017-02-03T04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2016-02-03T04:05Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:month,quantity:-1,timestamp:\"2017-02-03T04:05Z\",result:(success 2017-01-03T04:05Z)}",
+    statement:"date_add(month, -1, `2017-02-03T04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-03T04:05Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:day,quantity:-1,timestamp:\"2017-02-03T04:05Z\",result:(success 2017-02-02T04:05Z)}",
+    statement:"date_add(day, -1, `2017-02-03T04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-02T04:05Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:hour,quantity:-1,timestamp:\"2017-02-03T04:05Z\",result:(success 2017-02-03T03:05Z)}",
+    statement:"date_add(hour, -1, `2017-02-03T04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-03T03:05Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:minute,quantity:-1,timestamp:\"2017-02-03T04:05Z\",result:(success 2017-02-03T04:04Z)}",
+    statement:"date_add(minute, -1, `2017-02-03T04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-03T04:04Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:second,quantity:-1,timestamp:\"2017-02-03T04:05Z\",result:(success 2017-02-03T04:04:59Z)}",
+    statement:"date_add(second, -1, `2017-02-03T04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-03T04:04:59Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:year,quantity:-1,timestamp:\"2017-02-03T04:05:06Z\",result:(success 2016-02-03T04:05:06Z)}",
+    statement:"date_add(year, -1, `2017-02-03T04:05:06Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2016-02-03T04:05:06Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:month,quantity:-1,timestamp:\"2017-02-03T04:05:06Z\",result:(success 2017-01-03T04:05:06Z)}",
+    statement:"date_add(month, -1, `2017-02-03T04:05:06Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-03T04:05:06Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:day,quantity:-1,timestamp:\"2017-02-03T04:05:06Z\",result:(success 2017-02-02T04:05:06Z)}",
+    statement:"date_add(day, -1, `2017-02-03T04:05:06Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-02T04:05:06Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:hour,quantity:-1,timestamp:\"2017-02-03T04:05:06Z\",result:(success 2017-02-03T03:05:06Z)}",
+    statement:"date_add(hour, -1, `2017-02-03T04:05:06Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-03T03:05:06Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:minute,quantity:-1,timestamp:\"2017-02-03T04:05:06Z\",result:(success 2017-02-03T04:04:06Z)}",
+    statement:"date_add(minute, -1, `2017-02-03T04:05:06Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-03T04:04:06Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:second,quantity:-1,timestamp:\"2017-02-03T04:05:06Z\",result:(success 2017-02-03T04:05:05Z)}",
+    statement:"date_add(second, -1, `2017-02-03T04:05:06Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-03T04:05:05Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:year,quantity:-1,timestamp:\"2017-02-03T04:05:06.007Z\",result:(success 2016-02-03T04:05:06.007Z)}",
+    statement:"date_add(year, -1, `2017-02-03T04:05:06.007Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2016-02-03T04:05:06.007Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:month,quantity:-1,timestamp:\"2017-02-03T04:05:06.007Z\",result:(success 2017-01-03T04:05:06.007Z)}",
+    statement:"date_add(month, -1, `2017-02-03T04:05:06.007Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-01-03T04:05:06.007Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:day,quantity:-1,timestamp:\"2017-02-03T04:05:06.007Z\",result:(success 2017-02-02T04:05:06.007Z)}",
+    statement:"date_add(day, -1, `2017-02-03T04:05:06.007Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-02T04:05:06.007Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:hour,quantity:-1,timestamp:\"2017-02-03T04:05:06.007Z\",result:(success 2017-02-03T03:05:06.007Z)}",
+    statement:"date_add(hour, -1, `2017-02-03T04:05:06.007Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-03T03:05:06.007Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:minute,quantity:-1,timestamp:\"2017-02-03T04:05:06.007Z\",result:(success 2017-02-03T04:04:06.007Z)}",
+    statement:"date_add(minute, -1, `2017-02-03T04:05:06.007Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-03T04:04:06.007Z
+    }
+  },
+  {
+    name:"date_add valid cases{time_part:second,quantity:-1,timestamp:\"2017-02-03T04:05:06.007Z\",result:(success 2017-02-03T04:05:05.007Z)}",
+    statement:"date_add(second, -1, `2017-02-03T04:05:06.007Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017-02-03T04:05:05.007Z
+    }
+  },
+  {
+    name:"date_add null and missing propagation{time_part:year,quantity:\"null\",timestamp:\"`2017T`\",result:(success null)}",
+    statement:"date_add(year, null, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"date_add null and missing propagation{time_part:year,quantity:1,timestamp:\"null\",result:(success null)}",
+    statement:"date_add(year, 1, null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"date_add null and missing propagation{time_part:year,quantity:\"missing\",timestamp:\"`2017T`\",result:(success missing::null)}",
+    statement:"date_add(year, missing, `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"date_add null and missing propagation{time_part:year,quantity:1,timestamp:\"missing\",result:(success missing::null)}",
+    statement:"date_add(year, 1, missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"date_add null and missing propagation{time_part:year,quantity:\"null\",timestamp:\"missing\",result:(success missing::null)}",
+    statement:"date_add(year, null, missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"date_add null and missing propagation{time_part:year,quantity:\"missing\",timestamp:\"null\",result:(success missing::null)}",
+    statement:"date_add(year, missing, null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+]
+
+date_add_invalid::[
+  {
+    name:"date_add invalid quantity{time_part:\"year\",quantity:9999}",
+    statement:"date_add(year, 9999, `9999-12-31T23:59:59Z`)",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"date_add invalid quantity{time_part:\"second\",quantity:1}",
+    statement:"date_add(second, 1, `9999-12-31T23:59:59Z`)",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"date_add invalid quantity{time_part:\"year\",quantity:-10000}",
+    statement:"date_add(year, -10000, `9999-12-31T23:59:59Z`)",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  }
+]

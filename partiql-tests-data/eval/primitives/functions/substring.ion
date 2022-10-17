@@ -1,0 +1,1313 @@
+substring::[
+  {
+    name:"substring valid cases 2 arguments with FROM syntax{target:\"123456789\",start:\"0\",result:\"123456789\"}",
+    statement:"substring('123456789' FROM 0)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"123456789"
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments with FROM syntax{target:\"123456789\",start:\"1\",result:\"123456789\"}",
+    statement:"substring('123456789' FROM 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"123456789"
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments with FROM syntax{target:\"123456789\",start:\"2\",result:\"23456789\"}",
+    statement:"substring('123456789' FROM 2)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"23456789"
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments with FROM syntax{target:\"123456789\",start:\"-4\",result:\"123456789\"}",
+    statement:"substring('123456789' FROM -4)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"123456789"
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments with FROM syntax{target:\"\",start:\"-1\",result:\"\"}",
+    statement:"substring('' FROM -1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:""
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments with FROM syntax{target:\"\",start:\"0\",result:\"\"}",
+    statement:"substring('' FROM 0)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:""
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments with FROM syntax{target:\"\\U0001f601\\U0001f61e\\U0001f638\\U0001f638\",start:\"3\",result:\"\\U0001f638\\U0001f638\"}",
+    statement:"substring('😁😞😸😸' FROM 3)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"😸😸"
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments with FROM syntax{target:\"\\u8a71\\u5bb6\\u8eab\\u5727\\u8cbb\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\",start:\"6\",result:\"\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\"}",
+    statement:"substring('話家身圧費谷料村能計税金' FROM 6)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"谷料村能計税金"
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments with FROM syntax{target:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",start:\"40\",result:\"\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\"}",
+    statement:"substring('ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя' FROM 40)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"ШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя"
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments with FROM syntax{target:\"( \\u0361\\xb0 \\u035c\\u0296 \\u0361\\xb0)\\u252c\\u2500\\u252c\\u30ce( \\xba _ \\xba\\u30ce)\",start:\"16\",result:\"( \\xba _ \\xba\\u30ce)\"}",
+    statement:"substring('( ͡° ͜ʖ ͡°)┬─┬ノ( º _ ºノ)' FROM 16)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"( º _ ºノ)"
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments with FROM syntax{target:\"\\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\",start:\"17\",result:\"\\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\"}",
+    statement:"substring('𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫' FROM 17)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫"
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments with FROM syntax{target:\"\\U0001f469\\U0001f3fd\",start:\"2\",result:\"\\U0001f3fd\"}",
+    statement:"substring('👩🏽' FROM 2)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"🏽"
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments{target:\"123456789\",start:\"0\",result:\"123456789\"}",
+    statement:"substring('123456789', 0)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"123456789"
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments{target:\"123456789\",start:\"1\",result:\"123456789\"}",
+    statement:"substring('123456789', 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"123456789"
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments{target:\"123456789\",start:\"2\",result:\"23456789\"}",
+    statement:"substring('123456789', 2)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"23456789"
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments{target:\"123456789\",start:\"-4\",result:\"123456789\"}",
+    statement:"substring('123456789', -4)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"123456789"
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments{target:\"\",start:\"-1\",result:\"\"}",
+    statement:"substring('', -1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:""
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments{target:\"\",start:\"0\",result:\"\"}",
+    statement:"substring('', 0)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:""
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments{target:\"\\U0001f601\\U0001f61e\\U0001f638\\U0001f638\",start:\"3\",result:\"\\U0001f638\\U0001f638\"}",
+    statement:"substring('😁😞😸😸', 3)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"😸😸"
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments{target:\"\\u8a71\\u5bb6\\u8eab\\u5727\\u8cbb\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\",start:\"6\",result:\"\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\"}",
+    statement:"substring('話家身圧費谷料村能計税金', 6)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"谷料村能計税金"
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments{target:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",start:\"40\",result:\"\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\"}",
+    statement:"substring('ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя', 40)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"ШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя"
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments{target:\"( \\u0361\\xb0 \\u035c\\u0296 \\u0361\\xb0)\\u252c\\u2500\\u252c\\u30ce( \\xba _ \\xba\\u30ce)\",start:\"16\",result:\"( \\xba _ \\xba\\u30ce)\"}",
+    statement:"substring('( ͡° ͜ʖ ͡°)┬─┬ノ( º _ ºノ)', 16)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"( º _ ºノ)"
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments{target:\"\\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\",start:\"17\",result:\"\\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\"}",
+    statement:"substring('𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫', 17)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫"
+    }
+  },
+  {
+    name:"substring valid cases 2 arguments{target:\"\\U0001f469\\U0001f3fd\",start:\"2\",result:\"\\U0001f3fd\"}",
+    statement:"substring('👩🏽', 2)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"🏽"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"123456789\",start:\"0\",quantity:\"999\",result:\"123456789\"}",
+    statement:"substring('123456789' FROM 0 FOR 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"123456789"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"123456789\",start:\"0\",quantity:\"2\",result:\"1\"}",
+    statement:"substring('123456789' FROM 0 FOR 2)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"123456789\",start:\"1\",quantity:\"999\",result:\"123456789\"}",
+    statement:"substring('123456789' FROM 1 FOR 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"123456789"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"123456789\",start:\"1\",quantity:\"2\",result:\"12\"}",
+    statement:"substring('123456789' FROM 1 FOR 2)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"12"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"123456789\",start:\"2\",quantity:\"999\",result:\"23456789\"}",
+    statement:"substring('123456789' FROM 2 FOR 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"23456789"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"123456789\",start:\"2\",quantity:\"3\",result:\"234\"}",
+    statement:"substring('123456789' FROM 2 FOR 3)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"234"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"123456789\",start:\"-4\",quantity:\"999\",result:\"123456789\"}",
+    statement:"substring('123456789' FROM -4 FOR 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"123456789"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"123456789\",start:\"-4\",quantity:\"6\",result:\"1\"}",
+    statement:"substring('123456789' FROM -4 FOR 6)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"\",start:\"-1\",quantity:\"999\",result:\"\"}",
+    statement:"substring('' FROM -1 FOR 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:""
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"\",start:\"0\",quantity:\"999\",result:\"\"}",
+    statement:"substring('' FROM 0 FOR 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:""
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"1\",start:\"-4\",quantity:\"1\",result:\"\"}",
+    statement:"substring('1' FROM -4 FOR 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:""
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"1\",start:\"-4\",quantity:\"0\",result:\"\"}",
+    statement:"substring('1' FROM -4 FOR 0)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:""
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"1\",start:\"1\",quantity:\"0\",result:\"\"}",
+    statement:"substring('1' FROM 1 FOR 0)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:""
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"1\",start:\"0\",quantity:\"0\",result:\"\"}",
+    statement:"substring('1' FROM 0 FOR 0)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:""
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"\\U0001f601\\U0001f61e\\U0001f638\\U0001f638\",start:\"3\",quantity:\"999\",result:\"\\U0001f638\\U0001f638\"}",
+    statement:"substring('😁😞😸😸' FROM 3 FOR 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"😸😸"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"\\U0001f601\\U0001f61e\\U0001f638\\U0001f638\",start:\"3\",quantity:\"1\",result:\"\\U0001f638\"}",
+    statement:"substring('😁😞😸😸' FROM 3 FOR 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"😸"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"\\u8a71\\u5bb6\\u8eab\\u5727\\u8cbb\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\",start:\"6\",quantity:\"999\",result:\"\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\"}",
+    statement:"substring('話家身圧費谷料村能計税金' FROM 6 FOR 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"谷料村能計税金"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"\\u8a71\\u5bb6\\u8eab\\u5727\\u8cbb\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\",start:\"6\",quantity:\"2\",result:\"\\u8c37\\u6599\"}",
+    statement:"substring('話家身圧費谷料村能計税金' FROM 6 FOR 2)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"谷料"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",start:\"40\",quantity:\"999\",result:\"\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\"}",
+    statement:"substring('ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя' FROM 40 FOR 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"ШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",start:\"40\",quantity:\"4\",result:\"\\u0428\\u0429\\u042a\\u042b\"}",
+    statement:"substring('ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя' FROM 40 FOR 4)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"ШЩЪЫ"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"( \\u0361\\xb0 \\u035c\\u0296 \\u0361\\xb0)\\u252c\\u2500\\u252c\\u30ce( \\xba _ \\xba\\u30ce)\",start:\"16\",quantity:\"999\",result:\"( \\xba _ \\xba\\u30ce)\"}",
+    statement:"substring('( ͡° ͜ʖ ͡°)┬─┬ノ( º _ ºノ)' FROM 16 FOR 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"( º _ ºノ)"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"( \\u0361\\xb0 \\u035c\\u0296 \\u0361\\xb0)\\u252c\\u2500\\u252c\\u30ce( \\xba _ \\xba\\u30ce)\",start:\"18\",quantity:\"5\",result:\"\\xba _ \\xba\"}",
+    statement:"substring('( ͡° ͜ʖ ͡°)┬─┬ノ( º _ ºノ)' FROM 18 FOR 5)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"º _ º"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"\\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\",start:\"17\",quantity:\"999\",result:\"\\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\"}",
+    statement:"substring('𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫' FROM 17 FOR 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"\\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\",start:\"17\",quantity:\"5\",result:\"\\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c\"}",
+    statement:"substring('𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫' FROM 17 FOR 5)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"𝐣𝐮𝐦𝐩𝐬"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments using FROM syntax{target:\"\\U0001f469\\U0001f3fd\",start:\"1\",quantity:\"1\",result:\"\\U0001f469\"}",
+    statement:"substring('👩🏽' FROM 1 FOR 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"👩"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"123456789\",start:\"0\",quantity:\"999\",result:\"123456789\"}",
+    statement:"substring('123456789', 0, 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"123456789"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"123456789\",start:\"0\",quantity:\"2\",result:\"1\"}",
+    statement:"substring('123456789', 0, 2)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"123456789\",start:\"1\",quantity:\"999\",result:\"123456789\"}",
+    statement:"substring('123456789', 1, 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"123456789"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"123456789\",start:\"1\",quantity:\"2\",result:\"12\"}",
+    statement:"substring('123456789', 1, 2)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"12"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"123456789\",start:\"2\",quantity:\"999\",result:\"23456789\"}",
+    statement:"substring('123456789', 2, 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"23456789"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"123456789\",start:\"2\",quantity:\"3\",result:\"234\"}",
+    statement:"substring('123456789', 2, 3)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"234"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"123456789\",start:\"-4\",quantity:\"999\",result:\"123456789\"}",
+    statement:"substring('123456789', -4, 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"123456789"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"123456789\",start:\"-4\",quantity:\"6\",result:\"1\"}",
+    statement:"substring('123456789', -4, 6)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"\",start:\"-1\",quantity:\"999\",result:\"\"}",
+    statement:"substring('', -1, 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:""
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"\",start:\"0\",quantity:\"999\",result:\"\"}",
+    statement:"substring('', 0, 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:""
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"1\",start:\"-4\",quantity:\"1\",result:\"\"}",
+    statement:"substring('1', -4, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:""
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"1\",start:\"-4\",quantity:\"0\",result:\"\"}",
+    statement:"substring('1', -4, 0)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:""
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"1\",start:\"1\",quantity:\"0\",result:\"\"}",
+    statement:"substring('1', 1, 0)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:""
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"1\",start:\"0\",quantity:\"0\",result:\"\"}",
+    statement:"substring('1', 0, 0)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:""
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"\\U0001f601\\U0001f61e\\U0001f638\\U0001f638\",start:\"3\",quantity:\"999\",result:\"\\U0001f638\\U0001f638\"}",
+    statement:"substring('😁😞😸😸', 3, 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"😸😸"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"\\U0001f601\\U0001f61e\\U0001f638\\U0001f638\",start:\"3\",quantity:\"1\",result:\"\\U0001f638\"}",
+    statement:"substring('😁😞😸😸', 3, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"😸"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"\\u8a71\\u5bb6\\u8eab\\u5727\\u8cbb\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\",start:\"6\",quantity:\"999\",result:\"\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\"}",
+    statement:"substring('話家身圧費谷料村能計税金', 6, 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"谷料村能計税金"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"\\u8a71\\u5bb6\\u8eab\\u5727\\u8cbb\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\",start:\"6\",quantity:\"2\",result:\"\\u8c37\\u6599\"}",
+    statement:"substring('話家身圧費谷料村能計税金', 6, 2)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"谷料"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",start:\"40\",quantity:\"999\",result:\"\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\"}",
+    statement:"substring('ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя', 40, 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"ШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",start:\"40\",quantity:\"4\",result:\"\\u0428\\u0429\\u042a\\u042b\"}",
+    statement:"substring('ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя', 40, 4)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"ШЩЪЫ"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"( \\u0361\\xb0 \\u035c\\u0296 \\u0361\\xb0)\\u252c\\u2500\\u252c\\u30ce( \\xba _ \\xba\\u30ce)\",start:\"16\",quantity:\"999\",result:\"( \\xba _ \\xba\\u30ce)\"}",
+    statement:"substring('( ͡° ͜ʖ ͡°)┬─┬ノ( º _ ºノ)', 16, 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"( º _ ºノ)"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"( \\u0361\\xb0 \\u035c\\u0296 \\u0361\\xb0)\\u252c\\u2500\\u252c\\u30ce( \\xba _ \\xba\\u30ce)\",start:\"18\",quantity:\"5\",result:\"\\xba _ \\xba\"}",
+    statement:"substring('( ͡° ͜ʖ ͡°)┬─┬ノ( º _ ºノ)', 18, 5)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"º _ º"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"\\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\",start:\"17\",quantity:\"999\",result:\"\\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\"}",
+    statement:"substring('𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫', 17, 999)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"\\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\",start:\"17\",quantity:\"5\",result:\"\\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c\"}",
+    statement:"substring('𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫', 17, 5)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"𝐣𝐮𝐦𝐩𝐬"
+    }
+  },
+  {
+    name:"substring valid cases 3 arguments{target:\"\\U0001f469\\U0001f3fd\",start:\"1\",quantity:\"1\",result:\"\\U0001f469\"}",
+    statement:"substring('👩🏽', 1, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"👩"
+    }
+  },
+  {
+    name:"substring null and missing propagation 2 arguments{target:\"null\",start_pos:\"1\"}",
+    statement:"substring(null, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"substring null and missing propagation 2 arguments{target:\"''\",start_pos:\"null\"}",
+    statement:"substring('', null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"substring null and missing propagation 2 arguments{target:\"null\",start_pos:\"null\"}",
+    statement:"substring(null, null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"substring null and missing propagation 2 arguments{target:\"missing\",start_pos:\"1\"}",
+    statement:"substring(missing, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 2 arguments{target:\"''\",start_pos:\"missing\"}",
+    statement:"substring('', missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 2 arguments{target:\"missing\",start_pos:\"missing\"}",
+    statement:"substring(missing, missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 2 arguments{target:\"null\",start_pos:\"missing\"}",
+    statement:"substring(null, missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 2 arguments{target:\"missing\",start_pos:\"null\"}",
+    statement:"substring(missing, null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"null\",start_pos:\"1\",quantity:\"1\"}",
+    statement:"substring(null, 1, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"null\",start_pos:\"1\",quantity:\"null\"}",
+    statement:"substring(null, 1, null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"null\",start_pos:\"1\",quantity:\"missing\"}",
+    statement:"substring(null, 1, missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"null\",start_pos:\"null\",quantity:\"1\"}",
+    statement:"substring(null, null, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"null\",start_pos:\"null\",quantity:\"null\"}",
+    statement:"substring(null, null, null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"null\",start_pos:\"null\",quantity:\"missing\"}",
+    statement:"substring(null, null, missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"null\",start_pos:\"missing\",quantity:\"1\"}",
+    statement:"substring(null, missing, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"null\",start_pos:\"missing\",quantity:\"null\"}",
+    statement:"substring(null, missing, null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"null\",start_pos:\"missing\",quantity:\"missing\"}",
+    statement:"substring(null, missing, missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"missing\",start_pos:\"1\",quantity:\"1\"}",
+    statement:"substring(missing, 1, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"missing\",start_pos:\"1\",quantity:\"null\"}",
+    statement:"substring(missing, 1, null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"missing\",start_pos:\"1\",quantity:\"missing\"}",
+    statement:"substring(missing, 1, missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"missing\",start_pos:\"null\",quantity:\"1\"}",
+    statement:"substring(missing, null, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"missing\",start_pos:\"null\",quantity:\"null\"}",
+    statement:"substring(missing, null, null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"missing\",start_pos:\"null\",quantity:\"missing\"}",
+    statement:"substring(missing, null, missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"missing\",start_pos:\"missing\",quantity:\"1\"}",
+    statement:"substring(missing, missing, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"missing\",start_pos:\"missing\",quantity:\"null\"}",
+    statement:"substring(missing, missing, null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"missing\",start_pos:\"missing\",quantity:\"missing\"}",
+    statement:"substring(missing, missing, missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"''\",start_pos:\"1\",quantity:\"null\"}",
+    statement:"substring('', 1, null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"''\",start_pos:\"1\",quantity:\"missing\"}",
+    statement:"substring('', 1, missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"''\",start_pos:\"null\",quantity:\"1\"}",
+    statement:"substring('', null, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"''\",start_pos:\"null\",quantity:\"null\"}",
+    statement:"substring('', null, null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"''\",start_pos:\"null\",quantity:\"missing\"}",
+    statement:"substring('', null, missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"''\",start_pos:\"missing\",quantity:\"1\"}",
+    statement:"substring('', missing, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"''\",start_pos:\"missing\",quantity:\"null\"}",
+    statement:"substring('', missing, null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring null and missing propagation 3 arguments{target:\"''\",start_pos:\"missing\",quantity:\"missing\"}",
+    statement:"substring('', missing, missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"substring invalid quantity",
+    statement:"substring('1', 4, -11)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  }
+]

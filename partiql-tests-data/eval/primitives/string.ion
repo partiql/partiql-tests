@@ -1,0 +1,350 @@
+string::[
+  {
+    name:"concatenation with non-nulls{left:\"\",right:\"\",result:\"\"}",
+    statement:"{ `concatenated_literals`: '' || '', `concatenated_variables`: env_left || env_right }",
+    env:{
+      env_left:"",
+      env_right:""
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        concatenated_literals:"",
+        concatenated_variables:""
+      }
+    }
+  },
+  {
+    name:"concatenation with non-nulls{left:\"left\",right:\"\",result:\"left\"}",
+    statement:"{ `concatenated_literals`: 'left' || '', `concatenated_variables`: env_left || env_right }",
+    env:{
+      env_left:"left",
+      env_right:""
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        concatenated_literals:"left",
+        concatenated_variables:"left"
+      }
+    }
+  },
+  {
+    name:"concatenation with non-nulls{left:\"\",right:\"right\",result:\"right\"}",
+    statement:"{ `concatenated_literals`: '' || 'right', `concatenated_variables`: env_left || env_right }",
+    env:{
+      env_left:"",
+      env_right:"right"
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        concatenated_literals:"right",
+        concatenated_variables:"right"
+      }
+    }
+  },
+  {
+    name:"concatenation with non-nulls{left:\"a\",right:\"b\",result:\"ab\"}",
+    statement:"{ `concatenated_literals`: 'a' || 'b', `concatenated_variables`: env_left || env_right }",
+    env:{
+      env_left:"a",
+      env_right:"b"
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        concatenated_literals:"ab",
+        concatenated_variables:"ab"
+      }
+    }
+  },
+  {
+    name:"concatenation with non-nulls{left:\"hello\",right:\"world\",result:\"helloworld\"}",
+    statement:"{ `concatenated_literals`: 'hello' || 'world', `concatenated_variables`: env_left || env_right }",
+    env:{
+      env_left:"hello",
+      env_right:"world"
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        concatenated_literals:"helloworld",
+        concatenated_variables:"helloworld"
+      }
+    }
+  },
+  {
+    name:"concatenation with non-nulls{left:\"o\",right:\"\\u0300\",result:\"o\\u0300\"}",
+    statement:"{ `concatenated_literals`: 'o' || '̀', `concatenated_variables`: env_left || env_right }",
+    env:{
+      env_left:"o",
+      env_right:"̀"
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        concatenated_literals:"ò",
+        concatenated_variables:"ò"
+      }
+    }
+  },
+  {
+    name:"concatenation with non-nulls{left:\"\\u8a71\\u5bb6\\u8eab\\u5727\\u8cbb\\u8c37\",right:\"\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\",result:\"\\u8a71\\u5bb6\\u8eab\\u5727\\u8cbb\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\"}",
+    statement:"{ `concatenated_literals`: '話家身圧費谷' || '料村能計税金', `concatenated_variables`: env_left || env_right }",
+    env:{
+      env_left:"話家身圧費谷",
+      env_right:"料村能計税金"
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        concatenated_literals:"話家身圧費谷料村能計税金",
+        concatenated_variables:"話家身圧費谷料村能計税金"
+      }
+    }
+  },
+  {
+    name:"concatenation with non-nulls{left:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\",right:\"\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",result:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\"}",
+    statement:"{ `concatenated_literals`: 'ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРС' || 'ТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя', `concatenated_variables`: env_left || env_right }",
+    env:{
+      env_left:"ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРС",
+      env_right:"ТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя"
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        concatenated_literals:"ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя",
+        concatenated_variables:"ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя"
+      }
+    }
+  },
+  {
+    name:"concatenation with non-nulls{left:\"\\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \",right:\"\\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\",result:\"\\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\"}",
+    statement:"{ `concatenated_literals`: '𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 ' || '𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫', `concatenated_variables`: env_left || env_right }",
+    env:{
+      env_left:"𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 ",
+      env_right:"𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫"
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        concatenated_literals:"𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫",
+        concatenated_variables:"𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫"
+      }
+    }
+  },
+  {
+    name:"concatenation with non-nulls{left:\"( \\u0361\\xb0 \\u035c\\u0296 \\u0361\\xb0)\\u252c\\u2500\\u252c\\u30ce\",right:\"( \\xba _ \\xba\\u30ce)\",result:\"( \\u0361\\xb0 \\u035c\\u0296 \\u0361\\xb0)\\u252c\\u2500\\u252c\\u30ce( \\xba _ \\xba\\u30ce)\"}",
+    statement:"{ `concatenated_literals`: '( ͡° ͜ʖ ͡°)┬─┬ノ' || '( º _ ºノ)', `concatenated_variables`: env_left || env_right }",
+    env:{
+      env_left:"( ͡° ͜ʖ ͡°)┬─┬ノ",
+      env_right:"( º _ ºノ)"
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        concatenated_literals:"( ͡° ͜ʖ ͡°)┬─┬ノ( º _ ºノ)",
+        concatenated_variables:"( ͡° ͜ʖ ͡°)┬─┬ノ( º _ ºノ)"
+      }
+    }
+  },
+  {
+    name:"concatenation with non-nulls{left:\"\\U0001f60d\",right:\"\\U0001f60d\",result:\"\\U0001f60d\\U0001f60d\"}",
+    statement:"{ `concatenated_literals`: '😍' || '😍', `concatenated_variables`: env_left || env_right }",
+    env:{
+      env_left:"😍",
+      env_right:"😍"
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        concatenated_literals:"😍😍",
+        concatenated_variables:"😍😍"
+      }
+    }
+  },
+  {
+    name:"concatenation with non-nulls{left:\"\\U0001f4a9\\U0001f4a9\",right:\"\\U0001f4a9\\U0001f4a9\",result:\"\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f4a9\"}",
+    statement:"{ `concatenated_literals`: '💩💩' || '💩💩', `concatenated_variables`: env_left || env_right }",
+    env:{
+      env_left:"💩💩",
+      env_right:"💩💩"
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        concatenated_literals:"💩💩💩💩",
+        concatenated_variables:"💩💩💩💩"
+      }
+    }
+  },
+  {
+    name:"concatenation with null values{left:\"NULL\",right:\"NULL\"}",
+    statement:"NULL || NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"concatenation with null values{left:\"MISSING\",right:\"MISSING\"}",
+    statement:"MISSING || MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"concatenation with null values{left:\"''\",right:\"NULL\"}",
+    statement:"'' || NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"concatenation with null values{left:\"NULL\",right:\"''\"}",
+    statement:"NULL || ''",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"concatenation with null values{left:\"''\",right:\"MISSING\"}",
+    statement:"'' || MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"concatenation with null values{left:\"MISSING\",right:\"''\"}",
+    statement:"MISSING || ''",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"concatenation with null values{left:\"'a'\",right:\"NULL\"}",
+    statement:"'a' || NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"concatenation with null values{left:\"NULL\",right:\"'b'\"}",
+    statement:"NULL || 'b'",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"concatenation with null values{left:\"'a'\",right:\"MISSING\"}",
+    statement:"'a' || MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"concatenation with null values{left:\"MISSING\",right:\"'b'\"}",
+    statement:"MISSING || 'b'",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+]

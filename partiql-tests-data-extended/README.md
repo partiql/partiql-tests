@@ -1,0 +1,1 @@
+This directory contains additional tests that are not formally defined within the PartiQL specification. This suite may assume additional features which are not included in the conformance test suite.

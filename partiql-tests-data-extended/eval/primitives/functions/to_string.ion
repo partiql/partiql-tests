@@ -1,0 +1,3852 @@
+to_string_valid::[
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0001T\",pattern:\"y\",result:\"1\"}",
+    statement:"to_string(`0001T`, 'y')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"9999T\",pattern:\"y\",result:\"9999\"}",
+    statement:"to_string(`9999T`, 'y')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"9999"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"y\",result:\"986\"}",
+    statement:"to_string(`0986T`, 'y')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"986"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"y\",result:\"986\"}",
+    statement:"to_string(`0986-01T`, 'y')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"986"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"y\",result:\"986\"}",
+    statement:"to_string(`0986-01-02T`, 'y')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"986"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"y\",result:\"986\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'y')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"986"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01+01:00\",pattern:\"y\",result:\"986\"}",
+    statement:"to_string(`0986-01-02T10:01+01:00`, 'y')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"986"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55Z\",pattern:\"y\",result:\"986\"}",
+    statement:"to_string(`0986-01-02T10:01:55Z`, 'y')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"986"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55+01:00\",pattern:\"y\",result:\"986\"}",
+    statement:"to_string(`0986-01-02T10:01:55+01:00`, 'y')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"986"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55.004Z\",pattern:\"y\",result:\"986\"}",
+    statement:"to_string(`0986-01-02T10:01:55.004Z`, 'y')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"986"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55.004+01:00\",pattern:\"y\",result:\"986\"}",
+    statement:"to_string(`0986-01-02T10:01:55.004+01:00`, 'y')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"986"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0001T\",pattern:\"yy\",result:\"01\"}",
+    statement:"to_string(`0001T`, 'yy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"01"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"9999T\",pattern:\"yy\",result:\"99\"}",
+    statement:"to_string(`9999T`, 'yy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"99"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"1986T\",pattern:\"yy\",result:\"86\"}",
+    statement:"to_string(`1986T`, 'yy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"86"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"1986-01T\",pattern:\"yy\",result:\"86\"}",
+    statement:"to_string(`1986-01T`, 'yy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"86"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"1986-01-02\",pattern:\"yy\",result:\"86\"}",
+    statement:"to_string(`1986-01-02`, 'yy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"86"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"1986-01-02T10:01Z\",pattern:\"yy\",result:\"86\"}",
+    statement:"to_string(`1986-01-02T10:01Z`, 'yy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"86"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"1986-01-02T10:01+01:00\",pattern:\"yy\",result:\"86\"}",
+    statement:"to_string(`1986-01-02T10:01+01:00`, 'yy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"86"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"1986-01-02T10:01:55Z\",pattern:\"yy\",result:\"86\"}",
+    statement:"to_string(`1986-01-02T10:01:55Z`, 'yy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"86"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"1986-01-02T10:01:55+01:00\",pattern:\"yy\",result:\"86\"}",
+    statement:"to_string(`1986-01-02T10:01:55+01:00`, 'yy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"86"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"1986-01-02T10:01:55.004Z\",pattern:\"yy\",result:\"86\"}",
+    statement:"to_string(`1986-01-02T10:01:55.004Z`, 'yy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"86"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"1986-01-02T10:01:55.004+01:00\",pattern:\"yy\",result:\"86\"}",
+    statement:"to_string(`1986-01-02T10:01:55.004+01:00`, 'yy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"86"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"yyyy\",result:\"0986\"}",
+    statement:"to_string(`0986T`, 'yyyy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0986"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"yyyy\",result:\"0986\"}",
+    statement:"to_string(`0986-01T`, 'yyyy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0986"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"yyyy\",result:\"0986\"}",
+    statement:"to_string(`0986-01-02T`, 'yyyy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0986"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"yyyy\",result:\"0986\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'yyyy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0986"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01+01:00\",pattern:\"yyyy\",result:\"0986\"}",
+    statement:"to_string(`0986-01-02T10:01+01:00`, 'yyyy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0986"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55Z\",pattern:\"yyyy\",result:\"0986\"}",
+    statement:"to_string(`0986-01-02T10:01:55Z`, 'yyyy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0986"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55+01:00\",pattern:\"yyyy\",result:\"0986\"}",
+    statement:"to_string(`0986-01-02T10:01:55+01:00`, 'yyyy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0986"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55.004Z\",pattern:\"yyyy\",result:\"0986\"}",
+    statement:"to_string(`0986-01-02T10:01:55.004Z`, 'yyyy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0986"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55.004+01:00\",pattern:\"yyyy\",result:\"0986\"}",
+    statement:"to_string(`0986-01-02T10:01:55.004+01:00`, 'yyyy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0986"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"M\",result:\"1\"}",
+    statement:"to_string(`0986T`, 'M')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"M\",result:\"1\"}",
+    statement:"to_string(`0986-01T`, 'M')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-02-02T\",pattern:\"M\",result:\"2\"}",
+    statement:"to_string(`0986-02-02T`, 'M')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"2"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-03-02T10:01Z\",pattern:\"M\",result:\"3\"}",
+    statement:"to_string(`0986-03-02T10:01Z`, 'M')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"3"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-04-02T10:01+01:00\",pattern:\"M\",result:\"4\"}",
+    statement:"to_string(`0986-04-02T10:01+01:00`, 'M')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"4"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-05-02T10:01:55Z\",pattern:\"M\",result:\"5\"}",
+    statement:"to_string(`0986-05-02T10:01:55Z`, 'M')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"5"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-06-02T10:01:55+01:00\",pattern:\"M\",result:\"6\"}",
+    statement:"to_string(`0986-06-02T10:01:55+01:00`, 'M')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"6"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-07-02T10:01:55.004Z\",pattern:\"M\",result:\"7\"}",
+    statement:"to_string(`0986-07-02T10:01:55.004Z`, 'M')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"7"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-10-02T10:01:55.004+01:00\",pattern:\"M\",result:\"10\"}",
+    statement:"to_string(`0986-10-02T10:01:55.004+01:00`, 'M')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"10"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"MM\",result:\"01\"}",
+    statement:"to_string(`0986T`, 'MM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"01"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"MM\",result:\"01\"}",
+    statement:"to_string(`0986-01T`, 'MM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"01"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-02-02T\",pattern:\"MM\",result:\"02\"}",
+    statement:"to_string(`0986-02-02T`, 'MM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"02"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-03-02T10:01Z\",pattern:\"MM\",result:\"03\"}",
+    statement:"to_string(`0986-03-02T10:01Z`, 'MM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"03"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-04-02T10:01+01:00\",pattern:\"MM\",result:\"04\"}",
+    statement:"to_string(`0986-04-02T10:01+01:00`, 'MM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"04"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-05-02T10:01:55Z\",pattern:\"MM\",result:\"05\"}",
+    statement:"to_string(`0986-05-02T10:01:55Z`, 'MM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"05"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-06-02T10:01:55+01:00\",pattern:\"MM\",result:\"06\"}",
+    statement:"to_string(`0986-06-02T10:01:55+01:00`, 'MM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"06"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-07-02T10:01:55.004Z\",pattern:\"MM\",result:\"07\"}",
+    statement:"to_string(`0986-07-02T10:01:55.004Z`, 'MM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"07"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-10-02T10:01:55.004+01:00\",pattern:\"MM\",result:\"10\"}",
+    statement:"to_string(`0986-10-02T10:01:55.004+01:00`, 'MM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"10"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"MMM\",result:\"Jan\"}",
+    statement:"to_string(`0986T`, 'MMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Jan"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"MMM\",result:\"Jan\"}",
+    statement:"to_string(`0986-01-02T`, 'MMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Jan"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"MMM\",result:\"Jan\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'MMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Jan"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01+01:00\",pattern:\"MMM\",result:\"Jan\"}",
+    statement:"to_string(`0986-01-02T10:01+01:00`, 'MMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Jan"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55Z\",pattern:\"MMM\",result:\"Jan\"}",
+    statement:"to_string(`0986-01-02T10:01:55Z`, 'MMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Jan"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55+01:00\",pattern:\"MMM\",result:\"Jan\"}",
+    statement:"to_string(`0986-01-02T10:01:55+01:00`, 'MMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Jan"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55.004Z\",pattern:\"MMM\",result:\"Jan\"}",
+    statement:"to_string(`0986-01-02T10:01:55.004Z`, 'MMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Jan"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55.004+01:00\",pattern:\"MMM\",result:\"Jan\"}",
+    statement:"to_string(`0986-01-02T10:01:55.004+01:00`, 'MMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Jan"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"MMM\",result:\"Jan\"}",
+    statement:"to_string(`0986-01T`, 'MMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Jan"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-02T\",pattern:\"MMM\",result:\"Feb\"}",
+    statement:"to_string(`0986-02T`, 'MMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Feb"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-03T\",pattern:\"MMM\",result:\"Mar\"}",
+    statement:"to_string(`0986-03T`, 'MMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Mar"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-04T\",pattern:\"MMM\",result:\"Apr\"}",
+    statement:"to_string(`0986-04T`, 'MMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Apr"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-05T\",pattern:\"MMM\",result:\"May\"}",
+    statement:"to_string(`0986-05T`, 'MMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"May"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-06T\",pattern:\"MMM\",result:\"Jun\"}",
+    statement:"to_string(`0986-06T`, 'MMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Jun"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-07T\",pattern:\"MMM\",result:\"Jul\"}",
+    statement:"to_string(`0986-07T`, 'MMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Jul"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-08T\",pattern:\"MMM\",result:\"Aug\"}",
+    statement:"to_string(`0986-08T`, 'MMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Aug"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-09T\",pattern:\"MMM\",result:\"Sep\"}",
+    statement:"to_string(`0986-09T`, 'MMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Sep"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-10T\",pattern:\"MMM\",result:\"Oct\"}",
+    statement:"to_string(`0986-10T`, 'MMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Oct"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-11T\",pattern:\"MMM\",result:\"Nov\"}",
+    statement:"to_string(`0986-11T`, 'MMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Nov"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-12T\",pattern:\"MMM\",result:\"Dec\"}",
+    statement:"to_string(`0986-12T`, 'MMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Dec"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"MMMM\",result:\"January\"}",
+    statement:"to_string(`0986T`, 'MMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"January"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"MMMM\",result:\"January\"}",
+    statement:"to_string(`0986-01-02T`, 'MMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"January"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"MMMM\",result:\"January\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'MMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"January"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01+01:00\",pattern:\"MMMM\",result:\"January\"}",
+    statement:"to_string(`0986-01-02T10:01+01:00`, 'MMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"January"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55Z\",pattern:\"MMMM\",result:\"January\"}",
+    statement:"to_string(`0986-01-02T10:01:55Z`, 'MMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"January"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55+01:00\",pattern:\"MMMM\",result:\"January\"}",
+    statement:"to_string(`0986-01-02T10:01:55+01:00`, 'MMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"January"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55.004Z\",pattern:\"MMMM\",result:\"January\"}",
+    statement:"to_string(`0986-01-02T10:01:55.004Z`, 'MMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"January"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55.004+01:00\",pattern:\"MMMM\",result:\"January\"}",
+    statement:"to_string(`0986-01-02T10:01:55.004+01:00`, 'MMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"January"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"MMMM\",result:\"January\"}",
+    statement:"to_string(`0986-01T`, 'MMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"January"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-02T\",pattern:\"MMMM\",result:\"February\"}",
+    statement:"to_string(`0986-02T`, 'MMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"February"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-03T\",pattern:\"MMMM\",result:\"March\"}",
+    statement:"to_string(`0986-03T`, 'MMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"March"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-04T\",pattern:\"MMMM\",result:\"April\"}",
+    statement:"to_string(`0986-04T`, 'MMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"April"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-05T\",pattern:\"MMMM\",result:\"May\"}",
+    statement:"to_string(`0986-05T`, 'MMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"May"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-06T\",pattern:\"MMMM\",result:\"June\"}",
+    statement:"to_string(`0986-06T`, 'MMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"June"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-07T\",pattern:\"MMMM\",result:\"July\"}",
+    statement:"to_string(`0986-07T`, 'MMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"July"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-08T\",pattern:\"MMMM\",result:\"August\"}",
+    statement:"to_string(`0986-08T`, 'MMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"August"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-09T\",pattern:\"MMMM\",result:\"September\"}",
+    statement:"to_string(`0986-09T`, 'MMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"September"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-10T\",pattern:\"MMMM\",result:\"October\"}",
+    statement:"to_string(`0986-10T`, 'MMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"October"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-11T\",pattern:\"MMMM\",result:\"November\"}",
+    statement:"to_string(`0986-11T`, 'MMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"November"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-12T\",pattern:\"MMMM\",result:\"December\"}",
+    statement:"to_string(`0986-12T`, 'MMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"December"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"MMMMM\",result:\"J\"}",
+    statement:"to_string(`0986T`, 'MMMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"J"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"MMMMM\",result:\"J\"}",
+    statement:"to_string(`0986-01-02T`, 'MMMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"J"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"MMMMM\",result:\"J\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'MMMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"J"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01+01:00\",pattern:\"MMMMM\",result:\"J\"}",
+    statement:"to_string(`0986-01-02T10:01+01:00`, 'MMMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"J"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55Z\",pattern:\"MMMMM\",result:\"J\"}",
+    statement:"to_string(`0986-01-02T10:01:55Z`, 'MMMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"J"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55+01:00\",pattern:\"MMMMM\",result:\"J\"}",
+    statement:"to_string(`0986-01-02T10:01:55+01:00`, 'MMMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"J"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55.004Z\",pattern:\"MMMMM\",result:\"J\"}",
+    statement:"to_string(`0986-01-02T10:01:55.004Z`, 'MMMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"J"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55.004+01:00\",pattern:\"MMMMM\",result:\"J\"}",
+    statement:"to_string(`0986-01-02T10:01:55.004+01:00`, 'MMMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"J"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"MMMMM\",result:\"J\"}",
+    statement:"to_string(`0986-01T`, 'MMMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"J"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-02T\",pattern:\"MMMMM\",result:\"F\"}",
+    statement:"to_string(`0986-02T`, 'MMMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"F"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-03T\",pattern:\"MMMMM\",result:\"M\"}",
+    statement:"to_string(`0986-03T`, 'MMMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"M"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-04T\",pattern:\"MMMMM\",result:\"A\"}",
+    statement:"to_string(`0986-04T`, 'MMMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"A"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-05T\",pattern:\"MMMMM\",result:\"M\"}",
+    statement:"to_string(`0986-05T`, 'MMMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"M"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-06T\",pattern:\"MMMMM\",result:\"J\"}",
+    statement:"to_string(`0986-06T`, 'MMMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"J"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-07T\",pattern:\"MMMMM\",result:\"J\"}",
+    statement:"to_string(`0986-07T`, 'MMMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"J"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-08T\",pattern:\"MMMMM\",result:\"A\"}",
+    statement:"to_string(`0986-08T`, 'MMMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"A"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-09T\",pattern:\"MMMMM\",result:\"S\"}",
+    statement:"to_string(`0986-09T`, 'MMMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"S"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-10T\",pattern:\"MMMMM\",result:\"O\"}",
+    statement:"to_string(`0986-10T`, 'MMMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"O"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-11T\",pattern:\"MMMMM\",result:\"N\"}",
+    statement:"to_string(`0986-11T`, 'MMMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"N"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-12T\",pattern:\"MMMMM\",result:\"D\"}",
+    statement:"to_string(`0986-12T`, 'MMMMM')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"D"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"d\",result:\"1\"}",
+    statement:"to_string(`0986T`, 'd')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"d\",result:\"1\"}",
+    statement:"to_string(`0986-01T`, 'd')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"d\",result:\"2\"}",
+    statement:"to_string(`0986-01-02T`, 'd')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"2"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"d\",result:\"2\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'd')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"2"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-12T10:01+01:00\",pattern:\"d\",result:\"12\"}",
+    statement:"to_string(`0986-01-12T10:01+01:00`, 'd')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"12"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-20T10:01:55Z\",pattern:\"d\",result:\"20\"}",
+    statement:"to_string(`0986-01-20T10:01:55Z`, 'd')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"20"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-31T10:01:55+01:00\",pattern:\"d\",result:\"31\"}",
+    statement:"to_string(`0986-01-31T10:01:55+01:00`, 'd')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"31"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55.004Z\",pattern:\"d\",result:\"2\"}",
+    statement:"to_string(`0986-01-02T10:01:55.004Z`, 'd')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"2"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55.004+01:00\",pattern:\"d\",result:\"2\"}",
+    statement:"to_string(`0986-01-02T10:01:55.004+01:00`, 'd')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"2"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"dd\",result:\"01\"}",
+    statement:"to_string(`0986T`, 'dd')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"01"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"dd\",result:\"01\"}",
+    statement:"to_string(`0986-01T`, 'dd')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"01"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"dd\",result:\"02\"}",
+    statement:"to_string(`0986-01-02T`, 'dd')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"02"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"dd\",result:\"02\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'dd')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"02"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-12T10:01+01:00\",pattern:\"dd\",result:\"12\"}",
+    statement:"to_string(`0986-01-12T10:01+01:00`, 'dd')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"12"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-20T10:01:55Z\",pattern:\"dd\",result:\"20\"}",
+    statement:"to_string(`0986-01-20T10:01:55Z`, 'dd')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"20"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-31T10:01:55+01:00\",pattern:\"dd\",result:\"31\"}",
+    statement:"to_string(`0986-01-31T10:01:55+01:00`, 'dd')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"31"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55.004Z\",pattern:\"dd\",result:\"02\"}",
+    statement:"to_string(`0986-01-02T10:01:55.004Z`, 'dd')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"02"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01:55.004+01:00\",pattern:\"dd\",result:\"02\"}",
+    statement:"to_string(`0986-01-02T10:01:55.004+01:00`, 'dd')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"02"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"a\",result:\"AM\"}",
+    statement:"to_string(`0986T`, 'a')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"AM"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"a\",result:\"AM\"}",
+    statement:"to_string(`0986-01T`, 'a')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"AM"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"a\",result:\"AM\"}",
+    statement:"to_string(`0986-01-02T`, 'a')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"AM"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"a\",result:\"AM\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'a')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"AM"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-12T10:01+01:00\",pattern:\"a\",result:\"AM\"}",
+    statement:"to_string(`0986-01-12T10:01+01:00`, 'a')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"AM"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-20T10:01:55Z\",pattern:\"a\",result:\"AM\"}",
+    statement:"to_string(`0986-01-20T10:01:55Z`, 'a')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"AM"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-31T10:01:55+01:00\",pattern:\"a\",result:\"AM\"}",
+    statement:"to_string(`0986-01-31T10:01:55+01:00`, 'a')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"AM"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T20:01:55.004Z\",pattern:\"a\",result:\"PM\"}",
+    statement:"to_string(`0986-01-02T20:01:55.004Z`, 'a')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"PM"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T18:01:55.004+01:00\",pattern:\"a\",result:\"PM\"}",
+    statement:"to_string(`0986-01-02T18:01:55.004+01:00`, 'a')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"PM"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"h\",result:\"12\"}",
+    statement:"to_string(`0986T`, 'h')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"12"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"h\",result:\"12\"}",
+    statement:"to_string(`0986-01T`, 'h')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"12"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"h\",result:\"12\"}",
+    statement:"to_string(`0986-01-02T`, 'h')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"12"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"h\",result:\"10\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'h')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"10"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-12T10:01+01:00\",pattern:\"h\",result:\"10\"}",
+    statement:"to_string(`0986-01-12T10:01+01:00`, 'h')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"10"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-20T10:01:55Z\",pattern:\"h\",result:\"10\"}",
+    statement:"to_string(`0986-01-20T10:01:55Z`, 'h')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"10"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-31T05:01:55+01:00\",pattern:\"h\",result:\"5\"}",
+    statement:"to_string(`0986-01-31T05:01:55+01:00`, 'h')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"5"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T20:01:55.004Z\",pattern:\"h\",result:\"8\"}",
+    statement:"to_string(`0986-01-02T20:01:55.004Z`, 'h')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"8"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T18:01:55.004+01:00\",pattern:\"h\",result:\"6\"}",
+    statement:"to_string(`0986-01-02T18:01:55.004+01:00`, 'h')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"6"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"hh\",result:\"12\"}",
+    statement:"to_string(`0986T`, 'hh')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"12"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"hh\",result:\"12\"}",
+    statement:"to_string(`0986-01T`, 'hh')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"12"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"hh\",result:\"12\"}",
+    statement:"to_string(`0986-01-02T`, 'hh')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"12"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"hh\",result:\"10\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'hh')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"10"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-12T10:01+01:00\",pattern:\"hh\",result:\"10\"}",
+    statement:"to_string(`0986-01-12T10:01+01:00`, 'hh')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"10"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-20T10:01:55Z\",pattern:\"hh\",result:\"10\"}",
+    statement:"to_string(`0986-01-20T10:01:55Z`, 'hh')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"10"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-31T05:01:55+01:00\",pattern:\"hh\",result:\"05\"}",
+    statement:"to_string(`0986-01-31T05:01:55+01:00`, 'hh')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"05"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T20:01:55.004Z\",pattern:\"hh\",result:\"08\"}",
+    statement:"to_string(`0986-01-02T20:01:55.004Z`, 'hh')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"08"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T18:01:55.004+01:00\",pattern:\"hh\",result:\"06\"}",
+    statement:"to_string(`0986-01-02T18:01:55.004+01:00`, 'hh')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"06"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"H\",result:\"0\"}",
+    statement:"to_string(`0986T`, 'H')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"H\",result:\"0\"}",
+    statement:"to_string(`0986-01T`, 'H')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"H\",result:\"0\"}",
+    statement:"to_string(`0986-01-02T`, 'H')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"H\",result:\"10\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'H')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"10"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-12T10:01+01:00\",pattern:\"H\",result:\"10\"}",
+    statement:"to_string(`0986-01-12T10:01+01:00`, 'H')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"10"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-20T10:01:55Z\",pattern:\"H\",result:\"10\"}",
+    statement:"to_string(`0986-01-20T10:01:55Z`, 'H')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"10"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-31T05:01:55+01:00\",pattern:\"H\",result:\"5\"}",
+    statement:"to_string(`0986-01-31T05:01:55+01:00`, 'H')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"5"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T20:01:55.004Z\",pattern:\"H\",result:\"20\"}",
+    statement:"to_string(`0986-01-02T20:01:55.004Z`, 'H')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"20"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T18:01:55.004+01:00\",pattern:\"H\",result:\"18\"}",
+    statement:"to_string(`0986-01-02T18:01:55.004+01:00`, 'H')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"18"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"HH\",result:\"00\"}",
+    statement:"to_string(`0986T`, 'HH')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"HH\",result:\"00\"}",
+    statement:"to_string(`0986-01T`, 'HH')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"HH\",result:\"00\"}",
+    statement:"to_string(`0986-01-02T`, 'HH')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"HH\",result:\"10\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'HH')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"10"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-12T10:01+01:00\",pattern:\"HH\",result:\"10\"}",
+    statement:"to_string(`0986-01-12T10:01+01:00`, 'HH')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"10"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-20T10:01:55Z\",pattern:\"HH\",result:\"10\"}",
+    statement:"to_string(`0986-01-20T10:01:55Z`, 'HH')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"10"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-31T05:01:55+01:00\",pattern:\"HH\",result:\"05\"}",
+    statement:"to_string(`0986-01-31T05:01:55+01:00`, 'HH')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"05"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T20:01:55.004Z\",pattern:\"HH\",result:\"20\"}",
+    statement:"to_string(`0986-01-02T20:01:55.004Z`, 'HH')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"20"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T18:01:55.004+01:00\",pattern:\"HH\",result:\"18\"}",
+    statement:"to_string(`0986-01-02T18:01:55.004+01:00`, 'HH')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"18"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"m\",result:\"0\"}",
+    statement:"to_string(`0986T`, 'm')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"m\",result:\"0\"}",
+    statement:"to_string(`0986-01T`, 'm')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"m\",result:\"0\"}",
+    statement:"to_string(`0986-01-02T`, 'm')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"m\",result:\"1\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'm')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-12T10:01+01:00\",pattern:\"m\",result:\"1\"}",
+    statement:"to_string(`0986-01-12T10:01+01:00`, 'm')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-20T10:10:55Z\",pattern:\"m\",result:\"10\"}",
+    statement:"to_string(`0986-01-20T10:10:55Z`, 'm')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"10"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-31T05:05:55+01:00\",pattern:\"m\",result:\"5\"}",
+    statement:"to_string(`0986-01-31T05:05:55+01:00`, 'm')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"5"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T20:01:55.004Z\",pattern:\"m\",result:\"1\"}",
+    statement:"to_string(`0986-01-02T20:01:55.004Z`, 'm')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T18:01:55.004+01:00\",pattern:\"m\",result:\"1\"}",
+    statement:"to_string(`0986-01-02T18:01:55.004+01:00`, 'm')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"mm\",result:\"00\"}",
+    statement:"to_string(`0986T`, 'mm')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"mm\",result:\"00\"}",
+    statement:"to_string(`0986-01T`, 'mm')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"mm\",result:\"00\"}",
+    statement:"to_string(`0986-01-02T`, 'mm')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"mm\",result:\"01\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'mm')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"01"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-12T10:01+01:00\",pattern:\"mm\",result:\"01\"}",
+    statement:"to_string(`0986-01-12T10:01+01:00`, 'mm')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"01"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-20T10:10:55Z\",pattern:\"mm\",result:\"10\"}",
+    statement:"to_string(`0986-01-20T10:10:55Z`, 'mm')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"10"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-31T05:05:55+01:00\",pattern:\"mm\",result:\"05\"}",
+    statement:"to_string(`0986-01-31T05:05:55+01:00`, 'mm')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"05"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T20:01:55.004Z\",pattern:\"mm\",result:\"01\"}",
+    statement:"to_string(`0986-01-02T20:01:55.004Z`, 'mm')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"01"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T18:01:55.004+01:00\",pattern:\"mm\",result:\"01\"}",
+    statement:"to_string(`0986-01-02T18:01:55.004+01:00`, 'mm')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"01"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"s\",result:\"0\"}",
+    statement:"to_string(`0986T`, 's')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"s\",result:\"0\"}",
+    statement:"to_string(`0986-01T`, 's')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"s\",result:\"0\"}",
+    statement:"to_string(`0986-01-02T`, 's')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"s\",result:\"0\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 's')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-12T10:01+01:00\",pattern:\"s\",result:\"0\"}",
+    statement:"to_string(`0986-01-12T10:01+01:00`, 's')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-20T10:10:55Z\",pattern:\"s\",result:\"55\"}",
+    statement:"to_string(`0986-01-20T10:10:55Z`, 's')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"55"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-31T05:05:05+01:00\",pattern:\"s\",result:\"5\"}",
+    statement:"to_string(`0986-01-31T05:05:05+01:00`, 's')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"5"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T20:01:55.004Z\",pattern:\"s\",result:\"55\"}",
+    statement:"to_string(`0986-01-02T20:01:55.004Z`, 's')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"55"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T18:01:55.004+01:00\",pattern:\"s\",result:\"55\"}",
+    statement:"to_string(`0986-01-02T18:01:55.004+01:00`, 's')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"55"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"ss\",result:\"00\"}",
+    statement:"to_string(`0986T`, 'ss')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"ss\",result:\"00\"}",
+    statement:"to_string(`0986-01T`, 'ss')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"ss\",result:\"00\"}",
+    statement:"to_string(`0986-01-02T`, 'ss')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"ss\",result:\"00\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'ss')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-12T10:01+01:00\",pattern:\"ss\",result:\"00\"}",
+    statement:"to_string(`0986-01-12T10:01+01:00`, 'ss')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-20T10:10:55Z\",pattern:\"ss\",result:\"55\"}",
+    statement:"to_string(`0986-01-20T10:10:55Z`, 'ss')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"55"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-31T05:05:05+01:00\",pattern:\"ss\",result:\"05\"}",
+    statement:"to_string(`0986-01-31T05:05:05+01:00`, 'ss')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"05"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T20:01:55.004Z\",pattern:\"ss\",result:\"55\"}",
+    statement:"to_string(`0986-01-02T20:01:55.004Z`, 'ss')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"55"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T18:01:55.004+01:00\",pattern:\"ss\",result:\"55\"}",
+    statement:"to_string(`0986-01-02T18:01:55.004+01:00`, 'ss')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"55"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"S\",result:\"0\"}",
+    statement:"to_string(`0986T`, 'S')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"S\",result:\"0\"}",
+    statement:"to_string(`0986-01T`, 'S')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"S\",result:\"0\"}",
+    statement:"to_string(`0986-01-02T`, 'S')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"S\",result:\"0\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'S')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-12T10:01+01:00\",pattern:\"S\",result:\"0\"}",
+    statement:"to_string(`0986-01-12T10:01+01:00`, 'S')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-20T10:10:55Z\",pattern:\"S\",result:\"0\"}",
+    statement:"to_string(`0986-01-20T10:10:55Z`, 'S')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-31T05:05:05+01:00\",pattern:\"S\",result:\"0\"}",
+    statement:"to_string(`0986-01-31T05:05:05+01:00`, 'S')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T20:01:55.100Z\",pattern:\"S\",result:\"1\"}",
+    statement:"to_string(`0986-01-02T20:01:55.100Z`, 'S')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T18:01:55.100+01:00\",pattern:\"SS\",result:\"10\"}",
+    statement:"to_string(`0986-01-02T18:01:55.100+01:00`, 'SS')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"10"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T18:01:55.004+01:00\",pattern:\"SS\",result:\"00\"}",
+    statement:"to_string(`0986-01-02T18:01:55.004+01:00`, 'SS')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T18:01:55.004+01:00\",pattern:\"SSS\",result:\"004\"}",
+    statement:"to_string(`0986-01-02T18:01:55.004+01:00`, 'SSS')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"004"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"n\",result:\"0\"}",
+    statement:"to_string(`0986T`, 'n')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"n\",result:\"0\"}",
+    statement:"to_string(`0986-01T`, 'n')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"n\",result:\"0\"}",
+    statement:"to_string(`0986-01-02T`, 'n')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"n\",result:\"0\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'n')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-12T10:01+01:00\",pattern:\"n\",result:\"0\"}",
+    statement:"to_string(`0986-01-12T10:01+01:00`, 'n')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-20T10:10:55Z\",pattern:\"n\",result:\"0\"}",
+    statement:"to_string(`0986-01-20T10:10:55Z`, 'n')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-31T05:05:05+01:00\",pattern:\"n\",result:\"0\"}",
+    statement:"to_string(`0986-01-31T05:05:05+01:00`, 'n')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"0"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T20:01:55.004Z\",pattern:\"n\",result:\"4000000\"}",
+    statement:"to_string(`0986-01-02T20:01:55.004Z`, 'n')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"4000000"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T18:01:55.004+01:00\",pattern:\"n\",result:\"4000000\"}",
+    statement:"to_string(`0986-01-02T18:01:55.004+01:00`, 'n')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"4000000"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"X\",result:\"Z\"}",
+    statement:"to_string(`0986T`, 'X')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Z"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"X\",result:\"Z\"}",
+    statement:"to_string(`0986-01T`, 'X')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Z"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"X\",result:\"Z\"}",
+    statement:"to_string(`0986-01-02T`, 'X')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Z"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"X\",result:\"Z\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'X')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Z"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-12T10:01+01:00\",pattern:\"X\",result:\"+01\"}",
+    statement:"to_string(`0986-01-12T10:01+01:00`, 'X')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+01"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-20T10:10:55Z\",pattern:\"X\",result:\"Z\"}",
+    statement:"to_string(`0986-01-20T10:10:55Z`, 'X')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Z"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-31T05:05:05+01:00\",pattern:\"X\",result:\"+01\"}",
+    statement:"to_string(`0986-01-31T05:05:05+01:00`, 'X')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+01"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T20:01:55.004Z\",pattern:\"X\",result:\"Z\"}",
+    statement:"to_string(`0986-01-02T20:01:55.004Z`, 'X')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Z"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T18:01:55.004+01:00\",pattern:\"X\",result:\"+01\"}",
+    statement:"to_string(`0986-01-02T18:01:55.004+01:00`, 'X')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+01"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"XX\",result:\"Z\"}",
+    statement:"to_string(`0986T`, 'XX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Z"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"XX\",result:\"Z\"}",
+    statement:"to_string(`0986-01T`, 'XX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Z"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"XX\",result:\"Z\"}",
+    statement:"to_string(`0986-01-02T`, 'XX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Z"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"XX\",result:\"Z\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'XX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Z"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-12T10:01+01:00\",pattern:\"XXXX\",result:\"+0100\"}",
+    statement:"to_string(`0986-01-12T10:01+01:00`, 'XXXX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+0100"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-20T10:10:55Z\",pattern:\"XX\",result:\"Z\"}",
+    statement:"to_string(`0986-01-20T10:10:55Z`, 'XX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Z"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-31T05:05:05+01:00\",pattern:\"XX\",result:\"+0100\"}",
+    statement:"to_string(`0986-01-31T05:05:05+01:00`, 'XX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+0100"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T20:01:55.004Z\",pattern:\"XX\",result:\"Z\"}",
+    statement:"to_string(`0986-01-02T20:01:55.004Z`, 'XX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Z"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T18:01:55.004+01:10\",pattern:\"XX\",result:\"+0110\"}",
+    statement:"to_string(`0986-01-02T18:01:55.004+01:10`, 'XX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+0110"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"XXX\",result:\"Z\"}",
+    statement:"to_string(`0986T`, 'XXX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Z"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"XXX\",result:\"Z\"}",
+    statement:"to_string(`0986-01T`, 'XXX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Z"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"XXX\",result:\"Z\"}",
+    statement:"to_string(`0986-01-02T`, 'XXX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Z"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"XXX\",result:\"Z\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'XXX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Z"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-12T10:01+01:00\",pattern:\"XXXXX\",result:\"+01:00\"}",
+    statement:"to_string(`0986-01-12T10:01+01:00`, 'XXXXX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+01:00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-20T10:10:55Z\",pattern:\"XXX\",result:\"Z\"}",
+    statement:"to_string(`0986-01-20T10:10:55Z`, 'XXX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Z"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-31T05:05:05+01:00\",pattern:\"XXX\",result:\"+01:00\"}",
+    statement:"to_string(`0986-01-31T05:05:05+01:00`, 'XXX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+01:00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T20:01:55.004Z\",pattern:\"XXX\",result:\"Z\"}",
+    statement:"to_string(`0986-01-02T20:01:55.004Z`, 'XXX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Z"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T18:01:55.004+01:10\",pattern:\"XXX\",result:\"+01:10\"}",
+    statement:"to_string(`0986-01-02T18:01:55.004+01:10`, 'XXX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+01:10"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"x\",result:\"+00\"}",
+    statement:"to_string(`0986T`, 'x')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"x\",result:\"+00\"}",
+    statement:"to_string(`0986-01T`, 'x')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"x\",result:\"+00\"}",
+    statement:"to_string(`0986-01-02T`, 'x')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"x\",result:\"+00\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'x')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-12T10:01+01:00\",pattern:\"x\",result:\"+01\"}",
+    statement:"to_string(`0986-01-12T10:01+01:00`, 'x')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+01"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-20T10:10:55Z\",pattern:\"x\",result:\"+00\"}",
+    statement:"to_string(`0986-01-20T10:10:55Z`, 'x')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-31T05:05:05+01:00\",pattern:\"x\",result:\"+01\"}",
+    statement:"to_string(`0986-01-31T05:05:05+01:00`, 'x')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+01"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T20:01:55.004Z\",pattern:\"x\",result:\"+00\"}",
+    statement:"to_string(`0986-01-02T20:01:55.004Z`, 'x')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T18:01:55.004+01:00\",pattern:\"x\",result:\"+01\"}",
+    statement:"to_string(`0986-01-02T18:01:55.004+01:00`, 'x')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+01"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"xx\",result:\"+0000\"}",
+    statement:"to_string(`0986T`, 'xx')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+0000"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"xx\",result:\"+0000\"}",
+    statement:"to_string(`0986-01T`, 'xx')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+0000"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"xx\",result:\"+0000\"}",
+    statement:"to_string(`0986-01-02T`, 'xx')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+0000"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"xx\",result:\"+0000\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'xx')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+0000"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-12T10:01+01:00\",pattern:\"xxxx\",result:\"+0100\"}",
+    statement:"to_string(`0986-01-12T10:01+01:00`, 'xxxx')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+0100"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-20T10:10:55Z\",pattern:\"xx\",result:\"+0000\"}",
+    statement:"to_string(`0986-01-20T10:10:55Z`, 'xx')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+0000"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-31T05:05:05+01:00\",pattern:\"xx\",result:\"+0100\"}",
+    statement:"to_string(`0986-01-31T05:05:05+01:00`, 'xx')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+0100"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T20:01:55.004Z\",pattern:\"xx\",result:\"+0000\"}",
+    statement:"to_string(`0986-01-02T20:01:55.004Z`, 'xx')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+0000"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T18:01:55.004+01:10\",pattern:\"xx\",result:\"+0110\"}",
+    statement:"to_string(`0986-01-02T18:01:55.004+01:10`, 'xx')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+0110"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986T\",pattern:\"xxx\",result:\"+00:00\"}",
+    statement:"to_string(`0986T`, 'xxx')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+00:00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01T\",pattern:\"xxx\",result:\"+00:00\"}",
+    statement:"to_string(`0986-01T`, 'xxx')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+00:00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T\",pattern:\"xxx\",result:\"+00:00\"}",
+    statement:"to_string(`0986-01-02T`, 'xxx')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+00:00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T10:01Z\",pattern:\"xxx\",result:\"+00:00\"}",
+    statement:"to_string(`0986-01-02T10:01Z`, 'xxx')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+00:00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-12T10:01+01:00\",pattern:\"xxxxx\",result:\"+01:00\"}",
+    statement:"to_string(`0986-01-12T10:01+01:00`, 'xxxxx')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+01:00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-20T10:10:55Z\",pattern:\"xxx\",result:\"+00:00\"}",
+    statement:"to_string(`0986-01-20T10:10:55Z`, 'xxx')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+00:00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-31T05:05:05+01:00\",pattern:\"xxx\",result:\"+01:00\"}",
+    statement:"to_string(`0986-01-31T05:05:05+01:00`, 'xxx')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+01:00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T20:01:55.004Z\",pattern:\"xxx\",result:\"+00:00\"}",
+    statement:"to_string(`0986-01-02T20:01:55.004Z`, 'xxx')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+00:00"
+    }
+  },
+  {
+    name:"to_string valid valid cases for each individual supported pattern{timestamp:\"0986-01-02T18:01:55.004+01:10\",pattern:\"xxx\",result:\"+01:10\"}",
+    statement:"to_string(`0986-01-02T18:01:55.004+01:10`, 'xxx')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"+01:10"
+    }
+  },
+  {
+    name:"to_string null and missing propagation{timestamp:\"null\",pattern:\"'y'\",result:null}",
+    statement:"to_string(null, 'y')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"to_string null and missing propagation{timestamp:\"`2000T`\",pattern:\"null\",result:null}",
+    statement:"to_string(`2000T`, null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"to_string null and missing propagation{timestamp:\"null\",pattern:\"null\",result:null}",
+    statement:"to_string(null, null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"to_string null and missing propagation{timestamp:\"missing\",pattern:\"null\",result:null}",
+    statement:"to_string(missing, null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"to_string null and missing propagation{timestamp:\"null\",pattern:\"missing\",result:null}",
+    statement:"to_string(null, missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"to_string null and missing propagation{timestamp:\"missing\",pattern:\"'y'\",result:null}",
+    statement:"to_string(missing, 'y')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"to_string null and missing propagation{timestamp:\"`2000T`\",pattern:\"missing\",result:null}",
+    statement:"to_string(`2000T`, missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"to_string null and missing propagation{timestamp:\"missing\",pattern:\"missing\",result:null}",
+    statement:"to_string(missing, missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"to_string multiple symbols{timestamp:\"0500-03-09\",pattern:\"MM/dd/yyyy\",result:\"03/09/0500\"}",
+    statement:"to_string(`0500-03-09`, 'MM/dd/yyyy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"03/09/0500"
+    }
+  },
+  {
+    name:"to_string multiple symbols{timestamp:\"0500-03-09\",pattern:\"M/d/y\",result:\"3/9/500\"}",
+    statement:"to_string(`0500-03-09`, 'M/d/y')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"3/9/500"
+    }
+  },
+  {
+    name:"to_string multiple symbols{timestamp:\"0001-03-09\",pattern:\"MM/dd/yyyy\",result:\"03/09/0001\"}",
+    statement:"to_string(`0001-03-09`, 'MM/dd/yyyy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"03/09/0001"
+    }
+  },
+  {
+    name:"to_string multiple symbols{timestamp:\"0001-03-09\",pattern:\"M/d/y\",result:\"3/9/1\"}",
+    statement:"to_string(`0001-03-09`, 'M/d/y')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"3/9/1"
+    }
+  },
+  {
+    name:"to_string multiple symbols{timestamp:\"9999-03-09\",pattern:\"MM/dd/yyyy\",result:\"03/09/9999\"}",
+    statement:"to_string(`9999-03-09`, 'MM/dd/yyyy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"03/09/9999"
+    }
+  },
+  {
+    name:"to_string multiple symbols{timestamp:\"9999-03-09\",pattern:\"M/d/y\",result:\"3/9/9999\"}",
+    statement:"to_string(`9999-03-09`, 'M/d/y')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"3/9/9999"
+    }
+  },
+  {
+    name:"to_string multiple symbols{timestamp:\"1969-07-20T20:18Z\",pattern:\"MMMM d, y\",result:\"July 20, 1969\"}",
+    statement:"to_string(`1969-07-20T20:18Z`, 'MMMM d, y')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"July 20, 1969"
+    }
+  },
+  {
+    name:"to_string multiple symbols{timestamp:\"1969-07-20T20:18Z\",pattern:\"MMM d, yyyy\",result:\"Jul 20, 1969\"}",
+    statement:"to_string(`1969-07-20T20:18Z`, 'MMM d, yyyy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"Jul 20, 1969"
+    }
+  },
+  {
+    name:"to_string multiple symbols{timestamp:\"1969-07-20T20:18Z\",pattern:\"M-d-yy\",result:\"7-20-69\"}",
+    statement:"to_string(`1969-07-20T20:18Z`, 'M-d-yy')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"7-20-69"
+    }
+  },
+  {
+    name:"to_string multiple symbols{timestamp:\"1969-07-20T20:18Z\",pattern:\"MM-d-y\",result:\"07-20-1969\"}",
+    statement:"to_string(`1969-07-20T20:18Z`, 'MM-d-y')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"07-20-1969"
+    }
+  },
+  {
+    name:"to_string multiple symbols{timestamp:\"1969-07-20T20:18Z\",pattern:\"MMMM d, y h:m a\",result:\"July 20, 1969 8:18 PM\"}",
+    statement:"to_string(`1969-07-20T20:18Z`, 'MMMM d, y h:m a')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"July 20, 1969 8:18 PM"
+    }
+  },
+  {
+    name:"to_string multiple symbols{timestamp:\"1969-07-20T20:18Z\",pattern:\"y-MM-dd''T''H:m:ssX\",result:\"1969-07-20T20:18:00Z\"}",
+    statement:"to_string(`1969-07-20T20:18Z`, 'y-MM-dd''T''H:m:ssX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1969-07-20T20:18:00Z"
+    }
+  },
+  {
+    name:"to_string multiple symbols{timestamp:\"1969-07-20T20:18+08:00\",pattern:\"y-MM-dd''T''H:m:ssX\",result:\"1969-07-20T20:18:00+08\"}",
+    statement:"to_string(`1969-07-20T20:18+08:00`, 'y-MM-dd''T''H:m:ssX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1969-07-20T20:18:00+08"
+    }
+  },
+  {
+    name:"to_string multiple symbols{timestamp:\"1969-07-20T20:18+08:00\",pattern:\"y-MM-dd''T''H:m:ssXXXX\",result:\"1969-07-20T20:18:00+0800\"}",
+    statement:"to_string(`1969-07-20T20:18+08:00`, 'y-MM-dd''T''H:m:ssXXXX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1969-07-20T20:18:00+0800"
+    }
+  },
+  {
+    name:"to_string multiple symbols{timestamp:\"1969-07-20T20:18+08:00\",pattern:\"y-MM-dd''T''H:m:ssXXXXX\",result:\"1969-07-20T20:18:00+08:00\"}",
+    statement:"to_string(`1969-07-20T20:18+08:00`, 'y-MM-dd''T''H:m:ssXXXXX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"1969-07-20T20:18:00+08:00"
+    }
+  },
+]
+
+to_string_invalid::[
+  {
+    name:"to_string invalid pattern{pattern:\"not_a_pattern\",cn:1}",
+    statement:"to_string(`2000T`, 'not_a_pattern')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"G\",cn:1}",
+    statement:"to_string(`2000T`, 'G')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"u\",cn:1}",
+    statement:"to_string(`2000T`, 'u')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"Q\",cn:1}",
+    statement:"to_string(`2000T`, 'Q')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"q\",cn:1}",
+    statement:"to_string(`2000T`, 'q')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"w\",cn:1}",
+    statement:"to_string(`2000T`, 'w')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"W\",cn:1}",
+    statement:"to_string(`2000T`, 'W')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"E\",cn:1}",
+    statement:"to_string(`2000T`, 'E')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"e\",cn:1}",
+    statement:"to_string(`2000T`, 'e')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"c\",cn:1}",
+    statement:"to_string(`2000T`, 'c')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"F\",cn:1}",
+    statement:"to_string(`2000T`, 'F')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"k\",cn:1}",
+    statement:"to_string(`2000T`, 'k')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"K\",cn:1}",
+    statement:"to_string(`2000T`, 'K')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"A\",cn:1}",
+    statement:"to_string(`2000T`, 'A')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"V\",cn:1}",
+    statement:"to_string(`2000T`, 'V')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"z\",cn:1}",
+    statement:"to_string(`2000T`, 'z')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+  {
+    name:"to_string invalid pattern{pattern:\"p\",cn:1}",
+    statement:"to_string(`2000T`, 'p')",
+    assert:{
+      evalMode:[
+        EvalModeError,
+        EvalModeCoerce,
+      ],
+      result:EvaluationFail
+    },
+  },
+]

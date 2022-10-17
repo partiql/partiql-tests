@@ -61,3 +61,85 @@
         result: SyntaxFail
     },
 }
+
+partiql::[
+  // From the SQL-92 BNF (https://ronsavage.github.io/SQL/sql-92.bnf.html#select%20list), select star with other select
+  // list items is not permitted. PostgreSQL does allow some of the following cases, while others like MySQL gives a
+  // syntax error. The use case in which a user would want select star with other projection items is unclear. It may
+  // be something we want to explicitly disallow in a future spec RFC.
+  'select-star'::[
+    {
+      name:"disallowed uses of *, *",
+      statement:"SELECT *, * FROM <<1>>",
+      assert: {
+        result: SyntaxFail
+      },
+    },
+    {
+      name:"disallowed uses of *, alias.*",
+      statement:"SELECT *, foo.* FROM <<{ a: 1 }>> as foo",
+      assert: {
+        result: SyntaxFail
+      },
+    },
+    {
+      name:"disallowed uses of alias.*, *",
+      statement:"SELECT foo.*, * FROM <<{ a: 1 }>> as foo",
+      assert: {
+        result: SyntaxFail
+      },
+    },
+    {
+      name:"disallowed uses of <expr>, *",
+      statement:"SELECT 1, * FROM <<{ a: 1 }>>",
+      assert: {
+        result: SyntaxFail
+      },
+    },
+    {
+      name:"disallowed uses of *, <expr>",
+      statement:"SELECT *, 1 FROM <<{ a: 1 }>>",
+      assert: {
+        result: SyntaxFail
+      },
+    }
+  ]
+]
+
+'projection-pathing'::[
+  {
+    name:"foo[*] is disallowed",
+    statement:"SELECT foo[*] FROM foo",
+    assert: {
+      result: SyntaxFail
+    },
+  },
+  {
+    name:"foo.*.bar is disallowed",
+    statement:"SELECT foo.*.bar FROM foo",
+    assert: {
+      result: SyntaxFail
+    },
+  },
+  {
+    name:"foo['a'].* is disallowed",
+    statement:"SELECT foo['a'].* FROM foo",
+    assert: {
+      result: SyntaxFail
+    },
+  },
+  {
+    name:"foo[a].* is disallowed",
+    statement:"SELECT foo[a].* FROM foo",
+    assert: {
+      result: SyntaxFail
+    },
+  },
+  {
+    name:"foo[1].* is disallowed",
+    statement:"SELECT foo[1].* FROM foo",
+    assert: {
+      result: SyntaxFail
+    },
+  },
+]

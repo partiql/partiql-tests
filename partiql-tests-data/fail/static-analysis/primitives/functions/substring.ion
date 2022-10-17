@@ -1,0 +1,79 @@
+wrong_num_function_args::[
+  substring::[
+    {
+      name:"substring wrong number of arguments{sql:\"substring('')\"}",
+      statement:"substring('')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"substring wrong number of arguments{sql:\"substring('', 1, 1, 1)\"}",
+      statement:"substring('', 1, 1, 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"substring wrong number of arguments{sql:\"substring('', 1, 1, '')\"}",
+      statement:"substring('', 1, 1, '')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+  ],
+]
+
+invalid_function_args::[
+  substring::[
+    {
+      name:"substring wrong type of arguments{sql:\"substring('', `{}`)\"}",
+      statement:"substring('', `{}`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"substring wrong type of arguments{sql:\"substring(1, 1)\"}",
+      statement:"substring(1, 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"substring wrong type of arguments{sql:\"substring(1, 1, 1)\"}",
+      statement:"substring(1, 1, 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"substring wrong type of arguments{sql:\"substring('', [], 1)\"}",
+      statement:"substring('', [], 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"substring wrong type of arguments{sql:\"substring('', 1.1, 1)\"}",
+      statement:"substring('', 1.1, 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"substring wrong type of arguments{sql:\"substring('', 1e1, 1)\"}",
+      statement:"substring('', 1e1, 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"substring wrong type of arguments{sql:\"substring('', 1, 1.1)\"}",
+      statement:"substring('', 1, 1.1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+  ],
+]

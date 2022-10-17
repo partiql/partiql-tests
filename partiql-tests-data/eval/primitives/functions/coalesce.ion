@@ -1,0 +1,86 @@
+coalesce::[
+  {
+    name:"coalesce valid cases{args:\"1\",result:(success 1)}",
+    statement:"coalesce(1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"coalesce valid cases{args:\"1, 2\",result:(success 1)}",
+    statement:"coalesce(1, 2)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"coalesce valid cases{args:\"null, 2\",result:(success 2)}",
+    statement:"coalesce(null, 2)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"coalesce valid cases{args:\"missing, 3\",result:(success 3)}",
+    statement:"coalesce(missing, 3)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:3
+    }
+  },
+  {
+    name:"coalesce valid cases{args:\"null, null, 3\",result:(success 3)}",
+    statement:"coalesce(null, null, 3)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:3
+    }
+  },
+  {
+    name:"coalesce valid cases{args:\"null, missing, 3\",result:(success 3)}",
+    statement:"coalesce(null, missing, 3)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:3
+    }
+  },
+  {
+    name:"coalesce valid cases{args:\"null, missing, null, null, missing, 9, 4, 5, 6\",result:(success 9)}",
+    statement:"coalesce(null, missing, null, null, missing, 9, 4, 5, 6)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:9
+    }
+  },
+]

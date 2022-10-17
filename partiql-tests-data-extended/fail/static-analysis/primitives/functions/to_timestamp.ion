@@ -1,0 +1,51 @@
+wrong_num_function_args::[
+  to_timestamp::[
+    {
+      name:"to_timestamp wrong number of arguments{sql:\"to_timestamp()\"}",
+      statement:"to_timestamp()",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"to_timestamp wrong number of arguments{sql:\"to_timestamp('', 'y', '')\"}",
+      statement:"to_timestamp('', 'y', '')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"to_timestamp wrong number of arguments{sql:\"to_timestamp('', 'y', 1)\"}",
+      statement:"to_timestamp('', 'y', 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+  ],
+]
+
+invalid_function_args::[
+  to_timestamp::[
+    {
+      name:"to_timestamp wrong type of arguments{sql:\"to_timestamp(1, 'y')\"}",
+      statement:"to_timestamp(1, 'y')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"to_timestamp wrong type of arguments{sql:\"to_timestamp('', 1)\"}",
+      statement:"to_timestamp('', 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"to_timestamp wrong type of arguments{sql:\"to_timestamp(1)\"}",
+      statement:"to_timestamp(1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+  ],
+]

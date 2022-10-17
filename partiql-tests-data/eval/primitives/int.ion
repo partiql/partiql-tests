@@ -1,0 +1,2438 @@
+int::[
+  envs::{
+    max_int:9223372036854775807,
+    min_int:-9223372036854775808,
+    one_tenth_of_max_int:922337203685477580,
+    one_tenth_of_min_int:-922337203685477580
+  },
+  {
+    name:"negative zero equality",
+    statement:"0 = 0 AND 0 = -0 AND -0 = 0 AND -0 = -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"int pass-through{sql:\"1\",result:1}",
+    statement:"1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"int pass-through{sql:\"-1\",result:-1}",
+    statement:"-1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"int pass-through{sql:\"9223372036854775807\",result:9223372036854775807}",
+    statement:"9223372036854775807",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:9223372036854775807
+    }
+  },
+  {
+    name:"int pass-through{sql:\"-9223372036854775808\",result:-9223372036854775808}",
+    statement:"-9223372036854775808",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-9223372036854775808
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"1 + 1\",result:2}",
+    statement:"1 + 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"1 * 1\",result:1}",
+    statement:"1 * 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"1 / 1\",result:1}",
+    statement:"1 / 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"1 - 1\",result:0}",
+    statement:"1 - 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"1 + 2\",result:3}",
+    statement:"1 + 2",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:3
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"1 * 2\",result:2}",
+    statement:"1 * 2",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"1 / 2\",result:0}",
+    statement:"1 / 2",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"1 - 2\",result:-1}",
+    statement:"1 - 2",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"10 % 1\",result:0}",
+    statement:"10 % 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"10 % 2\",result:0}",
+    statement:"10 % 2",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"10 % 3\",result:1}",
+    statement:"10 % 3",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"10 % 4\",result:2}",
+    statement:"10 % 4",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"10 % 6\",result:4}",
+    statement:"10 % 6",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:4
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"10 % 7\",result:3}",
+    statement:"10 % 7",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:3
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"10 % 8\",result:2}",
+    statement:"10 % 8",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"10 % 9\",result:1}",
+    statement:"10 % 9",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"10 % 10\",result:0}",
+    statement:"10 % 10",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"10 % 11\",result:10}",
+    statement:"10 % 11",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:10
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"-1 + 1\",result:0}",
+    statement:"-1 + 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"-1 * 1\",result:-1}",
+    statement:"-1 * 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"-1 / 1\",result:-1}",
+    statement:"-1 / 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"-1 - 1\",result:-2}",
+    statement:"-1 - 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-2
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"-1 + 2\",result:1}",
+    statement:"-1 + 2",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"-1 * 2\",result:-2}",
+    statement:"-1 * 2",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-2
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"-1 / 2\",result:0}",
+    statement:"-1 / 2",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"-10 % 1\",result:0}",
+    statement:"-10 % 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"-10 % 2\",result:0}",
+    statement:"-10 % 2",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"-10 % 3\",result:-1}",
+    statement:"-10 % 3",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"-10 % 4\",result:-2}",
+    statement:"-10 % 4",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-2
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"-10 % 6\",result:-4}",
+    statement:"-10 % 6",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-4
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"-10 % 7\",result:-3}",
+    statement:"-10 % 7",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-3
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"-10 % 8\",result:-2}",
+    statement:"-10 % 8",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-2
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"-10 % 9\",result:-1}",
+    statement:"-10 % 9",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"-10 % 10\",result:0}",
+    statement:"-10 % 10",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"-10 % 11\",result:-10}",
+    statement:"-10 % 11",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-10
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"1 + -1\",result:0}",
+    statement:"1 + -1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"1 * -1\",result:-1}",
+    statement:"1 * -1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"1 / -1\",result:-1}",
+    statement:"1 / -1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"1 - -1\",result:2}",
+    statement:"1 - -1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"1 + -2\",result:-1}",
+    statement:"1 + -2",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"1 * -2\",result:-2}",
+    statement:"1 * -2",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-2
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"1 / -2\",result:0}",
+    statement:"1 / -2",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"10 % -1\",result:0}",
+    statement:"10 % -1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"10 % -2\",result:0}",
+    statement:"10 % -2",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"10 % -3\",result:1}",
+    statement:"10 % -3",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"10 % -4\",result:2}",
+    statement:"10 % -4",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"10 % -6\",result:4}",
+    statement:"10 % -6",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:4
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"10 % -7\",result:3}",
+    statement:"10 % -7",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:3
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"10 % -8\",result:2}",
+    statement:"10 % -8",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"10 % -9\",result:1}",
+    statement:"10 % -9",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"10 % -10\",result:0}",
+    statement:"10 % -10",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"int arithmetic{sql:\"10 % -11\",result:10}",
+    statement:"10 % -11",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:10
+    }
+  },
+  {
+    name:"int boundary arithmetic{sql:\"(max_int - 1) + 1\",result:9223372036854775807}",
+    statement:"(max_int - 1) + 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:9223372036854775807
+    }
+  },
+  {
+    name:"int boundary arithmetic{sql:\"(min_int + 1) - 1\",result:-9223372036854775808}",
+    statement:"(min_int + 1) - 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-9223372036854775808
+    }
+  },
+  {
+    name:"equality operator binary relations{x:1,y:1,z:1}",
+    statement:"{ 'is_reflexive': (x = x) = (x = x), 'is_antisymmetric': (x = y) = (y = x), 'is_transitive': (x = y) = (y = z) and (x = y) = (x = z) }",
+    env:{
+      x:1,
+      y:1,
+      z:1
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        is_reflexive:true,
+        is_antisymmetric:true,
+        is_transitive:true
+      }
+    }
+  },
+  {
+    name:"equality operator binary relations{x:1,y:2,z:3}",
+    statement:"{ 'is_reflexive': (x = x) = (x = x), 'is_antisymmetric': (x = y) = (y = x), 'is_transitive': (x = y) = (y = z) and (x = y) = (x = z) }",
+    env:{
+      x:1,
+      y:2,
+      z:3
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        is_reflexive:true,
+        is_antisymmetric:true,
+        is_transitive:true
+      }
+    }
+  },
+  {
+    name:"equality operator binary relations{x:3,y:2,z:1}",
+    statement:"{ 'is_reflexive': (x = x) = (x = x), 'is_antisymmetric': (x = y) = (y = x), 'is_transitive': (x = y) = (y = z) and (x = y) = (x = z) }",
+    env:{
+      x:3,
+      y:2,
+      z:1
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        is_reflexive:true,
+        is_antisymmetric:true,
+        is_transitive:true
+      }
+    }
+  },
+  {
+    name:"equality operator binary relations{x:-1,y:-1,z:-1}",
+    statement:"{ 'is_reflexive': (x = x) = (x = x), 'is_antisymmetric': (x = y) = (y = x), 'is_transitive': (x = y) = (y = z) and (x = y) = (x = z) }",
+    env:{
+      x:-1,
+      y:-1,
+      z:-1
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        is_reflexive:true,
+        is_antisymmetric:true,
+        is_transitive:true
+      }
+    }
+  },
+  {
+    name:"equality operator binary relations{x:-1,y:-2,z:-3}",
+    statement:"{ 'is_reflexive': (x = x) = (x = x), 'is_antisymmetric': (x = y) = (y = x), 'is_transitive': (x = y) = (y = z) and (x = y) = (x = z) }",
+    env:{
+      x:-1,
+      y:-2,
+      z:-3
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        is_reflexive:true,
+        is_antisymmetric:true,
+        is_transitive:true
+      }
+    }
+  },
+  {
+    name:"equality operator binary relations{x:-3,y:-2,z:-1}",
+    statement:"{ 'is_reflexive': (x = x) = (x = x), 'is_antisymmetric': (x = y) = (y = x), 'is_transitive': (x = y) = (y = z) and (x = y) = (x = z) }",
+    env:{
+      x:-3,
+      y:-2,
+      z:-1
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        is_reflexive:true,
+        is_antisymmetric:true,
+        is_transitive:true
+      }
+    }
+  },
+  {
+    name:"equality operator binary relations{x:-1,y:2,z:3}",
+    statement:"{ 'is_reflexive': (x = x) = (x = x), 'is_antisymmetric': (x = y) = (y = x), 'is_transitive': (x = y) = (y = z) and (x = y) = (x = z) }",
+    env:{
+      x:-1,
+      y:2,
+      z:3
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        is_reflexive:true,
+        is_antisymmetric:true,
+        is_transitive:true
+      }
+    }
+  },
+  {
+    name:"equality operator binary relations{x:-3,y:2,z:1}",
+    statement:"{ 'is_reflexive': (x = x) = (x = x), 'is_antisymmetric': (x = y) = (y = x), 'is_transitive': (x = y) = (y = z) and (x = y) = (x = z) }",
+    env:{
+      x:-3,
+      y:2,
+      z:1
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        is_reflexive:true,
+        is_antisymmetric:true,
+        is_transitive:true
+      }
+    }
+  },
+  {
+    name:"equality operator binary relations{x:1,y:2,z:-3}",
+    statement:"{ 'is_reflexive': (x = x) = (x = x), 'is_antisymmetric': (x = y) = (y = x), 'is_transitive': (x = y) = (y = z) and (x = y) = (x = z) }",
+    env:{
+      x:1,
+      y:2,
+      z:-3
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        is_reflexive:true,
+        is_antisymmetric:true,
+        is_transitive:true
+      }
+    }
+  },
+  {
+    name:"equality operator binary relations{x:3,y:2,z:-1}",
+    statement:"{ 'is_reflexive': (x = x) = (x = x), 'is_antisymmetric': (x = y) = (y = x), 'is_transitive': (x = y) = (y = z) and (x = y) = (x = z) }",
+    env:{
+      x:3,
+      y:2,
+      z:-1
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        is_reflexive:true,
+        is_antisymmetric:true,
+        is_transitive:true
+      }
+    }
+  },
+  {
+    name:"greater than and less than operator binary relations{x:-3,y:-2,z:-1}",
+    statement:"{ 'gt_is_reflexive': (x > x) = (x > x), 'gt_is_antisymmetric': (x > y) = (y > x), 'gt_is_transitive': (x > y) = (y > z) and (x > y) = (x > z), 'lt_is_reflexive': (x < x) = (x < x), 'lt_is_antisymmetric': (x < y) = (y < x), 'lt_is_transitive': (x < y) = (y < z) and (x < y) = (x < z) }",
+    env:{
+      x:-3,
+      y:-2,
+      z:-1
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        gt_is_reflexive:true,
+        gt_is_antisymmetric:false,
+        gt_is_transitive:true,
+        lt_is_reflexive:true,
+        lt_is_antisymmetric:false,
+        lt_is_transitive:true
+      }
+    }
+  },
+  {
+    name:"greater than and less than operator binary relations{x:-2,y:-1,z:0}",
+    statement:"{ 'gt_is_reflexive': (x > x) = (x > x), 'gt_is_antisymmetric': (x > y) = (y > x), 'gt_is_transitive': (x > y) = (y > z) and (x > y) = (x > z), 'lt_is_reflexive': (x < x) = (x < x), 'lt_is_antisymmetric': (x < y) = (y < x), 'lt_is_transitive': (x < y) = (y < z) and (x < y) = (x < z) }",
+    env:{
+      x:-2,
+      y:-1,
+      z:0
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        gt_is_reflexive:true,
+        gt_is_antisymmetric:false,
+        gt_is_transitive:true,
+        lt_is_reflexive:true,
+        lt_is_antisymmetric:false,
+        lt_is_transitive:true
+      }
+    }
+  },
+  {
+    name:"greater than and less than operator binary relations{x:-1,y:0,z:1}",
+    statement:"{ 'gt_is_reflexive': (x > x) = (x > x), 'gt_is_antisymmetric': (x > y) = (y > x), 'gt_is_transitive': (x > y) = (y > z) and (x > y) = (x > z), 'lt_is_reflexive': (x < x) = (x < x), 'lt_is_antisymmetric': (x < y) = (y < x), 'lt_is_transitive': (x < y) = (y < z) and (x < y) = (x < z) }",
+    env:{
+      x:-1,
+      y:0,
+      z:1
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        gt_is_reflexive:true,
+        gt_is_antisymmetric:false,
+        gt_is_transitive:true,
+        lt_is_reflexive:true,
+        lt_is_antisymmetric:false,
+        lt_is_transitive:true
+      }
+    }
+  },
+  {
+    name:"greater than and less than operator binary relations{x:0,y:1,z:2}",
+    statement:"{ 'gt_is_reflexive': (x > x) = (x > x), 'gt_is_antisymmetric': (x > y) = (y > x), 'gt_is_transitive': (x > y) = (y > z) and (x > y) = (x > z), 'lt_is_reflexive': (x < x) = (x < x), 'lt_is_antisymmetric': (x < y) = (y < x), 'lt_is_transitive': (x < y) = (y < z) and (x < y) = (x < z) }",
+    env:{
+      x:0,
+      y:1,
+      z:2
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        gt_is_reflexive:true,
+        gt_is_antisymmetric:false,
+        gt_is_transitive:true,
+        lt_is_reflexive:true,
+        lt_is_antisymmetric:false,
+        lt_is_transitive:true
+      }
+    }
+  },
+  {
+    name:"greater than and less than operator binary relations{x:1,y:2,z:3}",
+    statement:"{ 'gt_is_reflexive': (x > x) = (x > x), 'gt_is_antisymmetric': (x > y) = (y > x), 'gt_is_transitive': (x > y) = (y > z) and (x > y) = (x > z), 'lt_is_reflexive': (x < x) = (x < x), 'lt_is_antisymmetric': (x < y) = (y < x), 'lt_is_transitive': (x < y) = (y < z) and (x < y) = (x < z) }",
+    env:{
+      x:1,
+      y:2,
+      z:3
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        gt_is_reflexive:true,
+        gt_is_antisymmetric:false,
+        gt_is_transitive:true,
+        lt_is_reflexive:true,
+        lt_is_antisymmetric:false,
+        lt_is_transitive:true
+      }
+    }
+  },
+  {
+    name:"greater than and less than operator binary relations{x:3,y:2,z:1}",
+    statement:"{ 'gt_is_reflexive': (x > x) = (x > x), 'gt_is_antisymmetric': (x > y) = (y > x), 'gt_is_transitive': (x > y) = (y > z) and (x > y) = (x > z), 'lt_is_reflexive': (x < x) = (x < x), 'lt_is_antisymmetric': (x < y) = (y < x), 'lt_is_transitive': (x < y) = (y < z) and (x < y) = (x < z) }",
+    env:{
+      x:3,
+      y:2,
+      z:1
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        gt_is_reflexive:true,
+        gt_is_antisymmetric:false,
+        gt_is_transitive:true,
+        lt_is_reflexive:true,
+        lt_is_antisymmetric:false,
+        lt_is_transitive:true
+      }
+    }
+  },
+  {
+    name:"greater than and less than operator binary relations{x:2,y:1,z:0}",
+    statement:"{ 'gt_is_reflexive': (x > x) = (x > x), 'gt_is_antisymmetric': (x > y) = (y > x), 'gt_is_transitive': (x > y) = (y > z) and (x > y) = (x > z), 'lt_is_reflexive': (x < x) = (x < x), 'lt_is_antisymmetric': (x < y) = (y < x), 'lt_is_transitive': (x < y) = (y < z) and (x < y) = (x < z) }",
+    env:{
+      x:2,
+      y:1,
+      z:0
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        gt_is_reflexive:true,
+        gt_is_antisymmetric:false,
+        gt_is_transitive:true,
+        lt_is_reflexive:true,
+        lt_is_antisymmetric:false,
+        lt_is_transitive:true
+      }
+    }
+  },
+  {
+    name:"greater than and less than operator binary relations{x:1,y:0,z:-1}",
+    statement:"{ 'gt_is_reflexive': (x > x) = (x > x), 'gt_is_antisymmetric': (x > y) = (y > x), 'gt_is_transitive': (x > y) = (y > z) and (x > y) = (x > z), 'lt_is_reflexive': (x < x) = (x < x), 'lt_is_antisymmetric': (x < y) = (y < x), 'lt_is_transitive': (x < y) = (y < z) and (x < y) = (x < z) }",
+    env:{
+      x:1,
+      y:0,
+      z:-1
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        gt_is_reflexive:true,
+        gt_is_antisymmetric:false,
+        gt_is_transitive:true,
+        lt_is_reflexive:true,
+        lt_is_antisymmetric:false,
+        lt_is_transitive:true
+      }
+    }
+  },
+  {
+    name:"greater than and less than operator binary relations{x:0,y:-1,z:-2}",
+    statement:"{ 'gt_is_reflexive': (x > x) = (x > x), 'gt_is_antisymmetric': (x > y) = (y > x), 'gt_is_transitive': (x > y) = (y > z) and (x > y) = (x > z), 'lt_is_reflexive': (x < x) = (x < x), 'lt_is_antisymmetric': (x < y) = (y < x), 'lt_is_transitive': (x < y) = (y < z) and (x < y) = (x < z) }",
+    env:{
+      x:0,
+      y:-1,
+      z:-2
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        gt_is_reflexive:true,
+        gt_is_antisymmetric:false,
+        gt_is_transitive:true,
+        lt_is_reflexive:true,
+        lt_is_antisymmetric:false,
+        lt_is_transitive:true
+      }
+    }
+  },
+  {
+    name:"greater than and less than operator binary relations{x:-1,y:-2,z:-3}",
+    statement:"{ 'gt_is_reflexive': (x > x) = (x > x), 'gt_is_antisymmetric': (x > y) = (y > x), 'gt_is_transitive': (x > y) = (y > z) and (x > y) = (x > z), 'lt_is_reflexive': (x < x) = (x < x), 'lt_is_antisymmetric': (x < y) = (y < x), 'lt_is_transitive': (x < y) = (y < z) and (x < y) = (x < z) }",
+    env:{
+      x:-1,
+      y:-2,
+      z:-3
+    },
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:{
+        gt_is_reflexive:true,
+        gt_is_antisymmetric:false,
+        gt_is_transitive:true,
+        lt_is_reflexive:true,
+        lt_is_antisymmetric:false,
+        lt_is_transitive:true
+      }
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"0 = -0\",result:true}",
+    statement:"0 = -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"-0 = 0\",result:true}",
+    statement:"-0 = 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"0 = 0\",result:true}",
+    statement:"0 = 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"-0 = -0\",result:true}",
+    statement:"-0 = -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"1 = 0\",result:false}",
+    statement:"1 = 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"1 = -0\",result:false}",
+    statement:"1 = -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"1 = 1\",result:true}",
+    statement:"1 = 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"-1 = -1\",result:true}",
+    statement:"-1 = -1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"max_int = max_int\",result:true}",
+    statement:"max_int = max_int",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"max_int = min_int\",result:false}",
+    statement:"max_int = min_int",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"min_int = max_int\",result:false}",
+    statement:"min_int = max_int",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"min_int = min_int\",result:true}",
+    statement:"min_int = min_int",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"0 <> 0\",result:false}",
+    statement:"0 <> 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"0 <> -0\",result:false}",
+    statement:"0 <> -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"-0 <> 0\",result:false}",
+    statement:"-0 <> 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"-0 <> -0\",result:false}",
+    statement:"-0 <> -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"1 <> 0\",result:true}",
+    statement:"1 <> 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"1 <> -0\",result:true}",
+    statement:"1 <> -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"max_int <> max_int\",result:false}",
+    statement:"max_int <> max_int",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"max_int <> min_int\",result:true}",
+    statement:"max_int <> min_int",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"min_int <> max_int\",result:true}",
+    statement:"min_int <> max_int",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"equal and not equal{sql:\"min_int <> min_int\",result:false}",
+    statement:"min_int <> min_int",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"1 > 0\",result:true}",
+    statement:"1 > 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"1 > 1\",result:false}",
+    statement:"1 > 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"0 > 1\",result:false}",
+    statement:"0 > 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"0 > 0\",result:false}",
+    statement:"0 > 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"1 < 0\",result:false}",
+    statement:"1 < 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"1 < 1\",result:false}",
+    statement:"1 < 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"0 < 1\",result:true}",
+    statement:"0 < 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"0 < 0\",result:false}",
+    statement:"0 < 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"1   >   -0\",result:true}",
+    statement:"1 > -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"-0  >   1\",result:false}",
+    statement:"-0 > 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"-0  >   -0\",result:false}",
+    statement:"-0 > -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"1   <   -0\",result:false}",
+    statement:"1 < -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"-0  <   1\",result:true}",
+    statement:"-0 < 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"-0  <   -0\",result:false}",
+    statement:"-0 < -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"1       > min_int\",result:true}",
+    statement:"1 > min_int",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"min_int > 1\",result:false}",
+    statement:"min_int > 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"min_int > min_int\",result:false}",
+    statement:"min_int > min_int",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"1       < min_int\",result:false}",
+    statement:"1 < min_int",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"min_int < 1\",result:true}",
+    statement:"min_int < 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"min_int < 0\",result:true}",
+    statement:"min_int < 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"min_int < -0\",result:true}",
+    statement:"min_int < -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"1       < max_int\",result:true}",
+    statement:"1 < max_int",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"max_int < 1\",result:false}",
+    statement:"max_int < 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"max_int < 0\",result:false}",
+    statement:"max_int < 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"max_int < -0\",result:false}",
+    statement:"max_int < -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"1 >= 0\",result:true}",
+    statement:"1 >= 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"1 >= 1\",result:true}",
+    statement:"1 >= 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"0 >= 1\",result:false}",
+    statement:"0 >= 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"0 >= 0\",result:true}",
+    statement:"0 >= 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"1 <= 0\",result:false}",
+    statement:"1 <= 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"1 <= 1\",result:true}",
+    statement:"1 <= 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"0 <= 1\",result:true}",
+    statement:"0 <= 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"0 <= 0\",result:true}",
+    statement:"0 <= 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"1   >=   -0\",result:true}",
+    statement:"1 >= -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"-0  >=   1\",result:false}",
+    statement:"-0 >= 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"-0  >=   -0\",result:true}",
+    statement:"-0 >= -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"0   >=   -0\",result:true}",
+    statement:"0 >= -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"-0  >=   0\",result:true}",
+    statement:"-0 >= 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"1   <=   -0\",result:false}",
+    statement:"1 <= -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"-0  <=   1\",result:true}",
+    statement:"-0 <= 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"-0  <=   -0\",result:true}",
+    statement:"-0 <= -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"0   <=   -0\",result:true}",
+    statement:"0 <= -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"-0  <=   0\",result:true}",
+    statement:"-0 <= 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"1       >= min_int\",result:true}",
+    statement:"1 >= min_int",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"min_int >= 1\",result:false}",
+    statement:"min_int >= 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"min_int >= min_int\",result:true}",
+    statement:"min_int >= min_int",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"min_int >= 0\",result:false}",
+    statement:"min_int >= 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"min_int >= -0\",result:false}",
+    statement:"min_int >= -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"1       <= min_int\",result:false}",
+    statement:"1 <= min_int",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"min_int <= 1\",result:true}",
+    statement:"min_int <= 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"min_int <= 0\",result:true}",
+    statement:"min_int <= 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"min_int <= -0\",result:true}",
+    statement:"min_int <= -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"1       <= max_int\",result:true}",
+    statement:"1 <= max_int",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"comparison operators{sql:\"max_int <= 1\",result:false}",
+    statement:"max_int <= 1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"max_int <= 0\",result:false}",
+    statement:"max_int <= 0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"comparison operators{sql:\"max_int <= -0\",result:false}",
+    statement:"max_int <= -0",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"leading zeros{sql:\"01\",result:1}",
+    statement:"01",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"001\",result:1}",
+    statement:"001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"0001\",result:1}",
+    statement:"0001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"00001\",result:1}",
+    statement:"00001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"000001\",result:1}",
+    statement:"000001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"0000001\",result:1}",
+    statement:"0000001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"00000001\",result:1}",
+    statement:"00000001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"000000001\",result:1}",
+    statement:"000000001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"0000000001\",result:1}",
+    statement:"0000000001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"00000000001\",result:1}",
+    statement:"00000000001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"000000000001\",result:1}",
+    statement:"000000000001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"0000000000001\",result:1}",
+    statement:"0000000000001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"00000000000001\",result:1}",
+    statement:"00000000000001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"000000000000001\",result:1}",
+    statement:"000000000000001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001\",result:1}",
+    statement:"00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"-01\",result:-1}",
+    statement:"-01",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"-001\",result:-1}",
+    statement:"-001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"-0001\",result:-1}",
+    statement:"-0001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"-00001\",result:-1}",
+    statement:"-00001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"-000001\",result:-1}",
+    statement:"-000001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"-0000001\",result:-1}",
+    statement:"-0000001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"-00000001\",result:-1}",
+    statement:"-00000001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"-000000001\",result:-1}",
+    statement:"-000000001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"-0000000001\",result:-1}",
+    statement:"-0000000001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"-00000000001\",result:-1}",
+    statement:"-00000000001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"-000000000001\",result:-1}",
+    statement:"-000000000001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"-0000000000001\",result:-1}",
+    statement:"-0000000000001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"leading zeros{sql:\"-00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001\",result:-1}",
+    statement:"-00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  }
+]

@@ -1,0 +1,1034 @@
+'cast-to-missing'::[
+  {
+    name:"cast to MISSING valid cases{value:\"NULL\"}",
+    statement:"cast(NULL as MISSING)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"cast to MISSING valid cases{value:\"MISSING\"}",
+    statement:"cast(MISSING as MISSING)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  }
+]
+
+'cast-to-int'::[
+  {
+    name:"cast to int valid cases{value:\"true\",result:1}",
+    statement:"cast(true as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"false\",result:0}",
+    statement:"cast(false as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"1\",result:1}",
+    statement:"cast(1 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"0\",result:0}",
+    statement:"cast(0 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"-1\",result:-1}",
+    statement:"cast(-1 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"9223372036854775807\",result:9223372036854775807}",
+    statement:"cast(9223372036854775807 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:9223372036854775807
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"-9223372036854775808\",result:-9223372036854775808}",
+    statement:"cast(-9223372036854775808 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-9223372036854775808
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"`1.5e0`\",result:1}",
+    statement:"cast(`1.5e0` as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"`1.9e0`\",result:1}",
+    statement:"cast(`1.9e0` as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"`1.1e0`\",result:1}",
+    statement:"cast(`1.1e0` as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"`0.1e0`\",result:0}",
+    statement:"cast(`0.1e0` as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"`0.5e0`\",result:0}",
+    statement:"cast(`0.5e0` as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"`0.9e0`\",result:0}",
+    statement:"cast(`0.9e0` as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"`-1.1e0`\",result:-1}",
+    statement:"cast(`-1.1e0` as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"`-1.5e0`\",result:-1}",
+    statement:"cast(`-1.5e0` as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"`-1.9e0`\",result:-1}",
+    statement:"cast(`-1.9e0` as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"`-9223372036854775808e0`\",result:-9223372036854775808}",
+    statement:"cast(`-9223372036854775808e0` as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-9223372036854775808
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"1.5\",result:1}",
+    statement:"cast(1.5 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"1.9\",result:1}",
+    statement:"cast(1.9 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"1.1\",result:1}",
+    statement:"cast(1.1 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"0.1\",result:0}",
+    statement:"cast(0.1 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"0.5\",result:0}",
+    statement:"cast(0.5 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"0.9\",result:0}",
+    statement:"cast(0.9 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"-1.1\",result:-1}",
+    statement:"cast(-1.1 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"-1.5\",result:-1}",
+    statement:"cast(-1.5 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"-1.9\",result:-1}",
+    statement:"cast(-1.9 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"9223372036854775807.0\",result:9223372036854775807}",
+    statement:"cast(9223372036854775807.0 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:9223372036854775807
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"-9223372036854775808.0\",result:-9223372036854775808}",
+    statement:"cast(-9223372036854775808.0 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-9223372036854775808
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'1'\",result:1}",
+    statement:"cast('1' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'01'\",result:1}",
+    statement:"cast('01' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'+1'\",result:1}",
+    statement:"cast('+1' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'+01'\",result:1}",
+    statement:"cast('+01' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'-1'\",result:-1}",
+    statement:"cast('-1' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'-01'\",result:-1}",
+    statement:"cast('-01' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'0'\",result:0}",
+    statement:"cast('0' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'00'\",result:0}",
+    statement:"cast('00' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'+0'\",result:0}",
+    statement:"cast('+0' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'+00'\",result:0}",
+    statement:"cast('+00' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'-0'\",result:0}",
+    statement:"cast('-0' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'-00'\",result:0}",
+    statement:"cast('-00' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'0b10'\",result:2}",
+    statement:"cast('0b10' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'0B10'\",result:2}",
+    statement:"cast('0B10' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'0b010'\",result:2}",
+    statement:"cast('0b010' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'+0b10'\",result:2}",
+    statement:"cast('+0b10' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'+0b010'\",result:2}",
+    statement:"cast('+0b010' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'-0b10'\",result:-2}",
+    statement:"cast('-0b10' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-2
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'-0b010'\",result:-2}",
+    statement:"cast('-0b010' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-2
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'0xA'\",result:10}",
+    statement:"cast('0xA' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:10
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'0XA'\",result:10}",
+    statement:"cast('0XA' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:10
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'0x0A'\",result:10}",
+    statement:"cast('0x0A' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:10
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'+0xA'\",result:10}",
+    statement:"cast('+0xA' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:10
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'+0x0A'\",result:10}",
+    statement:"cast('+0x0A' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:10
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'-0xA'\",result:-10}",
+    statement:"cast('-0xA' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-10
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"'-0x0A'\",result:-10}",
+    statement:"cast('-0x0A' as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-10
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\" `\\\"100\\\"` \",result:100}",
+    statement:"cast( `\"100\"` as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:100
+    }
+  },
+]
+
+'cast-to-null'::[
+  {
+    name:"cast to NULL valid cases{value:\"NULL\"}",
+    statement:"cast(NULL as NULL)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"cast to NULL valid cases{value:\"MISSING\"}",
+    statement:"cast(MISSING as NULL)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  }
+]
+
+cast_invalid::[
+  {
+    name:"cast to int invalid values{value:\"'hello'\",target:\"STRING\"}",
+    statement:"cast('hello' as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid values{value:\"'123456A'\",target:\"STRING\"}",
+    statement:"cast('123456A' as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid values{value:\"'00xA'\",target:\"STRING\"}",
+    statement:"cast('00xA' as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid values{value:\"'00b10'\",target:\"STRING\"}",
+    statement:"cast('00b10' as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid values{value:\"'2e10'\",target:\"STRING\"}",
+    statement:"cast('2e10' as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\"`2017T`\",target:\"TIMESTAMP\"}",
+    statement:"cast(`2017T` as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\" `{{\\\"\\\"}}` \",target:\"CLOB\"}",
+    statement:"cast( `{{\"\"}}` as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\" `{{\\\"1\\\"}}` \",target:\"CLOB\"}",
+    statement:"cast( `{{\"1\"}}` as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\"`{{}}`\",target:\"BLOB\"}",
+    statement:"cast(`{{}}` as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\"[1, 2]\",target:\"LIST\"}",
+    statement:"cast([1, 2] as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\"[1]\",target:\"LIST\"}",
+    statement:"cast([1] as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\"[]\",target:\"LIST\"}",
+    statement:"cast([] as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\"`(1 2)`\",target:\"SEXP\"}",
+    statement:"cast(`(1 2)` as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\"`(1)`\",target:\"SEXP\"}",
+    statement:"cast(`(1)` as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\"`()`\",target:\"SEXP\"}",
+    statement:"cast(`()` as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\"{'a': 1}\",target:\"STRUCT\"}",
+    statement:"cast({'a': 1} as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\"{'a': '12'}\",target:\"STRUCT\"}",
+    statement:"cast({'a': '12'} as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\"{}\",target:\"STRUCT\"}",
+    statement:"cast({} as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\"<<1, 2>>\",target:\"BAG\"}",
+    statement:"cast(<<1, 2>> as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\"<<1>>\",target:\"BAG\"}",
+    statement:"cast(<<1>> as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\"<<>>\",target:\"BAG\"}",
+    statement:"cast(<<>> as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  }
+]

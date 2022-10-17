@@ -1,0 +1,44 @@
+wrong_num_function_args::[
+  size::[
+    {
+      name:"size wrong number of arguments{sql:\"size()\"}",
+      statement:"size()",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"size wrong number of arguments{sql:\"size(`[]`, `[]`)\"}",
+      statement:"size(`[]`, `[]`)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"size wrong number of arguments{sql:\"size(`[]`, 1)\"}",
+      statement:"size(`[]`, 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+  ],
+]
+
+invalid_function_args::[
+  size::[
+    {
+      name:"size wrong type of arguments{param:1,actual:\"INT\"}",
+      statement:"size(1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"size wrong type of arguments{param:\"''\",actual:\"STRING\"}",
+      statement:"size('')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    }
+  ],
+]

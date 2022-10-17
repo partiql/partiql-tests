@@ -1,0 +1,626 @@
+extract::[
+  {
+    name:"extract valid cases{result:2017.,time_part:\"year\",timestamp:\"2017T\"}",
+    statement:"extract(year from `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017.
+    }
+  },
+  {
+    name:"extract valid cases{result:1.,time_part:\"month\",timestamp:\"2017T\"}",
+    statement:"extract(month from `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1.
+    }
+  },
+  {
+    name:"extract valid cases{result:1.,time_part:\"day\",timestamp:\"2017T\"}",
+    statement:"extract(day from `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1.
+    }
+  },
+  {
+    name:"extract valid cases{result:0.,time_part:\"hour\",timestamp:\"2017T\"}",
+    statement:"extract(hour from `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0.
+    }
+  },
+  {
+    name:"extract valid cases{result:0.,time_part:\"minute\",timestamp:\"2017T\"}",
+    statement:"extract(minute from `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0.
+    }
+  },
+  {
+    name:"extract valid cases{result:0.,time_part:\"second\",timestamp:\"2017T\"}",
+    statement:"extract(second from `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0.
+    }
+  },
+  {
+    name:"extract valid cases{result:0.,time_part:\"timezone_hour\",timestamp:\"2017T\"}",
+    statement:"extract(timezone_hour from `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0.
+    }
+  },
+  {
+    name:"extract valid cases{result:0.,time_part:\"timezone_minute\",timestamp:\"2017T\"}",
+    statement:"extract(timezone_minute from `2017T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0.
+    }
+  },
+  {
+    name:"extract valid cases{result:2017.,time_part:\"year\",timestamp:\"2017-01T\"}",
+    statement:"extract(year from `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017.
+    }
+  },
+  {
+    name:"extract valid cases{result:1.,time_part:\"month\",timestamp:\"2017-01T\"}",
+    statement:"extract(month from `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1.
+    }
+  },
+  {
+    name:"extract valid cases{result:1.,time_part:\"day\",timestamp:\"2017-01T\"}",
+    statement:"extract(day from `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1.
+    }
+  },
+  {
+    name:"extract valid cases{result:0.,time_part:\"hour\",timestamp:\"2017-01T\"}",
+    statement:"extract(hour from `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0.
+    }
+  },
+  {
+    name:"extract valid cases{result:0.,time_part:\"minute\",timestamp:\"2017-01T\"}",
+    statement:"extract(minute from `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0.
+    }
+  },
+  {
+    name:"extract valid cases{result:0.,time_part:\"second\",timestamp:\"2017-01T\"}",
+    statement:"extract(second from `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0.
+    }
+  },
+  {
+    name:"extract valid cases{result:0.,time_part:\"timezone_hour\",timestamp:\"2017-01T\"}",
+    statement:"extract(timezone_hour from `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0.
+    }
+  },
+  {
+    name:"extract valid cases{result:0.,time_part:\"timezone_minute\",timestamp:\"2017-01T\"}",
+    statement:"extract(timezone_minute from `2017-01T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0.
+    }
+  },
+  {
+    name:"extract valid cases{result:2017.,time_part:\"year\",timestamp:\"2017-01-02T\"}",
+    statement:"extract(year from `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017.
+    }
+  },
+  {
+    name:"extract valid cases{result:1.,time_part:\"month\",timestamp:\"2017-01-02T\"}",
+    statement:"extract(month from `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1.
+    }
+  },
+  {
+    name:"extract valid cases{result:2.,time_part:\"day\",timestamp:\"2017-01-02T\"}",
+    statement:"extract(day from `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2.
+    }
+  },
+  {
+    name:"extract valid cases{result:0.,time_part:\"hour\",timestamp:\"2017-01-02T\"}",
+    statement:"extract(hour from `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0.
+    }
+  },
+  {
+    name:"extract valid cases{result:0.,time_part:\"minute\",timestamp:\"2017-01-02T\"}",
+    statement:"extract(minute from `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0.
+    }
+  },
+  {
+    name:"extract valid cases{result:0.,time_part:\"second\",timestamp:\"2017-01-02T\"}",
+    statement:"extract(second from `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0.
+    }
+  },
+  {
+    name:"extract valid cases{result:0.,time_part:\"timezone_hour\",timestamp:\"2017-01-02T\"}",
+    statement:"extract(timezone_hour from `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0.
+    }
+  },
+  {
+    name:"extract valid cases{result:0.,time_part:\"timezone_minute\",timestamp:\"2017-01-02T\"}",
+    statement:"extract(timezone_minute from `2017-01-02T`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0.
+    }
+  },
+  {
+    name:"extract valid cases{result:2017.,time_part:\"year\",timestamp:\"2017-01-02T03:04Z\"}",
+    statement:"extract(year from `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017.
+    }
+  },
+  {
+    name:"extract valid cases{result:1.,time_part:\"month\",timestamp:\"2017-01-02T03:04Z\"}",
+    statement:"extract(month from `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1.
+    }
+  },
+  {
+    name:"extract valid cases{result:2.,time_part:\"day\",timestamp:\"2017-01-02T03:04Z\"}",
+    statement:"extract(day from `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2.
+    }
+  },
+  {
+    name:"extract valid cases{result:3.,time_part:\"hour\",timestamp:\"2017-01-02T03:04Z\"}",
+    statement:"extract(hour from `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:3.
+    }
+  },
+  {
+    name:"extract valid cases{result:4.,time_part:\"minute\",timestamp:\"2017-01-02T03:04Z\"}",
+    statement:"extract(minute from `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:4.
+    }
+  },
+  {
+    name:"extract valid cases{result:0.,time_part:\"second\",timestamp:\"2017-01-02T03:04Z\"}",
+    statement:"extract(second from `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0.
+    }
+  },
+  {
+    name:"extract valid cases{result:0.,time_part:\"timezone_hour\",timestamp:\"2017-01-02T03:04Z\"}",
+    statement:"extract(timezone_hour from `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0.
+    }
+  },
+  {
+    name:"extract valid cases{result:0.,time_part:\"timezone_minute\",timestamp:\"2017-01-02T03:04Z\"}",
+    statement:"extract(timezone_minute from `2017-01-02T03:04Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0.
+    }
+  },
+  {
+    name:"extract valid cases{result:2017.,time_part:\"year\",timestamp:\"2017-01-02T03:04:05Z\"}",
+    statement:"extract(year from `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017.
+    }
+  },
+  {
+    name:"extract valid cases{result:1.,time_part:\"month\",timestamp:\"2017-01-02T03:04:05Z\"}",
+    statement:"extract(month from `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1.
+    }
+  },
+  {
+    name:"extract valid cases{result:2.,time_part:\"day\",timestamp:\"2017-01-02T03:04:05Z\"}",
+    statement:"extract(day from `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2.
+    }
+  },
+  {
+    name:"extract valid cases{result:3.,time_part:\"hour\",timestamp:\"2017-01-02T03:04:05Z\"}",
+    statement:"extract(hour from `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:3.
+    }
+  },
+  {
+    name:"extract valid cases{result:4.,time_part:\"minute\",timestamp:\"2017-01-02T03:04:05Z\"}",
+    statement:"extract(minute from `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:4.
+    }
+  },
+  {
+    name:"extract valid cases{result:5.,time_part:\"second\",timestamp:\"2017-01-02T03:04:05Z\"}",
+    statement:"extract(second from `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:5.
+    }
+  },
+  {
+    name:"extract valid cases{result:0.,time_part:\"timezone_hour\",timestamp:\"2017-01-02T03:04:05Z\"}",
+    statement:"extract(timezone_hour from `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0.
+    }
+  },
+  {
+    name:"extract valid cases{result:0.,time_part:\"timezone_minute\",timestamp:\"2017-01-02T03:04:05Z\"}",
+    statement:"extract(timezone_minute from `2017-01-02T03:04:05Z`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0.
+    }
+  },
+  {
+    name:"extract valid cases{result:2017.,time_part:\"year\",timestamp:\"2017-01-02T03:04:05+07:08\"}",
+    statement:"extract(year from `2017-01-02T03:04:05+07:08`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2017.
+    }
+  },
+  {
+    name:"extract valid cases{result:1.,time_part:\"month\",timestamp:\"2017-01-02T03:04:05+07:08\"}",
+    statement:"extract(month from `2017-01-02T03:04:05+07:08`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1.
+    }
+  },
+  {
+    name:"extract valid cases{result:2.,time_part:\"day\",timestamp:\"2017-01-02T03:04:05+07:08\"}",
+    statement:"extract(day from `2017-01-02T03:04:05+07:08`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2.
+    }
+  },
+  {
+    name:"extract valid cases{result:3.,time_part:\"hour\",timestamp:\"2017-01-02T03:04:05+07:08\"}",
+    statement:"extract(hour from `2017-01-02T03:04:05+07:08`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:3.
+    }
+  },
+  {
+    name:"extract valid cases{result:4.,time_part:\"minute\",timestamp:\"2017-01-02T03:04:05+07:08\"}",
+    statement:"extract(minute from `2017-01-02T03:04:05+07:08`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:4.
+    }
+  },
+  {
+    name:"extract valid cases{result:5.,time_part:\"second\",timestamp:\"2017-01-02T03:04:05+07:08\"}",
+    statement:"extract(second from `2017-01-02T03:04:05+07:08`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:5.
+    }
+  },
+  {
+    name:"extract valid cases{result:7.,time_part:\"timezone_hour\",timestamp:\"2017-01-02T03:04:05+07:08\"}",
+    statement:"extract(timezone_hour from `2017-01-02T03:04:05+07:08`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:7.
+    }
+  },
+  {
+    name:"extract valid cases{result:8.,time_part:\"timezone_minute\",timestamp:\"2017-01-02T03:04:05+07:08\"}",
+    statement:"extract(timezone_minute from `2017-01-02T03:04:05+07:08`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:8.
+    }
+  },
+  {
+    name:"extract valid cases{result:-7.,time_part:\"timezone_hour\",timestamp:\"2017-01-02T03:04:05-07:08\"}",
+    statement:"extract(timezone_hour from `2017-01-02T03:04:05-07:08`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-7.
+    }
+  },
+  {
+    name:"extract valid cases{result:-8.,time_part:\"timezone_minute\",timestamp:\"2017-01-02T03:04:05-07:08\"}",
+    statement:"extract(timezone_minute from `2017-01-02T03:04:05-07:08`)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-8.
+    }
+  },
+  {
+    name:"extract null and missing propagation{time_part:\"year\",timestamp:\"null\"}",
+    statement:"extract(year from null)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"extract null and missing propagation{time_part:\"year\",timestamp:\"missing\"}",
+    statement:"extract(year from missing)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+]

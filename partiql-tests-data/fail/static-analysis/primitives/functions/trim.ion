@@ -1,0 +1,81 @@
+wrong_num_function_args::[
+  trim::[
+    {
+      name:"trim wrong number of arguments{sql:\"trim()\"}",
+      statement:"trim()",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"trim wrong number of arguments{sql:\"trim('', '')\"}",
+      statement:"trim('', '')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"trim wrong number of arguments{sql:\"trim(leading '')\"}",
+      statement:"trim(leading '')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"trim wrong number of arguments{sql:\"trim(foobar from '')\"}",
+      statement:"trim(foobar from '')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"trim wrong number of arguments{spec:\"1\",to_remove:\"''\",target:\"''\"}",
+      statement:"trim(1 '' from '')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"trim wrong number of arguments{spec:\"foobar\",to_remove:\"''\",target:\"''\"}",
+      statement:"trim(foobar '' from '')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"trim wrong number of arguments{spec:\"'foobar'\",to_remove:\"''\",target:\"''\"}",
+      statement:"trim('foobar' '' from '')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"trim wrong number of arguments{spec:\"leading\",to_remove:\"1\",target:\"''\"}",
+      statement:"trim(leading 1 from '')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"trim wrong number of arguments{spec:\"leading\",to_remove:\"foobar\",target:\"''\"}",
+      statement:"trim(leading foobar from '')",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"trim wrong number of arguments{spec:\"leading\",to_remove:\"''\",target:\"1\"}",
+      statement:"trim(leading '' from 1)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    },
+    {
+      name:"trim wrong number of arguments{spec:\"leading\",to_remove:\"''\",target:\"foobar\"}",
+      statement:"trim(leading '' from foobar)",
+      assert: {
+        result: StaticAnalysisFail
+      },
+    }
+  ],
+]
