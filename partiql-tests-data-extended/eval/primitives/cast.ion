@@ -1,0 +1,220 @@
+// TODO: resolve the issue, https://github.com/partiql/partiql-tests/issues/39
+// Round half to even
+'cast-to-int'::[
+  {
+    name:"cast to int valid cases{value:\"`1.5e0`\",result:2}",
+    statement:"cast(`1.5e0` as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"`1.9e0`\",result:2}",
+    statement:"cast(`1.9e0` as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"`1.1e0`\",result:1}",
+    statement:"cast(`1.1e0` as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"`0.1e0`\",result:0}",
+    statement:"cast(`0.1e0` as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"`0.5e0`\",result:0}",
+    statement:"cast(`0.5e0` as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"`0.9e0`\",result:1}",
+    statement:"cast(`0.9e0` as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"`-1.1e0`\",result:-1}",
+    statement:"cast(`-1.1e0` as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"`-1.5e0`\",result:-2}",
+    statement:"cast(`-1.5e0` as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-2
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"`-1.9e0`\",result:-2}",
+    statement:"cast(`-1.9e0` as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-2
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"1.5\",result:2}",
+    statement:"cast(1.5 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"1.9\",result:2}",
+    statement:"cast(1.9 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"1.1\",result:1}",
+    statement:"cast(1.1 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"0.1\",result:0}",
+    statement:"cast(0.1 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"0.5\",result:0}",
+    statement:"cast(0.5 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"0.9\",result:1}",
+    statement:"cast(0.9 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"-1.1\",result:-1}",
+    statement:"cast(-1.1 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"-1.5\",result:-2}",
+    statement:"cast(-1.5 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-2
+    }
+  },
+  {
+    name:"cast to int valid cases{value:\"-1.9\",result:-2}",
+    statement:"cast(-1.9 as INT)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-2
+    }
+  }
+]
