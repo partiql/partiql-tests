@@ -1,0 +1,28 @@
+envs::{
+  numbers:[
+    1,
+    2.0,
+    3e0,
+    4,
+    5.
+  ],
+}
+
+// Round half to even
+'arithmetic with mixed type'::[
+  {
+    name:"function call with mixed StaticType",
+    statement:"SELECT VALUE CAST(v/2 AS INT) FROM numbers as v",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        0,
+        1,
+        2,
+        2,
+        2
+      ]
+    }
+  }
+]

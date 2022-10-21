@@ -302,21 +302,6 @@ basic::[
     }
   },
   {
-    name:"function call with mixed StaticType",
-    statement:"SELECT VALUE CAST(v/2 AS INT) FROM numbers as v",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        0,
-        1,
-        2,
-        2,
-        2
-      ]
-    }
-  },
-  {
     name:"arithmetic with null/missing",
     statement:"SELECT VALUE 1 + v FROM << null, missing, 1 >> AS v",
     assert:{
