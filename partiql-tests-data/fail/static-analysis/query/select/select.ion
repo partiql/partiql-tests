@@ -1,0 +1,37 @@
+'projection-pathing'::[
+  {
+    name:"foo[*] is disallowed",
+    statement:"SELECT foo[*] FROM foo",
+    assert: {
+      result: StaticAnalysisFail
+    },
+  },
+  {
+    name:"foo.*.bar is disallowed",
+    statement:"SELECT foo.*.bar FROM foo",
+    assert: {
+      result: StaticAnalysisFail
+    },
+  },
+  {
+    name:"foo['a'].* is disallowed",
+    statement:"SELECT foo['a'].* FROM foo",
+    assert: {
+      result: StaticAnalysisFail
+    },
+  },
+  {
+    name:"foo[a].* is disallowed",
+    statement:"SELECT foo[a].* FROM foo",
+    assert: {
+      result: StaticAnalysisFail
+    },
+  },
+  {
+    name:"foo[1].* is disallowed",
+    statement:"SELECT foo[1].* FROM foo",
+    assert: {
+      result: StaticAnalysisFail
+    },
+  },
+]
