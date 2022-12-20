@@ -120,21 +120,21 @@
     },
     {
         name: "single source FROM with list and AT clause",
-        statement: "SELECT * FROM someOrderedTable AS x AT y",
+        statement: "SELECT x, y FROM someOrderedTable AS x AT y",
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
             result: EvaluationSuccess,
-            output: $bag::[{a: 0, b: 0, y: 0}, {a: 1, b: 1, y: 1}]
+            output: $bag::[{x: {a: 0, b: 0}, y: 0}, {x: {a: 1, b: 1}, y: 1}]
         }
     },
     {
         name: "single source FROM with bag and AT clause",
-        statement: "SELECT * FROM someUnorderedTable AS x AT y",
+        statement: "SELECT x, y FROM someUnorderedTable AS x AT y",
         assert: [
             {
                 evalMode: EvalModeCoerce,
                 result: EvaluationSuccess,
-                output: $bag::[{a: 0, b: 0}, {a: 1, b: 1}]
+                output: $bag::[{x: {a: 0, b: 0}}, {x: {a: 1, b: 1}}]
             },
             {
                 evalMode: EvalModeError,
@@ -144,21 +144,21 @@
     },
     {
         name: "single source FROM with scalar",
-        statement: "SELECT * FROM someOrderedTable[0].a AS x",
+        statement: "SELECT x FROM someOrderedTable[0].a AS x",
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
             result: EvaluationSuccess,
-            output: $bag::[{_1: 0}]
+            output: $bag::[{x: 0}]
         }
     },
     {
         name: "single source FROM with scalar and AT clause",
-        statement: "SELECT * FROM someOrderedTable[0].a AS x AT p",
+        statement: "SELECT x, p FROM someOrderedTable[0].a AS x AT p",
         assert: [
             {
                 evalMode: EvalModeCoerce,
                 result: EvaluationSuccess,
-                output: $bag::[{_1: 0}]
+                output: $bag::[{x: 0}]
             },
             {
                 evalMode: EvalModeError,
@@ -168,21 +168,21 @@
     },
     {
         name: "single source FROM with tuple",
-        statement: "SELECT * FROM {'someKey': 'someValue' } AS x",
+        statement: "SELECT x FROM {'someKey': 'someValue' } AS x",
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
             result: EvaluationSuccess,
-            output: $bag::[{someKey: "someValue"}]
+            output: $bag::[{x: {someKey: "someValue"}}]
         }
     },
     {
         name: "single source FROM with tuple and AT clause",
-        statement: "SELECT * FROM {'someKey': 'someValue' } AS x AT p",
+        statement: "SELECT x, p FROM {'someKey': 'someValue' } AS x AT p",
         assert: [
             {
                 evalMode: EvalModeCoerce,
                 result: EvaluationSuccess,
-                output: $bag::[{someKey: "someValue"}]
+                output: $bag::[{x: {someKey: "someValue"}}]
             },
             {
                 evalMode: EvalModeError,
@@ -192,21 +192,21 @@
     },
     {
         name: "single source FROM with absent value null",
-        statement: "SELECT * FROM NULL AS x",
+        statement: "SELECT x FROM NULL AS x",
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
             result: EvaluationSuccess,
-            output: $bag::[{_1: null}]
+            output: $bag::[{x: null}]
         }
     },
     {
         name: "single source FROM with absent value null and AT clause",
-        statement: "SELECT * FROM NULL AS x AT p",
+        statement: "SELECT x, p FROM NULL AS x AT p",
         assert: [
             {
                 evalMode: EvalModeCoerce,
                 result: EvaluationSuccess,
-                output: $bag::[{_1: null}]
+                output: $bag::[{x: null}]
             },
             {
                 evalMode: EvalModeError,
@@ -216,7 +216,7 @@
     },
     {
         name: "single source FROM with absent value missing",
-        statement: "SELECT * FROM MISSING AS x",
+        statement: "SELECT x FROM MISSING AS x",
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
             result: EvaluationSuccess,
@@ -225,7 +225,7 @@
     },
     {
         name: "single source FROM with absent value missing and AT clause",
-        statement: "SELECT * FROM MISSING AS x AT p",
+        statement: "SELECT x, p FROM MISSING AS x AT p",
         assert: [
             {
                 evalMode: EvalModeCoerce,
