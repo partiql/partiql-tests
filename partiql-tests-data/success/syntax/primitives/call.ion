@@ -139,3 +139,15 @@
         ]
     },
 ]
+
+'position'::[
+    {
+        name: "call POSITION",
+        statement: "POSITION('abc' IN 'abcdefg')",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+]
