@@ -7,7 +7,7 @@ envs::{
 case::[
   {
     name:"simpleCase",
-    statement:"SELECT VALUE CASE x + 1 WHEN NULL THEN 'shouldnt be null' WHEN NULL THEN 'shouldnt be missing' WHEN i THEN 'ONE' WHEN f THEN 'TWO' WHEN d THEN 'THREE' ELSE '?' END FROM << i, f, d, null, missing >> AS x",
+    statement:"SELECT VALUE CASE x + 1 WHEN NULL THEN 'shouldnt be null' WHEN MISSING THEN 'shouldnt be missing' WHEN i THEN 'ONE' WHEN f THEN 'TWO' WHEN d THEN 'THREE' ELSE '?' END FROM << i, f, d, null, missing >> AS x",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -22,7 +22,7 @@ case::[
   },
   {
     name:"simpleCaseNoElse",
-    statement:"SELECT VALUE CASE x + 1 WHEN NULL THEN 'shouldnt be null' WHEN NULL THEN 'shouldnt be missing' WHEN i THEN 'ONE' WHEN f THEN 'TWO' WHEN d THEN 'THREE' END FROM << i, f, d, null, missing >> AS x",
+    statement:"SELECT VALUE CASE x + 1 WHEN NULL THEN 'shouldnt be null' WHEN MISSING THEN 'shouldnt be missing' WHEN i THEN 'ONE' WHEN f THEN 'TWO' WHEN d THEN 'THREE' END FROM << i, f, d, null, missing >> AS x",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
