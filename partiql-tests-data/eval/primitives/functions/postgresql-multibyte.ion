@@ -1,0 +1,1489 @@
+// following tests were taken from postgres/postgres -- src/test/mb ("mb" refers to multibyte)
+// TODO: above directory also includes some tests using `LIKE`, which we could add to `partiql-tests`
+
+big5::[
+  envs::{
+    tbl:[
+      {
+        attr: "電腦業"
+      },
+      {
+        attr: "製造業"
+      },
+      {
+        attr: "餐飲業"
+      },
+    ]
+  },
+  character_length::[
+    {
+      name:"CHARACTER_LENGTH big5",
+      statement:"SELECT attr, CHARACTER_LENGTH(attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "電腦業",
+            result: 3
+          },
+          {
+            attr: "製造業",
+            result: 3
+          },
+          {
+            attr: "餐飲業",
+            result: 3
+          },
+        ]
+      }
+    },
+  ],
+  octet_length::[
+    {
+      name:"OCTET_LENGTH big5",
+      statement:"SELECT attr, OCTET_LENGTH(attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "電腦業",
+            result: 6
+          },
+          {
+            attr: "製造業",
+            result: 6
+          },
+          {
+            attr: "餐飲業",
+            result: 6
+          },
+        ]
+      }
+    },
+  ],
+  position::[
+    {
+      name:"POSITION big5",
+      statement:"SELECT attr, POSITION('有限' IN attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "電腦業",
+            result: 0
+          },
+          {
+            attr: "製造業",
+            result: 3
+          },
+          {
+            attr: "餐飲業",
+            result: 5
+          },
+        ]
+      }
+    },
+  ],
+  substring::[
+    {
+      name:"SUBSTRING big5",
+      statement:"SELECT attr, SUBSTRING(attr FROM 3 FOR 6) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "電腦業",
+            result: "科技"
+          },
+          {
+            attr: "製造業",
+            result: "有限公司"
+          },
+          {
+            attr: "餐飲業",
+            result: "股份有限公司"
+          },
+        ]
+      }
+    },
+  ],
+]
+
+euc_cn::[
+  envs::{
+    tbl:[
+      {
+        attr: "电脑显示屏"
+      },
+      {
+        attr: "电脑图形"
+      },
+      {
+        attr: "电脑程序员"
+      },
+    ]
+  },
+  character_length::[
+    {
+      name:"CHARACTER_LENGTH euc_cn",
+      statement:"SELECT attr, CHARACTER_LENGTH(attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "电脑显示屏",
+            result: 5
+          },
+          {
+            attr: "电脑图形",
+            result: 4
+          },
+          {
+            attr: "电脑程序员",
+            result: 5
+          },
+        ]
+      }
+    },
+  ],
+  octet_length::[
+    {
+      name:"OCTET_LENGTH euc_cn",
+      statement:"SELECT attr, OCTET_LENGTH(attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "电脑显示屏",
+            result: 10
+          },
+          {
+            attr: "电脑图形",
+            result: 8
+          },
+          {
+            attr: "电脑程序员",
+            result: 10
+          },
+        ]
+      }
+    },
+  ],
+  position::[
+    {
+      name:"POSITION euc_cn",
+      statement:"SELECT attr, POSITION('显' IN attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "电脑显示屏",
+            result: 3
+          },
+          {
+            attr: "电脑图形",
+            result: 0
+          },
+          {
+            attr: "电脑程序员",
+            result: 0
+          },
+        ]
+      }
+    },
+  ],
+  substring::[
+    {
+      name:"SUBSTRING euc_cn",
+      statement:"SELECT attr, SUBSTRING(attr FROM 3 FOR 4) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "电脑显示屏",
+            result: "显示屏"
+          },
+          {
+            attr: "电脑图形",
+            result: "图形"
+          },
+          {
+            attr: "电脑程序员",
+            result: "程序员"
+          },
+        ]
+      }
+    },
+  ],
+]
+
+euc_jp::[
+  envs::{
+    tbl:[
+      {
+        attr: "コンピュータディスプレイ"
+      },
+      {
+        attr: "コンピュータグラフィックス"
+      },
+      {
+        attr: "コンピュータプログラマー"
+      },
+    ]
+  },
+  character_length::[
+    {
+      name:"CHARACTER_LENGTH euc_jp",
+      statement:"SELECT attr, CHARACTER_LENGTH(attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "コンピュータディスプレイ",
+            result: 12
+          },
+          {
+            attr: "コンピュータグラフィックス",
+            result: 13
+          },
+          {
+            attr: "コンピュータプログラマー",
+            result: 12
+          },
+        ]
+      }
+    },
+  ],
+  octet_length::[
+    {
+      name:"OCTET_LENGTH euc_jp",
+      statement:"SELECT attr, OCTET_LENGTH(attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "コンピュータディスプレイ",
+            result: 24
+          },
+          {
+            attr: "コンピュータグラフィックス",
+            result: 26
+          },
+          {
+            attr: "コンピュータプログラマー",
+            result: 24
+          },
+        ]
+      }
+    },
+  ],
+  position::[
+    {
+      name:"POSITION euc_jp",
+      statement:"SELECT attr, POSITION('デ' IN attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "コンピュータディスプレイ",
+            result: 7
+          },
+          {
+            attr: "コンピュータグラフィックス",
+            result: 0
+          },
+          {
+            attr: "コンピュータプログラマー",
+            result: 0
+          },
+        ]
+      }
+    },
+  ],
+  substring::[
+    {
+      name:"SUBSTRING euc_jp",
+      statement:"SELECT attr, SUBSTRING(attr FROM 10 FOR 4) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "コンピュータディスプレイ",
+            result: "プレイ"
+          },
+          {
+            attr: "コンピュータグラフィックス",
+            result: "ィックス"
+          },
+          {
+            attr: "コンピュータプログラマー",
+            result: "ラマー"
+          },
+        ]
+      }
+    },
+  ],
+]
+
+euc_kr::[
+  envs::{
+    tbl:[
+      {
+        attr: "컴퓨터디스플레이"
+      },
+      {
+        attr: "컴퓨터그래픽스"
+      },
+      {
+        attr: "컴퓨터프로그래머"
+      },
+    ]
+  },
+  character_length::[
+    {
+      name:"CHARACTER_LENGTH euc_kr",
+      statement:"SELECT attr, CHARACTER_LENGTH(attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "컴퓨터디스플레이",
+            result: 8
+          },
+          {
+            attr: "컴퓨터그래픽스",
+            result: 7
+          },
+          {
+            attr: "컴퓨터프로그래머",
+            result: 8
+          },
+        ]
+      }
+    },
+  ],
+  octet_length::[
+    {
+      name:"OCTET_LENGTH euc_kr",
+      statement:"SELECT attr, OCTET_LENGTH(attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "컴퓨터디스플레이",
+            result: 16
+          },
+          {
+            attr: "컴퓨터그래픽스",
+            result: 14
+          },
+          {
+            attr: "컴퓨터프로그래머",
+            result: 16
+          },
+        ]
+      }
+    },
+  ],
+  position::[
+    {
+      name:"POSITION euc_kr",
+      statement:"SELECT attr, POSITION('디' IN attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "컴퓨터디스플레이",
+            result: 4
+          },
+          {
+            attr: "컴퓨터그래픽스",
+            result: 0
+          },
+          {
+            attr: "컴퓨터프로그래머",
+            result: 0
+          },
+        ]
+      }
+    },
+  ],
+  substring::[
+    {
+      name:"SUBSTRING euc_kr",
+      statement:"SELECT attr, SUBSTRING(attr FROM 3 FOR 4) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "컴퓨터디스플레이",
+            result: "터디스플"
+          },
+          {
+            attr: "컴퓨터그래픽스",
+            result: "터그래픽"
+          },
+          {
+            attr: "컴퓨터프로그래머",
+            result: "터프로그"
+          },
+        ]
+      }
+    },
+  ],
+]
+
+euc_tw::[
+  envs::{
+    tbl:[
+      {
+        attr: "缳妾淦"
+      },
+      {
+        attr: "犒葸淦"
+      },
+      {
+        attr: "螫悖淦"
+      },
+    ]
+  },
+  character_length::[
+    {
+      name:"CHARACTER_LENGTH euc_tw",
+      statement:"SELECT attr, CHARACTER_LENGTH(attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "缳妾淦",
+            result: 3
+          },
+          {
+            attr: "犒葸淦",
+            result: 3
+          },
+          {
+            attr: "螫悖淦",
+            result: 3
+          },
+        ]
+      }
+    },
+  ],
+  octet_length::[
+    {
+      name:"OCTET_LENGTH euc_tw",
+      statement:"SELECT attr, OCTET_LENGTH(attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "缳妾淦",
+            result: 6
+          },
+          {
+            attr: "犒葸淦",
+            result: 6
+          },
+          {
+            attr: "螫悖淦",
+            result: 6
+          },
+        ]
+      }
+    },
+  ],
+  position::[
+    {
+      name:"POSITION euc_tw",
+      statement:"SELECT attr, POSITION('却宇' IN attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "缳妾淦",
+            result: 0
+          },
+          {
+            attr: "犒葸淦",
+            result: 3
+          },
+          {
+            attr: "螫悖淦",
+            result: 5
+          },
+        ]
+      }
+    },
+  ],
+  substring::[
+    {
+      name:"SUBSTRING euc_tw",
+      statement:"SELECT attr, SUBSTRING(attr FROM 3 FOR 6) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "缳妾淦",
+            result: "绎世"
+          },
+          {
+            attr: "犒葸淦",
+            result: "却宇狞瞥"
+          },
+          {
+            attr: "螫悖淦",
+            result: "洗枪却宇狞瞥"
+          },
+        ]
+      }
+    },
+  ],
+]
+
+gb18030::[
+  envs::{
+    tbl:[
+      {
+        attr: "コンピュータディスプレイ"
+      },
+      {
+        attr: "コンピュータグラフィックス"
+      },
+      {
+        attr: "コンピュータプログラマー"
+      },
+    ]
+  },
+  character_length::[
+    {
+      name:"CHARACTER_LENGTH gb18030",
+      statement:"SELECT attr, CHARACTER_LENGTH(attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "コンピュータディスプレイ",
+            result: 12
+          },
+          {
+            attr: "コンピュータグラフィックス",
+            result: 13
+          },
+          {
+            attr: "コンピュータプログラマー",
+            result: 12
+          },
+        ]
+      }
+    },
+  ],
+  octet_length::[
+    {
+      name:"OCTET_LENGTH gb18030",
+      statement:"SELECT attr, OCTET_LENGTH(attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "コンピュータディスプレイ",
+            result: 36
+          },
+          {
+            attr: "コンピュータグラフィックス",
+            result: 39
+          },
+          {
+            attr: "コンピュータプログラマー",
+            result: 36
+          },
+        ]
+      }
+    },
+  ],
+  position::[
+    {
+      name:"POSITION gb18030",
+      statement:"SELECT attr, POSITION('デ' IN attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "コンピュータディスプレイ",
+            result: 7
+          },
+          {
+            attr: "コンピュータグラフィックス",
+            result: 0
+          },
+          {
+            attr: "コンピュータプログラマー",
+            result: 0
+          },
+        ]
+      }
+    },
+  ],
+  substring::[
+    {
+      name:"SUBSTRING gb18030",
+      statement:"SELECT attr, SUBSTRING(attr FROM 10 FOR 4) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "コンピュータディスプレイ",
+            result: "プレイ"
+          },
+          {
+            attr: "コンピュータグラフィックス",
+            result: "ィックス"
+          },
+          {
+            attr: "コンピュータプログラマー",
+            result: "ラマー"
+          },
+        ]
+      }
+    },
+  ],
+]
+
+mule_internal::[
+  envs::{
+    tbl1:[
+      {
+        attr: "’¥³’¥ó’¥Ô’¥å’¡¼’¥¿’¥Ç’¥£’¥¹’¥×’¥ì’¥¤"
+      },
+      {
+        attr: "’¥³’¥ó’¥Ô’¥å’¡¼’¥¿’¥°’¥é’¥Õ’¥£’¥Ã’¥¯’¥¹"
+      },
+      {
+        attr: "’¥³’¥ó’¥Ô’¥å’¡¼’¥¿’¥×’¥í’¥°’¥é’¥Þ’¡¼"
+      },
+    ],
+    tbl2:[
+      {
+        attr: "‘µç‘ÄÔ‘ÏÔ‘Ê¾‘ÆÁ"
+      },
+      {
+        attr: "‘µç‘ÄÔ‘Í¼‘ÐÎ"
+      },
+      {
+        attr: "‘µç‘ÄÔ‘³Ì‘Ðò‘Ô±"
+      },
+    ],
+    tbl3:[
+      {
+        attr: "“ÄÄ“Ç»“ÅÍ“µð“½º“ÇÃ“·¹“ÀÌ"
+      },
+      {
+        attr: "“ÄÄ“Ç»“ÅÍ“±×“·¡“ÇÈ“½º"
+      },
+      {
+        attr: "“ÄÄ“Ç»“ÅÍ“ÇÁ“·Î“±×“·¡“¸Ó"
+      },
+    ],
+    tbl4:[
+      {
+        attr: "ENGLISH"
+      },
+      {
+        attr: "FRANÇAIS"
+      },
+      {
+        attr: "ESPAÑOL"
+      },
+      {
+        attr: "ÍSLENSKA"
+      },
+      {
+        attr: "ENGLISH FRANÇAIS ESPAÑOL ÍSLENSKA"
+      },
+    ]
+  },
+  character_length::[
+    {
+      name:"CHARACTER_LENGTH mule_internal tbl1",
+      statement:"SELECT attr, CHARACTER_LENGTH(attr) AS result FROM tbl1",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "’¥³’¥ó’¥Ô’¥å’¡¼’¥¿’¥Ç’¥£’¥¹’¥×’¥ì’¥¤",
+            result: 12
+          },
+          {
+            attr: "’¥³’¥ó’¥Ô’¥å’¡¼’¥¿’¥°’¥é’¥Õ’¥£’¥Ã’¥¯’¥¹",
+            result: 13
+          },
+          {
+            attr: "’¥³’¥ó’¥Ô’¥å’¡¼’¥¿’¥×’¥í’¥°’¥é’¥Þ’¡¼",
+            result: 12
+          },
+        ]
+      }
+    },
+    {
+      name:"CHARACTER_LENGTH mule_internal tbl2",
+      statement:"SELECT attr, CHARACTER_LENGTH(attr) AS result FROM tbl2",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "‘µç‘ÄÔ‘ÏÔ‘Ê¾‘ÆÁ",
+            result: 5
+          },
+          {
+            attr: "‘µç‘ÄÔ‘Í¼‘ÐÎ",
+            result: 4
+          },
+          {
+            attr: "‘µç‘ÄÔ‘³Ì‘Ðò‘Ô±",
+            result: 5
+          },
+        ]
+      }
+    },
+    {
+      name:"CHARACTER_LENGTH mule_internal tbl3",
+      statement:"SELECT attr, CHARACTER_LENGTH(attr) AS result FROM tbl3",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "“ÄÄ“Ç»“ÅÍ“µð“½º“ÇÃ“·¹“ÀÌ",
+            result: 8
+          },
+          {
+            attr: "“ÄÄ“Ç»“ÅÍ“±×“·¡“ÇÈ“½º",
+            result: 7
+          },
+          {
+            attr: "“ÄÄ“Ç»“ÅÍ“ÇÁ“·Î“±×“·¡“¸Ó",
+            result: 8
+          },
+        ]
+      }
+    },
+    {
+      name:"CHARACTER_LENGTH mule_internal tbl4",
+      statement:"SELECT attr, CHARACTER_LENGTH(attr) AS result FROM tbl4",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "ENGLISH",
+            result: 7
+          },
+          {
+            attr: "FRANÇAIS",
+            result: 8
+          },
+          {
+            attr: "ESPAÑOL",
+            result: 7
+          },
+          {
+            attr: "ÍSLENSKA",
+            result: 8
+          },
+          {
+            attr: "ENGLISH FRANÇAIS ESPAÑOL ÍSLENSKA",
+            result: 33
+          },
+        ]
+      }
+    },
+  ],
+  octet_length::[
+    {
+      name:"OCTET_LENGTH mule_internal tbl1",
+      statement:"SELECT attr, OCTET_LENGTH(attr) AS result FROM tbl1",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "’¥³’¥ó’¥Ô’¥å’¡¼’¥¿’¥Ç’¥£’¥¹’¥×’¥ì’¥¤",
+            result: 36
+          },
+          {
+            attr: "’¥³’¥ó’¥Ô’¥å’¡¼’¥¿’¥°’¥é’¥Õ’¥£’¥Ã’¥¯’¥¹",
+            result: 39
+          },
+          {
+            attr: "’¥³’¥ó’¥Ô’¥å’¡¼’¥¿’¥×’¥í’¥°’¥é’¥Þ’¡¼",
+            result: 36
+          },
+        ]
+      }
+    },
+    {
+      name:"OCTET_LENGTH mule_internal tbl2",
+      statement:"SELECT attr, OCTET_LENGTH(attr) AS result FROM tbl2",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "‘µç‘ÄÔ‘ÏÔ‘Ê¾‘ÆÁ",
+            result: 15
+          },
+          {
+            attr: "‘µç‘ÄÔ‘Í¼‘ÐÎ",
+            result: 12
+          },
+          {
+            attr: "‘µç‘ÄÔ‘³Ì‘Ðò‘Ô±",
+            result: 15
+          },
+        ]
+      }
+    },
+    {
+      name:"OCTET_LENGTH mule_internal tbl3",
+      statement:"SELECT attr, OCTET_LENGTH(attr) AS result FROM tbl3",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "“ÄÄ“Ç»“ÅÍ“µð“½º“ÇÃ“·¹“ÀÌ",
+            result: 24
+          },
+          {
+            attr: "“ÄÄ“Ç»“ÅÍ“±×“·¡“ÇÈ“½º",
+            result: 21
+          },
+          {
+            attr: "“ÄÄ“Ç»“ÅÍ“ÇÁ“·Î“±×“·¡“¸Ó",
+            result: 24
+          },
+        ]
+      }
+    },
+    {
+      name:"OCTET_LENGTH mule_internal tbl4",
+      statement:"SELECT attr, OCTET_LENGTH(attr) AS result FROM tbl4",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "ENGLISH",
+            result: 7
+          },
+          {
+            attr: "FRANÇAIS",
+            result: 9
+          },
+          {
+            attr: "ESPAÑOL",
+            result: 8
+          },
+          {
+            attr: "ÍSLENSKA",
+            result: 9
+          },
+          {
+            attr: "ENGLISH FRANÇAIS ESPAÑOL ÍSLENSKA",
+            result: 36
+          },
+        ]
+      }
+    },
+  ],
+  position::[
+    {
+      name:"POSITION mule_internal tbl1",
+      statement:"SELECT attr, POSITION('’¥Ç' IN attr) AS result FROM tbl1",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "’¥³’¥ó’¥Ô’¥å’¡¼’¥¿’¥Ç’¥£’¥¹’¥×’¥ì’¥¤",
+            result: 7
+          },
+          {
+            attr: "’¥³’¥ó’¥Ô’¥å’¡¼’¥¿’¥°’¥é’¥Õ’¥£’¥Ã’¥¯’¥¹",
+            result: 0
+          },
+          {
+            attr: "’¥³’¥ó’¥Ô’¥å’¡¼’¥¿’¥×’¥í’¥°’¥é’¥Þ’¡¼",
+            result: 0
+          },
+        ]
+      }
+    },
+    {
+      name:"POSITION mule_internal tbl2",
+      statement:"SELECT attr, POSITION('‘ÏÔ' IN attr) AS result FROM tbl2",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "‘µç‘ÄÔ‘ÏÔ‘Ê¾‘ÆÁ",
+            result: 3
+          },
+          {
+            attr: "‘µç‘ÄÔ‘Í¼‘ÐÎ",
+            result: 0
+          },
+          {
+            attr: "‘µç‘ÄÔ‘³Ì‘Ðò‘Ô±",
+            result: 0
+          },
+        ]
+      }
+    },
+    {
+      name:"POSITION mule_internal tbl3",
+      statement:"SELECT attr, POSITION('“µð' IN attr) AS result FROM tbl3",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "“ÄÄ“Ç»“ÅÍ“µð“½º“ÇÃ“·¹“ÀÌ",
+            result: 4
+          },
+          {
+            attr: "“ÄÄ“Ç»“ÅÍ“±×“·¡“ÇÈ“½º",
+            result: 0
+          },
+          {
+            attr: "“ÄÄ“Ç»“ÅÍ“ÇÁ“·Î“±×“·¡“¸Ó",
+            result: 0
+          },
+        ]
+      }
+    },
+    {
+      name:"POSITION mule_internal tbl4",
+      statement:"SELECT attr, POSITION('L' IN attr) AS result FROM tbl4",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "ENGLISH",
+            result: 4
+          },
+          {
+            attr: "FRANÇAIS",
+            result: 0
+          },
+          {
+            attr: "ESPAÑOL",
+            result: 7
+          },
+          {
+            attr: "ÍSLENSKA",
+            result: 3
+          },
+          {
+            attr: "ENGLISH FRANÇAIS ESPAÑOL ÍSLENSKA",
+            result: 4
+          },
+        ]
+      }
+    },
+  ],
+  substring::[
+    {
+      name:"SUBSTRING mule_internal tbl1",
+      statement:"SELECT attr, SUBSTRING(attr FROM 10 FOR 4) AS result FROM tbl1",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "’¥³’¥ó’¥Ô’¥å’¡¼’¥¿’¥Ç’¥£’¥¹’¥×’¥ì’¥¤",
+            result: "’¥×’¥ì’¥¤"
+          },
+          {
+            attr: "’¥³’¥ó’¥Ô’¥å’¡¼’¥¿’¥°’¥é’¥Õ’¥£’¥Ã’¥¯’¥¹",
+            result: "’¥£’¥Ã’¥¯’¥¹"
+          },
+          {
+            attr: "’¥³’¥ó’¥Ô’¥å’¡¼’¥¿’¥×’¥í’¥°’¥é’¥Þ’¡¼",
+            result: "’¥é’¥Þ’¡¼"
+          },
+        ]
+      }
+    },
+    {
+      name:"SUBSTRING mule_internal tbl2",
+      statement:"SELECT attr, SUBSTRING(attr FROM 3 FOR 4) AS result FROM tbl2",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "‘µç‘ÄÔ‘ÏÔ‘Ê¾‘ÆÁ",
+            result: "‘ÏÔ‘Ê¾‘ÆÁ"
+          },
+          {
+            attr: "‘µç‘ÄÔ‘Í¼‘ÐÎ",
+            result: "‘Í¼‘ÐÎ"
+          },
+          {
+            attr: "‘µç‘ÄÔ‘³Ì‘Ðò‘Ô±",
+            result: "‘³Ì‘Ðò‘Ô±"
+          },
+        ]
+      }
+    },
+    {
+      name:"SUBSTRING mule_internal tbl3",
+      statement:"SELECT attr, SUBSTRING(attr FROM 3 FOR 4) AS result FROM tbl3",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "“ÄÄ“Ç»“ÅÍ“µð“½º“ÇÃ“·¹“ÀÌ",
+            result: "“ÅÍ“µð“½º“ÇÃ"
+          },
+          {
+            attr: "“ÄÄ“Ç»“ÅÍ“±×“·¡“ÇÈ“½º",
+            result: "“ÅÍ“±×“·¡“ÇÈ"
+          },
+          {
+            attr: "“ÄÄ“Ç»“ÅÍ“ÇÁ“·Î“±×“·¡“¸Ó",
+            result: "“ÅÍ“ÇÁ“·Î“±×"
+          },
+        ]
+      }
+    },
+    {
+      name:"SUBSTRING mule_internal tbl4",
+      statement:"SELECT attr, SUBSTRING(attr FROM 3 FOR 4) AS result FROM tbl4",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "ENGLISH",
+            result: "GLIS"
+          },
+          {
+            attr: "FRANÇAIS",
+            result: "ANÇA"
+          },
+          {
+            attr: "ESPAÑOL",
+            result: "PAÑO"
+          },
+          {
+            attr: "ÍSLENSKA",
+            result: "LENS"
+          },
+          {
+            attr: "ENGLISH FRANÇAIS ESPAÑOL ÍSLENSKA",
+            result: "GLIS"
+          },
+        ]
+      }
+    },
+  ],
+]
+
+sjis::[
+  envs::{
+    tbl:[
+      {
+        attr: "コンピュータディスプレイ"
+      },
+      {
+        attr: "コンピュータグラフィックス"
+      },
+      {
+        attr: "コンピュータプログラマー"
+      },
+    ]
+  },
+  character_length::[
+    {
+      name:"CHARACTER_LENGTH sjis",
+      statement:"SELECT attr, CHARACTER_LENGTH(attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "コンピュータディスプレイ",
+            result: 12
+          },
+          {
+            attr: "コンピュータグラフィックス",
+            result: 13
+          },
+          {
+            attr: "コンピュータプログラマー",
+            result: 12
+          },
+        ]
+      }
+    },
+  ],
+  octet_length::[
+    {
+      name:"OCTET_LENGTH sjis",
+      statement:"SELECT attr, OCTET_LENGTH(attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "コンピュータディスプレイ",
+            result: 24
+          },
+          {
+            attr: "コンピュータグラフィックス",
+            result: 26
+          },
+          {
+            attr: "コンピュータプログラマー",
+            result: 24
+          },
+        ]
+      }
+    },
+  ],
+  position::[
+    {
+      name:"POSITION sjis",
+      statement:"SELECT attr, POSITION('デ' IN attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "コンピュータディスプレイ",
+            result: 7
+          },
+          {
+            attr: "コンピュータグラフィックス",
+            result: 0
+          },
+          {
+            attr: "コンピュータプログラマー",
+            result: 0
+          },
+        ]
+      }
+    },
+  ],
+  substring::[
+    {
+      name:"SUBSTRING sjis",
+      statement:"SELECT attr, SUBSTRING(attr FROM 10 FOR 4) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "コンピュータディスプレイ",
+            result: "プレイ"
+          },
+          {
+            attr: "コンピュータグラフィックス",
+            result: "ィックス"
+          },
+          {
+            attr: "コンピュータプログラマー",
+            result: "ラマー"
+          },
+        ]
+      }
+    },
+  ],
+]
+
+utf8::[
+  envs::{
+    tbl:[
+      {
+        attr: "コンピュータディスプレイ"
+      },
+      {
+        attr: "コンピュータグラフィックス"
+      },
+      {
+        attr: "コンピュータプログラマー"
+      },
+    ]
+  },
+  character_length::[
+    {
+      name:"CHARACTER_LENGTH utf8",
+      statement:"SELECT attr, CHARACTER_LENGTH(attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "コンピュータディスプレイ",
+            result: 12
+          },
+          {
+            attr: "コンピュータグラフィックス",
+            result: 13
+          },
+          {
+            attr: "コンピュータプログラマー",
+            result: 12
+          },
+        ]
+      }
+    },
+  ],
+  octet_length::[
+    {
+      name:"OCTET_LENGTH utf8",
+      statement:"SELECT attr, OCTET_LENGTH(attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "コンピュータディスプレイ",
+            result: 36
+          },
+          {
+            attr: "コンピュータグラフィックス",
+            result: 39
+          },
+          {
+            attr: "コンピュータプログラマー",
+            result: 36
+          },
+        ]
+      }
+    },
+  ],
+  position::[
+    {
+      name:"POSITION utf8",
+      statement:"SELECT attr, POSITION('デ' IN attr) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "コンピュータディスプレイ",
+            result: 7
+          },
+          {
+            attr: "コンピュータグラフィックス",
+            result: 0
+          },
+          {
+            attr: "コンピュータプログラマー",
+            result: 0
+          },
+        ]
+      }
+    },
+  ],
+  substring::[
+    {
+      name:"SUBSTRING utf8",
+      statement:"SELECT attr, SUBSTRING(attr FROM 10 FOR 4) AS result FROM tbl",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:$bag::[
+          {
+            attr: "コンピュータディスプレイ",
+            result: "プレイ"
+          },
+          {
+            attr: "コンピュータグラフィックス",
+            result: "ィックス"
+          },
+          {
+            attr: "コンピュータプログラマー",
+            result: "ラマー"
+          },
+        ]
+      }
+    },
+  ],
+]

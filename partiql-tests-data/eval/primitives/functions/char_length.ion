@@ -3479,4 +3479,16 @@ char_length::[
       output:$missing::null
     }
   },
+  {
+    name:"CHARACTER_LENGTH special character",
+    statement:"CHARACTER_LENGTH('français')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"8"
+    }
+  },
 ]
