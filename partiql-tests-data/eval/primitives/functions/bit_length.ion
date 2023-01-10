@@ -8,7 +8,7 @@ bit_length::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"0"
+      output:0
     }
   },
   {
@@ -20,7 +20,7 @@ bit_length::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"24"
+      output:24
     }
   },
   {
@@ -83,7 +83,7 @@ bit_length::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"72"
+      output:72
     }
   },
 ]

@@ -3488,7 +3488,7 @@ char_length::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"8"
+      output:8
     }
   },
 ]
