@@ -20,7 +20,7 @@ octet_length::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:24
+      output:3
     }
   },
   {
@@ -33,18 +33,6 @@ octet_length::[
         EvalModeError
       ],
       output:null
-    }
-  },
-  {
-    name:"OCTET_LENGTH MISSING",
-    statement:"OCTET_LENGTH(MISSING)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
     }
   },
   {

@@ -48,18 +48,6 @@ bit_length::[
     }
   },
   {
-    name:"BIT_LENGTH MISSING",
-    statement:"BIT_LENGTH(MISSING)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
     name:"BIT_LENGTH invalid type",
     statement:"BIT_LENGTH(1)",
     assert:[

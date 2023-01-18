@@ -1,6 +1,12 @@
-// following tests were taken from postgres/postgres -- src/test/mb ("mb" refers to multibyte)
+// The following tests were taken from postgres/postgres -- src/test/mb ("mb" refers to multibyte).
+// Source: https://github.com/postgres/postgres/tree/master/src/test/mb.
+// Each of the following tests, should be run with the encoding specified in the namespace. See
+// https://www.postgresql.org/docs/current/multibyte.html#CHARSET-TABLE for PostgreSQL's character set names.
 // TODO: above directory also includes some tests using `LIKE`, which we could add to `partiql-tests`
 
+// Name: BIG5
+// Description: Big Five
+// Language: Traditional Chinese
 big5::[
   envs::{
     tbl:[
@@ -125,6 +131,9 @@ big5::[
   ],
 ]
 
+// Name: EUC_CN
+// Description: Extended UNIX Code-CN
+// Language: Simplified Chinese
 euc_cn::[
   envs::{
     tbl:[
@@ -249,6 +258,9 @@ euc_cn::[
   ],
 ]
 
+// Name: EUC_JP
+// Description: Extended UNIX Code-JP
+// Language: Japanese
 euc_jp::[
   envs::{
     tbl:[
@@ -373,6 +385,9 @@ euc_jp::[
   ],
 ]
 
+// Name: EUC_KR
+// Description: Extended UNIX Code-KR
+// Language: Korean
 euc_kr::[
   envs::{
     tbl:[
@@ -497,6 +512,9 @@ euc_kr::[
   ],
 ]
 
+// Name: EUC_TW
+// Description: Extended UNIX Code-TW
+// Language: Traditional Chinese, Taiwanese
 euc_tw::[
   envs::{
     tbl:[
@@ -621,6 +639,9 @@ euc_tw::[
   ],
 ]
 
+// Name: GB18030
+// Description: National Standard
+// Language: Chinese
 gb18030::[
   envs::{
     tbl:[
@@ -745,6 +766,9 @@ gb18030::[
   ],
 ]
 
+// Name: MULE_INTERNAL
+// Description: Mule internal code
+// Language: Multilingual Emacs
 mule_internal::[
   envs::{
     tbl1:[
@@ -1240,6 +1264,9 @@ mule_internal::[
   ],
 ]
 
+// Name: SJIS
+// Description: Shift JIS
+// Language: Japanese
 sjis::[
   envs::{
     tbl:[
@@ -1364,6 +1391,9 @@ sjis::[
   ],
 ]
 
+// Name: UTF8
+// Description: Unicode, 8-bit
+// Language: all
 utf8::[
   envs::{
     tbl:[
