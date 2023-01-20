@@ -56,3 +56,27 @@ trim::[
         },
     },
 ]
+
+position::[
+    {
+        name: "POSITION no second arg, no IN",
+        statement: "POSITION('abc')",
+        assert: {
+            result: SyntaxFail
+        },
+    },
+    {
+        name: "POSITION no second arg",
+        statement: "POSITION('abc' IN)",
+        assert: {
+            result: SyntaxFail
+        },
+    },
+    {
+        name: "POSITION no first arg",
+        statement: "POSITION(IN 'abcdefg')",
+        assert: {
+            result: SyntaxFail
+        },
+    },
+]
