@@ -8,7 +8,7 @@ position::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"1"
+      output:1
     }
   },
   {
@@ -20,7 +20,7 @@ position::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"1"
+      output:1
     }
   },
   {
@@ -32,7 +32,7 @@ position::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"3"
+      output:3
     }
   },
   {
@@ -44,7 +44,7 @@ position::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"5"
+      output:5
     }
   },
   {
@@ -56,7 +56,7 @@ position::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"0"
+      output:0
     }
   },
   {
