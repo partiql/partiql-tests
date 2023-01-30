@@ -1572,13 +1572,12 @@ like::[
   {
     name:"like expression value, pattern, and escape as variable references",
     statement:'''
-      SELECT v FROM
-        <<
-          {'v': 'abc%', 'p': 'abc/%', 'e': '/'},
-          {'v': 'abcd', 'p': 'abc%', 'e': '/'},
-          {'v': 'abcd', 'p': 'abc', 'e': '/'}
-        >> AS tbl
-      WHERE v LIKE p ESCAPE e''',
+      SELECT v LIKE p ESCAPE e as is_like FROM [
+        {'v': 'abc%', 'p': 'abc/%', 'e': '/'},
+        {'v': 'abcd', 'p': 'abc%', 'e': '/'},
+        {'v': 'abcd', 'p': 'abc', 'e': '/'}
+      ] AS tbl
+      ''',
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1587,10 +1586,13 @@ like::[
       ],
       output:$bag::[
         {
-          v: "abc%"
+          is_like: true
         },
         {
-          v: "abcd"
+          is_like: true
+        },
+        {
+          is_like: false
         }
       ]
     }
@@ -1649,6 +1651,24 @@ like::[
     }
 ]
 
+// Unknown propagation rules follow from section 8.5 of the SQL-92 spec
+// (http://www.contrib.andrew.cmu.edu/~shadow/sql/sql1992.txt):
+//         1) If an <escape character> is specified and M, P, or E is the null
+//            value, then
+//
+//              M LIKE P ESCAPE E
+//
+//            is unknown.
+//
+//         2) If an <escape character> is not specified and M or P is the null
+//            value, then
+//
+//              M LIKE P
+//
+//            is unknown.
+//
+// NULL/MISSING and mistyped arguments follow section 7 of the PartiQL spec
+// (https://partiql.org/assets/PartiQL-Specification.pdf#section.7)
 'null-missing-mistyped-for-like'::[
   {
     name:"NULL LIKE 'some pattern'",
