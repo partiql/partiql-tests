@@ -1569,6 +1569,34 @@ like::[
       ]
     }
   },
+  {
+    name:"like expression value, pattern, and escape as variable references",
+    statement:'''
+      SELECT v LIKE p ESCAPE e as is_like FROM [
+        {'v': 'abc%', 'p': 'abc/%', 'e': '/'},
+        {'v': 'abcd', 'p': 'abc%', 'e': '/'},
+        {'v': 'abcd', 'p': 'abc', 'e': '/'}
+      ] AS tbl
+      ''',
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          is_like: true
+        },
+        {
+          is_like: true
+        },
+        {
+          is_like: false
+        }
+      ]
+    }
+  },
 ]
 
 'empty-string-for-like-pattern'::[
@@ -1621,4 +1649,262 @@ like::[
         result:EvaluationFail
       },
     }
+]
+
+// Unknown propagation rules follow from section 8.5 of the SQL-92 spec
+// (http://www.contrib.andrew.cmu.edu/~shadow/sql/sql1992.txt):
+//         1) If an <escape character> is specified and M, P, or E is the null
+//            value, then
+//
+//              M LIKE P ESCAPE E
+//
+//            is unknown.
+//
+//         2) If an <escape character> is not specified and M or P is the null
+//            value, then
+//
+//              M LIKE P
+//
+//            is unknown.
+//
+// NULL/MISSING and mistyped arguments follow section 7 of the PartiQL spec
+// (https://partiql.org/assets/PartiQL-Specification.pdf#section.7)
+'null-missing-mistyped-for-like'::[
+  {
+    name:"NULL LIKE 'some pattern'",
+    statement:"NULL LIKE 'some pattern'",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"'some value' LIKE NULL",
+    statement:"'some value' LIKE NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"NULL LIKE NULL",
+    statement:"NULL LIKE NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"MISSING LIKE 'some pattern'",
+    statement:"MISSING LIKE 'some pattern'",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"'some value' LIKE MISSING",
+    statement:"'some value' LIKE MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"MISSING LIKE MISSING",
+    statement:"MISSING LIKE MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"NULL LIKE MISSING",
+    statement:"NULL LIKE MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"MISSING LIKE NULL",
+    statement:"MISSING LIKE NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"NULL LIKE 'some pattern' ESCAPE '/'",
+    statement:"NULL LIKE 'some pattern' ESCAPE '/'",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"'some value' LIKE NULL ESCAPE '/'",
+    statement:"'some value' LIKE NULL ESCAPE '/'",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"'some value' LIKE 'some pattern' ESCAPE NULL",
+    statement:"'some value' LIKE 'some pattern' ESCAPE NULL",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"MISSING LIKE 'some pattern' ESCAPE '/'",
+    statement:"MISSING LIKE 'some pattern' ESCAPE '/'",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"'some value' LIKE MISSING ESCAPE '/'",
+    statement:"'some value' LIKE MISSING ESCAPE '/'",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"'some value' LIKE 'some pattern' ESCAPE MISSING",
+    statement:"'some value' LIKE 'some pattern' ESCAPE MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"NULL LIKE 'some pattern' ESCAPE MISSING",
+    statement:"NULL LIKE 'some pattern' ESCAPE MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"'some value' LIKE NULL ESCAPE MISSING",
+    statement:"'some value' LIKE NULL ESCAPE MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"LIKE bad value type",
+    statement:"123 LIKE 'some pattern' ESCAPE '/'",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"LIKE bad pattern type",
+    statement:"'some value' LIKE 123 ESCAPE '/'",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"LIKE bad escape type",
+    statement:"'some value' LIKE '/' ESCAPE 123",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
 ]
