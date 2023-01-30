@@ -145,7 +145,7 @@ nullif::[
     }
   },
   {
-    name:"nullif valid cases{first:\"missing\",second:\"missing\",result:null}",
+    name:"nullif valid cases{first:\"missing\",second:\"missing\",result:missing}",
     statement:"nullif(missing, missing)",
     assert:{
       result:EvaluationSuccess,
@@ -153,7 +153,7 @@ nullif::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$missing::null
     }
   },
 ]
