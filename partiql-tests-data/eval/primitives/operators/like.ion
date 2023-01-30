@@ -1655,18 +1655,12 @@ like::[
 // (http://www.contrib.andrew.cmu.edu/~shadow/sql/sql1992.txt):
 //         1) If an <escape character> is specified and M, P, or E is the null
 //            value, then
-//
 //              M LIKE P ESCAPE E
-//
 //            is unknown.
-//
 //         2) If an <escape character> is not specified and M or P is the null
 //            value, then
-//
 //              M LIKE P
-//
 //            is unknown.
-//
 // NULL/MISSING and mistyped arguments follow section 7 of the PartiQL spec
 // (https://partiql.org/assets/PartiQL-Specification.pdf#section.7)
 'null-missing-mistyped-for-like'::[
