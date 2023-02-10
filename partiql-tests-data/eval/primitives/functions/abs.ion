@@ -20,7 +20,7 @@ abs::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"1.0"
+      output:10d-1
     }
   },
   {
@@ -32,7 +32,7 @@ abs::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"1d0"
+      output:1d0
     }
   },
   {
@@ -44,7 +44,7 @@ abs::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"1e0"
+      output:1e0
     }
   },
   {
@@ -56,7 +56,7 @@ abs::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"1.9999999999999999999900"
+      output:19999999999999999999900d-22
     }
   },
   {
@@ -68,7 +68,7 @@ abs::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"1"
+      output:1
     }
   },
   {
@@ -80,7 +80,7 @@ abs::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"1.0"
+      output:10d-1
     }
   },
   {
@@ -92,7 +92,7 @@ abs::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"1d0"
+      output:1d0
     }
   },
   {
@@ -104,7 +104,7 @@ abs::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"1e0"
+      output:1e0
     }
   },
   {
@@ -116,7 +116,7 @@ abs::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"1.9999999999999999999900"
+      output:19999999999999999999900d-22
     }
   },
   {
@@ -128,7 +128,7 @@ abs::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"0."
+      output:0d0
     }
   },
   {
@@ -140,7 +140,7 @@ abs::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"0."
+      output:0d0
     }
   },
   {
@@ -152,7 +152,7 @@ abs::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"0."
+      output:0d0
     }
   },
   {
@@ -164,7 +164,7 @@ abs::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"0."
+      output:0d0
     }
   },
   {
@@ -176,7 +176,7 @@ abs::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"0.0000"
+      output:0d-4
     }
   },
   {
@@ -188,7 +188,7 @@ abs::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"+inf"
+      output:+inf
     }
   },
   {
@@ -200,7 +200,7 @@ abs::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"+inf"
+      output:+inf
     }
   },
   {
@@ -212,7 +212,7 @@ abs::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"nan"
+      output:nan
     }
   }
 ]
