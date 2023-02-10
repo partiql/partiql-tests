@@ -1,0 +1,98 @@
+mod::[
+  {
+    name:"MOD(1, 1)",
+    statement:"MOD(1, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: 0
+    }
+  },
+  {
+    name:"MOD(10, 1)",
+    statement:"MOD(10, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: 0
+    }
+  },
+  {
+    name:"MOD(17, 1)",
+    statement:"MOD(17, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: 0
+    }
+  },
+  {
+    name:"MOD(-17, 4)",
+    statement:"MOD(-17, 4)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: -1
+    }
+  },
+  {
+    name:"MOD(17, -4)",
+    statement:"MOD(17, -4)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: 1
+    }
+  },
+  {
+    name:"MOD(10, 3)",
+    statement:"MOD(10, 3)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: 1
+    }
+  },
+  {
+    name:"MOD(17, 1)",
+    statement:"MOD(17, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: 0
+    }
+  },
+  {
+    name:"MOD(17, 3)",
+    statement:"MOD(17, 3)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: 2
+    }
+  },
+]
