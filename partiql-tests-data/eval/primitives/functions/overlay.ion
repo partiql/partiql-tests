@@ -1,0 +1,146 @@
+overlay::[
+  {
+    name:"OVERLAY 'hello' PLACING '' FROM 1",
+    statement:"OVERLAY('hello' PLACING '' FROM 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"hello"
+    }
+  },
+  {
+    name:"OVERLAY 'hello' PLACING '' FROM 2 FOR 3",
+    statement:"OVERLAY('hello' PLACING '' FROM 2 FOR 3)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"ho"
+    }
+  },
+  {
+    name:"OVERLAY 'hello' PLACING '' FROM 2 FOR 4",
+    statement:"OVERLAY('hello' PLACING '' FROM 2 FOR 4)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"h"
+    }
+  },
+  {
+    name:"OVERLAY 'hello' PLACING 'XX' FROM 1",
+    statement:"OVERLAY('hello' PLACING 'XX' FROM 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"XXllo"
+    }
+  },
+  {
+    name:"OVERLAY 'hello' PLACING 'XX' FROM 1 FOR 3",
+    statement:"OVERLAY('hello' PLACING 'XX' FROM 1 FOR 3)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"XXlo"
+    }
+  },
+  {
+    name:"OVERLAY 'hello' PLACING 'XX' FROM 1 FOR 1",
+    statement:"OVERLAY('hello' PLACING 'XX' FROM 1 FOR 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"XXello"
+    }
+  },
+  {
+    name:"OVERLAY 'hello' PLACING 'XX' FROM 1 FOR 100",
+    statement:"OVERLAY('hello' PLACING 'XX' FROM 1 FOR 100)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"XX"
+    }
+  },
+  {
+    name:"OVERLAY 'hello' PLACING 'XX' FROM 1 FOR 0",
+    statement:"OVERLAY('hello' PLACING 'XX' FROM 1 FOR 0)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"helloXX"
+    }
+  },
+  {
+    name:"OVERLAY 'hello' PLACING 'XX' FROM 7",
+    statement:"OVERLAY('hello' PLACING 'XX' FROM 7)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"helloXX"
+    }
+  },
+  {
+    name:"OVERLAY 'hello' PLACING 'XX' FROM 100 FOR 100",
+    statement:"OVERLAY('hello' PLACING 'XX' FROM 100 FOR 100)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"helloXX"
+    }
+  },
+  {
+    name:"OVERLAY 'hello' PLACING 'XX' FROM 2 FOR 1",
+    statement:"OVERLAY('hello' PLACING 'XX' FROM 2 FOR 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"hXXllo"
+    }
+  },
+  {
+    name:"OVERLAY 'hello' PLACING 'XX' FROM 2 FOR 3",
+    statement:"OVERLAY('hello' PLACING 'XX' FROM 2 FOR 3)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"hXXo"
+    }
+  }
+]
