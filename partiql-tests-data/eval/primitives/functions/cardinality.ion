@@ -227,4 +227,19 @@ cardinality::[
       output:$missing::null
     }
   },
+  {
+    name:"CARDINALITY('foo') type mismatch",
+    statement:"CARDINALITY('foo')",
+    assert: [
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  }
 ]

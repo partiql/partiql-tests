@@ -12,7 +12,7 @@ abs::[
     }
   },
   {
-    name:"ABS(1.0) FLOAT",
+    name:"ABS(1.0) DECIMAL",
     statement:"ABS(1.0)",
     assert:{
       result:EvaluationSuccess,
@@ -24,7 +24,7 @@ abs::[
     }
   },
   {
-    name:"ABS(`1d0`) DOUBLE",
+    name:"ABS(`1d0`) Ion DECIMAL",
     statement:"ABS(`1d0`)",
     assert:{
       result:EvaluationSuccess,
@@ -36,7 +36,7 @@ abs::[
     }
   },
   {
-    name:"ABS(`1e0`) DECIMAL",
+    name:"ABS(`1e0`) Ion FLOAT",
     statement:"ABS(`1e0`)",
     assert:{
       result:EvaluationSuccess,
@@ -214,5 +214,44 @@ abs::[
       ],
       output:nan
     }
+  },
+  {
+    name:"ABS(MISSING) null propogation",
+    statement:"ABS(MISSING)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null,
+    }
+  },
+  {
+    name:"ABS(NULL) null propogation",
+    statement:"ABS(NULL)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"ABS('foo')",
+    statement:"ABS('foo')",
+    assert: [
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
   }
 ]
