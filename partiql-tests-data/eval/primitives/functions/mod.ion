@@ -1,0 +1,248 @@
+mod::[
+  {
+    name:"MOD(1, 1)",
+    statement:"MOD(1, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"MOD(10, 1)",
+    statement:"MOD(10, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"MOD(17, 1)",
+    statement:"MOD(17, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"MOD(-17, 4)",
+    statement:"MOD(-17, 4)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:-1
+    }
+  },
+  {
+    name:"MOD(17, -4)",
+    statement:"MOD(17, -4)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"MOD(10, 3)",
+    statement:"MOD(10, 3)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"MOD(17, 1)",
+    statement:"MOD(17, 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
+  {
+    name:"MOD(17, 3)",
+    statement:"MOD(17, 3)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"MOD(MISSING, 3)",
+    statement:"MOD(MISSING, 3)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"MOD(3, MISSING)",
+    statement:"MOD(3, MISSING)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"MOD(NULL, 3)",
+    statement:"MOD(NULL, 3)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"MOD(3, NULL)",
+    statement:"MOD(3, NULL)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"MOD(MISSING, NULL)",
+    statement:"MOD(MISSING, NULL)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"MOD(NULL, MISSING)",
+    statement:"MOD(NULL, MISSING)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"MOD(MISSING, 'some string')",
+    statement:"MOD(MISSING, 'some string')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"MOD('some string, MISSING)",
+    statement:"MOD('some string, MISSING)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+  {
+    name:"MOD(NULL, 'some string')",
+    statement:"MOD(NULL, 'some string')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"MOD('some string, NULL)",
+    statement:"MOD('some string, NULL)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"MOD(3, 'some string')",
+    statement:"MOD(3, 'some string')",
+    assert: [
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"MOD('some string', 3)",
+    statement:"MOD('some string', 3)",
+    assert: [
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  }
+]
