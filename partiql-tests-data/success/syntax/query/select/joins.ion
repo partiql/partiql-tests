@@ -104,7 +104,7 @@
 
 {
     name: "SELECT with multiple JOINS and implicit CROSS JOIN",
-    statement: "SELECT x FROM a, b CROSS JOIN c LEFT JOIN d ON e RIGHT OUTER CROSS JOIN f OUTER JOIN g ON h",
+    statement: "SELECT x FROM a, b CROSS JOIN c LEFT JOIN d ON e RIGHT OUTER CROSS JOIN f FULL OUTER JOIN g ON h",
     assert: {
         result: SyntaxSuccess
     },
@@ -112,7 +112,7 @@
 
 {
     name: "SELECT with multiple JOINS and explicit CROSS JOIN",
-    statement: "SELECT x FROM a INNER CROSS JOIN b CROSS JOIN c LEFT JOIN d ON e RIGHT OUTER CROSS JOIN f OUTER JOIN g ON h",
+    statement: "SELECT x FROM a INNER CROSS JOIN b CROSS JOIN c LEFT JOIN d ON e RIGHT OUTER CROSS JOIN f FULL OUTER JOIN g ON h",
     assert: {
         result: SyntaxSuccess
     },
