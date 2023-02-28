@@ -180,8 +180,8 @@ mod::[
     }
   },
   {
-    name:"MOD('some string, MISSING)",
-    statement:"MOD('some string, MISSING)",
+    name:"MOD('some string', MISSING)",
+    statement:"MOD('some string', MISSING)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -204,8 +204,8 @@ mod::[
     }
   },
   {
-    name:"MOD('some string, NULL)",
-    statement:"MOD('some string, NULL)",
+    name:"MOD('some string', NULL)",
+    statement:"MOD('some string', NULL)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
