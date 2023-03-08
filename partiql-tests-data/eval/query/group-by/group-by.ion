@@ -8439,7 +8439,7 @@
     }
   },
   {
-    name:"SELECT with nested aggregates (complex) : SELECT i2 AS outerKey, g2 AS outerGroupAs, COUNT(*) AS outerCount, SUM(innerQuery.innerSum) AS outerSum, MIN(innerQuery.innerSum) AS outerMin FROM ( SELECT i, g, SUM(col1) AS innerSum FROM simple_1_col_1_group_2 AS innerFromSource GROUP BY col1 AS i GROUP AS g ) AS innerQuery GROUP BY innerQuery.i AS i2, innerQuery.g AS g2",
+    name:"SELECT with nested aggregates (complex) 1",
     statement:"SELECT i2 AS outerKey, g2 AS outerGroupAs, COUNT(*) AS outerCount, SUM(innerQuery.innerSum) AS outerSum, MIN(innerQuery.innerSum) AS outerMin FROM ( SELECT i, g, SUM(col1) AS innerSum FROM simple_1_col_1_group_2 AS innerFromSource GROUP BY col1 AS i GROUP AS g ) AS innerQuery GROUP BY innerQuery.i AS i2, innerQuery.g AS g2",
     assert:{
       result:EvaluationSuccess,
@@ -8478,7 +8478,7 @@
     }
   },
   {
-    name:"SELECT with nested aggregates (complex)",
+    name:"SELECT with nested aggregates (complex) 2",
     statement:"SELECT i2 AS outerKey, g2 AS outerGroupAs, MIN(innerQuery.innerSum) AS outerMin, ( SELECT VALUE SUM(i2) FROM << 0, 1 >> ) AS projListSubQuery FROM ( SELECT i, g, SUM(col1) AS innerSum FROM simple_1_col_1_group_2 AS innerFromSource GROUP BY col1 AS i GROUP AS g ) AS innerQuery GROUP BY innerQuery.i AS i2, innerQuery.g AS g2",
     assert:{
       result:EvaluationSuccess,
