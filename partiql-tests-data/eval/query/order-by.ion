@@ -1,0 +1,523 @@
+envs::{
+  simple_1:[{col1: 1, col2: 10}, {col1: 1, col2: 5}, {col1: 1, col2: 7}, {col1: 5, col2: 7}, {col1: 3, col2: 12}],
+  suppliers:[
+    { supplierId: 10, supplierName: "Umbrella" },
+    { supplierId: 11, supplierName: "Initech" }
+  ],
+  products:[
+    { productId: 1, supplierId: 10, categoryId: 20, price: 5.0,  numInStock: 1 },
+    { productId: 2, supplierId: 10, categoryId: 20, price: 10.0, numInStock: 10 },
+    { productId: 3, supplierId: 10, categoryId: 21, price: 15.0, numInStock: 100 },
+    { productId: 4, supplierId: 11, categoryId: 21, price: 5.0,  numInStock: 1000 },
+    { productId: 5, supplierId: 11, categoryId: 21, price: 15.0, numInStock: 10000 }
+  ],
+  products_sparse:[
+    { productId: 1,  categoryId: 20, regionId: 100, supplierId_nulls: 10,   supplierId_missings: 10, supplierId_mixed: 10,   price_nulls: 1.0,  price_missings: 1.0, price_mixed: 1.0  },
+    { productId: 2,  categoryId: 20, regionId: 100, supplierId_nulls: 10,   supplierId_missings: 10, supplierId_mixed: 10,   price_nulls: 2.0,  price_missings: 2.0, price_mixed: 2.0  },
+    { productId: 3,  categoryId: 20, regionId: 200, supplierId_nulls: 10,   supplierId_missings: 10, supplierId_mixed: 10,   price_nulls: 3.0,  price_missings: 3.0, price_mixed: 3.0  },
+    { productId: 5,  categoryId: 21, regionId: 100, supplierId_nulls: null,                                                  price_nulls: null                                         },
+    { productId: 4,  categoryId: 20, regionId: 100, supplierId_nulls: null,                          supplierId_mixed: null, price_nulls: null,                      price_mixed: null },
+    { productId: 6,  categoryId: 21, regionId: 100, supplierId_nulls: 11,   supplierId_missings: 11, supplierId_mixed: 11,   price_nulls: 4.0,  price_missings: 4.0, price_mixed: 4.0  },
+    { productId: 7,  categoryId: 21, regionId: 200, supplierId_nulls: 11,   supplierId_missings: 11, supplierId_mixed: 11,   price_nulls: 5.0,  price_missings: 5.0, price_mixed: 5.0  },
+    { productId: 8,  categoryId: 21, regionId: 200, supplierId_nulls: null,                          supplierId_mixed: null, price_nulls: null,                      price_mixed: null },
+    { productId: 9,  categoryId: 21, regionId: 200, supplierId_nulls: null,                                                  price_nulls: null,                                        },
+    { productId: 10, categoryId: 21, regionId: 200, supplierId_nulls: null,                          supplierId_mixed: null, price_nulls: null,                                        }
+  ],
+  orders:[
+    { customerId: 123, sellerId: 1, productId: 11111, cost: 1 },
+    { customerId: 123, sellerId: 2, productId: 22222, cost: 2 },
+    { customerId: 123, sellerId: 1, productId: 33333, cost: 3 },
+    { customerId: 456, sellerId: 2, productId: 44444, cost: 4 },
+    { customerId: 456, sellerId: 1, productId: 55555, cost: 5 },
+    { customerId: 456, sellerId: 2, productId: 66666, cost: 6 },
+    { customerId: 789, sellerId: 1, productId: 77777, cost: 7 },
+    { customerId: 789, sellerId: 2, productId: 88888, cost: 8 },
+    { customerId: 789, sellerId: 1, productId: 99999, cost: 9 },
+    { customerId: 100, sellerId: 2, productId: 10000, cost: 10 }
+  ],
+  differentDataTypes:[
+    { 'data_value': {} },
+    { 'data_value': 5 },
+    { 'data_value': 2017-01-01T00:00-00:00 },
+    { 'data_value': [] },
+    { 'data_value': $time::{'hour':12, 'minute':12, 'second':12.1,'timezone_hour':null.int,'timezone_minute':null.int} },
+    { 'data_value': 'a' },
+    { 'data_value': null },
+    { 'data_value': false },
+    { 'data_value': {{YWFhYWFhYWFhYWFhYf8=}} },
+    { 'data_value': $date::2021-08-22 },
+    { 'data_value': $bag::[] },
+    { 'data_value': {{"aaaaaaaaaaaaa\xFF"}} }
+  ]
+}
+
+simple::[
+  // should order by col1 asc
+  {
+    name:"col1 asc",
+    statement:"SELECT col1 FROM simple_1 ORDER BY col1",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'col1': 1}, {'col1': 1}, {'col1': 1}, {'col1': 3}, {'col1': 5}]
+    }
+  },
+  // should order by col1 desc
+  {
+    name:"col1 desc",
+    statement:"SELECT col1 FROM simple_1 ORDER BY col1 DESC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'col1': 5}, {'col1': 3}, {'col1': 1}, {'col1': 1}, {'col1': 1}]
+    }
+  },
+  // should order by col1 and then col2 asc
+  {
+    name:"col1 asc, col2 asc",
+    statement:"SELECT * FROM simple_1 ORDER BY col1, col2",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'col1': 1, 'col2': 5}, {'col1': 1, 'col2': 7}, {'col1': 1, 'col2': 10}, {'col1': 3, 'col2': 12}, {'col1': 5, 'col2': 7}]
+    }
+  },
+  // should order by price desc and productId asc
+  {
+    name:"price desc, productId asc",
+    statement:"SELECT productId, price FROM products ORDER BY price DESC, productId ASC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'productId': 3, 'price': 15.0}, {'productId': 5, 'price': 15.0}, {'productId': 2, 'price': 10.0}, {'productId': 1, 'price': 5.0}, {'productId': 4, 'price': 5.0}]
+    }
+  },
+  // should order by supplierId_nulls nulls last
+  {
+    name:"supplierId_nulls nulls last",
+    statement:"SELECT productId, supplierId_nulls FROM products_sparse ORDER BY supplierId_nulls NULLS LAST, productId",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'productId': 1, 'supplierId_nulls': 10}, {'productId': 2, 'supplierId_nulls': 10}, {'productId': 3, 'supplierId_nulls': 10}, {'productId': 6, 'supplierId_nulls': 11}, {'productId': 7, 'supplierId_nulls': 11}, {'productId': 4, 'supplierId_nulls': null}, {'productId': 5, 'supplierId_nulls': null}, {'productId': 8, 'supplierId_nulls': null}, {'productId': 9, 'supplierId_nulls': null}, {'productId': 10, 'supplierId_nulls': null}]
+    }
+  },
+  // should order by supplierId_nulls nulls last
+  {
+    name:"supplierId_nulls nulls last",
+    statement:"SELECT productId, supplierId_nulls FROM products_sparse ORDER BY supplierId_nulls NULLS FIRST, productId",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'productId': 4, 'supplierId_nulls': null}, {'productId': 5, 'supplierId_nulls': null}, {'productId': 8, 'supplierId_nulls': null}, {'productId': 9, 'supplierId_nulls': null}, {'productId': 10, 'supplierId_nulls': null}, {'productId': 1, 'supplierId_nulls': 10}, {'productId': 2, 'supplierId_nulls': 10}, {'productId': 3, 'supplierId_nulls': 10}, {'productId': 6, 'supplierId_nulls': 11}, {'productId': 7, 'supplierId_nulls': 11}]
+    }
+  },
+  // should order by nulls last as default for supplierId_nulls asc
+  {
+    name:"supplierId_nulls asc nulls last, productId asc",
+    statement:"SELECT productId, supplierId_nulls FROM products_sparse ORDER BY supplierId_nulls ASC, productId",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'productId': 1, 'supplierId_nulls': 10}, {'productId': 2, 'supplierId_nulls': 10}, {'productId': 3, 'supplierId_nulls': 10}, {'productId': 6, 'supplierId_nulls': 11}, {'productId': 7, 'supplierId_nulls': 11}, {'productId': 4, 'supplierId_nulls': null}, {'productId': 5, 'supplierId_nulls': null}, {'productId': 8, 'supplierId_nulls': null}, {'productId': 9, 'supplierId_nulls': null}, {'productId': 10, 'supplierId_nulls': null}]
+    }
+  },
+  // should order by nulls first as default for supplierId_nulls desc
+  {
+    name:"nulls first as default for supplierId_nulls desc",
+    statement:"SELECT productId, supplierId_nulls FROM products_sparse ORDER BY supplierId_nulls DESC, productId",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'productId': 4, 'supplierId_nulls': null}, {'productId': 5, 'supplierId_nulls': null}, {'productId': 8, 'supplierId_nulls': null}, {'productId': 9, 'supplierId_nulls': null}, {'productId': 10, 'supplierId_nulls': null}, {'productId': 6, 'supplierId_nulls': 11}, {'productId': 7, 'supplierId_nulls': 11}, {'productId': 1, 'supplierId_nulls': 10}, {'productId': 2, 'supplierId_nulls': 10}, {'productId': 3, 'supplierId_nulls': 10}]
+    }
+  },
+  // should group and order by asc sellerId
+  {
+    name:"group and order by asc sellerId",
+    statement:"SELECT sellerId FROM orders GROUP BY sellerId ORDER BY sellerId ASC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'sellerId': 1}, {'sellerId': 2}]
+    }
+  },
+  // should group and order by desc sellerId
+  {
+    name:"group and order by desc sellerId",
+    statement:"SELECT sellerId FROM orders GROUP BY sellerId ORDER BY sellerId DESC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'sellerId': 2}, {'sellerId': 1}]
+    }
+  },
+  // should group and order by DESC (NULLS FIRST as default)
+  {
+    name:"group and order by DESC (NULLS FIRST as default)",
+    statement:"SELECT supplierId_nulls FROM products_sparse GROUP BY supplierId_nulls ORDER BY supplierId_nulls DESC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: [{'supplierId_nulls': null}, {'supplierId_nulls': 11}, {'supplierId_nulls': 10}]
+    }
+  },
+  // should group and order by ASC (NULLS LAST as default)
+  {
+    name:"group and order by ASC (NULLS LAST as default)",
+    statement:"SELECT supplierId_nulls FROM products_sparse GROUP BY supplierId_nulls ORDER BY supplierId_nulls ASC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'supplierId_nulls': 10}, {'supplierId_nulls': 11}, {'supplierId_nulls': null}]
+    }
+  },
+  // should group and place nulls first (asc as default)
+  {
+    name:"group and place nulls first (asc as default)",
+    statement:"SELECT supplierId_nulls FROM products_sparse GROUP BY supplierId_nulls ORDER BY supplierId_nulls NULLS FIRST",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'supplierId_nulls': null}, {'supplierId_nulls': 10}, {'supplierId_nulls': 11}]
+    }
+  },
+  // should group and place nulls last (asc as default)
+  {
+    name:"group and place nulls last (asc as default)",
+    statement:"SELECT supplierId_nulls FROM products_sparse GROUP BY supplierId_nulls ORDER BY supplierId_nulls NULLS LAST",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'supplierId_nulls': 10}, {'supplierId_nulls': 11}, {'supplierId_nulls': null}]
+    }
+  },
+  // should group and order by asc and place nulls first
+  {
+    name:"group and order by asc and place nulls first",
+    statement:"SELECT supplierId_nulls FROM products_sparse GROUP BY supplierId_nulls ORDER BY supplierId_nulls ASC NULLS FIRST",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'supplierId_nulls': null}, {'supplierId_nulls': 10}, {'supplierId_nulls': 11}]
+    }
+  },
+]
+
+data_types::[
+  // DIFFERENT DATA TYPES
+  // should order different data types by following order bool, numbers, date, time, timestamp, text, LOB Types, lists, struct, bag
+  // handling nulls/missing can be change by ordering spec(if nulls spec is not specified, NULLS FIRST is default for asc, NULLS LAST default for desc) or nulls spec
+
+  {
+    name:"should order data types by the specifications (NULLS LAST default for asc)",
+    statement:"SELECT * FROM differentDataTypes ORDER BY data_value",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'data_value': false}, {'data_value': 5}, {'data_value': $date::2021-08-22}, {'data_value': $time::{'hour':12, 'minute':12, 'second':12.1,'timezone_hour':null.int,'timezone_minute':null.int} }, {'data_value': 2017-01-01T00:00-00:00}, {'data_value': 'a'}, {'data_value': {{YWFhYWFhYWFhYWFhYf8=}}}, {'data_value': {{"aaaaaaaaaaaaa\xff"}}}, {'data_value': []}, {'data_value': {}}, {'data_value': $bag::[]}, {'data_value': null}]
+    }
+  },
+  {
+    name:"should order data types by the specifications (NULLS FIRST default for desc)",
+    statement:"SELECT * FROM differentDataTypes ORDER BY data_value DESC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'data_value': null}, {'data_value': $bag::[]}, {'data_value': {}}, {'data_value': []}, {'data_value': {{YWFhYWFhYWFhYWFhYf8=}}}, {'data_value': {{"aaaaaaaaaaaaa\xff"}}}, {'data_value': 'a'}, {'data_value': 2017-01-01T00:00-00:00}, {'data_value': $time::{'hour':12, 'minute':12, 'second':12.1,'timezone_hour':null.int,'timezone_minute':null.int}}, {'data_value': $date::2021-08-22}, {'data_value': 5}, {'data_value': false}]
+              }
+  },
+  {
+    name:"should order data types by the specifications (nulls should be first due to nulls spec)",
+    statement:"SELECT * FROM differentDataTypes ORDER BY data_value NULLS FIRST",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'data_value': null}, {'data_value': false}, {'data_value': 5}, {'data_value': $date::2021-08-22}, {'data_value': $time::{'hour':12, 'minute':12, 'second':12.1,'timezone_hour':null.int,'timezone_minute':null.int}}, {'data_value': 2017-01-01T00:00-00:00}, {'data_value': 'a'}, {'data_value': {{YWFhYWFhYWFhYWFhYf8=}}}, {'data_value': {{"aaaaaaaaaaaaa\xff"}}}, {'data_value': []}, {'data_value': {}}, {'data_value': $bag::[]}]
+      }
+  },
+  {
+    name:"should order data types by the specifications (nulls should be last due to nulls spec)",
+    statement:"SELECT * FROM differentDataTypes ORDER BY data_value NULLS LAST",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'data_value': false}, {'data_value': 5}, {'data_value': $date::2021-08-22}, {'data_value': $time::{'hour':12, 'minute':12, 'second':12.1,'timezone_hour':null.int,'timezone_minute':null.int}}, {'data_value': 2017-01-01T00:00-00:00}, {'data_value': 'a'}, {'data_value': {{YWFhYWFhYWFhYWFhYf8=}}}, {'data_value': {{"aaaaaaaaaaaaa\xff"}}}, {'data_value': []}, {'data_value': {}}, {'data_value': $bag::[]}, {'data_value': null}]
+      }
+  },
+]
+
+edge_cases::[
+  // false before true (ASC)
+  {
+    name:"false before true (ASC)",
+    statement:"SELECT * FROM [{ 'a': false }, { 'a': true }, { 'a': true }, { 'a': false }] ORDER BY a",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': false}, {'a': false}, {'a': true}, {'a': true}]
+    }
+  },
+  // true before false (DESC)
+  {
+    name:"true before false (DESC)",
+    statement:"SELECT * FROM [{ 'a': false }, { 'a': true }, { 'a': true }, { 'a': false }] ORDER BY a DESC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': true}, {'a': true}, {'a': false}, {'a': false}]
+    }
+  },
+  // nan before -inf, then numeric values then +inf (ASC)
+  {
+    name:"nan before -inf, then numeric values then +inf (ASC)",
+    statement:"SELECT * FROM [{ 'a': 5 }, { 'a': -5e-1 }, { 'a': `-inf` }, { 'a': `nan` }, { 'a': 7 }, { 'a': `+inf` }, { 'a': 9 }] ORDER BY a",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': nan}, {'a': -inf}, {'a': -0.5}, {'a': 5}, {'a': 7}, {'a': 9}, {'a': +inf}]
+    }
+  },
+  // +inf before numeric values then -inf then nan (DESC)
+  {
+    name:"+inf before numeric values then -inf then nan (DESC)",
+    statement:"SELECT * FROM [{ 'a': 5 }, { 'a': -5e-1 }, { 'a': `-inf` }, { 'a': `nan` }, { 'a': 7 }, { 'a': `+inf` }, { 'a': 9 }] ORDER BY a DESC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': +inf}, {'a': 9}, {'a': 7}, {'a': 5}, {'a': -0.5}, {'a': -inf}, {'a': nan}]
+    }
+  },
+  // text types compared by lexicographical ordering of Unicode scalar (ASC)
+  {
+    name:"text types compared by lexicographical ordering of Unicode scalar (ASC)",
+    statement:'''SELECT * FROM [{ 'a': `'\uD83D\uDCA9'`}, { 'a': 'Z'}, { 'a': '9' }, { 'a': 'A'}, { 'a1': `"\U0001F4A9"`}, { 'a': 'a'}, { 'a': 'z'}, { 'a': '0' }] ORDER BY a''',
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': '0'}, {'a': '9'}, {'a': 'A'}, {'a': 'Z'}, {'a': 'a'}, {'a': 'z'}, {'a': '\uD83D\uDCA9'}, {'a2': "\U0001F4A9"}]
+    }
+  },
+  // text types compared by lexicographical ordering of Unicode scalar (DESC)
+  {
+    name:"text types compared by lexicographical ordering of Unicode scalar (DESC)",
+    statement:'''SELECT * FROM [{ 'a': `'\uD83D\uDCA9'`}, { 'a': 'Z'}, { 'a': '9' }, { 'a': 'A'}, { 'a': `"\U0001F4A9"`}, { 'a': 'a'}, { 'a': 'z'}, { 'a': '0' }] ORDER BY a DESC''',
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': '\uD83D\uDCA9'}, {'a': "\U0001F4A9"}, {'a': 'z'}, {'a': 'a'}, {'a': 'Z'}, {'a': 'A'}, {'a': '9'}, {'a': '0'}]
+    }
+  },
+  // LOB types follow their lexicographical ordering by octet (ASC)
+  {
+    name:"LOB types follow their lexicographical ordering by octet (ASC)",
+    statement:'''SELECT * FROM [{'a': `{{"Z"}}`}, {'a': `{{"a"}}`}, {'a': `{{"A"}}`}, {'a': `{{"z"}}`}] ORDER BY a''',
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': {{"A"}}}, {'a': {{"Z"}}}, {'a': {{"a"}}}, {'a': {{"z"}}}]
+    }
+  },
+  // LOB types should ordered (DESC)
+  {
+    name:"LOB types should ordered (DESC)",
+    statement:'''SELECT * FROM [{'a': `{{"Z"}}`}, {'a': `{{"a"}}`}, {'a': `{{"A"}}`}, {'a': `{{"z"}}`}] ORDER BY a DESC''',
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': {{"z"}}}, {'a': {{"a"}}}, {'a': {{"Z"}}}, {'a': {{"A"}}}]
+    }
+  },
+  // shorter array comes first (ASC)
+  {
+    name:"shorter array comes first (ASC)",
+    statement:"SELECT * FROM [ {'a': [1, 2, 3, 4]}, {'a': [1, 2]}, {'a': [1, 2, 3]}, {'a': []}] ORDER BY a",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': []}, {'a': [1, 2]}, {'a': [1, 2, 3]}, {'a': [1, 2, 3, 4]}]
+    }
+  },
+  // longer array comes first (DESC)
+  {
+    name:"longer array comes first (DESC)",
+    statement:"SELECT * FROM [ {'a': [1, 2, 3, 4]}, {'a': [1, 2]}, {'a': [1, 2, 3]}, {'a': []}] ORDER BY a DESC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': [1, 2, 3, 4]}, {'a': [1, 2, 3]}, {'a': [1, 2]}, {'a': []}]
+    }
+  },
+  // lists compared lexicographically based on comparison of elements (ASC)
+  {
+    name:"lists compared lexicographically based on comparison of elements (ASC)",
+    statement:"SELECT * FROM [ {'a': ['b', 'a']}, {'a': ['a', 'b']}, {'a': ['b', 'c']}, {'a': ['a', 'c']}] ORDER BY a",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': ["a", "b"]}, {'a': ["a", "c"]}, {'a': ["b", "a"]}, {'a': ["b", "c"]}]
+    }
+  },
+  // lists compared lexicographically based on comparison of elements (DESC)
+  {
+    name:"lists compared lexicographically based on comparison of elements (DESC)",
+    statement:"SELECT * FROM [ {'a': ['b', 'a']}, {'a': ['a', 'b']}, {'a': ['b', 'c']}, {'a': ['a', 'c']}] ORDER BY a DESC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': ["b", "c"]}, {'a': ["b", "a"]}, {'a': ["a", "c"]}, {'a': ["a", "b"]}]
+    }
+  },
+  // lists items should be ordered by data types (ASC) (nulls last as default for asc)
+  {
+    name:"lists items should be ordered by data types (ASC) (nulls last as default for asc)",
+    statement:"SELECT * FROM [{'a': ['a']}, {'a': [1]}, {'a': [true]}, {'a': [null]}, {'a': [{}]}, {'a': [<<>>]}, {'a': [`{{}}`]}, {'a': [[]]} ] ORDER BY a",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': [true]}, {'a': [1]}, {'a': ["a"]}, {'a': [{{}}]}, {'a': [[]]}, {'a': [{}]}, {'a': [$bag::[]]}, {'a': [null]}]
+    }
+  },
+  // lists items should be ordered by data types (DESC) (nulls first as default for desc)
+  {
+    name:"lists items should be ordered by data types (DESC) (nulls first as default for desc)",
+    statement:"SELECT * FROM [{'a': ['a']}, {'a': [1]}, {'a': [true]}, {'a': [null]}, {'a': [{}]}, {'a': [<<>>]}, {'a': [`{{}}`]}, {'a': [[]]} ] ORDER BY a DESC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': [null]}, {'a': [$bag::[]]}, {'a': [{}]}, {'a': [[]]}, {'a': [{{}}]}, {'a': ["a"]}, {'a': [1]}, {'a': [true]}]
+    }
+  },
+  // structs compared lexicographically first by key then by value (ASC)
+  {
+    name:"structs compared lexicographically first by key then by value (ASC)",
+    statement:"SELECT * FROM [{'a': {'b': 'a'}}, {'a': {'a': 'b'}}, {'a': {'b': 'c'}}, {'a': {'a': 'c'}}] ORDER BY a",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': {'a': "b"}}, {'a': {'a': "c"}}, {'a': {'b': "a"}}, {'a': {'b': "c"}}]
+    }
+  },
+  // structs compared lexicographically first by key then by value (DESC)
+  {
+    name:"structs compared lexicographically first by key then by value (DESC)",
+    statement:"SELECT * FROM [{'a': {'b': 'a'}}, {'a': {'a': 'b'}}, {'a': {'b': 'c'}}, {'a': {'a': 'c'}}] ORDER BY a DESC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': {'b': "c"}}, {'a': {'b': "a"}}, {'a': {'a': "c"}}, {'a': {'a': "b"}}]
+    }
+  },
+  // structs should be ordered by data types (ASC) (nulls last as default for asc)
+  {
+    name:"structs should be ordered by data types (ASC) (nulls last as default for asc)",
+    statement:"SELECT * FROM [{'a': {'a': 5}}, {'a': {'a': 'b'}}, {'a': {'a': true}}, {'a': {'a': []}}, {'a': {'a': {}}}, {'a': {'a': <<>>}}, {'a': {'a': `{{}}`}}, {'a': {'a': null}}] ORDER BY a",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': {'a': true}}, {'a': {'a': 5}}, {'a': {'a': "b"}}, {'a': {'a': {{}}}}, {'a': {'a': []}}, {'a': {'a': {}}}, {'a': {'a': $bag::[]}}, {'a': {'a': null}}]
+    }
+  },
+  // structs should be ordered by data types (DESC) (nulls first as default for desc)
+  {
+    name:"structs should be ordered by data types (DESC) (nulls first as default for desc)",
+    statement:"SELECT * FROM [{'a': {'a': 5}}, {'a': {'a': 'b'}}, {'a': {'a': true}}, {'a': {'a': []}}, {'a': {'a': {}}}, {'a': {'a': <<>>}}, {'a': {'a': `{{}}`}}, {'a': {'a': null}}] ORDER BY a DESC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': {'a': null}}, {'a': {'a': $bag::[]}}, {'a': {'a': {}}}, {'a': {'a': []}}, {'a': {'a': {{}}}}, {'a': {'a': "b"}}, {'a': {'a': 5}}, {'a': {'a': true}}]
+    }
+  },
+  // bags compared as sorted lists (ASC)
+  {
+    name:"bags compared as sorted lists (ASC)",
+    statement:"SELECT * FROM [{'a': <<5>>}, {'a': <<1>>}, {'a': <<10>>}] ORDER BY a",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': $bag::[1]}, {'a': $bag::[5]}, {'a': $bag::[10]}]
+    }
+  },
+  // bags compared as sorted lists (DESC)
+  {
+    name:"bags compared as sorted lists (DESC)",
+    statement:"SELECT * FROM [{'a': <<5>>}, {'a': <<1>>}, {'a': <<10>>}] ORDER BY a DESC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': $bag::[10]}, {'a': $bag::[5]}, {'a': $bag::[1]}]
+    }
+  },
+  // testing alias support
+  {
+    name:"testing alias support",
+    statement:"SELECT a AS b FROM [{'a': <<5>>}, {'a': <<1>>}, {'a': <<10>>}] ORDER BY b DESC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'b': $bag::[10]}, {'b': $bag::[5]}, {'b': $bag::[1]}]
+    }
+  },
+
+  // testing nested alias support
+  {
+    name:"testing nested alias support",
+    statement:"SELECT b AS \"C\" FROM (SELECT a AS b FROM [{'a': <<5>>}, {'a': <<1>>}, {'a': <<10>>}] ORDER BY b DESC) ORDER BY \"C\"",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'C': $bag::[1]}, {'C': $bag::[5]}, {'C': $bag::[10]}]
+    }
+  },
+
+  // Empty Output (ordered)
+  {
+    name:"Empty Output (ordered)",
+    statement:"SELECT * FROM <<>> ORDER BY true",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[]
+    }
+  },
+  // Empty Projection item (ordered) -- Output (unordered)
+  {
+    name:"Empty Projection item (ordered) -- Output (unordered)",
+    statement:"SELECT (SELECT * FROM <<>> ORDER BY true) AS ordered FROM <<0>>",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[ { 'ordered': [] } ]
+    }
+  },
+  // Empty Projection item (unordered) -- Output (ordered)
+  {
+    name:"Empty Projection item (unordered) -- Output (ordered)",
+    statement:"SELECT (SELECT * FROM <<>>) AS ordered FROM <<0>> ORDER BY true",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[ { 'ordered': $bag::[] } ]
+    }
+  },
+  // Empty Projection item (ordered) -- Output (ordered)
+  {
+    name:"Empty Projection item (ordered) -- Output (ordered)",
+    statement:"SELECT (SELECT * FROM <<>> ORDER BY true) AS ordered FROM <<0>> ORDER BY true",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[ { 'ordered': [] } ]
+    }
+  },
+  // Empty Projection item (unordered) -- Output (unordered)
+  {
+    name:"Empty Projection item (unordered) -- Output (unordered)",
+    statement:"SELECT (SELECT * FROM <<>>) AS ordered FROM <<0>>",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[ { 'ordered': $bag::[] } ]
+    }
+  },
+]
