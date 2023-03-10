@@ -102,9 +102,9 @@ simple::[
       output:[{'productId': 1, 'supplierId_nulls': 10}, {'productId': 2, 'supplierId_nulls': 10}, {'productId': 3, 'supplierId_nulls': 10}, {'productId': 6, 'supplierId_nulls': 11}, {'productId': 7, 'supplierId_nulls': 11}, {'productId': 4, 'supplierId_nulls': null}, {'productId': 5, 'supplierId_nulls': null}, {'productId': 8, 'supplierId_nulls': null}, {'productId': 9, 'supplierId_nulls': null}, {'productId': 10, 'supplierId_nulls': null}]
     }
   },
-  // should order by supplierId_nulls nulls last
+  // should order by supplierId_nulls nulls first
   {
-    name:"supplierId_nulls nulls last",
+    name:"supplierId_nulls nulls first",
     statement:"SELECT productId, supplierId_nulls FROM products_sparse ORDER BY supplierId_nulls NULLS FIRST, productId",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
