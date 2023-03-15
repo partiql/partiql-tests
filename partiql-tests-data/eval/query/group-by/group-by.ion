@@ -1144,18 +1144,18 @@
     ],
     string_groups: [
       {
-        col1: 'a'
+        col1: "a"
       },
       {
-        col1: 'a'
+        col1: "a"
       }
     ],
     string_numbers: [
       {
-        num: '1'
+        num: "1"
       },
       {
-        num: '2'
+        num: "2"
       }
     ],
     products_sparse: [
@@ -8288,9 +8288,9 @@
       }
     ],
     employees: [
-       { name: 'Joey', age: 25, manager: { name: 'John', address: { city: 'Seattle' } } },
-       { name: 'Chandler', age: 27, manager: { name: 'Rocky', address: { city: 'Seattle' } } },
-       { name: 'Ross', age: 22, manager: { 'name': 'Alex', address: { city: 'Chicago' } } }
+       { name: "Joey", age: 25, manager: { name: "John", address: { city: "Seattle" } } },
+       { name: "Chandler", age: 27, manager: { name: "Rocky", address: { city: "Seattle" } } },
+       { name: "Ross", age: 22, manager: { 'name': "Alex", address: { city: "Chicago" } } }
     ],
     simple_1_col_1_group_2: [
       { col1: 1 },
@@ -8429,11 +8429,11 @@
       output:$bag::[
         {
           avg_employee_age:22.,
-          city:Chicago
+          city:"Chicago"
         },
         {
           avg_employee_age:26.,
-          city:Seattle
+          city:"Seattle"
         }
       ]
     }
@@ -8578,7 +8578,7 @@
     different_types_per_row: [
       { 'a': 1001 },
       1002.0,
-      'one-thousand and three'
+      "one-thousand and three"
     ]
   },
   {
@@ -9437,7 +9437,7 @@
               simple_1_col_1_group:{
                 col1:1
               },
-              different_types_per_row:'one-thousand and three'
+              different_types_per_row:"one-thousand and three"
             },
             {
               simple_1_col_1_group:{
@@ -9457,7 +9457,7 @@
               simple_1_col_1_group:{
                 col1:1
               },
-              different_types_per_row:'one-thousand and three'
+              different_types_per_row:"one-thousand and three"
             }
           ]
         }
@@ -9495,7 +9495,7 @@
               simple_1_col_1_group:{
                 col1:1
               },
-              different_types_per_row:'one-thousand and three'
+              different_types_per_row:"one-thousand and three"
             },
             {
               simple_1_col_1_group:{
@@ -9515,7 +9515,7 @@
               simple_1_col_1_group:{
                 col1:1
               },
-              different_types_per_row:'one-thousand and three'
+              different_types_per_row:"one-thousand and three"
             }
           ]
         }
@@ -9553,7 +9553,7 @@
               simple_1_col_1_group:{
                 col1:1
               },
-              different_types_per_row:'one-thousand and three'
+              different_types_per_row:"one-thousand and three"
             },
             {
               simple_1_col_1_group:{
@@ -9573,7 +9573,7 @@
               simple_1_col_1_group:{
                 col1:1
               },
-              different_types_per_row:'one-thousand and three'
+              different_types_per_row:"one-thousand and three"
             }
           ]
         }
