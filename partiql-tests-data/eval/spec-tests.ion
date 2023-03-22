@@ -771,7 +771,7 @@
 
 'section-13'::[
     // TODO: RFC#0007 bag operators (https://github.com/partiql/partiql-docs/blob/main/RFCs/0007-rfc-bag-operators.md)
-    // is added to spec, port tests
+    // TODO: once added to spec, port tests in eval/rfc/0007.ion
 ]
 
 'section-14'::[

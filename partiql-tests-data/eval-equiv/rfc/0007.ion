@@ -1,0 +1,127 @@
+envs::{
+    hr: {
+        employees: $bag::[
+          { name: "Bob Smith",   title: "Consultant" },
+          { name: "Susan Smith", title: "Manager" },
+          { name: "Jane Smith",  title: "DEI" }
+        ]
+    },
+    accounting: {
+        employees: $bag::[
+          { level: 3, name: "Quincy Jones",   title: "Director" },
+          { level: 2, name: "James Earl Jones", title: "Manager" },
+          { level: 1, name: "Indiana Jones",  title: "Intern" }
+        ]
+    },
+    engineering: {
+        employees: $bag::[
+          { title: "Manager", name: "Paul McCharmly" },
+          { title: "SDE", name: "George Parasol" },
+          { title: "Principal SDE", name: "Ringo Stone" },
+          { title: "Intern", name: "Eric Lennon" }
+        ]
+    },
+}
+
+set::[
+    equiv_class::{
+        id: example_2_2,
+        statements: [
+            '''SELECT * FROM hr.employees
+               UNION ALL CORRESPONDING BY ( name, title )
+               SELECT * FROM engineering.employees''',
+            '''TABLE hr.employees
+               UNION ALL CORRESPONDING BY ( name, title )
+               TABLE engineering.employees''',
+            '''SELECT name, title FROM hr.employees
+               UNION ALL
+               SELECT name, title FROM engineering.employees''',
+        ]
+    },
+    {
+        name: "Example 2.2 — With CORRESPONDING Clause",
+        statement: example_2_2,
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                { name: "Bob Smith", title: "Consultant" },
+                { name: "Susan Smith", title: "Manager" },
+                { name: "Jane Smith",  title: "DEI" },
+                { name: "Paul McCharmly", title: "Manager" },
+                { name: "George Parasol", title: "SDE" },
+                { name: "Ringo Stone", title: "Principal SDE" },
+                { name: "Eric Lennon", title: "Intern" }
+            ]
+        }
+    },
+
+]
+
+
+bag::[
+    equiv_class::{
+        id: example_6,
+        statements: [
+            '''SELECT * FROM << 1 >> OUTER UNION 'A' ''',
+            '''SELECT * FROM << 1 >> OUTER UNION << 'A' >>''',
+        ]
+    },
+    {
+        name: "Example 6 — Value Coercion",
+        statement: example_6,
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                { "_1": 1 },
+                "A",
+            ]
+        }
+    },
+
+
+    equiv_class::{
+        id: example_7_1,
+        statements: [
+            '''TABLE engineering.employees''',
+            '''SELECT * FROM engineering.employees OUTER EXCEPT << >> ''',
+            '''TABLE engineering.employees OUTER UNION NULL''',
+            '''TABLE engineering.employees OUTER UNION MISSING''',
+        ]
+    },
+    {
+        name: "Example 7 — NULL and MISSING Coercion - 1",
+        statement: example_7_1,
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                { title: "Manager", name: "Paul McCharmly" },
+                { title: "SDE", name: "George Parasol" },
+                { title: "Principal SDE", name: "Ringo Stone" },
+                { title: "Intern", name: "Eric Lennon" }
+            ]
+        }
+    },
+
+
+    equiv_class::{
+        id: example_7_2,
+        statements: [
+            '''SELECT * FROM engineering.employees OUTER INTERSECT << >>''',
+            '''TABLE engineering.employees OUTER INTERSECT NULL''',
+            '''TABLE engineering.employees OUTER INTERSECT MISSING''',
+        ]
+    },
+    {
+        name: "Example 7 — NULL and MISSING Coercion - 2",
+        statement: example_7_2,
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[]
+        }
+    },
+]
+
