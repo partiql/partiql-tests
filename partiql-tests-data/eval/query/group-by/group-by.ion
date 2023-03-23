@@ -217,22 +217,6 @@
     ]
   },
   {
-    name:"group by - 1 columm",
-    statement:"SELECT col1 FROM simple_1_col_1_group GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        }
-      ]
-    }
-  },
-  {
     name:"group by with group as that is not in select list - 1 column",
     statement:"SELECT col1 FROM simple_1_col_1_group GROUP BY col1 GROUP AS g",
     assert:{
@@ -289,22 +273,6 @@
         {
           col1:1,
           col2:2
-        }
-      ]
-    }
-  },
-  {
-    name:"group by with group as variable that is not selected - 1 column",
-    statement:"SELECT col1 FROM simple_1_col_1_group GROUP BY col1 GROUP AS g",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
         }
       ]
     }
@@ -975,24 +943,8 @@
     }
   },
   {
-    name:"SELECT * with GROUP BY",
-    statement:"SELECT * FROM simple_1_col_1_group GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * with GROUP BY and GROUP AS",
-    statement:"SELECT * FROM simple_1_col_1_group GROUP BY col1 GROUP AS grp",
+    name:"SELECT column and group with GROUP BY and GROUP AS",
+    statement:"SELECT col1, grp FROM simple_1_col_1_group GROUP BY col1 GROUP AS grp",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1031,7 +983,7 @@
   },
   {
     name:"GROUP BY binding referenced in FROM clause",
-    statement:"SELECT * FROM sales_report, gb_binding WHERE fiscal_year >= `2001T` GROUP BY rep AS gb_binding",
+    statement:"SELECT rep FROM sales_report, gb_binding WHERE fiscal_year >= `2001T` GROUP BY rep AS gb_binding",
     assert:[
       {
         evalMode:EvalModeError,
@@ -1046,7 +998,7 @@
   },
   {
     name:"GROUP BY binding referenced in WHERE clause",
-    statement:"SELECT * FROM sales_report, gb_binding WHERE gb_binding = 1 GROUP BY rep AS gb_binding",
+    statement:"SELECT rep FROM sales_report, gb_binding WHERE gb_binding = 1 GROUP BY rep AS gb_binding",
     assert:[
       {
         evalMode:EvalModeError,
@@ -1061,7 +1013,7 @@
   },
   {
     name:"GROUP AS binding referenced in FROM clause",
-    statement:"SELECT * FROM sales_report, gba_binding WHERE fiscal_year >= `2001T` GROUP BY rep GROUP AS gba_binding",
+    statement:"SELECT rep, gba_binding FROM sales_report, gba_binding WHERE fiscal_year >= `2001T` GROUP BY rep GROUP AS gba_binding",
     assert:[
       {
         evalMode:EvalModeError,
@@ -1076,7 +1028,7 @@
   },
   {
     name:"GROUP AS binding referenced in WHERE clause",
-    statement:"SELECT * FROM sales_report, gba_binding WHERE gba_binding = 1 GROUP BY rep GROUP AS gba_binding",
+    statement:"SELECT rep, gba_binding FROM sales_report, gba_binding WHERE gba_binding = 1 GROUP BY rep GROUP AS gba_binding",
     assert:[
       {
         evalMode:EvalModeError,
@@ -1172,8 +1124,8 @@
     ]
   },
   {
-    name:"SELECT * FROM [] GROUP BY doesntMatterWontBeEvaluated",
-    statement:"SELECT * FROM [] GROUP BY doesntMatterWontBeEvaluated",
+    name:"SELECT doesntMatterWontBeEvaluated FROM [] GROUP BY doesntMatterWontBeEvaluated",
+    statement:"SELECT doesntMatterWontBeEvaluated FROM [] GROUP BY doesntMatterWontBeEvaluated",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1198,312 +1150,8 @@
     }
   },
   {
-    name:"SELECT * FROM simple_1_col_1_group GROUP BY col1",
-    statement:"SELECT * FROM simple_1_col_1_group GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_1_col_1_group GROUP BY col1",
-    statement:"SELECT * FROM simple_1_col_1_group GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_1_col_1_group GROUP BY col1",
-    statement:"SELECT * FROM simple_1_col_1_group GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_1_col_1_group GROUP BY col1",
-    statement:"SELECT * FROM simple_1_col_1_group GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_1_col_1_group GROUP BY col1",
-    statement:"SELECT * FROM simple_1_col_1_group GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_1_col_1_group GROUP BY col1",
-    statement:"SELECT * FROM simple_1_col_1_group GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_1_group GROUP BY col1",
-    statement:"SELECT * FROM simple_2_col_1_group GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_1_group GROUP BY col1",
-    statement:"SELECT * FROM simple_2_col_1_group GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_1_group GROUP BY col1",
-    statement:"SELECT * FROM simple_2_col_1_group GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_1_group GROUP BY col1",
-    statement:"SELECT * FROM simple_2_col_1_group GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_1_group GROUP BY col1",
-    statement:"SELECT * FROM simple_2_col_1_group GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_1_group GROUP BY col1",
-    statement:"SELECT * FROM simple_2_col_1_group GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_1_group GROUP BY col2",
-    statement:"SELECT * FROM simple_2_col_1_group GROUP BY col2",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col2:10
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_1_group GROUP BY col2",
-    statement:"SELECT * FROM simple_2_col_1_group GROUP BY col2",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col2:10
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_1_group GROUP BY col2",
-    statement:"SELECT * FROM simple_2_col_1_group GROUP BY col2",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col2:10
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_1_group GROUP BY col2",
-    statement:"SELECT * FROM simple_2_col_1_group GROUP BY col2",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col2:10
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_1_group GROUP BY col2",
-    statement:"SELECT * FROM simple_2_col_1_group GROUP BY col2",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col2:10
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_1_group GROUP BY col2",
-    statement:"SELECT * FROM simple_2_col_1_group GROUP BY col2",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col2:10
-        }
-      ]
-    }
-  },
-  {
     name:"SELECT col1 FROM simple_1_col_1_group GROUP BY col1",
     statement:"SELECT col1 FROM simple_1_col_1_group GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT VALUE { 'col1': 1 } FROM simple_1_col_1_group GROUP BY col1",
-    statement:"SELECT VALUE { 'col1': 1 } FROM simple_1_col_1_group GROUP BY col1",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1534,8 +1182,24 @@
     }
   },
   {
-    name:"SELECT VALUE { 'col1': 1 } FROM simple_2_col_1_group GROUP BY col1",
-    statement:"SELECT VALUE { 'col1': 1 } FROM simple_2_col_1_group GROUP BY col1",
+    name:"SELECT col2 FROM simple_2_col_1_group GROUP BY col2",
+    statement:"SELECT col2 FROM simple_2_col_1_group GROUP BY col2",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          col2:10
+        }
+      ]
+    }
+  },
+  {
+    name:"SELECT VALUE { 'col1': 1 } FROM simple_1_col_1_group GROUP BY col1",
+    statement:"SELECT VALUE { 'col1': 1 } FROM simple_1_col_1_group GROUP BY col1",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1550,8 +1214,8 @@
     }
   },
   {
-    name:"SELECT col2 FROM simple_2_col_1_group GROUP BY col2",
-    statement:"SELECT col2 FROM simple_2_col_1_group GROUP BY col2",
+    name:"SELECT VALUE { 'col1': 1 } FROM simple_2_col_1_group GROUP BY col1",
+    statement:"SELECT VALUE { 'col1': 1 } FROM simple_2_col_1_group GROUP BY col1",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1560,7 +1224,7 @@
       ],
       output:$bag::[
         {
-          col2:10
+          col1:1
         }
       ]
     }
@@ -1582,369 +1246,8 @@
     }
   },
   {
-    name:"SELECT * FROM simple_1_col_2_groups GROUP BY col1",
-    statement:"SELECT * FROM simple_1_col_2_groups GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        },
-        {
-          col1:2
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_1_col_2_groups GROUP BY col1",
-    statement:"SELECT * FROM simple_1_col_2_groups GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        },
-        {
-          col1:2
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_1_col_2_groups GROUP BY col1",
-    statement:"SELECT * FROM simple_1_col_2_groups GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        },
-        {
-          col1:2
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_1_col_2_groups GROUP BY col1",
-    statement:"SELECT * FROM simple_1_col_2_groups GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        },
-        {
-          col1:2
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_1_col_2_groups GROUP BY col1",
-    statement:"SELECT * FROM simple_1_col_2_groups GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        },
-        {
-          col1:2
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_1_col_2_groups GROUP BY col1",
-    statement:"SELECT * FROM simple_1_col_2_groups GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        },
-        {
-          col1:2
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_2_groups GROUP BY col1",
-    statement:"SELECT * FROM simple_2_col_2_groups GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        },
-        {
-          col1:11
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_2_groups GROUP BY col1",
-    statement:"SELECT * FROM simple_2_col_2_groups GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        },
-        {
-          col1:11
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_2_groups GROUP BY col1",
-    statement:"SELECT * FROM simple_2_col_2_groups GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        },
-        {
-          col1:11
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_2_groups GROUP BY col1",
-    statement:"SELECT * FROM simple_2_col_2_groups GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        },
-        {
-          col1:11
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_2_groups GROUP BY col1",
-    statement:"SELECT * FROM simple_2_col_2_groups GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        },
-        {
-          col1:11
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_2_groups GROUP BY col1",
-    statement:"SELECT * FROM simple_2_col_2_groups GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        },
-        {
-          col1:11
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_2_groups GROUP BY col2",
-    statement:"SELECT * FROM simple_2_col_2_groups GROUP BY col2",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col2:10
-        },
-        {
-          col2:110
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_2_groups GROUP BY col2",
-    statement:"SELECT * FROM simple_2_col_2_groups GROUP BY col2",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col2:10
-        },
-        {
-          col2:110
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_2_groups GROUP BY col2",
-    statement:"SELECT * FROM simple_2_col_2_groups GROUP BY col2",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col2:10
-        },
-        {
-          col2:110
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_2_groups GROUP BY col2",
-    statement:"SELECT * FROM simple_2_col_2_groups GROUP BY col2",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col2:10
-        },
-        {
-          col2:110
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_2_groups GROUP BY col2",
-    statement:"SELECT * FROM simple_2_col_2_groups GROUP BY col2",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col2:10
-        },
-        {
-          col2:110
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_2_groups GROUP BY col2",
-    statement:"SELECT * FROM simple_2_col_2_groups GROUP BY col2",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col2:10
-        },
-        {
-          col2:110
-        }
-      ]
-    }
-  },
-  {
     name:"SELECT col1 FROM simple_1_col_2_groups GROUP BY col1",
     statement:"SELECT col1 FROM simple_1_col_2_groups GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        },
-        {
-          col1:2
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT VALUE { 'col1': col1 } FROM simple_1_col_2_groups GROUP BY col1",
-    statement:"SELECT VALUE { 'col1': col1 } FROM simple_1_col_2_groups GROUP BY col1",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1981,25 +1284,6 @@
     }
   },
   {
-    name:"SELECT VALUE { 'col1': col1 } FROM simple_2_col_2_groups GROUP BY col1",
-    statement:"SELECT VALUE { 'col1': col1 } FROM simple_2_col_2_groups GROUP BY col1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1
-        },
-        {
-          col1:11
-        }
-      ]
-    }
-  },
-  {
     name:"SELECT col2 FROM simple_2_col_2_groups GROUP BY col2",
     statement:"SELECT col2 FROM simple_2_col_2_groups GROUP BY col2",
     assert:{
@@ -2019,6 +1303,44 @@
     }
   },
   {
+    name:"SELECT VALUE { 'col1': col1 } FROM simple_1_col_2_groups GROUP BY col1",
+    statement:"SELECT VALUE { 'col1': col1 } FROM simple_1_col_2_groups GROUP BY col1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          col1:1
+        },
+        {
+          col1:2
+        }
+      ]
+    }
+  },
+  {
+    name:"SELECT VALUE { 'col1': col1 } FROM simple_2_col_2_groups GROUP BY col1",
+    statement:"SELECT VALUE { 'col1': col1 } FROM simple_2_col_2_groups GROUP BY col1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          col1:1
+        },
+        {
+          col1:11
+        }
+      ]
+    }
+  },
+  {
     name:"SELECT VALUE { 'col2': col2 } FROM simple_2_col_2_groups GROUP BY col2",
     statement:"SELECT VALUE { 'col2': col2 } FROM simple_2_col_2_groups GROUP BY col2",
     assert:{
@@ -2033,22 +1355,6 @@
         },
         {
           col2:110
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_1_col_1_group GROUP BY col1 + 1",
-    statement:"SELECT * FROM simple_1_col_1_group GROUP BY col1 + 1",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          _1:2
         }
       ]
     }
@@ -2086,22 +1392,6 @@
     }
   },
   {
-    name:"SELECT * FROM string_groups GROUP BY col1 || 'a'",
-    statement:"SELECT * FROM string_groups GROUP BY col1 || 'a'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          _1:"aa"
-        }
-      ]
-    }
-  },
-  {
     name:"SELECT _1 FROM string_groups GROUP BY col1 || 'a'",
     statement:"SELECT _1 FROM string_groups GROUP BY col1 || 'a'",
     assert:{
@@ -2129,25 +1419,6 @@
       output:$bag::[
         {
           _1:"aa"
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM string_numbers GROUP BY CAST(num AS INT)",
-    statement:"SELECT * FROM string_numbers GROUP BY CAST(num AS INT)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          num:1
-        },
-        {
-          num:2
         }
       ]
     }
@@ -2191,22 +1462,6 @@
     }
   },
   {
-    name:"SELECT * FROM simple_1_col_1_group GROUP BY col1 + 1 AS someGBE",
-    statement:"SELECT * FROM simple_1_col_1_group GROUP BY col1 + 1 AS someGBE",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          someGBE:2
-        }
-      ]
-    }
-  },
-  {
     name:"SELECT someGBE FROM simple_1_col_1_group GROUP BY col1 + 1 AS someGBE",
     statement:"SELECT someGBE FROM simple_1_col_1_group GROUP BY col1 + 1 AS someGBE",
     assert:{
@@ -2239,22 +1494,6 @@
     }
   },
   {
-    name:"SELECT * FROM string_groups GROUP BY col1 || 'a' AS someGBE",
-    statement:"SELECT * FROM string_groups GROUP BY col1 || 'a' AS someGBE",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          someGBE:"aa"
-        }
-      ]
-    }
-  },
-  {
     name:"SELECT someGBE FROM string_groups GROUP BY col1 || 'a' AS someGBE",
     statement:"SELECT someGBE FROM string_groups GROUP BY col1 || 'a' AS someGBE",
     assert:{
@@ -2282,25 +1521,6 @@
       output:$bag::[
         {
           someGBE:"aa"
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM string_numbers GROUP BY CAST(num AS INT) AS someGBE",
-    statement:"SELECT * FROM string_numbers GROUP BY CAST(num AS INT) AS someGBE",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          someGBE:1
-        },
-        {
-          someGBE:2
         }
       ]
     }
@@ -2344,22 +1564,6 @@
     }
   },
   {
-    name:"SELECT * FROM simple_1_col_1_group GROUP BY NULL AS someNull",
-    statement:"SELECT * FROM simple_1_col_1_group GROUP BY NULL AS someNull",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          someNull:null
-        }
-      ]
-    }
-  },
-  {
     name:"SELECT someNull FROM simple_1_col_1_group GROUP BY NULL AS someNull",
     statement:"SELECT someNull FROM simple_1_col_1_group GROUP BY NULL AS someNull",
     assert:{
@@ -2392,21 +1596,6 @@
     }
   },
   {
-    name:"SELECT * FROM simple_1_col_1_group GROUP BY MISSING AS someMissing",
-    statement:"SELECT * FROM simple_1_col_1_group GROUP BY MISSING AS someMissing",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-        }
-      ]
-    }
-  },
-  {
     name:"SELECT someMissing FROM simple_1_col_1_group GROUP BY MISSING AS someMissing",
     statement:"SELECT someMissing FROM simple_1_col_1_group GROUP BY MISSING AS someMissing",
     assert:{
@@ -2432,22 +1621,6 @@
       ],
       output:$bag::[
         {
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_1_col_1_group GROUP BY NULL AS groupExp",
-    statement:"SELECT * FROM simple_1_col_1_group GROUP BY NULL AS groupExp",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          groupExp:null
         }
       ]
     }
@@ -2485,21 +1658,6 @@
     }
   },
   {
-    name:"SELECT * FROM simple_1_col_1_group GROUP BY MISSING AS groupExp",
-    statement:"SELECT * FROM simple_1_col_1_group GROUP BY MISSING AS groupExp",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-        }
-      ]
-    }
-  },
-  {
     name:"SELECT groupExp FROM simple_1_col_1_group GROUP BY MISSING AS groupExp",
     statement:"SELECT groupExp FROM simple_1_col_1_group GROUP BY MISSING AS groupExp",
     assert:{
@@ -2525,28 +1683,6 @@
       ],
       output:$bag::[
         {
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM products_sparse p GROUP BY p.supplierId_nulls",
-    statement:"SELECT * FROM products_sparse p GROUP BY p.supplierId_nulls",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          supplierId_nulls:10
-        },
-        {
-          supplierId_nulls:11
-        },
-        {
-          supplierId_nulls:null
         }
       ]
     }
@@ -2596,8 +1732,8 @@
     }
   },
   {
-    name:"SELECT * FROM products_sparse p GROUP BY p.supplierId_missings",
-    statement:"SELECT * FROM products_sparse p GROUP BY p.supplierId_missings",
+    name:"SELECT supplierId_missings FROM products_sparse p GROUP BY p.supplierId_missings",
+    statement:"SELECT supplierId_missings FROM products_sparse p GROUP BY p.supplierId_missings",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -2659,8 +1795,8 @@
     }
   },
   {
-    name:"SELECT * FROM products_sparse p GROUP BY p.supplierId_mixed",
-    statement:"SELECT * FROM products_sparse p GROUP BY p.supplierId_mixed",
+    name:"SELECT supplierId_mixed FROM products_sparse p GROUP BY p.supplierId_mixed",
+    statement:"SELECT supplierId_mixed FROM products_sparse p GROUP BY p.supplierId_mixed",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -2717,43 +1853,6 @@
           supplierId_mixed:11
         },
         {
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM products_sparse p GROUP BY p.regionId, p.supplierId_nulls",
-    statement:"SELECT * FROM products_sparse p GROUP BY p.regionId, p.supplierId_nulls",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          regionId:100,
-          supplierId_nulls:10
-        },
-        {
-          regionId:100,
-          supplierId_nulls:11
-        },
-        {
-          regionId:100,
-          supplierId_nulls:null
-        },
-        {
-          regionId:200,
-          supplierId_nulls:10
-        },
-        {
-          regionId:200,
-          supplierId_nulls:11
-        },
-        {
-          regionId:200,
-          supplierId_nulls:null
         }
       ]
     }
@@ -2833,8 +1932,8 @@
     }
   },
   {
-    name:"SELECT * FROM products_sparse p GROUP BY p.regionId, p.supplierId_missings",
-    statement:"SELECT * FROM products_sparse p GROUP BY p.regionId, p.supplierId_missings",
+    name:"SELECT regionId, supplierId_missings FROM products_sparse p GROUP BY p.regionId, p.supplierId_missings",
+    statement:"SELECT regionId, supplierId_missings FROM products_sparse p GROUP BY p.regionId, p.supplierId_missings",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -2938,8 +2037,8 @@
     }
   },
   {
-    name:"SELECT * FROM products_sparse p GROUP BY p.regionId, p.supplierId_mixed",
-    statement:"SELECT * FROM products_sparse p GROUP BY p.regionId, p.supplierId_mixed",
+    name:"SELECT regionId, supplierId_mixed FROM products_sparse p GROUP BY p.regionId, p.supplierId_mixed",
+    statement:"SELECT regionId, supplierId_mixed FROM products_sparse p GROUP BY p.regionId, p.supplierId_mixed",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -8582,62 +7681,6 @@
     ]
   },
   {
-    name:"SELECT * FROM simple_1_col_1_group GROUP BY col1 GROUP AS g",
-    statement:"SELECT * FROM simple_1_col_1_group GROUP BY col1 GROUP AS g",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1,
-          g:$bag::[
-            {
-              simple_1_col_1_group:{
-                col1:1
-              }
-            },
-            {
-              simple_1_col_1_group:{
-                col1:1
-              }
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT col1, g FROM simple_1_col_1_group GROUP BY col1 GROUP AS g",
-    statement:"SELECT col1, g FROM simple_1_col_1_group GROUP BY col1 GROUP AS g",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1,
-          g:$bag::[
-            {
-              simple_1_col_1_group:{
-                col1:1
-              }
-            },
-            {
-              simple_1_col_1_group:{
-                col1:1
-              }
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
     name:"SELECT VALUE { 'col1': col1, 'g': g } FROM simple_1_col_1_group GROUP BY col1 GROUP AS g",
     statement:"SELECT VALUE { 'col1': col1, 'g': g } FROM simple_1_col_1_group GROUP BY col1 GROUP AS g",
     assert:{
@@ -8658,36 +7701,6 @@
             {
               simple_1_col_1_group:{
                 col1:1
-              }
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_1_group GROUP BY col1 GROUP AS g",
-    statement:"SELECT * FROM simple_2_col_1_group GROUP BY col1 GROUP AS g",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1,
-          g:$bag::[
-            {
-              simple_2_col_1_group:{
-                col1:1,
-                col2:10
-              }
-            },
-            {
-              simple_2_col_1_group:{
-                col1:1,
-                col2:10
               }
             }
           ]
@@ -8737,36 +7750,6 @@
       output:$bag::[
         {
           col1:1,
-          g:$bag::[
-            {
-              simple_2_col_1_group:{
-                col1:1,
-                col2:10
-              }
-            },
-            {
-              simple_2_col_1_group:{
-                col1:1,
-                col2:10
-              }
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_1_group GROUP BY col2 GROUP AS g",
-    statement:"SELECT * FROM simple_2_col_1_group GROUP BY col2 GROUP AS g",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col2:10,
           g:$bag::[
             {
               simple_2_col_1_group:{
@@ -8838,49 +7821,6 @@
               simple_2_col_1_group:{
                 col1:1,
                 col2:10
-              }
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_1_col_2_groups GROUP BY col1 GROUP AS g",
-    statement:"SELECT * FROM simple_1_col_2_groups GROUP BY col1 GROUP AS g",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1,
-          g:$bag::[
-            {
-              simple_1_col_2_groups:{
-                col1:1
-              }
-            },
-            {
-              simple_1_col_2_groups:{
-                col1:1
-              }
-            }
-          ]
-        },
-        {
-          col1:2,
-          g:$bag::[
-            {
-              simple_1_col_2_groups:{
-                col1:2
-              }
-            },
-            {
-              simple_1_col_2_groups:{
-                col1:2
               }
             }
           ]
@@ -8975,53 +7915,6 @@
     }
   },
   {
-    name:"SELECT * FROM simple_2_col_2_groups GROUP BY col1 GROUP AS g",
-    statement:"SELECT * FROM simple_2_col_2_groups GROUP BY col1 GROUP AS g",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1,
-          g:$bag::[
-            {
-              simple_2_col_2_groups:{
-                col1:1,
-                col2:10
-              }
-            },
-            {
-              simple_2_col_2_groups:{
-                col1:1,
-                col2:10
-              }
-            }
-          ]
-        },
-        {
-          col1:11,
-          g:$bag::[
-            {
-              simple_2_col_2_groups:{
-                col1:11,
-                col2:110
-              }
-            },
-            {
-              simple_2_col_2_groups:{
-                col1:11,
-                col2:110
-              }
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
     name:"SELECT col1, g FROM simple_2_col_2_groups GROUP BY col1 GROUP AS g",
     statement:"SELECT col1, g FROM simple_2_col_2_groups GROUP BY col1 GROUP AS g",
     assert:{
@@ -9097,53 +7990,6 @@
         },
         {
           col1:11,
-          g:$bag::[
-            {
-              simple_2_col_2_groups:{
-                col1:11,
-                col2:110
-              }
-            },
-            {
-              simple_2_col_2_groups:{
-                col1:11,
-                col2:110
-              }
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_2_col_2_groups GROUP BY col2 GROUP AS g",
-    statement:"SELECT * FROM simple_2_col_2_groups GROUP BY col2 GROUP AS g",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col2:10,
-          g:$bag::[
-            {
-              simple_2_col_2_groups:{
-                col1:1,
-                col2:10
-              }
-            },
-            {
-              simple_2_col_2_groups:{
-                col1:1,
-                col2:10
-              }
-            }
-          ]
-        },
-        {
-          col2:110,
           g:$bag::[
             {
               simple_2_col_2_groups:{
@@ -9257,56 +8103,6 @@
     }
   },
   {
-    name:"SELECT * FROM simple_1_col_1_group, join_me GROUP BY col1 GROUP AS g",
-    statement:"SELECT * FROM simple_1_col_1_group, join_me GROUP BY col1 GROUP AS g",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1,
-          g:$bag::[
-            {
-              simple_1_col_1_group:{
-                col1:1
-              },
-              join_me:{
-                foo:20
-              }
-            },
-            {
-              simple_1_col_1_group:{
-                col1:1
-              },
-              join_me:{
-                foo:30
-              }
-            },
-            {
-              simple_1_col_1_group:{
-                col1:1
-              },
-              join_me:{
-                foo:20
-              }
-            },
-            {
-              simple_1_col_1_group:{
-                col1:1
-              },
-              join_me:{
-                foo:30
-              }
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
     name:"SELECT col1, g FROM simple_1_col_1_group, join_me GROUP BY col1 GROUP AS g",
     statement:"SELECT col1, g FROM simple_1_col_1_group, join_me GROUP BY col1 GROUP AS g",
     assert:{
@@ -9400,64 +8196,6 @@
               join_me:{
                 foo:30
               }
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT * FROM simple_1_col_1_group, different_types_per_row GROUP BY col1 GROUP AS g",
-    statement:"SELECT * FROM simple_1_col_1_group, different_types_per_row GROUP BY col1 GROUP AS g",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          col1:1,
-          g:$bag::[
-            {
-              simple_1_col_1_group:{
-                col1:1
-              },
-              different_types_per_row:{
-                a:1001
-              }
-            },
-            {
-              simple_1_col_1_group:{
-                col1:1
-              },
-              different_types_per_row:1002.0
-            },
-            {
-              simple_1_col_1_group:{
-                col1:1
-              },
-              different_types_per_row:"one-thousand and three"
-            },
-            {
-              simple_1_col_1_group:{
-                col1:1
-              },
-              different_types_per_row:{
-                a:1001
-              }
-            },
-            {
-              simple_1_col_1_group:{
-                col1:1
-              },
-              different_types_per_row:1002.0
-            },
-            {
-              simple_1_col_1_group:{
-                col1:1
-              },
-              different_types_per_row:"one-thousand and three"
             }
           ]
         }
