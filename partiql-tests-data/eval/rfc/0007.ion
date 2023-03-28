@@ -1,0 +1,247 @@
+envs::{
+    hr: {
+        employees: $bag::[
+          { name: "Bob Smith",   title: "Consultant" },
+          { name: "Susan Smith", title: "Manager" },
+          { name: "Jane Smith",  title: "DEI" }
+        ]
+    },
+    accounting: {
+        employees: $bag::[
+          { level: 3, name: "Quincy Jones",   title: "Director" },
+          { level: 2, name: "James Earl Jones", title: "Manager" },
+          { level: 1, name: "Indiana Jones",  title: "Intern" }
+        ]
+    },
+    engineering: {
+        employees: $bag::[
+          { title: "Manager", name: "Paul McCharmly" },
+          { title: "SDE", name: "George Parasol" },
+          { title: "Principal SDE", name: "Ringo Stone" },
+          { title: "Intern", name: "Eric Lennon" }
+        ]
+    },
+}
+
+set::[
+    {
+        name: "Example 1 — Union of Compatible Relations",
+        statement: '''SELECT name, title FROM hr.employees
+                      UNION ALL
+                      SELECT name, title FROM engineering.employees''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                { name: "Bob Smith", title: "Consultant" },
+                { name: "Susan Smith", title: "Manager" },
+                { name: "Jane Smith",  title: "DEI" },
+                { name: "Paul McCharmly", title: "Manager" },
+                { name: "George Parasol", title: "SDE" },
+                { name: "Ringo Stone", title: "Principal SDE" },
+                { name: "Eric Lennon", title: "Intern" }
+            ]
+        }
+    },
+    {
+        name: "Example 2.1 — Union of Compatible Relations; Mismatch Column Names; Without CORRESPONDING Clause",
+        statement: '''SELECT * FROM hr.employees
+                      UNION ALL
+                      SELECT * FROM engineering.employees''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                { name: "Bob Smith", title: "Consultant" },
+                { name: "Susan Smith", title: "Manager" },
+                { name: "Jane Smith",  title: "DEI" },
+                { name: "Manager", title: "Paul McCharmly" },
+                { name: "SDE", title: "George Parasol" },
+                { name: "Principal SDE", title: "Ringo Stone" },
+                { name: "Intern", title: "Eric Lennon" }
+            ]
+        }
+    },
+    {
+        name: "Example 2.2 — Union of Compatible Relations; Mismatch Column Names; With CORRESPONDING Clause",
+        statement: '''SELECT * FROM hr.employees
+                      UNION ALL CORRESPONDING BY ( name, title )
+                      SELECT * FROM engineering.employees''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                { name: "Bob Smith", title: "Consultant" },
+                { name: "Susan Smith", title: "Manager" },
+                { name: "Jane Smith",  title: "DEI" },
+                { name: "Paul McCharmly", title: "Manager" },
+                { name: "George Parasol", title: "SDE" },
+                { name: "Ringo Stone", title: "Principal SDE" },
+                { name: "Eric Lennon", title: "Intern" }
+            ]
+        }
+    },
+    {
+        name: "Example 3 — Union of Heterogenous Relations",
+        statement: '''SELECT * FROM hr.employees               -- T1
+                      UNION
+                      SELECT title FROM engineering.employees  -- T2''',
+        assert: {
+            evalMode:[EvalModeCoerce, EvalModeError],
+            result: EvaluationFail,
+        }
+    },
+    {
+        name: "Example 4 — Intersection of Compatible Relations",
+        statement: '''SELECT title FROM hr.employees INTERSECT SELECT title FROM engineering.employees''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                { title: "Manager" },
+            ]
+        }
+    },
+    {
+        name: "Example 5 — Difference of Compatible Relations",
+        statement: '''SELECT title FROM engineering.employees EXCEPT (
+                        SELECT title FROM hr.employees
+                        UNION
+                        SELECT title FROM accounting.employees
+                      )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                { title: "SDE" },
+                { title: "Principal SDE" },
+            ]
+        }
+    },
+    {
+        name: "Example 6 - Value Coercion not union-compatible",
+        statement: '''SELECT * FROM << 1 >>
+                      UNION
+                      SELECT * FROM << 'A' >>''',
+        assert: {
+            evalMode:[EvalModeCoerce, EvalModeError],
+            result: EvaluationFail,
+        }
+    },
+
+]
+
+
+bag::[
+    {
+        name: "Example 2.3 — Union of Compatible Relations; Mismatch Column Names; Using OUTER UNION",
+        statement: '''SELECT name, title FROM hr.employees
+                      OUTER UNION ALL
+                      SELECT name, title FROM engineering.employees''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                { name: "Bob Smith", title: "Consultant" },
+                { name: "Susan Smith", title: "Manager" },
+                { name: "Jane Smith",  title: "DEI" },
+                { title: "Manager", name: "Paul McCharmly" },
+                { title: "SDE", name: "George Parasol" },
+                { title: "Principal SDE", name: "Ringo Stone" },
+                { title: "Intern", name: "Eric Lennon" }
+            ]
+        }
+    },
+    {
+        name: "Example 3 — Union of Heterogenous Relations",
+        statement: '''SELECT * FROM hr.employees               -- T1
+                      UNION
+                      SELECT title FROM engineering.employees  -- T2''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                { name: "Bob Smith", title: "Consultant" },
+                { name: "Susan Smith", title: "Manager" },
+                { name: "Jane Smith",  title: "DEI" },
+                { title: "Manager" },
+                { title: "SDE" },
+                { title: "Principal SDE" },
+                { title: "Intern" }
+            ]
+        }
+    },
+    {
+        name: "Example 6 — Value Coercion; Coercion of single value",
+        statement: '''SELECT * FROM << 1 >> OUTER UNION 'A' ''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                { "_1": 1 },
+                "A",
+            ]
+        }
+    },
+    {
+        name: "Example 6 — Value Coercion",
+        statement: '''SELECT * FROM << 1 >>
+                      OUTER UNION
+                      SELECT * FROM << 'A' >>''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                { "_1": 1 },
+                { "_1": "A" },
+            ]
+        }
+    },
+    {
+        name: "Example 7 — `SELECT * FROM engineering.employees OUTER EXCEPT << >>`",
+        statement: '''SELECT * FROM engineering.employees OUTER EXCEPT << >>''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                { title: "Manager", name: "Paul McCharmly" },
+                { title: "SDE", name: "George Parasol" },
+                { title: "Principal SDE", name: "Ringo Stone" },
+                { title: "Intern", name: "Eric Lennon" }
+            ]
+        }
+    },
+    {
+        name: "Example 7 — `TABLE engineering.employees UNION << MISSING >>`",
+        statement: '''TABLE engineering.employees UNION << MISSING >>''',
+        assert: {
+            evalMode:[EvalModeCoerce, EvalModeError],
+            result: EvaluationFail,
+        }
+    },
+    {
+        name: "Example 7 — `TABLE engineering.employess OUTER UNION << MISSING >>`",
+        statement: '''TABLE engineering.employess OUTER UNION << MISSING >>''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                { title: "Manager", name: "Paul McCharmly" },
+                { title: "SDE", name: "George Parasol" },
+                { title: "Principal SDE", name: "Ringo Stone" },
+                { title: "Intern", name: "Eric Lennon" },
+                $missing::null
+            ]
+        }
+    },
+    {
+        name: "Example 7 — result is the empty bag",
+        statement: '''SELECT * FROM engineering.employees OUTER INTERSECT << >>''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[]
+        }
+    },
+]
+
