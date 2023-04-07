@@ -1,0 +1,127 @@
+{
+    name: "COLL_AVG no args",
+    statement: "COLL_AVG()",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "COLL_AVG too many args",
+    statement: "COLL_AVG(a, b)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "COLL_AVG with star",
+    statement: "COLL_AVG(*)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "COLL_MAX no args",
+    statement: "COLL_MAX()",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "COLL_MAX too many args",
+    statement: "COLL_MAX(a, b)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "COLL_MAX with star",
+    statement: "COLL_MAX(*)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "COLL_MIN no args",
+    statement: "COLL_MIN()",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "COLL_MIN too many args",
+    statement: "COLL_MIN(a, b)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "COLL_MIN with star",
+    statement: "COLL_MIN(*)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "COLL_SUM no args",
+    statement: "COLL_SUM()",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "COLL_SUM too many args",
+    statement: "COLL_SUM(a, b)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "COLL_SUM with star",
+    statement: "COLL_SUM(*)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "COLL_COUNT no args",
+    statement: "COLL_COUNT()",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "COLL_COUNT too many args",
+    statement: "COLL_COUNT(a, b)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "COLL_COUNT DISTINCT star",
+    statement: "COLL_COUNT(DISTINCT *)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "COLL_COUNT ALL star",
+    statement: "COLL_COUNT(ALL *)",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}

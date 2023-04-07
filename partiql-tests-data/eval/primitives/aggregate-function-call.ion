@@ -10,8 +10,8 @@ envs::{
 
 aggregates::[
   {
-    name:"topLevelCountDistinct",
-    statement:"COUNT(DISTINCT [1,1,1,1,2])",
+    name:"topLevelCollCountDistinct",
+    statement:"COLL_COUNT(DISTINCT [1,1,1,1,2])",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -19,8 +19,8 @@ aggregates::[
     }
   },
   {
-    name:"topLevelCount",
-    statement:"COUNT(numbers)",
+    name:"topLevelCollCount",
+    statement:"COLL_COUNT(numbers)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -28,8 +28,8 @@ aggregates::[
     }
   },
   {
-    name:"topLevelAllCount",
-    statement:"COUNT(ALL numbers)",
+    name:"topLevelAllCollCount",
+    statement:"COLL_COUNT(ALL numbers)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -37,8 +37,8 @@ aggregates::[
     }
   },
   {
-    name:"topLevelSum",
-    statement:"SUM(numbers)",
+    name:"topLevelCollSum",
+    statement:"COLL_SUM(numbers)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -46,8 +46,8 @@ aggregates::[
     }
   },
   {
-    name:"topLevelAllSum",
-    statement:"SUM(ALL numbers)",
+    name:"topLevelAllCollSum",
+    statement:"COLL_SUM(ALL numbers)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -55,8 +55,8 @@ aggregates::[
     }
   },
   {
-    name:"topLevelDistinctSum",
-    statement:"SUM(DISTINCT [1,1,1,1,1,1,1,2])",
+    name:"topLevelDistinctCollSum",
+    statement:"COLL_SUM(DISTINCT [1,1,1,1,1,1,1,2])",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -64,8 +64,8 @@ aggregates::[
     }
   },
   {
-    name:"topLevelMin",
-    statement:"MIN(numbers)",
+    name:"topLevelCollMin",
+    statement:"COLL_MIN(numbers)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -73,8 +73,8 @@ aggregates::[
     }
   },
   {
-    name:"topLevelDistinctMin",
-    statement:"MIN(DISTINCT numbers)",
+    name:"topLevelDistinctCollMin",
+    statement:"COLL_MIN(DISTINCT numbers)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -82,8 +82,8 @@ aggregates::[
     }
   },
   {
-    name:"topLevelAllMin",
-    statement:"MIN(ALL numbers)",
+    name:"topLevelAllCollMin",
+    statement:"COLL_MIN(ALL numbers)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -91,8 +91,8 @@ aggregates::[
     }
   },
   {
-    name:"topLevelMax",
-    statement:"MAX(numbers)",
+    name:"topLevelCollMax",
+    statement:"COLL_MAX(numbers)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -100,8 +100,8 @@ aggregates::[
     }
   },
   {
-    name:"topLevelDistinctMax",
-    statement:"MAX(DISTINCT numbers)",
+    name:"topLevelDistinctCollMax",
+    statement:"COLL_MAX(DISTINCT numbers)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -109,8 +109,8 @@ aggregates::[
     }
   },
   {
-    name:"topLevelAllMax",
-    statement:"MAX(ALL numbers)",
+    name:"topLevelAllCollMax",
+    statement:"COLL_MAX(ALL numbers)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -118,8 +118,8 @@ aggregates::[
     }
   },
   {
-    name:"topLevelAvg",
-    statement:"AVG(numbers)",
+    name:"topLevelCollAvg",
+    statement:"COLL_AVG(numbers)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -127,8 +127,8 @@ aggregates::[
     }
   },
   {
-    name:"topLevelDistinctAvg",
-    statement:"AVG(DISTINCT [1,1,1,1,1,3])",
+    name:"topLevelDistinctCollAvg",
+    statement:"COLL_AVG(DISTINCT [1,1,1,1,1,3])",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -136,8 +136,8 @@ aggregates::[
     }
   },
   {
-    name:"topLevelAvgOnlyInt",
-    statement:"AVG([2,2,2,4])",
+    name:"topLevelCollAvgOnlyInt",
+    statement:"COLL_AVG([2,2,2,4])",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -146,7 +146,7 @@ aggregates::[
   },
   {
     name:"selectValueAggregate",
-    statement:"SELECT VALUE COUNT(v) + SUM(v) FROM <<numbers, numbers>> AS v",
+    statement:"SELECT VALUE COLL_COUNT(v) + COLL_SUM(v) FROM <<numbers, numbers>> AS v",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -278,8 +278,8 @@ max::[
     ]
   },
   {
-    name:"max top level{agg:'MAX(data)',result:(success 2)}",
-    statement:"MAX(data)",
+    name:"max top level{agg:'COLL_MAX(data)',result:(success 2)}",
+    statement:"COLL_MAX(data)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -290,8 +290,8 @@ max::[
     }
   },
   {
-    name:"max top level{agg:'MAX(ALL data)',result:(success 2)}",
-    statement:"MAX(ALL data)",
+    name:"coll_max top level{agg:'COLL_MAX(ALL data)',result:(success 2)}",
+    statement:"COLL_MAX(ALL data)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -302,8 +302,8 @@ max::[
     }
   },
   {
-    name:"max top level{agg:'MAX(DISTINCT data)',result:(success 2)}",
-    statement:"MAX(DISTINCT data)",
+    name:"coll_max top level{agg:'COLL_MAX(DISTINCT data)',result:(success 2)}",
+    statement:"COLL_MAX(DISTINCT data)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -436,8 +436,8 @@ avg::[
     ]
   },
   {
-    name:"avg top level{agg:'AVG(data)',result:(success 1.25)}",
-    statement:"AVG(data)",
+    name:"coll_avg top level{agg:'COLL_AVG(data)',result:(success 1.25)}",
+    statement:"COLL_AVG(data)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -448,8 +448,8 @@ avg::[
     }
   },
   {
-    name:"avg top level{agg:'AVG(ALL data)',result:(success 1.25)}",
-    statement:"AVG(ALL data)",
+    name:"coll_avg top level{agg:'COLL_AVG(ALL data)',result:(success 1.25)}",
+    statement:"COLL_AVG(ALL data)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -460,8 +460,8 @@ avg::[
     }
   },
   {
-    name:"avg top level{agg:'AVG(DISTINCT data)',result:(success 1.5)}",
-    statement:"AVG(DISTINCT data)",
+    name:"coll_avg top level{agg:'COLL_AVG(DISTINCT data)',result:(success 1.5)}",
+    statement:"COLL_AVG(DISTINCT data)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -594,8 +594,8 @@ count::[
     ]
   },
   {
-    name:"count top level{agg:'COUNT(data)',result:(success 4)}",
-    statement:"COUNT(data)",
+    name:"coll_count top level{agg:'COLL_COUNT(data)',result:(success 4)}",
+    statement:"COLL_COUNT(data)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -606,8 +606,8 @@ count::[
     }
   },
   {
-    name:"count top level{agg:'COUNT(ALL data)',result:(success 4)}",
-    statement:"COUNT(ALL data)",
+    name:"coll_count top level{agg:'COLL_COUNT(ALL data)',result:(success 4)}",
+    statement:"COLL_COUNT(ALL data)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -618,8 +618,8 @@ count::[
     }
   },
   {
-    name:"count top level{agg:'COUNT(DISTINCT data)',result:(success 2)}",
-    statement:"COUNT(DISTINCT data)",
+    name:"coll_count top level{agg:'COLL_COUNT(DISTINCT data)',result:(success 2)}",
+    statement:"COLL_COUNT(DISTINCT data)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -752,8 +752,8 @@ sum::[
     ]
   },
   {
-    name:"sum top level{agg:'SUM(data)',result:(success 5)}",
-    statement:"SUM(data)",
+    name:"coll_sum top level{agg:'COLL_SUM(data)',result:(success 5)}",
+    statement:"COLL_SUM(data)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -764,8 +764,8 @@ sum::[
     }
   },
   {
-    name:"sum top level{agg:'SUM(ALL data)',result:(success 5)}",
-    statement:"SUM(ALL data)",
+    name:"coll_sum top level{agg:'COLL_SUM(ALL data)',result:(success 5)}",
+    statement:"COLL_SUM(ALL data)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -776,8 +776,8 @@ sum::[
     }
   },
   {
-    name:"sum top level{agg:'SUM(DISTINCT data)',result:(success 3)}",
-    statement:"SUM(DISTINCT data)",
+    name:"coll_sum top level{agg:'COLL_SUM(DISTINCT data)',result:(success 3)}",
+    statement:"COLL_SUM(DISTINCT data)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -910,8 +910,8 @@ min::[
     ]
   },
   {
-    name:"min top level{agg:'MIN(data)',result:(success 1)}",
-    statement:"MIN(data)",
+    name:"coll_min top level{agg:'COLL_MIN(data)',result:(success 1)}",
+    statement:"COLL_MIN(data)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -922,8 +922,8 @@ min::[
     }
   },
   {
-    name:"min top level{agg:'MIN(ALL data)',result:(success 1)}",
-    statement:"MIN(ALL data)",
+    name:"coll_min top level{agg:'COLL_MIN(ALL data)',result:(success 1)}",
+    statement:"COLL_MIN(ALL data)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -934,8 +934,8 @@ min::[
     }
   },
   {
-    name:"min top level{agg:'MIN(DISTINCT data)',result:(success 1)}",
-    statement:"MIN(DISTINCT data)",
+    name:"coll_min top level{agg:'COLL_MIN(DISTINCT data)',result:(success 1)}",
+    statement:"COLL_MIN(DISTINCT data)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
