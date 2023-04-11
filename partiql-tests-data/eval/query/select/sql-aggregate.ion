@@ -645,6 +645,171 @@ sql_min::[
   }
 ]
 
+sql_any::[
+  {
+    name:"ANY with GROUP BY",
+    statement:'''
+              SELECT x.a, ANY(x.b < 15) AS e
+              FROM << {'a': 1, 'b': 10}, {'a': 1, 'b': 17}, {'a': 2, 'b': 20}, {'a': 3} >> AS x
+              GROUP BY x.a
+              ''',
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:$bag::[
+        {
+          a: 1,
+          e: true
+        },
+        {
+          a: 2,
+          e: false
+        },
+        {
+          a: 3,
+          e: null
+        },
+      ]
+    }
+  },
+  {
+    name:"ANY DISTINCT with GROUP BY",
+    statement:'''
+              SELECT x.a, ANY(DISTINCT x.b < 15) AS e
+              FROM [ {'a': 1, 'b': 10}, {'a': 1, 'b': 17}, {'a': 2, 'b': 20}, {'a': 3} ] AS x
+              GROUP BY x.a
+              ''',
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:$bag::[
+        {
+          a: 1,
+          e: true
+        },
+        {
+          a: 2,
+          e: false
+        },
+        {
+          a: 3,
+          e: null
+        },
+      ]
+    }
+  }
+]
+
+sql_some::[
+  {
+    name:"SOME with GROUP BY",
+    statement:'''
+              SELECT x.a, SOME(x.b < 15) AS e
+              FROM << {'a': 1, 'b': 10}, {'a': 1, 'b': 17}, {'a': 2, 'b': 20}, {'a': 3} >> AS x
+              GROUP BY x.a
+              ''',
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:$bag::[
+        {
+          a: 1,
+          e: true
+        },
+        {
+          a: 2,
+          e: false
+        },
+        {
+          a: 3,
+          e: null
+        },
+      ]
+    }
+  },
+  {
+    name:"SOME DISTINCT with GROUP BY",
+    statement:'''
+              SELECT x.a, SOME(DISTINCT x.b < 15) AS e
+              FROM [ {'a': 1, 'b': 10}, {'a': 1, 'b': 17}, {'a': 2, 'b': 20}, {'a': 3} ] AS x
+              GROUP BY x.a
+              ''',
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:$bag::[
+        {
+          a: 1,
+          e: true
+        },
+        {
+          a: 2,
+          e: false
+        },
+        {
+          a: 3,
+          e: null
+        },
+      ]
+    }
+  }
+]
+
+sql_every::[
+  {
+    name:"EVERY with GROUP BY",
+    statement:'''
+              SELECT x.a, EVERY(x.b < 15) AS e
+              FROM << {'a': 1, 'b': 10}, {'a': 1, 'b': 11}, {'a': 2, 'b': 20}, {'a': 3} >> AS x
+              GROUP BY x.a
+              ''',
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:$bag::[
+        {
+          a: 1,
+          e: true
+        },
+        {
+          a: 2,
+          e: false
+        },
+        {
+          a: 3,
+          e: null
+        },
+      ]
+    }
+  },
+  {
+    name:"EVERY DISTINCT with GROUP BY",
+    statement:'''
+              SELECT x.a, EVERY(DISTINCT x.b < 15) AS e
+              FROM [ {'a': 1, 'b': 10}, {'a': 1, 'b': 11}, {'a': 2, 'b': 20}, {'a': 3} ] AS x
+              GROUP BY x.a
+              ''',
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:$bag::[
+        {
+          a: 1,
+          e: true
+        },
+        {
+          a: 2,
+          e: false
+        },
+        {
+          a: 3,
+          e: null
+        },
+      ]
+    }
+  }
+]
+
 multiple_sql_aggregates::[
   {
     name:"selectListMultipleAggregates",

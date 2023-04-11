@@ -156,3 +156,93 @@ coll_min::[
         ]
     }
 ]
+
+coll_any::[
+    {
+        name: "COLL_ANY aggregate function call",
+        statement: "COLL_ANY(a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_ANY DISTINCT aggregate function call",
+        statement: "COLL_ANY(DISTINCT a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_ANY ALL aggregate function call",
+        statement: "COLL_ANY(ALL a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    }
+]
+
+coll_some::[
+    {
+        name: "COLL_SOME aggregate function call",
+        statement: "COLL_SOME(a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_SOME DISTINCT aggregate function call",
+        statement: "COLL_SOME(DISTINCT a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_SOME ALL aggregate function call",
+        statement: "COLL_SOME(ALL a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    }
+]
+
+coll_every::[
+    {
+        name: "COLL_EVERY aggregate function call",
+        statement: "COLL_EVERY(a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_EVERY DISTINCT aggregate function call",
+        statement: "COLL_EVERY(DISTINCT a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_EVERY ALL aggregate function call",
+        statement: "COLL_EVERY(ALL a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    }
+]

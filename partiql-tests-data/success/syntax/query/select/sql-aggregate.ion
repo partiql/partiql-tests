@@ -166,6 +166,97 @@ sql_avg::[
     },
 ]
 
+sql_any::[
+    {
+        name: "SQL ANY aggregate function call",
+        statement: "SELECT ANY(a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL ANY DISTINCT aggregate function call",
+        statement: "SELECT ANY(DISTINCT a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL ANY ALL aggregate function call",
+        statement: "SELECT ANY(ALL a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+]
+
+sql_some::[
+    {
+        name: "SQL SOME aggregate function call",
+        statement: "SELECT SOME(a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL SOME DISTINCT aggregate function call",
+        statement: "SELECT SOME(DISTINCT a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL SOME ALL aggregate function call",
+        statement: "SELECT SOME(ALL a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+]
+
+
+sql_every::[
+    {
+        name: "SQL EVERY aggregate function call",
+        statement: "SELECT EVERY(a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL EVERY DISTINCT aggregate function call",
+        statement: "SELECT EVERY(DISTINCT a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL EVERY ALL aggregate function call",
+        statement: "SELECT EVERY(ALL a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+]
+
 sql_aggregates::[
     {
         name: "multiple SQL aggregates",

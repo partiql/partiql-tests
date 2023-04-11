@@ -108,4 +108,67 @@ spec_51::[
             result: StaticAnalysisFail
         },
     },
+    {
+        name:"top level ANY disallowed",
+        statement:"ANY([1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level ANY ALL disallowed",
+        statement:"ANY(ALL [1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level ANY DISTINCT disallowed",
+        statement:"ANY(DISTINCT [1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level SOME disallowed",
+        statement:"SOME([1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level SOME ALL disallowed",
+        statement:"SOME(ALL [1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level SOME DISTINCT disallowed",
+        statement:"SOME(DISTINCT [1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level EVERY disallowed",
+        statement:"EVERY([1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level EVERY ALL disallowed",
+        statement:"EVERY(ALL [1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level EVERY DISTINCT disallowed",
+        statement:"EVERY(DISTINCT [1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
 ]

@@ -344,6 +344,366 @@ coll_min::[
   },
 ]
 
+coll_any::[
+  {
+    name:"COLL_ANY bag literals",
+    statement:"COLL_ANY(<< false, true, false >>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"COLL_ANY list expressions",
+    statement:"COLL_ANY([ 1 < 5, false, 5 IS NULL ])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"COLL_ANY single true",
+    statement:"COLL_ANY(<<true>>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"COLL_ANY single false",
+    statement:"COLL_ANY([false])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"COLL_ANY nulls with true",
+    statement:"COLL_ANY(<< NULL, 2<3, MISSING, false >>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"COLL_ANY nulls with false",
+    statement:"COLL_ANY([ 2>3, NULL ])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"COLL_ANY nulls only",
+    statement:"COLL_ANY([NULL, MISSING]])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_ANY some empty",
+    statement:"COLL_ANY(<< >>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_ANY one non-bool, non-unknown",
+    statement:"COLL_ANY(<< true, 5, true >>)",
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"COLL_ANY all non-bool, non-unknown",
+    statement:"COLL_ANY([ 5, 'hello', 3.14])",
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"COLL_ANY nested collection",
+    statement:"COLL_ANY([[ true, false]])",
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
+  },
+]
+
+coll_some::[
+  {
+    name:"COLL_SOME bag literals",
+    statement:"COLL_SOME(<< false, true, false >>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"COLL_SOME list expressions",
+    statement:"COLL_SOME([ 1 < 5, false, 5 IS NULL ])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"COLL_SOME single true",
+    statement:"COLL_SOME(<<true>>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"COLL_SOME single false",
+    statement:"COLL_SOME([false])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"COLL_SOME nulls with true",
+    statement:"COLL_SOME(<< NULL, 2<3, MISSING, false >>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"COLL_SOME nulls with false",
+    statement:"COLL_SOME([ 2>3, NULL ])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"COLL_SOME nulls only",
+    statement:"COLL_SOME([NULL, MISSING]])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_SOME some empty",
+    statement:"COLL_SOME(<< >>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_SOME one non-bool, non-unknown",
+    statement:"COLL_SOME(<< true, 5, true >>)",
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"COLL_SOME all non-bool, non-unknown",
+    statement:"COLL_SOME([ 5, 'hello', 3.14])",
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"COLL_SOME nested collection",
+    statement:"COLL_SOME([[ true, false]])",
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
+  },
+]
+
+coll_agg_every::[
+  {
+    name:"COLL_EVERY bag literals",
+    statement:"COLL_EVERY(<< true, false, true >>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"COLL_EVERY list expressions",
+    statement:"COLL_EVERY([ 1 < 5, true, NULL IS NULL])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"COLL_EVERY single true",
+    statement:"COLL_EVERY(<<true>>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"COLL_EVERY single false",
+    statement:"COLL_EVERY([false])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"COLL_EVERY null and missing with true",
+    statement:"COLL_EVERY(<< NULL, 2<3, MISSING, true >>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"COLL_EVERY null with false",
+    statement:"COLL_EVERY([ 2>3, NULL ])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"COLL_EVERY null and missing only",
+    statement:"COLL_EVERY([NULL, MISSING])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_EVERY empty collection",
+    statement:"COLL_EVERY(<< >>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_EVERY one non-bool, non-unknown",
+    statement:"COLL_EVERY(<< true, 5, true >>)",
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"COLL_EVERY all non-bool, non-unknown",
+    statement:"COLL_EVERY([ 5, 'hello', 3.14])",
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"COLL_EVERY nested collection",
+    statement:"COLL_EVERY([[ true, false]])",
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
+  },
+]
+
 coll_agg_in_select::[
   {
     name:"selectValueCollAggregate",
