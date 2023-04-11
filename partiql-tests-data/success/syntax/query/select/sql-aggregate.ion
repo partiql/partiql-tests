@@ -1,0 +1,206 @@
+sql_sum::[
+    {
+        name: "SQL SUM aggregate function call",
+        statement: "SELECT SUM(a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL SUM DISTINCT aggregate function call",
+        statement: "SELECT SUM(DISTINCT a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL SUM ALL aggregate function call",
+        statement: "SELECT SUM(ALL a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+]
+
+sql_count::[
+    {
+        name: "SQL COUNT aggregate function call",
+        statement: "SELECT COUNT(a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL COUNT DISTINCT aggregate function call",
+        statement: "SELECT COUNT(DISTINCT a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL COUNT ALL aggregate function call",
+        statement: "SELECT COUNT(ALL a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL COUNT 1 aggregate function call",
+        statement: "SELECT COUNT(1) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL COUNT * aggregate function call",
+        statement: "SELECT COUNT(*) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+]
+
+sql_max::[
+    {
+        name: "SQL MAX aggregate function call",
+        statement: "SELECT MAX(a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL MAX DISTINCT aggregate function call",
+        statement: "SELECT MAX(DISTINCT a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL MAX ALL aggregate function call",
+        statement: "SELECT MAX(ALL a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+]
+
+sql_min::[
+    {
+        name: "SQL MIN aggregate function call",
+        statement: "SELECT MIN(a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL MIN DISTINCT aggregate function call",
+        statement: "SELECT MIN(DISTINCT a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL MIN ALL aggregate function call",
+        statement: "SELECT MIN(ALL a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+]
+
+sql_avg::[
+    {
+        name: "SQL AVG aggregate function call",
+        statement: "SELECT AVG(a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL AVG DISTINCT aggregate function call",
+        statement: "SELECT AVG(DISTINCT a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL AVG ALL aggregate function call",
+        statement: "SELECT AVG(ALL a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+]
+
+sql_aggregates::[
+    {
+        name: "multiple SQL aggregates",
+        statement: "SELECT AVG(a), COUNT(b), MAX(c), MIN(d), SUM(e) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL aggregate in SELECT VALUE",
+        statement: "SELECT VALUE AVG(a) FROM t",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL aggregate in HAVING",
+        statement: "SELECT a FROM t GROUP BY a HAVING SUM(a) > 0",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "SQL aggregate in ORDER BY",
+        statement: "SELECT a FROM t GROUP BY a ORDER BY SUM(a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+]

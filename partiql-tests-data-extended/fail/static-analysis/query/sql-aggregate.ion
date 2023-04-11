@@ -1,0 +1,111 @@
+// Pending resolution of https://github.com/partiql/partiql-spec/issues/51#issuecomment-1498352752.
+// The following tests use SQL aggregation functions in contexts where a `COLL_` aggregation function is expected
+// (e.g. as a top-level query)
+
+spec_51::[
+    {
+        name:"top level AVG disallowed",
+        statement:"AVG([1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level AVG ALL disallowed",
+        statement:"AVG(ALL [1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level AVG DISTINCT disallowed",
+        statement:"AVG(DISTINCT [1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level COUNT disallowed",
+        statement:"COUNT([1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level COUNT ALL disallowed",
+        statement:"COUNT(ALL [1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level COUNT DISTINCT disallowed",
+        statement:"COUNT(DISTINCT [1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level MAX disallowed",
+        statement:"MAX([1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level MAX ALL disallowed",
+        statement:"MAX(ALL [1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level MAX DISTINCT disallowed",
+        statement:"MAX(DISTINCT [1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level MIN disallowed",
+        statement:"MIN([1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level MIN ALL disallowed",
+        statement:"MIN(ALL [1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level MIN DISTINCT disallowed",
+        statement:"MIN(DISTINCT [1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level SUM disallowed",
+        statement:"SUM([1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level SUM ALL disallowed",
+        statement:"SUM(ALL [1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level SUM DISTINCT disallowed",
+        statement:"SUM(DISTINCT [1, 2, 3, 3])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+]
