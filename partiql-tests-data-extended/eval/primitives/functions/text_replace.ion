@@ -1,0 +1,120 @@
+// Adding `text_replace` tests in the "extended" folder since the function name is not part of any SQL spec
+text_replace::[
+  {
+    name:"text_replace('abcdefabcdef', 'cd', 'XX')",
+    statement:"text_replace('abcdefabcdef', 'cd', 'XX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:"abXXefabXXef"
+    }
+  },
+  {
+    name:"text_replace('abcdefabcdef', 'xyz', 'XX')",
+    statement:"text_replace('abcdefabcdef', 'xyz', 'XX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:"abcdefabcdef"
+    }
+  },
+  {
+    name:"text_replace('abcdefabcdef', 'defab', '')",
+    statement:"text_replace('abcdefabcdef', 'defab', '')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:"abccdef"
+    }
+  },
+  {
+    name:"text_replace('abcabcabcdef', 'abcabc', 'XXX')",
+    statement:"text_replace('abcabcabcdef', 'abcabc', 'XXX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:"XXXabcdef"
+    }
+  },
+  {
+    name:"text_replace('abcabcabcdef', '', 'X')",
+    statement:"text_replace('abcabcabcdef', '', 'X')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:"XaXbXcXaXbXcXaXbXcXdXeXfX"
+    }
+  },
+  {
+    name:"text_replace('', 'abc', 'XX')",
+    statement:"text_replace('', 'abc', 'XX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:""
+    }
+  },
+  {
+    name:"text_replace('', '', 'XX')",
+    statement:"text_replace('', '', 'XX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:"XX"
+    }
+  },
+  {
+    name:"text_replace('abcdefabcdef', 'def', '😁😞')",
+    statement:"text_replace('abcdefabcdef', 'def', '😁😞')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:"abc😁😞abc😁😞"
+    }
+  },
+  {
+    name:"text_replace('abc😁😞abc😁😞', '😁😞', 'def')",
+    statement:"text_replace('abc😁😞abc😁😞', '😁😞', 'def')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:"abcdefabcdef"
+    }
+  },
+  {
+    name:"text_replace('abcdefabcdef', 'def', 'd😁😞')",
+    statement:"text_replace('abcdefabcdef', 'def', 'd😁😞')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:"abcd😁😞abcd😁😞"
+    }
+  },
+  {
+    name:"text_replace('abcdefabcdef', 'def', 'deࠫf')",
+    statement:"text_replace('abcdefabcdef', 'def', 'deࠫf')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:"abcdeࠫfabcdeࠫf"
+    }
+  },
+  {
+    name:"text_replace('abcdeࠫfabcdeࠫf', 'def', 'XX')",
+    statement:"text_replace('abcdeࠫfabcdeࠫf', 'def', 'XX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:"abcdeࠫfabcdeࠫf"
+    }
+  },
+  {
+    name:"text_replace('abcdeࠫfabcdeࠫf', 'deࠫf', 'XX')",
+    statement:"text_replace('abcdeࠫfabcdeࠫf', 'deࠫf', 'XX')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:"abcXXabcXX"
+    }
+  },
+]
