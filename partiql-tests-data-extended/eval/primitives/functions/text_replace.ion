@@ -117,4 +117,112 @@ text_replace::[
       output:"abcXXabcXX"
     }
   },
+  {
+    name:"text_replace NULL first arg",
+    statement:"text_replace(NULL, 'foo', 'bar')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:null
+    }
+  },
+  {
+    name:"text_replace NULL second arg",
+    statement:"text_replace('foo', NULL, 'bar')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:null
+    }
+  },
+  {
+    name:"text_replace NULL third arg",
+    statement:"text_replace('foo', 'bar', NULL)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:null
+    }
+  },
+  {
+    name:"text_replace MISSING first arg",
+    statement:"text_replace(MISSING, 'foo', 'bar')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:$missing::null
+    }
+  },
+  {
+    name:"text_replace MISSING second arg",
+    statement:"text_replace('foo', MISSING, 'bar')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:$missing::null
+    }
+  },
+  {
+    name:"text_replace MISSING third arg",
+    statement:"text_replace('foo', 'bar', MISSING)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:$missing::null
+    }
+  },
+  {
+    name:"text_replace NULL and MISSING arg",
+    statement:"text_replace(NULL, 'foo', MISSING)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:$missing::null
+    }
+  },
+  {
+    name:"text_replace mistyped first argument",
+    statement:"text_replace(1, 'foo', 'bar')",
+    assert:[
+      {
+        result:EvaluationFail,
+        evalMode: EvalModeError,
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"text_replace mistyped second argument",
+    statement:"text_replace('foo', 1, 'bar')",
+    assert:[
+      {
+        result:EvaluationFail,
+        evalMode: EvalModeError,
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"text_replace mistyped third argument",
+    statement:"text_replace('foo', 'bar', 1)",
+    assert:[
+      {
+        result:EvaluationFail,
+        evalMode: EvalModeError,
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
 ]
