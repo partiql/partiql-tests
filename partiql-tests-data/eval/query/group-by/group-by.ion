@@ -1606,6 +1606,7 @@
       ],
       output:$bag::[
         {
+          someMissing:null  // missing coerced to null as per 11.1.1
         }
       ]
     }
@@ -1621,68 +1622,7 @@
       ],
       output:$bag::[
         {
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT groupExp FROM simple_1_col_1_group GROUP BY NULL AS groupExp",
-    statement:"SELECT groupExp FROM simple_1_col_1_group GROUP BY NULL AS groupExp",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          groupExp:null
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT VALUE { 'groupExp': groupExp } FROM simple_1_col_1_group GROUP BY NULL AS groupExp",
-    statement:"SELECT VALUE { 'groupExp': groupExp } FROM simple_1_col_1_group GROUP BY NULL AS groupExp",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          groupExp:null
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT groupExp FROM simple_1_col_1_group GROUP BY MISSING AS groupExp",
-    statement:"SELECT groupExp FROM simple_1_col_1_group GROUP BY MISSING AS groupExp",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-        }
-      ]
-    }
-  },
-  {
-    name:"SELECT VALUE { 'groupExp': groupExp } FROM simple_1_col_1_group GROUP BY MISSING AS groupExp",
-    statement:"SELECT VALUE { 'groupExp': groupExp } FROM simple_1_col_1_group GROUP BY MISSING AS groupExp",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
+          someMissing:null  // missing coerced to null as per 11.1.1
         }
       ]
     }
@@ -1748,6 +1688,7 @@
           supplierId_missings:11
         },
         {
+          supplierId_missings:null  // missing coerced to null as per 11.1.1
         }
       ]
     }
@@ -1769,6 +1710,7 @@
           supplierId_missings:11
         },
         {
+          supplierId_missings:null  // missing coerced to null as per 11.1.1
         }
       ]
     }
@@ -1790,6 +1732,7 @@
           supplierId_missings:11
         },
         {
+          supplierId_missings:null  // missing coerced to null as per 11.1.1
         }
       ]
     }
@@ -1811,6 +1754,7 @@
           supplierId_mixed:11
         },
         {
+          supplierId_mixed:null  // missing coerced to null as per 11.1.1
         }
       ]
     }
@@ -1832,6 +1776,7 @@
           supplierId_mixed:11
         },
         {
+          supplierId_mixed:null  // missing coerced to null as per 11.1.1
         }
       ]
     }
@@ -1853,6 +1798,7 @@
           supplierId_mixed:11
         },
         {
+          supplierId_mixed:null  // missing coerced to null as per 11.1.1
         }
       ]
     }
@@ -1950,7 +1896,8 @@
           supplierId_missings:11
         },
         {
-          regionId:100
+          regionId:100,
+          supplierId_missings:null  // missing coerced to null as per 11.1.1
         },
         {
           regionId:200,
@@ -1961,7 +1908,8 @@
           supplierId_missings:11
         },
         {
-          regionId:200
+          regionId:200,
+          supplierId_missings:null  // missing coerced to null as per 11.1.1
         }
       ]
     }
@@ -1985,7 +1933,8 @@
           supplierId_missings:11
         },
         {
-          regionId:100
+          regionId:100,
+          supplierId_missings:null  // missing coerced to null as per 11.1.1
         },
         {
           regionId:200,
@@ -1996,7 +1945,8 @@
           supplierId_missings:11
         },
         {
-          regionId:200
+          regionId:200,
+          supplierId_missings:null  // missing coerced to null as per 11.1.1
         }
       ]
     }
@@ -2020,7 +1970,8 @@
           supplierId_missings:11
         },
         {
-          regionId:100
+          regionId:100,
+          supplierId_missings:null  // missing coerced to null as per 11.1.1
         },
         {
           regionId:200,
@@ -2031,7 +1982,8 @@
           supplierId_missings:11
         },
         {
-          regionId:200
+          regionId:200,
+          supplierId_missings:null  // missing coerced to null as per 11.1.1
         }
       ]
     }
@@ -2055,7 +2007,8 @@
           supplierId_mixed:11
         },
         {
-          regionId:100
+          regionId:100,
+          supplierId_mixed:null  // missing coerced to null as per 11.1.1
         },
         {
           regionId:200,
@@ -2091,7 +2044,8 @@
           supplierId_mixed:11
         },
         {
-          regionId:100
+          regionId:100,
+          supplierId_mixed:null  // missing coerced to null as per 11.1.1
         },
         {
           regionId:200,
@@ -2127,7 +2081,8 @@
           supplierId_mixed:11
         },
         {
-          regionId:100
+          regionId:100,
+          supplierId_mixed:null  // missing coerced to null as per 11.1.1
         },
         {
           regionId:200,
