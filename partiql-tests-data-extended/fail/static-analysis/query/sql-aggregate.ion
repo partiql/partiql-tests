@@ -108,4 +108,67 @@ spec_51::[
             result: StaticAnalysisFail
         },
     },
+    {
+        name:"top level ANY disallowed",
+        statement:"ANY([true, true, false, false])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level ANY ALL disallowed",
+        statement:"ANY(ALL [true, true, false, false])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level ANY DISTINCT disallowed",
+        statement:"ANY(DISTINCT [true, true, false, false])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level SOME disallowed",
+        statement:"SOME([true, true, false, false])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level SOME ALL disallowed",
+        statement:"SOME(ALL [true, true, false, false])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level SOME DISTINCT disallowed",
+        statement:"SOME(DISTINCT [true, true, false, false])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level EVERY disallowed",
+        statement:"EVERY([true, true, false, false])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level EVERY ALL disallowed",
+        statement:"EVERY(ALL [true, true, false, false])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
+    {
+        name:"top level EVERY DISTINCT disallowed",
+        statement:"EVERY(DISTINCT [true, true, false, false])",
+        assert: {
+            result: StaticAnalysisFail
+        },
+    },
 ]

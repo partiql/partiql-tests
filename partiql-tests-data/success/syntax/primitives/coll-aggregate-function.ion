@@ -1,0 +1,248 @@
+coll_sum::[
+    {
+        name: "COLL_SUM aggregate function call",
+        statement: "COLL_SUM(a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_SUM DISTINCT aggregate function call",
+        statement: "COLL_SUM(DISTINCT a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_SUM ALL aggregate function call",
+        statement: "COLL_SUM(ALL a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    }
+]
+
+coll_count::[
+    {
+        name: "COLL_COUNT aggregate function call",
+        statement: "COLL_COUNT(a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_COUNT star aggregate function call",
+        statement: "COLL_COUNT(*)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_COUNT ALL aggregate function call",
+        statement: "COLL_COUNT(ALL a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_COUNT DISTINCT aggregate function call",
+        statement: "COLL_COUNT(DISTINCT a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+]
+
+coll_avg::[
+    {
+        name: "COLL_AVG aggregate function call",
+        statement: "COLL_AVG(a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_AVG DISTINCT aggregate function call",
+        statement: "COLL_AVG(DISTINCT a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_AVG ALL aggregate function call",
+        statement: "COLL_AVG(ALL a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+]
+
+coll_max::[
+    {
+        name: "COLL_MAX aggregate function call",
+        statement: "COLL_MAX(a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_MAX DISTINCT aggregate function call",
+        statement: "COLL_MAX(DISTINCT a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_MAX ALL aggregate function call",
+        statement: "COLL_MAX(ALL a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+]
+
+coll_min::[
+    {
+        name: "COLL_MIN aggregate function call",
+        statement: "COLL_MIN(a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_MIN DISTINCT aggregate function call",
+        statement: "COLL_MIN(DISTINCT a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_MIN ALL aggregate function call",
+        statement: "COLL_MIN(ALL a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    }
+]
+
+coll_any::[
+    {
+        name: "COLL_ANY aggregate function call",
+        statement: "COLL_ANY(a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_ANY DISTINCT aggregate function call",
+        statement: "COLL_ANY(DISTINCT a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_ANY ALL aggregate function call",
+        statement: "COLL_ANY(ALL a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    }
+]
+
+coll_some::[
+    {
+        name: "COLL_SOME aggregate function call",
+        statement: "COLL_SOME(a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_SOME DISTINCT aggregate function call",
+        statement: "COLL_SOME(DISTINCT a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_SOME ALL aggregate function call",
+        statement: "COLL_SOME(ALL a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    }
+]
+
+coll_every::[
+    {
+        name: "COLL_EVERY aggregate function call",
+        statement: "COLL_EVERY(a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_EVERY DISTINCT aggregate function call",
+        statement: "COLL_EVERY(DISTINCT a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    },
+    {
+        name: "COLL_EVERY ALL aggregate function call",
+        statement: "COLL_EVERY(ALL a)",
+        assert: [
+            {
+                result: SyntaxSuccess
+            },
+        ]
+    }
+]
