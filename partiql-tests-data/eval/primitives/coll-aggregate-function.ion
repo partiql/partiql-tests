@@ -78,6 +78,75 @@ coll_max::[
       output:5.
     }
   },
+  {
+    name:"COLL_MAX empty collection",
+    statement:"COLL_MAX(<< >>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_MAX null",
+    statement:"COLL_MAX(NULL)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_MAX missing",
+    statement:"COLL_MAX(MISSING)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$missing::null
+    }
+  },
+  {
+    name:"COLL_MAX list of missing element",
+    statement:"COLL_MAX([MISSING])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_MAX bag of missing elements",
+    statement:"COLL_MAX(<<MISSING, MISSING>>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_MAX non-collection",
+    statement:"COLL_MAX('non-collection')",
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"COLL_MAX bag of heterogeneous element types",
+    statement:"COLL_MAX(<<1, 'non-number', NULL, MISSING>>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:"non-number"
+    }
+  },
 ]
 
 coll_avg::[
@@ -144,6 +213,81 @@ coll_avg::[
       output:2.5
     }
   },
+  {
+    name:"COLL_AVG empty collection",
+    statement:"COLL_AVG(<< >>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_AVG null",
+    statement:"COLL_AVG(NULL)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_AVG missing",
+    statement:"COLL_AVG(MISSING)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$missing::null
+    }
+  },
+  {
+    name:"COLL_AVG list of missing element",
+    statement:"COLL_AVG([MISSING])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_AVG bag of missing elements",
+    statement:"COLL_AVG(<<MISSING, MISSING>>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_AVG non-collection",
+    statement:"COLL_AVG('non-collection')",
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"COLL_AVG mistyped element",
+    statement:"COLL_AVG(<<1, 'non-number'>>)",
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
+  },
 ]
 
 coll_count::[
@@ -208,6 +352,75 @@ coll_count::[
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:5
+    }
+  },
+  {
+    name:"COLL_COUNT empty collection",
+    statement:"COLL_COUNT(<< >>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:0
+    }
+  },
+  {
+    name:"COLL_COUNT null",
+    statement:"COLL_COUNT(NULL)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_COUNT missing",
+    statement:"COLL_COUNT(MISSING)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$missing::null
+    }
+  },
+  {
+    name:"COLL_COUNT list of missing element",
+    statement:"COLL_COUNT([MISSING])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_COUNT bag of missing elements",
+    statement:"COLL_COUNT(<<MISSING, MISSING>>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_COUNT non-collection",
+    statement:"COLL_COUNT('non-collection')",
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"COLL_COUNT bag of heterogeneous element types",
+    statement:"COLL_COUNT(<<1, 'non-number', NULL, MISSING>>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:2
     }
   },
 ]
@@ -276,6 +489,81 @@ coll_sum::[
       output:3
     }
   },
+  {
+    name:"COLL_SUM empty collection",
+    statement:"COLL_SUM(<< >>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_SUM null",
+    statement:"COLL_SUM(NULL)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_SUM missing",
+    statement:"COLL_SUM(MISSING)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$missing::null
+    }
+  },
+  {
+    name:"COLL_SUM list of missing element",
+    statement:"COLL_SUM([MISSING])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_SUM bag of missing elements",
+    statement:"COLL_SUM(<<MISSING, MISSING>>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_SUM non-collection",
+    statement:"COLL_SUM('non-collection')",
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"COLL_SUM mistyped element",
+    statement:"COLL_SUM(<<1, 'non-number'>>)",
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
+  },
 ]
 
 coll_min::[
@@ -336,6 +624,75 @@ coll_min::[
   {
     name:"topLevelAllCollMin",
     statement:"COLL_MIN(ALL numbers)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:1
+    }
+  },
+  {
+    name:"COLL_MIN empty collection",
+    statement:"COLL_MIN(<< >>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_MIN null",
+    statement:"COLL_MIN(NULL)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_MIN missing",
+    statement:"COLL_MIN(MISSING)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$missing::null
+    }
+  },
+  {
+    name:"COLL_MIN list of missing element",
+    statement:"COLL_MIN([MISSING])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_MIN bag of missing elements",
+    statement:"COLL_MIN(<<MISSING, MISSING>>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_MIN non-collection",
+    statement:"COLL_MIN('non-collection')",
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"COLL_MIN bag of heterogeneous element types",
+    statement:"COLL_MIN(<<1, 'non-number', NULL, MISSING>>)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -409,6 +766,42 @@ coll_any::[
     }
   },
   {
+    name:"COLL_ANY null",
+    statement:"COLL_ANY(NULL)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_ANY missing",
+    statement:"COLL_ANY(MISSING)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$missing::null
+    }
+  },
+  {
+    name:"COLL_ANY list of missing element",
+    statement:"COLL_ANY([MISSING])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_ANY bag of missing elements",
+    statement:"COLL_ANY(<<MISSING, MISSING>>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
     name:"COLL_ANY some empty",
     statement:"COLL_ANY(<< >>)",
     assert:{
@@ -416,6 +809,21 @@ coll_any::[
       result:EvaluationSuccess,
       output:null
     }
+  },
+  {
+    name:"COLL_ANY non-collection",
+    statement:"COLL_ANY('non-collection')",
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
   },
   {
     name:"COLL_ANY one non-bool, non-unknown",
@@ -529,6 +937,42 @@ coll_some::[
     }
   },
   {
+    name:"COLL_SOME null",
+    statement:"COLL_SOME(NULL)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_SOME missing",
+    statement:"COLL_SOME(MISSING)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$missing::null
+    }
+  },
+  {
+    name:"COLL_SOME list of missing element",
+    statement:"COLL_SOME([MISSING])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_SOME bag of missing elements",
+    statement:"COLL_SOME(<<MISSING, MISSING>>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
     name:"COLL_SOME some empty",
     statement:"COLL_SOME(<< >>)",
     assert:{
@@ -536,6 +980,21 @@ coll_some::[
       result:EvaluationSuccess,
       output:null
     }
+  },
+  {
+    name:"COLL_SOME non-collection",
+    statement:"COLL_SOME('non-collection')",
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
   },
   {
     name:"COLL_SOME one non-bool, non-unknown",
@@ -584,7 +1043,7 @@ coll_some::[
   },
 ]
 
-coll_agg_every::[
+coll_every::[
   {
     name:"COLL_EVERY bag literals",
     statement:"COLL_EVERY(<< true, false, true >>)",
@@ -649,6 +1108,42 @@ coll_agg_every::[
     }
   },
   {
+    name:"COLL_EVERY null",
+    statement:"COLL_EVERY(NULL)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_EVERY missing",
+    statement:"COLL_EVERY(MISSING)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$missing::null
+    }
+  },
+  {
+    name:"COLL_EVERY list of missing element",
+    statement:"COLL_EVERY([MISSING])",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"COLL_EVERY bag of missing elements",
+    statement:"COLL_EVERY(<<MISSING, MISSING>>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
     name:"COLL_EVERY empty collection",
     statement:"COLL_EVERY(<< >>)",
     assert:{
@@ -656,6 +1151,21 @@ coll_agg_every::[
       result:EvaluationSuccess,
       output:null
     }
+  },
+  {
+    name:"COLL_EVERY non-collection",
+    statement:"COLL_EVERY('non-collection')",
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
   },
   {
     name:"COLL_EVERY one non-bool, non-unknown",
