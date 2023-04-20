@@ -110,63 +110,63 @@ spec_51::[
     },
     {
         name:"top level ANY disallowed",
-        statement:"ANY([1, 2, 3, 3])",
+        statement:"ANY([true, true, false, false])",
         assert: {
             result: StaticAnalysisFail
         },
     },
     {
         name:"top level ANY ALL disallowed",
-        statement:"ANY(ALL [1, 2, 3, 3])",
+        statement:"ANY(ALL [true, true, false, false])",
         assert: {
             result: StaticAnalysisFail
         },
     },
     {
         name:"top level ANY DISTINCT disallowed",
-        statement:"ANY(DISTINCT [1, 2, 3, 3])",
+        statement:"ANY(DISTINCT [true, true, false, false])",
         assert: {
             result: StaticAnalysisFail
         },
     },
     {
         name:"top level SOME disallowed",
-        statement:"SOME([1, 2, 3, 3])",
+        statement:"SOME([true, true, false, false])",
         assert: {
             result: StaticAnalysisFail
         },
     },
     {
         name:"top level SOME ALL disallowed",
-        statement:"SOME(ALL [1, 2, 3, 3])",
+        statement:"SOME(ALL [true, true, false, false])",
         assert: {
             result: StaticAnalysisFail
         },
     },
     {
         name:"top level SOME DISTINCT disallowed",
-        statement:"SOME(DISTINCT [1, 2, 3, 3])",
+        statement:"SOME(DISTINCT [true, true, false, false])",
         assert: {
             result: StaticAnalysisFail
         },
     },
     {
         name:"top level EVERY disallowed",
-        statement:"EVERY([1, 2, 3, 3])",
+        statement:"EVERY([true, true, false, false])",
         assert: {
             result: StaticAnalysisFail
         },
     },
     {
         name:"top level EVERY ALL disallowed",
-        statement:"EVERY(ALL [1, 2, 3, 3])",
+        statement:"EVERY(ALL [true, true, false, false])",
         assert: {
             result: StaticAnalysisFail
         },
     },
     {
         name:"top level EVERY DISTINCT disallowed",
-        statement:"EVERY(DISTINCT [1, 2, 3, 3])",
+        statement:"EVERY(DISTINCT [true, true, false, false])",
         assert: {
             result: StaticAnalysisFail
         },
