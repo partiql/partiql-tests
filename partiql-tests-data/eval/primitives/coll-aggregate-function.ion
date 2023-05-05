@@ -387,7 +387,7 @@ coll_count::[
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:null
+      output:0
     }
   },
   {
@@ -396,7 +396,7 @@ coll_count::[
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:null
+      output:0
     }
   },
   {
