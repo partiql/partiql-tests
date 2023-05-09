@@ -387,7 +387,7 @@ coll_count::[
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:null
+      output:0
     }
   },
   {
@@ -396,7 +396,7 @@ coll_count::[
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:null
+      output:0
     }
   },
   {
@@ -758,7 +758,7 @@ coll_any::[
   },
   {
     name:"COLL_ANY nulls only",
-    statement:"COLL_ANY([NULL, MISSING]])",
+    statement:"COLL_ANY([NULL, MISSING])",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -929,7 +929,7 @@ coll_some::[
   },
   {
     name:"COLL_SOME nulls only",
-    statement:"COLL_SOME([NULL, MISSING]])",
+    statement:"COLL_SOME([NULL, MISSING])",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
