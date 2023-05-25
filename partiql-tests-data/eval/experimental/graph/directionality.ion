@@ -1,0 +1,254 @@
+envs::{
+  pairs: $graph::{
+           nodes: [ {id: a1, labels:["a1"], payload: "A1"},
+                    {id: b1, labels:["b1"], payload: "B1"},
+                    {id: a2, labels:["a2"], payload: "A2"},
+                    {id: b2, labels:["b2"], payload: "B2"} ],
+           edges: [ {id: d1, labels:["d1"], payload: "D1", ends: (a1 -> b1)},
+                    {id: u2, labels:["u2"], payload: "U2", ends: (a2 -- b2)}  ]
+  }
+}
+
+directionality::[
+    {
+        name: "Right with variables",
+        statement: '''(pairs MATCH (x)-[y]->(z))''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x': "A1", 'y': "D1", 'z': "B1"} ]
+        }
+    },
+    {
+        name: "Right with spots",
+        statement: '''(pairs MATCH ()-[]->())''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {} ]
+        }
+    },
+    {
+        name: "Right shorthand",
+        statement: '''(pairs MATCH -> )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {} ]
+        }
+    },
+
+    {
+        name: "Left with variables",
+        statement: '''(pairs MATCH (x)<-[y]-(z))''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x': "B1", 'y': "D1", 'z': "A1"} ]
+        }
+    },
+    {
+        name: "Left with spots",
+        statement: '''(pairs MATCH ()<-[]-())''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {} ]
+        }
+    },
+    {
+        name: "Left shorthand",
+        statement: '''(pairs MATCH <- )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {} ]
+        }
+    },
+
+    {
+        name: "Left+right with variables",
+        statement: '''(pairs MATCH (x)<-[y]->(z))''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x': "A1", 'y': "D1", 'z': "B1"},
+                            {'x': "B1", 'y': "D1", 'z': "A1"}]
+        }
+    },
+    {
+        name: "Left+right with spots",
+        statement: '''(pairs MATCH ()<-[]->())''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {}, {} ]
+        }
+    },
+    {
+        name: "Left+right shorthand",
+        statement: '''(pairs MATCH <-> )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {}, {} ]
+        }
+    },
+    {
+        name: "Left+right with variables and label",
+        statement: '''(pairs MATCH (x:a1)<-[y]->(z))''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x': "A1", 'y': "D1", 'z': "B1"} ]
+        }
+    },
+
+    {
+        name: "Undirected with variables",
+        statement: '''(pairs MATCH (x)~[y]~(z))''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x': "A2", 'y': "U2", 'z': "B2"},
+                            {'x': "B2", 'y': "U2", 'z': "A2"}]
+        }
+    },
+    {
+        name: "Undirected with spots",
+        statement: '''(pairs MATCH ()~[]~())''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {}, {} ]
+        }
+    },
+    {
+        name: "Undirected shorthand",
+        statement: '''(pairs MATCH ~ )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {}, {} ]
+        }
+    },
+    {
+        name: "Undirected with variables and label",
+        statement: '''(pairs MATCH (x)~[y]~(z:b2))''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x': "A2", 'y': "U2", 'z': "B2"} ]
+        }
+    },
+
+    {
+        name: "Right+undirected with variables",
+        statement: '''(pairs MATCH (x)~[y]~>(z))''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x': "A1", 'y': "D1", 'z': "B1"},
+                            {'x': "A2", 'y': "U2", 'z': "B2"},
+                            {'x': "B2", 'y': "U2", 'z': "A2"}]
+        }
+    },
+    {
+        name: "Right+undirected with spots",
+        statement: '''(pairs MATCH ()~[]~>())''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {}, {}, {} ]
+        }
+    },
+    {
+        name: "Right+undirected shorthand",
+        statement: '''(pairs MATCH ~> )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {}, {}, {} ]
+        }
+    },
+    {
+        name: "Right+undirected with variables and labels",
+        statement: '''(pairs MATCH (x:a1)~[y]~>(z:a2) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ ]
+        }
+    },
+
+    {
+        name: "Left+undirected with variables",
+        statement: '''(pairs MATCH (x)<~[y]~(z))''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x': "B1", 'y': "D1", 'z': "A1"},
+                            {'x': "A2", 'y': "U2", 'z': "B2"},
+                            {'x': "B2", 'y': "U2", 'z': "A2"} ]
+        }
+    },
+    {
+        name: "Left+undirected with spots",
+        statement: '''(pairs MATCH ()<~[]~())''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {}, {}, {} ]
+        }
+    },
+    {
+        name: "Left+undirected shorthand",
+        statement: '''(pairs MATCH <~ )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {}, {}, {} ]
+        }
+    },
+    {
+        name: "Left+undirected with variables and label",
+        statement: '''(pairs MATCH (x)<~[y:u2]~(z))''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x': "A2", 'y': "U2", 'z': "B2"},
+                            {'x': "B2", 'y': "U2", 'z': "A2"} ]
+        }
+    },
+
+    {
+        name: "Left+right+undirected with variables",
+        statement: '''(pairs MATCH (x)-[y]-(z))''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x': "A1", 'y': "D1", 'z': "B1"},
+                            {'x': "B1", 'y': "D1", 'z': "A1"},
+                            {'x': "A2", 'y': "U2", 'z': "B2"},
+                            {'x': "B2", 'y': "U2", 'z': "A2"} ]
+        }
+    },
+    {
+        name: "Left+right+undirected with spots",
+        statement: '''(pairs MATCH ()-[]-())''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {}, {}, {}, {} ]
+        }
+    },
+    {
+        name: "Left+right+undirected shorthand",
+        statement: '''(pairs MATCH - )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {}, {}, {}, {} ]
+        }
+    },
+]

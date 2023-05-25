@@ -1,0 +1,643 @@
+envs::{
+            // The empty graph
+            N0E0: $graph::{ nodes: [], edges: [] },
+            // n1  -- one solitary node
+            N1E0: $graph::{ nodes: [ {id: n1, payload: 1} ], edges: [] },
+            // n1  -- a single node with a directed self-loop edge
+            N1D1: $graph::{ nodes: [ {id: n1, payload: 1} ],
+                            edges: [ {id: d1, payload: 1.1, ends: (n1 -> n1) } ] },
+            // n1 -- a single node with an undirected self-loop
+            N1U1: $graph::{ nodes: [ {id: n1, payload: 1} ],
+                          edges: [ {id: u1, payload: 1.1, ends: (n1 -- n1)} ] },
+            // n1  -- a single node with two self-loop edges
+            N1D2: $graph::{ nodes: [ {id: n1, payload: 1} ],
+                          edges: [ {id: d1, payload: 1.1, ends: (n1 -> n1) },
+                                   {id: d2, payload: 11.11, ends: (n1 -> n1)} ] },
+            // n1  n2  -- two disconnected nodes
+            N2E0: $graph::{ nodes: [ {id: n1, payload: 1}, {id: n2, payload: 2} ], edges: [] },
+            // n1 -[d1]-> n2
+            N2D1: $graph::{ nodes: [ {id: n1, payload: 1}, {id: n2, payload: 2} ],
+                          edges: [ {id: d1, payload: 1.2, ends: (n1 -> n2) } ] },
+            // n1 -[u1]- n2
+            N2U1: $graph::{ nodes: [ {id: n1, payload: 1}, {id: n2, payload: 2} ],
+                          edges: [ {id: u1, payload: 1.2, ends: (n1 -- n2) } ] },
+            // n1 -[d1]-> n2   --- two parallel edges
+            //    -[d2]->
+            N2D2: $graph::{ nodes: [ {id: n1, payload: 1}, {id: n2, payload: 2} ],
+                          edges: [ {id: d1, payload: 1.2,   ends: (n1 -> n2) },
+                                   {id: d2, payload: 11.22, ends: (n1 -> n2) } ] },
+            // n1 -[d1]-> n2   --- two cycling edges
+            //    <-[d2]-
+            N2D2c: $graph::{ nodes: [ {id: n1, payload: 1}, {id: n2, payload: 2} ],
+                           edges: [ {id: d1, payload: 1.2, ends: (n1 -> n2) },
+                                   {id: d2, payload: 2.1, ends: (n2 -> n1) } ] },
+            // n1 -[u1]- n2   --- two parallel undirected edges
+            //    -[u2]-
+            N2U2: $graph::{ nodes: [ {id: n1, payload: 1}, {id: n2, payload: 2} ],
+                         edges: [ {id: u1, payload: 1.2, ends: (n1 -- n2) },
+                                  {id: u2, payload: 2.1, ends: (n2 -- n1) } ] },
+}
+
+small_graphs::[
+    {
+        name: "(N0E0 MATCH (x))",
+        statement: '''(N0E0 MATCH (x))''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ ]
+        }
+    },
+    {
+        name: "(N0E0 MATCH -[y]-> )",
+        statement: '''(N0E0 MATCH -[y]-> )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ ]
+        }
+    },
+    {
+        name: "(N0E0 MATCH (x)-[y]->(z) )",
+        statement: '''(N0E0 MATCH (x)-[y]->(z) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ ]
+        }
+    },
+
+    {
+        name: "(N1E0 MATCH (x))",
+        statement: '''(N1E0 MATCH (x))''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x':1} ]
+        }
+    },
+    {
+        name: "(N1E0 MATCH -[y]-> )",
+        statement: '''(N1E0 MATCH -[y]-> )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ ]
+        }
+    },
+    {
+        name: "(N1E0 MATCH (x)-[y]->(z) )",
+        statement: '''(N1E0 MATCH (x)-[y]->(z) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ ]
+        }
+    },
+    {
+        name: "(N1E0 MATCH (x)-[y]->(x) )",
+        statement: '''(N1E0 MATCH (x)-[y]->(x) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ ]
+        }
+    },
+
+    {
+        name: "(N1U1 MATCH (x))",
+        statement: '''(N1U1 MATCH (x))''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x':1} ]
+        }
+    },
+    {
+        name: "(N1U1 MATCH ~[y]~ )",
+        statement: '''(N1U1 MATCH ~[y]~ )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'y':1.1} ]
+        }
+    },
+    {
+        name: "(N1U1 MATCH (x)~[y]~(z) )",
+        statement: '''(N1U1 MATCH (x)~[y]~(z) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x':1, 'y':1.1, 'z':1} ]
+        }
+    },
+    {
+        name: "(N1U1 MATCH (x)~[y]~(x) )",
+        statement: '''(N1U1 MATCH (x)~[y]~(x) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x':1, 'y':1.1} ]
+        }
+    },
+    {
+        name: "(N1U1 MATCH (x1)~[y1]~(x2)~[y2]~(x3) )",
+        statement: '''(N1U1 MATCH (x1)~[y1]~(x2)~[y2]~(x3) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x1':1, 'y1':1.1, 'x2':1, 'y2':1.1, 'x3':1} ]
+        }
+    },
+
+    {
+        name: "(N1D2 MATCH (x))",
+        statement: '''(N1D2 MATCH (x))''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x':1} ]
+        }
+    },
+    {
+        name: "(N1D2 MATCH -[y]-> )",
+        statement: '''(N1D2 MATCH -[y]-> )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'y':1.1}, {'y':11.11} ]
+        }
+    },
+    {
+        name: "(N1D2 MATCH (x)-[y]->(z) )",
+        statement: '''(N1D2 MATCH (x)-[y]->(z) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x':1, 'y':1.1, 'z':1}, {'x':1, 'y':11.11, 'z':1} ]
+        }
+    },
+    {
+        name: "(N1D2 MATCH (x)-[y]->(x) )",
+        statement: '''(N1D2 MATCH (x)-[y]->(x) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x':1, 'y':1.1}, {'x':1, 'y':11.11} ]
+        }
+    },
+    {
+        name: "(N1D2 MATCH (x1)-[y1]->(x2)-[y2]->(x3) )",
+        statement: '''(N1D2 MATCH (x1)-[y1]->(x2)-[y2]->(x3) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x1':1, 'y1':1.1,   'x2':1, 'y2':1.1,   'x3':1},
+                            {'x1':1, 'y1':1.1,   'x2':1, 'y2':11.11, 'x3':1},
+                            {'x1':1, 'y1':11.11, 'x2':1, 'y2':1.1,   'x3':1},
+                            {'x1':1, 'y1':11.11, 'x2':1, 'y2':11.11, 'x3':1} ]
+        }
+    },
+
+    {
+        name: "(N2E0 MATCH (x))",
+        statement: '''(N2E0 MATCH (x))''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x':1}, {'x':2} ]
+        }
+    },
+    {
+        name: "(N2E0 MATCH -[y]-> )",
+        statement: '''(N2E0 MATCH -[y]-> )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ ]
+        }
+    },
+    {
+        name: "(N2E0 MATCH (x)-[y]->(z) )",
+        statement: '''(N2E0 MATCH (x)-[y]->(z) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ ]
+        }
+    },
+    {
+        name: "(N2E0 MATCH (x)-[y]->(x) )",
+        statement: '''(N2E0 MATCH (x)-[y]->(x) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ ]
+        }
+    },
+
+    {
+        name: "(N2D1 MATCH (x))",
+        statement: '''(N2D1 MATCH (x))''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x':1}, {'x':2} ]
+        }
+    },
+    {
+        name: "(N2D1 MATCH -[y]-> )",
+        statement: '''(N2D1 MATCH -[y]-> )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'y':1.2} ]
+        }
+    },
+    {
+        name: "(N2D1 MATCH (x)-[y]->(z) )",
+        statement: '''(N2D1 MATCH (x)-[y]->(z) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x':1, 'y':1.2, 'z':2} ]
+        }
+    },
+    {
+        name: "(N2D1 MATCH (x)-[y]->(x) )",
+        statement: '''(N2D1 MATCH (x)-[y]->(x) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ ]
+        }
+    },
+    {
+        name: "(N2D1 MATCH (x1)-[y1]->(x2)-[y2]->(x3) )",
+        statement: '''(N2D1 MATCH (x1)-[y1]->(x2)-[y2]->(x3) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ ]
+        }
+    },
+    {
+        name: "(N2D1 MATCH (x1)-[y1]->(x2)-[y2]-(x3) )",
+        statement: '''(N2D1 MATCH (x1)-[y1]->(x2)-[y2]-(x3) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x1':1, 'y1':1.2, 'x2':2, 'y2':1.2, 'x3':1} ]
+        }
+    },
+    {
+        name: "(N2D1 MATCH (x1)-[y1]-(x2)-[y2]->(x3) )",
+        statement: '''(N2D1 MATCH (x1)-[y1]-(x2)-[y2]->(x3) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x1':2, 'y1':1.2, 'x2':1, 'y2':1.2, 'x3':2} ]
+        }
+    },
+    {
+        name: "(N2D1 MATCH (x1)-[y1]-(x2)-[y2]-(x3) )",
+        statement: '''(N2D1 MATCH (x1)-[y1]-(x2)-[y2]-(x3) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x1':1, 'y1':1.2, 'x2':2, 'y2':1.2, 'x3':1},
+                            {'x1':2, 'y1':1.2, 'x2':1, 'y2':1.2, 'x3':2} ]
+        }
+    },
+
+    {
+        name: "(N2U1 MATCH (x))",
+        statement: '''(N2U1 MATCH (x))''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x':1}, {'x':2} ]
+        }
+    },
+    {
+        name: "(N2U1 MATCH ~[y]~ )",
+        statement: '''(N2U1 MATCH ~[y]~ )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'y':1.2} ]
+        }
+    },
+    {
+        name: "(N2U1 MATCH (x)~[y]~(z) )",
+        statement: '''(N2U1 MATCH (x)~[y]~(z) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x':1, 'y':1.2, 'z':2},
+                            {'x':2, 'y':1.2, 'z':1} ]
+        }
+    },
+    {
+        name: "(N2U1 MATCH (x)~[y]~(x) )",
+        statement: '''(N2U1 MATCH (x)~[y]~(x) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ ]
+        }
+    },
+    {
+        name: "(N2U1 MATCH (x1)~[y1]~(x2)~[y2]~(x3) )",
+        statement: '''(N2U1 MATCH (x1)~[y1]~(x2)~[y2]~(x3) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x1':1, 'y1':1.2, 'x2':2, 'y2':1.2, 'x3':1},
+                            {'x1':2, 'y1':1.2, 'x2':1, 'y2':1.2, 'x3':2} ]
+        }
+    },
+    {
+        name: "(N2U1 MATCH (x1)~[y1]~(x2)-[y2]-(x3) )",
+        statement: '''(N2U1 MATCH (x1)~[y1]~(x2)-[y2]-(x3) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x1':1, 'y1':1.2, 'x2':2, 'y2':1.2, 'x3':1},
+                            {'x1':2, 'y1':1.2, 'x2':1, 'y2':1.2, 'x3':2} ]
+        }
+    },
+    {
+        name: "(N2U1 MATCH (x1)-[y1]-(x2)~[y2]~(x3) )",
+        statement: '''(N2U1 MATCH (x1)-[y1]-(x2)~[y2]~(x3) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x1':1, 'y1':1.2, 'x2':2, 'y2':1.2, 'x3':1},
+                            {'x1':2, 'y1':1.2, 'x2':1, 'y2':1.2, 'x3':2} ]
+        }
+    },
+    {
+        name: "(N2U1 MATCH (x1)-[y1]-(x2)-[y2]-(x3) )",
+        statement: '''(N2U1 MATCH (x1)-[y1]-(x2)-[y2]-(x3) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x1':1, 'y1':1.2, 'x2':2, 'y2':1.2, 'x3':1},
+                            {'x1':2, 'y1':1.2, 'x2':1, 'y2':1.2, 'x3':2} ]
+        }
+    },
+
+    {
+        name: "(N2D2 MATCH (x))",
+        statement: '''(N2D2 MATCH (x))''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x':1}, {'x':2} ]
+        }
+    },
+    {
+        name: "(N2D2 MATCH -[y]-> )",
+        statement: '''(N2D2 MATCH -[y]-> )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'y':1.2}, {'y':11.22} ]
+        }
+    },
+    {
+        name: "(N2D2 MATCH (x)-[y]->(z) )",
+        statement: '''(N2D2 MATCH (x)-[y]->(z) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x':1, 'y':1.2, 'z':2}, {'x':1, 'y':11.22, 'z':2} ]
+        }
+    },
+    {
+        name: "(N2D2 MATCH (x)-[y]->(x) )",
+        statement: '''(N2D2 MATCH (x)-[y]->(x) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ ]
+        }
+    },
+    {
+        name: "(N2D2 MATCH (x1)-[y1]->(x2)-[y2]->(x3) )",
+        statement: '''(N2D2 MATCH (x1)-[y1]->(x2)-[y2]->(x3) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ ]
+        }
+    },
+    {
+        name: "(N2D2 MATCH (x1)-[y1]->(x2)-[y2]-(x3) )",
+        statement: '''(N2D2 MATCH (x1)-[y1]->(x2)-[y2]-(x3) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x1':1, 'y1':1.2, 'x2':2, 'y2':1.2, 'x3':1},
+                            {'x1':1, 'y1':1.2, 'x2':2, 'y2':11.22, 'x3':1},
+                            {'x1':1, 'y1':11.22, 'x2':2, 'y2':1.2, 'x3':1},
+                            {'x1':1, 'y1':11.22, 'x2':2, 'y2':11.22, 'x3':1} ]
+        }
+    },
+    {
+        name: "(N2D2 MATCH (x1)-[y1]-(x2)-[y2]->(x3) )",
+        statement: '''(N2D2 MATCH (x1)-[y1]-(x2)-[y2]->(x3) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x1':2, 'y1':1.2, 'x2':1, 'y2':1.2, 'x3':2},
+                            {'x1':2, 'y1':1.2, 'x2':1, 'y2':11.22, 'x3':2},
+                            {'x1':2, 'y1':11.22, 'x2':1, 'y2':1.2, 'x3':2},
+                            {'x1':2, 'y1':11.22, 'x2':1, 'y2':11.22, 'x3':2} ]
+        }
+    },
+    {
+        name: "(N2D2 MATCH (x1)-[y1]-(x2)-[y2]-(x3) )",
+        statement: '''(N2D2 MATCH (x1)-[y1]-(x2)-[y2]-(x3) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x1':1, 'y1':1.2, 'x2':2, 'y2':1.2, 'x3':1},
+                            {'x1':1, 'y1':1.2, 'x2':2, 'y2':11.22, 'x3':1},
+                            {'x1':1, 'y1':11.22, 'x2':2, 'y2':1.2, 'x3':1},
+                            {'x1':1, 'y1':11.22, 'x2':2, 'y2':11.22, 'x3':1},
+                            {'x1':2, 'y1':1.2, 'x2':1, 'y2':1.2, 'x3':2},
+                            {'x1':2, 'y1':1.2, 'x2':1, 'y2':11.22, 'x3':2},
+                            {'x1':2, 'y1':11.22, 'x2':1, 'y2':1.2, 'x3':2},
+                            {'x1':2, 'y1':11.22, 'x2':1, 'y2':11.22, 'x3':2} ]
+        }
+    },
+
+    {
+        name: "(N2D2c MATCH (x))",
+        statement: '''(N2D2c MATCH (x))''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x':1}, {'x':2} ]
+        }
+    },
+    {
+        name: "(N2D2c MATCH -[y]-> )",
+        statement: '''(N2D2c MATCH -[y]-> )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'y':1.2}, {'y':2.1} ]
+        }
+    },
+    {
+        name: "(N2D2c MATCH (x)-[y]->(z) )",
+        statement: '''(N2D2c MATCH (x)-[y]->(z) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x':1, 'y':1.2, 'z':2}, {'x':2, 'y':2.1, 'z':1} ]
+        }
+    },
+    {
+        name: "(N2D2c MATCH (x)-[y]->(x) )",
+        statement: '''(N2D2c MATCH (x)-[y]->(x) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ ]
+        }
+    },
+    {
+        name: "(N2D2c MATCH (x1)-[y1]->(x2)-[y2]->(x3) )",
+        statement: '''(N2D2c MATCH (x1)-[y1]->(x2)-[y2]->(x3) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x1':1, 'y1':1.2, 'x2':2, 'y2':2.1, 'x3':1},
+                            {'x1':2, 'y1':2.1, 'x2':1, 'y2':1.2, 'x3':2} ]
+        }
+    },
+    {
+        name: "(N2D2c MATCH (x1)-[y1]->(x2)-[y2]->(x1) )",
+        statement: '''(N2D2c MATCH (x1)-[y1]->(x2)-[y2]->(x1) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[  {'x1':1, 'y1':1.2, 'x2':2, 'y2':2.1 },
+                             {'x1':2, 'y1':2.1, 'x2':1, 'y2':1.2 } ]
+        }
+    },
+    {
+        name: "(N2D2c MATCH (x1)-[y1]->(x2)-[y2]-(x3) )",
+        statement: '''(N2D2c MATCH (x1)-[y1]->(x2)-[y2]-(x3) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x1':1, 'y1':1.2, 'x2':2, 'y2':1.2, 'x3':1},
+                            {'x1':1, 'y1':1.2, 'x2':2, 'y2':2.1, 'x3':1},
+                            {'x1':2, 'y1':2.1, 'x2':1, 'y2':1.2, 'x3':2},
+                            {'x1':2, 'y1':2.1, 'x2':1, 'y2':2.1, 'x3':2} ]
+        }
+    },
+    {
+        name: "(N2D2c MATCH (x1)-[y1]-(x2)-[y2]->(x3) )",
+        statement: '''(N2D2c MATCH (x1)-[y1]-(x2)-[y2]->(x3) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[  {'x1':2, 'y1':1.2, 'x2':1, 'y2':1.2, 'x3':2},
+                             {'x1':2, 'y1':2.1, 'x2':1, 'y2':1.2, 'x3':2},
+                             {'x1':1, 'y1':1.2, 'x2':2, 'y2':2.1, 'x3':1},
+                             {'x1':1, 'y1':2.1, 'x2':2, 'y2':2.1, 'x3':1} ]
+        }
+    },
+    {
+        name: "(N2D2c MATCH (x1)-[y1]-(x2)-[y2]-(x3) )",
+        statement: '''(N2D2c MATCH (x1)-[y1]-(x2)-[y2]-(x3) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[    {'x1':1, 'y1':1.2, 'x2':2, 'y2':1.2, 'x3':1},
+                               {'x1':1, 'y1':1.2, 'x2':2, 'y2':2.1, 'x3':1},
+                               {'x1':1, 'y1':2.1, 'x2':2, 'y2':1.2, 'x3':1},
+                               {'x1':1, 'y1':2.1, 'x2':2, 'y2':2.1, 'x3':1},
+                               {'x1':2, 'y1':1.2, 'x2':1, 'y2':1.2, 'x3':2},
+                               {'x1':2, 'y1':1.2, 'x2':1, 'y2':2.1, 'x3':2},
+                               {'x1':2, 'y1':2.1, 'x2':1, 'y2':1.2, 'x3':2},
+                               {'x1':2, 'y1':2.1, 'x2':1, 'y2':2.1, 'x3':2} ]
+        }
+    },
+
+    {
+        name: "(N2U2 MATCH (x))",
+        statement: '''(N2U2 MATCH (x))''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x':1}, {'x':2} ]
+        }
+    },
+    {
+        name: "(N2U2 MATCH ~[y]~ )",
+        statement: '''(N2U2 MATCH ~[y]~ )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'y':1.2}, {'y':2.1} ]
+        }
+    },
+    {
+        name: "(N2U2 MATCH (x)~[y]~(z) )",
+        statement: '''(N2U2 MATCH (x)~[y]~(z) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x':1, 'y':1.2, 'z':2}, {'x':2, 'y':2.1, 'z':1},
+                            {'x':2, 'y':1.2, 'z':1}, {'x':1, 'y':2.1, 'z':2} ]
+        }
+    },
+    {
+        name: "(N2U2 MATCH (x)~[y]~(x) )",
+        statement: '''(N2U2 MATCH (x)~[y]~(x) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ ]
+        }
+    },
+    {
+        name: "(N2U2 MATCH (x1)~[y1]~(x2)~[y2]~(x3) )",
+        statement: '''(N2U2 MATCH (x1)~[y1]~(x2)~[y2]~(x3) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x1':1, 'y1':1.2, 'x2':2, 'y2':2.1, 'x3':1},
+                            {'x1':1, 'y1':1.2, 'x2':2, 'y2':1.2, 'x3':1},
+                            {'x1':1, 'y1':2.1, 'x2':2, 'y2':1.2, 'x3':1},
+                            {'x1':1, 'y1':2.1, 'x2':2, 'y2':2.1, 'x3':1},
+                            {'x1':2, 'y1':1.2, 'x2':1, 'y2':2.1, 'x3':2},
+                            {'x1':2, 'y1':1.2, 'x2':1, 'y2':1.2, 'x3':2},
+                            {'x1':2, 'y1':2.1, 'x2':1, 'y2':1.2, 'x3':2},
+                            {'x1':2, 'y1':2.1, 'x2':1, 'y2':2.1, 'x3':2} ]
+        }
+    },
+    {
+        name: "(N2U2 MATCH (x1)~[y1]~(x2)~[y2]~(x1) )",
+        statement: '''(N2U2 MATCH (x1)~[y1]~(x2)~[y2]~(x1) )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ {'x1':1, 'y1':1.2, 'x2':2, 'y2':2.1},
+                            {'x1':1, 'y1':1.2, 'x2':2, 'y2':1.2},
+                            {'x1':1, 'y1':2.1, 'x2':2, 'y2':1.2},
+                            {'x1':1, 'y1':2.1, 'x2':2, 'y2':2.1},
+                            {'x1':2, 'y1':1.2, 'x2':1, 'y2':2.1},
+                            {'x1':2, 'y1':1.2, 'x2':1, 'y2':1.2},
+                            {'x1':2, 'y1':2.1, 'x2':1, 'y2':1.2},
+                            {'x1':2, 'y1':2.1, 'x2':1, 'y2':2.1} ]
+        }
+    },
+]
