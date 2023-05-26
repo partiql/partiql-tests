@@ -203,6 +203,16 @@ $date::'2022-02-22'
 $time::'02:30:59'
 ```
 
+Similarly, graphs defined with the Ion-based format for "external" graphs 
+([org.partiql.schemas/graph.isl](https://github.com/partiql/partiql-lang-kotlin/blob/main/partiql-lang/src/main/resources/org/partiql/schemas/graph.isl))
+are annotated with `$graph`:
+
+```ion
+// graph -- a struct in graph.isl format, annotated with $graph
+$graph::{ nodes: [ {id: n1, payload: 1} ], 
+          edges: [ {id: d1, payload: 1.1, ends: (n1 -> n1) } ] }
+```
+
 ---
 
 #### PartiQL Evaluation Modes
