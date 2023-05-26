@@ -153,9 +153,9 @@ bag::[
         }
     },
     {
-        name: "Example 3 — Union of Heterogenous Relations",
+        name: "Example 3 — Outer union of Heterogenous Relations",
         statement: '''SELECT * FROM hr.employees               -- T1
-                      UNION
+                      OUTER UNION
                       SELECT title FROM engineering.employees  -- T2''',
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
@@ -212,16 +212,16 @@ bag::[
         }
     },
     {
-        name: "Example 7 — `TABLE engineering.employees UNION << MISSING >>`",
-        statement: '''TABLE engineering.employees UNION << MISSING >>''',
+        name: "Example 7 — `engineering.employees UNION << MISSING >>`",
+        statement: '''engineering.employees UNION << MISSING >>''',
         assert: {
             evalMode:[EvalModeCoerce, EvalModeError],
             result: EvaluationFail,
         }
     },
     {
-        name: "Example 7 — `TABLE engineering.employess OUTER UNION << MISSING >>`",
-        statement: '''TABLE engineering.employess OUTER UNION << MISSING >>''',
+        name: "Example 7 — `engineering.employees OUTER UNION << MISSING >>`",
+        statement: '''engineering.employees OUTER UNION << MISSING >>''',
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
             result: EvaluationSuccess,
