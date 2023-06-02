@@ -325,7 +325,8 @@ small_graphs::[
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
             result: EvaluationSuccess,
-            output: $bag::[ {'y':1.2} ]
+            output: $bag::[ {'y':1.2}, {'y':1.2} ]
+            // valid duplication in the result, because it comes from erasure in distinct bindings of the next example
         }
     },
     {
@@ -586,7 +587,8 @@ small_graphs::[
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
             result: EvaluationSuccess,
-            output: $bag::[ {'y':1.2}, {'y':2.1} ]
+            output: $bag::[ {'y':1.2}, {'y':2.1}, {'y':1.2}, {'y':2.1} ]
+            // valid duplication in the result, because it comes from erasure in distinct bindings of the next example
         }
     },
     {
