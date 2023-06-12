@@ -1,0 +1,122 @@
+is::[
+  {
+    name: "1.000 is DECIMAL(3,3)",
+    statement: "1.000 is DECIMAL(3,3)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: true
+    }
+  },
+  {
+    name: "1.0000 is DECIMAL(5,3)",
+    statement: "1.0000 is DECIMAL(5,3)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: false
+    }
+  },
+  {
+    name: "0.001 is DECIMAL(3,3)",
+    statement: "0.001 is DECIMAL(3,3)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: true
+    }
+  },
+  {
+    name: "123.456 is DECIMAL(2,2)",
+    statement: "123.456 is DECIMAL(2,2)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: false
+    }
+  },
+  {
+    name: "123.456 is DECIMAL(5,3)",
+    statement: "123.456 is DECIMAL(5,3)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: false
+    }
+  },
+  {
+    name: "123.456 is DECIMAL(7,3)",
+    statement: "123.456 is DECIMAL(7,3)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: false
+    }
+  },
+  {
+    name: "123.456 is DECIMAL(6,2)",
+    statement: "123.456 is DECIMAL(6,2)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: false
+    }
+  },
+  {
+    name: "123.456 is DECIMAL(6,4)",
+    statement: "123.456 is DECIMAL(6,4)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: false
+    }
+  },
+  {
+    name: "0123.456 is DECIMAL(6,3)",
+    statement: "0123.456 is DECIMAL(6,3)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: true
+    }
+  },
+  {
+    name: "0.00 is DECIMAL(4,3)",
+    statement: "0.00 is DECIMAL(4,3)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: true
+    }
+  },
+]
