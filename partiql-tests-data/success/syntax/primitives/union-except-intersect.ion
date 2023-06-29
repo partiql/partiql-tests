@@ -20,6 +20,13 @@
             result: SyntaxSuccess
         }
     },
+    {
+        name: "a UNION DISTINCT b",
+        statement: "a UNION DISTINCT b",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
 ]
 
 'except-sql'::[
@@ -37,6 +44,13 @@
             result: SyntaxSuccess
         }
     },
+    {
+        name: "a EXCEPT DISTINCT b",
+        statement: "a EXCEPT DISTINCT b",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
 ]
 
 'intersect-sql'::[
@@ -50,6 +64,158 @@
     {
         name: "a INTERSECT ALL b",
         statement: "a INTERSECT ALL b",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "a INTERSECT DISTINCT b",
+        statement: "a INTERSECT DISTINCT b",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+]
+
+'outer-union'::[
+    {
+        name: "a OUTER UNION b",
+        statement: "a OUTER UNION b",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "OUTER UNION SELECT precedence",
+        statement: "SELECT * FROM foo OUTER UNION SELECT * FROM bar",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "a OUTER UNION ALL b",
+        statement: "a OUTER UNION ALL b",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "a OUTER UNION DISTINCT b",
+        statement: "a OUTER UNION DISTINCT b",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+]
+
+'outer-except'::[
+    {
+        name: "a OUTER EXCEPT b",
+        statement: "a OUTER EXCEPT b",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "a OUTER EXCEPT ALL b",
+        statement: "a OUTER EXCEPT ALL b",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "a OUTER EXCEPT DISTINCT b",
+        statement: "a OUTER EXCEPT DISTINCT b",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+]
+
+'outer-intersect'::[
+    {
+        name: "a OUTER INTERSECT b",
+        statement: "a OUTER INTERSECT b",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "a OUTER INTERSECT ALL b",
+        statement: "a OUTER INTERSECT ALL b",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "a OUTER INTERSECT DISTINCT b",
+        statement: "a OUTER INTERSECT DISTINCT b",
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+]
+
+'order-by-limit-offset-bag-ops'::[
+    {
+        name: "UNION SFW children with ORDER BY LIMIT OFFSET",
+        statement: '''
+            (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
+            UNION
+            (SELECT a2 FROM b2 ORDER BY c2 LIMIT d2 OFFSET e2)
+            ORDER BY c3 LIMIT d3 OFFSET e3''',
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "INTERSECT SFW children with ORDER BY LIMIT OFFSET",
+        statement: '''
+            (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
+            INTERSECT
+            (SELECT a2 FROM b2 ORDER BY c2 LIMIT d2 OFFSET e2)
+            ORDER BY c3 LIMIT d3 OFFSET e3''',
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "EXCEPT SFW children with ORDER BY LIMIT OFFSET",
+        statement: '''
+            (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
+            EXCEPT
+            (SELECT a2 FROM b2 ORDER BY c2 LIMIT d2 OFFSET e2)
+            ORDER BY c3 LIMIT d3 OFFSET e3''',
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "nested bag op with ORDER BY LIMIT OFFSET",
+        statement: '''
+            (
+                (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
+                UNION DISTINCT
+                (SELECT a2 FROM b2 ORDER BY c2 LIMIT d2 OFFSET e2)
+            )
+            OUTER UNION ALL
+            (SELECT a3 FROM b3 ORDER BY c3 LIMIT d3 OFFSET e3)
+            ORDER BY c4 LIMIT d4 OFFSET e4''',
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "deep nested bag ops with ORDER BY LIMIT OFFSET",
+        statement: '''
+            (a UNION b)
+            INTERSECT
+            (
+                c EXCEPT
+                d UNION ALL (e INTERSECT f ORDER BY g LIMIT h OFFSET i)
+            )
+            EXCEPT j
+            ORDER BY k LIMIT l OFFSET m''',
         assert: {
             result: SyntaxSuccess
         }

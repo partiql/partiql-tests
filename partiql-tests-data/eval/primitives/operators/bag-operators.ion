@@ -1,4 +1,50 @@
 bagOperators::[
+  envs::{
+    t1: [
+      {
+        a: 1,
+        tbl: 1
+      },
+      {
+        a: 2,
+        tbl: 1
+      },
+      {
+        a: 3,
+        tbl: 1
+      },
+      {
+        a: 4,
+        tbl: 1
+      },
+      {
+        a: 5,
+        tbl: 1
+      }
+    ],
+    t2: [
+      {
+        a: 2,
+        tbl: 2
+      },
+      {
+        a: 3,
+        tbl: 2
+      },
+      {
+        a: 4,
+        tbl: 2
+      },
+      {
+        a: 5,
+        tbl: 2
+      },
+      {
+        a: 6,
+        tbl: 2
+      }
+    ]
+  },
   {
     name:"outerUnionDistinct",
     statement:"<< 1, 2, 2, 3, 3, 3 >> OUTER UNION << 1, 2, 3, 3 >>",
@@ -136,5 +182,99 @@ bagOperators::[
         2
       ]
     }
-  }
+  },
+  {
+    name:"OUTER UNION with ORDER BY LIMIT OFFSET on children",
+    statement:"(SELECT a, tbl FROM t1 ORDER BY a LIMIT 1 OFFSET 1) OUTER UNION ALL (SELECT a, tbl FROM t2 ORDER BY a LIMIT 1 OFFSET 1)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          a: 2,
+          tbl: 1,
+        },
+        {
+          a: 3,
+          tbl: 2
+        }
+      ]
+    }
+  },
+  {
+    name:"OUTER INTERSECT with ORDER BY LIMIT OFFSET on children",
+    statement:"(SELECT a FROM t1 ORDER BY a LIMIT 3 OFFSET 1) OUTER INTERSECT ALL (SELECT a FROM t2 ORDER BY a LIMIT 3 OFFSET 1)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          a: 3,
+        },
+        {
+          a: 4,
+        },
+      ]
+    }
+  },
+  {
+    name:"OUTER EXCEPT with ORDER BY LIMIT OFFSET on children",
+    statement:"(SELECT a FROM t1 ORDER BY a LIMIT 3 OFFSET 1) OUTER EXCEPT ALL (SELECT a FROM t2 ORDER BY a LIMIT 3 OFFSET 1)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          a: 2,
+        },
+      ]
+    }
+  },
+  {
+    name:"OUTER UNION with ORDER BY LIMIT on children and bag op",
+    statement:"(SELECT a, tbl FROM t1 ORDER BY a LIMIT 2) OUTER UNION ALL (SELECT a, tbl FROM t2 ORDER BY a LIMIT 2) ORDER BY a LIMIT 2",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[
+        {
+          a: 1,
+          tbl: 1,
+        },
+        {
+          a: 2,
+          tbl: 1
+        }
+      ]
+    }
+  },
+  {
+    name:"OUTER INTERSECT with ORDER BY LIMIT on children and bag op",
+    statement:"(SELECT a FROM t1 ORDER BY a LIMIT 4) OUTER INTERSECT ALL (SELECT a FROM t2 ORDER BY a LIMIT 4) ORDER BY a LIMIT 2",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[
+        {
+          a: 2,
+        },
+        {
+          a: 3,
+        }
+      ]
+    }
+  },
+  {
+    name:"OUTER EXCEPT with ORDER BY LIMIT on children and bag op",
+    statement:"(SELECT a FROM t1 ORDER BY a LIMIT 2) OUTER EXCEPT ALL (SELECT a FROM t2 ORDER BY a LIMIT 2) ORDER BY a LIMIT 2",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[
+        {
+          a: 1,
+        },
+      ]
+    }
+  },
 ]
