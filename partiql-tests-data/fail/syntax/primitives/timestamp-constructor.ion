@@ -1,0 +1,47 @@
+{
+  name: "missing TIMESTAMP string",
+  statement: "TIMESTAMP",
+  assert: {
+    result: SyntaxFail
+  },
+}
+
+{
+  name: "invalid type INT for TIMESTAMP string",
+  statement: "TIMESTAMP 2012",
+  assert: {
+    result: SyntaxFail
+  },
+}
+
+{
+  name: "invalid TIMESTAMP string without single quotes",
+  statement: "TIMESTAMP 2012-08-28 00:00:00",
+  assert: {
+    result: SyntaxFail
+  },
+}
+
+{
+  name: "invalid TIMESTAMP string using Ion literal",
+  statement: "TIMESTAMP `2012-08-28T00:00:00Z`",
+  assert: {
+    result: SyntaxFail
+  },
+}
+
+{
+  name: "invalid TIMESTAMP string no starting single quotation",
+  statement: "TIMESTAMP 2012-08-28 00:00:00'",
+  assert: {
+    result: SyntaxFail
+  },
+}
+
+{
+  name: "invalid TIMESTAMP string no ending single quotation",
+  statement: "TIMESTAMP '2012-08-28 00:00:00",
+  assert: {
+    result: SyntaxFail
+  },
+}

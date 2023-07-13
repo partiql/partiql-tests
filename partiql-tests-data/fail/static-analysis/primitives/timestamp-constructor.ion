@@ -1,0 +1,655 @@
+// Timestamp WITH OUT TIME ZONE
+// SQL Format
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid YEAR field - beyond 9999",
+  statement: "TIMESTAMP '12345-03-10 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid YEAR field - minus before year",
+  statement: "TIMESTAMP '-9999-03-10 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid YEAR field - plus before year",
+  statement: "TIMESTAMP '+9999-03-10 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid MONTH field - above upper bound",
+  statement: "TIMESTAMP '2021-13-01 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid MONTH field - month of zero",
+  statement: "TIMESTAMP '2021-00-01 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid MONTH field - minus before month",
+  statement: "TIMESTAMP '2021--03-10 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid MONTH field - plus before month",
+  statement: "TIMESTAMP '2021-+03-10 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid DAY field - out of range for January",
+  statement: "TIMESTAMP '2021-01-32 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid DAY field - out of range for February leap year",
+  statement: "TIMESTAMP '2012-02-30 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid DAY field - out of range for February non leap year",
+  statement: "TIMESTAMP '2021-02-29 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid DAY field - out of range for March",
+  statement: "TIMESTAMP '2021-03-32 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid DAY field - out of range for April",
+  statement: "TIMESTAMP '2021-04-31 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid DAY field - out of range for May",
+  statement: "TIMESTAMP '2021-05-32 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid DAY field - out of range for June",
+  statement: "TIMESTAMP '2021-06-31 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid DAY field - out of range for July",
+  statement: "TIMESTAMP '2021-07-32 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid DAY field - out of range for August",
+  statement: "TIMESTAMP '2021-08-32 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid DAY field - out of range for September",
+  statement: "TIMESTAMP '2021-09-31 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid DAY field - out of range for October",
+  statement: "TIMESTAMP '2021-10-32 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid DAY field - out of range for November",
+  statement: "TIMESTAMP '2021-11-31 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid DAY field - out of range for December",
+  statement: "TIMESTAMP '2021-12-32 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid DAY field - day of zero",
+  statement: "TIMESTAMP '2021-01-00 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid DAY field - out of range",
+  statement: "TIMESTAMP '2021-03-12345 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid Day field - minus before day",
+  statement: "TIMESTAMP '2021-03--10 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid Day field - plus before day",
+  statement: "TIMESTAMP '2021-03-+10 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid literal Format - random string",
+  statement: "TIMESTAMP 'timestamp'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid HOUR field - above upper bound",
+  statement: "TIMESTAMP '2021-03-01 24:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid HOUR field - Negative value",
+  statement: "TIMESTAMP '2021-03-01 -01:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid HOUR field - plus sign",
+  statement: "TIMESTAMP '2021-03-01 +01:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid HOUR field - plus sign",
+  statement: "TIMESTAMP '2021-03-01 +01:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid MINUTE field - above upper bound",
+  statement: "TIMESTAMP '2021-03-01 00:60:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid MINUTE field - negative value",
+  statement: "TIMESTAMP '2021-03-01 00:-01:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid MINUTE field - plus sign",
+  statement: "TIMESTAMP '2021-03-01 00:+01:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+// Setting to 62 to take account of leap second, if any implement does care.
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid SECOND field - above upper bound",
+  statement: "TIMESTAMP '2021-03-01 00:00:62'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid SECOND field - negative value",
+  statement: "TIMESTAMP '2021-03-01 00:00:-01'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid SECOND field - plus sign",
+  statement: "TIMESTAMP '2021-03-01 00:00:+01'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Fomat - invalid Precision - negative value",
+  statement: "TIMESTAMP(-1) '2021-03-01 00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+// TIMESTAMP WITHOUT TIME ZONE - RFC 3339 FORMAT
+// The same test case as the above, but using T as opposite to space to seperate Date and Time Part.
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid YEAR field - beyond 9999",
+  statement: "TIMESTAMP '12345-03-10T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid YEAR field - minus before year",
+  statement: "TIMESTAMP '-9999-03-10T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid YEAR field - plus before year",
+  statement: "TIMESTAMP '+9999-03-10T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid MONTH field - above upper bound",
+  statement: "TIMESTAMP '2021-13-01T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid MONTH field - month of zero",
+  statement: "TIMESTAMP '2021-00-01T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid MONTH field - minus before month",
+  statement: "TIMESTAMP '2021--03-10T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid MONTH field - plus before month",
+  statement: "TIMESTAMP '2021-+03-10T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid DAY field - out of range for January",
+  statement: "TIMESTAMP '2021-01-32T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid DAY field - out of range for February leap year",
+  statement: "TIMESTAMP '2012-02-30T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid DAY field - out of range for February non leap year",
+  statement: "TIMESTAMP '2021-02-29T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid DAY field - out of range for March",
+  statement: "TIMESTAMP '2021-03-32T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid DAY field - out of range for April",
+  statement: "TIMESTAMP '2021-04-31T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid DAY field - out of range for May",
+  statement: "TIMESTAMP '2021-05-32T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid DAY field - out of range for June",
+  statement: "TIMESTAMP '2021-06-31T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid DAY field - out of range for July",
+  statement: "TIMESTAMP '2021-07-32T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid DAY field - out of range for August",
+  statement: "TIMESTAMP '2021-08-32T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid DAY field - out of range for September",
+  statement: "TIMESTAMP '2021-09-31T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid DAY field - out of range for October",
+  statement: "TIMESTAMP '2021-10-32T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid DAY field - out of range for November",
+  statement: "TIMESTAMP '2021-11-31T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid DAY field - out of range for December",
+  statement: "TIMESTAMP '2021-12-32T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid DAY field - day of zero",
+  statement: "TIMESTAMP '2021-01-00T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid DAY field - out of range",
+  statement: "TIMESTAMP '2021-03-12345T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid Day field - minus before day",
+  statement: "TIMESTAMP '2021-03--10T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid Day field - plus before day",
+  statement: "TIMESTAMP '2021-03-+10T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid literal Format - random string",
+  statement: "TIMESTAMP 'timestamp'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid HOUR field - above upper bound",
+  statement: "TIMESTAMP '2021-03-01T24:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid HOUR field - Negative value",
+  statement: "TIMESTAMP '2021-03-01T-01:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid HOUR field - plus sign",
+  statement: "TIMESTAMP '2021-03-01T+01:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid HOUR field - plus sign",
+  statement: "TIMESTAMP '2021-03-01T+01:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid MINUTE field - above upper bound",
+  statement: "TIMESTAMP '2021-03-01T00:60:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid MINUTE field - negative value",
+  statement: "TIMESTAMP '2021-03-01T00:-01:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid MINUTE field - plus sign",
+  statement: "TIMESTAMP '2021-03-01T00:+01:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+// Setting to 62 to take account of leap second, if any implement does care.
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid SECOND field - above upper bound",
+  statement: "TIMESTAMP '2021-03-01T00:00:62'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid SECOND field - negative value",
+  statement: "TIMESTAMP '2021-03-01T00:00:-01'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid SECOND field - plus sign",
+  statement: "TIMESTAMP '2021-03-01T00:00:+01'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Fomat - invalid Precision - negative value",
+  statement: "TIMESTAMP(-1) '2021-03-01T00:00:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+// TIMESTAMP - WITH TIME ZONE - SQL FORMAT
+{
+  name: "TIMESTAMP - WITH TIMEZONE - SQL Fomat - invalid timezone_hour field - above upper bound",
+  statement: "TIMESTAMP '2021-03-01 00:00:00+24:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH TIMEZONE - SQL Fomat - invalid timezone_hour field - below lower bound",
+  statement: "TIMESTAMP '2021-03-01 00:00:00-24:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH TIMEZONE - SQL Fomat - invalid timezone_minute field - above upper bound",
+  statement: "TIMESTAMP '2021-03-01 00:00:00+00:60'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH TIMEZONE - SQL Fomat - invalid timezone_hour field - below lower bound",
+  statement: "TIMESTAMP '2021-03-01 00:00:00-00:60'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+// TIMESTAMP WITH TIME ZONE - RFC 3339 Format
+{
+  name: "TIMESTAMP - WITH TIMEZONE - RFC 3339 Fomat - invalid timezone_hour field - above upper bound",
+  statement: "TIMESTAMP '2021-03-01T00:00:00+24:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH TIMEZONE - RFC 3339 Fomat - invalid timezone_hour field - below lower bound",
+  statement: "TIMESTAMP '2021-03-01T00:00:00-24:00'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH TIMEZONE - RFC 3339 Fomat - invalid timezone_minute field - above upper bound",
+  statement: "TIMESTAMP '2021-03-01T00:00:00+00:60'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH TIMEZONE - RFC 3339 Fomat - invalid timezone_hour field - below lower bound",
+  statement: "TIMESTAMP '2021-03-01T00:00:00-00:60'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
+{
+  name: "TIMESTAMP - WITH TIMEZONE - RFC 3339 Fomat - invalid timezone_hour symbol",
+  statement: "TIMESTAMP '2021-03-01T00:00:00s'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
