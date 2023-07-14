@@ -167,53 +167,66 @@ mod::[
       output:$missing::null
     }
   },
+  // data type mismatch tests below
   {
     name:"MOD(MISSING, 'some string')",
     statement:"MOD(MISSING, 'some string')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
   },
   {
     name:"MOD('some string', MISSING)",
     statement:"MOD('some string', MISSING)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
   },
   {
     name:"MOD(NULL, 'some string')",
     statement:"MOD(NULL, 'some string')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:null
-    }
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
   },
   {
     name:"MOD('some string', NULL)",
     statement:"MOD('some string', NULL)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:null
-    }
+    assert:[
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail,
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
   },
   {
     name:"MOD(3, 'some string')",
