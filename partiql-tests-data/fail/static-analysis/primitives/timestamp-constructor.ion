@@ -256,7 +256,7 @@
   },
 }
 
-// Setting to 62 to take account of leap second, if any implement does care.
+// Setting to 62 to take account of leap second, if any implementation cares.
 {
   name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Format - invalid SECOND field - above upper bound",
   statement: "TIMESTAMP '2021-03-01 00:00:62'",
