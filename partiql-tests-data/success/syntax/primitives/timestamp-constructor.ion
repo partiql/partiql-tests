@@ -20,7 +20,7 @@
 }
 
 {
-  name: "TIMESTAMP WITHOUT TIME ZONE - SQL Style - Precision = Digit in Second Fraction",
+  name: "TIMESTAMP WITHOUT TIME ZONE - SQL Style - Precision Equals To Digit In Second Fraction",
   statement: "TIMESTAMP(0) '2023-06-01 00:00:00",
   assert: [
     {
@@ -30,7 +30,7 @@
 }
 
 {
-  name: "TIMESTAMP WITHOUT TIME ZONE - SQL Style - Precision < Digit in Second Fraction",
+  name: "TIMESTAMP WITHOUT TIME ZONE - SQL Style - Precision Less Than Digit In Second Fraction",
   statement: "TIMESTAMP(0) '2023-06-01 00:00:00.0000",
   assert: [
     {
@@ -40,7 +40,7 @@
 }
 
 {
-  name: "TIMESTAMP WITHOUT TIME ZONE - SQL Style - Precision > Digit in Second Fraction",
+  name: "TIMESTAMP WITHOUT TIME ZONE - SQL Style - Precision Bigger than Digit In Second Fraction",
   statement: "TIMESTAMP(10) '2023-06-01 00:00:00.0000",
   assert: [
     {
@@ -70,7 +70,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - SQL Style - Precision = Digit in Second Fraction",
+  name: "TIMESTAMP WITH TIME ZONE - SQL Style - Precision Equals To Digit In Second Fraction",
   statement: "TIMESTAMP(0) '2023-06-01 00:00:00+00:00",
   assert: [
     {
@@ -80,7 +80,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - SQL Style - Precision < Digit in Second Fraction",
+  name: "TIMESTAMP WITH TIME ZONE - SQL Style - Precision Less Than Digit In Second Fraction",
   statement: "TIMESTAMP(0) '2023-06-01 00:00:00.0000+00:00",
   assert: [
     {
@@ -90,7 +90,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - SQL Style - Precision > Digit in Second Fraction",
+  name: "TIMESTAMP WITH TIME ZONE - SQL Style - Precision Bigger Than Digit In Second Fraction",
   statement: "TIMESTAMP(10) '2023-06-01 00:00:00.0000+00:00",
   assert: [
     {
@@ -122,7 +122,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision = Digit in Second Fraction - Time ZONE INTERVAL - Captialized T",
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Equals To Digit In Second Fraction - Time ZONE INTERVAL - Captialized T",
   statement: "TIMESTAMP(0) '2023-06-01T00:00:00+00:00",
   assert: [
     {
@@ -132,7 +132,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision < Digit in Second Fraction - Time ZONE INTERVAL - Captialized T",
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Less Than Digit In Second Fraction - Time ZONE INTERVAL - Captialized T",
   statement: "TIMESTAMP(0) '2023-06-01T00:00:00.0000+00:00",
   assert: [
     {
@@ -142,7 +142,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision > Digit in Second Fraction - Time ZONE INTERVAL - Captialized T",
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Bigger Than Digit In Second Fraction - Time ZONE INTERVAL - Captialized T",
   statement: "TIMESTAMP(10) '2023-06-01T00:00:00.0000+00:00",
   assert: [
     {
@@ -172,7 +172,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision = Digit in Second Fraction - Time ZONE INTERVAL - Lowercase t",
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Equals To Digit In Second Fraction - Time ZONE INTERVAL - Lowercase t",
   statement: "TIMESTAMP(0) '2023-06-01t00:00:00+00:00",
   assert: [
     {
@@ -182,7 +182,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision < Digit in Second Fraction - Time ZONE INTERVAL - Lowercase t",
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Less Than Digit In Second Fraction - Time ZONE INTERVAL - Lowercase t",
   statement: "TIMESTAMP(0) '2023-06-01t00:00:00.0000+00:00",
   assert: [
     {
@@ -192,7 +192,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision > Digit in Second Fraction - Time ZONE INTERVAL - Lowercase t",
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Bigger Than Digit In Second Fraction - Time ZONE INTERVAL - Lowercase t",
   statement: "TIMESTAMP(10) '2023-06-01t00:00:00.0000+00:00",
   assert: [
     {
@@ -222,7 +222,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision = Digit in Second Fraction - Captial Z for UTC - Captialized T",
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Equals To Digit in Second Fraction - Captial Z for UTC - Captialized T",
   statement: "TIMESTAMP(0) '2023-06-01T00:00:00Z",
   assert: [
     {
@@ -232,7 +232,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision < Digit in Second Fraction - Captial Z for UTC - Captialized T",
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Less Than Digit In Second Fraction - Captial Z for UTC - Captialized T",
   statement: "TIMESTAMP(0) '2023-06-01T00:00:00.0000Z",
   assert: [
     {
@@ -242,7 +242,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision > Digit in Second Fraction - Captial Z for UTC - Captialized T",
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Bigger Than Digit In Second Fraction - Captial Z for UTC - Captialized T",
   statement: "TIMESTAMP(10) '2023-06-01T00:00:00.0000Z",
   assert: [
     {
@@ -272,7 +272,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision = Digit in Second Fraction - Captial Z for UTC - Lowercase t",
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Equals To Digit In Second Fraction - Captial Z for UTC - Lowercase t",
   statement: "TIMESTAMP(0) '2023-06-01t00:00:00Z",
   assert: [
     {
@@ -282,7 +282,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision < Digit in Second Fraction - Captial Z for UTC - Lowercase t",
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Less Than Digit In Second Fraction - Captial Z for UTC - Lowercase t",
   statement: "TIMESTAMP(0) '2023-06-01t00:00:00.0000Z",
   assert: [
     {
@@ -292,7 +292,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision > Digit in Second Fraction - Captial Z for UTC - Lowercase t",
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Bigger Than Digit In Second Fraction - Captial Z for UTC - Lowercase t",
   statement: "TIMESTAMP(10) '2023-06-01t00:00:00.0000Z",
   assert: [
     {
@@ -322,7 +322,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision = Digit in Second Fraction - Lowercase Z for UTC - Captialized T",
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Equals To Digit In Second Fraction - Lowercase Z for UTC - Captialized T",
   statement: "TIMESTAMP(0) '2023-06-01T00:00:00z",
   assert: [
     {
@@ -332,7 +332,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision < Digit in Second Fraction - Lowercase Z for UTC - Captialized T",
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Less Than Digit In Second Fraction - Lowercase Z for UTC - Captialized T",
   statement: "TIMESTAMP(0) '2023-06-01T00:00:00.0000z",
   assert: [
     {
@@ -342,7 +342,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision > Digit in Second Fraction - Lowercase Z for UTC - Captialized T",
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Bigger Than Digit In Second Fraction - Lowercase Z for UTC - Captialized T",
   statement: "TIMESTAMP(10) '2023-06-01T00:00:00.0000z",
   assert: [
     {
@@ -372,7 +372,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision = Digit in Second Fraction - Lowercase Z for UTC - Lowercase t",
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Equals To Digit In Second Fraction - Lowercase Z for UTC - Lowercase t",
   statement: "TIMESTAMP(0) '2023-06-01t00:00:00z",
   assert: [
     {
@@ -382,7 +382,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision < Digit in Second Fraction - Lowercase Z for UTC - Lowercase t",
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Less Than Digit In Second Fraction - Lowercase Z for UTC - Lowercase t",
   statement: "TIMESTAMP(0) '2023-06-01t00:00:00.0000z",
   assert: [
     {
@@ -392,7 +392,7 @@
 }
 
 {
-  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision > Digit in Second Fraction - Lowercase Z for UTC - Lowercase t",
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Bigger Than Digit In Second Fraction - Lowercase Z for UTC - Lowercase t",
   statement: "TIMESTAMP(10) '2023-06-01t00:00:00.0000z",
   assert: [
     {
