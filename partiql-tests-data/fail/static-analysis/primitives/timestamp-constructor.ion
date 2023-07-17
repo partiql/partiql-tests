@@ -1,4 +1,13 @@
 // Timestamp WITH OUT TIME ZONE
+// Format Independent. 
+{
+  name: "TIMESTAMP - WITH OUT TIMEZONE - invalid literal Format - random string",
+  statement: "TIMESTAMP 'timestamp'",
+  assert: {
+    result: StaticAnalysisFail
+  },
+}
+
 // SQL Format
 {
   name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Format - invalid YEAR field - beyond 9999",
@@ -187,14 +196,6 @@
 {
   name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Format - invalid DAY field - plus before day",
   statement: "TIMESTAMP '2021-03-+10 00:00:00'",
-  assert: {
-    result: StaticAnalysisFail
-  },
-}
-
-{
-  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Format - invalid literal Format - random string",
-  statement: "TIMESTAMP 'timestamp'",
   assert: {
     result: StaticAnalysisFail
   },
@@ -478,14 +479,6 @@
 {
   name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Format - invalid DAY field - plus before day",
   statement: "TIMESTAMP '2021-03-+10T00:00:00'",
-  assert: {
-    result: StaticAnalysisFail
-  },
-}
-
-{
-  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Format - invalid literal Format - random string",
-  statement: "TIMESTAMP 'timestamp'",
   assert: {
     result: StaticAnalysisFail
   },
