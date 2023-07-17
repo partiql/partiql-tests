@@ -290,7 +290,7 @@
 }
 
 // TIMESTAMP WITHOUT TIME ZONE - RFC 3339 FORMAT
-// The same test case as the above, but using T as opposite to space to seperate Date and Time Part.
+// The same test cases as above, but using T rather than space to separate Date and Time Part.
 {
   name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Format - invalid YEAR field - beyond 9999",
   statement: "TIMESTAMP '12345-03-10T00:00:00'",
@@ -547,7 +547,7 @@
   },
 }
 
-// Setting to 62 to take account of leap second, if any implement does care.
+// Setting to 62 to take account of leap second, if any implementation cares.
 {
   name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Format - invalid SECOND field - above upper bound",
   statement: "TIMESTAMP '2021-03-01T00:00:62'",
