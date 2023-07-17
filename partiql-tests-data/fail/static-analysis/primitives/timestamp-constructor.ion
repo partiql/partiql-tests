@@ -177,7 +177,7 @@
 }
 
 {
-  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Format - invalid Day field - minus before day",
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Format - invalid DAY field - minus before day",
   statement: "TIMESTAMP '2021-03--10 00:00:00'",
   assert: {
     result: StaticAnalysisFail
@@ -185,7 +185,7 @@
 }
 
 {
-  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Format - invalid Day field - plus before day",
+  name: "TIMESTAMP - WITH OUT TIMEZONE - SQL Format - invalid DAY field - plus before day",
   statement: "TIMESTAMP '2021-03-+10 00:00:00'",
   assert: {
     result: StaticAnalysisFail
@@ -468,7 +468,7 @@
 }
 
 {
-  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Format - invalid Day field - minus before day",
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Format - invalid DAY field - minus before day",
   statement: "TIMESTAMP '2021-03--10T00:00:00'",
   assert: {
     result: StaticAnalysisFail
@@ -476,7 +476,7 @@
 }
 
 {
-  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Format - invalid Day field - plus before day",
+  name: "TIMESTAMP - WITH OUT TIMEZONE - RFC 3339 Format - invalid DAY field - plus before day",
   statement: "TIMESTAMP '2021-03-+10T00:00:00'",
   assert: {
     result: StaticAnalysisFail
