@@ -12,7 +12,7 @@ limit_offset::[
   // OFFSET 0 should not affect results
   {
     name:"offset 0",
-    statement:"SELECT * FROM foo OFFSET 0",
+    statement:"SELECT a FROM foo OFFSET 0",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -25,11 +25,11 @@ limit_offset::[
   // OFFSET 1 should skip first result
   {
     name:"offset 1",
-    statement:"SELECT * FROM foo OFFSET 1",
+    statement:"SELECT a FROM foo ORDER BY a OFFSET 1",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:$bag::[
+      output:[
         {'a': 2}, {'a': 3}, {'a': 4}, {'a': 5}
       ]
     }
@@ -38,11 +38,11 @@ limit_offset::[
   // OFFSET 2 should skip first two results
   {
     name:"offset 2",
-    statement:"SELECT * FROM foo OFFSET 2",
+    statement:"SELECT a FROM foo ORDER BY a OFFSET 2",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:$bag::[
+      output:[
         {'a': 3}, {'a': 4}, {'a': 5}
       ]
     }
@@ -51,7 +51,7 @@ limit_offset::[
   // OFFSET 2^31 should return no results
   {
     name:"offset 2^31",
-    statement:"SELECT * FROM foo OFFSET 2147483648",
+    statement:"SELECT a FROM foo OFFSET 2147483648",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -62,7 +62,7 @@ limit_offset::[
  // OFFSET 2^63 should return no results
   {
     name:"offset 2^63",
-    statement:"SELECT * FROM foo OFFSET 9223372036854775808",
+    statement:"SELECT a FROM foo OFFSET 9223372036854775808",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -73,11 +73,11 @@ limit_offset::[
   // LIMIT 1 and OFFSET 1 should return the second result
   {
     name:"limit 1 offset 1",
-    statement:"SELECT * FROM foo LIMIT 1 OFFSET 1",
+    statement:"SELECT a FROM foo ORDER BY a LIMIT 1 OFFSET 1",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:$bag::[
+      output:[
         {'a': 2}
       ]
     }
@@ -86,11 +86,11 @@ limit_offset::[
   // LIMIT 10 and OFFSET 1 should skip first result
   {
     name:"limit 10 offset 1",
-    statement:"SELECT * FROM foo LIMIT 10 OFFSET 1",
+    statement:"SELECT a FROM foo ORDER BY a LIMIT 10 OFFSET 1",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:$bag::[
+      output:[
         {'a': 2}, {'a': 3}, {'a': 4}, {'a': 5}
       ]
     }
@@ -99,7 +99,7 @@ limit_offset::[
   // LIMIT 10 and OFFSET 10 should return no result
   {
     name:"limit 10 offset 10",
-    statement:"SELECT * FROM foo LIMIT 10 OFFSET 10",
+    statement:"SELECT a FROM foo LIMIT 10 OFFSET 10",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -110,11 +110,11 @@ limit_offset::[
   // LIMIT 2 and OFFSET 2 should return third and fourth results
   {
     name:"limit 2 offset 2",
-    statement:"SELECT * FROM foo GROUP BY a LIMIT 2 OFFSET 2",
+    statement:"SELECT a FROM foo GROUP BY a ORDER BY a LIMIT 2 OFFSET 2",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:$bag::[
+      output:[
         {'a': 3}, {'a': 4}
       ],
     }
@@ -123,11 +123,11 @@ limit_offset::[
   // LIMIT and OFFSET applied after GROUP BY
   {
     name:"limit offset after group by",
-    statement:"SELECT * FROM foo GROUP BY a LIMIT 1 OFFSET 1",
+    statement:"SELECT a FROM foo GROUP BY a ORDER BY a LIMIT 1 OFFSET 1",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:$bag::[
+      output:[
         {'a': 2}
       ],
     }
@@ -136,11 +136,11 @@ limit_offset::[
   // OFFSET value can be subtraction of 2 numbers
   {
     name:"offset 2-1",
-    statement:"SELECT * FROM foo OFFSET 2 - 1",
+    statement:"SELECT a FROM foo ORDER BY a OFFSET 2 - 1",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:$bag::[
+      output:[
         {'a': 2}, {'a': 3}, {'a': 4}, {'a': 5}
       ]
     }
@@ -149,11 +149,11 @@ limit_offset::[
   // OFFSET value can be addition of 2 numbers
   {
     name:"offset 2+1",
-    statement:"SELECT * FROM foo OFFSET 2 + 1",
+    statement:"SELECT a FROM foo ORDER BY a OFFSET 2 + 1",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:$bag::[
+      output:[
         {'a': 4}, {'a': 5}
       ]
     }
@@ -162,11 +162,11 @@ limit_offset::[
   // OFFSET value can be multiplication of 2 numbers
   {
     name:"offset 2*1",
-    statement:"SELECT * FROM foo OFFSET 2 * 1",
+    statement:"SELECT a FROM foo ORDER BY a OFFSET 2 * 1",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:$bag::[
+      output:[
         {'a': 3}, {'a': 4}, {'a': 5}
       ]
     }
@@ -175,11 +175,11 @@ limit_offset::[
   // OFFSET value can be division of 2 numbers
   {
     name:"offset 2/1",
-    statement:"SELECT * FROM foo OFFSET 4 / 2",
+    statement:"SELECT a FROM foo ORDER BY a OFFSET 4 / 2",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:$bag::[
+      output:[
         {'a': 3}, {'a': 4}, {'a': 5}
       ]
     }
@@ -188,11 +188,11 @@ limit_offset::[
   // OFFSET with GROUP BY and HAVING
   {
     name:"offset group by having",
-    statement:"SELECT * FROM foo GROUP BY a HAVING a > 2 LIMIT 1 OFFSET 1",
+    statement:"SELECT a FROM foo GROUP BY a HAVING a > 2 ORDER BY a LIMIT 1 OFFSET 1",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:$bag::[
+      output:[
         {'a': 4}
       ],
     }
@@ -204,6 +204,7 @@ limit_offset::[
     statement:'''
       PIVOT foo.a AT foo.b
       FROM <<{'a': 1, 'b':'I'}, {'a': 2, 'b':'II'}, {'a': 3, 'b':'III'}>> AS foo
+      ORDER BY a
       LIMIT 1 OFFSET 1
     ''',
     assert:{
@@ -216,7 +217,7 @@ limit_offset::[
   // OFFSET -1 should throw exception
   {
     name: "offset -1",
-    statement: "select * from foo OFFSET -1",
+    statement: "SELECT a FROM foo OFFSET -1",
     assert: [
       {
         evalMode:[EvalModeCoerce, EvalModeError],
@@ -228,7 +229,7 @@ limit_offset::[
   // OFFSET 1-2 should throw exception in error mode and do nothing when coerced
   {
     name: "offset 1-2",
-    statement: "select * from foo OFFSET 1-2",
+    statement: "SELECT a FROM foo OFFSET 1-2",
     assert:[
       {
         evalMode:EvalModeCoerce,
@@ -247,7 +248,7 @@ limit_offset::[
   // OFFSET string value should throw exception in error mode and do nothing when coerced
   {
     name: "offset <str>",
-    statement: "select * from foo OFFSET 'this won''t work'",
+    statement: "SELECT a FROM foo OFFSET 'this won''t work'",
     assert:[
       {
         evalMode:EvalModeCoerce,
@@ -265,8 +266,8 @@ limit_offset::[
 
   // OFFSET non-integer value should throw exception in error mode and do nothing when coerced
   {
-    name: "offset <float>>",
-    statement: "select * from foo OFFSET 2.5",
+    name: "offset <decimal>>",
+    statement: "SELECT a FROM foo OFFSET 2.5",
     assert:[
       {
         evalMode:EvalModeCoerce,
@@ -281,5 +282,4 @@ limit_offset::[
       }
     ]
   },
-  
 ]
