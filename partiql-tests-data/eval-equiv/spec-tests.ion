@@ -167,7 +167,7 @@
             "SELECT * FROM customers AS c, orders AS o",
             "SELECT * FROM customers AS c CROSS JOIN orders AS o",
             "SELECT * FROM customers AS c JOIN orders AS o ON true",
-            "SELECT * FROM customers AS c LATERAL orders AS o"  // # 5.7 SQL's LATERAL
+            "SELECT * FROM customers AS c, LATERAL orders AS o"  // # 5.7 SQL's LATERAL
         ]
     },
     {
