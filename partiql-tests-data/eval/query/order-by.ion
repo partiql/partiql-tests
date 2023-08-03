@@ -132,6 +132,26 @@ simple::[
       output:[{'productId': 4, 'supplierId_nulls': null}, {'productId': 5, 'supplierId_nulls': null}, {'productId': 8, 'supplierId_nulls': null}, {'productId': 9, 'supplierId_nulls': null}, {'productId': 10, 'supplierId_nulls': null}, {'productId': 6, 'supplierId_nulls': 11}, {'productId': 7, 'supplierId_nulls': 11}, {'productId': 1, 'supplierId_nulls': 10}, {'productId': 2, 'supplierId_nulls': 10}, {'productId': 3, 'supplierId_nulls': 10}]
     }
   },
+  // order by nulls first for supplierId_nulls desc
+    {
+      name:"nulls first for supplierId_nulls desc",
+      statement:"SELECT productId, supplierId_nulls FROM products_sparse ORDER BY supplierId_nulls DESC NULLS FIRST, productId",
+      assert:{
+        evalMode:[EvalModeCoerce, EvalModeError],
+        result:EvaluationSuccess,
+        output:[{'productId': 4, 'supplierId_nulls': null}, {'productId': 5, 'supplierId_nulls': null}, {'productId': 8, 'supplierId_nulls': null}, {'productId': 9, 'supplierId_nulls': null}, {'productId': 10, 'supplierId_nulls': null}, {'productId': 6, 'supplierId_nulls': 11}, {'productId': 7, 'supplierId_nulls': 11}, {'productId': 1, 'supplierId_nulls': 10}, {'productId': 2, 'supplierId_nulls': 10}, {'productId': 3, 'supplierId_nulls': 10}]
+      }
+    },
+  // order by nulls last for supplierId_nulls desc
+  {
+    name:"nulls last for supplierId_nulls desc",
+    statement:"SELECT productId, supplierId_nulls FROM products_sparse ORDER BY supplierId_nulls DESC NULLS LAST, productId",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'productId': 6, 'supplierId_nulls': 11}, {'productId': 7, 'supplierId_nulls': 11}, {'productId': 1, 'supplierId_nulls': 10}, {'productId': 2, 'supplierId_nulls': 10}, {'productId': 3, 'supplierId_nulls': 10}, {'productId': 4, 'supplierId_nulls': null}, {'productId': 5, 'supplierId_nulls': null}, {'productId': 8, 'supplierId_nulls': null}, {'productId': 9, 'supplierId_nulls': null}, {'productId': 10, 'supplierId_nulls': null}]
+    }
+  },
   // should group and order by asc sellerId
   {
     name:"group and order by asc sellerId",
