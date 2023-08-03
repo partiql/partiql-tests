@@ -291,11 +291,11 @@ edge_cases::[
   // text types compared by lexicographical ordering of Unicode scalar (ASC)
   {
     name:"text types compared by lexicographical ordering of Unicode scalar (ASC)",
-    statement:'''SELECT * FROM [{ 'a': `'\uD83D\uDCA9'`}, { 'a': 'Z'}, { 'a': '9' }, { 'a': 'A'}, { 'a1': `"\U0001F4A9"`}, { 'a': 'a'}, { 'a': 'z'}, { 'a': '0' }] ORDER BY a''',
+    statement:'''SELECT * FROM [{ 'a': `'\uD83D\uDCA9'`}, { 'a': 'Z'}, { 'a': '9' }, { 'a': 'A'}, { 'a': `"\U0001F4A9"`}, { 'a': 'a'}, { 'a': 'z'}, { 'a': '0' }] ORDER BY a''',
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:[{'a': '0'}, {'a': '9'}, {'a': 'A'}, {'a': 'Z'}, {'a': 'a'}, {'a': 'z'}, {'a': '\uD83D\uDCA9'}, {'a2': "\U0001F4A9"}]
+      output:[{'a': '0'}, {'a': '9'}, {'a': 'A'}, {'a': 'Z'}, {'a': 'a'}, {'a': 'z'}, {'a': '\uD83D\uDCA9'}, {'a': "\U0001F4A9"}]
     }
   },
   // text types compared by lexicographical ordering of Unicode scalar (DESC)
