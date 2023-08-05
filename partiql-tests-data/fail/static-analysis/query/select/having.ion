@@ -1,0 +1,7 @@
+{
+  name:"having without group by",
+  statement:"SELECT rep, SUM(total_sales) as total FROM sales_report HAVING rep = \"Meg\"",
+  assert:{
+    result: StaticAnalysisFail
+  },
+}
