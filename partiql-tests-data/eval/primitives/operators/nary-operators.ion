@@ -177,6 +177,51 @@ nary::[
     }
   },
   {
+    name:"equalListDifferentTypesWithNullMissingTrue",
+    statement:"[1, `2e0`, 'hello', NULL, MISSING] = [1.0, 2, `hello`, NULL, MISSING]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"equalListDifferentTypesWithNullMissingEquivalenceTrue",
+    statement:"[1, `2e0`, 'hello', NULL] = [1.0, 2, `hello`, MISSING]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"listDifferentTypesDifferentOrderFalse",
+    statement:"[1, `2e0`, 'hello'] = [`hello`, 2, 1.0]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"equalBagDifferentTypesDifferentOrderTrue",
+    statement:"<<1, `2e0`, 'hello'>> = <<`hello`, 2, 1.0>>",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"equalBagDifferentTypesWithNullMissingDifferentOrderTrue",
+    statement:"<<1, `2e0`, 'hello', NULL, MISSING>> = <<MISSING, NULL, `hello`, 2, 1.0>>",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
     name:"equalListDifferentLengthsShortFirst",
     statement:"[1.0, 2] = [1.0, 2, `hello`]",
     assert:{
@@ -188,6 +233,42 @@ nary::[
   {
     name:"equalListDifferentLengthsLongFirst",
     statement:"[1, `2e0`, 'hello'] = [1, `2e0`]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"equalTuplesDifferentTypesTrue",
+    statement:"{'a': 1, 'a': 10.0, 'b': `2e0`} = {'a': 1.0, 'a': 10, 'b': 2}",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"equalTuplesDifferentTypesDifferentOrderTrue",
+    statement:"{'a': 1, 'a': 10.0, 'b': `2e0`} = {'b': 2, 'a': 10, 'a': 1.0}",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"equalTuplesDifferentTypesDifferentOrderWithNullMissingTrue",
+    statement:"{'a': 1, 'a': 10.0, 'b': `2e0`, 'c': NULL, 'd': MISSING} = {'d': MISSING, 'c': NULL, 'b': 2, 'a': 10, 'a': 1.0}",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"equalTuplesDifferentTypesDifferentOrderWithNullMissingEquivalenceFalse",
+    statement:"{'a': 1, 'a': 10.0, 'b': `2e0`, 'c': NULL, 'd': NULL} = {'d': MISSING, 'c': MISSING, 'b': 2, 'a': 10, 'a': 1.0}",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
