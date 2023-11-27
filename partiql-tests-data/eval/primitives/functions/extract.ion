@@ -435,8 +435,8 @@ extract::[
   ],
   extract_timestamp::[
     {
-      name:"EXTRACT(YEAR FROM `2000-01-02T03:04:05.67Z`)",
-      statement:"EXTRACT(YEAR FROM `2000-01-02T03:04:05.67Z`) = 2000",
+      name:"EXTRACT(YEAR FROM TIMESTAMP '2000-01-02 03:04:05.67')",
+      statement:"EXTRACT(YEAR FROM TIMESTAMP '2000-01-02 03:04:05.67') = 2000",
       assert:{
         result:EvaluationSuccess,
         evalMode:[
@@ -447,8 +447,8 @@ extract::[
       }
     },
     {
-      name:"EXTRACT(MONTH FROM `2000-01-02T03:04:05.67Z`)",
-      statement:"EXTRACT(MONTH FROM `2000-01-02T03:04:05.67Z`) = 1",
+      name:"EXTRACT(MONTH FROM TIMESTAMP '2000-01-02 03:04:05.67')",
+      statement:"EXTRACT(MONTH FROM TIMESTAMP '2000-01-02 03:04:05.67') = 1",
       assert:{
         result:EvaluationSuccess,
         evalMode:[
@@ -459,8 +459,8 @@ extract::[
       }
     },
     {
-      name:"EXTRACT(DAY FROM `2000-01-02T03:04:05.67Z`)",
-      statement:"EXTRACT(DAY FROM `2000-01-02T03:04:05.67Z`) = 2",
+      name:"EXTRACT(DAY FROM TIMESTAMP '2000-01-02 03:04:05.67')",
+      statement:"EXTRACT(DAY FROM TIMESTAMP '2000-01-02 03:04:05.67') = 2",
       assert:{
         result:EvaluationSuccess,
         evalMode:[
@@ -471,8 +471,8 @@ extract::[
       }
     },
     {
-      name:"EXTRACT(HOUR FROM `2000-01-02T03:04:05.67Z`)",
-      statement:"EXTRACT(HOUR FROM `2000-01-02T03:04:05.67Z`) = 3",
+      name:"EXTRACT(HOUR FROM TIMESTAMP '2000-01-02 03:04:05.67')",
+      statement:"EXTRACT(HOUR FROM TIMESTAMP '2000-01-02 03:04:05.67') = 3",
       assert:{
         result:EvaluationSuccess,
         evalMode:[
@@ -483,8 +483,8 @@ extract::[
       }
     },
     {
-      name:"EXTRACT(MINUTE FROM `2000-01-02T03:04:05.67Z`)",
-      statement:"EXTRACT(MINUTE FROM `2000-01-02T03:04:05.67Z`) = 4",
+      name:"EXTRACT(MINUTE FROM TIMESTAMP '2000-01-02 03:04:05.67')",
+      statement:"EXTRACT(MINUTE FROM TIMESTAMP '2000-01-02 03:04:05.67') = 4",
       assert:{
         result:EvaluationSuccess,
         evalMode:[
@@ -495,8 +495,8 @@ extract::[
       }
     },
     {
-      name:"EXTRACT(SECOND FROM `2000-01-02T03:04:05.67Z`)",
-      statement:"EXTRACT(SECOND FROM `2000-01-02T03:04:05.67Z`) = 5.67",
+      name:"EXTRACT(SECOND FROM TIMESTAMP '2000-01-02 03:04:05.67')",
+      statement:"EXTRACT(SECOND FROM TIMESTAMP '2000-01-02 03:04:05.67') = 5.67",
       assert:{
         result:EvaluationSuccess,
         evalMode:[
@@ -507,6 +507,7 @@ extract::[
       }
     },
   ],
+  // TODO : What to do with unknown offset?
   extract_timestamp_offset::[
     {
       name:"EXTRACT(YEAR FROM `2000-01-02T03:04:05.67+08:09`)",
@@ -619,6 +620,174 @@ extract::[
     {
       name:"EXTRACT(TIMEZONE_MINUTE FROM `2000-01-02T03:04:05.67-08:09`)",
       statement:"EXTRACT(TIMEZONE_MINUTE FROM `2000-01-02T03:04:05.67-08:09`) = -9",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
+      name:"EXTRACT(TIMEZONE_HOUR FROM `2000-01-02T03:04:05.67Z`)",
+      statement:"EXTRACT(TIMEZONE_HOUR FROM `2000-01-02T03:04:05.67Z`) = 0",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
+      name:"EXTRACT(TIMEZONE_MINUTE FROM `2000-01-02T03:04:05.67Z`)",
+      statement:"EXTRACT(TIMEZONE_MINUTE FROM `2000-01-02T03:04:05.67Z`) = 0",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
+      name:"EXTRACT(YEAR FROM TIMESTAMP '2000-01-02 03:04:05.67+08:09')",
+      statement:"EXTRACT(YEAR FROM TIMESTAMP '2000-01-02 03:04:05.67+08:09') = 2000",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
+      name:"EXTRACT(MONTH FROM TIMESTAMP '2000-01-02 03:04:05.67+08:09')",
+      statement:"EXTRACT(MONTH FROM TIMESTAMP '2000-01-02 03:04:05.67+08:09') = 1",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
+      name:"EXTRACT(DAY FROM TIMESTAMP '2000-01-02 03:04:05.67+08:09')",
+      statement:"EXTRACT(DAY FROM TIMESTAMP '2000-01-02 03:04:05.67+08:09') = 2",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
+      name:"EXTRACT(HOUR FROM TIMESTAMP '2000-01-02 03:04:05.67+08:09')",
+      statement:"EXTRACT(HOUR FROM TIMESTAMP '2000-01-02 03:04:05.67+08:09') = 3",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
+      name:"EXTRACT(MINUTE FROM TIMESTAMP '2000-01-02 03:04:05.67+08:09')",
+      statement:"EXTRACT(MINUTE FROM TIMESTAMP '2000-01-02 03:04:05.67+08:09') = 4",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
+      name:"EXTRACT(SECOND FROM TIMESTAMP '2000-01-02 03:04:05.67+08:09')",
+      statement:"EXTRACT(SECOND FROM TIMESTAMP '2000-01-02 03:04:05.67+08:09') = 5.67",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
+      name:"EXTRACT(TIMEZONE_HOUR FROM TIMESTAMP '2000-01-02 03:04:05.67+08:09')",
+      statement:"EXTRACT(TIMEZONE_HOUR FROM TIMESTAMP '2000-01-02 03:04:05.67+08:09') = 8",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
+      name:"EXTRACT(TIMEZONE_MINUTE FROM TIMESTAMP '2000-01-02 03:04:05.67+08:09')",
+      statement:"EXTRACT(TIMEZONE_MINUTE FROM TIMESTAMP '2000-01-02 03:04:05.67+08:09') = 9",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
+      name:"EXTRACT(TIMEZONE_HOUR FROM TIMESTAMP '2000-01-02 03:04:05.67-08:09')",
+      statement:"EXTRACT(TIMEZONE_HOUR FROM TIMESTAMP '2000-01-02 03:04:05.67-08:09') = -8",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
+      name:"EXTRACT(TIMEZONE_MINUTE FROM TIMESTAMP '2000-01-02 03:04:05.67-08:09')",
+      statement:"EXTRACT(TIMEZONE_MINUTE FROM TIMESTAMP '2000-01-02 03:04:05.67-08:09') = -9",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
+      name:"EXTRACT(TIMEZONE_HOUR FROM TIMESTAMP '2000-01-02T03:04:05.67Z')",
+      statement:"EXTRACT(TIMEZONE_HOUR FROM TIMESTAMP '2000-01-02T03:04:05.67Z') = 0",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
+      name:"EXTRACT(TIMEZONE_MINUTE FROM TIMESTAMP '2000-01-02T03:04:05.67Z')",
+      statement:"EXTRACT(TIMEZONE_MINUTE FROM TIMESTAMP '2000-01-02T03:04:05.67Z') = 0",
       assert:{
         result:EvaluationSuccess,
         evalMode:[
