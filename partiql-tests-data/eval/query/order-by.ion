@@ -222,6 +222,16 @@ simple::[
       output:[{'supplierId_nulls': null}, {'supplierId_nulls': 10}, {'supplierId_nulls': 11}]
     }
   },
+  // should group and order by count
+  {
+    name:"group and order by count",
+    statement:"SELECT supplierId, count(1) as n FROM products GROUP BY supplierId ORDER BY n DESC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'supplierId': 10, n: 3}, {'supplierId': 11, 'n':2}]
+    }
+  },
 ]
 
 data_types::[
