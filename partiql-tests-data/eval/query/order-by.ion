@@ -40,12 +40,12 @@ envs::{
     { 'data_value': 5 },
     { 'data_value': 2017-01-01T00:00-00:00 },
     { 'data_value': [] },
-    { 'data_value': $time::{'hour':12, 'minute':12, 'second':12.1,'timezone_hour':null.int,'timezone_minute':null.int} },
+    { 'data_value': $time::{'hour':12, 'minute':12, 'second':12.1,'offset':null.int} },
     { 'data_value': 'a' },
     { 'data_value': null },
     { 'data_value': false },
     { 'data_value': {{YWFhYWFhYWFhYWFhYf8=}} },
-    { 'data_value': $date::2021-08-22 },
+    { 'data_value': $date::{ "year": 2021, "month": 8, "day": 22 } },
     { 'data_value': $bag::[] },
     { 'data_value': {{"aaaaaaaaaaaaa\xFF"}} }
   ]
