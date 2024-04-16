@@ -7449,18 +7449,7 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-        $bag::[
-          {
-            the_sum:1
-          }
-        ],
-        $bag::[
-          {
-            the_sum:1
-          }
-        ]
-      ]
+      output:$bag::[1, 1]
     }
   },
   {

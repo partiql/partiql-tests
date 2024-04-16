@@ -126,7 +126,6 @@ bagOperators::[
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
-        1,
         2
       ]
     }
