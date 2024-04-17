@@ -7375,8 +7375,8 @@
     }
   },
   {
-    name:"Expression with multiple subqueriees containing aggregates : CAST((SELECT COUNT(1) FROM products) AS LIST)[0]._1 / CAST((SELECT COUNT(1) FROM suppliers) AS LIST)[0]._1",
-    statement:"CAST((SELECT COUNT(1) FROM products) AS LIST)[0]._1 / CAST((SELECT COUNT(1) FROM suppliers) AS LIST)[0]._1",
+    name:"Expression with multiple subqueries containing aggregates : (SELECT COUNT(1) FROM products) / (SELECT COUNT(1) FROM suppliers)",
+    statement:"(SELECT COUNT(1) FROM products) / (SELECT COUNT(1) FROM suppliers)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -7387,8 +7387,8 @@
     }
   },
   {
-    name:"Aggregates with subquery containing another aggregate : SELECT COUNT(1) + CAST((SELECT SUM(numInStock) FROM products) AS LIST)[0]._1 as a_number FROM products",
-    statement:"SELECT COUNT(1) + CAST((SELECT SUM(numInStock) FROM products) AS LIST)[0]._1 as a_number FROM products",
+    name:"Aggregates with subquery containing another aggregate : SELECT COUNT(1) + (SELECT SUM(numInStock) FROM products) as a_number FROM products",
+    statement:"SELECT COUNT(1) + (SELECT SUM(numInStock) FROM products) as a_number FROM products",
     assert:{
       result:EvaluationSuccess,
       evalMode:[

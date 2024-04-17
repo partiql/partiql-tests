@@ -832,31 +832,11 @@ multiple_sql_aggregates::[
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
-        $bag::[
-          {
-            result:27.
-          }
-        ],
-        $bag::[
-          {
-            result:29.0
-          }
-        ],
-        $bag::[
-          {
-            result:31.
-          }
-        ],
-        $bag::[
-          {
-            result:33.
-          }
-        ],
-        $bag::[
-          {
-            result:35.
-          }
-        ]
+        27.,
+        29.0,
+        31.,
+        33.,
+        35.
       ]
     }
   },
