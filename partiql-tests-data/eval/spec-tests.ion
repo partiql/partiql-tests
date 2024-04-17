@@ -147,7 +147,7 @@
         statement: "SELECT x FROM someOrderedTable[0].a AS x",
         assert: [
             {
-                evalMode: [EvalModeCoerce, EvalModeError],
+                evalMode: EvalModeCoerce,
                 result: EvaluationSuccess,
                 output: $bag::[{x: 0}]
             },
@@ -637,11 +637,17 @@
     {
         name: "WHERE clause eliminating absent values",
         statement: "SELECT VALUE v.a FROM [{'a':1, 'b':true}, {'a':2, 'b':null}, {'a':3}] v WHERE v.b",
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[1]
-        }
+        assert: [
+            {
+                evalMode: EvalModeCoerce,
+                result: EvaluationSuccess,
+                output: $bag::[1]
+            },
+            {
+                evalMode:EvalModeError,
+                result:EvaluationFail
+            },
+        ]
     },
     {
         name: "null is missing",
