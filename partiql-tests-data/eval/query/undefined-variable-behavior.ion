@@ -51,15 +51,21 @@ undefined_variable_behavior::[
   {
     name:"undefinedUnqualifiedVariableInSelectWithUndefinedVariableBehaviorMissing",
     statement:"SELECT s.a, s.undefined_variable, s.b FROM `[{a:100, b:200}]` s",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        {
-          a:100,
-          b:200
-        }
-      ]
-    }
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          {
+            a:100,
+            b:200
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   }
 ]

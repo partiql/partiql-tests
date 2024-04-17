@@ -653,24 +653,30 @@ sql_any::[
               FROM << {'a': 1, 'b': 10}, {'a': 1, 'b': 17}, {'a': 2, 'b': 20}, {'a': 3} >> AS x
               GROUP BY x.a
               ''',
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[EvalModeCoerce, EvalModeError],
-      output:$bag::[
-        {
-          a: 1,
-          e: true
-        },
-        {
-          a: 2,
-          e: false
-        },
-        {
-          a: 3,
-          e: null
-        },
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            a: 1,
+            e: true
+          },
+          {
+            a: 2,
+            e: false
+          },
+          {
+            a: 3,
+            e: null
+          },
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"ANY DISTINCT with GROUP BY",
@@ -679,24 +685,30 @@ sql_any::[
               FROM [ {'a': 1, 'b': 10}, {'a': 1, 'b': 17}, {'a': 2, 'b': 20}, {'a': 3} ] AS x
               GROUP BY x.a
               ''',
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[EvalModeCoerce, EvalModeError],
-      output:$bag::[
-        {
-          a: 1,
-          e: true
-        },
-        {
-          a: 2,
-          e: false
-        },
-        {
-          a: 3,
-          e: null
-        },
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            a: 1,
+            e: true
+          },
+          {
+            a: 2,
+            e: false
+          },
+          {
+            a: 3,
+            e: null
+          },
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   }
 ]
 
@@ -708,24 +720,30 @@ sql_some::[
               FROM << {'a': 1, 'b': 10}, {'a': 1, 'b': 17}, {'a': 2, 'b': 20}, {'a': 3} >> AS x
               GROUP BY x.a
               ''',
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[EvalModeCoerce, EvalModeError],
-      output:$bag::[
-        {
-          a: 1,
-          e: true
-        },
-        {
-          a: 2,
-          e: false
-        },
-        {
-          a: 3,
-          e: null
-        },
-      ]
-    }
+    assert:[
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            a: 1,
+            e: true
+          },
+          {
+            a: 2,
+            e: false
+          },
+          {
+            a: 3,
+            e: null
+          },
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SOME DISTINCT with GROUP BY",
@@ -734,24 +752,30 @@ sql_some::[
               FROM [ {'a': 1, 'b': 10}, {'a': 1, 'b': 17}, {'a': 2, 'b': 20}, {'a': 3} ] AS x
               GROUP BY x.a
               ''',
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[EvalModeCoerce, EvalModeError],
-      output:$bag::[
-        {
-          a: 1,
-          e: true
-        },
-        {
-          a: 2,
-          e: false
-        },
-        {
-          a: 3,
-          e: null
-        },
-      ]
-    }
+    assert:[
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            a: 1,
+            e: true
+          },
+          {
+            a: 2,
+            e: false
+          },
+          {
+            a: 3,
+            e: null
+          },
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   }
 ]
 
@@ -763,24 +787,30 @@ sql_every::[
               FROM << {'a': 1, 'b': 10}, {'a': 1, 'b': 11}, {'a': 2, 'b': 20}, {'a': 3} >> AS x
               GROUP BY x.a
               ''',
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[EvalModeCoerce, EvalModeError],
-      output:$bag::[
-        {
-          a: 1,
-          e: true
-        },
-        {
-          a: 2,
-          e: false
-        },
-        {
-          a: 3,
-          e: null
-        },
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            a: 1,
+            e: true
+          },
+          {
+            a: 2,
+            e: false
+          },
+          {
+            a: 3,
+            e: null
+          },
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"EVERY DISTINCT with GROUP BY",
@@ -789,24 +819,30 @@ sql_every::[
               FROM [ {'a': 1, 'b': 10}, {'a': 1, 'b': 11}, {'a': 2, 'b': 20}, {'a': 3} ] AS x
               GROUP BY x.a
               ''',
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[EvalModeCoerce, EvalModeError],
-      output:$bag::[
-        {
-          a: 1,
-          e: true
-        },
-        {
-          a: 2,
-          e: false
-        },
-        {
-          a: 3,
-          e: null
-        },
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            a: 1,
+            e: true
+          },
+          {
+            a: 2,
+            e: false
+          },
+          {
+            a: 3,
+            e: null
+          },
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   }
 ]
 

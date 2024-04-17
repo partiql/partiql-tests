@@ -239,18 +239,24 @@ envs::{
   {
     name:"selectListWithMissing",
     statement:"SELECT a.x AS x, a.y AS y FROM `[{x:5}, {y:6}]` AS a",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        {
-          x:5
-        },
-        {
-          y:6
-        }
-      ]
-    }
+    assert: [
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          {
+            x:5
+          },
+          {
+            y:6
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   }
 ]
 

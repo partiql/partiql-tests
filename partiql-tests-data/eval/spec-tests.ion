@@ -329,38 +329,62 @@
     {
         name: "attribute value evaluates to MISSING",
         statement: "SELECT VALUE {'a':v.a, 'b':v.b} FROM [{'a':1, 'b':1}, {'a':2}] AS v",
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[{a:1, b:1}, {a:2}]
-        }
+        assert: [
+            {
+                evalMode: EvalModeCoerce,
+                result: EvaluationSuccess,
+                output: $bag::[{a:1, b:1}, {a:2}]
+            },
+            {
+                evalMode:EvalModeError,
+                result:EvaluationFail
+            },
+        ]
     },
     {
         name: "array element evaluates to MISSING",
         statement: "SELECT VALUE [v.a, v.b] FROM [{'a':1, 'b':1}, {'a':2}] AS v",
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[[1, 1], [2, $missing::null]]
-        }
+        assert: [
+            {
+                evalMode: EvalModeCoerce,
+                result: EvaluationSuccess,
+                output: $bag::[[1, 1], [2, $missing::null]]
+            },
+            {
+                evalMode:EvalModeError,
+                result:EvaluationFail
+            },
+        ]
     },
     {
         name: "bag element evaluates to MISSING",
         statement: "SELECT VALUE v.b FROM [{'a':1, 'b':1}, {'a':2}] AS v",
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[1, $missing::null]
-        }
+        assert: [
+            {
+                evalMode: EvalModeCoerce,
+                result: EvaluationSuccess,
+                output: $bag::[1, $missing::null]
+            },
+            {
+                evalMode:EvalModeError,
+                result:EvaluationFail
+            },
+        ]
     },
     {
         name: "bag element evaluates to MISSING in bag constructor",
         statement: "SELECT VALUE <<v.a, v.b>> FROM [{'a':1, 'b':1}, {'a':2}] AS v",
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[$bag::[1, 1], $bag::[2, $missing::null]]
-        }
+        assert: [
+            {
+                evalMode: EvalModeCoerce,
+                result: EvaluationSuccess,
+                output: $bag::[$bag::[1, 1], $bag::[2, $missing::null]]
+            },
+            {
+                evalMode:EvalModeError,
+                result:EvaluationFail
+            },
+        ]
     },
     {
         name: "pivot into a tuple",
@@ -412,11 +436,17 @@
     {
         name: "cast and operations with missing argument",
         statement: "SELECT VALUE {'a':3*v.a, 'b':3*(CAST(v.b AS INTEGER))} FROM [{'a':1, 'b':'1'}, {'a':2}] v",
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[{a:3, b:3}, {a:6}]
-        }
+        assert: [
+            {
+                evalMode: EvalModeCoerce,
+                result: EvaluationSuccess,
+                output: $bag::[{a:3, b:3}, {a:6}]
+            },
+            {
+                evalMode:EvalModeError,
+                result:EvaluationFail
+            },
+        ]
     },
     {
         name: "missing value in arithmetic expression",
@@ -721,15 +751,21 @@
                 {co:0.5}
             ]
         },
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[
-                {sensor:1, readings:$bag::[0.4, 0.2]},
-                {sensor:2, readings:$bag::[0.3]},
-                {sensor:null, readings:$bag::[0.1, 0.5]}
-            ]
-        }
+        assert: [
+            {
+                evalMode: EvalModeCoerce,
+                result: EvaluationSuccess,
+                output: $bag::[
+                    {sensor:1, readings:$bag::[0.4, 0.2]},
+                    {sensor:2, readings:$bag::[0.3]},
+                    {sensor:null, readings:$bag::[0.1, 0.5]}
+                ]
+            },
+            {
+                evalMode:EvalModeError,
+                result:EvaluationFail
+            },
+        ]
     },
     {
         name: "group by with differenciated absent values",
@@ -749,16 +785,22 @@
                 {co:0.5}
             ]
         },
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[
-                {sensor:1, readings:$bag::[0.4, 0.2]},
-                {sensor:2, readings:$bag::[0.3]},
-                {sensor:null, readings:$bag::[0.1]},
-                {readings:$bag::[0.5]}
-            ]
-        }
+        assert: [
+            {
+                evalMode: EvalModeCoerce,
+                result: EvaluationSuccess,
+                output: $bag::[
+                    {sensor:1, readings:$bag::[0.4, 0.2]},
+                    {sensor:2, readings:$bag::[0.3]},
+                    {sensor:null, readings:$bag::[0.1]},
+                    {readings:$bag::[0.5]}
+                ]
+            },
+            {
+                evalMode:EvalModeError,
+                result:EvaluationFail
+            },
+        ]
     },
     {
         name: "windowing simplified with grouping",
