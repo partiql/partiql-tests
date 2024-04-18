@@ -86,64 +86,82 @@ envs::{
   {
     name:"selectFromScalarAndAtUnpivotWildCardOverScalar",
     statement:"SELECT VALUE [n, v] FROM (100).* AS v AT n",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        [
-          "_1",
-          100
+    assert: [
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          [
+            $missing::null,
+            100
+          ]
         ]
-      ]
-    }
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      },
+    ]
   },
   {
     name:"selectFromListAndAtUnpivotWildCardOverScalar",
     statement:"SELECT VALUE [n, (SELECT VALUE [i, x] FROM @v AS x AT i)] FROM [100, 200].*.*.* AS v AT n",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        [
-          "_1",
-          $bag::[
-            [
-              0,
-              100
-            ],
-            [
-              1,
-              200
+    assert: [
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          [
+            $missing::null,
+            $bag::[
+              [
+                0,
+                100
+              ],
+              [
+                1,
+                200
+              ]
             ]
           ]
         ]
-      ]
-    }
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      },
+    ]
   },
   {
     name:"selectFromBagAndAtUnpivotWildCardOverScalar",
     statement:"SELECT VALUE [n, (SELECT VALUE [i IS MISSING, i, x] FROM @v AS x AT i)] FROM <<100, 200>>.* AS v AT n",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        [
-          "_1",
-          $bag::[
-            [
-              true,
-              $missing::null,
-              100
-            ],
-            [
-              true,
-              $missing::null,
-              200
+    assert: [
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          [
+            $missing::null,
+            $bag::[
+              [
+                true,
+                $missing::null,
+                100
+              ],
+              [
+                true,
+                $missing::null,
+                200
+              ]
             ]
           ]
         ]
-      ]
-    }
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      },
+    ]
   },
   {
     name:"selectPathUnpivotWildCardOverStructMultiple",
@@ -270,26 +288,30 @@ envs::{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
-        (
-          a
-          b
-          c
-        )
+        a,
+        b,
+        c
       ]
     }
   },
   {
     name:"rangeOverStruct",
     statement:"SELECT VALUE v FROM `{a:5}` AS v",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        {
-          a:5
-        }
-      ]
-    }
+    assert: [
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          {
+            a:5
+          }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      },
+    ]
   },
   {
     name:"rangeOverList",
@@ -377,45 +399,57 @@ envs::{
   {
     name:"rangeOverBagWithAt",
     statement:"SELECT VALUE [i, v] FROM <<1, 2, 3>> AS v AT i",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        [
-          $missing::null,
-          1
-        ],
-        [
-          $missing::null,
-          2
-        ],
-        [
-          $missing::null,
-          3
+    assert: [
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          [
+            $missing::null,
+            1
+          ],
+          [
+            $missing::null,
+            2
+          ],
+          [
+            $missing::null,
+            3
+          ]
         ]
-      ]
-    }
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      },
+    ]
   },
   {
     name:"rangeOverNestedWithAt",
     statement:"SELECT VALUE [i, v] FROM (SELECT VALUE v FROM `[1, 2, 3]` AS v) AS v AT i",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        [
-          $missing::null,
-          1
-        ],
-        [
-          $missing::null,
-          2
-        ],
-        [
-          $missing::null,
-          3
+    assert: [
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          [
+            $missing::null,
+            1
+          ],
+          [
+            $missing::null,
+            2
+          ],
+          [
+            $missing::null,
+            3
+          ]
         ]
-      ]
-    }
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      },
+    ]
   }
 ]
