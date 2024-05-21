@@ -1666,134 +1666,153 @@
   {
     name:"SELECT supplierId_missings FROM products_sparse p GROUP BY p.supplierId_missings",
     statement:"SELECT supplierId_missings FROM products_sparse p GROUP BY p.supplierId_missings",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          supplierId_missings:10
-        },
-        {
-          supplierId_missings:11
-        },
-        {
-          supplierId_missings:null  // missing coerced to null as per 11.1.1
-        }
-      ]
-    }
+    assert:[
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            supplierId_missings:10
+          },
+          {
+            supplierId_missings:11
+          },
+          {
+            supplierId_missings:null  // missing coerced to null as per 11.1.1
+          }
+        ]
+      },
+
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT p.supplierId_missings FROM products_sparse p GROUP BY p.supplierId_missings",
     statement:"SELECT p.supplierId_missings FROM products_sparse p GROUP BY p.supplierId_missings",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          supplierId_missings:10
-        },
-        {
-          supplierId_missings:11
-        },
-        {
-          supplierId_missings:null  // missing coerced to null as per 11.1.1
-        }
-      ]
-    }
+    assert:[
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            supplierId_missings:10
+          },
+          {
+            supplierId_missings:11
+          },
+          {
+            supplierId_missings:null  // missing coerced to null as per 11.1.1
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT VALUE { 'supplierId_missings' : p.supplierId_missings } FROM products_sparse p GROUP BY p.supplierId_missings",
     statement:"SELECT VALUE { 'supplierId_missings' : p.supplierId_missings } FROM products_sparse p GROUP BY p.supplierId_missings",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          supplierId_missings:10
-        },
-        {
-          supplierId_missings:11
-        },
-        {
-          supplierId_missings:null  // missing coerced to null as per 11.1.1
-        }
-      ]
-    }
+    assert:[
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            supplierId_missings:10
+          },
+          {
+            supplierId_missings:11
+          },
+          {
+            supplierId_missings:null  // missing coerced to null as per 11.1.1
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT supplierId_mixed FROM products_sparse p GROUP BY p.supplierId_mixed",
     statement:"SELECT supplierId_mixed FROM products_sparse p GROUP BY p.supplierId_mixed",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          supplierId_mixed:10
-        },
-        {
-          supplierId_mixed:11
-        },
-        {
-          supplierId_mixed:null  // missing coerced to null as per 11.1.1
-        }
-      ]
-    }
+    assert:[
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            supplierId_mixed:10
+          },
+          {
+            supplierId_mixed:11
+          },
+          {
+            supplierId_mixed:null  // missing coerced to null as per 11.1.1
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT p.supplierId_mixed FROM products_sparse p GROUP BY p.supplierId_mixed",
     statement:"SELECT p.supplierId_mixed FROM products_sparse p GROUP BY p.supplierId_mixed",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          supplierId_mixed:10
-        },
-        {
-          supplierId_mixed:11
-        },
-        {
-          supplierId_mixed:null  // missing coerced to null as per 11.1.1
-        }
-      ]
-    }
+    assert:[
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            supplierId_mixed:10
+          },
+          {
+            supplierId_mixed:11
+          },
+          {
+            supplierId_mixed:null  // missing coerced to null as per 11.1.1
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT VALUE { 'supplierId_mixed' : p.supplierId_mixed } FROM products_sparse p GROUP BY p.supplierId_mixed",
     statement:"SELECT VALUE { 'supplierId_mixed' : p.supplierId_mixed } FROM products_sparse p GROUP BY p.supplierId_mixed",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          supplierId_mixed:10
-        },
-        {
-          supplierId_mixed:11
-        },
-        {
-          supplierId_mixed:null  // missing coerced to null as per 11.1.1
-        }
-      ]
-    }
+    assert:[
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            supplierId_mixed:10
+          },
+          {
+            supplierId_mixed:11
+          },
+          {
+            supplierId_mixed:null  // missing coerced to null as per 11.1.1
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT regionId, supplierId_nulls FROM products_sparse p GROUP BY p.regionId, p.supplierId_nulls",
@@ -1872,224 +1891,242 @@
   {
     name:"SELECT regionId, supplierId_missings FROM products_sparse p GROUP BY p.regionId, p.supplierId_missings",
     statement:"SELECT regionId, supplierId_missings FROM products_sparse p GROUP BY p.regionId, p.supplierId_missings",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          regionId:100,
-          supplierId_missings:10
-        },
-        {
-          regionId:100,
-          supplierId_missings:11
-        },
-        {
-          regionId:100,
-          supplierId_missings:null  // missing coerced to null as per 11.1.1
-        },
-        {
-          regionId:200,
-          supplierId_missings:10
-        },
-        {
-          regionId:200,
-          supplierId_missings:11
-        },
-        {
-          regionId:200,
-          supplierId_missings:null  // missing coerced to null as per 11.1.1
-        }
-      ]
-    }
+    assert:[
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            regionId:100,
+            supplierId_missings:10
+          },
+          {
+            regionId:100,
+            supplierId_missings:11
+          },
+          {
+            regionId:100,
+            supplierId_missings:null  // missing coerced to null as per 11.1.1
+          },
+          {
+            regionId:200,
+            supplierId_missings:10
+          },
+          {
+            regionId:200,
+            supplierId_missings:11
+          },
+          {
+            regionId:200,
+            supplierId_missings:null  // missing coerced to null as per 11.1.1
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT p.regionId, p.supplierId_missings FROM products_sparse p GROUP BY p.regionId, p.supplierId_missings",
     statement:"SELECT p.regionId, p.supplierId_missings FROM products_sparse p GROUP BY p.regionId, p.supplierId_missings",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          regionId:100,
-          supplierId_missings:10
-        },
-        {
-          regionId:100,
-          supplierId_missings:11
-        },
-        {
-          regionId:100,
-          supplierId_missings:null  // missing coerced to null as per 11.1.1
-        },
-        {
-          regionId:200,
-          supplierId_missings:10
-        },
-        {
-          regionId:200,
-          supplierId_missings:11
-        },
-        {
-          regionId:200,
-          supplierId_missings:null  // missing coerced to null as per 11.1.1
-        }
-      ]
-    }
+    assert:[
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            regionId:100,
+            supplierId_missings:10
+          },
+          {
+            regionId:100,
+            supplierId_missings:11
+          },
+          {
+            regionId:100,
+            supplierId_missings:null  // missing coerced to null as per 11.1.1
+          },
+          {
+            regionId:200,
+            supplierId_missings:10
+          },
+          {
+            regionId:200,
+            supplierId_missings:11
+          },
+          {
+            regionId:200,
+            supplierId_missings:null  // missing coerced to null as per 11.1.1
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT VALUE { 'regionId': p.regionId, 'supplierId_missings': p.supplierId_missings } FROM products_sparse p GROUP BY p.regionId, p.supplierId_missings",
     statement:"SELECT VALUE { 'regionId': p.regionId, 'supplierId_missings': p.supplierId_missings } FROM products_sparse p GROUP BY p.regionId, p.supplierId_missings",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          regionId:100,
-          supplierId_missings:10
-        },
-        {
-          regionId:100,
-          supplierId_missings:11
-        },
-        {
-          regionId:100,
-          supplierId_missings:null  // missing coerced to null as per 11.1.1
-        },
-        {
-          regionId:200,
-          supplierId_missings:10
-        },
-        {
-          regionId:200,
-          supplierId_missings:11
-        },
-        {
-          regionId:200,
-          supplierId_missings:null  // missing coerced to null as per 11.1.1
-        }
-      ]
-    }
+    assert:[
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            regionId:100,
+            supplierId_missings:10
+          },
+          {
+            regionId:100,
+            supplierId_missings:11
+          },
+          {
+            regionId:100,
+            supplierId_missings:null  // missing coerced to null as per 11.1.1
+          },
+          {
+            regionId:200,
+            supplierId_missings:10
+          },
+          {
+            regionId:200,
+            supplierId_missings:11
+          },
+          {
+            regionId:200,
+            supplierId_missings:null  // missing coerced to null as per 11.1.1
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT regionId, supplierId_mixed FROM products_sparse p GROUP BY p.regionId, p.supplierId_mixed",
     statement:"SELECT regionId, supplierId_mixed FROM products_sparse p GROUP BY p.regionId, p.supplierId_mixed",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          regionId:100,
-          supplierId_mixed:10
-        },
-        {
-          regionId:100,
-          supplierId_mixed:11
-        },
-        {
-          regionId:100,
-          supplierId_mixed:null  // missing coerced to null as per 11.1.1
-        },
-        {
-          regionId:200,
-          supplierId_mixed:10
-        },
-        {
-          regionId:200,
-          supplierId_mixed:11
-        },
-        {
-          regionId:200,
-          supplierId_mixed:null
-        }
-      ]
-    }
+    assert:[
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            regionId:100,
+            supplierId_mixed:10
+          },
+          {
+            regionId:100,
+            supplierId_mixed:11
+          },
+          {
+            regionId:100,
+            supplierId_mixed:null  // missing coerced to null as per 11.1.1
+          },
+          {
+            regionId:200,
+            supplierId_mixed:10
+          },
+          {
+            regionId:200,
+            supplierId_mixed:11
+          },
+          {
+            regionId:200,
+            supplierId_mixed:null
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT regionId, p.supplierId_mixed FROM products_sparse p GROUP BY p.regionId, p.supplierId_mixed",
     statement:"SELECT regionId, p.supplierId_mixed FROM products_sparse p GROUP BY p.regionId, p.supplierId_mixed",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          regionId:100,
-          supplierId_mixed:10
-        },
-        {
-          regionId:100,
-          supplierId_mixed:11
-        },
-        {
-          regionId:100,
-          supplierId_mixed:null  // missing coerced to null as per 11.1.1
-        },
-        {
-          regionId:200,
-          supplierId_mixed:10
-        },
-        {
-          regionId:200,
-          supplierId_mixed:11
-        },
-        {
-          regionId:200,
-          supplierId_mixed:null
-        }
-      ]
-    }
+    assert:[
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            regionId:100,
+            supplierId_mixed:10
+          },
+          {
+            regionId:100,
+            supplierId_mixed:11
+          },
+          {
+            regionId:100,
+            supplierId_mixed:null  // missing coerced to null as per 11.1.1
+          },
+          {
+            regionId:200,
+            supplierId_mixed:10
+          },
+          {
+            regionId:200,
+            supplierId_mixed:11
+          },
+          {
+            regionId:200,
+            supplierId_mixed:null
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT VALUE { 'regionId': p.regionId, 'supplierId_mixed': p.supplierId_mixed } FROM products_sparse p GROUP BY p.regionId, p.supplierId_mixed",
     statement:"SELECT VALUE { 'regionId': p.regionId, 'supplierId_mixed': p.supplierId_mixed } FROM products_sparse p GROUP BY p.regionId, p.supplierId_mixed",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          regionId:100,
-          supplierId_mixed:10
-        },
-        {
-          regionId:100,
-          supplierId_mixed:11
-        },
-        {
-          regionId:100,
-          supplierId_mixed:null  // missing coerced to null as per 11.1.1
-        },
-        {
-          regionId:200,
-          supplierId_mixed:10
-        },
-        {
-          regionId:200,
-          supplierId_mixed:11
-        },
-        {
-          regionId:200,
-          supplierId_mixed:null
-        }
-      ]
-    }
+    assert:[
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            regionId:100,
+            supplierId_mixed:10
+          },
+          {
+            regionId:100,
+            supplierId_mixed:11
+          },
+          {
+            regionId:100,
+            supplierId_mixed:null  // missing coerced to null as per 11.1.1
+          },
+          {
+            regionId:200,
+            supplierId_mixed:10
+          },
+          {
+            regionId:200,
+            supplierId_mixed:11
+          },
+          {
+            regionId:200,
+            supplierId_mixed:null
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
 ]
 
@@ -5714,172 +5751,202 @@
   {
     name:"SELECT COUNT(1) AS the_count, COUNT(p.price_missings) AS the_agg FROM products_sparse AS p",
     statement:"SELECT COUNT(1) AS the_count, COUNT(p.price_missings) AS the_agg FROM products_sparse AS p",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          the_count:10,
-          the_agg:5
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            the_count:10,
+            the_agg:5
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT COUNT(1) AS the_count, SUM(p.price_missings) AS the_agg FROM products_sparse AS p",
     statement:"SELECT COUNT(1) AS the_count, SUM(p.price_missings) AS the_agg FROM products_sparse AS p",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          the_count:10,
-          the_agg:15.0
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            the_count:10,
+            the_agg:15.0
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT COUNT(1) AS the_count, MIN(p.price_missings) AS the_agg FROM products_sparse AS p",
     statement:"SELECT COUNT(1) AS the_count, MIN(p.price_missings) AS the_agg FROM products_sparse AS p",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          the_count:10,
-          the_agg:1.0
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            the_count:10,
+            the_agg:1.0
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT COUNT(1) AS the_count, MAX(p.price_missings) AS the_agg FROM products_sparse AS p",
     statement:"SELECT COUNT(1) AS the_count, MAX(p.price_missings) AS the_agg FROM products_sparse AS p",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          the_count:10,
-          the_agg:5.0
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            the_count:10,
+            the_agg:5.0
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT COUNT(1) AS the_count, AVG(p.price_missings) AS the_agg FROM products_sparse AS p",
     statement:"SELECT COUNT(1) AS the_count, AVG(p.price_missings) AS the_agg FROM products_sparse AS p",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          the_count:10,
-          the_agg:3.0
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            the_count:10,
+            the_agg:3.0
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT COUNT(1) AS the_count, COUNT(p.price_mixed) AS the_agg FROM products_sparse AS p",
     statement:"SELECT COUNT(1) AS the_count, COUNT(p.price_mixed) AS the_agg FROM products_sparse AS p",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          the_count:10,
-          the_agg:5
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            the_count:10,
+            the_agg:5
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT COUNT(1) AS the_count, SUM(p.price_mixed) AS the_agg FROM products_sparse AS p",
     statement:"SELECT COUNT(1) AS the_count, SUM(p.price_mixed) AS the_agg FROM products_sparse AS p",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          the_count:10,
-          the_agg:15.0
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            the_count:10,
+            the_agg:15.0
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT COUNT(1) AS the_count, MIN(p.price_mixed) AS the_agg FROM products_sparse AS p",
     statement:"SELECT COUNT(1) AS the_count, MIN(p.price_mixed) AS the_agg FROM products_sparse AS p",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          the_count:10,
-          the_agg:1.0
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            the_count:10,
+            the_agg:1.0
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT COUNT(1) AS the_count, MAX(p.price_mixed) AS the_agg FROM products_sparse AS p",
     statement:"SELECT COUNT(1) AS the_count, MAX(p.price_mixed) AS the_agg FROM products_sparse AS p",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          the_count:10,
-          the_agg:5.0
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            the_count:10,
+            the_agg:5.0
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT COUNT(1) AS the_count, AVG(p.price_mixed) AS the_agg FROM products_sparse AS p",
     statement:"SELECT COUNT(1) AS the_count, AVG(p.price_mixed) AS the_agg FROM products_sparse AS p",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          the_count:10,
-          the_agg:3.0
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            the_count:10,
+            the_agg:3.0
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT categoryId, COUNT(1) AS the_count, COUNT( price_nulls) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
@@ -6374,232 +6441,262 @@
   {
     name:"SELECT categoryId, COUNT(1) AS the_count, COUNT(p.price_missings) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
     statement:"SELECT categoryId, COUNT(1) AS the_count, COUNT(p.price_missings) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          categoryId:20,
-          the_count:4,
-          the_agg:3
-        },
-        {
-          categoryId:21,
-          the_count:6,
-          the_agg:2
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            categoryId:20,
+            the_count:4,
+            the_agg:3
+          },
+          {
+            categoryId:21,
+            the_count:6,
+            the_agg:2
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT categoryId, COUNT(1) AS the_count, SUM(p.price_missings) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
     statement:"SELECT categoryId, COUNT(1) AS the_count, SUM(p.price_missings) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          categoryId:20,
-          the_count:4,
-          the_agg:6.0
-        },
-        {
-          categoryId:21,
-          the_count:6,
-          the_agg:9.0
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            categoryId:20,
+            the_count:4,
+            the_agg:6.0
+          },
+          {
+            categoryId:21,
+            the_count:6,
+            the_agg:9.0
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT categoryId, COUNT(1) AS the_count, MIN(p.price_missings) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
     statement:"SELECT categoryId, COUNT(1) AS the_count, MIN(p.price_missings) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          categoryId:20,
-          the_count:4,
-          the_agg:1.0
-        },
-        {
-          categoryId:21,
-          the_count:6,
-          the_agg:4.0
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            categoryId:20,
+            the_count:4,
+            the_agg:1.0
+          },
+          {
+            categoryId:21,
+            the_count:6,
+            the_agg:4.0
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT categoryId, COUNT(1) AS the_count, MAX(p.price_missings) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
     statement:"SELECT categoryId, COUNT(1) AS the_count, MAX(p.price_missings) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          categoryId:20,
-          the_count:4,
-          the_agg:3.0
-        },
-        {
-          categoryId:21,
-          the_count:6,
-          the_agg:5.0
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            categoryId:20,
+            the_count:4,
+            the_agg:3.0
+          },
+          {
+            categoryId:21,
+            the_count:6,
+            the_agg:5.0
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT categoryId, COUNT(1) AS the_count, AVG(p.price_missings) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
     statement:"SELECT categoryId, COUNT(1) AS the_count, AVG(p.price_missings) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          categoryId:20,
-          the_count:4,
-          the_agg:2.0
-        },
-        {
-          categoryId:21,
-          the_count:6,
-          the_agg:4.5
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            categoryId:20,
+            the_count:4,
+            the_agg:2.0
+          },
+          {
+            categoryId:21,
+            the_count:6,
+            the_agg:4.5
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT categoryId, COUNT(1) AS the_count, COUNT(p.price_mixed) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
     statement:"SELECT categoryId, COUNT(1) AS the_count, COUNT(p.price_mixed) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          categoryId:20,
-          the_count:4,
-          the_agg:3
-        },
-        {
-          categoryId:21,
-          the_count:6,
-          the_agg:2
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            categoryId:20,
+            the_count:4,
+            the_agg:3
+          },
+          {
+            categoryId:21,
+            the_count:6,
+            the_agg:2
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT categoryId, COUNT(1) AS the_count, SUM(p.price_mixed) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
     statement:"SELECT categoryId, COUNT(1) AS the_count, SUM(p.price_mixed) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          categoryId:20,
-          the_count:4,
-          the_agg:6.0
-        },
-        {
-          categoryId:21,
-          the_count:6,
-          the_agg:9.0
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            categoryId:20,
+            the_count:4,
+            the_agg:6.0
+          },
+          {
+            categoryId:21,
+            the_count:6,
+            the_agg:9.0
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT categoryId, COUNT(1) AS the_count, MIN(p.price_mixed) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
     statement:"SELECT categoryId, COUNT(1) AS the_count, MIN(p.price_mixed) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          categoryId:20,
-          the_count:4,
-          the_agg:1.0
-        },
-        {
-          categoryId:21,
-          the_count:6,
-          the_agg:4.0
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            categoryId:20,
+            the_count:4,
+            the_agg:1.0
+          },
+          {
+            categoryId:21,
+            the_count:6,
+            the_agg:4.0
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT categoryId, COUNT(1) AS the_count, MAX(p.price_mixed) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
     statement:"SELECT categoryId, COUNT(1) AS the_count, MAX(p.price_mixed) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          categoryId:20,
-          the_count:4,
-          the_agg:3.0
-        },
-        {
-          categoryId:21,
-          the_count:6,
-          the_agg:5.0
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            categoryId:20,
+            the_count:4,
+            the_agg:3.0
+          },
+          {
+            categoryId:21,
+            the_count:6,
+            the_agg:5.0
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT categoryId, COUNT(1) AS the_count, AVG(p.price_mixed) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
     statement:"SELECT categoryId, COUNT(1) AS the_count, AVG(p.price_mixed) AS the_agg FROM products_sparse AS p GROUP BY categoryId",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          categoryId:20,
-          the_count:4,
-          the_agg:2.0
-        },
-        {
-          categoryId:21,
-          the_count:6,
-          the_agg:4.5
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            categoryId:20,
+            the_count:4,
+            the_agg:2.0
+          },
+          {
+            categoryId:21,
+            the_count:6,
+            the_agg:4.5
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT p.categoryId, COUNT(1) AS the_count, COUNT( price_nulls) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
@@ -7094,232 +7191,262 @@
   {
     name:"SELECT p.categoryId, COUNT(1) AS the_count, COUNT(p.price_missings) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
     statement:"SELECT p.categoryId, COUNT(1) AS the_count, COUNT(p.price_missings) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          categoryId:20,
-          the_count:4,
-          the_agg:3
-        },
-        {
-          categoryId:21,
-          the_count:6,
-          the_agg:2
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            categoryId:20,
+            the_count:4,
+            the_agg:3
+          },
+          {
+            categoryId:21,
+            the_count:6,
+            the_agg:2
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT p.categoryId, COUNT(1) AS the_count, SUM(p.price_missings) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
     statement:"SELECT p.categoryId, COUNT(1) AS the_count, SUM(p.price_missings) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          categoryId:20,
-          the_count:4,
-          the_agg:6.0
-        },
-        {
-          categoryId:21,
-          the_count:6,
-          the_agg:9.0
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            categoryId:20,
+            the_count:4,
+            the_agg:6.0
+          },
+          {
+            categoryId:21,
+            the_count:6,
+            the_agg:9.0
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT p.categoryId, COUNT(1) AS the_count, MIN(p.price_missings) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
     statement:"SELECT p.categoryId, COUNT(1) AS the_count, MIN(p.price_missings) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          categoryId:20,
-          the_count:4,
-          the_agg:1.0
-        },
-        {
-          categoryId:21,
-          the_count:6,
-          the_agg:4.0
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            categoryId:20,
+            the_count:4,
+            the_agg:1.0
+          },
+          {
+            categoryId:21,
+            the_count:6,
+            the_agg:4.0
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT p.categoryId, COUNT(1) AS the_count, MAX(p.price_missings) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
     statement:"SELECT p.categoryId, COUNT(1) AS the_count, MAX(p.price_missings) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          categoryId:20,
-          the_count:4,
-          the_agg:3.0
-        },
-        {
-          categoryId:21,
-          the_count:6,
-          the_agg:5.0
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            categoryId:20,
+            the_count:4,
+            the_agg:3.0
+          },
+          {
+            categoryId:21,
+            the_count:6,
+            the_agg:5.0
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT p.categoryId, COUNT(1) AS the_count, AVG(p.price_missings) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
     statement:"SELECT p.categoryId, COUNT(1) AS the_count, AVG(p.price_missings) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          categoryId:20,
-          the_count:4,
-          the_agg:2.0
-        },
-        {
-          categoryId:21,
-          the_count:6,
-          the_agg:4.5
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            categoryId:20,
+            the_count:4,
+            the_agg:2.0
+          },
+          {
+            categoryId:21,
+            the_count:6,
+            the_agg:4.5
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT p.categoryId, COUNT(1) AS the_count, COUNT(p.price_mixed) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
     statement:"SELECT p.categoryId, COUNT(1) AS the_count, COUNT(p.price_mixed) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          categoryId:20,
-          the_count:4,
-          the_agg:3
-        },
-        {
-          categoryId:21,
-          the_count:6,
-          the_agg:2
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            categoryId:20,
+            the_count:4,
+            the_agg:3
+          },
+          {
+            categoryId:21,
+            the_count:6,
+            the_agg:2
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT p.categoryId, COUNT(1) AS the_count, SUM(p.price_mixed) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
     statement:"SELECT p.categoryId, COUNT(1) AS the_count, SUM(p.price_mixed) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          categoryId:20,
-          the_count:4,
-          the_agg:6.0
-        },
-        {
-          categoryId:21,
-          the_count:6,
-          the_agg:9.0
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            categoryId:20,
+            the_count:4,
+            the_agg:6.0
+          },
+          {
+            categoryId:21,
+            the_count:6,
+            the_agg:9.0
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT p.categoryId, COUNT(1) AS the_count, MIN(p.price_mixed) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
     statement:"SELECT p.categoryId, COUNT(1) AS the_count, MIN(p.price_mixed) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          categoryId:20,
-          the_count:4,
-          the_agg:1.0
-        },
-        {
-          categoryId:21,
-          the_count:6,
-          the_agg:4.0
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            categoryId:20,
+            the_count:4,
+            the_agg:1.0
+          },
+          {
+            categoryId:21,
+            the_count:6,
+            the_agg:4.0
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT p.categoryId, COUNT(1) AS the_count, MAX(p.price_mixed) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
     statement:"SELECT p.categoryId, COUNT(1) AS the_count, MAX(p.price_mixed) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          categoryId:20,
-          the_count:4,
-          the_agg:3.0
-        },
-        {
-          categoryId:21,
-          the_count:6,
-          the_agg:5.0
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            categoryId:20,
+            the_count:4,
+            the_agg:3.0
+          },
+          {
+            categoryId:21,
+            the_count:6,
+            the_agg:5.0
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"SELECT p.categoryId, COUNT(1) AS the_count, AVG(p.price_mixed) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
     statement:"SELECT p.categoryId, COUNT(1) AS the_count, AVG(p.price_mixed) AS the_agg FROM products_sparse AS p GROUP BY p.categoryId",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          categoryId:20,
-          the_count:4,
-          the_agg:2.0
-        },
-        {
-          categoryId:21,
-          the_count:6,
-          the_agg:4.5
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output:$bag::[
+          {
+            categoryId:20,
+            the_count:4,
+            the_agg:2.0
+          },
+          {
+            categoryId:21,
+            the_count:6,
+            the_agg:4.5
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
 ]
 
@@ -7375,8 +7502,8 @@
     }
   },
   {
-    name:"Expression with multiple subqueriees containing aggregates : CAST((SELECT COUNT(1) FROM products) AS LIST)[0]._1 / CAST((SELECT COUNT(1) FROM suppliers) AS LIST)[0]._1",
-    statement:"CAST((SELECT COUNT(1) FROM products) AS LIST)[0]._1 / CAST((SELECT COUNT(1) FROM suppliers) AS LIST)[0]._1",
+    name:"Expression with multiple subqueries containing aggregates : (SELECT COUNT(1) FROM products) / (SELECT COUNT(1) FROM suppliers)",
+    statement:"(SELECT COUNT(1) FROM products) / (SELECT COUNT(1) FROM suppliers)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -7387,8 +7514,8 @@
     }
   },
   {
-    name:"Aggregates with subquery containing another aggregate : SELECT COUNT(1) + CAST((SELECT SUM(numInStock) FROM products) AS LIST)[0]._1 as a_number FROM products",
-    statement:"SELECT COUNT(1) + CAST((SELECT SUM(numInStock) FROM products) AS LIST)[0]._1 as a_number FROM products",
+    name:"Aggregates with subquery containing another aggregate : SELECT COUNT(1) + (SELECT SUM(numInStock) FROM products) as a_number FROM products",
+    statement:"SELECT COUNT(1) + (SELECT SUM(numInStock) FROM products) as a_number FROM products",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -7449,18 +7576,7 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-        $bag::[
-          {
-            the_sum:1
-          }
-        ],
-        $bag::[
-          {
-            the_sum:1
-          }
-        ]
-      ]
+      output:$bag::[1, 1]
     }
   },
   {

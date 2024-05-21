@@ -198,26 +198,32 @@ envs::{
   {
     name:"ordinalAccessWithNegativeIndex",
     statement:"SELECT temp[-2] FROM <<[1,2,3,4]>> AS temp",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        {
-        }
-      ]
-    }
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[ {} ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      },
+    ]
   },
   {
     name:"ordinalAccessWithNegativeIndexAndBindings",
     statement:"SELECT temp[-2] FROM [[1,2,3,4]] AS temp",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        {
-        }
-      ]
-    }
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[ {} ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      },
+    ]
   }
 ]
 
@@ -254,11 +260,9 @@ envs::{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
-        (
-          a
-          b
-          c
-        )
+        a,
+        b,
+        c
       ]
     }
   },
@@ -361,45 +365,57 @@ envs::{
   {
     name:"rangeOverBagWithAt",
     statement:"SELECT VALUE [i, v] FROM <<1, 2, 3>> AS v AT i",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        [
-          $missing::null,
-          1
-        ],
-        [
-          $missing::null,
-          2
-        ],
-        [
-          $missing::null,
-          3
+    assert: [
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          [
+            $missing::null,
+            1
+          ],
+          [
+            $missing::null,
+            2
+          ],
+          [
+            $missing::null,
+            3
+          ]
         ]
-      ]
-    }
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      },
+    ]
   },
   {
     name:"rangeOverNestedWithAt",
     statement:"SELECT VALUE [i, v] FROM (SELECT VALUE v FROM `[1, 2, 3]` AS v) AS v AT i",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        [
-          $missing::null,
-          1
-        ],
-        [
-          $missing::null,
-          2
-        ],
-        [
-          $missing::null,
-          3
+    assert: [
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          [
+            $missing::null,
+            1
+          ],
+          [
+            $missing::null,
+            2
+          ],
+          [
+            $missing::null,
+            3
+          ]
         ]
-      ]
-    }
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      },
+    ]
   }
 ]

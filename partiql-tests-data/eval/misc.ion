@@ -110,18 +110,24 @@ uncategorized::[
   {
     name:"selectValueStructConstructorWithMissing",
     statement:"SELECT VALUE {'x': a.x, 'y': a.y} FROM `[{x:5}, {y:6}]` AS a",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        {
-          x:5
-        },
-        {
-          y:6
-        }
-      ]
-    }
+    assert: [
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          {
+            x:5
+          },
+          {
+            y:6
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"selectIndexStruct",
