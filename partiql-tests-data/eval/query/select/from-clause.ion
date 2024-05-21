@@ -86,82 +86,64 @@ envs::{
   {
     name:"selectFromScalarAndAtUnpivotWildCardOverScalar",
     statement:"SELECT VALUE [n, v] FROM (100).* AS v AT n",
-    assert: [
-      {
-        evalMode:EvalModeCoerce,
-        result:EvaluationSuccess,
-        output:$bag::[
-          [
-            $missing::null,
-            100
-          ]
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        [
+          "_1",
+          100
         ]
-      },
-      {
-        evalMode: EvalModeError,
-        result: EvaluationFail,
-      },
-    ]
+      ]
+    }
   },
   {
     name:"selectFromListAndAtUnpivotWildCardOverScalar",
     statement:"SELECT VALUE [n, (SELECT VALUE [i, x] FROM @v AS x AT i)] FROM [100, 200].*.*.* AS v AT n",
-    assert: [
-      {
-        evalMode:EvalModeCoerce,
-        result:EvaluationSuccess,
-        output:$bag::[
-          [
-            $missing::null,
-            $bag::[
-              [
-                0,
-                100
-              ],
-              [
-                1,
-                200
-              ]
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        [
+          "_1",
+          $bag::[
+            [
+              0,
+              100
+            ],
+            [
+              1,
+              200
             ]
           ]
         ]
-      },
-      {
-        evalMode: EvalModeError,
-        result: EvaluationFail,
-      },
-    ]
+      ]
+    }
   },
   {
     name:"selectFromBagAndAtUnpivotWildCardOverScalar",
     statement:"SELECT VALUE [n, (SELECT VALUE [i IS MISSING, i, x] FROM @v AS x AT i)] FROM <<100, 200>>.* AS v AT n",
-    assert: [
-      {
-        evalMode:EvalModeCoerce,
-        result:EvaluationSuccess,
-        output:$bag::[
-          [
-            $missing::null,
-            $bag::[
-              [
-                true,
-                $missing::null,
-                100
-              ],
-              [
-                true,
-                $missing::null,
-                200
-              ]
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        [
+          "_1",
+          $bag::[
+            [
+              true,
+              $missing::null,
+              100
+            ],
+            [
+              true,
+              $missing::null,
+              200
             ]
           ]
         ]
-      },
-      {
-        evalMode: EvalModeError,
-        result: EvaluationFail,
-      },
-    ]
+      ]
+    }
   },
   {
     name:"selectPathUnpivotWildCardOverStructMultiple",
@@ -249,37 +231,27 @@ envs::{
   {
     name:"rangeOverScalar",
     statement:"SELECT VALUE v FROM 1 AS v",
-    assert:[
-      {
-        evalMode:EvalModeCoerce,
-        result:EvaluationSuccess,
-        output:$bag::[ 1 ]
-      },
-      {
-        evalMode: EvalModeError,
-        result: EvaluationFail,
-      },
-    ]
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        1
+      ]
+    }
   },
   {
     name:"rangeTwiceOverScalar",
     statement:"SELECT VALUE [v1, v2] FROM 1 AS v1, @v1 AS v2",
-    assert:[
-      {
-        evalMode:EvalModeCoerce,
-        result:EvaluationSuccess,
-        output:$bag::[
-          [
-            1,
-            1
-          ]
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        [
+          1,
+          1
         ]
-      },
-      {
-        evalMode: EvalModeError,
-        result: EvaluationFail,
-      },
-    ]
+      ]
+    }
   },
   {
     name:"rangeOverSexp",
@@ -297,21 +269,15 @@ envs::{
   {
     name:"rangeOverStruct",
     statement:"SELECT VALUE v FROM `{a:5}` AS v",
-    assert: [
-      {
-        evalMode:EvalModeCoerce,
-        result:EvaluationSuccess,
-        output:$bag::[
-          {
-            a:5
-          }
-        ]
-      },
-      {
-        evalMode: EvalModeError,
-        result: EvaluationFail,
-      },
-    ]
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          a:5
+        }
+      ]
+    }
   },
   {
     name:"rangeOverList",
