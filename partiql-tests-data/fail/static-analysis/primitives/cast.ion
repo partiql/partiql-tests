@@ -5,3 +5,19 @@
         result: StaticAnalysisFail
     },
 }
+
+{
+    name: "invalid cast type parameter - Decimal precision set to 0",
+    statement: "CAST(5 AS DECIMAL(0,0))",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
+
+{
+    name: "invalid cast type parameter - Decimal precision < scale",
+    statement: "CAST(5 AS DECIMAL(5,10))",
+    assert: {
+        result: StaticAnalysisFail
+    },
+}
