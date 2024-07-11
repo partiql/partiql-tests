@@ -8,65 +8,89 @@ case::[
   {
     name:"simpleCase",
     statement:"SELECT VALUE CASE x + 1 WHEN NULL THEN 'shouldnt be null' WHEN MISSING THEN 'shouldnt be missing' WHEN i THEN 'ONE' WHEN f THEN 'TWO' WHEN d THEN 'THREE' ELSE '?' END FROM << i, f, d, null, missing >> AS x",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        "TWO",
-        "THREE",
-        "?",
-        "?",
-        "?"
-      ]
-    }
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          "TWO",
+          "THREE",
+          "?",
+          "?",
+          "?"
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   {
     name:"simpleCaseNoElse",
     statement:"SELECT VALUE CASE x + 1 WHEN NULL THEN 'shouldnt be null' WHEN MISSING THEN 'shouldnt be missing' WHEN i THEN 'ONE' WHEN f THEN 'TWO' WHEN d THEN 'THREE' END FROM << i, f, d, null, missing >> AS x",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        "TWO",
-        "THREE",
-        null,
-        null,
-        null
-      ]
-    }
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          "TWO",
+          "THREE",
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   {
     name:"searchedCase",
     statement:"SELECT VALUE CASE WHEN x + 1 < i THEN '< ONE' WHEN x + 1 = f THEN 'TWO' WHEN (x + 1 > d) AND (x + 1 < 100) THEN '>= THREE < 100' ELSE '?' END FROM << -1.0000, i, f, d, 100e0, null, missing >> AS x",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        "< ONE",
-        "TWO",
-        "?",
-        ">= THREE < 100",
-        "?",
-        "?",
-        "?"
-      ]
-    }
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          "< ONE",
+          "TWO",
+          "?",
+          ">= THREE < 100",
+          "?",
+          "?",
+          "?"
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   {
     name:"searchedCaseNoElse",
     statement:"SELECT VALUE CASE WHEN x + 1 < i THEN '< ONE' WHEN x + 1 = f THEN 'TWO' WHEN (x + 1 > d) AND (x + 1 < 100) THEN '>= THREE < 100' END FROM << -1.0000, i, f, d, 100e0, null, missing >> AS x",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        "< ONE",
-        "TWO",
-        null,
-        ">= THREE < 100",
-        null,
-        null,
-        null
-      ]
-    }
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          "< ONE",
+          "TWO",
+          null,
+          ">= THREE < 100",
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   }
 ]
