@@ -1,128 +1,127 @@
 envs::{
-  a:{
-    b:{
-      c:{
-        d:{
-          e:5,
-          f:6
+  a: {
+    b: {
+      c: {
+        d: {
+          e: 5,
+          f: 6
         }
       }
     }
   },
-  b:{
-    c:100
+  b: {
+    c: 100
   },
-  e:[
+  e: [
     {
-      books:[
+      books: [
         "b1",
         "b2"
       ]
     }
   ],
-  s:"hello",
-  someList:[
+  s: "hello",
+  someList: [
     {
-      a:1
+      a: 1
     },
     {
-      a:2
+      a: 2
     },
     {
-      a:3
+      a: 3
     }
   ],
-  stores:[
+  stores: [
     {
-      id:"5",
-      books:[
+      id: "5",
+      books: [
         {
-          title:"A",
-          price:5.0,
-          categories:[
+          title: "A",
+          price: 5.0,
+          categories: [
             "sci-fi",
             "action"
           ]
         },
         {
-          title:"B",
-          price:2.0,
-          categories:[
+          title: "B",
+          price: 2.0,
+          categories: [
             "sci-fi",
             "comedy"
           ]
         },
         {
-          title:"C",
-          price:7.0,
-          categories:[
+          title: "C",
+          price: 7.0,
+          categories: [
             "action",
             "suspense"
           ]
         },
         {
-          title:"D",
-          price:9.0,
-          categories:[
+          title: "D",
+          price: 9.0,
+          categories: [
             "suspense"
           ]
         }
       ]
     },
     {
-      id:"6",
-      books:[
+      id: "6",
+      books: [
         {
-          title:"A",
-          price:5.0,
-          categories:[
+          title: "A",
+          price: 5.0,
+          categories: [
             "sci-fi",
             "action"
           ]
         },
         {
-          title:"E",
-          price:9.5,
-          categories:[
+          title: "E",
+          price: 9.5,
+          categories: [
             "fantasy",
             "comedy"
           ]
         },
         {
-          title:"F",
-          price:10.0,
-          categories:[
+          title: "F",
+          price: 10.0,
+          categories: [
             "history"
           ]
         }
       ]
     },
     {
-      id:"7",
-      books:[
-      ]
+      id: "7",
+      books: []
     }
   ],
-  friends:{
-    kumo:{
-      type:"DOG",
-      likes:{
-        mochi:{
-          type:"dog"
+  friends: {
+    kumo: {
+      type: "DOG",
+      likes: {
+        mochi: {
+          type: "dog"
         },
-        zoe:{
-          type:"human"
+        zoe: {
+          type: "human"
         }
       }
     },
-    mochi:{
-      type:"DOG",
-      likes:{
-        kumo:{
-          type:"dog"
+    mochi: {
+      type: "DOG",
+      likes: {
+        kumo: {
+          type: "dog"
         },
-        brownie:{
-          type:"cat"
+        brownie: {
+          type: "cat"
         }
       }
     }
@@ -131,148 +130,214 @@ envs::{
 
 path::[
   {
-    name:"pathSimpleDotOnly",
-    statement:"b.c",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:100
+    name: "pathSimpleDotOnly",
+    statement: "b.c",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: 100
     }
   },
   {
-    name:"pathDotOnly",
-    statement:"a.b.c.d.e",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:5
+    name: "pathDotOnly",
+    statement: "a.b.c.d.e",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: 5
     }
   },
   {
-    name:"pathDotMissingAttribute",
-    statement:"a.z IS MISSING",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:true
+    name: "pathDotMissingAttribute",
+    statement: "a.z IS MISSING",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: true
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathMissingDotName",
+    statement: "(MISSING).a IS MISSING",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: true
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  // TODO: LOOK AT THIS? Should this be NULL?
+  {
+    name: "pathNullDotName",
+    statement: "(NULL).a IS MISSING",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: true
     }
   },
   {
-    name:"pathMissingDotName",
-    statement:"(MISSING).a IS MISSING",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:true
+    name: "pathIndexing",
+    statement: "stores[0].books[2].title",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: "C"
     }
   },
   {
-    name:"pathNullDotName",
-    statement:"(NULL).a IS MISSING",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:true
+    name: "pathIndexListLiteral",
+    statement: "[1, 2, 3][1]",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: 2
     }
   },
   {
-    name:"pathIndexing",
-    statement:"stores[0].books[2].title",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:"C"
+    name: "pathIndexBagLiteral",
+    statement: "<<1, 2, 3>>[1]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathFieldStructLiteral",
+    statement: "{'a': 1, 'b': 2, 'b': 3}.a",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: 1
     }
   },
   {
-    name:"pathIndexListLiteral",
-    statement:"[1, 2, 3][1]",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:2
-    }
+    name: "pathIndexStructLiteral",
+    statement: "{'a': 1, 'b': 2, 'b': 3}[1]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   {
-    name:"pathIndexBagLiteral",
-    statement:"<<1, 2, 3>>[1]",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$missing::null
-    }
+    name: "pathIndexStructOutOfBoundsLowLiteral",
+    statement: "{'a': 1, 'b': 2, 'b': 3}[-1]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   {
-    name:"pathFieldStructLiteral",
-    statement:"{'a': 1, 'b': 2, 'b': 3}.a",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:1
-    }
+    name: "pathIndexStructOutOfBoundsHighLiteral",
+    statement: "{'a': 1, 'b': 2, 'b': 3}[3]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   {
-    name:"pathIndexStructLiteral",
-    statement:"{'a': 1, 'b': 2, 'b': 3}[1]",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:2
-    }
-  },
-  {
-    name:"pathIndexStructOutOfBoundsLowLiteral",
-    statement:"{'a': 1, 'b': 2, 'b': 3}[-1]",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$missing::null
-    }
-  },
-  {
-    name:"pathIndexStructOutOfBoundsHighLiteral",
-    statement:"{'a': 1, 'b': 2, 'b': 3}[3]",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$missing::null
-    }
-  },
-  {
-    name:"pathUnpivotWildcard",
-    statement:"friends.kumo.likes.*",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "pathUnpivotWildcard",
+    statement: "friends.kumo.likes.*",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          type:"dog"
+          type: "dog"
         },
         {
-          type:"human"
+          type: "human"
         }
       ]
     }
   },
   {
-    name:"pathUnpivotWildcardFieldsAfter",
-    statement:"friends.kumo.likes.*.type",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "pathUnpivotWildcardFieldsAfter",
+    statement: "friends.kumo.likes.*.type",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         "dog",
         "human"
       ]
     }
   },
   {
-    name:"pathSimpleWildcard",
-    statement:"someList[*].a",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "pathSimpleWildcard",
+    statement: "someList[*].a",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         1,
         2,
         3
@@ -280,12 +345,15 @@ path::[
     }
   },
   {
-    name:"selectValuePath",
-    statement:"SELECT VALUE v1.books FROM e AS v1",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectValuePath",
+    statement: "SELECT VALUE v1.books FROM e AS v1",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         [
           "b1",
           "b2"
@@ -294,12 +362,15 @@ path::[
     }
   },
   {
-    name:"pathWildcardPath",
-    statement:"e[*].books",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "pathWildcardPath",
+    statement: "e[*].books",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         [
           "b1",
           "b2"
@@ -308,12 +379,15 @@ path::[
     }
   },
   {
-    name:"pathWildcard",
-    statement:"stores[0].books[*].title",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "pathWildcard",
+    statement: "stores[0].books[*].title",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         "A",
         "B",
         "C",
@@ -322,12 +396,15 @@ path::[
     }
   },
   {
-    name:"pathDoubleWildCard",
-    statement:"stores[*].books[*].title",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "pathDoubleWildCard",
+    statement: "stores[*].books[*].title",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         "A",
         "B",
         "C",
@@ -339,12 +416,15 @@ path::[
     }
   },
   {
-    name:"pathDoubleUnpivotWildCard",
-    statement:"friends.*.likes.*.type",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "pathDoubleUnpivotWildCard",
+    statement: "friends.*.likes.*.type",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         "dog",
         "human",
         "dog",
@@ -353,412 +433,480 @@ path::[
     }
   },
   {
-    name:"pathWildCardOverScalar",
-    statement:"s[*]",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        "hello"
-      ]
-    }
+    name: "pathWildCardOverScalar",
+    statement: "s[*]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
+          "hello"
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   {
-    name:"pathUnpivotWildCardOverScalar",
-    statement:"s.*",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        "hello"
-      ]
-    }
+    name: "pathUnpivotWildCardOverScalar",
+    statement: "s.*",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
+          "hello"
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   {
-    name:"pathWildCardOverScalarMultiple",
-    statement:"(100)[*][*][*]",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        100
-      ]
-    }
+    name: "pathWildCardOverScalarMultiple",
+    statement: "(100)[*][*][*]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
+          100
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   {
-    name:"pathUnpivotWildCardOverScalarMultiple",
-    statement:"(100).*.*.*",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        100
-      ]
-    }
+    name: "pathUnpivotWildCardOverScalarMultiple",
+    statement: "(100).*.*.*",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
+          100
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   {
-    name:"pathWildCardOverStructMultiple",
-    statement:"a[*][*][*][*]",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        {
-          b:{
-            c:{
-              d:{
-                e:5,
-                f:6
+    name: "pathWildCardOverStructMultiple",
+    statement: "a[*][*][*][*]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
+          {
+            b: {
+              c: {
+                d: {
+                  e: 5,
+                  f: 6
+                }
               }
             }
           }
-        }
-      ]
-    }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   {
-    name:"pathUnpivotWildCardOverStructMultiple",
-    statement:"a.*.*.*.*",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        5,
-        6
-      ]
-    }
+    name: "pathUnpivotWildCardOverStructMultiple",
+    statement: "a.*.*.*.*",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
+          5,
+          6
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   }
 ]
 
 pathUnpivotMissing::[
   {
-    name:"unpivotMissing",
-    statement:"SELECT * FROM UNPIVOT MISSING",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-      ]
+    name: "unpivotMissing",
+    statement: "SELECT * FROM UNPIVOT MISSING",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[]
     }
   },
   {
-    name:"unpivotEmptyStruct",
-    statement:"SELECT * FROM UNPIVOT {}",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-      ]
+    name: "unpivotEmptyStruct",
+    statement: "SELECT * FROM UNPIVOT {}",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[]
     }
   },
   {
-    name:"unpivotStructWithMissingField",
-    statement:"SELECT * FROM UNPIVOT { 'a': MISSING }",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-      ]
+    name: "unpivotStructWithMissingField",
+    statement: "SELECT * FROM UNPIVOT { 'a': MISSING }",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[]
     }
   },
   {
-    name:"unpivotMissingWithAsAndAt",
-    statement:"SELECT unnestIndex, unnestValue FROM UNPIVOT MISSING AS unnestValue AT unnestIndex",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-      ]
+    name: "unpivotMissingWithAsAndAt",
+    statement: "SELECT unnestIndex, unnestValue FROM UNPIVOT MISSING AS unnestValue AT unnestIndex",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[]
     }
   },
   {
-    name:"unpivotMissingCrossJoinWithAsAndAt",
-    statement:"SELECT unnestIndex, unnestValue FROM MISSING, UNPIVOT MISSING AS unnestValue AT unnestIndex",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-      ]
+    name: "unpivotMissingCrossJoinWithAsAndAt",
+    statement: "SELECT unnestIndex, unnestValue FROM MISSING, UNPIVOT MISSING AS unnestValue AT unnestIndex",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[]
     }
   },
   {
-    name:"pathUnpivotEmptyStruct1",
-    statement:"{}.*.*.bar",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-      ]
+    name: "pathUnpivotEmptyStruct1",
+    statement: "{}.*.*.bar",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[]
     }
   },
   {
-    name:"pathUnpivotEmptyStruct2",
-    statement:"{}.*.bar.*",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-      ]
+    name: "pathUnpivotEmptyStruct2",
+    statement: "{}.*.bar.*",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[]
     }
   },
   {
-    name:"pathUnpivotEmptyStruct3",
-    statement:"{}.*.bar.*.baz",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-      ]
+    name: "pathUnpivotEmptyStruct3",
+    statement: "{}.*.bar.*.baz",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[]
     }
   }
 ]
 
 'path-expressions'::[
   envs::{
-    test_struct:{
-      unambiguous_field:"this is unambiguous_field",
-      ambiguous_field:"this is ambiguous_field (lowercase)",
-      AMBIGUOUS_FIELD:"this is AMBIGUOUS_FIELD (uppercase)",
-      unambiguous_lookup_field:"this is unambiguous_lookup_field",
-      ambiguous_lookup_field:"this is ambiguous_lookup_field (lowercase)",
-      AMBIGUOUS_LOOKUP_FIELD:"this is AMBIGUOUS_LOOKUP_FIELD (uppercase)"
+    test_struct: {
+      unambiguous_field: "this is unambiguous_field",
+      ambiguous_field: "this is ambiguous_field (lowercase)",
+      AMBIGUOUS_FIELD: "this is AMBIGUOUS_FIELD (uppercase)",
+      unambiguous_lookup_field: "this is unambiguous_lookup_field",
+      ambiguous_lookup_field: "this is ambiguous_lookup_field (lowercase)",
+      AMBIGUOUS_LOOKUP_FIELD: "this is AMBIGUOUS_LOOKUP_FIELD (uppercase)"
     },
-    unambiguous_variable:"unambiguous_lookup_field",
-    ambiguous_case_variable:"ambiguous_lookup_field",
-    AMBIGUOUS_CASE_VARIABLE:"AMBIGUOUS_LOOKUP_FIELD",
-    table1:[
+    unambiguous_variable: "unambiguous_lookup_field",
+    ambiguous_case_variable: "ambiguous_lookup_field",
+    AMBIGUOUS_CASE_VARIABLE: "AMBIGUOUS_LOOKUP_FIELD",
+    table1: [
       {
-        f:"this is from table1"
+        f: "this is from table1"
       }
     ],
-    table2:[
+    table2: [
       {
-        f:"this is from table2"
+        f: "this is from table2"
       }
     ]
   },
   {
-    name:"dotted path expression with unquoted identifiers accesses field unambiguous_field (lowercase)",
-    statement:"test_struct.unambiguous_field",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "dotted path expression with unquoted identifiers accesses field unambiguous_field (lowercase)",
+    statement: "test_struct.unambiguous_field",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"this is unambiguous_field"
+      output: "this is unambiguous_field"
     }
   },
   {
-    name:"dotted path expression with unquoted identifiers accesses field UNAMBIGUOUS_FIELD (uppercase)",
-    statement:"test_struct.UNAMBIGUOUS_FIELD",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "dotted path expression with unquoted identifiers accesses field UNAMBIGUOUS_FIELD (uppercase)",
+    statement: "test_struct.UNAMBIGUOUS_FIELD",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"this is unambiguous_field"
+      output: "this is unambiguous_field"
     }
   },
   {
-    name:"dotted path expression with quoted field name accesses field unambiguous_field (lowercase)",
-    statement:"test_struct.\"unambiguous_field\"",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "dotted path expression with quoted field name accesses field unambiguous_field (lowercase)",
+    statement: "test_struct.\"unambiguous_field\"",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"this is unambiguous_field"
+      output: "this is unambiguous_field"
     }
   },
   {
-    name:"dotted path expression with quoted field name accesses field UNAMBIGUOUS_FIELD (uppercase)",
-    statement:"test_struct.\"UNAMBIGUOUS_FIELD\"",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"dotted path expression with quoted field name accesses field ambiguous_field (lowercase)",
-    statement:"test_struct.\"ambiguous_field\"",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:"this is ambiguous_field (lowercase)"
-    }
-  },
-  {
-    name:"dotted path expression with quoted field name accesses field AMBIGUOUS_FIELD (uppercase)",
-    statement:"test_struct.\"AMBIGUOUS_FIELD\"",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:"this is AMBIGUOUS_FIELD (uppercase)"
-    }
-  },
-  {
-    name:"subscript with variable in lowercase",
-    statement:"test_struct[unambiguous_variable]",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:"this is unambiguous_lookup_field"
-    }
-  },
-  {
-    name:"subscript with variable in uppercase",
-    statement:"test_struct[UNAMBIGUOUS_VARIABLE]",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:"this is unambiguous_lookup_field"
-    }
-  },
-  {
-    name:"subscript with variable in mixed case",
-    statement:"test_struct[uNaMbiGuOuS_VaRiAbLE]",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:"this is unambiguous_lookup_field"
-    }
-  },
-  {
-    name:"subscript with literal string in lowercase",
-    statement:"test_struct['ambiguous_lookup_field']",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:"this is ambiguous_lookup_field (lowercase)"
-    }
-  },
-  {
-    name:"subscript with literal string in uppercase",
-    statement:"test_struct['AMBIGUOUS_LOOKUP_FIELD']",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:"this is AMBIGUOUS_LOOKUP_FIELD (uppercase)"
-    }
-  },
-  {
-    name:"subscript with non-existent variable in lowercase",
-    statement:"test_struct[unambiguous_field]",
-    assert:[
+    name: "dotted path expression with quoted field name accesses field UNAMBIGUOUS_FIELD (uppercase)",
+    statement: "test_struct.\"UNAMBIGUOUS_FIELD\"",
+    assert: [
       {
-        evalMode:EvalModeError,
-        result:EvaluationFail
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       },
       {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
+        evalMode: EvalModeError,
+        result: EvaluationFail
       }
     ]
   },
   {
-    name:"subscript with non-existent variable in uppercase",
-    statement:"test_struct[TEST_FIELD]",
-    assert:[
+    name: "dotted path expression with quoted field name accesses field ambiguous_field (lowercase)",
+    statement: "test_struct.\"ambiguous_field\"",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: "this is ambiguous_field (lowercase)"
+    }
+  },
+  {
+    name: "dotted path expression with quoted field name accesses field AMBIGUOUS_FIELD (uppercase)",
+    statement: "test_struct.\"AMBIGUOUS_FIELD\"",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: "this is AMBIGUOUS_FIELD (uppercase)"
+    }
+  },
+  // This has the below behavior due to PartiQL Specification: "The expression a[s] is a shorthand for the tuple path navigation a.s when
+  //  the expression s is either (a) a string literal or (b) an expression that is explicitly CAST into a string."
+  {
+    name: "subscript with variable in lowercase",
+    statement: "test_struct[unambiguous_variable]",
+    assert: [
       {
-        evalMode:EvalModeError,
-        result:EvaluationFail
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       },
       {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  // This has the below behavior due to PartiQL Specification: "The expression a[s] is a shorthand for the tuple path navigation a.s when
+  //  the expression s is either (a) a string literal or (b) an expression that is explicitly CAST into a string."
+  {
+    name: "subscript with variable in uppercase",
+    statement: "test_struct[UNAMBIGUOUS_VARIABLE]",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
       }
     ]
   },
   {
-    name:"path expression with table alias in uppercase",
-    statement:"SELECT AN_ALIAS.f FROM table1 as an_alias",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "subscript with variable in mixed case",
+    statement: "test_struct[uNaMbiGuOuS_VaRiAbLE]",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "subscript with literal string in lowercase",
+    statement: "test_struct['ambiguous_lookup_field']",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: "this is ambiguous_lookup_field (lowercase)"
+    }
+  },
+  {
+    name: "subscript with literal string in uppercase",
+    statement: "test_struct['AMBIGUOUS_LOOKUP_FIELD']",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: "this is AMBIGUOUS_LOOKUP_FIELD (uppercase)"
+    }
+  },
+  {
+    name: "subscript with non-existent variable in lowercase",
+    statement: "test_struct[unambiguous_field]",
+    assert: [
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      },
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
+      }
+    ]
+  },
+  {
+    name: "subscript with non-existent variable in uppercase",
+    statement: "test_struct[TEST_FIELD]",
+    assert: [
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      },
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
+      }
+    ]
+  },
+  {
+    name: "path expression with table alias in uppercase",
+    statement: "SELECT AN_ALIAS.f FROM table1 as an_alias",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: $bag::[
         {
-          f:"this is from table1"
+          f: "this is from table1"
         }
       ]
     }
   },
   {
-    name:"path expression with table alias in lowercase",
-    statement:"SELECT an_alias.f FROM table1 as AN_ALIAS",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "path expression with table alias in lowercase",
+    statement: "SELECT an_alias.f FROM table1 as AN_ALIAS",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          f:"this is from table1"
+          f: "this is from table1"
         }
       ]
     }
   },
   {
-    name:"path expression with ambiguous table alias (lowercase)",
-    statement:"SELECT \"an_alias\".f FROM table1 AS an_alias, table2 AS AN_ALIAS",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "path expression with ambiguous table alias (lowercase)",
+    statement: "SELECT \"an_alias\".f FROM table1 AS an_alias, table2 AS AN_ALIAS",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          f:"this is from table1"
+          f: "this is from table1"
         }
       ]
     }
   },
   {
-    name:"path expression with ambiguous table alias (uppercase)",
-    statement:"SELECT \"AN_ALIAS\".f FROM table1 AS an_alias, table2 AS AN_ALIAS",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "path expression with ambiguous table alias (uppercase)",
+    statement: "SELECT \"AN_ALIAS\".f FROM table1 AS an_alias, table2 AS AN_ALIAS",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          f:"this is from table2"
+          f: "this is from table2"
         }
       ]
     }
@@ -769,39 +917,39 @@ pathUnpivotMissing::[
   // Following tests are implementation-dependent for COERCE eval mode when tuples are unordered per section 4 of the
   // spec
   {
-    name:"repeated field on struct is ambiguous{identifier:\"REPEATED\",cn:9,bn:\"REPEATED\"}",
-    statement:"SELECT REPEATED FROM `[{repeated:1, repeated:2}]`",
-    assert:{
-      evalMode:EvalModeError,
-      result:EvaluationFail
+    name: "repeated field on struct is ambiguous{identifier:\"REPEATED\",cn:9,bn:\"REPEATED\"}",
+    statement: "SELECT REPEATED FROM `[{repeated:1, repeated:2}]`",
+    assert: {
+      evalMode: EvalModeError,
+      result: EvaluationFail
     },
   },
   {
-    name:"repeated field on struct is ambiguous{identifier:\" \\\"repeated\\\" \",cn:10,bn:\"repeated\"}",
-    statement:"SELECT \"repeated\" FROM `[{repeated:1, repeated:2}]`",
-    assert:{
-      evalMode:EvalModeError,
-      result:EvaluationFail
+    name: "repeated field on struct is ambiguous{identifier:\" \\\"repeated\\\" \",cn:10,bn:\"repeated\"}",
+    statement: "SELECT \"repeated\" FROM `[{repeated:1, repeated:2}]`",
+    assert: {
+      evalMode: EvalModeError,
+      result: EvaluationFail
     },
   },
   {
-    name:"path expression with ambiguous table alias (lowercase)",
-    statement:"SELECT an_alias.f FROM table1 AS an_alias, table2 AS AN_ALIAS",
+    name: "path expression with ambiguous table alias (lowercase)",
+    statement: "SELECT an_alias.f FROM table1 AS an_alias, table2 AS AN_ALIAS",
     env: {
-      table1:[
+      table1: [
         {
-          f:"this is from table1"
+          f: "this is from table1"
         }
       ],
-      table2:[
+      table2: [
         {
-          f:"this is from table2"
+          f: "this is from table2"
         }
       ]
     },
-    assert:{
-      evalMode:EvalModeError,
-      result:EvaluationFail
+    assert: {
+      evalMode: EvalModeError,
+      result: EvaluationFail
     }
   }
 ]
