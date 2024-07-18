@@ -1,187 +1,207 @@
 position::[
   {
-    name:"POSITION empty string in string",
-    statement:"POSITION('' IN 'abcdefg')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "POSITION empty string in string",
+    statement: "POSITION('' IN 'abcdefg')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:1
+      output: 1
     }
   },
   {
-    name:"POSITION string at start",
-    statement:"POSITION('abc' IN 'abcdefg')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "POSITION string at start",
+    statement: "POSITION('abc' IN 'abcdefg')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:1
+      output: 1
     }
   },
   {
-    name:"POSITION string in middle",
-    statement:"POSITION('cde' IN 'abcdefg')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "POSITION string in middle",
+    statement: "POSITION('cde' IN 'abcdefg')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"POSITION string at end",
-    statement:"POSITION('efg' IN 'abcdefg')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "POSITION string at end",
+    statement: "POSITION('efg' IN 'abcdefg')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"POSITION string not in string",
-    statement:"POSITION('ghi' IN 'abcdefg')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "POSITION string not in string",
+    statement: "POSITION('ghi' IN 'abcdefg')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:0
+      output: 0
     }
   },
   {
-    name:"POSITION NULL in string",
-    statement:"POSITION(NULL IN 'abcdefg')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "POSITION NULL in string",
+    statement: "POSITION(NULL IN 'abcdefg')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output: null
     }
   },
   {
-    name:"POSITION MISSING in string",
-    statement:"POSITION(MISSING IN 'abcdefg')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"POSITION string in NULL",
-    statement:"POSITION('abc' IN NULL)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:null
-    }
-  },
-  {
-    name:"POSITION string in MISSING",
-    statement:"POSITION('abc' IN MISSING)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"POSITION NULL in MISSING",
-    statement:"POSITION(NULL IN MISSING)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"POSITION MISSING in NULL",
-    statement:"POSITION(MISSING IN NULL)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"POSITION NULL in NULL",
-    statement:"POSITION(NULL IN NULL)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:null
-    }
-  },
-  {
-    name:"POSITION MISSING in MISSING",
-    statement:"POSITION(MISSING IN MISSING)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"POSITION invalid type in string",
-    statement:"POSITION(1 IN 'abcdefg')",
-    assert:[
+    name: "POSITION MISSING in string",
+    statement: "POSITION(MISSING IN 'abcdefg')",
+    assert: [
       {
-        evalMode:EvalModeError,
-        result:EvaluationFail
+        result: EvaluationSuccess,
+        evalMode:
+        EvalModeCoerce,
+        output: $missing::null
       },
       {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      }
+    ]
+  },
+  {
+    name: "POSITION string in NULL",
+    statement: "POSITION('abc' IN NULL)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: null
+    }
+  },
+  {
+    name: "POSITION string in MISSING",
+    statement: "POSITION('abc' IN MISSING)",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode:
+        EvalModeCoerce,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      }
+    ]
+  },
+  {
+    name: "POSITION NULL in MISSING",
+    statement: "POSITION(NULL IN MISSING)",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode:
+        EvalModeCoerce,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      }
+    ]
+  },
+  {
+    name: "POSITION MISSING in NULL",
+    statement: "POSITION(MISSING IN NULL)",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode:
+        EvalModeCoerce,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      }
+    ]
+  },
+  {
+    name: "POSITION NULL in NULL",
+    statement: "POSITION(NULL IN NULL)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: null
+    }
+  },
+  {
+    name: "POSITION MISSING in MISSING",
+    statement: "POSITION(MISSING IN MISSING)",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode:
+        EvalModeCoerce,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      }
+    ]
+  },
+  {
+    name: "POSITION invalid type in string",
+    statement: "POSITION(1 IN 'abcdefg')",
+    assert: [
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      },
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       }
     ],
   },
   {
-    name:"POSITION string in invalid type",
-    statement:"POSITION('abc' IN 1)",
-    assert:[
+    name: "POSITION string in invalid type",
+    statement: "POSITION('abc' IN 1)",
+    assert: [
       {
-        evalMode:EvalModeError,
-        result:EvaluationFail
+        evalMode: EvalModeError,
+        result: EvaluationFail
       },
       {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       }
     ],
   },

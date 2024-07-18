@@ -1,146 +1,165 @@
 concat::[
   {
-    name:"|| valid cases{lparam:\"'a'\",rparam:\"'b'\",result:\"ab\"}",
-    statement:"'a' || 'b'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "|| valid cases{lparam:\"'a'\",rparam:\"'b'\",result:\"ab\"}",
+    statement: "'a' || 'b'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"ab"
+      output: "ab"
     }
   },
   {
-    name:"|| valid cases{lparam:\"`'a'`\",rparam:\"`'b'`\",result:\"ab\"}",
-    statement:"`'a'` || `'b'`",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "|| valid cases{lparam:\"`'a'`\",rparam:\"`'b'`\",result:\"ab\"}",
+    statement: "`'a'` || `'b'`",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"ab"
+      output: "ab"
     }
   },
   {
-    name:"|| valid cases{lparam:\"`'a'`\",rparam:\"'b'\",result:\"ab\"}",
-    statement:"`'a'` || 'b'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "|| valid cases{lparam:\"`'a'`\",rparam:\"'b'\",result:\"ab\"}",
+    statement: "`'a'` || 'b'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"ab"
+      output: "ab"
     }
   },
   {
-    name:"|| valid cases{lparam:\"'a'\",rparam:\"`'b'`\",result:\"ab\"}",
-    statement:"'a' || `'b'`",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "|| valid cases{lparam:\"'a'\",rparam:\"`'b'`\",result:\"ab\"}",
+    statement: "'a' || `'b'`",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"ab"
+      output: "ab"
     }
   },
   {
-    name:"|| valid cases{lparam:\"null\",rparam:\"'b'\",result:null}",
-    statement:"null || 'b'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "|| valid cases{lparam:\"null\",rparam:\"'b'\",result:null}",
+    statement: "null || 'b'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output: null
     }
   },
   {
-    name:"|| valid cases{lparam:\"'a'\",rparam:\"null\",result:null}",
-    statement:"'a' || null",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "|| valid cases{lparam:\"'a'\",rparam:\"null\",result:null}",
+    statement: "'a' || null",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output: null
     }
   },
   {
-    name:"|| valid cases{lparam:\"null\",rparam:\"null\",result:null}",
-    statement:"null || null",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "|| valid cases{lparam:\"null\",rparam:\"null\",result:null}",
+    statement: "null || null",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output: null
     }
   },
   {
-    name:"|| valid cases{lparam:\"null\",rparam:\"missing\",result:missing::null}",
-    statement:"null || missing",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "|| valid cases{lparam:\"null\",rparam:\"missing\",result:missing::null}",
+    statement: "null || missing",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode:
         EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
+        output: $missing::null
+      },
+      {
+        result: EvaluationFail,
+        evalMode: EvalModeError
+      }
+    ]
   },
   {
-    name:"|| valid cases{lparam:\"missing\",rparam:\"null\",result:missing::null}",
-    statement:"missing || null",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "|| valid cases{lparam:\"missing\",rparam:\"null\",result:missing::null}",
+    statement: "missing || null",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode:
         EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
+        output: $missing::null
+      },
+      {
+        result: EvaluationFail,
+        evalMode: EvalModeError
+      }
+    ]
   },
   {
-    name:"|| valid cases{lparam:\"missing\",rparam:\"'b'\",result:missing::null}",
-    statement:"missing || 'b'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
+    name: "|| valid cases{lparam:\"missing\",rparam:\"'b'\",result:missing::null}",
+    statement: "missing || 'b'",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
+      },
+      {
+        result: EvaluationFail,
+        evalMode: EvalModeError
+      }
+    ]
   },
   {
-    name:"|| valid cases{lparam:\"'a'\",rparam:\"missing\",result:missing::null}",
-    statement:"'a' || missing",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "|| valid cases{lparam:\"'a'\",rparam:\"missing\",result:missing::null}",
+    statement: "'a' || missing",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode:
         EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
+        output: $missing::null
+      },
+      {
+        result: EvaluationFail,
+        evalMode: EvalModeError
+      }
+    ]
   },
   {
-    name:"|| valid cases{lparam:\"missing\",rparam:\"missing\",result:missing::null}",
-    statement:"missing || missing",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "|| valid cases{lparam:\"missing\",rparam:\"missing\",result:missing::null}",
+    statement: "missing || missing",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode:
         EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
+        output: $missing::null
+      },
+      {
+        result: EvaluationFail,
+        evalMode: EvalModeError
+      }
+    ]
   }
 ]

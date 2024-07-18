@@ -1,3509 +1,3516 @@
 char_length::[
   {
-    name:"char_length valid cases{in:\"\",result:(success 0)}",
-    statement:"char_length('')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\",result:(success 0)}",
+    statement: "char_length('')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:0
+      output: 0
     }
   },
   {
-    name:"char_length valid cases{in:\"a\",result:(success 1)}",
-    statement:"char_length('a')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"a\",result:(success 1)}",
+    statement: "char_length('a')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:1
+      output: 1
     }
   },
   {
-    name:"char_length valid cases{in:\"123456789\",result:(success 9)}",
-    statement:"char_length('123456789')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"123456789\",result:(success 9)}",
+    statement: "char_length('123456789')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:9
+      output: 9
     }
   },
   {
-    name:"char_length valid cases{in:\"avi\\xe3o\",result:(success 5)}",
-    statement:"char_length('avião')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"avi\\xe3o\",result:(success 5)}",
+    statement: "char_length('avião')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"char_length valid cases{in:\"e\\u082b\",result:(success 2)}",
-    statement:"char_length('eࠫ')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"e\\u082b\",result:(success 2)}",
+    statement: "char_length('eࠫ')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:2
+      output: 2
     }
   },
   {
-    name:"char_length valid cases{in:\"\\U0001f601\\U0001f61e\\U0001f638\\U0001f638\",result:(success 4)}",
-    statement:"char_length('😁😞😸😸')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\U0001f601\\U0001f61e\\U0001f638\\U0001f638\",result:(success 4)}",
+    statement: "char_length('😁😞😸😸')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"char_length valid cases{in:\"\\u8a71\\u5bb6\\u8eab\\u5727\\u8cbb\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\",result:(success 12)}",
-    statement:"char_length('話家身圧費谷料村能計税金')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\u8a71\\u5bb6\\u8eab\\u5727\\u8cbb\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\",result:(success 12)}",
+    statement: "char_length('話家身圧費谷料村能計税金')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"char_length valid cases{in:\"undefined\",result:(success 9)}",
-    statement:"char_length('undefined')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"undefined\",result:(success 9)}",
+    statement: "char_length('undefined')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:9
+      output: 9
     }
   },
   {
-    name:"char_length valid cases{in:\"undef\",result:(success 5)}",
-    statement:"char_length('undef')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"undef\",result:(success 5)}",
+    statement: "char_length('undef')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"char_length valid cases{in:\"null\",result:(success 4)}",
-    statement:"char_length('null')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"null\",result:(success 4)}",
+    statement: "char_length('null')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"char_length valid cases{in:\"NULL\",result:(success 4)}",
-    statement:"char_length('NULL')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"NULL\",result:(success 4)}",
+    statement: "char_length('NULL')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"char_length valid cases{in:\"(null)\",result:(success 6)}",
-    statement:"char_length('(null)')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"(null)\",result:(success 6)}",
+    statement: "char_length('(null)')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:6
+      output: 6
     }
   },
   {
-    name:"char_length valid cases{in:\"nil\",result:(success 3)}",
-    statement:"char_length('nil')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"nil\",result:(success 3)}",
+    statement: "char_length('nil')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"char_length valid cases{in:\"NIL\",result:(success 3)}",
-    statement:"char_length('NIL')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"NIL\",result:(success 3)}",
+    statement: "char_length('NIL')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"char_length valid cases{in:\"true\",result:(success 4)}",
-    statement:"char_length('true')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"true\",result:(success 4)}",
+    statement: "char_length('true')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"char_length valid cases{in:\"false\",result:(success 5)}",
-    statement:"char_length('false')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"false\",result:(success 5)}",
+    statement: "char_length('false')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"char_length valid cases{in:\"True\",result:(success 4)}",
-    statement:"char_length('True')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"True\",result:(success 4)}",
+    statement: "char_length('True')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"char_length valid cases{in:\"False\",result:(success 5)}",
-    statement:"char_length('False')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"False\",result:(success 5)}",
+    statement: "char_length('False')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"char_length valid cases{in:\"TRUE\",result:(success 4)}",
-    statement:"char_length('TRUE')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"TRUE\",result:(success 4)}",
+    statement: "char_length('TRUE')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"char_length valid cases{in:\"FALSE\",result:(success 5)}",
-    statement:"char_length('FALSE')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"FALSE\",result:(success 5)}",
+    statement: "char_length('FALSE')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"char_length valid cases{in:\"None\",result:(success 4)}",
-    statement:"char_length('None')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"None\",result:(success 4)}",
+    statement: "char_length('None')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"char_length valid cases{in:\"hasOwnProperty\",result:(success 14)}",
-    statement:"char_length('hasOwnProperty')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"hasOwnProperty\",result:(success 14)}",
+    statement: "char_length('hasOwnProperty')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:14
+      output: 14
     }
   },
   {
-    name:"char_length valid cases{in:\"999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999\",result:(success 96)}",
-    statement:"char_length('999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999\",result:(success 96)}",
+    statement: "char_length('999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:96
+      output: 96
     }
   },
   {
-    name:"char_length valid cases{in:\"123456789012345678901234567890123456789\",result:(success 39)}",
-    statement:"char_length('123456789012345678901234567890123456789')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"123456789012345678901234567890123456789\",result:(success 39)}",
+    statement: "char_length('123456789012345678901234567890123456789')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:39
+      output: 39
     }
   },
   {
-    name:"char_length valid cases{in:\"0\",result:(success 1)}",
-    statement:"char_length('0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"0\",result:(success 1)}",
+    statement: "char_length('0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:1
+      output: 1
     }
   },
   {
-    name:"char_length valid cases{in:\"1\",result:(success 1)}",
-    statement:"char_length('1')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1\",result:(success 1)}",
+    statement: "char_length('1')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:1
+      output: 1
     }
   },
   {
-    name:"char_length valid cases{in:\"1.00\",result:(success 4)}",
-    statement:"char_length('1.00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1.00\",result:(success 4)}",
+    statement: "char_length('1.00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"char_length valid cases{in:\"1.00\",result:(success 5)}",
-    statement:"char_length('$1.00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1.00\",result:(success 5)}",
+    statement: "char_length('$1.00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"char_length valid cases{in:\"1/2\",result:(success 3)}",
-    statement:"char_length('1/2')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1/2\",result:(success 3)}",
+    statement: "char_length('1/2')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"char_length valid cases{in:\"1E2\",result:(success 3)}",
-    statement:"char_length('1E2')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1E2\",result:(success 3)}",
+    statement: "char_length('1E2')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"char_length valid cases{in:\"1E02\",result:(success 4)}",
-    statement:"char_length('1E02')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1E02\",result:(success 4)}",
+    statement: "char_length('1E02')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"char_length valid cases{in:\"1E+02\",result:(success 5)}",
-    statement:"char_length('1E+02')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1E+02\",result:(success 5)}",
+    statement: "char_length('1E+02')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"char_length valid cases{in:\"-1\",result:(success 2)}",
-    statement:"char_length('-1')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"-1\",result:(success 2)}",
+    statement: "char_length('-1')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:2
+      output: 2
     }
   },
   {
-    name:"char_length valid cases{in:\"-1.00\",result:(success 5)}",
-    statement:"char_length('-1.00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"-1.00\",result:(success 5)}",
+    statement: "char_length('-1.00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"char_length valid cases{in:\"-1.00\",result:(success 6)}",
-    statement:"char_length('-$1.00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"-1.00\",result:(success 6)}",
+    statement: "char_length('-$1.00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:6
+      output: 6
     }
   },
   {
-    name:"char_length valid cases{in:\"-1/2\",result:(success 4)}",
-    statement:"char_length('-1/2')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"-1/2\",result:(success 4)}",
+    statement: "char_length('-1/2')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"char_length valid cases{in:\"-1E2\",result:(success 4)}",
-    statement:"char_length('-1E2')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"-1E2\",result:(success 4)}",
+    statement: "char_length('-1E2')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"char_length valid cases{in:\"-1E02\",result:(success 5)}",
-    statement:"char_length('-1E02')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"-1E02\",result:(success 5)}",
+    statement: "char_length('-1E02')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"char_length valid cases{in:\"-1E+02\",result:(success 6)}",
-    statement:"char_length('-1E+02')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"-1E+02\",result:(success 6)}",
+    statement: "char_length('-1E+02')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:6
+      output: 6
     }
   },
   {
-    name:"char_length valid cases{in:\"1/0\",result:(success 3)}",
-    statement:"char_length('1/0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1/0\",result:(success 3)}",
+    statement: "char_length('1/0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"char_length valid cases{in:\"0/0\",result:(success 3)}",
-    statement:"char_length('0/0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"0/0\",result:(success 3)}",
+    statement: "char_length('0/0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"char_length valid cases{in:\"-2147483648/-1\",result:(success 14)}",
-    statement:"char_length('-2147483648/-1')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"-2147483648/-1\",result:(success 14)}",
+    statement: "char_length('-2147483648/-1')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:14
+      output: 14
     }
   },
   {
-    name:"char_length valid cases{in:\"-9223372036854775808/-1\",result:(success 23)}",
-    statement:"char_length('-9223372036854775808/-1')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"-9223372036854775808/-1\",result:(success 23)}",
+    statement: "char_length('-9223372036854775808/-1')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:23
+      output: 23
     }
   },
   {
-    name:"char_length valid cases{in:\"-0\",result:(success 2)}",
-    statement:"char_length('-0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"-0\",result:(success 2)}",
+    statement: "char_length('-0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:2
+      output: 2
     }
   },
   {
-    name:"char_length valid cases{in:\"-0.0\",result:(success 4)}",
-    statement:"char_length('-0.0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"-0.0\",result:(success 4)}",
+    statement: "char_length('-0.0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"char_length valid cases{in:\"+0\",result:(success 2)}",
-    statement:"char_length('+0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"+0\",result:(success 2)}",
+    statement: "char_length('+0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:2
+      output: 2
     }
   },
   {
-    name:"char_length valid cases{in:\"+0.0\",result:(success 4)}",
-    statement:"char_length('+0.0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"+0.0\",result:(success 4)}",
+    statement: "char_length('+0.0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"char_length valid cases{in:\"0.00\",result:(success 4)}",
-    statement:"char_length('0.00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"0.00\",result:(success 4)}",
+    statement: "char_length('0.00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"char_length valid cases{in:\"0..0\",result:(success 4)}",
-    statement:"char_length('0..0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"0..0\",result:(success 4)}",
+    statement: "char_length('0..0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"char_length valid cases{in:\".\",result:(success 1)}",
-    statement:"char_length('.')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\".\",result:(success 1)}",
+    statement: "char_length('.')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:1
+      output: 1
     }
   },
   {
-    name:"char_length valid cases{in:\"0.0.0\",result:(success 5)}",
-    statement:"char_length('0.0.0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"0.0.0\",result:(success 5)}",
+    statement: "char_length('0.0.0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"char_length valid cases{in:\"0,00\",result:(success 4)}",
-    statement:"char_length('0,00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"0,00\",result:(success 4)}",
+    statement: "char_length('0,00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"char_length valid cases{in:\"0,,0\",result:(success 4)}",
-    statement:"char_length('0,,0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"0,,0\",result:(success 4)}",
+    statement: "char_length('0,,0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"char_length valid cases{in:\",\",result:(success 1)}",
-    statement:"char_length(',')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\",\",result:(success 1)}",
+    statement: "char_length(',')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:1
+      output: 1
     }
   },
   {
-    name:"char_length valid cases{in:\"0,0,0\",result:(success 5)}",
-    statement:"char_length('0,0,0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"0,0,0\",result:(success 5)}",
+    statement: "char_length('0,0,0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"char_length valid cases{in:\"0.0/0\",result:(success 5)}",
-    statement:"char_length('0.0/0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"0.0/0\",result:(success 5)}",
+    statement: "char_length('0.0/0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"char_length valid cases{in:\"1.0/0.0\",result:(success 7)}",
-    statement:"char_length('1.0/0.0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1.0/0.0\",result:(success 7)}",
+    statement: "char_length('1.0/0.0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:7
+      output: 7
     }
   },
   {
-    name:"char_length valid cases{in:\"0.0/0.0\",result:(success 7)}",
-    statement:"char_length('0.0/0.0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"0.0/0.0\",result:(success 7)}",
+    statement: "char_length('0.0/0.0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:7
+      output: 7
     }
   },
   {
-    name:"char_length valid cases{in:\"1,0/0,0\",result:(success 7)}",
-    statement:"char_length('1,0/0,0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1,0/0,0\",result:(success 7)}",
+    statement: "char_length('1,0/0,0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:7
+      output: 7
     }
   },
   {
-    name:"char_length valid cases{in:\"0,0/0,0\",result:(success 7)}",
-    statement:"char_length('0,0/0,0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"0,0/0,0\",result:(success 7)}",
+    statement: "char_length('0,0/0,0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:7
+      output: 7
     }
   },
   {
-    name:"char_length valid cases{in:\"--1\",result:(success 3)}",
-    statement:"char_length('--1')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"--1\",result:(success 3)}",
+    statement: "char_length('--1')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"char_length valid cases{in:\"-\",result:(success 1)}",
-    statement:"char_length('-')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"-\",result:(success 1)}",
+    statement: "char_length('-')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:1
+      output: 1
     }
   },
   {
-    name:"char_length valid cases{in:\"-.\",result:(success 2)}",
-    statement:"char_length('-.')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"-.\",result:(success 2)}",
+    statement: "char_length('-.')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:2
+      output: 2
     }
   },
   {
-    name:"char_length valid cases{in:\"-,\",result:(success 2)}",
-    statement:"char_length('-,')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"-,\",result:(success 2)}",
+    statement: "char_length('-,')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:2
+      output: 2
     }
   },
   {
-    name:"char_length valid cases{in:\"NaN\",result:(success 3)}",
-    statement:"char_length('NaN')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"NaN\",result:(success 3)}",
+    statement: "char_length('NaN')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"char_length valid cases{in:\"Infinity\",result:(success 8)}",
-    statement:"char_length('Infinity')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"Infinity\",result:(success 8)}",
+    statement: "char_length('Infinity')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:8
+      output: 8
     }
   },
   {
-    name:"char_length valid cases{in:\"-Infinity\",result:(success 9)}",
-    statement:"char_length('-Infinity')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"-Infinity\",result:(success 9)}",
+    statement: "char_length('-Infinity')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:9
+      output: 9
     }
   },
   {
-    name:"char_length valid cases{in:\"INF\",result:(success 3)}",
-    statement:"char_length('INF')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"INF\",result:(success 3)}",
+    statement: "char_length('INF')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"char_length valid cases{in:\"1#INF\",result:(success 5)}",
-    statement:"char_length('1#INF')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1#INF\",result:(success 5)}",
+    statement: "char_length('1#INF')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"char_length valid cases{in:\"-1#IND\",result:(success 6)}",
-    statement:"char_length('-1#IND')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"-1#IND\",result:(success 6)}",
+    statement: "char_length('-1#IND')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:6
+      output: 6
     }
   },
   {
-    name:"char_length valid cases{in:\"1#QNAN\",result:(success 6)}",
-    statement:"char_length('1#QNAN')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1#QNAN\",result:(success 6)}",
+    statement: "char_length('1#QNAN')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:6
+      output: 6
     }
   },
   {
-    name:"char_length valid cases{in:\"1#SNAN\",result:(success 6)}",
-    statement:"char_length('1#SNAN')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1#SNAN\",result:(success 6)}",
+    statement: "char_length('1#SNAN')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:6
+      output: 6
     }
   },
   {
-    name:"char_length valid cases{in:\"1#IND\",result:(success 5)}",
-    statement:"char_length('1#IND')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1#IND\",result:(success 5)}",
+    statement: "char_length('1#IND')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"char_length valid cases{in:\"0x0\",result:(success 3)}",
-    statement:"char_length('0x0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"0x0\",result:(success 3)}",
+    statement: "char_length('0x0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"char_length valid cases{in:\"0xffffffff\",result:(success 10)}",
-    statement:"char_length('0xffffffff')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"0xffffffff\",result:(success 10)}",
+    statement: "char_length('0xffffffff')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:10
+      output: 10
     }
   },
   {
-    name:"char_length valid cases{in:\"0xffffffffffffffff\",result:(success 18)}",
-    statement:"char_length('0xffffffffffffffff')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"0xffffffffffffffff\",result:(success 18)}",
+    statement: "char_length('0xffffffffffffffff')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:18
+      output: 18
     }
   },
   {
-    name:"char_length valid cases{in:\"0xabad1dea\",result:(success 10)}",
-    statement:"char_length('0xabad1dea')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"0xabad1dea\",result:(success 10)}",
+    statement: "char_length('0xabad1dea')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:10
+      output: 10
     }
   },
   {
-    name:"char_length valid cases{in:\"1,000.00\",result:(success 8)}",
-    statement:"char_length('1,000.00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1,000.00\",result:(success 8)}",
+    statement: "char_length('1,000.00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:8
+      output: 8
     }
   },
   {
-    name:"char_length valid cases{in:\"1 000.00\",result:(success 8)}",
-    statement:"char_length('1 000.00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1 000.00\",result:(success 8)}",
+    statement: "char_length('1 000.00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:8
+      output: 8
     }
   },
   {
-    name:"char_length valid cases{in:\"1,000,000.00\",result:(success 12)}",
-    statement:"char_length('1,000,000.00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1,000,000.00\",result:(success 12)}",
+    statement: "char_length('1,000,000.00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"char_length valid cases{in:\"1 000 000.00\",result:(success 12)}",
-    statement:"char_length('1 000 000.00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1 000 000.00\",result:(success 12)}",
+    statement: "char_length('1 000 000.00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"char_length valid cases{in:\"1.000,00\",result:(success 8)}",
-    statement:"char_length('1.000,00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1.000,00\",result:(success 8)}",
+    statement: "char_length('1.000,00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:8
+      output: 8
     }
   },
   {
-    name:"char_length valid cases{in:\"1 000,00\",result:(success 8)}",
-    statement:"char_length('1 000,00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1 000,00\",result:(success 8)}",
+    statement: "char_length('1 000,00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:8
+      output: 8
     }
   },
   {
-    name:"char_length valid cases{in:\"1.000.000,00\",result:(success 12)}",
-    statement:"char_length('1.000.000,00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1.000.000,00\",result:(success 12)}",
+    statement: "char_length('1.000.000,00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"char_length valid cases{in:\"1 000 000,00\",result:(success 12)}",
-    statement:"char_length('1 000 000,00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"1 000 000,00\",result:(success 12)}",
+    statement: "char_length('1 000 000,00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"char_length valid cases{in:\"01000\",result:(success 5)}",
-    statement:"char_length('01000')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"01000\",result:(success 5)}",
+    statement: "char_length('01000')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"char_length valid cases{in:\"08\",result:(success 2)}",
-    statement:"char_length('08')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"08\",result:(success 2)}",
+    statement: "char_length('08')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:2
+      output: 2
     }
   },
   {
-    name:"char_length valid cases{in:\"09\",result:(success 2)}",
-    statement:"char_length('09')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"09\",result:(success 2)}",
+    statement: "char_length('09')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:2
+      output: 2
     }
   },
   {
-    name:"char_length valid cases{in:\"2.2250738585072011e-308\",result:(success 23)}",
-    statement:"char_length('2.2250738585072011e-308')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"2.2250738585072011e-308\",result:(success 23)}",
+    statement: "char_length('2.2250738585072011e-308')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:23
+      output: 23
     }
   },
   {
-    name:"char_length valid cases{in:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",result:(success 79)}",
-    statement:"char_length('ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",result:(success 79)}",
+    statement: "char_length('ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:79
+      output: 79
     }
   },
   {
-    name:"char_length valid cases{in:\"<>?:\\\"{}|_+\",result:(success 10)}",
-    statement:"char_length('<>?:\"{}|_+')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"<>?:\\\"{}|_+\",result:(success 10)}",
+    statement: "char_length('<>?:\"{}|_+')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:10
+      output: 10
     }
   },
   {
-    name:"char_length valid cases{in:\"!@#%^&*()`~\",result:(success 12)}",
-    statement:"char_length('!@#$%^&*()`~')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"!@#%^&*()`~\",result:(success 12)}",
+    statement: "char_length('!@#$%^&*()`~')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"char_length valid cases{in:\"\\u03a9\\u2248\\xe7\\u221a\\u222b\\u02dc\\xb5\\u2264\\u2265\\xf7\",result:(success 10)}",
-    statement:"char_length('Ω≈ç√∫˜µ≤≥÷')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\u03a9\\u2248\\xe7\\u221a\\u222b\\u02dc\\xb5\\u2264\\u2265\\xf7\",result:(success 10)}",
+    statement: "char_length('Ω≈ç√∫˜µ≤≥÷')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:10
+      output: 10
     }
   },
   {
-    name:"char_length valid cases{in:\"\\xe5\\xdf\\u2202\\u0192\\xa9\\u02d9\\u2206\\u02da\\xac\\u2026\\xe6\",result:(success 11)}",
-    statement:"char_length('åß∂ƒ©˙∆˚¬…æ')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\xe5\\xdf\\u2202\\u0192\\xa9\\u02d9\\u2206\\u02da\\xac\\u2026\\xe6\",result:(success 11)}",
+    statement: "char_length('åß∂ƒ©˙∆˚¬…æ')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:11
+      output: 11
     }
   },
   {
-    name:"char_length valid cases{in:\"\\u0153\\u2211\\xb4\\xae\\u2020\\xa5\\xa8\\u02c6\\xf8\\u03c0\\u201c\\u2018\",result:(success 12)}",
-    statement:"char_length('œ∑´®†¥¨ˆøπ“‘')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\u0153\\u2211\\xb4\\xae\\u2020\\xa5\\xa8\\u02c6\\xf8\\u03c0\\u201c\\u2018\",result:(success 12)}",
+    statement: "char_length('œ∑´®†¥¨ˆøπ“‘')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"char_length valid cases{in:\"\\xa1\\u2122\\xa3\\xa2\\u221e\\xa7\\xb6\\u2022\\xaa\\xba\\u2013\\u2260\",result:(success 12)}",
-    statement:"char_length('¡™£¢∞§¶•ªº–≠')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\xa1\\u2122\\xa3\\xa2\\u221e\\xa7\\xb6\\u2022\\xaa\\xba\\u2013\\u2260\",result:(success 12)}",
+    statement: "char_length('¡™£¢∞§¶•ªº–≠')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"char_length valid cases{in:\"\\xb8\\u02db\\xc7\\u25ca\\u0131\\u02dc\\xc2\\xaf\\u02d8\\xbf\",result:(success 10)}",
-    statement:"char_length('¸˛Ç◊ı˜Â¯˘¿')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\xb8\\u02db\\xc7\\u25ca\\u0131\\u02dc\\xc2\\xaf\\u02d8\\xbf\",result:(success 10)}",
+    statement: "char_length('¸˛Ç◊ı˜Â¯˘¿')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:10
+      output: 10
     }
   },
   {
-    name:"char_length valid cases{in:\"\\xc5\\xcd\\xce\\xcf\\u02dd\\xd3\\xd4\\uf8ff\\xd2\\xda\\xc6\\u2603\",result:(success 12)}",
-    statement:"char_length('ÅÍÎÏ˝ÓÔÒÚÆ☃')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\xc5\\xcd\\xce\\xcf\\u02dd\\xd3\\xd4\\uf8ff\\xd2\\xda\\xc6\\u2603\",result:(success 12)}",
+    statement: "char_length('ÅÍÎÏ˝ÓÔÒÚÆ☃')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"char_length valid cases{in:\"\\u0152\\u201e\\xb4\\u2030\\u02c7\\xc1\\xa8\\u02c6\\xd8\\u220f\\u201d\\u2019\",result:(success 12)}",
-    statement:"char_length('Œ„´‰ˇÁ¨ˆØ∏”’')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\u0152\\u201e\\xb4\\u2030\\u02c7\\xc1\\xa8\\u02c6\\xd8\\u220f\\u201d\\u2019\",result:(success 12)}",
+    statement: "char_length('Œ„´‰ˇÁ¨ˆØ∏”’')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"char_length valid cases{in:\"`\\u2044\\u20ac\\u2039\\u203a\\ufb01\\ufb02\\u2021\\xb0\\xb7\\u201a\\u2014\\xb1\",result:(success 13)}",
-    statement:"char_length('`⁄€‹›ﬁﬂ‡°·‚—±')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"`\\u2044\\u20ac\\u2039\\u203a\\ufb01\\ufb02\\u2021\\xb0\\xb7\\u201a\\u2014\\xb1\",result:(success 13)}",
+    statement: "char_length('`⁄€‹›ﬁﬂ‡°·‚—±')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:13
+      output: 13
     }
   },
   {
-    name:"char_length valid cases{in:\"\\u215b\\u215c\\u215d\\u215e\",result:(success 4)}",
-    statement:"char_length('⅛⅜⅝⅞')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\u215b\\u215c\\u215d\\u215e\",result:(success 4)}",
+    statement: "char_length('⅛⅜⅝⅞')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"char_length valid cases{in:\"\\u0660\\u0661\\u0662\\u0663\\u0664\\u0665\\u0666\\u0667\\u0668\\u0669\",result:(success 10)}",
-    statement:"char_length('٠١٢٣٤٥٦٧٨٩')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\u0660\\u0661\\u0662\\u0663\\u0664\\u0665\\u0666\\u0667\\u0668\\u0669\",result:(success 10)}",
+    statement: "char_length('٠١٢٣٤٥٦٧٨٩')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:10
+      output: 10
     }
   },
   {
-    name:"char_length valid cases{in:\"\\u7530\\u4e2d\\u3055\\u3093\\u306b\\u3042\\u3052\\u3066\\u4e0b\\u3055\\u3044\",result:(success 11)}",
-    statement:"char_length('田中さんにあげて下さい')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\u7530\\u4e2d\\u3055\\u3093\\u306b\\u3042\\u3052\\u3066\\u4e0b\\u3055\\u3044\",result:(success 11)}",
+    statement: "char_length('田中さんにあげて下さい')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:11
+      output: 11
     }
   },
   {
-    name:"char_length valid cases{in:\"\\u30d1\\u30fc\\u30c6\\u30a3\\u30fc\\u3078\\u884c\\u304b\\u306a\\u3044\\u304b\",result:(success 11)}",
-    statement:"char_length('パーティーへ行かないか')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\u30d1\\u30fc\\u30c6\\u30a3\\u30fc\\u3078\\u884c\\u304b\\u306a\\u3044\\u304b\",result:(success 11)}",
+    statement: "char_length('パーティーへ行かないか')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:11
+      output: 11
     }
   },
   {
-    name:"char_length valid cases{in:\"\\u548c\\u88fd\\u6f22\\u8a9e\",result:(success 4)}",
-    statement:"char_length('和製漢語')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\u548c\\u88fd\\u6f22\\u8a9e\",result:(success 4)}",
+    statement: "char_length('和製漢語')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"char_length valid cases{in:\"\\u90e8\\u843d\\u683c\",result:(success 3)}",
-    statement:"char_length('部落格')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\u90e8\\u843d\\u683c\",result:(success 3)}",
+    statement: "char_length('部落格')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"char_length valid cases{in:\"\\uc0ac\\ud68c\\uacfc\\ud559\\uc6d0 \\uc5b4\\ud559\\uc5f0\\uad6c\\uc18c\",result:(success 11)}",
-    statement:"char_length('사회과학원 어학연구소')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\uc0ac\\ud68c\\uacfc\\ud559\\uc6d0 \\uc5b4\\ud559\\uc5f0\\uad6c\\uc18c\",result:(success 11)}",
+    statement: "char_length('사회과학원 어학연구소')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:11
+      output: 11
     }
   },
   {
-    name:"char_length valid cases{in:\"\\ucc26\\ucc28\\ub97c \\ud0c0\\uace0 \\uc628 \\ud3b2\\uc2dc\\ub9e8\\uacfc \\uc45b\\ub2e4\\ub9ac \\ub620\\ubc29\\uac01\\ud558\",result:(success 22)}",
-    statement:"char_length('찦차를 타고 온 펲시맨과 쑛다리 똠방각하')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\ucc26\\ucc28\\ub97c \\ud0c0\\uace0 \\uc628 \\ud3b2\\uc2dc\\ub9e8\\uacfc \\uc45b\\ub2e4\\ub9ac \\ub620\\ubc29\\uac01\\ud558\",result:(success 22)}",
+    statement: "char_length('찦차를 타고 온 펲시맨과 쑛다리 똠방각하')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:22
+      output: 22
     }
   },
   {
-    name:"char_length valid cases{in:\"\\u793e\\u6703\\u79d1\\u5b78\\u9662\\u8a9e\\u5b78\\u7814\\u7a76\\u6240\",result:(success 10)}",
-    statement:"char_length('社會科學院語學研究所')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\u793e\\u6703\\u79d1\\u5b78\\u9662\\u8a9e\\u5b78\\u7814\\u7a76\\u6240\",result:(success 10)}",
+    statement: "char_length('社會科學院語學研究所')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:10
+      output: 10
     }
   },
   {
-    name:"char_length valid cases{in:\"\\uc6b8\\ub780\\ubc14\\ud1a0\\ub974\",result:(success 5)}",
-    statement:"char_length('울란바토르')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\uc6b8\\ub780\\ubc14\\ud1a0\\ub974\",result:(success 5)}",
+    statement: "char_length('울란바토르')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"char_length valid cases{in:\"\\U0002070e\\U00020731\\U00020779\\U00020c53\\U00020c78\\U00020c96\\U00020ccf\",result:(success 7)}",
-    statement:"char_length('𠜎𠜱𠝹𠱓𠱸𠲖𠳏')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\U0002070e\\U00020731\\U00020779\\U00020c53\\U00020c78\\U00020c96\\U00020ccf\",result:(success 7)}",
+    statement: "char_length('𠜎𠜱𠝹𠱓𠱸𠲖𠳏')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:7
+      output: 7
     }
   },
   {
-    name:"char_length valid cases{in:\"\\u023a\",result:(success 1)}",
-    statement:"char_length('Ⱥ')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\u023a\",result:(success 1)}",
+    statement: "char_length('Ⱥ')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:1
+      output: 1
     }
   },
   {
-    name:"char_length valid cases{in:\"\\u023e\",result:(success 1)}",
-    statement:"char_length('Ⱦ')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\u023e\",result:(success 1)}",
+    statement: "char_length('Ⱦ')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:1
+      output: 1
     }
   },
   {
-    name:"char_length valid cases{in:\"\\u30fd\\u0f3c\\u0e88\\u0644\\u035c\\u0e88\\u0f3d\\uff89 \\u30fd\\u0f3c\\u0e88\\u0644\\u035c\\u0e88\\u0f3d\\uff89\",result:(success 17)}",
-    statement:"char_length('ヽ༼ຈل͜ຈ༽ﾉ ヽ༼ຈل͜ຈ༽ﾉ')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\u30fd\\u0f3c\\u0e88\\u0644\\u035c\\u0e88\\u0f3d\\uff89 \\u30fd\\u0f3c\\u0e88\\u0644\\u035c\\u0e88\\u0f3d\\uff89\",result:(success 17)}",
+    statement: "char_length('ヽ༼ຈل͜ຈ༽ﾉ ヽ༼ຈل͜ຈ༽ﾉ')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:17
+      output: 17
     }
   },
   {
-    name:"char_length valid cases{in:\"(\\uff61\\u25d5 \\u2200 \\u25d5\\uff61)\",result:(success 9)}",
-    statement:"char_length('(｡◕ ∀ ◕｡)')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"(\\uff61\\u25d5 \\u2200 \\u25d5\\uff61)\",result:(success 9)}",
+    statement: "char_length('(｡◕ ∀ ◕｡)')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:9
+      output: 9
     }
   },
   {
-    name:"char_length valid cases{in:\"\\uff40\\uff68(\\xb4\\u2200\\uff40\\u2229\",result:(success 7)}",
-    statement:"char_length('｀ｨ(´∀｀∩')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\uff40\\uff68(\\xb4\\u2200\\uff40\\u2229\",result:(success 7)}",
+    statement: "char_length('｀ｨ(´∀｀∩')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:7
+      output: 7
     }
   },
   {
-    name:"char_length valid cases{in:\"__\\uff9b(,_,*)\",result:(success 9)}",
-    statement:"char_length('__ﾛ(,_,*)')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"__\\uff9b(,_,*)\",result:(success 9)}",
+    statement: "char_length('__ﾛ(,_,*)')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:9
+      output: 9
     }
   },
   {
-    name:"char_length valid cases{in:\"\\u30fb(\\uffe3\\u2200\\uffe3)\\u30fb:*:\",result:(success 10)}",
-    statement:"char_length('・(￣∀￣)・:*:')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\u30fb(\\uffe3\\u2200\\uffe3)\\u30fb:*:\",result:(success 10)}",
+    statement: "char_length('・(￣∀￣)・:*:')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:10
+      output: 10
     }
   },
   {
-    name:"char_length valid cases{in:\"\\uff9f\\uff65\\u273f\\u30fe\\u2572(\\uff61\\u25d5\\u203f\\u25d5\\uff61)\\u2571\\u273f\\uff65\\uff9f\",result:(success 16)}",
-    statement:"char_length('ﾟ･✿ヾ╲(｡◕‿◕｡)╱✿･ﾟ')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\uff9f\\uff65\\u273f\\u30fe\\u2572(\\uff61\\u25d5\\u203f\\u25d5\\uff61)\\u2571\\u273f\\uff65\\uff9f\",result:(success 16)}",
+    statement: "char_length('ﾟ･✿ヾ╲(｡◕‿◕｡)╱✿･ﾟ')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:16
+      output: 16
     }
   },
   {
-    name:"char_length valid cases{in:\",\\u3002\\u30fb:*:\\u30fb\\u309c\\u2019( \\u263b \\u03c9 \\u263b )\\u3002\\u30fb:*:\\u30fb\\u309c\\u2019\",result:(success 26)}",
-    statement:"char_length(',。・:*:・゜’( ☻ ω ☻ )。・:*:・゜’')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\",\\u3002\\u30fb:*:\\u30fb\\u309c\\u2019( \\u263b \\u03c9 \\u263b )\\u3002\\u30fb:*:\\u30fb\\u309c\\u2019\",result:(success 26)}",
+    statement: "char_length(',。・:*:・゜’( ☻ ω ☻ )。・:*:・゜’')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:26
+      output: 26
     }
   },
   {
-    name:"char_length valid cases{in:\"(\\u256f\\xb0\\u25a1\\xb0\\uff09\\u256f\\ufe35 \\u253b\\u2501\\u253b)\",result:(success 13)}",
-    statement:"char_length('(╯°□°）╯︵ ┻━┻)')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"(\\u256f\\xb0\\u25a1\\xb0\\uff09\\u256f\\ufe35 \\u253b\\u2501\\u253b)\",result:(success 13)}",
+    statement: "char_length('(╯°□°）╯︵ ┻━┻)')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:13
+      output: 13
     }
   },
   {
-    name:"char_length valid cases{in:\"(\\uff89\\u0ca5\\u76ca\\u0ca5\\uff09\\uff89\\ufeff \\u253b\\u2501\\u253b\",result:(success 12)}",
-    statement:"char_length('(ﾉಥ益ಥ）ﾉ﻿ ┻━┻')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"(\\uff89\\u0ca5\\u76ca\\u0ca5\\uff09\\uff89\\ufeff \\u253b\\u2501\\u253b\",result:(success 12)}",
+    statement: "char_length('(ﾉಥ益ಥ）ﾉ﻿ ┻━┻')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"char_length valid cases{in:\"\\u252c\\u2500\\u252c\\u30ce( \\xba _ \\xba\\u30ce)\",result:(success 13)}",
-    statement:"char_length('┬─┬ノ( º _ ºノ)')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\u252c\\u2500\\u252c\\u30ce( \\xba _ \\xba\\u30ce)\",result:(success 13)}",
+    statement: "char_length('┬─┬ノ( º _ ºノ)')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:13
+      output: 13
     }
   },
   {
-    name:"char_length valid cases{in:\"( \\u0361\\xb0 \\u035c\\u0296 \\u0361\\xb0)\",result:(success 11)}",
-    statement:"char_length('( ͡° ͜ʖ ͡°)')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"( \\u0361\\xb0 \\u035c\\u0296 \\u0361\\xb0)\",result:(success 11)}",
+    statement: "char_length('( ͡° ͜ʖ ͡°)')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:11
+      output: 11
     }
   },
   {
-    name:"char_length valid cases{in:\"\\U0001f60d\",result:(success 1)}",
-    statement:"char_length('😍')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\U0001f60d\",result:(success 1)}",
+    statement: "char_length('😍')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:1
+      output: 1
     }
   },
   {
-    name:"char_length valid cases{in:\"\\U0001f469\\U0001f3fd\",result:(success 2)}",
-    statement:"char_length('👩🏽')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\U0001f469\\U0001f3fd\",result:(success 2)}",
+    statement: "char_length('👩🏽')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:2
+      output: 2
     }
   },
   {
-    name:"char_length valid cases{in:\"\\U0001f47e \\U0001f647 \\U0001f481 \\U0001f645 \\U0001f646 \\U0001f64b \\U0001f64e \\U0001f64d\",result:(success 15)}",
-    statement:"char_length('👾 🙇 💁 🙅 🙆 🙋 🙎 🙍')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\U0001f47e \\U0001f647 \\U0001f481 \\U0001f645 \\U0001f646 \\U0001f64b \\U0001f64e \\U0001f64d\",result:(success 15)}",
+    statement: "char_length('👾 🙇 💁 🙅 🙆 🙋 🙎 🙍')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:15
+      output: 15
     }
   },
   {
-    name:"char_length valid cases{in:\"\\U0001f435 \\U0001f648 \\U0001f649 \\U0001f64a\",result:(success 7)}",
-    statement:"char_length('🐵 🙈 🙉 🙊')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\U0001f435 \\U0001f648 \\U0001f649 \\U0001f64a\",result:(success 7)}",
+    statement: "char_length('🐵 🙈 🙉 🙊')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:7
+      output: 7
     }
   },
   {
-    name:"char_length valid cases{in:\"\\u2764\\ufe0f \\U0001f494 \\U0001f48c \\U0001f495 \\U0001f49e \\U0001f493 \\U0001f497 \\U0001f496 \\U0001f498 \\U0001f49d \\U0001f49f \\U0001f49c \\U0001f49b \\U0001f49a \\U0001f499\",result:(success 30)}",
-    statement:"char_length('❤️ 💔 💌 💕 💞 💓 💗 💖 💘 💝 💟 💜 💛 💚 💙')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\u2764\\ufe0f \\U0001f494 \\U0001f48c \\U0001f495 \\U0001f49e \\U0001f493 \\U0001f497 \\U0001f496 \\U0001f498 \\U0001f49d \\U0001f49f \\U0001f49c \\U0001f49b \\U0001f49a \\U0001f499\",result:(success 30)}",
+    statement: "char_length('❤️ 💔 💌 💕 💞 💓 💗 💖 💘 💝 💟 💜 💛 💚 💙')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:30
+      output: 30
     }
   },
   {
-    name:"char_length valid cases{in:\"\\u270b\\U0001f3ff \\U0001f4aa\\U0001f3ff \\U0001f450\\U0001f3ff \\U0001f64c\\U0001f3ff \\U0001f44f\\U0001f3ff \\U0001f64f\\U0001f3ff\",result:(success 17)}",
-    statement:"char_length('✋🏿 💪🏿 👐🏿 🙌🏿 👏🏿 🙏🏿')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\u270b\\U0001f3ff \\U0001f4aa\\U0001f3ff \\U0001f450\\U0001f3ff \\U0001f64c\\U0001f3ff \\U0001f44f\\U0001f3ff \\U0001f64f\\U0001f3ff\",result:(success 17)}",
+    statement: "char_length('✋🏿 💪🏿 👐🏿 🙌🏿 👏🏿 🙏🏿')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:17
+      output: 17
     }
   },
   {
-    name:"char_length valid cases{in:\"\\U0001f6be \\U0001f192 \\U0001f193 \\U0001f195 \\U0001f196 \\U0001f197 \\U0001f199 \\U0001f3e7\",result:(success 15)}",
-    statement:"char_length('🚾 🆒 🆓 🆕 🆖 🆗 🆙 🏧')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\U0001f6be \\U0001f192 \\U0001f193 \\U0001f195 \\U0001f196 \\U0001f197 \\U0001f199 \\U0001f3e7\",result:(success 15)}",
+    statement: "char_length('🚾 🆒 🆓 🆕 🆖 🆗 🆙 🏧')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:15
+      output: 15
     }
   },
   {
-    name:"char_length valid cases{in:\"0\\ufe0f\\u20e3 1\\ufe0f\\u20e3 2\\ufe0f\\u20e3 3\\ufe0f\\u20e3 4\\ufe0f\\u20e3 5\\ufe0f\\u20e3 6\\ufe0f\\u20e3 7\\ufe0f\\u20e3 8\\ufe0f\\u20e3 9\\ufe0f\\u20e3 \\U0001f51f\",result:(success 41)}",
-    statement:"char_length('0️⃣ 1️⃣ 2️⃣ 3️⃣ 4️⃣ 5️⃣ 6️⃣ 7️⃣ 8️⃣ 9️⃣ 🔟')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"0\\ufe0f\\u20e3 1\\ufe0f\\u20e3 2\\ufe0f\\u20e3 3\\ufe0f\\u20e3 4\\ufe0f\\u20e3 5\\ufe0f\\u20e3 6\\ufe0f\\u20e3 7\\ufe0f\\u20e3 8\\ufe0f\\u20e3 9\\ufe0f\\u20e3 \\U0001f51f\",result:(success 41)}",
+    statement: "char_length('0️⃣ 1️⃣ 2️⃣ 3️⃣ 4️⃣ 5️⃣ 6️⃣ 7️⃣ 8️⃣ 9️⃣ 🔟')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:41
+      output: 41
     }
   },
   {
-    name:"char_length valid cases{in:\"\\U0001f1fa\\U0001f1f8\\U0001f1f7\\U0001f1fa\\U0001f1f8 \\U0001f1e6\\U0001f1eb\\U0001f1e6\\U0001f1f2\\U0001f1f8\",result:(success 11)}",
-    statement:"char_length('🇺🇸🇷🇺🇸 🇦🇫🇦🇲🇸')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\U0001f1fa\\U0001f1f8\\U0001f1f7\\U0001f1fa\\U0001f1f8 \\U0001f1e6\\U0001f1eb\\U0001f1e6\\U0001f1f2\\U0001f1f8\",result:(success 11)}",
+    statement: "char_length('🇺🇸🇷🇺🇸 🇦🇫🇦🇲🇸')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:11
+      output: 11
     }
   },
   {
-    name:"char_length valid cases{in:\"\\U0001f1fa\\U0001f1f8\\U0001f1f7\\U0001f1fa\\U0001f1f8\\U0001f1e6\\U0001f1eb\\U0001f1e6\\U0001f1f2\",result:(success 9)}",
-    statement:"char_length('🇺🇸🇷🇺🇸🇦🇫🇦🇲')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\U0001f1fa\\U0001f1f8\\U0001f1f7\\U0001f1fa\\U0001f1f8\\U0001f1e6\\U0001f1eb\\U0001f1e6\\U0001f1f2\",result:(success 9)}",
+    statement: "char_length('🇺🇸🇷🇺🇸🇦🇫🇦🇲')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:9
+      output: 9
     }
   },
   {
-    name:"char_length valid cases{in:\"\\U0001f1fa\\U0001f1f8\\U0001f1f7\\U0001f1fa\\U0001f1f8\\U0001f1e6\",result:(success 6)}",
-    statement:"char_length('🇺🇸🇷🇺🇸🇦')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\U0001f1fa\\U0001f1f8\\U0001f1f7\\U0001f1fa\\U0001f1f8\\U0001f1e6\",result:(success 6)}",
+    statement: "char_length('🇺🇸🇷🇺🇸🇦')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:6
+      output: 6
     }
   },
   {
-    name:"char_length valid cases{in:\"\\uff34\\uff48\\uff45 \\uff51\\uff55\\uff49\\uff43\\uff4b \\uff42\\uff52\\uff4f\\uff57\\uff4e \\uff46\\uff4f\\uff58 \\uff4a\\uff55\\uff4d\\uff50\\uff53 \\uff4f\\uff56\\uff45\\uff52 \\uff54\\uff48\\uff45 \\uff4c\\uff41\\uff5a\\uff59 \\uff44\\uff4f\\uff47\",result:(success 43)}",
-    statement:"char_length('Ｔｈｅ ｑｕｉｃｋ ｂｒｏｗｎ ｆｏｘ ｊｕｍｐｓ ｏｖｅｒ ｔｈｅ ｌａｚｙ ｄｏｇ')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\uff34\\uff48\\uff45 \\uff51\\uff55\\uff49\\uff43\\uff4b \\uff42\\uff52\\uff4f\\uff57\\uff4e \\uff46\\uff4f\\uff58 \\uff4a\\uff55\\uff4d\\uff50\\uff53 \\uff4f\\uff56\\uff45\\uff52 \\uff54\\uff48\\uff45 \\uff4c\\uff41\\uff5a\\uff59 \\uff44\\uff4f\\uff47\",result:(success 43)}",
+    statement: "char_length('Ｔｈｅ ｑｕｉｃｋ ｂｒｏｗｎ ｆｏｘ ｊｕｍｐｓ ｏｖｅｒ ｔｈｅ ｌａｚｙ ｄｏｇ')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:43
+      output: 43
     }
   },
   {
-    name:"char_length valid cases{in:\"\\U0001d413\\U0001d421\\U0001d41e \\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b \\U0001d42d\\U0001d421\\U0001d41e \\U0001d425\\U0001d41a\\U0001d433\\U0001d432 \\U0001d41d\\U0001d428\\U0001d420\",result:(success 43)}",
-    statement:"char_length('𝐓𝐡𝐞 𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫 𝐭𝐡𝐞 𝐥𝐚𝐳𝐲 𝐝𝐨𝐠')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\U0001d413\\U0001d421\\U0001d41e \\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b \\U0001d42d\\U0001d421\\U0001d41e \\U0001d425\\U0001d41a\\U0001d433\\U0001d432 \\U0001d41d\\U0001d428\\U0001d420\",result:(success 43)}",
+    statement: "char_length('𝐓𝐡𝐞 𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫 𝐭𝐡𝐞 𝐥𝐚𝐳𝐲 𝐝𝐨𝐠')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:43
+      output: 43
     }
   },
   {
-    name:"char_length valid cases{in:\"\\U0001d57f\\U0001d58d\\U0001d58a \\U0001d596\\U0001d59a\\U0001d58e\\U0001d588\\U0001d590 \\U0001d587\\U0001d597\\U0001d594\\U0001d59c\\U0001d593 \\U0001d58b\\U0001d594\\U0001d59d \\U0001d58f\\U0001d59a\\U0001d592\\U0001d595\\U0001d598 \\U0001d594\\U0001d59b\\U0001d58a\\U0001d597 \\U0001d599\\U0001d58d\\U0001d58a \\U0001d591\\U0001d586\\U0001d59f\\U0001d59e \\U0001d589\\U0001d594\\U0001d58c\",result:(success 43)}",
-    statement:"char_length('𝕿𝖍𝖊 𝖖𝖚𝖎𝖈𝖐 𝖇𝖗𝖔𝖜𝖓 𝖋𝖔𝖝 𝖏𝖚𝖒𝖕𝖘 𝖔𝖛𝖊𝖗 𝖙𝖍𝖊 𝖑𝖆𝖟𝖞 𝖉𝖔𝖌')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\U0001d57f\\U0001d58d\\U0001d58a \\U0001d596\\U0001d59a\\U0001d58e\\U0001d588\\U0001d590 \\U0001d587\\U0001d597\\U0001d594\\U0001d59c\\U0001d593 \\U0001d58b\\U0001d594\\U0001d59d \\U0001d58f\\U0001d59a\\U0001d592\\U0001d595\\U0001d598 \\U0001d594\\U0001d59b\\U0001d58a\\U0001d597 \\U0001d599\\U0001d58d\\U0001d58a \\U0001d591\\U0001d586\\U0001d59f\\U0001d59e \\U0001d589\\U0001d594\\U0001d58c\",result:(success 43)}",
+    statement: "char_length('𝕿𝖍𝖊 𝖖𝖚𝖎𝖈𝖐 𝖇𝖗𝖔𝖜𝖓 𝖋𝖔𝖝 𝖏𝖚𝖒𝖕𝖘 𝖔𝖛𝖊𝖗 𝖙𝖍𝖊 𝖑𝖆𝖟𝖞 𝖉𝖔𝖌')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:43
+      output: 43
     }
   },
   {
-    name:"char_length valid cases{in:\"\\U0001d47b\\U0001d489\\U0001d486 \\U0001d492\\U0001d496\\U0001d48a\\U0001d484\\U0001d48c \\U0001d483\\U0001d493\\U0001d490\\U0001d498\\U0001d48f \\U0001d487\\U0001d490\\U0001d499 \\U0001d48b\\U0001d496\\U0001d48e\\U0001d491\\U0001d494 \\U0001d490\\U0001d497\\U0001d486\\U0001d493 \\U0001d495\\U0001d489\\U0001d486 \\U0001d48d\\U0001d482\\U0001d49b\\U0001d49a \\U0001d485\\U0001d490\\U0001d488\",result:(success 43)}",
-    statement:"char_length('𝑻𝒉𝒆 𝒒𝒖𝒊𝒄𝒌 𝒃𝒓𝒐𝒘𝒏 𝒇𝒐𝒙 𝒋𝒖𝒎𝒑𝒔 𝒐𝒗𝒆𝒓 𝒕𝒉𝒆 𝒍𝒂𝒛𝒚 𝒅𝒐𝒈')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\U0001d47b\\U0001d489\\U0001d486 \\U0001d492\\U0001d496\\U0001d48a\\U0001d484\\U0001d48c \\U0001d483\\U0001d493\\U0001d490\\U0001d498\\U0001d48f \\U0001d487\\U0001d490\\U0001d499 \\U0001d48b\\U0001d496\\U0001d48e\\U0001d491\\U0001d494 \\U0001d490\\U0001d497\\U0001d486\\U0001d493 \\U0001d495\\U0001d489\\U0001d486 \\U0001d48d\\U0001d482\\U0001d49b\\U0001d49a \\U0001d485\\U0001d490\\U0001d488\",result:(success 43)}",
+    statement: "char_length('𝑻𝒉𝒆 𝒒𝒖𝒊𝒄𝒌 𝒃𝒓𝒐𝒘𝒏 𝒇𝒐𝒙 𝒋𝒖𝒎𝒑𝒔 𝒐𝒗𝒆𝒓 𝒕𝒉𝒆 𝒍𝒂𝒛𝒚 𝒅𝒐𝒈')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:43
+      output: 43
     }
   },
   {
-    name:"char_length valid cases{in:\"\\U0001d4e3\\U0001d4f1\\U0001d4ee \\U0001d4fa\\U0001d4fe\\U0001d4f2\\U0001d4ec\\U0001d4f4 \\U0001d4eb\\U0001d4fb\\U0001d4f8\\U0001d500\\U0001d4f7 \\U0001d4ef\\U0001d4f8\\U0001d501 \\U0001d4f3\\U0001d4fe\\U0001d4f6\\U0001d4f9\\U0001d4fc \\U0001d4f8\\U0001d4ff\\U0001d4ee\\U0001d4fb \\U0001d4fd\\U0001d4f1\\U0001d4ee \\U0001d4f5\\U0001d4ea\\U0001d503\\U0001d502 \\U0001d4ed\\U0001d4f8\\U0001d4f0\",result:(success 43)}",
-    statement:"char_length('𝓣𝓱𝓮 𝓺𝓾𝓲𝓬𝓴 𝓫𝓻𝓸𝔀𝓷 𝓯𝓸𝔁 𝓳𝓾𝓶𝓹𝓼 𝓸𝓿𝓮𝓻 𝓽𝓱𝓮 𝓵𝓪𝔃𝔂 𝓭𝓸𝓰')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\U0001d4e3\\U0001d4f1\\U0001d4ee \\U0001d4fa\\U0001d4fe\\U0001d4f2\\U0001d4ec\\U0001d4f4 \\U0001d4eb\\U0001d4fb\\U0001d4f8\\U0001d500\\U0001d4f7 \\U0001d4ef\\U0001d4f8\\U0001d501 \\U0001d4f3\\U0001d4fe\\U0001d4f6\\U0001d4f9\\U0001d4fc \\U0001d4f8\\U0001d4ff\\U0001d4ee\\U0001d4fb \\U0001d4fd\\U0001d4f1\\U0001d4ee \\U0001d4f5\\U0001d4ea\\U0001d503\\U0001d502 \\U0001d4ed\\U0001d4f8\\U0001d4f0\",result:(success 43)}",
+    statement: "char_length('𝓣𝓱𝓮 𝓺𝓾𝓲𝓬𝓴 𝓫𝓻𝓸𝔀𝓷 𝓯𝓸𝔁 𝓳𝓾𝓶𝓹𝓼 𝓸𝓿𝓮𝓻 𝓽𝓱𝓮 𝓵𝓪𝔃𝔂 𝓭𝓸𝓰')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:43
+      output: 43
     }
   },
   {
-    name:"char_length valid cases{in:\"\\U0001d54b\\U0001d559\\U0001d556 \\U0001d562\\U0001d566\\U0001d55a\\U0001d554\\U0001d55c \\U0001d553\\U0001d563\\U0001d560\\U0001d568\\U0001d55f \\U0001d557\\U0001d560\\U0001d569 \\U0001d55b\\U0001d566\\U0001d55e\\U0001d561\\U0001d564 \\U0001d560\\U0001d567\\U0001d556\\U0001d563 \\U0001d565\\U0001d559\\U0001d556 \\U0001d55d\\U0001d552\\U0001d56b\\U0001d56a \\U0001d555\\U0001d560\\U0001d558\",result:(success 43)}",
-    statement:"char_length('𝕋𝕙𝕖 𝕢𝕦𝕚𝕔𝕜 𝕓𝕣𝕠𝕨𝕟 𝕗𝕠𝕩 𝕛𝕦𝕞𝕡𝕤 𝕠𝕧𝕖𝕣 𝕥𝕙𝕖 𝕝𝕒𝕫𝕪 𝕕𝕠𝕘')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\U0001d54b\\U0001d559\\U0001d556 \\U0001d562\\U0001d566\\U0001d55a\\U0001d554\\U0001d55c \\U0001d553\\U0001d563\\U0001d560\\U0001d568\\U0001d55f \\U0001d557\\U0001d560\\U0001d569 \\U0001d55b\\U0001d566\\U0001d55e\\U0001d561\\U0001d564 \\U0001d560\\U0001d567\\U0001d556\\U0001d563 \\U0001d565\\U0001d559\\U0001d556 \\U0001d55d\\U0001d552\\U0001d56b\\U0001d56a \\U0001d555\\U0001d560\\U0001d558\",result:(success 43)}",
+    statement: "char_length('𝕋𝕙𝕖 𝕢𝕦𝕚𝕔𝕜 𝕓𝕣𝕠𝕨𝕟 𝕗𝕠𝕩 𝕛𝕦𝕞𝕡𝕤 𝕠𝕧𝕖𝕣 𝕥𝕙𝕖 𝕝𝕒𝕫𝕪 𝕕𝕠𝕘')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:43
+      output: 43
     }
   },
   {
-    name:"char_length valid cases{in:\"\\U0001d683\\U0001d691\\U0001d68e \\U0001d69a\\U0001d69e\\U0001d692\\U0001d68c\\U0001d694 \\U0001d68b\\U0001d69b\\U0001d698\\U0001d6a0\\U0001d697 \\U0001d68f\\U0001d698\\U0001d6a1 \\U0001d693\\U0001d69e\\U0001d696\\U0001d699\\U0001d69c \\U0001d698\\U0001d69f\\U0001d68e\\U0001d69b \\U0001d69d\\U0001d691\\U0001d68e \\U0001d695\\U0001d68a\\U0001d6a3\\U0001d6a2 \\U0001d68d\\U0001d698\\U0001d690\",result:(success 43)}",
-    statement:"char_length('𝚃𝚑𝚎 𝚚𝚞𝚒𝚌𝚔 𝚋𝚛𝚘𝚠𝚗 𝚏𝚘𝚡 𝚓𝚞𝚖𝚙𝚜 𝚘𝚟𝚎𝚛 𝚝𝚑𝚎 𝚕𝚊𝚣𝚢 𝚍𝚘𝚐')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\U0001d683\\U0001d691\\U0001d68e \\U0001d69a\\U0001d69e\\U0001d692\\U0001d68c\\U0001d694 \\U0001d68b\\U0001d69b\\U0001d698\\U0001d6a0\\U0001d697 \\U0001d68f\\U0001d698\\U0001d6a1 \\U0001d693\\U0001d69e\\U0001d696\\U0001d699\\U0001d69c \\U0001d698\\U0001d69f\\U0001d68e\\U0001d69b \\U0001d69d\\U0001d691\\U0001d68e \\U0001d695\\U0001d68a\\U0001d6a3\\U0001d6a2 \\U0001d68d\\U0001d698\\U0001d690\",result:(success 43)}",
+    statement: "char_length('𝚃𝚑𝚎 𝚚𝚞𝚒𝚌𝚔 𝚋𝚛𝚘𝚠𝚗 𝚏𝚘𝚡 𝚓𝚞𝚖𝚙𝚜 𝚘𝚟𝚎𝚛 𝚝𝚑𝚎 𝚕𝚊𝚣𝚢 𝚍𝚘𝚐')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:43
+      output: 43
     }
   },
   {
-    name:"char_length valid cases{in:\"\\u24af\\u24a3\\u24a0 \\u24ac\\u24b0\\u24a4\\u249e\\u24a6 \\u249d\\u24ad\\u24aa\\u24b2\\u24a9 \\u24a1\\u24aa\\u24b3 \\u24a5\\u24b0\\u24a8\\u24ab\\u24ae \\u24aa\\u24b1\\u24a0\\u24ad \\u24af\\u24a3\\u24a0 \\u24a7\\u249c\\u24b5\\u24b4 \\u249f\\u24aa\\u24a2\",result:(success 43)}",
-    statement:"char_length('⒯⒣⒠ ⒬⒰⒤⒞⒦ ⒝⒭⒪⒲⒩ ⒡⒪⒳ ⒥⒰⒨⒫⒮ ⒪⒱⒠⒭ ⒯⒣⒠ ⒧⒜⒵⒴ ⒟⒪⒢')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length valid cases{in:\"\\u24af\\u24a3\\u24a0 \\u24ac\\u24b0\\u24a4\\u249e\\u24a6 \\u249d\\u24ad\\u24aa\\u24b2\\u24a9 \\u24a1\\u24aa\\u24b3 \\u24a5\\u24b0\\u24a8\\u24ab\\u24ae \\u24aa\\u24b1\\u24a0\\u24ad \\u24af\\u24a3\\u24a0 \\u24a7\\u249c\\u24b5\\u24b4 \\u249f\\u24aa\\u24a2\",result:(success 43)}",
+    statement: "char_length('⒯⒣⒠ ⒬⒰⒤⒞⒦ ⒝⒭⒪⒲⒩ ⒡⒪⒳ ⒥⒰⒨⒫⒮ ⒪⒱⒠⒭ ⒯⒣⒠ ⒧⒜⒵⒴ ⒟⒪⒢')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:43
+      output: 43
     }
   },
   {
-    name:"character_length valid cases{in:\"\",result:(success 0)}",
-    statement:"character_length('')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\",result:(success 0)}",
+    statement: "character_length('')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:0
+      output: 0
     }
   },
   {
-    name:"character_length valid cases{in:\"a\",result:(success 1)}",
-    statement:"character_length('a')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"a\",result:(success 1)}",
+    statement: "character_length('a')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:1
+      output: 1
     }
   },
   {
-    name:"character_length valid cases{in:\"123456789\",result:(success 9)}",
-    statement:"character_length('123456789')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"123456789\",result:(success 9)}",
+    statement: "character_length('123456789')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:9
+      output: 9
     }
   },
   {
-    name:"character_length valid cases{in:\"avi\\xe3o\",result:(success 5)}",
-    statement:"character_length('avião')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"avi\\xe3o\",result:(success 5)}",
+    statement: "character_length('avião')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"character_length valid cases{in:\"e\\u082b\",result:(success 2)}",
-    statement:"character_length('eࠫ')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"e\\u082b\",result:(success 2)}",
+    statement: "character_length('eࠫ')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:2
+      output: 2
     }
   },
   {
-    name:"character_length valid cases{in:\"\\U0001f601\\U0001f61e\\U0001f638\\U0001f638\",result:(success 4)}",
-    statement:"character_length('😁😞😸😸')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\U0001f601\\U0001f61e\\U0001f638\\U0001f638\",result:(success 4)}",
+    statement: "character_length('😁😞😸😸')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"character_length valid cases{in:\"\\u8a71\\u5bb6\\u8eab\\u5727\\u8cbb\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\",result:(success 12)}",
-    statement:"character_length('話家身圧費谷料村能計税金')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\u8a71\\u5bb6\\u8eab\\u5727\\u8cbb\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\",result:(success 12)}",
+    statement: "character_length('話家身圧費谷料村能計税金')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"character_length valid cases{in:\"undefined\",result:(success 9)}",
-    statement:"character_length('undefined')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"undefined\",result:(success 9)}",
+    statement: "character_length('undefined')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:9
+      output: 9
     }
   },
   {
-    name:"character_length valid cases{in:\"undef\",result:(success 5)}",
-    statement:"character_length('undef')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"undef\",result:(success 5)}",
+    statement: "character_length('undef')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"character_length valid cases{in:\"null\",result:(success 4)}",
-    statement:"character_length('null')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"null\",result:(success 4)}",
+    statement: "character_length('null')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"character_length valid cases{in:\"NULL\",result:(success 4)}",
-    statement:"character_length('NULL')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"NULL\",result:(success 4)}",
+    statement: "character_length('NULL')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"character_length valid cases{in:\"(null)\",result:(success 6)}",
-    statement:"character_length('(null)')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"(null)\",result:(success 6)}",
+    statement: "character_length('(null)')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:6
+      output: 6
     }
   },
   {
-    name:"character_length valid cases{in:\"nil\",result:(success 3)}",
-    statement:"character_length('nil')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"nil\",result:(success 3)}",
+    statement: "character_length('nil')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"character_length valid cases{in:\"NIL\",result:(success 3)}",
-    statement:"character_length('NIL')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"NIL\",result:(success 3)}",
+    statement: "character_length('NIL')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"character_length valid cases{in:\"true\",result:(success 4)}",
-    statement:"character_length('true')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"true\",result:(success 4)}",
+    statement: "character_length('true')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"character_length valid cases{in:\"false\",result:(success 5)}",
-    statement:"character_length('false')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"false\",result:(success 5)}",
+    statement: "character_length('false')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"character_length valid cases{in:\"True\",result:(success 4)}",
-    statement:"character_length('True')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"True\",result:(success 4)}",
+    statement: "character_length('True')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"character_length valid cases{in:\"False\",result:(success 5)}",
-    statement:"character_length('False')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"False\",result:(success 5)}",
+    statement: "character_length('False')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"character_length valid cases{in:\"TRUE\",result:(success 4)}",
-    statement:"character_length('TRUE')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"TRUE\",result:(success 4)}",
+    statement: "character_length('TRUE')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"character_length valid cases{in:\"FALSE\",result:(success 5)}",
-    statement:"character_length('FALSE')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"FALSE\",result:(success 5)}",
+    statement: "character_length('FALSE')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"character_length valid cases{in:\"None\",result:(success 4)}",
-    statement:"character_length('None')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"None\",result:(success 4)}",
+    statement: "character_length('None')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"character_length valid cases{in:\"hasOwnProperty\",result:(success 14)}",
-    statement:"character_length('hasOwnProperty')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"hasOwnProperty\",result:(success 14)}",
+    statement: "character_length('hasOwnProperty')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:14
+      output: 14
     }
   },
   {
-    name:"character_length valid cases{in:\"999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999\",result:(success 96)}",
-    statement:"character_length('999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999\",result:(success 96)}",
+    statement: "character_length('999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:96
+      output: 96
     }
   },
   {
-    name:"character_length valid cases{in:\"123456789012345678901234567890123456789\",result:(success 39)}",
-    statement:"character_length('123456789012345678901234567890123456789')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"123456789012345678901234567890123456789\",result:(success 39)}",
+    statement: "character_length('123456789012345678901234567890123456789')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:39
+      output: 39
     }
   },
   {
-    name:"character_length valid cases{in:\"0\",result:(success 1)}",
-    statement:"character_length('0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"0\",result:(success 1)}",
+    statement: "character_length('0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:1
+      output: 1
     }
   },
   {
-    name:"character_length valid cases{in:\"1\",result:(success 1)}",
-    statement:"character_length('1')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1\",result:(success 1)}",
+    statement: "character_length('1')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:1
+      output: 1
     }
   },
   {
-    name:"character_length valid cases{in:\"1.00\",result:(success 4)}",
-    statement:"character_length('1.00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1.00\",result:(success 4)}",
+    statement: "character_length('1.00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"character_length valid cases{in:\"1.00\",result:(success 5)}",
-    statement:"character_length('$1.00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1.00\",result:(success 5)}",
+    statement: "character_length('$1.00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"character_length valid cases{in:\"1/2\",result:(success 3)}",
-    statement:"character_length('1/2')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1/2\",result:(success 3)}",
+    statement: "character_length('1/2')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"character_length valid cases{in:\"1E2\",result:(success 3)}",
-    statement:"character_length('1E2')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1E2\",result:(success 3)}",
+    statement: "character_length('1E2')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"character_length valid cases{in:\"1E02\",result:(success 4)}",
-    statement:"character_length('1E02')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1E02\",result:(success 4)}",
+    statement: "character_length('1E02')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"character_length valid cases{in:\"1E+02\",result:(success 5)}",
-    statement:"character_length('1E+02')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1E+02\",result:(success 5)}",
+    statement: "character_length('1E+02')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"character_length valid cases{in:\"-1\",result:(success 2)}",
-    statement:"character_length('-1')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"-1\",result:(success 2)}",
+    statement: "character_length('-1')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:2
+      output: 2
     }
   },
   {
-    name:"character_length valid cases{in:\"-1.00\",result:(success 5)}",
-    statement:"character_length('-1.00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"-1.00\",result:(success 5)}",
+    statement: "character_length('-1.00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"character_length valid cases{in:\"-1.00\",result:(success 6)}",
-    statement:"character_length('-$1.00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"-1.00\",result:(success 6)}",
+    statement: "character_length('-$1.00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:6
+      output: 6
     }
   },
   {
-    name:"character_length valid cases{in:\"-1/2\",result:(success 4)}",
-    statement:"character_length('-1/2')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"-1/2\",result:(success 4)}",
+    statement: "character_length('-1/2')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"character_length valid cases{in:\"-1E2\",result:(success 4)}",
-    statement:"character_length('-1E2')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"-1E2\",result:(success 4)}",
+    statement: "character_length('-1E2')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"character_length valid cases{in:\"-1E02\",result:(success 5)}",
-    statement:"character_length('-1E02')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"-1E02\",result:(success 5)}",
+    statement: "character_length('-1E02')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"character_length valid cases{in:\"-1E+02\",result:(success 6)}",
-    statement:"character_length('-1E+02')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"-1E+02\",result:(success 6)}",
+    statement: "character_length('-1E+02')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:6
+      output: 6
     }
   },
   {
-    name:"character_length valid cases{in:\"1/0\",result:(success 3)}",
-    statement:"character_length('1/0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1/0\",result:(success 3)}",
+    statement: "character_length('1/0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"character_length valid cases{in:\"0/0\",result:(success 3)}",
-    statement:"character_length('0/0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"0/0\",result:(success 3)}",
+    statement: "character_length('0/0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"character_length valid cases{in:\"-2147483648/-1\",result:(success 14)}",
-    statement:"character_length('-2147483648/-1')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"-2147483648/-1\",result:(success 14)}",
+    statement: "character_length('-2147483648/-1')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:14
+      output: 14
     }
   },
   {
-    name:"character_length valid cases{in:\"-9223372036854775808/-1\",result:(success 23)}",
-    statement:"character_length('-9223372036854775808/-1')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"-9223372036854775808/-1\",result:(success 23)}",
+    statement: "character_length('-9223372036854775808/-1')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:23
+      output: 23
     }
   },
   {
-    name:"character_length valid cases{in:\"-0\",result:(success 2)}",
-    statement:"character_length('-0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"-0\",result:(success 2)}",
+    statement: "character_length('-0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:2
+      output: 2
     }
   },
   {
-    name:"character_length valid cases{in:\"-0.0\",result:(success 4)}",
-    statement:"character_length('-0.0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"-0.0\",result:(success 4)}",
+    statement: "character_length('-0.0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"character_length valid cases{in:\"+0\",result:(success 2)}",
-    statement:"character_length('+0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"+0\",result:(success 2)}",
+    statement: "character_length('+0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:2
+      output: 2
     }
   },
   {
-    name:"character_length valid cases{in:\"+0.0\",result:(success 4)}",
-    statement:"character_length('+0.0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"+0.0\",result:(success 4)}",
+    statement: "character_length('+0.0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"character_length valid cases{in:\"0.00\",result:(success 4)}",
-    statement:"character_length('0.00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"0.00\",result:(success 4)}",
+    statement: "character_length('0.00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"character_length valid cases{in:\"0..0\",result:(success 4)}",
-    statement:"character_length('0..0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"0..0\",result:(success 4)}",
+    statement: "character_length('0..0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"character_length valid cases{in:\".\",result:(success 1)}",
-    statement:"character_length('.')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\".\",result:(success 1)}",
+    statement: "character_length('.')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:1
+      output: 1
     }
   },
   {
-    name:"character_length valid cases{in:\"0.0.0\",result:(success 5)}",
-    statement:"character_length('0.0.0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"0.0.0\",result:(success 5)}",
+    statement: "character_length('0.0.0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"character_length valid cases{in:\"0,00\",result:(success 4)}",
-    statement:"character_length('0,00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"0,00\",result:(success 4)}",
+    statement: "character_length('0,00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"character_length valid cases{in:\"0,,0\",result:(success 4)}",
-    statement:"character_length('0,,0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"0,,0\",result:(success 4)}",
+    statement: "character_length('0,,0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"character_length valid cases{in:\",\",result:(success 1)}",
-    statement:"character_length(',')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\",\",result:(success 1)}",
+    statement: "character_length(',')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:1
+      output: 1
     }
   },
   {
-    name:"character_length valid cases{in:\"0,0,0\",result:(success 5)}",
-    statement:"character_length('0,0,0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"0,0,0\",result:(success 5)}",
+    statement: "character_length('0,0,0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"character_length valid cases{in:\"0.0/0\",result:(success 5)}",
-    statement:"character_length('0.0/0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"0.0/0\",result:(success 5)}",
+    statement: "character_length('0.0/0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"character_length valid cases{in:\"1.0/0.0\",result:(success 7)}",
-    statement:"character_length('1.0/0.0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1.0/0.0\",result:(success 7)}",
+    statement: "character_length('1.0/0.0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:7
+      output: 7
     }
   },
   {
-    name:"character_length valid cases{in:\"0.0/0.0\",result:(success 7)}",
-    statement:"character_length('0.0/0.0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"0.0/0.0\",result:(success 7)}",
+    statement: "character_length('0.0/0.0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:7
+      output: 7
     }
   },
   {
-    name:"character_length valid cases{in:\"1,0/0,0\",result:(success 7)}",
-    statement:"character_length('1,0/0,0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1,0/0,0\",result:(success 7)}",
+    statement: "character_length('1,0/0,0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:7
+      output: 7
     }
   },
   {
-    name:"character_length valid cases{in:\"0,0/0,0\",result:(success 7)}",
-    statement:"character_length('0,0/0,0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"0,0/0,0\",result:(success 7)}",
+    statement: "character_length('0,0/0,0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:7
+      output: 7
     }
   },
   {
-    name:"character_length valid cases{in:\"--1\",result:(success 3)}",
-    statement:"character_length('--1')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"--1\",result:(success 3)}",
+    statement: "character_length('--1')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"character_length valid cases{in:\"-\",result:(success 1)}",
-    statement:"character_length('-')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"-\",result:(success 1)}",
+    statement: "character_length('-')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:1
+      output: 1
     }
   },
   {
-    name:"character_length valid cases{in:\"-.\",result:(success 2)}",
-    statement:"character_length('-.')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"-.\",result:(success 2)}",
+    statement: "character_length('-.')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:2
+      output: 2
     }
   },
   {
-    name:"character_length valid cases{in:\"-,\",result:(success 2)}",
-    statement:"character_length('-,')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"-,\",result:(success 2)}",
+    statement: "character_length('-,')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:2
+      output: 2
     }
   },
   {
-    name:"character_length valid cases{in:\"NaN\",result:(success 3)}",
-    statement:"character_length('NaN')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"NaN\",result:(success 3)}",
+    statement: "character_length('NaN')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"character_length valid cases{in:\"Infinity\",result:(success 8)}",
-    statement:"character_length('Infinity')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"Infinity\",result:(success 8)}",
+    statement: "character_length('Infinity')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:8
+      output: 8
     }
   },
   {
-    name:"character_length valid cases{in:\"-Infinity\",result:(success 9)}",
-    statement:"character_length('-Infinity')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"-Infinity\",result:(success 9)}",
+    statement: "character_length('-Infinity')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:9
+      output: 9
     }
   },
   {
-    name:"character_length valid cases{in:\"INF\",result:(success 3)}",
-    statement:"character_length('INF')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"INF\",result:(success 3)}",
+    statement: "character_length('INF')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"character_length valid cases{in:\"1#INF\",result:(success 5)}",
-    statement:"character_length('1#INF')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1#INF\",result:(success 5)}",
+    statement: "character_length('1#INF')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"character_length valid cases{in:\"-1#IND\",result:(success 6)}",
-    statement:"character_length('-1#IND')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"-1#IND\",result:(success 6)}",
+    statement: "character_length('-1#IND')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:6
+      output: 6
     }
   },
   {
-    name:"character_length valid cases{in:\"1#QNAN\",result:(success 6)}",
-    statement:"character_length('1#QNAN')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1#QNAN\",result:(success 6)}",
+    statement: "character_length('1#QNAN')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:6
+      output: 6
     }
   },
   {
-    name:"character_length valid cases{in:\"1#SNAN\",result:(success 6)}",
-    statement:"character_length('1#SNAN')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1#SNAN\",result:(success 6)}",
+    statement: "character_length('1#SNAN')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:6
+      output: 6
     }
   },
   {
-    name:"character_length valid cases{in:\"1#IND\",result:(success 5)}",
-    statement:"character_length('1#IND')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1#IND\",result:(success 5)}",
+    statement: "character_length('1#IND')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"character_length valid cases{in:\"0x0\",result:(success 3)}",
-    statement:"character_length('0x0')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"0x0\",result:(success 3)}",
+    statement: "character_length('0x0')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"character_length valid cases{in:\"0xffffffff\",result:(success 10)}",
-    statement:"character_length('0xffffffff')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"0xffffffff\",result:(success 10)}",
+    statement: "character_length('0xffffffff')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:10
+      output: 10
     }
   },
   {
-    name:"character_length valid cases{in:\"0xffffffffffffffff\",result:(success 18)}",
-    statement:"character_length('0xffffffffffffffff')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"0xffffffffffffffff\",result:(success 18)}",
+    statement: "character_length('0xffffffffffffffff')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:18
+      output: 18
     }
   },
   {
-    name:"character_length valid cases{in:\"0xabad1dea\",result:(success 10)}",
-    statement:"character_length('0xabad1dea')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"0xabad1dea\",result:(success 10)}",
+    statement: "character_length('0xabad1dea')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:10
+      output: 10
     }
   },
   {
-    name:"character_length valid cases{in:\"1,000.00\",result:(success 8)}",
-    statement:"character_length('1,000.00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1,000.00\",result:(success 8)}",
+    statement: "character_length('1,000.00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:8
+      output: 8
     }
   },
   {
-    name:"character_length valid cases{in:\"1 000.00\",result:(success 8)}",
-    statement:"character_length('1 000.00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1 000.00\",result:(success 8)}",
+    statement: "character_length('1 000.00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:8
+      output: 8
     }
   },
   {
-    name:"character_length valid cases{in:\"1,000,000.00\",result:(success 12)}",
-    statement:"character_length('1,000,000.00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1,000,000.00\",result:(success 12)}",
+    statement: "character_length('1,000,000.00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"character_length valid cases{in:\"1 000 000.00\",result:(success 12)}",
-    statement:"character_length('1 000 000.00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1 000 000.00\",result:(success 12)}",
+    statement: "character_length('1 000 000.00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"character_length valid cases{in:\"1.000,00\",result:(success 8)}",
-    statement:"character_length('1.000,00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1.000,00\",result:(success 8)}",
+    statement: "character_length('1.000,00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:8
+      output: 8
     }
   },
   {
-    name:"character_length valid cases{in:\"1 000,00\",result:(success 8)}",
-    statement:"character_length('1 000,00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1 000,00\",result:(success 8)}",
+    statement: "character_length('1 000,00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:8
+      output: 8
     }
   },
   {
-    name:"character_length valid cases{in:\"1.000.000,00\",result:(success 12)}",
-    statement:"character_length('1.000.000,00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1.000.000,00\",result:(success 12)}",
+    statement: "character_length('1.000.000,00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"character_length valid cases{in:\"1 000 000,00\",result:(success 12)}",
-    statement:"character_length('1 000 000,00')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"1 000 000,00\",result:(success 12)}",
+    statement: "character_length('1 000 000,00')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"character_length valid cases{in:\"01000\",result:(success 5)}",
-    statement:"character_length('01000')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"01000\",result:(success 5)}",
+    statement: "character_length('01000')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"character_length valid cases{in:\"08\",result:(success 2)}",
-    statement:"character_length('08')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"08\",result:(success 2)}",
+    statement: "character_length('08')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:2
+      output: 2
     }
   },
   {
-    name:"character_length valid cases{in:\"09\",result:(success 2)}",
-    statement:"character_length('09')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"09\",result:(success 2)}",
+    statement: "character_length('09')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:2
+      output: 2
     }
   },
   {
-    name:"character_length valid cases{in:\"2.2250738585072011e-308\",result:(success 23)}",
-    statement:"character_length('2.2250738585072011e-308')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"2.2250738585072011e-308\",result:(success 23)}",
+    statement: "character_length('2.2250738585072011e-308')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:23
+      output: 23
     }
   },
   {
-    name:"character_length valid cases{in:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",result:(success 79)}",
-    statement:"character_length('ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",result:(success 79)}",
+    statement: "character_length('ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:79
+      output: 79
     }
   },
   {
-    name:"character_length valid cases{in:\"<>?:\\\"{}|_+\",result:(success 10)}",
-    statement:"character_length('<>?:\"{}|_+')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"<>?:\\\"{}|_+\",result:(success 10)}",
+    statement: "character_length('<>?:\"{}|_+')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:10
+      output: 10
     }
   },
   {
-    name:"character_length valid cases{in:\"!@#%^&*()`~\",result:(success 12)}",
-    statement:"character_length('!@#$%^&*()`~')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"!@#%^&*()`~\",result:(success 12)}",
+    statement: "character_length('!@#$%^&*()`~')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"character_length valid cases{in:\"\\u03a9\\u2248\\xe7\\u221a\\u222b\\u02dc\\xb5\\u2264\\u2265\\xf7\",result:(success 10)}",
-    statement:"character_length('Ω≈ç√∫˜µ≤≥÷')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\u03a9\\u2248\\xe7\\u221a\\u222b\\u02dc\\xb5\\u2264\\u2265\\xf7\",result:(success 10)}",
+    statement: "character_length('Ω≈ç√∫˜µ≤≥÷')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:10
+      output: 10
     }
   },
   {
-    name:"character_length valid cases{in:\"\\xe5\\xdf\\u2202\\u0192\\xa9\\u02d9\\u2206\\u02da\\xac\\u2026\\xe6\",result:(success 11)}",
-    statement:"character_length('åß∂ƒ©˙∆˚¬…æ')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\xe5\\xdf\\u2202\\u0192\\xa9\\u02d9\\u2206\\u02da\\xac\\u2026\\xe6\",result:(success 11)}",
+    statement: "character_length('åß∂ƒ©˙∆˚¬…æ')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:11
+      output: 11
     }
   },
   {
-    name:"character_length valid cases{in:\"\\u0153\\u2211\\xb4\\xae\\u2020\\xa5\\xa8\\u02c6\\xf8\\u03c0\\u201c\\u2018\",result:(success 12)}",
-    statement:"character_length('œ∑´®†¥¨ˆøπ“‘')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\u0153\\u2211\\xb4\\xae\\u2020\\xa5\\xa8\\u02c6\\xf8\\u03c0\\u201c\\u2018\",result:(success 12)}",
+    statement: "character_length('œ∑´®†¥¨ˆøπ“‘')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"character_length valid cases{in:\"\\xa1\\u2122\\xa3\\xa2\\u221e\\xa7\\xb6\\u2022\\xaa\\xba\\u2013\\u2260\",result:(success 12)}",
-    statement:"character_length('¡™£¢∞§¶•ªº–≠')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\xa1\\u2122\\xa3\\xa2\\u221e\\xa7\\xb6\\u2022\\xaa\\xba\\u2013\\u2260\",result:(success 12)}",
+    statement: "character_length('¡™£¢∞§¶•ªº–≠')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"character_length valid cases{in:\"\\xb8\\u02db\\xc7\\u25ca\\u0131\\u02dc\\xc2\\xaf\\u02d8\\xbf\",result:(success 10)}",
-    statement:"character_length('¸˛Ç◊ı˜Â¯˘¿')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\xb8\\u02db\\xc7\\u25ca\\u0131\\u02dc\\xc2\\xaf\\u02d8\\xbf\",result:(success 10)}",
+    statement: "character_length('¸˛Ç◊ı˜Â¯˘¿')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:10
+      output: 10
     }
   },
   {
-    name:"character_length valid cases{in:\"\\xc5\\xcd\\xce\\xcf\\u02dd\\xd3\\xd4\\uf8ff\\xd2\\xda\\xc6\\u2603\",result:(success 12)}",
-    statement:"character_length('ÅÍÎÏ˝ÓÔÒÚÆ☃')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\xc5\\xcd\\xce\\xcf\\u02dd\\xd3\\xd4\\uf8ff\\xd2\\xda\\xc6\\u2603\",result:(success 12)}",
+    statement: "character_length('ÅÍÎÏ˝ÓÔÒÚÆ☃')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"character_length valid cases{in:\"\\u0152\\u201e\\xb4\\u2030\\u02c7\\xc1\\xa8\\u02c6\\xd8\\u220f\\u201d\\u2019\",result:(success 12)}",
-    statement:"character_length('Œ„´‰ˇÁ¨ˆØ∏”’')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\u0152\\u201e\\xb4\\u2030\\u02c7\\xc1\\xa8\\u02c6\\xd8\\u220f\\u201d\\u2019\",result:(success 12)}",
+    statement: "character_length('Œ„´‰ˇÁ¨ˆØ∏”’')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"character_length valid cases{in:\"`\\u2044\\u20ac\\u2039\\u203a\\ufb01\\ufb02\\u2021\\xb0\\xb7\\u201a\\u2014\\xb1\",result:(success 13)}",
-    statement:"character_length('`⁄€‹›ﬁﬂ‡°·‚—±')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"`\\u2044\\u20ac\\u2039\\u203a\\ufb01\\ufb02\\u2021\\xb0\\xb7\\u201a\\u2014\\xb1\",result:(success 13)}",
+    statement: "character_length('`⁄€‹›ﬁﬂ‡°·‚—±')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:13
+      output: 13
     }
   },
   {
-    name:"character_length valid cases{in:\"\\u215b\\u215c\\u215d\\u215e\",result:(success 4)}",
-    statement:"character_length('⅛⅜⅝⅞')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\u215b\\u215c\\u215d\\u215e\",result:(success 4)}",
+    statement: "character_length('⅛⅜⅝⅞')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"character_length valid cases{in:\"\\u0660\\u0661\\u0662\\u0663\\u0664\\u0665\\u0666\\u0667\\u0668\\u0669\",result:(success 10)}",
-    statement:"character_length('٠١٢٣٤٥٦٧٨٩')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\u0660\\u0661\\u0662\\u0663\\u0664\\u0665\\u0666\\u0667\\u0668\\u0669\",result:(success 10)}",
+    statement: "character_length('٠١٢٣٤٥٦٧٨٩')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:10
+      output: 10
     }
   },
   {
-    name:"character_length valid cases{in:\"\\u7530\\u4e2d\\u3055\\u3093\\u306b\\u3042\\u3052\\u3066\\u4e0b\\u3055\\u3044\",result:(success 11)}",
-    statement:"character_length('田中さんにあげて下さい')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\u7530\\u4e2d\\u3055\\u3093\\u306b\\u3042\\u3052\\u3066\\u4e0b\\u3055\\u3044\",result:(success 11)}",
+    statement: "character_length('田中さんにあげて下さい')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:11
+      output: 11
     }
   },
   {
-    name:"character_length valid cases{in:\"\\u30d1\\u30fc\\u30c6\\u30a3\\u30fc\\u3078\\u884c\\u304b\\u306a\\u3044\\u304b\",result:(success 11)}",
-    statement:"character_length('パーティーへ行かないか')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\u30d1\\u30fc\\u30c6\\u30a3\\u30fc\\u3078\\u884c\\u304b\\u306a\\u3044\\u304b\",result:(success 11)}",
+    statement: "character_length('パーティーへ行かないか')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:11
+      output: 11
     }
   },
   {
-    name:"character_length valid cases{in:\"\\u548c\\u88fd\\u6f22\\u8a9e\",result:(success 4)}",
-    statement:"character_length('和製漢語')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\u548c\\u88fd\\u6f22\\u8a9e\",result:(success 4)}",
+    statement: "character_length('和製漢語')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:4
+      output: 4
     }
   },
   {
-    name:"character_length valid cases{in:\"\\u90e8\\u843d\\u683c\",result:(success 3)}",
-    statement:"character_length('部落格')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\u90e8\\u843d\\u683c\",result:(success 3)}",
+    statement: "character_length('部落格')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:3
+      output: 3
     }
   },
   {
-    name:"character_length valid cases{in:\"\\uc0ac\\ud68c\\uacfc\\ud559\\uc6d0 \\uc5b4\\ud559\\uc5f0\\uad6c\\uc18c\",result:(success 11)}",
-    statement:"character_length('사회과학원 어학연구소')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\uc0ac\\ud68c\\uacfc\\ud559\\uc6d0 \\uc5b4\\ud559\\uc5f0\\uad6c\\uc18c\",result:(success 11)}",
+    statement: "character_length('사회과학원 어학연구소')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:11
+      output: 11
     }
   },
   {
-    name:"character_length valid cases{in:\"\\ucc26\\ucc28\\ub97c \\ud0c0\\uace0 \\uc628 \\ud3b2\\uc2dc\\ub9e8\\uacfc \\uc45b\\ub2e4\\ub9ac \\ub620\\ubc29\\uac01\\ud558\",result:(success 22)}",
-    statement:"character_length('찦차를 타고 온 펲시맨과 쑛다리 똠방각하')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\ucc26\\ucc28\\ub97c \\ud0c0\\uace0 \\uc628 \\ud3b2\\uc2dc\\ub9e8\\uacfc \\uc45b\\ub2e4\\ub9ac \\ub620\\ubc29\\uac01\\ud558\",result:(success 22)}",
+    statement: "character_length('찦차를 타고 온 펲시맨과 쑛다리 똠방각하')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:22
+      output: 22
     }
   },
   {
-    name:"character_length valid cases{in:\"\\u793e\\u6703\\u79d1\\u5b78\\u9662\\u8a9e\\u5b78\\u7814\\u7a76\\u6240\",result:(success 10)}",
-    statement:"character_length('社會科學院語學研究所')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\u793e\\u6703\\u79d1\\u5b78\\u9662\\u8a9e\\u5b78\\u7814\\u7a76\\u6240\",result:(success 10)}",
+    statement: "character_length('社會科學院語學研究所')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:10
+      output: 10
     }
   },
   {
-    name:"character_length valid cases{in:\"\\uc6b8\\ub780\\ubc14\\ud1a0\\ub974\",result:(success 5)}",
-    statement:"character_length('울란바토르')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\uc6b8\\ub780\\ubc14\\ud1a0\\ub974\",result:(success 5)}",
+    statement: "character_length('울란바토르')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:5
+      output: 5
     }
   },
   {
-    name:"character_length valid cases{in:\"\\U0002070e\\U00020731\\U00020779\\U00020c53\\U00020c78\\U00020c96\\U00020ccf\",result:(success 7)}",
-    statement:"character_length('𠜎𠜱𠝹𠱓𠱸𠲖𠳏')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\U0002070e\\U00020731\\U00020779\\U00020c53\\U00020c78\\U00020c96\\U00020ccf\",result:(success 7)}",
+    statement: "character_length('𠜎𠜱𠝹𠱓𠱸𠲖𠳏')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:7
+      output: 7
     }
   },
   {
-    name:"character_length valid cases{in:\"\\u023a\",result:(success 1)}",
-    statement:"character_length('Ⱥ')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\u023a\",result:(success 1)}",
+    statement: "character_length('Ⱥ')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:1
+      output: 1
     }
   },
   {
-    name:"character_length valid cases{in:\"\\u023e\",result:(success 1)}",
-    statement:"character_length('Ⱦ')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\u023e\",result:(success 1)}",
+    statement: "character_length('Ⱦ')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:1
+      output: 1
     }
   },
   {
-    name:"character_length valid cases{in:\"\\u30fd\\u0f3c\\u0e88\\u0644\\u035c\\u0e88\\u0f3d\\uff89 \\u30fd\\u0f3c\\u0e88\\u0644\\u035c\\u0e88\\u0f3d\\uff89\",result:(success 17)}",
-    statement:"character_length('ヽ༼ຈل͜ຈ༽ﾉ ヽ༼ຈل͜ຈ༽ﾉ')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\u30fd\\u0f3c\\u0e88\\u0644\\u035c\\u0e88\\u0f3d\\uff89 \\u30fd\\u0f3c\\u0e88\\u0644\\u035c\\u0e88\\u0f3d\\uff89\",result:(success 17)}",
+    statement: "character_length('ヽ༼ຈل͜ຈ༽ﾉ ヽ༼ຈل͜ຈ༽ﾉ')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:17
+      output: 17
     }
   },
   {
-    name:"character_length valid cases{in:\"(\\uff61\\u25d5 \\u2200 \\u25d5\\uff61)\",result:(success 9)}",
-    statement:"character_length('(｡◕ ∀ ◕｡)')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"(\\uff61\\u25d5 \\u2200 \\u25d5\\uff61)\",result:(success 9)}",
+    statement: "character_length('(｡◕ ∀ ◕｡)')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:9
+      output: 9
     }
   },
   {
-    name:"character_length valid cases{in:\"\\uff40\\uff68(\\xb4\\u2200\\uff40\\u2229\",result:(success 7)}",
-    statement:"character_length('｀ｨ(´∀｀∩')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\uff40\\uff68(\\xb4\\u2200\\uff40\\u2229\",result:(success 7)}",
+    statement: "character_length('｀ｨ(´∀｀∩')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:7
+      output: 7
     }
   },
   {
-    name:"character_length valid cases{in:\"__\\uff9b(,_,*)\",result:(success 9)}",
-    statement:"character_length('__ﾛ(,_,*)')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"__\\uff9b(,_,*)\",result:(success 9)}",
+    statement: "character_length('__ﾛ(,_,*)')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:9
+      output: 9
     }
   },
   {
-    name:"character_length valid cases{in:\"\\u30fb(\\uffe3\\u2200\\uffe3)\\u30fb:*:\",result:(success 10)}",
-    statement:"character_length('・(￣∀￣)・:*:')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\u30fb(\\uffe3\\u2200\\uffe3)\\u30fb:*:\",result:(success 10)}",
+    statement: "character_length('・(￣∀￣)・:*:')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:10
+      output: 10
     }
   },
   {
-    name:"character_length valid cases{in:\"\\uff9f\\uff65\\u273f\\u30fe\\u2572(\\uff61\\u25d5\\u203f\\u25d5\\uff61)\\u2571\\u273f\\uff65\\uff9f\",result:(success 16)}",
-    statement:"character_length('ﾟ･✿ヾ╲(｡◕‿◕｡)╱✿･ﾟ')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\uff9f\\uff65\\u273f\\u30fe\\u2572(\\uff61\\u25d5\\u203f\\u25d5\\uff61)\\u2571\\u273f\\uff65\\uff9f\",result:(success 16)}",
+    statement: "character_length('ﾟ･✿ヾ╲(｡◕‿◕｡)╱✿･ﾟ')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:16
+      output: 16
     }
   },
   {
-    name:"character_length valid cases{in:\",\\u3002\\u30fb:*:\\u30fb\\u309c\\u2019( \\u263b \\u03c9 \\u263b )\\u3002\\u30fb:*:\\u30fb\\u309c\\u2019\",result:(success 26)}",
-    statement:"character_length(',。・:*:・゜’( ☻ ω ☻ )。・:*:・゜’')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\",\\u3002\\u30fb:*:\\u30fb\\u309c\\u2019( \\u263b \\u03c9 \\u263b )\\u3002\\u30fb:*:\\u30fb\\u309c\\u2019\",result:(success 26)}",
+    statement: "character_length(',。・:*:・゜’( ☻ ω ☻ )。・:*:・゜’')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:26
+      output: 26
     }
   },
   {
-    name:"character_length valid cases{in:\"(\\u256f\\xb0\\u25a1\\xb0\\uff09\\u256f\\ufe35 \\u253b\\u2501\\u253b)\",result:(success 13)}",
-    statement:"character_length('(╯°□°）╯︵ ┻━┻)')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"(\\u256f\\xb0\\u25a1\\xb0\\uff09\\u256f\\ufe35 \\u253b\\u2501\\u253b)\",result:(success 13)}",
+    statement: "character_length('(╯°□°）╯︵ ┻━┻)')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:13
+      output: 13
     }
   },
   {
-    name:"character_length valid cases{in:\"(\\uff89\\u0ca5\\u76ca\\u0ca5\\uff09\\uff89\\ufeff \\u253b\\u2501\\u253b\",result:(success 12)}",
-    statement:"character_length('(ﾉಥ益ಥ）ﾉ﻿ ┻━┻')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"(\\uff89\\u0ca5\\u76ca\\u0ca5\\uff09\\uff89\\ufeff \\u253b\\u2501\\u253b\",result:(success 12)}",
+    statement: "character_length('(ﾉಥ益ಥ）ﾉ﻿ ┻━┻')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:12
+      output: 12
     }
   },
   {
-    name:"character_length valid cases{in:\"\\u252c\\u2500\\u252c\\u30ce( \\xba _ \\xba\\u30ce)\",result:(success 13)}",
-    statement:"character_length('┬─┬ノ( º _ ºノ)')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\u252c\\u2500\\u252c\\u30ce( \\xba _ \\xba\\u30ce)\",result:(success 13)}",
+    statement: "character_length('┬─┬ノ( º _ ºノ)')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:13
+      output: 13
     }
   },
   {
-    name:"character_length valid cases{in:\"( \\u0361\\xb0 \\u035c\\u0296 \\u0361\\xb0)\",result:(success 11)}",
-    statement:"character_length('( ͡° ͜ʖ ͡°)')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"( \\u0361\\xb0 \\u035c\\u0296 \\u0361\\xb0)\",result:(success 11)}",
+    statement: "character_length('( ͡° ͜ʖ ͡°)')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:11
+      output: 11
     }
   },
   {
-    name:"character_length valid cases{in:\"\\U0001f60d\",result:(success 1)}",
-    statement:"character_length('😍')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\U0001f60d\",result:(success 1)}",
+    statement: "character_length('😍')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:1
+      output: 1
     }
   },
   {
-    name:"character_length valid cases{in:\"\\U0001f469\\U0001f3fd\",result:(success 2)}",
-    statement:"character_length('👩🏽')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\U0001f469\\U0001f3fd\",result:(success 2)}",
+    statement: "character_length('👩🏽')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:2
+      output: 2
     }
   },
   {
-    name:"character_length valid cases{in:\"\\U0001f47e \\U0001f647 \\U0001f481 \\U0001f645 \\U0001f646 \\U0001f64b \\U0001f64e \\U0001f64d\",result:(success 15)}",
-    statement:"character_length('👾 🙇 💁 🙅 🙆 🙋 🙎 🙍')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\U0001f47e \\U0001f647 \\U0001f481 \\U0001f645 \\U0001f646 \\U0001f64b \\U0001f64e \\U0001f64d\",result:(success 15)}",
+    statement: "character_length('👾 🙇 💁 🙅 🙆 🙋 🙎 🙍')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:15
+      output: 15
     }
   },
   {
-    name:"character_length valid cases{in:\"\\U0001f435 \\U0001f648 \\U0001f649 \\U0001f64a\",result:(success 7)}",
-    statement:"character_length('🐵 🙈 🙉 🙊')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\U0001f435 \\U0001f648 \\U0001f649 \\U0001f64a\",result:(success 7)}",
+    statement: "character_length('🐵 🙈 🙉 🙊')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:7
+      output: 7
     }
   },
   {
-    name:"character_length valid cases{in:\"\\u2764\\ufe0f \\U0001f494 \\U0001f48c \\U0001f495 \\U0001f49e \\U0001f493 \\U0001f497 \\U0001f496 \\U0001f498 \\U0001f49d \\U0001f49f \\U0001f49c \\U0001f49b \\U0001f49a \\U0001f499\",result:(success 30)}",
-    statement:"character_length('❤️ 💔 💌 💕 💞 💓 💗 💖 💘 💝 💟 💜 💛 💚 💙')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\u2764\\ufe0f \\U0001f494 \\U0001f48c \\U0001f495 \\U0001f49e \\U0001f493 \\U0001f497 \\U0001f496 \\U0001f498 \\U0001f49d \\U0001f49f \\U0001f49c \\U0001f49b \\U0001f49a \\U0001f499\",result:(success 30)}",
+    statement: "character_length('❤️ 💔 💌 💕 💞 💓 💗 💖 💘 💝 💟 💜 💛 💚 💙')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:30
+      output: 30
     }
   },
   {
-    name:"character_length valid cases{in:\"\\u270b\\U0001f3ff \\U0001f4aa\\U0001f3ff \\U0001f450\\U0001f3ff \\U0001f64c\\U0001f3ff \\U0001f44f\\U0001f3ff \\U0001f64f\\U0001f3ff\",result:(success 17)}",
-    statement:"character_length('✋🏿 💪🏿 👐🏿 🙌🏿 👏🏿 🙏🏿')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\u270b\\U0001f3ff \\U0001f4aa\\U0001f3ff \\U0001f450\\U0001f3ff \\U0001f64c\\U0001f3ff \\U0001f44f\\U0001f3ff \\U0001f64f\\U0001f3ff\",result:(success 17)}",
+    statement: "character_length('✋🏿 💪🏿 👐🏿 🙌🏿 👏🏿 🙏🏿')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:17
+      output: 17
     }
   },
   {
-    name:"character_length valid cases{in:\"\\U0001f6be \\U0001f192 \\U0001f193 \\U0001f195 \\U0001f196 \\U0001f197 \\U0001f199 \\U0001f3e7\",result:(success 15)}",
-    statement:"character_length('🚾 🆒 🆓 🆕 🆖 🆗 🆙 🏧')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\U0001f6be \\U0001f192 \\U0001f193 \\U0001f195 \\U0001f196 \\U0001f197 \\U0001f199 \\U0001f3e7\",result:(success 15)}",
+    statement: "character_length('🚾 🆒 🆓 🆕 🆖 🆗 🆙 🏧')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:15
+      output: 15
     }
   },
   {
-    name:"character_length valid cases{in:\"0\\ufe0f\\u20e3 1\\ufe0f\\u20e3 2\\ufe0f\\u20e3 3\\ufe0f\\u20e3 4\\ufe0f\\u20e3 5\\ufe0f\\u20e3 6\\ufe0f\\u20e3 7\\ufe0f\\u20e3 8\\ufe0f\\u20e3 9\\ufe0f\\u20e3 \\U0001f51f\",result:(success 41)}",
-    statement:"character_length('0️⃣ 1️⃣ 2️⃣ 3️⃣ 4️⃣ 5️⃣ 6️⃣ 7️⃣ 8️⃣ 9️⃣ 🔟')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"0\\ufe0f\\u20e3 1\\ufe0f\\u20e3 2\\ufe0f\\u20e3 3\\ufe0f\\u20e3 4\\ufe0f\\u20e3 5\\ufe0f\\u20e3 6\\ufe0f\\u20e3 7\\ufe0f\\u20e3 8\\ufe0f\\u20e3 9\\ufe0f\\u20e3 \\U0001f51f\",result:(success 41)}",
+    statement: "character_length('0️⃣ 1️⃣ 2️⃣ 3️⃣ 4️⃣ 5️⃣ 6️⃣ 7️⃣ 8️⃣ 9️⃣ 🔟')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:41
+      output: 41
     }
   },
   {
-    name:"character_length valid cases{in:\"\\U0001f1fa\\U0001f1f8\\U0001f1f7\\U0001f1fa\\U0001f1f8 \\U0001f1e6\\U0001f1eb\\U0001f1e6\\U0001f1f2\\U0001f1f8\",result:(success 11)}",
-    statement:"character_length('🇺🇸🇷🇺🇸 🇦🇫🇦🇲🇸')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\U0001f1fa\\U0001f1f8\\U0001f1f7\\U0001f1fa\\U0001f1f8 \\U0001f1e6\\U0001f1eb\\U0001f1e6\\U0001f1f2\\U0001f1f8\",result:(success 11)}",
+    statement: "character_length('🇺🇸🇷🇺🇸 🇦🇫🇦🇲🇸')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:11
+      output: 11
     }
   },
   {
-    name:"character_length valid cases{in:\"\\U0001f1fa\\U0001f1f8\\U0001f1f7\\U0001f1fa\\U0001f1f8\\U0001f1e6\\U0001f1eb\\U0001f1e6\\U0001f1f2\",result:(success 9)}",
-    statement:"character_length('🇺🇸🇷🇺🇸🇦🇫🇦🇲')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\U0001f1fa\\U0001f1f8\\U0001f1f7\\U0001f1fa\\U0001f1f8\\U0001f1e6\\U0001f1eb\\U0001f1e6\\U0001f1f2\",result:(success 9)}",
+    statement: "character_length('🇺🇸🇷🇺🇸🇦🇫🇦🇲')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:9
+      output: 9
     }
   },
   {
-    name:"character_length valid cases{in:\"\\U0001f1fa\\U0001f1f8\\U0001f1f7\\U0001f1fa\\U0001f1f8\\U0001f1e6\",result:(success 6)}",
-    statement:"character_length('🇺🇸🇷🇺🇸🇦')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\U0001f1fa\\U0001f1f8\\U0001f1f7\\U0001f1fa\\U0001f1f8\\U0001f1e6\",result:(success 6)}",
+    statement: "character_length('🇺🇸🇷🇺🇸🇦')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:6
+      output: 6
     }
   },
   {
-    name:"character_length valid cases{in:\"\\uff34\\uff48\\uff45 \\uff51\\uff55\\uff49\\uff43\\uff4b \\uff42\\uff52\\uff4f\\uff57\\uff4e \\uff46\\uff4f\\uff58 \\uff4a\\uff55\\uff4d\\uff50\\uff53 \\uff4f\\uff56\\uff45\\uff52 \\uff54\\uff48\\uff45 \\uff4c\\uff41\\uff5a\\uff59 \\uff44\\uff4f\\uff47\",result:(success 43)}",
-    statement:"character_length('Ｔｈｅ ｑｕｉｃｋ ｂｒｏｗｎ ｆｏｘ ｊｕｍｐｓ ｏｖｅｒ ｔｈｅ ｌａｚｙ ｄｏｇ')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\uff34\\uff48\\uff45 \\uff51\\uff55\\uff49\\uff43\\uff4b \\uff42\\uff52\\uff4f\\uff57\\uff4e \\uff46\\uff4f\\uff58 \\uff4a\\uff55\\uff4d\\uff50\\uff53 \\uff4f\\uff56\\uff45\\uff52 \\uff54\\uff48\\uff45 \\uff4c\\uff41\\uff5a\\uff59 \\uff44\\uff4f\\uff47\",result:(success 43)}",
+    statement: "character_length('Ｔｈｅ ｑｕｉｃｋ ｂｒｏｗｎ ｆｏｘ ｊｕｍｐｓ ｏｖｅｒ ｔｈｅ ｌａｚｙ ｄｏｇ')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:43
+      output: 43
     }
   },
   {
-    name:"character_length valid cases{in:\"\\U0001d413\\U0001d421\\U0001d41e \\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b \\U0001d42d\\U0001d421\\U0001d41e \\U0001d425\\U0001d41a\\U0001d433\\U0001d432 \\U0001d41d\\U0001d428\\U0001d420\",result:(success 43)}",
-    statement:"character_length('𝐓𝐡𝐞 𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫 𝐭𝐡𝐞 𝐥𝐚𝐳𝐲 𝐝𝐨𝐠')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\U0001d413\\U0001d421\\U0001d41e \\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b \\U0001d42d\\U0001d421\\U0001d41e \\U0001d425\\U0001d41a\\U0001d433\\U0001d432 \\U0001d41d\\U0001d428\\U0001d420\",result:(success 43)}",
+    statement: "character_length('𝐓𝐡𝐞 𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫 𝐭𝐡𝐞 𝐥𝐚𝐳𝐲 𝐝𝐨𝐠')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:43
+      output: 43
     }
   },
   {
-    name:"character_length valid cases{in:\"\\U0001d57f\\U0001d58d\\U0001d58a \\U0001d596\\U0001d59a\\U0001d58e\\U0001d588\\U0001d590 \\U0001d587\\U0001d597\\U0001d594\\U0001d59c\\U0001d593 \\U0001d58b\\U0001d594\\U0001d59d \\U0001d58f\\U0001d59a\\U0001d592\\U0001d595\\U0001d598 \\U0001d594\\U0001d59b\\U0001d58a\\U0001d597 \\U0001d599\\U0001d58d\\U0001d58a \\U0001d591\\U0001d586\\U0001d59f\\U0001d59e \\U0001d589\\U0001d594\\U0001d58c\",result:(success 43)}",
-    statement:"character_length('𝕿𝖍𝖊 𝖖𝖚𝖎𝖈𝖐 𝖇𝖗𝖔𝖜𝖓 𝖋𝖔𝖝 𝖏𝖚𝖒𝖕𝖘 𝖔𝖛𝖊𝖗 𝖙𝖍𝖊 𝖑𝖆𝖟𝖞 𝖉𝖔𝖌')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\U0001d57f\\U0001d58d\\U0001d58a \\U0001d596\\U0001d59a\\U0001d58e\\U0001d588\\U0001d590 \\U0001d587\\U0001d597\\U0001d594\\U0001d59c\\U0001d593 \\U0001d58b\\U0001d594\\U0001d59d \\U0001d58f\\U0001d59a\\U0001d592\\U0001d595\\U0001d598 \\U0001d594\\U0001d59b\\U0001d58a\\U0001d597 \\U0001d599\\U0001d58d\\U0001d58a \\U0001d591\\U0001d586\\U0001d59f\\U0001d59e \\U0001d589\\U0001d594\\U0001d58c\",result:(success 43)}",
+    statement: "character_length('𝕿𝖍𝖊 𝖖𝖚𝖎𝖈𝖐 𝖇𝖗𝖔𝖜𝖓 𝖋𝖔𝖝 𝖏𝖚𝖒𝖕𝖘 𝖔𝖛𝖊𝖗 𝖙𝖍𝖊 𝖑𝖆𝖟𝖞 𝖉𝖔𝖌')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:43
+      output: 43
     }
   },
   {
-    name:"character_length valid cases{in:\"\\U0001d47b\\U0001d489\\U0001d486 \\U0001d492\\U0001d496\\U0001d48a\\U0001d484\\U0001d48c \\U0001d483\\U0001d493\\U0001d490\\U0001d498\\U0001d48f \\U0001d487\\U0001d490\\U0001d499 \\U0001d48b\\U0001d496\\U0001d48e\\U0001d491\\U0001d494 \\U0001d490\\U0001d497\\U0001d486\\U0001d493 \\U0001d495\\U0001d489\\U0001d486 \\U0001d48d\\U0001d482\\U0001d49b\\U0001d49a \\U0001d485\\U0001d490\\U0001d488\",result:(success 43)}",
-    statement:"character_length('𝑻𝒉𝒆 𝒒𝒖𝒊𝒄𝒌 𝒃𝒓𝒐𝒘𝒏 𝒇𝒐𝒙 𝒋𝒖𝒎𝒑𝒔 𝒐𝒗𝒆𝒓 𝒕𝒉𝒆 𝒍𝒂𝒛𝒚 𝒅𝒐𝒈')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\U0001d47b\\U0001d489\\U0001d486 \\U0001d492\\U0001d496\\U0001d48a\\U0001d484\\U0001d48c \\U0001d483\\U0001d493\\U0001d490\\U0001d498\\U0001d48f \\U0001d487\\U0001d490\\U0001d499 \\U0001d48b\\U0001d496\\U0001d48e\\U0001d491\\U0001d494 \\U0001d490\\U0001d497\\U0001d486\\U0001d493 \\U0001d495\\U0001d489\\U0001d486 \\U0001d48d\\U0001d482\\U0001d49b\\U0001d49a \\U0001d485\\U0001d490\\U0001d488\",result:(success 43)}",
+    statement: "character_length('𝑻𝒉𝒆 𝒒𝒖𝒊𝒄𝒌 𝒃𝒓𝒐𝒘𝒏 𝒇𝒐𝒙 𝒋𝒖𝒎𝒑𝒔 𝒐𝒗𝒆𝒓 𝒕𝒉𝒆 𝒍𝒂𝒛𝒚 𝒅𝒐𝒈')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:43
+      output: 43
     }
   },
   {
-    name:"character_length valid cases{in:\"\\U0001d4e3\\U0001d4f1\\U0001d4ee \\U0001d4fa\\U0001d4fe\\U0001d4f2\\U0001d4ec\\U0001d4f4 \\U0001d4eb\\U0001d4fb\\U0001d4f8\\U0001d500\\U0001d4f7 \\U0001d4ef\\U0001d4f8\\U0001d501 \\U0001d4f3\\U0001d4fe\\U0001d4f6\\U0001d4f9\\U0001d4fc \\U0001d4f8\\U0001d4ff\\U0001d4ee\\U0001d4fb \\U0001d4fd\\U0001d4f1\\U0001d4ee \\U0001d4f5\\U0001d4ea\\U0001d503\\U0001d502 \\U0001d4ed\\U0001d4f8\\U0001d4f0\",result:(success 43)}",
-    statement:"character_length('𝓣𝓱𝓮 𝓺𝓾𝓲𝓬𝓴 𝓫𝓻𝓸𝔀𝓷 𝓯𝓸𝔁 𝓳𝓾𝓶𝓹𝓼 𝓸𝓿𝓮𝓻 𝓽𝓱𝓮 𝓵𝓪𝔃𝔂 𝓭𝓸𝓰')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\U0001d4e3\\U0001d4f1\\U0001d4ee \\U0001d4fa\\U0001d4fe\\U0001d4f2\\U0001d4ec\\U0001d4f4 \\U0001d4eb\\U0001d4fb\\U0001d4f8\\U0001d500\\U0001d4f7 \\U0001d4ef\\U0001d4f8\\U0001d501 \\U0001d4f3\\U0001d4fe\\U0001d4f6\\U0001d4f9\\U0001d4fc \\U0001d4f8\\U0001d4ff\\U0001d4ee\\U0001d4fb \\U0001d4fd\\U0001d4f1\\U0001d4ee \\U0001d4f5\\U0001d4ea\\U0001d503\\U0001d502 \\U0001d4ed\\U0001d4f8\\U0001d4f0\",result:(success 43)}",
+    statement: "character_length('𝓣𝓱𝓮 𝓺𝓾𝓲𝓬𝓴 𝓫𝓻𝓸𝔀𝓷 𝓯𝓸𝔁 𝓳𝓾𝓶𝓹𝓼 𝓸𝓿𝓮𝓻 𝓽𝓱𝓮 𝓵𝓪𝔃𝔂 𝓭𝓸𝓰')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:43
+      output: 43
     }
   },
   {
-    name:"character_length valid cases{in:\"\\U0001d54b\\U0001d559\\U0001d556 \\U0001d562\\U0001d566\\U0001d55a\\U0001d554\\U0001d55c \\U0001d553\\U0001d563\\U0001d560\\U0001d568\\U0001d55f \\U0001d557\\U0001d560\\U0001d569 \\U0001d55b\\U0001d566\\U0001d55e\\U0001d561\\U0001d564 \\U0001d560\\U0001d567\\U0001d556\\U0001d563 \\U0001d565\\U0001d559\\U0001d556 \\U0001d55d\\U0001d552\\U0001d56b\\U0001d56a \\U0001d555\\U0001d560\\U0001d558\",result:(success 43)}",
-    statement:"character_length('𝕋𝕙𝕖 𝕢𝕦𝕚𝕔𝕜 𝕓𝕣𝕠𝕨𝕟 𝕗𝕠𝕩 𝕛𝕦𝕞𝕡𝕤 𝕠𝕧𝕖𝕣 𝕥𝕙𝕖 𝕝𝕒𝕫𝕪 𝕕𝕠𝕘')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\U0001d54b\\U0001d559\\U0001d556 \\U0001d562\\U0001d566\\U0001d55a\\U0001d554\\U0001d55c \\U0001d553\\U0001d563\\U0001d560\\U0001d568\\U0001d55f \\U0001d557\\U0001d560\\U0001d569 \\U0001d55b\\U0001d566\\U0001d55e\\U0001d561\\U0001d564 \\U0001d560\\U0001d567\\U0001d556\\U0001d563 \\U0001d565\\U0001d559\\U0001d556 \\U0001d55d\\U0001d552\\U0001d56b\\U0001d56a \\U0001d555\\U0001d560\\U0001d558\",result:(success 43)}",
+    statement: "character_length('𝕋𝕙𝕖 𝕢𝕦𝕚𝕔𝕜 𝕓𝕣𝕠𝕨𝕟 𝕗𝕠𝕩 𝕛𝕦𝕞𝕡𝕤 𝕠𝕧𝕖𝕣 𝕥𝕙𝕖 𝕝𝕒𝕫𝕪 𝕕𝕠𝕘')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:43
+      output: 43
     }
   },
   {
-    name:"character_length valid cases{in:\"\\U0001d683\\U0001d691\\U0001d68e \\U0001d69a\\U0001d69e\\U0001d692\\U0001d68c\\U0001d694 \\U0001d68b\\U0001d69b\\U0001d698\\U0001d6a0\\U0001d697 \\U0001d68f\\U0001d698\\U0001d6a1 \\U0001d693\\U0001d69e\\U0001d696\\U0001d699\\U0001d69c \\U0001d698\\U0001d69f\\U0001d68e\\U0001d69b \\U0001d69d\\U0001d691\\U0001d68e \\U0001d695\\U0001d68a\\U0001d6a3\\U0001d6a2 \\U0001d68d\\U0001d698\\U0001d690\",result:(success 43)}",
-    statement:"character_length('𝚃𝚑𝚎 𝚚𝚞𝚒𝚌𝚔 𝚋𝚛𝚘𝚠𝚗 𝚏𝚘𝚡 𝚓𝚞𝚖𝚙𝚜 𝚘𝚟𝚎𝚛 𝚝𝚑𝚎 𝚕𝚊𝚣𝚢 𝚍𝚘𝚐')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\U0001d683\\U0001d691\\U0001d68e \\U0001d69a\\U0001d69e\\U0001d692\\U0001d68c\\U0001d694 \\U0001d68b\\U0001d69b\\U0001d698\\U0001d6a0\\U0001d697 \\U0001d68f\\U0001d698\\U0001d6a1 \\U0001d693\\U0001d69e\\U0001d696\\U0001d699\\U0001d69c \\U0001d698\\U0001d69f\\U0001d68e\\U0001d69b \\U0001d69d\\U0001d691\\U0001d68e \\U0001d695\\U0001d68a\\U0001d6a3\\U0001d6a2 \\U0001d68d\\U0001d698\\U0001d690\",result:(success 43)}",
+    statement: "character_length('𝚃𝚑𝚎 𝚚𝚞𝚒𝚌𝚔 𝚋𝚛𝚘𝚠𝚗 𝚏𝚘𝚡 𝚓𝚞𝚖𝚙𝚜 𝚘𝚟𝚎𝚛 𝚝𝚑𝚎 𝚕𝚊𝚣𝚢 𝚍𝚘𝚐')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:43
+      output: 43
     }
   },
   {
-    name:"character_length valid cases{in:\"\\u24af\\u24a3\\u24a0 \\u24ac\\u24b0\\u24a4\\u249e\\u24a6 \\u249d\\u24ad\\u24aa\\u24b2\\u24a9 \\u24a1\\u24aa\\u24b3 \\u24a5\\u24b0\\u24a8\\u24ab\\u24ae \\u24aa\\u24b1\\u24a0\\u24ad \\u24af\\u24a3\\u24a0 \\u24a7\\u249c\\u24b5\\u24b4 \\u249f\\u24aa\\u24a2\",result:(success 43)}",
-    statement:"character_length('⒯⒣⒠ ⒬⒰⒤⒞⒦ ⒝⒭⒪⒲⒩ ⒡⒪⒳ ⒥⒰⒨⒫⒮ ⒪⒱⒠⒭ ⒯⒣⒠ ⒧⒜⒵⒴ ⒟⒪⒢')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "character_length valid cases{in:\"\\u24af\\u24a3\\u24a0 \\u24ac\\u24b0\\u24a4\\u249e\\u24a6 \\u249d\\u24ad\\u24aa\\u24b2\\u24a9 \\u24a1\\u24aa\\u24b3 \\u24a5\\u24b0\\u24a8\\u24ab\\u24ae \\u24aa\\u24b1\\u24a0\\u24ad \\u24af\\u24a3\\u24a0 \\u24a7\\u249c\\u24b5\\u24b4 \\u249f\\u24aa\\u24a2\",result:(success 43)}",
+    statement: "character_length('⒯⒣⒠ ⒬⒰⒤⒞⒦ ⒝⒭⒪⒲⒩ ⒡⒪⒳ ⒥⒰⒨⒫⒮ ⒪⒱⒠⒭ ⒯⒣⒠ ⒧⒜⒵⒴ ⒟⒪⒢')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:43
+      output: 43
     }
   },
   {
-    name:"char_length null and missing propagation{in:\"null\",result:(success null)}",
-    statement:"char_length(null)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "char_length null and missing propagation{in:\"null\",result:(success null)}",
+    statement: "char_length(null)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output: null
     }
   },
   {
-    name:"char_length null and missing propagation{in:\"missing\",result:(success missing::null)}",
-    statement:"char_length(missing)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"character_length null and missing propagation{in:\"null\",result:(success null)}",
-    statement:"character_length(null)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:null
-    }
-  },
-  {
-    name:"character_length null and missing propagation{in:\"missing\",result:(success missing::null)}",
-    statement:"character_length(missing)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"CHARACTER_LENGTH invalid type",
-    statement:"CHARACTER_LENGTH(1)",
-    assert:[
+    name: "char_length null and missing propagation{in:\"missing\",result:(success missing::null)}",
+    statement: "char_length(missing)",
+    assert: [
       {
-        evalMode:EvalModeError,
-        result:EvaluationFail
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       },
       {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
+        result: EvaluationFail,
+        evalMode: EvalModeError
+      }
+    ]
+  },
+  {
+    name: "character_length null and missing propagation{in:\"null\",result:(success null)}",
+    statement: "character_length(null)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: null
+    }
+  },
+  {
+    name: "character_length null and missing propagation{in:\"missing\",result:(success missing::null)}",
+    statement: "character_length(missing)",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode:
+        EvalModeCoerce,
+        output: $missing::null
+      },
+      {
+        result: EvaluationFail,
+        evalMode: EvalModeError
+      }
+    ]
+  },
+  {
+    name: "CHARACTER_LENGTH invalid type",
+    statement: "CHARACTER_LENGTH(1)",
+    assert: [
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      },
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       }
     ],
   },
   {
-    name:"CHARACTER_LENGTH special character",
-    statement:"CHARACTER_LENGTH('français')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "CHARACTER_LENGTH special character",
+    statement: "CHARACTER_LENGTH('français')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:8
+      output: 8
     }
   },
 ]

@@ -1,301 +1,313 @@
 overlay::[
   {
-    name:"OVERLAY 'hello' PLACING '' FROM 1",
-    statement:"OVERLAY('hello' PLACING '' FROM 1)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "OVERLAY 'hello' PLACING '' FROM 1",
+    statement: "OVERLAY('hello' PLACING '' FROM 1)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"hello"
+      output: "hello"
     }
   },
   {
-    name:"OVERLAY 'hello' PLACING '' FROM 2 FOR 3",
-    statement:"OVERLAY('hello' PLACING '' FROM 2 FOR 3)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "OVERLAY 'hello' PLACING '' FROM 2 FOR 3",
+    statement: "OVERLAY('hello' PLACING '' FROM 2 FOR 3)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"ho"
+      output: "ho"
     }
   },
   {
-    name:"OVERLAY 'hello' PLACING '' FROM 2 FOR 4",
-    statement:"OVERLAY('hello' PLACING '' FROM 2 FOR 4)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "OVERLAY 'hello' PLACING '' FROM 2 FOR 4",
+    statement: "OVERLAY('hello' PLACING '' FROM 2 FOR 4)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"h"
+      output: "h"
     }
   },
   {
-    name:"OVERLAY 'hello' PLACING 'XX' FROM 1",
-    statement:"OVERLAY('hello' PLACING 'XX' FROM 1)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "OVERLAY 'hello' PLACING 'XX' FROM 1",
+    statement: "OVERLAY('hello' PLACING 'XX' FROM 1)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"XXllo"
+      output: "XXllo"
     }
   },
   {
-    name:"OVERLAY 'hello' PLACING 'XX' FROM 1 FOR 3",
-    statement:"OVERLAY('hello' PLACING 'XX' FROM 1 FOR 3)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "OVERLAY 'hello' PLACING 'XX' FROM 1 FOR 3",
+    statement: "OVERLAY('hello' PLACING 'XX' FROM 1 FOR 3)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"XXlo"
+      output: "XXlo"
     }
   },
   {
-    name:"OVERLAY 'hello' PLACING 'XX' FROM 1 FOR 1",
-    statement:"OVERLAY('hello' PLACING 'XX' FROM 1 FOR 1)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "OVERLAY 'hello' PLACING 'XX' FROM 1 FOR 1",
+    statement: "OVERLAY('hello' PLACING 'XX' FROM 1 FOR 1)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"XXello"
+      output: "XXello"
     }
   },
   {
-    name:"OVERLAY 'hello' PLACING 'XX' FROM 1 FOR 100",
-    statement:"OVERLAY('hello' PLACING 'XX' FROM 1 FOR 100)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "OVERLAY 'hello' PLACING 'XX' FROM 1 FOR 100",
+    statement: "OVERLAY('hello' PLACING 'XX' FROM 1 FOR 100)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"XX"
+      output: "XX"
     }
   },
   {
-    name:"OVERLAY 'hello' PLACING 'XX' FROM 1 FOR 0",
-    statement:"OVERLAY('hello' PLACING 'XX' FROM 1 FOR 0)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "OVERLAY 'hello' PLACING 'XX' FROM 1 FOR 0",
+    statement: "OVERLAY('hello' PLACING 'XX' FROM 1 FOR 0)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"XXhello"
+      output: "XXhello"
     }
   },
   {
-    name:"OVERLAY 'hello' PLACING 'XX' FROM 7",
-    statement:"OVERLAY('hello' PLACING 'XX' FROM 7)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "OVERLAY 'hello' PLACING 'XX' FROM 7",
+    statement: "OVERLAY('hello' PLACING 'XX' FROM 7)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"helloXX"
+      output: "helloXX"
     }
   },
   {
-    name:"OVERLAY 'hello' PLACING 'XX' FROM 100 FOR 100",
-    statement:"OVERLAY('hello' PLACING 'XX' FROM 100 FOR 100)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "OVERLAY 'hello' PLACING 'XX' FROM 100 FOR 100",
+    statement: "OVERLAY('hello' PLACING 'XX' FROM 100 FOR 100)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"helloXX"
+      output: "helloXX"
     }
   },
   {
-    name:"OVERLAY 'hello' PLACING 'XX' FROM 2 FOR 1",
-    statement:"OVERLAY('hello' PLACING 'XX' FROM 2 FOR 1)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "OVERLAY 'hello' PLACING 'XX' FROM 2 FOR 1",
+    statement: "OVERLAY('hello' PLACING 'XX' FROM 2 FOR 1)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"hXXllo"
+      output: "hXXllo"
     }
   },
   {
-    name:"OVERLAY 'hello' PLACING 'XX' FROM 2 FOR 3",
-    statement:"OVERLAY('hello' PLACING 'XX' FROM 2 FOR 3)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "OVERLAY 'hello' PLACING 'XX' FROM 2 FOR 3",
+    statement: "OVERLAY('hello' PLACING 'XX' FROM 2 FOR 3)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:"hXXo"
+      output: "hXXo"
     }
   },
   {
-    name:"OVERLAY MISSING",
-    statement:"OVERLAY(MISSING PLACING 'XX' FROM 1)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"OVERLAY PLACING MISSING",
-    statement:"OVERLAY('foo' PLACING MISSING FROM 1)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"OVERLAY FROM MISSING",
-    statement:"OVERLAY('foo' PLACING 'bar' FROM MISSING)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"OVERLAY FOR MISSING",
-    statement:"OVERLAY('foo' PLACING 'bar' FROM 1 FOR MISSING)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"OVERLAY NULL",
-    statement:"OVERLAY(NULL PLACING 'XX' FROM 1)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:null
-    }
-  },
-  {
-    name:"OVERLAY PLACING NULL",
-    statement:"OVERLAY('foo' PLACING NULL FROM 1)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:null
-    }
-  },
-  {
-    name:"OVERLAY FROM NULL",
-    statement:"OVERLAY('foo' PLACING 'bar' FROM NULL)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:null
-    }
-  },
-  {
-    name:"OVERLAY FOR NULL",
-    statement:"OVERLAY('foo' PLACING 'bar' FROM 1 FOR NULL)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:null
-    }
-  },
-  {
-    name:"OVERLAY mismatched type",
-    statement:"OVERLAY(1 PLACING 'XX' FROM 1)",
+    name: "OVERLAY MISSING",
+    statement: "OVERLAY(MISSING PLACING 'XX' FROM 1)",
     assert: [
       {
-        evalMode: EvalModeError,
-        result:EvaluationFail,
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       },
       {
-        result:EvaluationSuccess,
-        evalMode: EvalModeCoerce,
-        output:$missing::null
+        evalMode: EvalModeError,
+        result: EvaluationFail,
       }
     ]
   },
   {
-    name:"OVERLAY PLACING mismatched type",
-    statement:"OVERLAY('foo' PLACING 1 FROM 1)",
+    name: "OVERLAY PLACING MISSING",
+    statement: "OVERLAY('foo' PLACING MISSING FROM 1)",
     assert: [
       {
-        evalMode: EvalModeError,
-        result:EvaluationFail,
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       },
       {
-        result:EvaluationSuccess,
-        evalMode: EvalModeCoerce,
-        output:$missing::null
+        evalMode: EvalModeError,
+        result: EvaluationFail,
       }
     ]
   },
   {
-    name:"OVERLAY FROM mismatched type",
-    statement:"OVERLAY('foo' PLACING 'bar' FROM 'string')",
+    name: "OVERLAY FROM MISSING",
+    statement: "OVERLAY('foo' PLACING 'bar' FROM MISSING)",
     assert: [
       {
-        evalMode: EvalModeError,
-        result:EvaluationFail,
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       },
       {
-        result:EvaluationSuccess,
-        evalMode: EvalModeCoerce,
-        output:$missing::null
+        evalMode: EvalModeError,
+        result: EvaluationFail,
       }
     ]
   },
   {
-    name:"OVERLAY FOR mismatched type",
-    statement:"OVERLAY('foo' PLACING 'bar' FROM 1 FOR 'string')",
+    name: "OVERLAY FOR MISSING",
+    statement: "OVERLAY('foo' PLACING 'bar' FROM 1 FOR MISSING)",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      }
+    ]
+  },
+  {
+    name: "OVERLAY NULL",
+    statement: "OVERLAY(NULL PLACING 'XX' FROM 1)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: null
+    }
+  },
+  {
+    name: "OVERLAY PLACING NULL",
+    statement: "OVERLAY('foo' PLACING NULL FROM 1)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: null
+    }
+  },
+  {
+    name: "OVERLAY FROM NULL",
+    statement: "OVERLAY('foo' PLACING 'bar' FROM NULL)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: null
+    }
+  },
+  {
+    name: "OVERLAY FOR NULL",
+    statement: "OVERLAY('foo' PLACING 'bar' FROM 1 FOR NULL)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: null
+    }
+  },
+  {
+    name: "OVERLAY mismatched type",
+    statement: "OVERLAY(1 PLACING 'XX' FROM 1)",
     assert: [
       {
         evalMode: EvalModeError,
-        result:EvaluationFail,
+        result: EvaluationFail,
       },
       {
-        result:EvaluationSuccess,
+        result: EvaluationSuccess,
         evalMode: EvalModeCoerce,
-        output:$missing::null
+        output: $missing::null
+      }
+    ]
+  },
+  {
+    name: "OVERLAY PLACING mismatched type",
+    statement: "OVERLAY('foo' PLACING 1 FROM 1)",
+    assert: [
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      },
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
+      }
+    ]
+  },
+  {
+    name: "OVERLAY FROM mismatched type",
+    statement: "OVERLAY('foo' PLACING 'bar' FROM 'string')",
+    assert: [
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      },
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
+      }
+    ]
+  },
+  {
+    name: "OVERLAY FOR mismatched type",
+    statement: "OVERLAY('foo' PLACING 'bar' FROM 1 FOR 'string')",
+    assert: [
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      },
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       }
     ]
   }

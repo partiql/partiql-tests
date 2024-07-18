@@ -1,1590 +1,1546 @@
 like::[
   envs::{
-    course:[
+    course: [
       {
-        sid:"S1",
-        grade:"90%"
+        sid: "S1",
+        grade: "90%"
       },
       {
-        sid:"S2",
-        grade:"80%"
+        sid: "S2",
+        grade: "80%"
       }
     ]
   },
   {
-    name:"null value on any of the 3 inputs returns false{likeExpr:\" null  LIKE null ESCAPE null \"}",
-    statement:"SELECT * FROM course AS d WHERE null LIKE null ESCAPE null",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "null value on any of the 3 inputs returns false{likeExpr:\" null  LIKE null ESCAPE null \"}",
+    statement: "SELECT * FROM course AS d WHERE null LIKE null ESCAPE null",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"null value on any of the 3 inputs returns false{likeExpr:\" d.sid LIKE null ESCAPE null \"}",
-    statement:"SELECT * FROM course AS d WHERE d.sid LIKE null ESCAPE null",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "null value on any of the 3 inputs returns false{likeExpr:\" d.sid LIKE null ESCAPE null \"}",
+    statement: "SELECT * FROM course AS d WHERE d.sid LIKE null ESCAPE null",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"null value on any of the 3 inputs returns false{likeExpr:\" null  LIKE 'S1' ESCAPE null \"}",
-    statement:"SELECT * FROM course AS d WHERE null LIKE 'S1' ESCAPE null",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "null value on any of the 3 inputs returns false{likeExpr:\" null  LIKE 'S1' ESCAPE null \"}",
+    statement: "SELECT * FROM course AS d WHERE null LIKE 'S1' ESCAPE null",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"null value on any of the 3 inputs returns false{likeExpr:\" null  LIKE null ESCAPE '['  \"}",
-    statement:"SELECT * FROM course AS d WHERE null LIKE null ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "null value on any of the 3 inputs returns false{likeExpr:\" null  LIKE null ESCAPE '['  \"}",
+    statement: "SELECT * FROM course AS d WHERE null LIKE null ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"null value on any of the 3 inputs returns false{likeExpr:\" null  LIKE 'S1' ESCAPE '['  \"}",
-    statement:"SELECT * FROM course AS d WHERE null LIKE 'S1' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "null value on any of the 3 inputs returns false{likeExpr:\" null  LIKE 'S1' ESCAPE '['  \"}",
+    statement: "SELECT * FROM course AS d WHERE null LIKE 'S1' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"null value on any of the 3 inputs returns false{likeExpr:\" d.sid LIKE null ESCAPE '['  \"}",
-    statement:"SELECT * FROM course AS d WHERE d.sid LIKE null ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "null value on any of the 3 inputs returns false{likeExpr:\" d.sid LIKE null ESCAPE '['  \"}",
+    statement: "SELECT * FROM course AS d WHERE d.sid LIKE null ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"null value on any of the 3 inputs returns false{likeExpr:\" d.sid LIKE 'S1' ESCAPE null \"}",
-    statement:"SELECT * FROM course AS d WHERE d.sid LIKE 'S1' ESCAPE null",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "null value on any of the 3 inputs returns false{likeExpr:\" d.sid LIKE 'S1' ESCAPE null \"}",
+    statement: "SELECT * FROM course AS d WHERE d.sid LIKE 'S1' ESCAPE null",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"null value on any of the 3 inputs returns false{likeExpr:\" null  LIKE null \"}",
-    statement:"SELECT * FROM course AS d WHERE null LIKE null",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "null value on any of the 3 inputs returns false{likeExpr:\" null  LIKE null \"}",
+    statement: "SELECT * FROM course AS d WHERE null LIKE null",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"null value on any of the 3 inputs returns false{likeExpr:\" d.sid LIKE null \"}",
-    statement:"SELECT * FROM course AS d WHERE d.sid LIKE null",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "null value on any of the 3 inputs returns false{likeExpr:\" d.sid LIKE null \"}",
+    statement: "SELECT * FROM course AS d WHERE d.sid LIKE null",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"null value on any of the 3 inputs returns false{likeExpr:\" null  LIKE 'S1' \"}",
-    statement:"SELECT * FROM course AS d WHERE null LIKE 'S1'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "null value on any of the 3 inputs returns false{likeExpr:\" null  LIKE 'S1' \"}",
+    statement: "SELECT * FROM course AS d WHERE null LIKE 'S1'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"empty string value on any of the 2 inputs (text and/or pattern){likeExpr:\" ''    LIKE null \",result:(bag)}",
-    statement:"SELECT * FROM course AS d WHERE '' LIKE null",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "empty string value on any of the 2 inputs (text and/or pattern){likeExpr:\" ''    LIKE null \",result:(bag)}",
+    statement: "SELECT * FROM course AS d WHERE '' LIKE null",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"empty string value on any of the 2 inputs (text and/or pattern){likeExpr:\" null  LIKE ''   \",result:(bag)}",
-    statement:"SELECT * FROM course AS d WHERE null LIKE ''",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "empty string value on any of the 2 inputs (text and/or pattern){likeExpr:\" null  LIKE ''   \",result:(bag)}",
+    statement: "SELECT * FROM course AS d WHERE null LIKE ''",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"empty string value on any of the 2 inputs (text and/or pattern){likeExpr:\" d.sid LIKE ''   \",result:(bag)}",
-    statement:"SELECT * FROM course AS d WHERE d.sid LIKE ''",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "empty string value on any of the 2 inputs (text and/or pattern){likeExpr:\" d.sid LIKE ''   \",result:(bag)}",
+    statement: "SELECT * FROM course AS d WHERE d.sid LIKE ''",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"empty string value on any of the 2 inputs (text and/or pattern){likeExpr:\" ''    LIKE 'S1' \",result:(bag)}",
-    statement:"SELECT * FROM course AS d WHERE '' LIKE 'S1'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "empty string value on any of the 2 inputs (text and/or pattern){likeExpr:\" ''    LIKE 'S1' \",result:(bag)}",
+    statement: "SELECT * FROM course AS d WHERE '' LIKE 'S1'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"empty string value on any of the 2 inputs (text and/or pattern){likeExpr:\" ''    LIKE '_'  \",result:(bag)}",
-    statement:"SELECT * FROM course AS d WHERE '' LIKE '_'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "empty string value on any of the 2 inputs (text and/or pattern){likeExpr:\" ''    LIKE '_'  \",result:(bag)}",
+    statement: "SELECT * FROM course AS d WHERE '' LIKE '_'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"empty string value on any of the 2 inputs (text and/or pattern){likeExpr:\" ''    LIKE '%' \",result:(bag {sid:\"S1\",grade:\"90%\"} {sid:\"S2\",grade:\"80%\"})}",
-    statement:"SELECT * FROM course AS d WHERE '' LIKE '%'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "empty string value on any of the 2 inputs (text and/or pattern){likeExpr:\" ''    LIKE '%' \",result:(bag {sid:\"S1\",grade:\"90%\"} {sid:\"S2\",grade:\"80%\"})}",
+    statement: "SELECT * FROM course AS d WHERE '' LIKE '%'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          sid:"S1",
-          grade:"90%"
+          sid: "S1",
+          grade: "90%"
         },
         {
-          sid:"S2",
-          grade:"80%"
+          sid: "S2",
+          grade: "80%"
         }
       ]
     }
   },
   {
-    name:"empty string value on any of the 2 inputs (text and/or pattern){likeExpr:\" ''    LIKE '' \",result:(bag {sid:\"S1\",grade:\"90%\"} {sid:\"S2\",grade:\"80%\"})}",
-    statement:"SELECT * FROM course AS d WHERE '' LIKE ''",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "empty string value on any of the 2 inputs (text and/or pattern){likeExpr:\" ''    LIKE '' \",result:(bag {sid:\"S1\",grade:\"90%\"} {sid:\"S2\",grade:\"80%\"})}",
+    statement: "SELECT * FROM course AS d WHERE '' LIKE ''",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          sid:"S1",
-          grade:"90%"
+          sid: "S1",
+          grade: "90%"
         },
         {
-          sid:"S2",
-          grade:"80%"
+          sid: "S2",
+          grade: "80%"
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" '_'         \",pattern:\" '_'          \"}",
-    statement:"SELECT * FROM `[true]` WHERE '_' LIKE '_'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" '_'         \",pattern:\" '_'          \"}",
+    statement: "SELECT * FROM `[true]` WHERE '_' LIKE '_'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" '_'         \",pattern:\" '%'          \"}",
-    statement:"SELECT * FROM `[true]` WHERE '_' LIKE '%'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" '_'         \",pattern:\" '%'          \"}",
+    statement: "SELECT * FROM `[true]` WHERE '_' LIKE '%'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" '%'         \",pattern:\" '_'          \"}",
-    statement:"SELECT * FROM `[true]` WHERE '%' LIKE '_'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" '%'         \",pattern:\" '_'          \"}",
+    statement: "SELECT * FROM `[true]` WHERE '%' LIKE '_'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" '%'         \",pattern:\" '%'          \"}",
-    statement:"SELECT * FROM `[true]` WHERE '%' LIKE '%'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" '%'         \",pattern:\" '%'          \"}",
+    statement: "SELECT * FROM `[true]` WHERE '%' LIKE '%'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'A'         \",pattern:\" 'A'          \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'A' LIKE 'A'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'A'         \",pattern:\" 'A'          \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'A' LIKE 'A'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" '\\\\'        \",pattern:\" '\\\\'         \"}",
-    statement:"SELECT * FROM `[true]` WHERE '\\' LIKE '\\'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" '\\\\'        \",pattern:\" '\\\\'         \"}",
+    statement: "SELECT * FROM `[true]` WHERE '\\' LIKE '\\'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" ''        \",pattern:\" ''         \"}",
-    statement:"SELECT * FROM `[true]` WHERE '$$' LIKE '$$'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" ''        \",pattern:\" ''         \"}",
+    statement: "SELECT * FROM `[true]` WHERE '$$' LIKE '$$'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '_BC'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '_BC'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '_BC'        \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '_BC'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'A_C'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'A_C'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'A_C'        \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE 'A_C'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'AB_'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'AB_'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'AB_'        \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE 'AB_'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '___'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '___'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '___'        \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '___'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'A__'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'A__'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'A__'        \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE 'A__'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '__C'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '__C'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '__C'        \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '__C'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%'          \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '%'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%'          \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '%'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%%%%'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '%%%%'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%%%%'       \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '%%%%'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%ABC'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '%ABC'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%ABC'       \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '%ABC'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%BC'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '%BC'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%BC'        \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '%BC'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%C'         \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '%C'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%C'         \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '%C'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'ABC%'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'ABC%'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'ABC%'       \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE 'ABC%'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'AB%'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'AB%'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'AB%'        \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE 'AB%'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'A%'         \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'A%'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'A%'         \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE 'A%'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'A%%%'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'A%%%'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'A%%%'       \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE 'A%%%'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'A%C'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'A%C'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'A%C'        \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE 'A%C'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%c'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%c'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%c'        \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%c'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%%c'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%%c'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%%c'       \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%%c'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%B%c'      \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%B%c'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%B%c'      \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%B%c'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%%B%%c'    \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%%B%%c'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%%B%%c'    \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%%B%%c'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%A%c'      \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%A%c'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%A%c'      \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%A%c'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%%%A%%%%c' \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%%%A%%%%c'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%%%A%%%%c' \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%%%A%%%%c'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%Aa%c'     \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%Aa%c'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%Aa%c'     \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%Aa%c'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%%'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%%'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%%'        \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%%'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" '%B%C%'      \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE '%B%C%'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" '%B%C%'      \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE '%B%C%'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" '%B%C%%'     \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE '%B%C%%'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" '%B%C%%'     \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE '%B%C%%'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" '%bC%'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE '%bC%'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" '%bC%'       \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE '%bC%'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" '%b%C%'      \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE '%b%C%'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" '%b%C%'      \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE '%b%C%'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%_%_%_%'    \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '%_%_%_%'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%_%_%_%'    \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '%_%_%_%'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '_%_%_%'     \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '_%_%_%'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '_%_%_%'     \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '_%_%_%'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%_%_%_'     \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '%_%_%_'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%_%_%_'     \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '%_%_%_'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '_%_%_'      \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '_%_%_'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '_%_%_'      \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '_%_%_'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '_%%_%%%_'   \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '_%%_%%%_'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '_%%_%%%_'   \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '_%%_%%%_'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '_%%B%%%_'   \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '_%%B%%%_'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '_%%B%%%_'   \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '_%%B%%%_'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" '%__b%C_%'   \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE '%__b%C_%'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" '%__b%C_%'   \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE '%__b%C_%'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" 'A'         \",pattern:\" 'a'          \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'A' LIKE 'a'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" 'A'         \",pattern:\" 'a'          \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'A' LIKE 'a'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" '\\\\'        \",pattern:\" '/'         \"}",
-    statement:"SELECT * FROM `[true]` WHERE '\\' LIKE '/'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" '\\\\'        \",pattern:\" '/'         \"}",
+    statement: "SELECT * FROM `[true]` WHERE '\\' LIKE '/'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" ''        \",pattern:\" '^'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE '$$' LIKE '^$$'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" ''        \",pattern:\" '^'        \"}",
+    statement: "SELECT * FROM `[true]` WHERE '$$' LIKE '^$$'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '_AC'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '_AC'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '_AC'        \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '_AC'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" 'A_B'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'A_B'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" 'A_B'        \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE 'A_B'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" 'AB_C'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'AB_C'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" 'AB_C'       \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE 'AB_C'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '_ABC'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '_ABC'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '_ABC'       \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '_ABC'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" 'ABC_'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'ABC_'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" 'ABC_'       \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE 'ABC_'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '__'         \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '__'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '__'         \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '__'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '____'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '____'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '____'       \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '____'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" 'B%'         \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'B%'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" 'B%'         \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE 'B%'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '%B'         \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '%B'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '%B'         \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '%B'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '%BCD'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '%BCD'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '%BCD'       \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '%BCD'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" 'B%C'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'B%C'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" 'B%C'        \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE 'B%C'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%Xc'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%Xc'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%Xc'       \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%Xc'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'AX%c'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'AX%c'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'AX%c'       \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'AX%c'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%X%c'      \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%X%c'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%X%c'      \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%X%c'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%%X%%c'    \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%%X%%c'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%%X%%c'    \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%%X%%c'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%%%X%%%%c' \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%%%X%%%%c'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%%%X%%%%c' \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%%%X%%%%c'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%Aba%c'    \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%Aba%c'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%Aba%c'    \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%Aba%c'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'X%%'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'X%%'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'X%%'        \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'X%%'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '%_%_%_%_%'  \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '%_%_%_%_%'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '%_%_%_%_%'  \"}",
+    statement: "SELECT * FROM `[true]` WHERE 'ABC' LIKE '%_%_%_%_%'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that match{text:\" '_'          \",pattern:\" '[_'            \"}",
-    statement:"SELECT * FROM `[true]` WHERE '_' LIKE '[_' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that match{text:\" '_'          \",pattern:\" '[_'            \"}",
+    statement: "SELECT * FROM `[true]` WHERE '_' LIKE '[_' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that match{text:\" '%'          \",pattern:\" '[%'            \"}",
-    statement:"SELECT * FROM `[true]` WHERE '%' LIKE '[%' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that match{text:\" '%'          \",pattern:\" '[%'            \"}",
+    statement: "SELECT * FROM `[true]` WHERE '%' LIKE '[%' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that match{text:\" '100%'       \",pattern:\" '100[%'         \"}",
-    statement:"SELECT * FROM `[true]` WHERE '100%' LIKE '100[%' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that match{text:\" '100%'       \",pattern:\" '100[%'         \"}",
+    statement: "SELECT * FROM `[true]` WHERE '100%' LIKE '100[%' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that match{text:\" '100%'       \",pattern:\" '%[%'           \"}",
-    statement:"SELECT * FROM `[true]` WHERE '100%' LIKE '%[%' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that match{text:\" '100%'       \",pattern:\" '%[%'           \"}",
+    statement: "SELECT * FROM `[true]` WHERE '100%' LIKE '%[%' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that match{text:\" '100%'       \",pattern:\" '1__[%'         \"}",
-    statement:"SELECT * FROM `[true]` WHERE '100%' LIKE '1__[%' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that match{text:\" '100%'       \",pattern:\" '1__[%'         \"}",
+    statement: "SELECT * FROM `[true]` WHERE '100%' LIKE '1__[%' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that match{text:\" '100%'       \",pattern:\" '1%[%'          \"}",
-    statement:"SELECT * FROM `[true]` WHERE '100%' LIKE '1%[%' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that match{text:\" '100%'       \",pattern:\" '1%[%'          \"}",
+    statement: "SELECT * FROM `[true]` WHERE '100%' LIKE '1%[%' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that match{text:\" '11%22%33%'  \",pattern:\" '1%[%2%[%3%[%'  \"}",
-    statement:"SELECT * FROM `[true]` WHERE '11%22%33%' LIKE '1%[%2%[%3%[%' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that match{text:\" '11%22%33%'  \",pattern:\" '1%[%2%[%3%[%'  \"}",
+    statement: "SELECT * FROM `[true]` WHERE '11%22%33%' LIKE '1%[%2%[%3%[%' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that match{text:\" '11%22%33%'  \",pattern:\" '1_[%2%[%3_[%'  \"}",
-    statement:"SELECT * FROM `[true]` WHERE '11%22%33%' LIKE '1_[%2%[%3_[%' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that match{text:\" '11%22%33%'  \",pattern:\" '1_[%2%[%3_[%'  \"}",
+    statement: "SELECT * FROM `[true]` WHERE '11%22%33%' LIKE '1_[%2%[%3_[%' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that match{text:\" '11%22%33%'  \",pattern:\" '%[%%[%%[%'     \"}",
-    statement:"SELECT * FROM `[true]` WHERE '11%22%33%' LIKE '%[%%[%%[%' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that match{text:\" '11%22%33%'  \",pattern:\" '%[%%[%%[%'     \"}",
+    statement: "SELECT * FROM `[true]` WHERE '11%22%33%' LIKE '%[%%[%%[%' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that match{text:\" '11%22%33%'  \",pattern:\" '__[%__[%__[%'  \"}",
-    statement:"SELECT * FROM `[true]` WHERE '11%22%33%' LIKE '__[%__[%__[%' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that match{text:\" '11%22%33%'  \",pattern:\" '__[%__[%__[%'  \"}",
+    statement: "SELECT * FROM `[true]` WHERE '11%22%33%' LIKE '__[%__[%__[%' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that match{text:\" '1_000_000%' \",pattern:\" '1[_000[_000[%' \"}",
-    statement:"SELECT * FROM `[true]` WHERE '1_000_000%' LIKE '1[_000[_000[%' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that match{text:\" '1_000_000%' \",pattern:\" '1[_000[_000[%' \"}",
+    statement: "SELECT * FROM `[true]` WHERE '1_000_000%' LIKE '1[_000[_000[%' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that match{text:\" '1_000_000%' \",pattern:\" '_[_000[_000[%' \"}",
-    statement:"SELECT * FROM `[true]` WHERE '1_000_000%' LIKE '_[_000[_000[%' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that match{text:\" '1_000_000%' \",pattern:\" '_[_000[_000[%' \"}",
+    statement: "SELECT * FROM `[true]` WHERE '1_000_000%' LIKE '_[_000[_000[%' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that match{text:\" '1_000_000%' \",pattern:\" '%[_000[_000[%' \"}",
-    statement:"SELECT * FROM `[true]` WHERE '1_000_000%' LIKE '%[_000[_000[%' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that match{text:\" '1_000_000%' \",pattern:\" '%[_000[_000[%' \"}",
+    statement: "SELECT * FROM `[true]` WHERE '1_000_000%' LIKE '%[_000[_000[%' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that match{text:\" '1_000_000%' \",pattern:\" '%[_0_0[_000[%' \"}",
-    statement:"SELECT * FROM `[true]` WHERE '1_000_000%' LIKE '%[_0_0[_000[%' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that match{text:\" '1_000_000%' \",pattern:\" '%[_0_0[_000[%' \"}",
+    statement: "SELECT * FROM `[true]` WHERE '1_000_000%' LIKE '%[_0_0[_000[%' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that match{text:\" '1_000_000%' \",pattern:\" '%[_0%0[_000[%' \"}",
-    statement:"SELECT * FROM `[true]` WHERE '1_000_000%' LIKE '%[_0%0[_000[%' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that match{text:\" '1_000_000%' \",pattern:\" '%[_0%0[_000[%' \"}",
+    statement: "SELECT * FROM `[true]` WHERE '1_000_000%' LIKE '%[_0%0[_000[%' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that match{text:\" '1_000_000%' \",pattern:\" '%[_0%0[__%_[%' \"}",
-    statement:"SELECT * FROM `[true]` WHERE '1_000_000%' LIKE '%[_0%0[__%_[%' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that match{text:\" '1_000_000%' \",pattern:\" '%[_0%0[__%_[%' \"}",
+    statement: "SELECT * FROM `[true]` WHERE '1_000_000%' LIKE '%[_0%0[__%_[%' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that match{text:\" '100%'       \",pattern:\" '1_%'           \"}",
-    statement:"SELECT * FROM `[true]` WHERE '100%' LIKE '1_%' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that match{text:\" '100%'       \",pattern:\" '1_%'           \"}",
+    statement: "SELECT * FROM `[true]` WHERE '100%' LIKE '1_%' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          _1:true
+          _1: true
         }
       ]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that DO NOT match{text:\" '_'    \",pattern:\" '[_[_'   \"}",
-    statement:"SELECT * FROM `[true]` WHERE '_' LIKE '[_[_' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that DO NOT match{text:\" '_'    \",pattern:\" '[_[_'   \"}",
+    statement: "SELECT * FROM `[true]` WHERE '_' LIKE '[_[_' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that DO NOT match{text:\" '_'    \",pattern:\" '_[_'    \"}",
-    statement:"SELECT * FROM `[true]` WHERE '_' LIKE '_[_' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that DO NOT match{text:\" '_'    \",pattern:\" '_[_'    \"}",
+    statement: "SELECT * FROM `[true]` WHERE '_' LIKE '_[_' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that DO NOT match{text:\" '%'    \",pattern:\" '[%[%'   \"}",
-    statement:"SELECT * FROM `[true]` WHERE '%' LIKE '[%[%' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that DO NOT match{text:\" '%'    \",pattern:\" '[%[%'   \"}",
+    statement: "SELECT * FROM `[true]` WHERE '%' LIKE '[%[%' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that DO NOT match{text:\" '100%' \",pattern:\" '1000[%' \"}",
-    statement:"SELECT * FROM `[true]` WHERE '100%' LIKE '1000[%' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that DO NOT match{text:\" '100%' \",pattern:\" '1000[%' \"}",
+    statement: "SELECT * FROM `[true]` WHERE '100%' LIKE '1000[%' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that DO NOT match{text:\" '100%' \",pattern:\" '[%100'  \"}",
-    statement:"SELECT * FROM `[true]` WHERE '100%' LIKE '[%100' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that DO NOT match{text:\" '100%' \",pattern:\" '[%100'  \"}",
+    statement: "SELECT * FROM `[true]` WHERE '100%' LIKE '[%100' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that DO NOT match{text:\" '100%' \",pattern:\" '1_[%_'  \"}",
-    statement:"SELECT * FROM `[true]` WHERE '100%' LIKE '1_[%_' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that DO NOT match{text:\" '100%' \",pattern:\" '1_[%_'  \"}",
+    statement: "SELECT * FROM `[true]` WHERE '100%' LIKE '1_[%_' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"like-expression with ESCAPE specified that DO NOT match{text:\" '100%' \",pattern:\" '1%_[%1' \"}",
-    statement:"SELECT * FROM `[true]` WHERE '100%' LIKE '1%_[%1' ESCAPE '['",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "like-expression with ESCAPE specified that DO NOT match{text:\" '100%' \",pattern:\" '1%_[%1' \"}",
+    statement: "SELECT * FROM `[true]` WHERE '100%' LIKE '1%_[%1' ESCAPE '['",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"like expression value, pattern, and escape as variable references",
-    statement:'''
+    name: "like expression value, pattern, and escape as variable references",
+    statement: '''
       SELECT v LIKE p ESCAPE e as is_like FROM [
         {'v': 'abc%', 'p': 'abc/%', 'e': '/'},
         {'v': 'abcd', 'p': 'abc%', 'e': '/'},
         {'v': 'abcd', 'p': 'abc', 'e': '/'}
       ] AS tbl
       ''',
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
           is_like: true
         },
@@ -1601,54 +1557,53 @@ like::[
 
 'empty-string-for-like-pattern'::[
   envs::{
-    people:[
+    people: [
       {
-        first_name:"John",
-        last_name:"Doe"
+        first_name: "John",
+        last_name: "Doe"
       }
     ]
   },
   {
-    name:"Empty String for LIKE pattern evaluates to false",
-    statement:"SELECT * FROM people AS p WHERE p.first_name LIKE ''",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "Empty String for LIKE pattern evaluates to false",
+    statement: "SELECT * FROM people AS p WHERE p.first_name LIKE ''",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"Empty String for LIKE pattern and text evaluates to true",
-    statement:"SELECT * FROM people AS p WHERE '' LIKE ''",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "Empty String for LIKE pattern and text evaluates to true",
+    statement: "SELECT * FROM people AS p WHERE '' LIKE ''",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          first_name:"John",
-          last_name:"Doe"
+          first_name: "John",
+          last_name: "Doe"
         }
       ]
     }
   },
   {
-      name:"More than one character given for ESCAPE",
-      statement:"SELECT * FROM `[true]` WHERE 'a' LIKE 'a' ESCAPE 'aa'",
-      assert:{
-        evalMode:[
-          EvalModeError,
-          EvalModeCoerce
-        ],
-        result:EvaluationFail
-      },
-    }
+    name: "More than one character given for ESCAPE",
+    statement: "SELECT * FROM `[true]` WHERE 'a' LIKE 'a' ESCAPE 'aa'",
+    assert: {
+      evalMode: [
+        EvalModeError,
+        EvalModeCoerce
+      ],
+      result: EvaluationFail
+    },
+  }
 ]
 
 // Unknown propagation rules follow from section 8.5 of the SQL-92 spec
@@ -1665,239 +1620,272 @@ like::[
 // (https://partiql.org/assets/PartiQL-Specification.pdf#section.7)
 'null-missing-mistyped-for-like'::[
   {
-    name:"NULL LIKE 'some pattern'",
-    statement:"NULL LIKE 'some pattern'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "NULL LIKE 'some pattern'",
+    statement: "NULL LIKE 'some pattern'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output: null
     }
   },
   {
-    name:"'some value' LIKE NULL",
-    statement:"'some value' LIKE NULL",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "'some value' LIKE NULL",
+    statement: "'some value' LIKE NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output: null
     }
   },
   {
-    name:"NULL LIKE NULL",
-    statement:"NULL LIKE NULL",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "NULL LIKE NULL",
+    statement: "NULL LIKE NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output: null
     }
   },
   {
-    name:"MISSING LIKE 'some pattern'",
-    statement:"MISSING LIKE 'some pattern'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"'some value' LIKE MISSING",
-    statement:"'some value' LIKE MISSING",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"MISSING LIKE MISSING",
-    statement:"MISSING LIKE MISSING",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"NULL LIKE MISSING",
-    statement:"NULL LIKE MISSING",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"MISSING LIKE NULL",
-    statement:"MISSING LIKE NULL",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"NULL LIKE 'some pattern' ESCAPE '/'",
-    statement:"NULL LIKE 'some pattern' ESCAPE '/'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:null
-    }
-  },
-  {
-    name:"'some value' LIKE NULL ESCAPE '/'",
-    statement:"'some value' LIKE NULL ESCAPE '/'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:null
-    }
-  },
-  {
-    name:"'some value' LIKE 'some pattern' ESCAPE NULL",
-    statement:"'some value' LIKE 'some pattern' ESCAPE NULL",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:null
-    }
-  },
-  {
-    name:"MISSING LIKE 'some pattern' ESCAPE '/'",
-    statement:"MISSING LIKE 'some pattern' ESCAPE '/'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"'some value' LIKE MISSING ESCAPE '/'",
-    statement:"'some value' LIKE MISSING ESCAPE '/'",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"'some value' LIKE 'some pattern' ESCAPE MISSING",
-    statement:"'some value' LIKE 'some pattern' ESCAPE MISSING",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"NULL LIKE 'some pattern' ESCAPE MISSING",
-    statement:"NULL LIKE 'some pattern' ESCAPE MISSING",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"'some value' LIKE NULL ESCAPE MISSING",
-    statement:"'some value' LIKE NULL ESCAPE MISSING",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"LIKE bad value type",
-    statement:"123 LIKE 'some pattern' ESCAPE '/'",
-    assert:[
+    name: "MISSING LIKE 'some pattern'",
+    statement: "MISSING LIKE 'some pattern'",
+    assert: [
       {
-        evalMode:EvalModeError,
-        result:EvaluationFail
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       },
       {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      }
+    ]
+  },
+  {
+    name: "'some value' LIKE MISSING",
+    statement: "'some value' LIKE MISSING",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
+      },
+      {
+        result: EvaluationFail,
+        evalMode: EvalModeError
+      }
+    ]
+  },
+  {
+    name: "MISSING LIKE MISSING",
+    statement: "MISSING LIKE MISSING",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
+      },
+      {
+        result: EvaluationFail,
+        evalMode: EvalModeError
+      }
+    ]
+  },
+  {
+    name: "NULL LIKE MISSING",
+    statement: "NULL LIKE MISSING",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
+      },
+      {
+        result: EvaluationFail,
+        evalMode: EvalModeError
+      }
+    ]
+  },
+  {
+    name: "MISSING LIKE NULL",
+    statement: "MISSING LIKE NULL",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
+      },
+      {
+        result: EvaluationFail,
+        evalMode: EvalModeError
+      }
+    ]
+  },
+  {
+    name: "NULL LIKE 'some pattern' ESCAPE '/'",
+    statement: "NULL LIKE 'some pattern' ESCAPE '/'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: null
+    }
+  },
+  {
+    name: "'some value' LIKE NULL ESCAPE '/'",
+    statement: "'some value' LIKE NULL ESCAPE '/'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: null
+    }
+  },
+  {
+    name: "'some value' LIKE 'some pattern' ESCAPE NULL",
+    statement: "'some value' LIKE 'some pattern' ESCAPE NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: null
+    }
+  },
+  {
+    name: "MISSING LIKE 'some pattern' ESCAPE '/'",
+    statement: "MISSING LIKE 'some pattern' ESCAPE '/'",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
+      },
+      {
+        result: EvaluationFail,
+        evalMode: EvalModeError
+      }
+    ]
+  },
+  {
+    name: "'some value' LIKE MISSING ESCAPE '/'",
+    statement: "'some value' LIKE MISSING ESCAPE '/'",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
+      },
+      {
+        result: EvaluationFail,
+        evalMode: EvalModeError
+      }
+    ]
+  },
+  {
+    name: "'some value' LIKE 'some pattern' ESCAPE MISSING",
+    statement: "'some value' LIKE 'some pattern' ESCAPE MISSING",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode:
+        EvalModeCoerce,
+        output: $missing::null
+      },
+      {
+        result: EvaluationFail,
+        evalMode: EvalModeError
+      }
+    ]
+  },
+  {
+    name: "NULL LIKE 'some pattern' ESCAPE MISSING",
+    statement: "NULL LIKE 'some pattern' ESCAPE MISSING",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode:
+        EvalModeCoerce,
+        output: $missing::null
+      },
+      {
+        result: EvaluationFail,
+        evalMode: EvalModeError
+      }
+    ]
+  },
+  {
+    name: "'some value' LIKE NULL ESCAPE MISSING",
+    statement: "'some value' LIKE NULL ESCAPE MISSING",
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode:
+        EvalModeCoerce,
+        output: $missing::null
+      },
+      {
+        result: EvaluationFail,
+        evalMode: EvalModeError
+      }
+    ]
+  },
+  {
+    name: "LIKE bad value type",
+    statement: "123 LIKE 'some pattern' ESCAPE '/'",
+    assert: [
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      },
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       }
     ],
   },
   {
-    name:"LIKE bad pattern type",
-    statement:"'some value' LIKE 123 ESCAPE '/'",
-    assert:[
+    name: "LIKE bad pattern type",
+    statement: "'some value' LIKE 123 ESCAPE '/'",
+    assert: [
       {
-        evalMode:EvalModeError,
-        result:EvaluationFail
+        evalMode: EvalModeError,
+        result: EvaluationFail
       },
       {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       }
     ],
   },
   {
-    name:"LIKE bad escape type",
-    statement:"'some value' LIKE '/' ESCAPE 123",
-    assert:[
+    name: "LIKE bad escape type",
+    statement: "'some value' LIKE '/' ESCAPE 123",
+    assert: [
       {
-        evalMode:EvalModeError,
-        result:EvaluationFail
+        evalMode: EvalModeError,
+        result: EvaluationFail
       },
       {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       }
     ],
   },

@@ -1,631 +1,662 @@
 extract::[
   extract_null_propagation::[
     {
-      name:"EXTRACT(YEAR FROM NULL)",
-      statement:"EXTRACT(YEAR FROM NULL)",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(YEAR FROM NULL)",
+      statement: "EXTRACT(YEAR FROM NULL)",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:null
+        output: null
       }
     },
     {
-      name:"EXTRACT(MONTH FROM NULL)",
-      statement:"EXTRACT(MONTH FROM NULL)",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(MONTH FROM NULL)",
+      statement: "EXTRACT(MONTH FROM NULL)",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:null
+        output: null
       }
     },
     {
-      name:"EXTRACT(DAY FROM NULL)",
-      statement:"EXTRACT(DAY FROM NULL)",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(DAY FROM NULL)",
+      statement: "EXTRACT(DAY FROM NULL)",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:null
+        output: null
       }
     },
     {
-      name:"EXTRACT(HOUR FROM NULL)",
-      statement:"EXTRACT(HOUR FROM NULL)",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(HOUR FROM NULL)",
+      statement: "EXTRACT(HOUR FROM NULL)",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:null
+        output: null
       }
     },
     {
-      name:"EXTRACT(MINUTE FROM NULL)",
-      statement:"EXTRACT(MINUTE FROM NULL)",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(MINUTE FROM NULL)",
+      statement: "EXTRACT(MINUTE FROM NULL)",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:null
+        output: null
       }
     },
     {
-      name:"EXTRACT(SECOND FROM NULL)",
-      statement:"EXTRACT(SECOND FROM NULL)",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(SECOND FROM NULL)",
+      statement: "EXTRACT(SECOND FROM NULL)",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:null
+        output: null
       }
     },
     {
-      name:"EXTRACT(TIMEZONE_HOUR FROM NULL)",
-      statement:"EXTRACT(TIMEZONE_HOUR FROM NULL)",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(TIMEZONE_HOUR FROM NULL)",
+      statement: "EXTRACT(TIMEZONE_HOUR FROM NULL)",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:null
+        output: null
       }
     },
     {
-      name:"EXTRACT(TIMEZONE_MINUTE FROM NULL)",
-      statement:"EXTRACT(TIMEZONE_MINUTE FROM NULL)",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(TIMEZONE_MINUTE FROM NULL)",
+      statement: "EXTRACT(TIMEZONE_MINUTE FROM NULL)",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:null
+        output: null
       }
     },
   ],
   missing_propagation::[
     {
-      name:"EXTRACT(YEAR FROM MISSING)",
-      statement:"EXTRACT(YEAR FROM MISSING)",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
-          EvalModeCoerce,
-          EvalModeError
-        ],
-        output:$missing::null
-      }
+      name: "EXTRACT(YEAR FROM MISSING)",
+      statement: "EXTRACT(YEAR FROM MISSING)",
+      assert: [
+        {
+          result: EvaluationSuccess,
+          evalMode: EvalModeCoerce,
+          output: $missing::null
+        },
+        {
+          result: EvaluationFail,
+          evalMode: EvalModeError
+        }
+      ]
     },
     {
-      name:"EXTRACT(MONTH FROM MISSING)",
-      statement:"EXTRACT(MONTH FROM MISSING)",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(MONTH FROM MISSING)",
+      statement: "EXTRACT(MONTH FROM MISSING)",
+      assert: [
+        {
+          result: EvaluationSuccess,
+          evalMode:
           EvalModeCoerce,
-          EvalModeError
-        ],
-        output:$missing::null
-      }
+          output: $missing::null
+        },
+        {
+          evalMode: EvalModeError,
+          result: EvaluationFail,
+        }
+      ]
     },
     {
-      name:"EXTRACT(DAY FROM MISSING)",
-      statement:"EXTRACT(DAY FROM MISSING)",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(DAY FROM MISSING)",
+      statement: "EXTRACT(DAY FROM MISSING)",
+      assert: [
+        {
+          result: EvaluationSuccess,
+          evalMode:
           EvalModeCoerce,
-          EvalModeError
-        ],
-        output:$missing::null
-      }
+          output: $missing::null
+        },
+        {
+          evalMode: EvalModeError,
+          result: EvaluationFail,
+        }
+      ]
     },
     {
-      name:"EXTRACT(HOUR FROM MISSING)",
-      statement:"EXTRACT(HOUR FROM MISSING)",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(HOUR FROM MISSING)",
+      statement: "EXTRACT(HOUR FROM MISSING)",
+      assert: [
+        {
+          result: EvaluationSuccess,
+          evalMode:
           EvalModeCoerce,
-          EvalModeError
-        ],
-        output:$missing::null
-      }
+          output: $missing::null
+        },
+        {
+          evalMode: EvalModeError,
+          result: EvaluationFail,
+        }
+      ]
     },
     {
-      name:"EXTRACT(MINUTE FROM MISSING)",
-      statement:"EXTRACT(MINUTE FROM MISSING)",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(MINUTE FROM MISSING)",
+      statement: "EXTRACT(MINUTE FROM MISSING)",
+      assert: [
+        {
+          result: EvaluationSuccess,
+          evalMode:
           EvalModeCoerce,
-          EvalModeError
-        ],
-        output:$missing::null
-      }
+          output: $missing::null
+        },
+        {
+          evalMode: EvalModeError,
+          result: EvaluationFail,
+        }
+      ]
     },
     {
-      name:"EXTRACT(SECOND FROM MISSING)",
-      statement:"EXTRACT(SECOND FROM MISSING)",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(SECOND FROM MISSING)",
+      statement: "EXTRACT(SECOND FROM MISSING)",
+      assert: [
+        {
+          result: EvaluationSuccess,
+          evalMode:
           EvalModeCoerce,
-          EvalModeError
-        ],
-        output:$missing::null
-      }
+          output: $missing::null
+        },
+        {
+          evalMode: EvalModeError,
+          result: EvaluationFail,
+        }
+      ]
     },
     {
-      name:"EXTRACT(TIMEZONE_HOUR FROM MISSING)",
-      statement:"EXTRACT(TIMEZONE_HOUR FROM MISSING)",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(TIMEZONE_HOUR FROM MISSING)",
+      statement: "EXTRACT(TIMEZONE_HOUR FROM MISSING)",
+      assert: [
+        {
+          result: EvaluationSuccess,
+          evalMode:
           EvalModeCoerce,
-          EvalModeError
-        ],
-        output:$missing::null
-      }
+          output: $missing::null
+        },
+        {
+          evalMode: EvalModeError,
+          result: EvaluationFail,
+        }
+      ]
     },
     {
-      name:"EXTRACT(TIMEZONE_MINUTE FROM MISSING)",
-      statement:"EXTRACT(TIMEZONE_MINUTE FROM MISSING)",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(TIMEZONE_MINUTE FROM MISSING)",
+      statement: "EXTRACT(TIMEZONE_MINUTE FROM MISSING)",
+      assert: [
+        {
+          result: EvaluationSuccess,
+          evalMode:
           EvalModeCoerce,
-          EvalModeError
-        ],
-        output:$missing::null
-      }
+          output: $missing::null
+        },
+        {
+          evalMode: EvalModeError,
+          result: EvaluationFail,
+        }
+      ]
     },
   ],
   extract_date::[
     {
-      name:"EXTRACT(YEAR FROM DATE '2000-01-02')",
-      statement:"EXTRACT(YEAR FROM DATE '2000-01-02') = 2000",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(YEAR FROM DATE '2000-01-02')",
+      statement: "EXTRACT(YEAR FROM DATE '2000-01-02') = 2000",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(MONTH FROM DATE '2000-01-02')",
-      statement:"EXTRACT(MONTH FROM DATE '2000-01-02') = 1",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(MONTH FROM DATE '2000-01-02')",
+      statement: "EXTRACT(MONTH FROM DATE '2000-01-02') = 1",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(DAY FROM DATE '2000-01-02')",
-      statement:"EXTRACT(DAY FROM DATE '2000-01-02') = 2",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(DAY FROM DATE '2000-01-02')",
+      statement: "EXTRACT(DAY FROM DATE '2000-01-02') = 2",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
   ],
   extract_time::[
     {
-      name:"EXTRACT(HOUR FROM TIME '01:23:45.678')",
-      statement:"EXTRACT(HOUR FROM TIME '01:23:45.678') = 1",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(HOUR FROM TIME '01:23:45.678')",
+      statement: "EXTRACT(HOUR FROM TIME '01:23:45.678') = 1",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(MINUTE FROM TIME '01:23:45.678')",
-      statement:"EXTRACT(MINUTE FROM TIME '01:23:45.678') = 23",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(MINUTE FROM TIME '01:23:45.678')",
+      statement: "EXTRACT(MINUTE FROM TIME '01:23:45.678') = 23",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(SECOND FROM TIME '01:23:45.678')",
-      statement:"EXTRACT(SECOND FROM TIME '01:23:45.678') = 45.678",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(SECOND FROM TIME '01:23:45.678')",
+      statement: "EXTRACT(SECOND FROM TIME '01:23:45.678') = 45.678",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
   ],
   extract_time_precision::[
     {
-      name:"EXTRACT(HOUR FROM TIME (2) '01:23:45.678')",
-      statement:"EXTRACT(HOUR FROM TIME (2) '01:23:45.678') = 1",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(HOUR FROM TIME (2) '01:23:45.678')",
+      statement: "EXTRACT(HOUR FROM TIME (2) '01:23:45.678') = 1",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(MINUTE FROM TIME (2) '01:23:45.678')",
-      statement:"EXTRACT(MINUTE FROM TIME (2) '01:23:45.678') = 23",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(MINUTE FROM TIME (2) '01:23:45.678')",
+      statement: "EXTRACT(MINUTE FROM TIME (2) '01:23:45.678') = 23",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(SECOND FROM TIME (2) '01:23:45.678')",
-      statement:"EXTRACT(SECOND FROM TIME (2) '01:23:45.678') = 45.68",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(SECOND FROM TIME (2) '01:23:45.678')",
+      statement: "EXTRACT(SECOND FROM TIME (2) '01:23:45.678') = 45.68",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
   ],
   extract_time_with_time_zone::[
     {
-      name:"EXTRACT(HOUR FROM TIME WITH TIME ZONE '01:23:45.678-06:30')",
-      statement:"EXTRACT(HOUR FROM TIME WITH TIME ZONE '01:23:45.678-06:30') = 1",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(HOUR FROM TIME WITH TIME ZONE '01:23:45.678-06:30')",
+      statement: "EXTRACT(HOUR FROM TIME WITH TIME ZONE '01:23:45.678-06:30') = 1",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(MINUTE FROM TIME WITH TIME ZONE '01:23:45.678-06:30')",
-      statement:"EXTRACT(MINUTE FROM TIME WITH TIME ZONE '01:23:45.678-06:30') = 23",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(MINUTE FROM TIME WITH TIME ZONE '01:23:45.678-06:30')",
+      statement: "EXTRACT(MINUTE FROM TIME WITH TIME ZONE '01:23:45.678-06:30') = 23",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(SECOND FROM TIME WITH TIME ZONE '01:23:45.678-06:30')",
-      statement:"EXTRACT(SECOND FROM TIME WITH TIME ZONE '01:23:45.678-06:30') = 45.678",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(SECOND FROM TIME WITH TIME ZONE '01:23:45.678-06:30')",
+      statement: "EXTRACT(SECOND FROM TIME WITH TIME ZONE '01:23:45.678-06:30') = 45.678",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(TIMEZONE_HOUR FROM TIME WITH TIME ZONE '01:23:45.678-06:30')",
-      statement:"EXTRACT(TIMEZONE_HOUR FROM TIME WITH TIME ZONE '01:23:45.678-06:30') = -6",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(TIMEZONE_HOUR FROM TIME WITH TIME ZONE '01:23:45.678-06:30')",
+      statement: "EXTRACT(TIMEZONE_HOUR FROM TIME WITH TIME ZONE '01:23:45.678-06:30') = -6",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(TIMEZONE_MINUTE FROM TIME WITH TIME ZONE '01:23:45.678-06:30')",
-      statement:"EXTRACT(TIMEZONE_MINUTE FROM TIME WITH TIME ZONE '01:23:45.678-06:30') = -30",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(TIMEZONE_MINUTE FROM TIME WITH TIME ZONE '01:23:45.678-06:30')",
+      statement: "EXTRACT(TIMEZONE_MINUTE FROM TIME WITH TIME ZONE '01:23:45.678-06:30') = -30",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
   ],
   extract_time_precision_with_time_zone::[
     {
-      name:"EXTRACT(HOUR FROM TIME (2) WITH TIME ZONE '01:23:45.678-06:30')",
-      statement:"EXTRACT(HOUR FROM TIME (2) WITH TIME ZONE '01:23:45.678') = 1",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(HOUR FROM TIME (2) WITH TIME ZONE '01:23:45.678-06:30')",
+      statement: "EXTRACT(HOUR FROM TIME (2) WITH TIME ZONE '01:23:45.678') = 1",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(MINUTE FROM TIME (2) WITH TIME ZONE '01:23:45.678-06:30')",
-      statement:"EXTRACT(MINUTE FROM TIME (2) WITH TIME ZONE '01:23:45.678-06:30') = 23",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(MINUTE FROM TIME (2) WITH TIME ZONE '01:23:45.678-06:30')",
+      statement: "EXTRACT(MINUTE FROM TIME (2) WITH TIME ZONE '01:23:45.678-06:30') = 23",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(SECOND FROM TIME (2) WITH TIME ZONE '01:23:45.678-06:30')",
-      statement:"EXTRACT(SECOND FROM TIME (2) WITH TIME ZONE '01:23:45.678-06:30') = 45.68",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(SECOND FROM TIME (2) WITH TIME ZONE '01:23:45.678-06:30')",
+      statement: "EXTRACT(SECOND FROM TIME (2) WITH TIME ZONE '01:23:45.678-06:30') = 45.68",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(TIMEZONE_HOUR FROM TIME (2) WITH TIME ZONE '01:23:45.678-06:30')",
-      statement:"EXTRACT(TIMEZONE_HOUR FROM TIME (2) WITH TIME ZONE '01:23:45.678-06:30') = -6",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(TIMEZONE_HOUR FROM TIME (2) WITH TIME ZONE '01:23:45.678-06:30')",
+      statement: "EXTRACT(TIMEZONE_HOUR FROM TIME (2) WITH TIME ZONE '01:23:45.678-06:30') = -6",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(TIMEZONE_MINUTE FROM TIME (2) WITH TIME ZONE '01:23:45.678-06:30')",
-      statement:"EXTRACT(TIMEZONE_MINUTE FROM TIME (2) WITH TIME ZONE '01:23:45.678-06:30') = -30",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(TIMEZONE_MINUTE FROM TIME (2) WITH TIME ZONE '01:23:45.678-06:30')",
+      statement: "EXTRACT(TIMEZONE_MINUTE FROM TIME (2) WITH TIME ZONE '01:23:45.678-06:30') = -30",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
   ],
   extract_timestamp::[
     {
-      name:"EXTRACT(YEAR FROM `2000-01-02T03:04:05.67Z`)",
-      statement:"EXTRACT(YEAR FROM `2000-01-02T03:04:05.67Z`) = 2000",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(YEAR FROM `2000-01-02T03:04:05.67Z`)",
+      statement: "EXTRACT(YEAR FROM `2000-01-02T03:04:05.67Z`) = 2000",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(MONTH FROM `2000-01-02T03:04:05.67Z`)",
-      statement:"EXTRACT(MONTH FROM `2000-01-02T03:04:05.67Z`) = 1",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(MONTH FROM `2000-01-02T03:04:05.67Z`)",
+      statement: "EXTRACT(MONTH FROM `2000-01-02T03:04:05.67Z`) = 1",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(DAY FROM `2000-01-02T03:04:05.67Z`)",
-      statement:"EXTRACT(DAY FROM `2000-01-02T03:04:05.67Z`) = 2",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(DAY FROM `2000-01-02T03:04:05.67Z`)",
+      statement: "EXTRACT(DAY FROM `2000-01-02T03:04:05.67Z`) = 2",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(HOUR FROM `2000-01-02T03:04:05.67Z`)",
-      statement:"EXTRACT(HOUR FROM `2000-01-02T03:04:05.67Z`) = 3",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(HOUR FROM `2000-01-02T03:04:05.67Z`)",
+      statement: "EXTRACT(HOUR FROM `2000-01-02T03:04:05.67Z`) = 3",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(MINUTE FROM `2000-01-02T03:04:05.67Z`)",
-      statement:"EXTRACT(MINUTE FROM `2000-01-02T03:04:05.67Z`) = 4",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(MINUTE FROM `2000-01-02T03:04:05.67Z`)",
+      statement: "EXTRACT(MINUTE FROM `2000-01-02T03:04:05.67Z`) = 4",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(SECOND FROM `2000-01-02T03:04:05.67Z`)",
-      statement:"EXTRACT(SECOND FROM `2000-01-02T03:04:05.67Z`) = 5.67",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(SECOND FROM `2000-01-02T03:04:05.67Z`)",
+      statement: "EXTRACT(SECOND FROM `2000-01-02T03:04:05.67Z`) = 5.67",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
   ],
   extract_timestamp_offset::[
     {
-      name:"EXTRACT(YEAR FROM `2000-01-02T03:04:05.67+08:09`)",
-      statement:"EXTRACT(YEAR FROM `2000-01-02T03:04:05.67+08:09`) = 2000",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(YEAR FROM `2000-01-02T03:04:05.67+08:09`)",
+      statement: "EXTRACT(YEAR FROM `2000-01-02T03:04:05.67+08:09`) = 2000",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(MONTH FROM `2000-01-02T03:04:05.67+08:09`)",
-      statement:"EXTRACT(MONTH FROM `2000-01-02T03:04:05.67+08:09`) = 1",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(MONTH FROM `2000-01-02T03:04:05.67+08:09`)",
+      statement: "EXTRACT(MONTH FROM `2000-01-02T03:04:05.67+08:09`) = 1",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(DAY FROM `2000-01-02T03:04:05.67+08:09`)",
-      statement:"EXTRACT(DAY FROM `2000-01-02T03:04:05.67+08:09`) = 2",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(DAY FROM `2000-01-02T03:04:05.67+08:09`)",
+      statement: "EXTRACT(DAY FROM `2000-01-02T03:04:05.67+08:09`) = 2",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(HOUR FROM `2000-01-02T03:04:05.67+08:09`)",
-      statement:"EXTRACT(HOUR FROM `2000-01-02T03:04:05.67+08:09`) = 3",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(HOUR FROM `2000-01-02T03:04:05.67+08:09`)",
+      statement: "EXTRACT(HOUR FROM `2000-01-02T03:04:05.67+08:09`) = 3",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(MINUTE FROM `2000-01-02T03:04:05.67+08:09`)",
-      statement:"EXTRACT(MINUTE FROM `2000-01-02T03:04:05.67+08:09`) = 4",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(MINUTE FROM `2000-01-02T03:04:05.67+08:09`)",
+      statement: "EXTRACT(MINUTE FROM `2000-01-02T03:04:05.67+08:09`) = 4",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(SECOND FROM `2000-01-02T03:04:05.67+08:09`)",
-      statement:"EXTRACT(SECOND FROM `2000-01-02T03:04:05.67+08:09`) = 5.67",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(SECOND FROM `2000-01-02T03:04:05.67+08:09`)",
+      statement: "EXTRACT(SECOND FROM `2000-01-02T03:04:05.67+08:09`) = 5.67",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(TIMEZONE_HOUR FROM `2000-01-02T03:04:05.67+08:09`)",
-      statement:"EXTRACT(TIMEZONE_HOUR FROM `2000-01-02T03:04:05.67+08:09`) = 8",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(TIMEZONE_HOUR FROM `2000-01-02T03:04:05.67+08:09`)",
+      statement: "EXTRACT(TIMEZONE_HOUR FROM `2000-01-02T03:04:05.67+08:09`) = 8",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(TIMEZONE_MINUTE FROM `2000-01-02T03:04:05.67+08:09`)",
-      statement:"EXTRACT(TIMEZONE_MINUTE FROM `2000-01-02T03:04:05.67+08:09`) = 9",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(TIMEZONE_MINUTE FROM `2000-01-02T03:04:05.67+08:09`)",
+      statement: "EXTRACT(TIMEZONE_MINUTE FROM `2000-01-02T03:04:05.67+08:09`) = 9",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(TIMEZONE_HOUR FROM `2000-01-02T03:04:05.67-08:09`)",
-      statement:"EXTRACT(TIMEZONE_HOUR FROM `2000-01-02T03:04:05.67-08:09`) = -8",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(TIMEZONE_HOUR FROM `2000-01-02T03:04:05.67-08:09`)",
+      statement: "EXTRACT(TIMEZONE_HOUR FROM `2000-01-02T03:04:05.67-08:09`) = -8",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
     {
-      name:"EXTRACT(TIMEZONE_MINUTE FROM `2000-01-02T03:04:05.67-08:09`)",
-      statement:"EXTRACT(TIMEZONE_MINUTE FROM `2000-01-02T03:04:05.67-08:09`) = -9",
-      assert:{
-        result:EvaluationSuccess,
-        evalMode:[
+      name: "EXTRACT(TIMEZONE_MINUTE FROM `2000-01-02T03:04:05.67-08:09`)",
+      statement: "EXTRACT(TIMEZONE_MINUTE FROM `2000-01-02T03:04:05.67-08:09`) = -9",
+      assert: {
+        result: EvaluationSuccess,
+        evalMode: [
           EvalModeCoerce,
           EvalModeError
         ],
-        output:true
+        output: true
       }
     },
   ]
@@ -633,92 +664,92 @@ extract::[
 
 extract_invalid::[
   {
-    name:"invalid extract year from time",
-    statement:"EXTRACT(YEAR FROM TIME '01:23:45.678')",
-    assert:[
+    name: "invalid extract year from time",
+    statement: "EXTRACT(YEAR FROM TIME '01:23:45.678')",
+    assert: [
       {
-        result:EvaluationFail,
-        evalMode:EvalModeError
+        result: EvaluationFail,
+        evalMode: EvalModeError
       },
       {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       }
     ]
   },
   {
-    name:"invalid extract month from time",
-    statement:"EXTRACT(MONTH FROM TIME '01:23:45.678')",
-    assert:[
+    name: "invalid extract month from time",
+    statement: "EXTRACT(MONTH FROM TIME '01:23:45.678')",
+    assert: [
       {
-        result:EvaluationFail,
-        evalMode:EvalModeError
+        result: EvaluationFail,
+        evalMode: EvalModeError
       },
       {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       }
     ]
   },
   {
-    name:"invalid extract day from time",
-    statement:"EXTRACT(DAY FROM TIME '01:23:45.678')",
-    assert:[
+    name: "invalid extract day from time",
+    statement: "EXTRACT(DAY FROM TIME '01:23:45.678')",
+    assert: [
       {
-        result:EvaluationFail,
-        evalMode:EvalModeError
+        result: EvaluationFail,
+        evalMode: EvalModeError
       },
       {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       }
     ]
   },
   {
-    name:"invalid extract year from time",
-    statement:"EXTRACT(YEAR FROM TIME WITH TIME ZONE '01:23:45.678-06:30')",
-    assert:[
+    name: "invalid extract year from time",
+    statement: "EXTRACT(YEAR FROM TIME WITH TIME ZONE '01:23:45.678-06:30')",
+    assert: [
       {
-        result:EvaluationFail,
-        evalMode:EvalModeError
+        result: EvaluationFail,
+        evalMode: EvalModeError
       },
       {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       }
     ]
   },
   {
-    name:"invalid extract month from time with time zone",
-    statement:"EXTRACT(MONTH FROM TIME WITH TIME ZONE '01:23:45.678-06:30')",
-    assert:[
+    name: "invalid extract month from time with time zone",
+    statement: "EXTRACT(MONTH FROM TIME WITH TIME ZONE '01:23:45.678-06:30')",
+    assert: [
       {
-        result:EvaluationFail,
-        evalMode:EvalModeError
+        result: EvaluationFail,
+        evalMode: EvalModeError
       },
       {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       }
     ]
   },
   {
-    name:"invalid extract day from time with time zone",
-    statement:"EXTRACT(DAY FROM TIME WITH TIME ZONE '01:23:45.678-06:30')",
-    assert:[
+    name: "invalid extract day from time with time zone",
+    statement: "EXTRACT(DAY FROM TIME WITH TIME ZONE '01:23:45.678-06:30')",
+    assert: [
       {
-        result:EvaluationFail,
-        evalMode:EvalModeError
+        result: EvaluationFail,
+        evalMode: EvalModeError
       },
       {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       }
     ]
   },

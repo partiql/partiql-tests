@@ -1,77 +1,80 @@
 bit_length::[
   {
-    name:"BIT_LENGTH empty string",
-    statement:"BIT_LENGTH('')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "BIT_LENGTH empty string",
+    statement: "BIT_LENGTH('')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:0
+      output: 0
     }
   },
   {
-    name:"BIT_LENGTH string",
-    statement:"BIT_LENGTH('abc')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "BIT_LENGTH string",
+    statement: "BIT_LENGTH('abc')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:24
+      output: 24
     }
   },
   {
-    name:"BIT_LENGTH NULL",
-    statement:"BIT_LENGTH(NULL)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "BIT_LENGTH NULL",
+    statement: "BIT_LENGTH(NULL)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output: null
     }
   },
   {
-    name:"BIT_LENGTH MISSING",
-    statement:"BIT_LENGTH(MISSING)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$missing::null
-    }
-  },
-  {
-    name:"BIT_LENGTH invalid type",
-    statement:"BIT_LENGTH(1)",
-    assert:[
+    name: "BIT_LENGTH MISSING",
+    statement: "BIT_LENGTH(MISSING)",
+    assert: [
       {
-        evalMode:EvalModeError,
-        result:EvaluationFail
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       },
       {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      }
+    ]
+  },
+  {
+    name: "BIT_LENGTH invalid type",
+    statement: "BIT_LENGTH(1)",
+    assert: [
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      },
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $missing::null
       }
     ],
   },
   {
-    name:"BIT_LENGTH special character",
-    statement:"BIT_LENGTH('français')",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    name: "BIT_LENGTH special character",
+    statement: "BIT_LENGTH('français')",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:72
+      output: 72
     }
   },
 ]

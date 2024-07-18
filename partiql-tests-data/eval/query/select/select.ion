@@ -1,260 +1,307 @@
 envs::{
   sensors: [
-    {readings: [{v: 1.3}, {v: 2}]},
-    {readings: [{v: 0.7}, {v: 0.8}, {v: 0.9}]}
-  ],
-  stores:[
     {
-      id:"5",
-      books:[
+      readings: [
         {
-          title:"A",
-          price:5.0,
-          categories:[
+          v: 1.3
+        },
+        {
+          v: 2
+        }
+      ]
+    },
+    {
+      readings: [
+        {
+          v: 0.7
+        },
+        {
+          v: 0.8
+        },
+        {
+          v: 0.9
+        }
+      ]
+    }
+  ],
+  stores: [
+    {
+      id: "5",
+      books: [
+        {
+          title: "A",
+          price: 5.0,
+          categories: [
             "sci-fi",
             "action"
           ]
         },
         {
-          title:"B",
-          price:2.0,
-          categories:[
+          title: "B",
+          price: 2.0,
+          categories: [
             "sci-fi",
             "comedy"
           ]
         },
         {
-          title:"C",
-          price:7.0,
-          categories:[
+          title: "C",
+          price: 7.0,
+          categories: [
             "action",
             "suspense"
           ]
         },
         {
-          title:"D",
-          price:9.0,
-          categories:[
+          title: "D",
+          price: 9.0,
+          categories: [
             "suspense"
           ]
         }
       ]
     },
     {
-      id:"6",
-      books:[
+      id: "6",
+      books: [
         {
-          title:"A",
-          price:5.0,
-          categories:[
+          title: "A",
+          price: 5.0,
+          categories: [
             "sci-fi",
             "action"
           ]
         },
         {
-          title:"E",
-          price:9.5,
-          categories:[
+          title: "E",
+          price: 9.5,
+          categories: [
             "fantasy",
             "comedy"
           ]
         },
         {
-          title:"F",
-          price:10.0,
-          categories:[
+          title: "F",
+          price: 10.0,
+          categories: [
             "history"
           ]
         }
       ]
     },
     {
-      id:"7",
-      books:[
-      ]
+      id: "7",
+      books: []
     }
   ],
-  animals:[
+  animals: [
     {
-      name:"Kumo",
-      type:"dog"
+      name: "Kumo",
+      type: "dog"
     },
     {
-      name:"Mochi",
-      type:"dog"
+      name: "Mochi",
+      type: "dog"
     },
     {
-      name:"Lilikoi",
-      type:"unicorn"
+      name: "Lilikoi",
+      type: "unicorn"
     }
   ],
-  animal_types:[
+  animal_types: [
     {
-      id:"dog",
-      is_magic:false
+      id: "dog",
+      is_magic: false
     },
     {
-      id:"cat",
-      is_magic:false
+      id: "cat",
+      is_magic: false
     },
     {
-      id:"unicorn",
-      is_magic:true
+      id: "unicorn",
+      is_magic: true
     }
   ],
-  a:{
-    b:{
-      c:{
-        d:{
-          e:5,
-          f:6
+  a: {
+    b: {
+      c: {
+        d: {
+          e: 5,
+          f: 6
         }
       }
     }
   },
-  b:{
-    c:100
+  b: {
+    c: 100
   },
-  d:3.,
-  someAlias:"hello",
+  d: 3.,
+  someAlias: "hello",
 }
 
 {
-    name: "SELECT path",
-    statement: "SELECT r.v FROM sensors AS s, s.readings AS r",
-    assert: {
-        evalMode: [EvalModeCoerce, EvalModeError],
-        result: EvaluationSuccess,
-        output: $bag::[
-            {
-                v: 1.3
-            },
-            {
-                v: 2
-            },
-            {
-                v: 0.7
-            },
-            {
-                v: 0.8
-            },
-            {
-                v: 0.9
-            }
-        ]
-    }
+  name: "SELECT path",
+  statement: "SELECT r.v FROM sensors AS s, s.readings AS r",
+  assert: {
+    evalMode: [
+      EvalModeCoerce,
+      EvalModeError
+    ],
+    result: EvaluationSuccess,
+    output: $bag::[
+      {
+        v: 1.3
+      },
+      {
+        v: 2
+      },
+      {
+        v: 0.7
+      },
+      {
+        v: 0.8
+      },
+      {
+        v: 0.9
+      }
+    ]
+  }
 }
 
 {
-    name: "SELECT path with inline environment",
-    statement: "SELECT r.v FROM sensors AS s, s.readings AS r",
-    env: {
-        sensors: [
-            {readings: [{v: 5.0}, {v: 78.2}]}
+  name: "SELECT path with inline environment",
+  statement: "SELECT r.v FROM sensors AS s, s.readings AS r",
+  env: {
+    sensors: [
+      {
+        readings: [
+          {
+            v: 5.0
+          },
+          {
+            v: 78.2
+          }
         ]
-    },
-    assert: {
-        evalMode: [EvalModeCoerce, EvalModeError],
-        result: EvaluationSuccess,
-        output: $bag::[
-            {
-                v: 5.0
-            },
-            {
-                v: 78.2
-            }
-        ]
-    }
+      }
+    ]
+  },
+  assert: {
+    evalMode: [
+      EvalModeCoerce,
+      EvalModeError
+    ],
+    result: EvaluationSuccess,
+    output: $bag::[
+      {
+        v: 5.0
+      },
+      {
+        v: 78.2
+      }
+    ]
+  }
 }
 
 'select list item'::[
   {
-    name:"explicitAliasSelectSingleSource",
-    statement:"SELECT id AS name FROM stores",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "explicitAliasSelectSingleSource",
+    statement: "SELECT id AS name FROM stores",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          name:"5"
+          name: "5"
         },
         {
-          name:"6"
+          name: "6"
         },
         {
-          name:"7"
+          name: "7"
         }
       ]
     }
   },
   {
-    name:"selectImplicitAndExplicitAliasSingleSourceHoisted",
-    statement:"SELECT title AS name, price FROM stores[*].books[*] AS b WHERE b.price >= 9.0",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectImplicitAndExplicitAliasSingleSourceHoisted",
+    statement: "SELECT title AS name, price FROM stores[*].books[*] AS b WHERE b.price >= 9.0",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          name:"D",
-          price:9.0
+          name: "D",
+          price: 9.0
         },
         {
-          name:"E",
-          price:9.5
+          name: "E",
+          price: 9.5
         },
         {
-          name:"F",
-          price:10.0
+          name: "F",
+          price: 10.0
         }
       ]
     }
   },
   {
-    name:"syntheticColumnNameInSelect",
-    statement:"SELECT i+1 FROM <<100>> i",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "syntheticColumnNameInSelect",
+    statement: "SELECT i+1 FROM <<100>> i",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          _1:101
+          _1: 101
         }
       ]
     }
   },
   {
-    name:"properAliasFromPathInSelect",
-    statement:"SELECT s.id, s.books[1].title FROM stores AS s WHERE s.id = '5'",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "properAliasFromPathInSelect",
+    statement: "SELECT s.id, s.books[1].title FROM stores AS s WHERE s.id = '5'",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          id:"5",
-          title:"B"
+          id: "5",
+          title: "B"
         }
       ]
     }
   },
   {
-    name:"selectListWithMissing",
-    statement:"SELECT a.x AS x, a.y AS y FROM `[{x:5}, {y:6}]` AS a",
+    name: "selectListWithMissing",
+    statement: "SELECT a.x AS x, a.y AS y FROM `[{x:5}, {y:6}]` AS a",
     assert: [
       {
-        evalMode:EvalModeCoerce,
-        result:EvaluationSuccess,
-        output:$bag::[
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
           {
-            x:5
+            x: 5
           },
           {
-            y:6
+            y: 6
           }
         ]
       },
       {
-        evalMode:EvalModeError,
-        result:EvaluationFail
+        evalMode: EvalModeError,
+        result: EvaluationFail
       },
     ]
   }
@@ -262,130 +309,151 @@ envs::{
 
 select_where::[
   {
-    name:"selectWhereStringEqualsSameCase",
-    statement:"SELECT * FROM animals as a WHERE a.name = 'Kumo'",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectWhereStringEqualsSameCase",
+    statement: "SELECT * FROM animals as a WHERE a.name = 'Kumo'",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          name:"Kumo",
-          type:"dog"
+          name: "Kumo",
+          type: "dog"
         }
       ]
     }
   },
   {
-    name:"selectWhereStrinEqualsDifferentCase",
-    statement:"SELECT * FROM animals as a WHERE a.name = 'KUMO'",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-      ]
+    name: "selectWhereStrinEqualsDifferentCase",
+    statement: "SELECT * FROM animals as a WHERE a.name = 'KUMO'",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[]
     }
   }
 ]
 
 select_join::[
   {
-    name:"selectJoin",
-    statement:"SELECT * FROM animals AS a, animal_types AS t WHERE a.type = t.id",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectJoin",
+    statement: "SELECT * FROM animals AS a, animal_types AS t WHERE a.type = t.id",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          name:"Kumo",
-          type:"dog",
-          id:"dog",
-          is_magic:false
+          name: "Kumo",
+          type: "dog",
+          id: "dog",
+          is_magic: false
         },
         {
-          name:"Mochi",
-          type:"dog",
-          id:"dog",
-          is_magic:false
+          name: "Mochi",
+          type: "dog",
+          id: "dog",
+          is_magic: false
         },
         {
-          name:"Lilikoi",
-          type:"unicorn",
-          id:"unicorn",
-          is_magic:true
+          name: "Lilikoi",
+          type: "unicorn",
+          id: "unicorn",
+          is_magic: true
         }
       ]
     }
   },
   {
-    name:"selectCorrelatedJoin",
-    statement:"SELECT s.id AS id, b.title AS title FROM stores AS s, @s.books AS b WHERE b IS NULL OR b.price > 5",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectCorrelatedJoin",
+    statement: "SELECT s.id AS id, b.title AS title FROM stores AS s, @s.books AS b WHERE b IS NULL OR b.price > 5",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          id:"5",
-          title:"C"
+          id: "5",
+          title: "C"
         },
         {
-          id:"5",
-          title:"D"
+          id: "5",
+          title: "D"
         },
         {
-          id:"6",
-          title:"E"
+          id: "6",
+          title: "E"
         },
         {
-          id:"6",
-          title:"F"
+          id: "6",
+          title: "F"
         }
       ]
     }
   },
   {
-    name:"selectCorrelatedLeftJoin",
-    statement:"SELECT s.id AS id, b.title AS title FROM stores AS s LEFT CROSS JOIN @s.books AS b WHERE b IS NULL",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectCorrelatedLeftJoin",
+    statement: "SELECT s.id AS id, b.title AS title FROM stores AS s LEFT CROSS JOIN @s.books AS b WHERE b IS NULL",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          id:"7"
+          id: "7"
         }
       ]
     }
   },
   {
-    name:"selectCorrelatedLeftJoinOnClause",
-    statement:"SELECT s.id AS id, b.title AS title FROM stores AS s LEFT OUTER JOIN @s.books AS b ON b.price > 9",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectCorrelatedLeftJoinOnClause",
+    statement: "SELECT s.id AS id, b.title AS title FROM stores AS s LEFT OUTER JOIN @s.books AS b ON b.price > 9",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          id:"5"
+          id: "5"
         },
         {
-          id:"6",
-          title:"E"
+          id: "6",
+          title: "E"
         },
         {
-          id:"6",
-          title:"F"
+          id: "6",
+          title: "F"
         },
         {
-          id:"7"
+          id: "7"
         }
       ]
     }
   },
   {
-    name:"selectJoinOnClauseScoping", // note that d is a global which should be shadowed by the last from source
-    statement:"SELECT VALUE [a, b, d] FROM [1, 3] AS a INNER JOIN [1, 2, 3] AS b ON b < d LEFT JOIN [1.1, 2.1] AS d ON b < d AND a <= d",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectJoinOnClauseScoping",
+    // note that d is a global which should be shadowed by the last from source
+    statement: "SELECT VALUE [a, b, d] FROM [1, 3] AS a INNER JOIN [1, 2, 3] AS b ON b < d LEFT JOIN [1.1, 2.1] AS d ON b < d AND a <= d",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         [
           1,
           1,
@@ -415,153 +483,176 @@ select_join::[
     }
   },
   {
-    name:"selectNonCorrelatedJoin", // Note that the joined someAlias is coming from the global scope without @-operator
-    statement:"SELECT someAlias.id AS id, v AS title FROM stores AS someAlias, someAlias AS v",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectNonCorrelatedJoin",
+    // Note that the joined someAlias is coming from the global scope without @-operator
+    statement: "SELECT someAlias.id AS id, v AS title FROM stores AS someAlias, someAlias AS v",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          id:"5",
-          title:"hello"
+          id: "5",
+          title: "hello"
         },
         {
-          id:"6",
-          title:"hello"
+          id: "6",
+          title: "hello"
         },
         {
-          id:"7",
-          title:"hello"
+          id: "7",
+          title: "hello"
         }
       ]
     }
   },
   {
-    name:"selectCorrelatedUnpivot",
-    statement:"SELECT n1, n2, n3, n4, val FROM UNPIVOT a AS b AT n1, UNPIVOT @b AS c AT n2, UNPIVOT @c AS d AT n3, UNPIVOT @d AS val AT n4",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectCorrelatedUnpivot",
+    statement: "SELECT n1, n2, n3, n4, val FROM UNPIVOT a AS b AT n1, UNPIVOT @b AS c AT n2, UNPIVOT @c AS d AT n3, UNPIVOT @d AS val AT n4",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          n1:"b",
-          n2:"c",
-          n3:"d",
-          n4:"e",
-          val:5
+          n1: "b",
+          n2: "c",
+          n3: "d",
+          n4: "e",
+          val: 5
         },
         {
-          n1:"b",
-          n2:"c",
-          n3:"d",
-          n4:"f",
-          val:6
+          n1: "b",
+          n2: "c",
+          n3: "d",
+          n4: "f",
+          val: 6
         }
       ]
     }
   },
   {
-    name:"nestedSelectJoinWithUnpivot",
-    statement:"SELECT col, val FROM (SELECT * FROM animals AS aa, animal_types AS tt WHERE aa.type = tt.id) AS a, UNPIVOT @a AS val AT col WHERE col != 'id'",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "nestedSelectJoinWithUnpivot",
+    statement: "SELECT col, val FROM (SELECT * FROM animals AS aa, animal_types AS tt WHERE aa.type = tt.id) AS a, UNPIVOT @a AS val AT col WHERE col != 'id'",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          col:"name",
-          val:"Kumo"
+          col: "name",
+          val: "Kumo"
         },
         {
-          col:"type",
-          val:"dog"
+          col: "type",
+          val: "dog"
         },
         {
-          col:"is_magic",
-          val:false
+          col: "is_magic",
+          val: false
         },
         {
-          col:"name",
-          val:"Mochi"
+          col: "name",
+          val: "Mochi"
         },
         {
-          col:"type",
-          val:"dog"
+          col: "type",
+          val: "dog"
         },
         {
-          col:"is_magic",
-          val:false
+          col: "is_magic",
+          val: false
         },
         {
-          col:"name",
-          val:"Lilikoi"
+          col: "name",
+          val: "Lilikoi"
         },
         {
-          col:"type",
-          val:"unicorn"
+          col: "type",
+          val: "unicorn"
         },
         {
-          col:"is_magic",
-          val:true
+          col: "is_magic",
+          val: true
         }
       ]
     }
   },
   {
-    name:"nestedSelectJoinLimit",
-    statement:"SELECT col, val FROM (SELECT * FROM animals AS aa, animal_types AS tt WHERE aa.type = tt.id) AS a, UNPIVOT @a AS val AT col WHERE col != 'id' LIMIT 6 - 3",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "nestedSelectJoinLimit",
+    statement: "SELECT col, val FROM (SELECT * FROM animals AS aa, animal_types AS tt WHERE aa.type = tt.id) AS a, UNPIVOT @a AS val AT col WHERE col != 'id' LIMIT 6 - 3",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          col:"name",
-          val:"Kumo"
+          col: "name",
+          val: "Kumo"
         },
         {
-          col:"type",
-          val:"dog"
+          col: "type",
+          val: "dog"
         },
         {
-          col:"is_magic",
-          val:false
+          col: "is_magic",
+          val: false
         }
       ]
     }
   },
   {
-    name:"correlatedJoinWithShadowedAttributes",
-    statement:"SELECT VALUE v FROM `[{v:5}]` AS item, @item.v AS v",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "correlatedJoinWithShadowedAttributes",
+    statement: "SELECT VALUE v FROM `[{v:5}]` AS item, @item.v AS v",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         5
       ]
     }
   },
   {
-    name:"correlatedJoinWithoutLexicalScope",
-    statement:"SELECT VALUE b FROM `[{b:5}]` AS item, item.b AS b",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "correlatedJoinWithoutLexicalScope",
+    statement: "SELECT VALUE b FROM `[{b:5}]` AS item, item.b AS b",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         5
       ]
     }
   },
   {
-    name:"joinWithShadowedGlobal", // 'a' is a global variable
-    statement:"SELECT VALUE b FROM `[{b:5}]` AS a, a.b AS b",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "joinWithShadowedGlobal",
+    // 'a' is a global variable
+    statement: "SELECT VALUE b FROM `[{b:5}]` AS a, a.b AS b",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          c:{
-            d:{
-              e:5,
-              f:6
+          c: {
+            d: {
+              e: 5,
+              f: 6
             }
           }
         }
@@ -572,58 +663,70 @@ select_join::[
 
 'ordered names'::[
   {
-    name:"wildcardOrderedNames",
-    statement:"SELECT * FROM <<{'a': 1, 'b': 2 }>> AS f",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "wildcardOrderedNames",
+    statement: "SELECT * FROM <<{'a': 1, 'b': 2 }>> AS f",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          a:1,
-          b:2
+          a: 1,
+          b: 2
         }
       ]
     }
   },
   {
-    name:"aliasWildcardOrderedNames",
-    statement:"SELECT f.* FROM <<{'a': 1, 'b': 2 }>> AS f",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "aliasWildcardOrderedNames",
+    statement: "SELECT f.* FROM <<{'a': 1, 'b': 2 }>> AS f",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          a:1,
-          b:2
+          a: 1,
+          b: 2
         }
       ]
     }
   },
   {
-    name:"aliasWildcardOrderedNamesSelectList",
-    statement:"SELECT f.a, f.* FROM <<{'a': 1, 'b': 2 }>> AS f",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "aliasWildcardOrderedNamesSelectList",
+    statement: "SELECT f.a, f.* FROM <<{'a': 1, 'b': 2 }>> AS f",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          a:1,
-          a:1,
-          b:2
+          a: 1,
+          a: 1,
+          b: 2
         }
       ]
     }
   },
   {
-    name:"aliasOrderedNamesSelectList",
-    statement:"SELECT f.a, f.b FROM <<{'a': 1, 'b': 2 }>> AS f",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "aliasOrderedNamesSelectList",
+    statement: "SELECT f.a, f.b FROM <<{'a': 1, 'b': 2 }>> AS f",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          a:1,
-          b:2
+          a: 1,
+          b: 2
         }
       ]
     }
@@ -632,241 +735,276 @@ select_join::[
 
 'select distinct'::[
   {
-    name:"selectDistinct",
-    statement:"SELECT DISTINCT t.a FROM `[{a: 1}, {a: 2}, {a: 1}]` t",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectDistinct",
+    statement: "SELECT DISTINCT t.a FROM `[{a: 1}, {a: 2}, {a: 1}]` t",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          a:1
+          a: 1
         },
         {
-          a:2
+          a: 2
         }
       ]
     }
   },
   {
-    name:"selectDistinctWithAggregate",
-    statement:"SELECT SUM(DISTINCT t.a) AS a FROM `[{a:10}, {a:1}, {a:10}, {a:3}]` t",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectDistinctWithAggregate",
+    statement: "SELECT SUM(DISTINCT t.a) AS a FROM `[{a:10}, {a:1}, {a:10}, {a:3}]` t",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          a:14
+          a: 14
         }
       ]
     }
   },
   {
-    name:"selectDistinctSubQuery",
-    statement:"SELECT * FROM (SELECT DISTINCT t.a FROM `[{a: 1}, {a: 2}, {a: 1}]` t)",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectDistinctSubQuery",
+    statement: "SELECT * FROM (SELECT DISTINCT t.a FROM `[{a: 1}, {a: 2}, {a: 1}]` t)",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          a:1
+          a: 1
         },
         {
-          a:2
+          a: 2
         }
       ]
     }
   },
   {
-    name:"selectDistinctWithSubQuery",
-    statement:"SELECT DISTINCT * FROM (SELECT t.a FROM `[{a: 1}, {a: 2}, {a: 1}]` t)",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectDistinctWithSubQuery",
+    statement: "SELECT DISTINCT * FROM (SELECT t.a FROM `[{a: 1}, {a: 2}, {a: 1}]` t)",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          a:1
+          a: 1
         },
         {
-          a:2
+          a: 2
         }
       ]
     }
   },
   {
-    name:"selectDistinctAggregationWithGroupBy",
-    statement:"SELECT t.a, COUNT(DISTINCT t.b) AS c FROM `[{a:1, b:10}, {a:1, b:10}, {a:1, b:20}, {a:2, b:10}, {a:2, b:10}]` t GROUP by t.a",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectDistinctAggregationWithGroupBy",
+    statement: "SELECT t.a, COUNT(DISTINCT t.b) AS c FROM `[{a:1, b:10}, {a:1, b:10}, {a:1, b:20}, {a:2, b:10}, {a:2, b:10}]` t GROUP by t.a",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          a:1,
-          c:2
+          a: 1,
+          c: 2
         },
         {
-          a:2,
-          c:1
+          a: 2,
+          c: 1
         }
       ]
     }
   },
   {
-    name:"selectDistinctWithGroupBy",
-    statement:"SELECT DISTINCT t.a, COUNT(t.b) AS c FROM `[{a:1, b:10}, {a:1, b:10}, {a:1, b:20}, {a:2, b:10}, {a:2, b:10}]` t GROUP by t.a",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectDistinctWithGroupBy",
+    statement: "SELECT DISTINCT t.a, COUNT(t.b) AS c FROM `[{a:1, b:10}, {a:1, b:10}, {a:1, b:20}, {a:2, b:10}, {a:2, b:10}]` t GROUP by t.a",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          a:1,
-          c:3
+          a: 1,
+          c: 3
         },
         {
-          a:2,
-          c:2
+          a: 2,
+          c: 2
         }
       ]
     }
   },
   {
-    name:"selectDistinctWithJoin",
-    statement:"SELECT DISTINCT * FROM `[1, 1, 1, 1, 2]` t1, `[2, 2, 2, 2, 1]` t2",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectDistinctWithJoin",
+    statement: "SELECT DISTINCT * FROM `[1, 1, 1, 1, 2]` t1, `[2, 2, 2, 2, 1]` t2",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          _1:1,
-          _2:2
+          _1: 1,
+          _2: 2
         },
         {
-          _1:1,
-          _2:1
+          _1: 1,
+          _2: 1
         },
         {
-          _1:2,
-          _2:2
+          _1: 2,
+          _2: 2
         },
         {
-          _1:2,
-          _2:1
+          _1: 2,
+          _2: 1
         }
       ]
     }
   },
   {
-    name:"selectDistinctStarMixed",
-    statement:"SELECT DISTINCT * FROM [ 1, 1, 2, [1], [1], [1, 2], <<>>, <<>>, MISSING, NULL, NULL, MISSING, {'a':1}, {'a':1}, {'a':2}]",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectDistinctStarMixed",
+    statement: "SELECT DISTINCT * FROM [ 1, 1, 2, [1], [1], [1, 2], <<>>, <<>>, MISSING, NULL, NULL, MISSING, {'a':1}, {'a':1}, {'a':2}]",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          _1:1
+          _1: 1
         },
         {
-          _1:2
+          _1: 2
         },
         {
-          _1:[
+          _1: [
             1
           ]
         },
         {
-          _1:[
+          _1: [
             1,
             2
           ]
         },
         {
-          _1:$bag::[
-          ]
+          _1: $bag::[]
+        },
+        {},
+        {
+          _1: null
         },
         {
+          a: 1
         },
         {
-          _1:null
-        },
-        {
-          a:1
-        },
-        {
-          a:2
+          a: 2
         }
       ]
     }
   },
   {
-    name:"selectDistinctStarScalars",
-    statement:"SELECT DISTINCT * FROM [1, 1, 2]",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectDistinctStarScalars",
+    statement: "SELECT DISTINCT * FROM [1, 1, 2]",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          _1:1
+          _1: 1
         },
         {
-          _1:2
+          _1: 2
         }
       ]
     }
   },
   {
-    name:"selectDistinctStarStructs",
-    statement:"SELECT DISTINCT * FROM [ {'a':1}, {'a':1}, {'a':2} ]",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectDistinctStarStructs",
+    statement: "SELECT DISTINCT * FROM [ {'a':1}, {'a':1}, {'a':2} ]",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          a:1
+          a: 1
         },
         {
-          a:2
+          a: 2
         }
       ]
     }
   },
   {
-    name:"selectDistinctStarUnknowns",
-    statement:"SELECT DISTINCT * FROM [MISSING, NULL, NULL, MISSING]",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        {
-        },
-        {
-          _1:null
-        }
-      ]
-    }
+    name: "selectDistinctStarUnknowns",
+    statement: "SELECT DISTINCT * FROM [MISSING, NULL, NULL, MISSING]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
+          {},
+          {
+            _1: null
+          }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      }
+    ]
   },
   {
-    name:"selectDistinctStarBags",
-    statement:"SELECT DISTINCT * FROM [ <<>>, <<>>, <<1>>, <<1>>, <<1, 2>>, <<2, 1>>, <<3, 4>>]",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectDistinctStarBags",
+    statement: "SELECT DISTINCT * FROM [ <<>>, <<>>, <<1>>, <<1>>, <<1, 2>>, <<2, 1>>, <<3, 4>>]",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          _1:$bag::[
-          ]
+          _1: $bag::[]
         },
         {
-          _1:$bag::[
+          _1: $bag::[
             1
           ]
         },
         {
-          _1:$bag::[
+          _1: $bag::[
             1,
             2
           ]
         },
         {
-          _1:$bag::[
+          _1: $bag::[
             3,
             4
           ]
@@ -875,19 +1013,22 @@ select_join::[
     }
   },
   {
-    name:"selectDistinctStarLists",
-    statement:"SELECT DISTINCT * FROM [[1], [1], [1, 2]]",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectDistinctStarLists",
+    statement: "SELECT DISTINCT * FROM [[1], [1], [1, 2]]",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          _1:[
+          _1: [
             1
           ]
         },
         {
-          _1:[
+          _1: [
             1,
             2
           ]
@@ -896,28 +1037,34 @@ select_join::[
     }
   },
   {
-    name:"selectDistinctStarIntegers",
-    statement:"SELECT DISTINCT * FROM [ 1, 1, 2 ]",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectDistinctStarIntegers",
+    statement: "SELECT DISTINCT * FROM [ 1, 1, 2 ]",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          _1:1
+          _1: 1
         },
         {
-          _1:2
+          _1: 2
         }
       ]
     }
   },
   {
-    name:"selectDistinctValue",
-    statement:"SELECT DISTINCT VALUE t FROM [1,2,3,1,1,1,1,1] t",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectDistinctValue",
+    statement: "SELECT DISTINCT VALUE t FROM [1,2,3,1,1,1,1,1] t",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         1,
         2,
         3
@@ -925,33 +1072,39 @@ select_join::[
     }
   },
   {
-    name:"selectDistinctExpressionAndWhere",
-    statement:"SELECT DISTINCT (t.a + t.b) as c FROM `[{a: 1, b: 1}, {a: 2, b: 0}, {a: 0, b: 2}, {a: 2, b: 2}, {a: 0, b: 99}]` t WHERE t.a > 0",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectDistinctExpressionAndWhere",
+    statement: "SELECT DISTINCT (t.a + t.b) as c FROM `[{a: 1, b: 1}, {a: 2, b: 0}, {a: 0, b: 2}, {a: 2, b: 2}, {a: 0, b: 99}]` t WHERE t.a > 0",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          c:2
+          c: 2
         },
         {
-          c:4
+          c: 4
         }
       ]
     }
   },
   {
-    name:"selectDistinctExpression",
-    statement:"SELECT DISTINCT (t.a || t.b) as c FROM `[{a: \"1\", b: \"1\"}, {a: \"11\", b: \"\"}, {a: \"\", b: \"11\"}, {a: \"2\", b: \"2\"}]` t",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
+    name: "selectDistinctExpression",
+    statement: "SELECT DISTINCT (t.a || t.b) as c FROM `[{a: \"1\", b: \"1\"}, {a: \"11\", b: \"\"}, {a: \"\", b: \"11\"}, {a: \"2\", b: \"2\"}]` t",
+    assert: {
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      result: EvaluationSuccess,
+      output: $bag::[
         {
-          c:"11"
+          c: "11"
         },
         {
-          c:"22"
+          c: "22"
         }
       ]
     }
@@ -960,203 +1113,201 @@ select_join::[
 
 select_bugs::[
   {
-    name:"MYSQL_SELECT_BUG_01",
-    statement:"select * from t1 left join t2 on t1.a = t2.c where t2.d in (4)",
-    env:{
-      t1:[
+    name: "MYSQL_SELECT_BUG_01",
+    statement: "select * from t1 left join t2 on t1.a = t2.c where t2.d in (4)",
+    env: {
+      t1: [
         {
-          a:1,
-          b:2
+          a: 1,
+          b: 2
         },
         {
-          a:2,
-          b:2
+          a: 2,
+          b: 2
         },
         {
-          a:3,
-          b:2
+          a: 3,
+          b: 2
         },
         {
-          a:4,
-          b:2
+          a: 4,
+          b: 2
         }
       ],
-      t2:[
+      t2: [
         {
-          c:1,
-          d:3
+          c: 1,
+          d: 3
         },
         {
-          c:2,
-          d:3
+          c: 2,
+          d: 3
         },
         {
-          c:3,
-          d:4
+          c: 3,
+          d: 4
         },
         {
-          c:4,
-          d:4
+          c: 4,
+          d: 4
         }
       ]
     },
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          a:3,
-          b:2,
-          c:3,
-          d:4
+          a: 3,
+          b: 2,
+          c: 3,
+          d: 4
         },
         {
-          a:4,
-          b:2,
-          c:4,
-          d:4
+          a: 4,
+          b: 2,
+          c: 4,
+          d: 4
         }
       ]
     }
   },
   {
-    name:"MYSQL_SELECT_BUG_02",
-    statement:"select * from t1 left join t2 on t1.a = t2.c where t2.d = 4",
-    env:{
-      t1:[
+    name: "MYSQL_SELECT_BUG_02",
+    statement: "select * from t1 left join t2 on t1.a = t2.c where t2.d = 4",
+    env: {
+      t1: [
         {
-          a:1,
-          b:2
+          a: 1,
+          b: 2
         },
         {
-          a:2,
-          b:2
+          a: 2,
+          b: 2
         },
         {
-          a:3,
-          b:2
+          a: 3,
+          b: 2
         },
         {
-          a:4,
-          b:2
+          a: 4,
+          b: 2
         }
       ],
-      t2:[
+      t2: [
         {
-          c:1,
-          d:3
+          c: 1,
+          d: 3
         },
         {
-          c:2,
-          d:3
+          c: 2,
+          d: 3
         },
         {
-          c:3,
-          d:4
+          c: 3,
+          d: 4
         },
         {
-          c:4,
-          d:4
+          c: 4,
+          d: 4
         }
       ]
     },
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
+      output: $bag::[
         {
-          a:3,
-          b:2,
-          c:3,
-          d:4
+          a: 3,
+          b: 2,
+          c: 3,
+          d: 4
         },
         {
-          a:4,
-          b:2,
-          c:4,
-          d:4
+          a: 4,
+          b: 2,
+          c: 4,
+          d: 4
         }
       ]
     }
   },
   {
-    name:"MYSQL_SELECT_BUG_03",
-    statement:"SELECT kunde_id ,FK_firma_id ,aktuell, vorname, nachname, geloescht FROM t1 WHERE ( ( ( '' != '' AND firma LIKE ('%' || '' || '%') ) OR ( vorname LIKE ('%' || 'Vorname1' || '%') AND nachname LIKE ('%' || '1Nachname' || '%') AND 'Vorname1' != '' AND 'xxxx' != '' ) ) AND ( aktuell = 'Ja' AND geloescht = 'Nein' AND FK_firma_id = 2 ) )",
-    env:{
-      t1:[
+    name: "MYSQL_SELECT_BUG_03",
+    statement: "SELECT kunde_id ,FK_firma_id ,aktuell, vorname, nachname, geloescht FROM t1 WHERE ( ( ( '' != '' AND firma LIKE ('%' || '' || '%') ) OR ( vorname LIKE ('%' || 'Vorname1' || '%') AND nachname LIKE ('%' || '1Nachname' || '%') AND 'Vorname1' != '' AND 'xxxx' != '' ) ) AND ( aktuell = 'Ja' AND geloescht = 'Nein' AND FK_firma_id = 2 ) )",
+    env: {
+      t1: [
         {
-          kunde_intern_id:3964,
-          kunde_id:3051,
-          FK_firma_id:1,
-          aktuell:"Ja",
-          vorname:"Vorname1",
-          nachname:"1Nachname",
-          geloescht:"Nein",
-          firma:"Print Schau XXXX"
+          kunde_intern_id: 3964,
+          kunde_id: 3051,
+          FK_firma_id: 1,
+          aktuell: "Ja",
+          vorname: "Vorname1",
+          nachname: "1Nachname",
+          geloescht: "Nein",
+          firma: "Print Schau XXXX"
         },
         {
-          kunde_intern_id:3965,
-          kunde_id:3051111,
-          FK_firma_id:1,
-          aktuell:"Ja",
-          vorname:"Vorname1111",
-          nachname:"1111Nachname",
-          geloescht:"Nein",
-          firma:"Print Schau XXXX"
+          kunde_intern_id: 3965,
+          kunde_id: 3051111,
+          FK_firma_id: 1,
+          aktuell: "Ja",
+          vorname: "Vorname1111",
+          nachname: "1111Nachname",
+          geloescht: "Nein",
+          firma: "Print Schau XXXX"
         }
       ]
     },
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   },
   {
-    name:"MYSQL_SELECT_BUG_04",
-    statement:"SELECT kunde_id ,FK_firma_id ,aktuell, vorname, nachname, geloescht FROM t1 WHERE ( ( aktuell = 'Ja' AND geloescht = 'Nein' AND FK_firma_id = 2 ) AND ( ( '' != '' AND firma LIKE ('%' || '' || '%') ) OR ( vorname LIKE ('%' || 'Vorname1' || '%') AND nachname LIKE ('%' || '1Nachname' || '%') AND 'Vorname1' != '' AND 'xxxx' != '' ) ) )",
-    env:{
-      t1:[
+    name: "MYSQL_SELECT_BUG_04",
+    statement: "SELECT kunde_id ,FK_firma_id ,aktuell, vorname, nachname, geloescht FROM t1 WHERE ( ( aktuell = 'Ja' AND geloescht = 'Nein' AND FK_firma_id = 2 ) AND ( ( '' != '' AND firma LIKE ('%' || '' || '%') ) OR ( vorname LIKE ('%' || 'Vorname1' || '%') AND nachname LIKE ('%' || '1Nachname' || '%') AND 'Vorname1' != '' AND 'xxxx' != '' ) ) )",
+    env: {
+      t1: [
         {
-          kunde_intern_id:3964,
-          kunde_id:3051,
-          FK_firma_id:1,
-          aktuell:"Ja",
-          vorname:"Vorname1",
-          nachname:"1Nachname",
-          geloescht:"Nein",
-          firma:"Print Schau XXXX"
+          kunde_intern_id: 3964,
+          kunde_id: 3051,
+          FK_firma_id: 1,
+          aktuell: "Ja",
+          vorname: "Vorname1",
+          nachname: "1Nachname",
+          geloescht: "Nein",
+          firma: "Print Schau XXXX"
         },
         {
-          kunde_intern_id:3965,
-          kunde_id:3051111,
-          FK_firma_id:1,
-          aktuell:"Ja",
-          vorname:"Vorname1111",
-          nachname:"1111Nachname",
-          geloescht:"Nein",
-          firma:"Print Schau XXXX"
+          kunde_intern_id: 3965,
+          kunde_id: 3051111,
+          FK_firma_id: 1,
+          aktuell: "Ja",
+          vorname: "Vorname1111",
+          nachname: "1111Nachname",
+          geloescht: "Nein",
+          firma: "Print Schau XXXX"
         }
       ]
     },
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$bag::[
-      ]
+      output: $bag::[]
     }
   }
 ]
