@@ -3,24 +3,22 @@
     name:"cast to MISSING valid cases{value:\"NULL\"}",
     statement:"cast(NULL as MISSING)",
     assert:{
-      result:EvaluationSuccess,
+      result:EvaluationFail,
       evalMode:[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$missing::null
     }
   },
   {
     name:"cast to MISSING valid cases{value:\"MISSING\"}",
     statement:"cast(MISSING as MISSING)",
     assert:{
-      result:EvaluationSuccess,
+      result:EvaluationFail,
       evalMode:[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$missing::null
     }
   }
 ]
@@ -88,7 +86,7 @@
   },
   {
     name:"cast to int valid cases{value:\"9223372036854775807\",result:9223372036854775807}",
-    statement:"cast(9223372036854775807 as INT)",
+    statement:"cast(9223372036854775807 as BIGINT)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -100,7 +98,7 @@
   },
   {
     name:"cast to int valid cases{value:\"-9223372036854775808\",result:-9223372036854775808}",
-    statement:"cast(-9223372036854775808 as INT)",
+    statement:"cast(-9223372036854775808 as BIGINT)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -112,7 +110,7 @@
   },
   {
     name:"cast to int valid cases{value:\"`-9223372036854775808e0`\",result:-9223372036854775808}",
-    statement:"cast(`-9223372036854775808e0` as INT)",
+    statement:"cast(`-9223372036854775808e0` as BIGINT)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -124,7 +122,7 @@
   },
   {
     name:"cast to int valid cases{value:\"9223372036854775807.0\",result:9223372036854775807}",
-    statement:"cast(9223372036854775807.0 as INT)",
+    statement:"cast(9223372036854775807.0 as BIGINT)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -136,7 +134,7 @@
   },
   {
     name:"cast to int valid cases{value:\"-9223372036854775808.0\",result:-9223372036854775808}",
-    statement:"cast(-9223372036854775808.0 as INT)",
+    statement:"cast(-9223372036854775808.0 as BIGINT)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -477,24 +475,22 @@
     name:"cast to NULL valid cases{value:\"NULL\"}",
     statement:"cast(NULL as NULL)",
     assert:{
-      result:EvaluationSuccess,
+      result:EvaluationFail,
       evalMode:[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
     }
   },
   {
     name:"cast to NULL valid cases{value:\"MISSING\"}",
     statement:"cast(MISSING as NULL)",
     assert:{
-      result:EvaluationSuccess,
+      result:EvaluationFail,
       evalMode:[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
     }
   }
 ]
