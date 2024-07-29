@@ -71,7 +71,7 @@ bag::[
         name: "Example 6 — Value Coercion",
         statement: example_6,
         assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
+            evalMode: [EvalModeCoerce],
             result: EvaluationSuccess,
             output: $bag::[
                 { "_1": 1 },
