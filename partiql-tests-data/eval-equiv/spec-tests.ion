@@ -107,11 +107,17 @@
                 ]
             }
         },
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[1, 2]
-        }
+        assert: [
+            {
+                evalMode: EvalModeCoerce,
+                result: EvaluationSuccess,
+                output: $bag::[1, 2]
+            },
+            {
+                evalMode: EvalModeError,
+                result: EvaluationFail,
+            }
+        ]
     },
 ]
 'section-5'::[

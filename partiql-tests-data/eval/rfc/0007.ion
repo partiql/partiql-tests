@@ -174,14 +174,20 @@ bag::[
     {
         name: "Example 6 — Value Coercion; Coercion of single value",
         statement: '''SELECT * FROM << 1 >> OUTER UNION 'A' ''',
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[
-                { "_1": 1 },
-                "A",
-            ]
-        }
+        assert: [
+            {
+                evalMode: EvalModeCoerce,
+                result: EvaluationSuccess,
+                output: $bag::[
+                    { "_1": 1 },
+                    "A",
+                ]
+            },
+            {
+                evalMode: EvalModeError,
+                result: EvaluationFail
+            }
+        ]
     },
     {
         name: "Example 6 — Value Coercion",

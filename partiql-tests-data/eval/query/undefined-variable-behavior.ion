@@ -9,8 +9,7 @@ undefined_variable_behavior::[
     assert:[
       {
         evalMode:EvalModeCoerce,
-        result:EvaluationSuccess,
-        output:$missing::null
+        result:EvaluationFail,
       },
       {
         evalMode:EvalModeError,
@@ -24,8 +23,7 @@ undefined_variable_behavior::[
     assert:[
       {
         evalMode:EvalModeCoerce,
-        result:EvaluationSuccess,
-        output:true
+        result:EvaluationFail,
       },
       {
         evalMode:EvalModeError,
@@ -39,8 +37,7 @@ undefined_variable_behavior::[
     assert:[
       {
         evalMode:EvalModeCoerce,
-        result:EvaluationSuccess,
-        output:true
+        result:EvaluationFail,
       },
       {
         evalMode:EvalModeError,

@@ -170,18 +170,21 @@
   {
     name:"alias1.alias2.*",
     statement:"SELECT r.commander.* FROM ranks as r",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          first_name:"William",
-          last_name:"Riker"
-        }
-      ]
-    }
+    assert: [
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$bag::[
+          {
+            first_name:"William",
+            last_name:"Riker"
+          }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      }
+    ]
   },
 ]
