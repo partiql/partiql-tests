@@ -45,12 +45,17 @@ pivot::[
   {
     name:"pivotBadFieldType",
     statement:"PIVOT a.name AT i FROM animals AS a AT i",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:{
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output:{}
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
       }
-    }
+    ]
   },
   {
     name:"pivotUnpivotWithWhereOrderByLimit",
