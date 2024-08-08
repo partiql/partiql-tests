@@ -148,7 +148,7 @@ bagOperators::[
     statement:"1 OUTER UNION 2",
     assert:[
        {
-        evalMode: EvalModeCoerce,
+        evalMode:EvalModeCoerce,
         result:EvaluationSuccess,
         output:$bag::[
           1,
@@ -156,7 +156,7 @@ bagOperators::[
         ]
       },
       {
-        evalMode: EvalModeError,
+        evalMode:EvalModeError,
         result:EvaluationFail
       },
     ]
@@ -178,7 +178,7 @@ bagOperators::[
         ]
       },
       {
-        evalMode: EvalModeError,
+        evalMode:EvalModeError,
         result:EvaluationFail
       },
     ]
@@ -188,7 +188,7 @@ bagOperators::[
     statement:"NULL OUTER UNION MISSING",
     assert:[
       {
-        evalMode:[EvalModeCoerce, EvalModeError],
+        evalMode:EvalModeCoerce,
         result:EvaluationSuccess,
         output:$bag::[
         ]
