@@ -95,17 +95,23 @@ uncategorized::[
   {
     name:"variableShadow",  // Note that i, f, d, and s are defined in the global environment
     statement:"SELECT f, d, s FROM i AS f, f AS d, @f AS s WHERE f = 1 AND d = 2e0 and s = 1",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        {
-          f:1,
-          d:2e0,
-          s:1
-        }
-      ]
-    }
+    assert:[
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
+          {
+            f: 1,
+            d: 2e0,
+            s: 1
+          }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   {
     name:"selectValueStructConstructorWithMissing",
@@ -132,15 +138,21 @@ uncategorized::[
   {
     name:"selectIndexStruct",
     statement:"SELECT VALUE x[0] FROM (SELECT s.id FROM stores AS s) AS x",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        "5",
-        "6",
-        "7"
-      ]
-    }
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          $missing::null,
+          $missing::null,
+          $missing::null
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   {
     name:"selectStarSingleSource",
@@ -212,27 +224,39 @@ uncategorized::[
   {
     name:"emptySymbol",
     statement:"SELECT \"\" FROM `{'': 1}`",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        {
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          {
           '':1
-        }
-      ]
-    }
+          }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   {
     name:"emptySymbolInGlobals",
     statement:"SELECT * FROM \"\"",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        {
-          _1:1
-        }
-      ]
-    }
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          {
+            _1:1
+          }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   }
 ]

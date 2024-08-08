@@ -2,18 +2,21 @@
   {
     name:"Empty Symbol in table",
     statement:"SELECT \"\" FROM `{'': 1}`",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          '':1
-        }
-      ]
-    }
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $bag::[
+          {
+          '': 1
+          }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   {
     name:"Empty Symbol in globals",
@@ -21,18 +24,22 @@
     env:{
       '':1
     },
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          _1:1
-        }
-      ]
-    }
+    assert:[
+
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $bag::[
+          {
+            _1: 1
+          }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   {
     name:"Empty Symbol in alias",
@@ -42,17 +49,20 @@
         v:1
       }
     },
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          '':1
-        }
-      ]
-    }
+    assert: [
+      {
+        result: EvaluationSuccess,
+        evalMode: EvalModeCoerce,
+        output: $bag::[
+          {
+          '': 1
+          }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   }
 ]

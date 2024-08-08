@@ -129,21 +129,27 @@
   {
     name:"projectOfUnpivotPath",
     statement:"SELECT * FROM <<{'name': 'Marrowstone Brewing'}, {'name': 'Tesla'}>>.*",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        {
-          _1:$bag::[
-            {
-              name:"Marrowstone Brewing"
-            },
-            {
-              name:"Tesla"
-            }
-          ]
-        }
-      ]
-    }
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
+          {
+            _1:$bag::[
+              {
+                name:"Marrowstone Brewing"
+              },
+              {
+                name:"Tesla"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      }
+    ]
   }
 ]
