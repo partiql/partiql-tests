@@ -550,14 +550,17 @@ pathUnpivotMissing::[
   {
     name: "unpivotMissing",
     statement: "SELECT * FROM UNPIVOT MISSING",
-    assert: {
-      evalMode: [
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      result: EvaluationSuccess,
-      output: $bag::[]
-    }
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      }
+    ]
   },
   {
     name: "unpivotEmptyStruct",
@@ -586,26 +589,32 @@ pathUnpivotMissing::[
   {
     name: "unpivotMissingWithAsAndAt",
     statement: "SELECT unnestIndex, unnestValue FROM UNPIVOT MISSING AS unnestValue AT unnestIndex",
-    assert: {
-      evalMode: [
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      result: EvaluationSuccess,
-      output: $bag::[]
-    }
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      }
+    ]
   },
   {
     name: "unpivotMissingCrossJoinWithAsAndAt",
     statement: "SELECT unnestIndex, unnestValue FROM MISSING, UNPIVOT MISSING AS unnestValue AT unnestIndex",
-    assert: {
-      evalMode: [
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      result: EvaluationSuccess,
-      output: $bag::[]
-    }
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      }
+    ]
   },
   {
     name: "pathUnpivotEmptyStruct1",

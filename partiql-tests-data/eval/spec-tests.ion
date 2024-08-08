@@ -145,11 +145,17 @@
     {
         name: "single source FROM with scalar",
         statement: "SELECT x FROM someOrderedTable[0].a AS x",
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[{x: 0}]
-        }
+        assert: [
+            {
+                evalMode: EvalModeCoerce,
+                result: EvaluationSuccess,
+                output: $bag::[{x: 0}]
+            },
+            {
+                evalMode: EvalModeError,
+                result: EvaluationFail,
+            }
+        ]
     },
     {
         name: "single source FROM with scalar and AT clause",
@@ -169,11 +175,17 @@
     {
         name: "single source FROM with tuple",
         statement: "SELECT x FROM {'someKey': 'someValue' } AS x",
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[{x: {someKey: "someValue"}}]
-        }
+        assert: [
+            {
+                evalMode: EvalModeCoerce,
+                result: EvaluationSuccess,
+                output: $bag::[{x: {someKey: "someValue"}}]
+            },
+            {
+                evalMode: EvalModeError,
+                result: EvaluationFail,
+            }
+        ]
     },
     {
         name: "single source FROM with tuple and AT clause",
@@ -193,11 +205,17 @@
     {
         name: "single source FROM with absent value null",
         statement: "SELECT x FROM NULL AS x",
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[{x: null}]
-        }
+        assert: [
+            {
+                evalMode: EvalModeCoerce,
+                result: EvaluationSuccess,
+                output: $bag::[{x: null}]
+            },
+            {
+                evalMode: EvalModeError,
+                result: EvaluationFail,
+            }
+        ]
     },
     {
         name: "single source FROM with absent value null and AT clause",
@@ -217,11 +235,17 @@
     {
         name: "single source FROM with absent value missing",
         statement: "SELECT x FROM MISSING AS x",
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[{}]
-        }
+        assert: [
+            {
+                evalMode: EvalModeCoerce,
+                result: EvaluationSuccess,
+                output: $bag::[{}]
+            },
+            {
+                evalMode: EvalModeError,
+                result: EvaluationFail,
+            },
+        ]
     },
     {
         name: "single source FROM with absent value missing and AT clause",
@@ -374,11 +398,17 @@
     {
         name: "pivot into a tuple with invalid attribute name",
         statement: "PIVOT t.price AT t.sym FROM [{'sym':25, 'price':31.52}, {'sym':'amzn', 'price':840.05}] AS t",
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: {amzn: 840.05}
-        }
+        assert: [
+            {
+                evalMode: EvalModeCoerce,
+                result: EvaluationSuccess,
+                output: {amzn: 840.05}
+            },
+            {
+                evalMode: EvalModeError,
+                result: EvaluationFail,
+            }
+        ]
     },
     {
         name: "select variable star with non tuples",

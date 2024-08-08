@@ -146,40 +146,60 @@ bagOperators::[
   {
     name:"outerUnionCoerceScalar",
     statement:"1 OUTER UNION 2",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        1,
-        2
-      ]
-    }
+    assert:[
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
+          1,
+          2
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   {
     name:"outerUnionCoerceStruct",
     statement:"{'a': 1} OUTER UNION {'b': 2}",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        {
-          a:1
-        },
-        {
-          b:2
-        }
-      ]
-    }
+    assert:[
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
+          {
+            a: 1
+          },
+          {
+            b: 2
+          }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   {
     name:"outerUnionCoerceNullMissing",
     statement:"NULL OUTER UNION MISSING",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-      ]
-    }
+    assert: [
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          null,
+          $missing::null
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      }
+    ]
   },
   {
     name:"outerUnionCoerceList",
