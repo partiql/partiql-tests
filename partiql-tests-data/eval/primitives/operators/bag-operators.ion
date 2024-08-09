@@ -143,43 +143,62 @@ bagOperators::[
       ]
     }
   },
+  // outer union coercion
   {
     name:"outerUnionCoerceScalar",
     statement:"1 OUTER UNION 2",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        1,
-        2
-      ]
-    }
+    assert:[
+       {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          1,
+          2
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"outerUnionCoerceStruct",
     statement:"{'a': 1} OUTER UNION {'b': 2}",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        {
-          a:1
-        },
-        {
-          b:2
-        }
-      ]
-    }
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          {
+            a:1
+          },
+          {
+            b:2
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"outerUnionCoerceNullMissing",
     statement:"NULL OUTER UNION MISSING",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-      ]
-    }
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail
+      },
+    ]
   },
   {
     name:"outerUnionCoerceList",
@@ -193,6 +212,135 @@ bagOperators::[
         1,
         1,
         2
+      ]
+    }
+  },
+  // outer intersect coercion
+  {
+    name:"outerIntersectCoerceScalar",
+    statement:"1 OUTER INTERSECT 1",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          1
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
+  },
+  {
+    name:"outerIntersectCoerceStruct",
+    statement:"{'a': 1} OUTER INTERSECT {'a': 1}",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          {
+            a:1
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
+  },
+  {
+    name:"outerIntersectCoerceNullMissing",
+    statement:"NULL OUTER INTERSECT MISSING",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail
+      },
+    ]
+  },
+  {
+    name:"outerIntersectCoerceList",
+    statement:"[ 1, 1, 1 ] OUTER INTERSECT ALL [ 1, 2 ]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        1
+      ]
+    }
+  },
+  // outer except coercion
+  {
+    name:"outerExceptCoerceScalar",
+    statement:"1 OUTER EXCEPT 2",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          1
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
+  },
+  {
+    name:"outerExceptCoerceStruct",
+    statement:"{'a': 1} OUTER EXCEPT {'b': 2}",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          {
+            a:1
+          }
+        ]
+      },
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+    ]
+  },
+  {
+    name:"outerExceptCoerceNullMissing",
+    statement:"NULL OUTER EXCEPT MISSING",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail
+      },
+    ]
+  },
+  {
+    name:"outerExceptCoerceList",
+    statement:"[ 1, 1, 1 ] OUTER EXCEPT ALL [ 1, 2 ]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        1,
+        1
       ]
     }
   },
@@ -244,8 +392,8 @@ bagOperators::[
     }
   },
   {
-    name:"OUTER UNION with ORDER BY LIMIT on children and bag op",
-    statement:"(SELECT a, tbl FROM t1 ORDER BY a LIMIT 2) OUTER UNION ALL (SELECT a, tbl FROM t2 ORDER BY a LIMIT 2) ORDER BY a LIMIT 2",
+    name:"SQL UNION with ORDER BY LIMIT on children and bag op",
+    statement:"(SELECT a, tbl FROM t1 ORDER BY a LIMIT 2) UNION ALL (SELECT a, tbl FROM t2 ORDER BY a LIMIT 2) ORDER BY a LIMIT 2",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -262,8 +410,8 @@ bagOperators::[
     }
   },
   {
-    name:"OUTER INTERSECT with ORDER BY LIMIT on children and bag op",
-    statement:"(SELECT a FROM t1 ORDER BY a LIMIT 4) OUTER INTERSECT ALL (SELECT a FROM t2 ORDER BY a LIMIT 4) ORDER BY a LIMIT 2",
+    name:"SQL INTERSECT with ORDER BY LIMIT on children and bag op",
+    statement:"(SELECT a FROM t1 ORDER BY a LIMIT 4) INTERSECT ALL (SELECT a FROM t2 ORDER BY a LIMIT 4) ORDER BY a LIMIT 2",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -278,8 +426,8 @@ bagOperators::[
     }
   },
   {
-    name:"OUTER EXCEPT with ORDER BY LIMIT on children and bag op",
-    statement:"(SELECT a FROM t1 ORDER BY a LIMIT 2) OUTER EXCEPT ALL (SELECT a FROM t2 ORDER BY a LIMIT 2) ORDER BY a LIMIT 2",
+    name:"SQL EXCEPT with ORDER BY LIMIT on children and bag op",
+    statement:"(SELECT a FROM t1 ORDER BY a LIMIT 2) EXCEPT ALL (SELECT a FROM t2 ORDER BY a LIMIT 2) ORDER BY a LIMIT 2",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
