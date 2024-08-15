@@ -192,6 +192,8 @@ bagOperators::[
         evalMode:EvalModeCoerce,
         result:EvaluationSuccess,
         output:$bag::[
+          null,
+          $missing::null
         ]
       },
       {
@@ -259,7 +261,7 @@ bagOperators::[
       {
         evalMode:EvalModeCoerce,
         result:EvaluationSuccess,
-        output:$bag::[
+        output:$bag::[  // still empty bag since both sides coerce to bag of absent value
         ]
       },
       {
@@ -324,6 +326,7 @@ bagOperators::[
         evalMode:EvalModeCoerce,
         result:EvaluationSuccess,
         output:$bag::[
+          null
         ]
       },
       {

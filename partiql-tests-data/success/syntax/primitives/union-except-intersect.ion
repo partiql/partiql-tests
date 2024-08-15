@@ -221,7 +221,7 @@
         }
     },
     {
-        name: "disallow outer union with ORDER BY",
+        name: "allow outer union with ORDER BY",
         statement: '''
             (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
             OUTER UNION
@@ -229,11 +229,11 @@
             ORDER BY c3
             ''',
         assert: {
-            result: SyntaxFail
+            result: SyntaxSuccess
         }
     },
     {
-        name: "disallow outer union with LIMIT",
+        name: "allow outer union with LIMIT",
         statement: '''
             (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
             OUTER UNION
@@ -241,11 +241,11 @@
             LIMIT d3
             ''',
         assert: {
-            result: SyntaxFail
+            result: SyntaxSuccess
         }
     },
     {
-        name: "disallow outer union with OFFSET",
+        name: "allow outer union with OFFSET",
         statement: '''
             (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
             OUTER UNION
@@ -253,11 +253,11 @@
             OFFSET e3
             ''',
         assert: {
-            result: SyntaxFail
+            result: SyntaxSuccess
         }
     },
     {
-        name: "disallow outer intersect with ORDER BY",
+        name: "allow outer intersect with ORDER BY",
         statement: '''
             (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
             OUTER INTERSECT
@@ -265,11 +265,11 @@
             ORDER BY c3
             ''',
         assert: {
-            result: SyntaxFail
+            result: SyntaxSuccess
         }
     },
     {
-        name: "disallow outer intersect with LIMIT",
+        name: "allow outer intersect with LIMIT",
         statement: '''
             (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
             OUTER INTERSECT
@@ -277,11 +277,11 @@
             LIMIT d3
             ''',
         assert: {
-            result: SyntaxFail
+            result: SyntaxSuccess
         }
     },
     {
-        name: "disallow outer intersect with OFFSET",
+        name: "allow outer intersect with OFFSET",
         statement: '''
             (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
             OUTER INTERSECT
@@ -289,11 +289,11 @@
             OFFSET e3
             ''',
         assert: {
-            result: SyntaxFail
+            result: SyntaxSuccess
         }
     },
     {
-        name: "disallow outer except with ORDER BY",
+        name: "allow outer except with ORDER BY",
         statement: '''
             (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
             OUTER EXCEPT
@@ -301,11 +301,11 @@
             ORDER BY c3
             ''',
         assert: {
-            result: SyntaxFail
+            result: SyntaxSuccess
         }
     },
     {
-        name: "disallow outer except with LIMIT",
+        name: "allow outer except with LIMIT",
         statement: '''
             (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
             OUTER EXCEPT
@@ -313,11 +313,11 @@
             LIMIT d3
             ''',
         assert: {
-            result: SyntaxFail
+            result: SyntaxSuccess
         }
     },
     {
-        name: "disallow outer except with OFFSET",
+        name: "allow outer except with OFFSET",
         statement: '''
             (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
             OUTER EXCEPT
@@ -325,7 +325,7 @@
             OFFSET e3
             ''',
         assert: {
-            result: SyntaxFail
+            result: SyntaxSuccess
         }
     },
 ]
