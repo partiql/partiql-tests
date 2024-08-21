@@ -193,7 +193,6 @@ bagOperators::[
         result:EvaluationSuccess,
         output:$bag::[
           null,
-          $missing::null
         ]
       },
       {
@@ -261,7 +260,8 @@ bagOperators::[
       {
         evalMode:EvalModeCoerce,
         result:EvaluationSuccess,
-        output:$bag::[  // still empty bag since both sides coerce to bag of absent value
+        output:$bag::[
+          null
         ]
       },
       {
@@ -325,9 +325,7 @@ bagOperators::[
       {
         evalMode:EvalModeCoerce,
         result:EvaluationSuccess,
-        output:$bag::[
-          null
-        ]
+        output:$bag::[]
       },
       {
         evalMode: EvalModeError,
@@ -395,7 +393,7 @@ bagOperators::[
     }
   },
   {
-    name:"SQL UNION with ORDER BY LIMIT on children and bag op",
+    name:"SQL UNION with ORDER BY LIMIT on children and set op",
     statement:"(SELECT a, tbl FROM t1 ORDER BY a LIMIT 2) UNION ALL (SELECT a, tbl FROM t2 ORDER BY a LIMIT 2) ORDER BY a LIMIT 2",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
@@ -413,7 +411,7 @@ bagOperators::[
     }
   },
   {
-    name:"SQL INTERSECT with ORDER BY LIMIT on children and bag op",
+    name:"SQL INTERSECT with ORDER BY LIMIT on children and set op",
     statement:"(SELECT a FROM t1 ORDER BY a LIMIT 4) INTERSECT ALL (SELECT a FROM t2 ORDER BY a LIMIT 4) ORDER BY a LIMIT 2",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
@@ -429,8 +427,56 @@ bagOperators::[
     }
   },
   {
-    name:"SQL EXCEPT with ORDER BY LIMIT on children and bag op",
+    name:"SQL EXCEPT with ORDER BY LIMIT on children and set op",
     statement:"(SELECT a FROM t1 ORDER BY a LIMIT 2) EXCEPT ALL (SELECT a FROM t2 ORDER BY a LIMIT 2) ORDER BY a LIMIT 2",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[
+        {
+          a: 1,
+        },
+      ]
+    }
+  },
+  // following tests are equivalent to above but use the PartiQL outer bag op
+  {
+    name:"PartiQL OUTER UNION with ORDER BY LIMIT on children and bag op",
+    statement:"(SELECT a, tbl FROM t1 ORDER BY a LIMIT 2) OUTER UNION ALL (SELECT a, tbl FROM t2 ORDER BY a LIMIT 2) ORDER BY a LIMIT 2",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[
+        {
+          a: 1,
+          tbl: 1,
+        },
+        {
+          a: 2,
+          tbl: 1
+        }
+      ]
+    }
+  },
+  {
+    name:"PartiQL OUTER INTERSECT with ORDER BY LIMIT on children and bag op",
+    statement:"(SELECT a FROM t1 ORDER BY a LIMIT 4) OUTER INTERSECT ALL (SELECT a FROM t2 ORDER BY a LIMIT 4) ORDER BY a LIMIT 2",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[
+        {
+          a: 2,
+        },
+        {
+          a: 3,
+        }
+      ]
+    }
+  },
+  {
+    name:"PartiQL OUTER EXCEPT with ORDER BY LIMIT on children and bag op",
+    statement:"(SELECT a FROM t1 ORDER BY a LIMIT 2) OUTER EXCEPT ALL (SELECT a FROM t2 ORDER BY a LIMIT 2) ORDER BY a LIMIT 2",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
