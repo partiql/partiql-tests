@@ -158,7 +158,7 @@
 
 'order-by-limit-offset-bag-ops'::[
     {
-        name: "UNION SFW children with ORDER BY LIMIT OFFSET",
+        name: "SQL UNION SFW children with ORDER BY LIMIT OFFSET",
         statement: '''
             (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
             UNION
@@ -169,7 +169,7 @@
         }
     },
     {
-        name: "INTERSECT SFW children with ORDER BY LIMIT OFFSET",
+        name: "SQL INTERSECT SFW children with ORDER BY LIMIT OFFSET",
         statement: '''
             (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
             INTERSECT
@@ -180,7 +180,7 @@
         }
     },
     {
-        name: "EXCEPT SFW children with ORDER BY LIMIT OFFSET",
+        name: "SQL EXCEPT SFW children with ORDER BY LIMIT OFFSET",
         statement: '''
             (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
             EXCEPT
@@ -191,14 +191,14 @@
         }
     },
     {
-        name: "nested bag op with ORDER BY LIMIT OFFSET",
+        name: "nested SQL set op with ORDER BY LIMIT OFFSET",
         statement: '''
             (
                 (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
                 UNION DISTINCT
                 (SELECT a2 FROM b2 ORDER BY c2 LIMIT d2 OFFSET e2)
             )
-            OUTER UNION ALL
+            UNION ALL
             (SELECT a3 FROM b3 ORDER BY c3 LIMIT d3 OFFSET e3)
             ORDER BY c4 LIMIT d4 OFFSET e4''',
         assert: {
@@ -206,16 +206,124 @@
         }
     },
     {
-        name: "deep nested bag ops with ORDER BY LIMIT OFFSET",
+        name: "bag ops with ORDER BY LIMIT OFFSET in children",
         statement: '''
-            (a UNION b)
-            INTERSECT
-            (
-                c EXCEPT
-                d UNION ALL (e INTERSECT f ORDER BY g LIMIT h OFFSET i)
-            )
-            EXCEPT j
-            ORDER BY k LIMIT l OFFSET m''',
+            (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
+            OUTER UNION
+            (SELECT a2 FROM b2 ORDER BY c2 LIMIT d2 OFFSET e2)
+            OUTER INTERSECT ALL
+            (SELECT a3 FROM b3 ORDER BY c3 LIMIT d3 OFFSET e3)
+            OUTER EXCEPT DISTINCT
+            (SELECT a4 FROM b4 ORDER BY c4 LIMIT d4 OFFSET e4)
+            ''',
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "allow outer union with ORDER BY",
+        statement: '''
+            (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
+            OUTER UNION
+            (SELECT a2 FROM b2 ORDER BY c2 LIMIT d2 OFFSET e2)
+            ORDER BY c3
+            ''',
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "allow outer union with LIMIT",
+        statement: '''
+            (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
+            OUTER UNION
+            (SELECT a2 FROM b2 ORDER BY c2 LIMIT d2 OFFSET e2)
+            LIMIT d3
+            ''',
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "allow outer union with OFFSET",
+        statement: '''
+            (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
+            OUTER UNION
+            (SELECT a2 FROM b2 ORDER BY c2 LIMIT d2 OFFSET e2)
+            OFFSET e3
+            ''',
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "allow outer intersect with ORDER BY",
+        statement: '''
+            (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
+            OUTER INTERSECT
+            (SELECT a2 FROM b2 ORDER BY c2 LIMIT d2 OFFSET e2)
+            ORDER BY c3
+            ''',
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "allow outer intersect with LIMIT",
+        statement: '''
+            (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
+            OUTER INTERSECT
+            (SELECT a2 FROM b2 ORDER BY c2 LIMIT d2 OFFSET e2)
+            LIMIT d3
+            ''',
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "allow outer intersect with OFFSET",
+        statement: '''
+            (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
+            OUTER INTERSECT
+            (SELECT a2 FROM b2 ORDER BY c2 LIMIT d2 OFFSET e2)
+            OFFSET e3
+            ''',
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "allow outer except with ORDER BY",
+        statement: '''
+            (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
+            OUTER EXCEPT
+            (SELECT a2 FROM b2 ORDER BY c2 LIMIT d2 OFFSET e2)
+            ORDER BY c3
+            ''',
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "allow outer except with LIMIT",
+        statement: '''
+            (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
+            OUTER EXCEPT
+            (SELECT a2 FROM b2 ORDER BY c2 LIMIT d2 OFFSET e2)
+            LIMIT d3
+            ''',
+        assert: {
+            result: SyntaxSuccess
+        }
+    },
+    {
+        name: "allow outer except with OFFSET",
+        statement: '''
+            (SELECT a1 FROM b1 ORDER BY c1 LIMIT d1 OFFSET e1)
+            OUTER EXCEPT
+            (SELECT a2 FROM b2 ORDER BY c2 LIMIT d2 OFFSET e2)
+            OFFSET e3
+            ''',
         assert: {
             result: SyntaxSuccess
         }
