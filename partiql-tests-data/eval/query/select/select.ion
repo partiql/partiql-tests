@@ -417,24 +417,30 @@ select_join::[
   {
     name:"selectNonCorrelatedJoin", // Note that the joined someAlias is coming from the global scope without @-operator
     statement:"SELECT someAlias.id AS id, v AS title FROM stores AS someAlias, someAlias AS v",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        {
-          id:"5",
-          title:"hello"
-        },
-        {
-          id:"6",
-          title:"hello"
-        },
-        {
-          id:"7",
-          title:"hello"
-        }
-      ]
-    }
+    assert: [
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          {
+            id:"5",
+            title:"hello"
+          },
+          {
+            id:"6",
+            title:"hello"
+          },
+          {
+            id:"7",
+            title:"hello"
+          }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      }
+    ]
   },
   {
     name:"selectCorrelatedUnpivot",
@@ -531,42 +537,60 @@ select_join::[
   {
     name:"correlatedJoinWithShadowedAttributes",
     statement:"SELECT VALUE v FROM `[{v:5}]` AS item, @item.v AS v",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        5
-      ]
-    }
+    assert: [
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          5
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      }
+    ]
   },
   {
     name:"correlatedJoinWithoutLexicalScope",
     statement:"SELECT VALUE b FROM `[{b:5}]` AS item, item.b AS b",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        5
-      ]
-    }
+    assert: [
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          5
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      }
+    ]
   },
   {
     name:"joinWithShadowedGlobal", // 'a' is a global variable
     statement:"SELECT VALUE b FROM `[{b:5}]` AS a, a.b AS b",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        {
-          c:{
-            d:{
-              e:5,
-              f:6
+    assert: [
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$bag::[
+          {
+            c:{
+              d:{
+                e:5,
+                f:6
+              }
             }
           }
-        }
-      ]
-    }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail,
+      }
+    ]
   }
 ]
 
