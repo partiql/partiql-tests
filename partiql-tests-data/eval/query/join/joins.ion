@@ -593,7 +593,7 @@ join::[
         {
           name:"ee",
           n:42,
-          _3:null
+          _2:null
         }
       ]
     }
@@ -657,7 +657,9 @@ join::[
           name:"ee",
           s2_n:42,
           s2_2:2,
-          _4:null
+          name:null,
+          s3_n:null,
+          s3_2:null
         }
       ]
     }

@@ -350,7 +350,8 @@ select_join::[
       result:EvaluationSuccess,
       output:$bag::[
         {
-          id:"7"
+          id:"7",
+          title: null
         }
       ]
     }
@@ -363,7 +364,8 @@ select_join::[
       result:EvaluationSuccess,
       output:$bag::[
         {
-          id:"5"
+          id:"5",
+          title: null
         },
         {
           id:"6",
@@ -374,7 +376,8 @@ select_join::[
           title:"F"
         },
         {
-          id:"7"
+          id:"7",
+          title: null
         }
       ]
     }
