@@ -982,9 +982,8 @@
         result:EvaluationFail
       },
       {
-        result:EvaluationSuccess,
+        result:EvaluationFail,
         evalMode:EvalModeCoerce,
-        output:$bag::[]
       }
     ]
   },
@@ -997,9 +996,8 @@
         result:EvaluationFail
       },
       {
-        result:EvaluationSuccess,
+        result:EvaluationFail,
         evalMode:EvalModeCoerce,
-        output:$bag::[]
       }
     ]
   },
@@ -1012,9 +1010,8 @@
         result:EvaluationFail
       },
       {
-        result:EvaluationSuccess,
+        result:EvaluationFail,
         evalMode:EvalModeCoerce,
-        output:$bag::[]
       }
     ]
   },
@@ -1027,9 +1024,8 @@
         result:EvaluationFail
       },
       {
-        result:EvaluationSuccess,
+        result:EvaluationFail,
         evalMode:EvalModeCoerce,
-        output:$bag::[]
       }
     ]
   }
@@ -7530,8 +7526,8 @@
     }
   },
   {
-    name:"GROUP BY with JOIN : SELECT supplierName, COUNT(*) as the_count FROM suppliers AS s INNER JOIN products AS p ON s.supplierId = p.supplierId GROUP BY supplierName",
-    statement:"SELECT supplierName, COUNT(*) as the_count FROM suppliers AS s INNER JOIN products AS p ON s.supplierId = p.supplierId GROUP BY supplierName",
+    name:"GROUP BY with JOIN : SELECT supplierName, COUNT(*) as the_count FROM suppliers AS s INNER JOIN products AS p ON s.supplierId = p.supplierId GROUP BY s.supplierName",
+    statement:"SELECT supplierName, COUNT(*) as the_count FROM suppliers AS s INNER JOIN products AS p ON s.supplierId = p.supplierId GROUP BY s.supplierName",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -8166,8 +8162,8 @@
     }
   },
   {
-    name:"SELECT col1, g FROM simple_1_col_1_group, join_me GROUP BY col1 GROUP AS g",
-    statement:"SELECT col1, g FROM simple_1_col_1_group, join_me GROUP BY col1 GROUP AS g",
+    name:"SELECT col1, g FROM simple_1_col_1_group, join_me GROUP BY simple_1_col_1_group.col1 GROUP AS g",
+    statement:"SELECT col1, g FROM simple_1_col_1_group, join_me GROUP BY simple_1_col_1_group.col1 GROUP AS g",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -8216,8 +8212,8 @@
     }
   },
   {
-    name:"SELECT VALUE { 'col1': col1, 'g': g } FROM simple_1_col_1_group, join_me GROUP BY col1 GROUP AS g",
-    statement:"SELECT VALUE { 'col1': col1, 'g': g } FROM simple_1_col_1_group, join_me GROUP BY col1 GROUP AS g",
+    name:"SELECT VALUE { 'col1': col1, 'g': g } FROM simple_1_col_1_group, join_me GROUP BY simple_1_col_1_group.col1 GROUP AS g",
+    statement:"SELECT VALUE { 'col1': col1, 'g': g } FROM simple_1_col_1_group, join_me GROUP BY simple_1_col_1_group.col1 GROUP AS g",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -8266,8 +8262,8 @@
     }
   },
   {
-    name:"SELECT col1, g FROM simple_1_col_1_group, different_types_per_row GROUP BY col1 GROUP AS g",
-    statement:"SELECT col1, g FROM simple_1_col_1_group, different_types_per_row GROUP BY col1 GROUP AS g",
+    name:"SELECT col1, g FROM simple_1_col_1_group, different_types_per_row GROUP BY simple_1_col_1_group.col1 GROUP AS g",
+    statement:"SELECT col1, g FROM simple_1_col_1_group, different_types_per_row GROUP BY simple_1_col_1_group.col1 GROUP AS g",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -8324,8 +8320,8 @@
     }
   },
   {
-    name:"SELECT VALUE { 'col1': col1, 'g': g } FROM simple_1_col_1_group, different_types_per_row GROUP BY col1 GROUP AS g",
-    statement:"SELECT VALUE { 'col1': col1, 'g': g } FROM simple_1_col_1_group, different_types_per_row GROUP BY col1 GROUP AS g",
+    name:"SELECT VALUE { 'col1': col1, 'g': g } FROM simple_1_col_1_group, different_types_per_row GROUP BY simple_1_col_1_group.col1 GROUP AS g",
+    statement:"SELECT VALUE { 'col1': col1, 'g': g } FROM simple_1_col_1_group, different_types_per_row GROUP BY simple_1_col_1_group.col1 GROUP AS g",
     assert:{
       result:EvaluationSuccess,
       evalMode:[

@@ -11373,7 +11373,7 @@ select::[
   },
   {
     name:"MYSQL_SELECT_20",
-    statement:"select fld3,period from t1,t2 where fld1 = 011401",
+    statement:"select t2.fld3,t1.period from t1,t2 where t2.fld1 = 011401",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -11390,7 +11390,7 @@ select::[
   },
   {
     name:"MYSQL_SELECT_21",
-    statement:"select fld3,period from t2,t1 where companynr*10 = 37*10",
+    statement:"select t2.fld3,t1.period from t2,t1 where t2.companynr*10 = 37*10",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
