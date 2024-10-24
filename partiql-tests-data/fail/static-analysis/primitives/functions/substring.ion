@@ -27,8 +27,8 @@ wrong_num_function_args::[
 invalid_function_args::[
   substring::[
     {
-      name:"substring wrong type of arguments{sql:\"substring('', `{}`)\"}",
-      statement:"substring('', `{}`)",
+      name:"substring wrong type of arguments{sql:\"substring('', {})\"}",
+      statement:"substring('', {})",
       assert: {
         result: StaticAnalysisFail
       },

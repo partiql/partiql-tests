@@ -1,0 +1,18 @@
+'project various container types'::[
+  {
+    name:"projectOfSexp",
+    statement:"SELECT * FROM `(1 2)` as foo",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        {
+          _1:(
+            1
+            2
+          )
+        }
+      ]
+    }
+  },
+]

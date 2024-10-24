@@ -250,7 +250,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" '_'         \",pattern:\" '_'          \"}",
-    statement:"SELECT * FROM `[true]` WHERE '_' LIKE '_'",
+    statement:"SELECT * FROM [TRUE] WHERE '_' LIKE '_'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -266,7 +266,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" '_'         \",pattern:\" '%'          \"}",
-    statement:"SELECT * FROM `[true]` WHERE '_' LIKE '%'",
+    statement:"SELECT * FROM [TRUE] WHERE '_' LIKE '%'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -282,7 +282,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" '%'         \",pattern:\" '_'          \"}",
-    statement:"SELECT * FROM `[true]` WHERE '%' LIKE '_'",
+    statement:"SELECT * FROM [TRUE] WHERE '%' LIKE '_'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -298,7 +298,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" '%'         \",pattern:\" '%'          \"}",
-    statement:"SELECT * FROM `[true]` WHERE '%' LIKE '%'",
+    statement:"SELECT * FROM [TRUE] WHERE '%' LIKE '%'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -314,7 +314,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'A'         \",pattern:\" 'A'          \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'A' LIKE 'A'",
+    statement:"SELECT * FROM [TRUE] WHERE 'A' LIKE 'A'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -330,7 +330,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" '\\\\'        \",pattern:\" '\\\\'         \"}",
-    statement:"SELECT * FROM `[true]` WHERE '\\' LIKE '\\'",
+    statement:"SELECT * FROM [TRUE] WHERE '\\' LIKE '\\'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -346,7 +346,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" ''        \",pattern:\" ''         \"}",
-    statement:"SELECT * FROM `[true]` WHERE '$$' LIKE '$$'",
+    statement:"SELECT * FROM [TRUE] WHERE '$$' LIKE '$$'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -362,7 +362,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '_BC'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '_BC'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '_BC'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -378,7 +378,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'A_C'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'A_C'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE 'A_C'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -394,7 +394,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'AB_'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'AB_'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE 'AB_'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -410,7 +410,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '___'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '___'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '___'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -426,7 +426,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'A__'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'A__'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE 'A__'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -442,7 +442,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '__C'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '__C'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '__C'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -458,7 +458,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%'          \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '%'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '%'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -474,7 +474,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%%%%'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '%%%%'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '%%%%'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -490,7 +490,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%ABC'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '%ABC'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '%ABC'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -506,7 +506,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%BC'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '%BC'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '%BC'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -522,7 +522,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%C'         \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '%C'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '%C'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -538,7 +538,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'ABC%'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'ABC%'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE 'ABC%'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -554,7 +554,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'AB%'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'AB%'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE 'AB%'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -570,7 +570,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'A%'         \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'A%'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE 'A%'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -586,7 +586,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'A%%%'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'A%%%'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE 'A%%%'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -602,7 +602,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" 'A%C'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'A%C'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE 'A%C'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -618,7 +618,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%c'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%c'",
+    statement:"SELECT * FROM [TRUE] WHERE 'AAaBBbCCc' LIKE 'A%c'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -634,7 +634,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%%c'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%%c'",
+    statement:"SELECT * FROM [TRUE] WHERE 'AAaBBbCCc' LIKE 'A%%c'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -650,7 +650,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%B%c'      \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%B%c'",
+    statement:"SELECT * FROM [TRUE] WHERE 'AAaBBbCCc' LIKE 'A%B%c'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -666,7 +666,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%%B%%c'    \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%%B%%c'",
+    statement:"SELECT * FROM [TRUE] WHERE 'AAaBBbCCc' LIKE 'A%%B%%c'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -682,7 +682,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%A%c'      \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%A%c'",
+    statement:"SELECT * FROM [TRUE] WHERE 'AAaBBbCCc' LIKE 'A%A%c'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -698,7 +698,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%%%A%%%%c' \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%%%A%%%%c'",
+    statement:"SELECT * FROM [TRUE] WHERE 'AAaBBbCCc' LIKE 'A%%%A%%%%c'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -714,7 +714,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%Aa%c'     \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%Aa%c'",
+    statement:"SELECT * FROM [TRUE] WHERE 'AAaBBbCCc' LIKE 'A%Aa%c'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -730,7 +730,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%%'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%%'",
+    statement:"SELECT * FROM [TRUE] WHERE 'AAaBBbCCc' LIKE 'A%%'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -746,7 +746,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" '%B%C%'      \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE '%B%C%'",
+    statement:"SELECT * FROM [TRUE] WHERE 'AAaBBbCCc' LIKE '%B%C%'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -762,7 +762,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" '%B%C%%'     \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE '%B%C%%'",
+    statement:"SELECT * FROM [TRUE] WHERE 'AAaBBbCCc' LIKE '%B%C%%'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -778,7 +778,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" '%bC%'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE '%bC%'",
+    statement:"SELECT * FROM [TRUE] WHERE 'AAaBBbCCc' LIKE '%bC%'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -794,7 +794,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" '%b%C%'      \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE '%b%C%'",
+    statement:"SELECT * FROM [TRUE] WHERE 'AAaBBbCCc' LIKE '%b%C%'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -810,7 +810,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%_%_%_%'    \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '%_%_%_%'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '%_%_%_%'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -826,7 +826,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '_%_%_%'     \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '_%_%_%'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '_%_%_%'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -842,7 +842,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '%_%_%_'     \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '%_%_%_'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '%_%_%_'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -858,7 +858,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '_%_%_'      \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '_%_%_'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '_%_%_'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -874,7 +874,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '_%%_%%%_'   \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '_%%_%%%_'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '_%%_%%%_'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -890,7 +890,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'ABC'       \",pattern:\" '_%%B%%%_'   \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '_%%B%%%_'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '_%%B%%%_'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -906,7 +906,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that match{text:\" 'AAaBBbCCc' \",pattern:\" '%__b%C_%'   \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE '%__b%C_%'",
+    statement:"SELECT * FROM [TRUE] WHERE 'AAaBBbCCc' LIKE '%__b%C_%'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -922,7 +922,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" 'A'         \",pattern:\" 'a'          \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'A' LIKE 'a'",
+    statement:"SELECT * FROM [TRUE] WHERE 'A' LIKE 'a'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -935,7 +935,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" '\\\\'        \",pattern:\" '/'         \"}",
-    statement:"SELECT * FROM `[true]` WHERE '\\' LIKE '/'",
+    statement:"SELECT * FROM [TRUE] WHERE '\\' LIKE '/'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -948,7 +948,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" ''        \",pattern:\" '^'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE '$$' LIKE '^$$'",
+    statement:"SELECT * FROM [TRUE] WHERE '$$' LIKE '^$$'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -961,7 +961,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '_AC'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '_AC'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '_AC'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -974,7 +974,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" 'A_B'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'A_B'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE 'A_B'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -987,7 +987,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" 'AB_C'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'AB_C'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE 'AB_C'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1000,7 +1000,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '_ABC'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '_ABC'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '_ABC'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1013,7 +1013,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" 'ABC_'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'ABC_'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE 'ABC_'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1026,7 +1026,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '__'         \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '__'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '__'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1039,7 +1039,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '____'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '____'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '____'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1052,7 +1052,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" 'B%'         \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'B%'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE 'B%'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1065,7 +1065,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '%B'         \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '%B'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '%B'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1078,7 +1078,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '%BCD'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '%BCD'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '%BCD'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1091,7 +1091,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" 'B%C'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE 'B%C'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE 'B%C'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1104,7 +1104,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%Xc'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%Xc'",
+    statement:"SELECT * FROM [TRUE] WHERE 'AAaBBbCCc' LIKE 'A%Xc'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1117,7 +1117,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'AX%c'       \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'AX%c'",
+    statement:"SELECT * FROM [TRUE] WHERE 'AAaBBbCCc' LIKE 'AX%c'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1130,7 +1130,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%X%c'      \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%X%c'",
+    statement:"SELECT * FROM [TRUE] WHERE 'AAaBBbCCc' LIKE 'A%X%c'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1143,7 +1143,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%%X%%c'    \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%%X%%c'",
+    statement:"SELECT * FROM [TRUE] WHERE 'AAaBBbCCc' LIKE 'A%%X%%c'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1156,7 +1156,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%%%X%%%%c' \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%%%X%%%%c'",
+    statement:"SELECT * FROM [TRUE] WHERE 'AAaBBbCCc' LIKE 'A%%%X%%%%c'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1169,7 +1169,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'A%Aba%c'    \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'A%Aba%c'",
+    statement:"SELECT * FROM [TRUE] WHERE 'AAaBBbCCc' LIKE 'A%Aba%c'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1182,7 +1182,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" 'AAaBBbCCc' \",pattern:\" 'X%%'        \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'AAaBBbCCc' LIKE 'X%%'",
+    statement:"SELECT * FROM [TRUE] WHERE 'AAaBBbCCc' LIKE 'X%%'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1195,7 +1195,7 @@ like::[
   },
   {
     name:"non-empty strings for text and pattern that DO NOT match{text:\" 'ABC'       \",pattern:\" '%_%_%_%_%'  \"}",
-    statement:"SELECT * FROM `[true]` WHERE 'ABC' LIKE '%_%_%_%_%'",
+    statement:"SELECT * FROM [TRUE] WHERE 'ABC' LIKE '%_%_%_%_%'",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1208,7 +1208,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that match{text:\" '_'          \",pattern:\" '[_'            \"}",
-    statement:"SELECT * FROM `[true]` WHERE '_' LIKE '[_' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '_' LIKE '[_' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1224,7 +1224,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that match{text:\" '%'          \",pattern:\" '[%'            \"}",
-    statement:"SELECT * FROM `[true]` WHERE '%' LIKE '[%' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '%' LIKE '[%' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1240,7 +1240,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that match{text:\" '100%'       \",pattern:\" '100[%'         \"}",
-    statement:"SELECT * FROM `[true]` WHERE '100%' LIKE '100[%' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '100%' LIKE '100[%' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1256,7 +1256,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that match{text:\" '100%'       \",pattern:\" '%[%'           \"}",
-    statement:"SELECT * FROM `[true]` WHERE '100%' LIKE '%[%' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '100%' LIKE '%[%' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1272,7 +1272,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that match{text:\" '100%'       \",pattern:\" '1__[%'         \"}",
-    statement:"SELECT * FROM `[true]` WHERE '100%' LIKE '1__[%' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '100%' LIKE '1__[%' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1288,7 +1288,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that match{text:\" '100%'       \",pattern:\" '1%[%'          \"}",
-    statement:"SELECT * FROM `[true]` WHERE '100%' LIKE '1%[%' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '100%' LIKE '1%[%' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1304,7 +1304,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that match{text:\" '11%22%33%'  \",pattern:\" '1%[%2%[%3%[%'  \"}",
-    statement:"SELECT * FROM `[true]` WHERE '11%22%33%' LIKE '1%[%2%[%3%[%' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '11%22%33%' LIKE '1%[%2%[%3%[%' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1320,7 +1320,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that match{text:\" '11%22%33%'  \",pattern:\" '1_[%2%[%3_[%'  \"}",
-    statement:"SELECT * FROM `[true]` WHERE '11%22%33%' LIKE '1_[%2%[%3_[%' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '11%22%33%' LIKE '1_[%2%[%3_[%' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1336,7 +1336,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that match{text:\" '11%22%33%'  \",pattern:\" '%[%%[%%[%'     \"}",
-    statement:"SELECT * FROM `[true]` WHERE '11%22%33%' LIKE '%[%%[%%[%' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '11%22%33%' LIKE '%[%%[%%[%' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1352,7 +1352,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that match{text:\" '11%22%33%'  \",pattern:\" '__[%__[%__[%'  \"}",
-    statement:"SELECT * FROM `[true]` WHERE '11%22%33%' LIKE '__[%__[%__[%' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '11%22%33%' LIKE '__[%__[%__[%' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1368,7 +1368,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that match{text:\" '1_000_000%' \",pattern:\" '1[_000[_000[%' \"}",
-    statement:"SELECT * FROM `[true]` WHERE '1_000_000%' LIKE '1[_000[_000[%' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '1_000_000%' LIKE '1[_000[_000[%' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1384,7 +1384,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that match{text:\" '1_000_000%' \",pattern:\" '_[_000[_000[%' \"}",
-    statement:"SELECT * FROM `[true]` WHERE '1_000_000%' LIKE '_[_000[_000[%' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '1_000_000%' LIKE '_[_000[_000[%' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1400,7 +1400,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that match{text:\" '1_000_000%' \",pattern:\" '%[_000[_000[%' \"}",
-    statement:"SELECT * FROM `[true]` WHERE '1_000_000%' LIKE '%[_000[_000[%' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '1_000_000%' LIKE '%[_000[_000[%' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1416,7 +1416,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that match{text:\" '1_000_000%' \",pattern:\" '%[_0_0[_000[%' \"}",
-    statement:"SELECT * FROM `[true]` WHERE '1_000_000%' LIKE '%[_0_0[_000[%' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '1_000_000%' LIKE '%[_0_0[_000[%' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1432,7 +1432,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that match{text:\" '1_000_000%' \",pattern:\" '%[_0%0[_000[%' \"}",
-    statement:"SELECT * FROM `[true]` WHERE '1_000_000%' LIKE '%[_0%0[_000[%' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '1_000_000%' LIKE '%[_0%0[_000[%' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1448,7 +1448,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that match{text:\" '1_000_000%' \",pattern:\" '%[_0%0[__%_[%' \"}",
-    statement:"SELECT * FROM `[true]` WHERE '1_000_000%' LIKE '%[_0%0[__%_[%' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '1_000_000%' LIKE '%[_0%0[__%_[%' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1464,7 +1464,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that match{text:\" '100%'       \",pattern:\" '1_%'           \"}",
-    statement:"SELECT * FROM `[true]` WHERE '100%' LIKE '1_%' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '100%' LIKE '1_%' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1480,7 +1480,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that DO NOT match{text:\" '_'    \",pattern:\" '[_[_'   \"}",
-    statement:"SELECT * FROM `[true]` WHERE '_' LIKE '[_[_' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '_' LIKE '[_[_' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1493,7 +1493,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that DO NOT match{text:\" '_'    \",pattern:\" '_[_'    \"}",
-    statement:"SELECT * FROM `[true]` WHERE '_' LIKE '_[_' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '_' LIKE '_[_' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1506,7 +1506,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that DO NOT match{text:\" '%'    \",pattern:\" '[%[%'   \"}",
-    statement:"SELECT * FROM `[true]` WHERE '%' LIKE '[%[%' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '%' LIKE '[%[%' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1519,7 +1519,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that DO NOT match{text:\" '100%' \",pattern:\" '1000[%' \"}",
-    statement:"SELECT * FROM `[true]` WHERE '100%' LIKE '1000[%' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '100%' LIKE '1000[%' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1532,7 +1532,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that DO NOT match{text:\" '100%' \",pattern:\" '[%100'  \"}",
-    statement:"SELECT * FROM `[true]` WHERE '100%' LIKE '[%100' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '100%' LIKE '[%100' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1545,7 +1545,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that DO NOT match{text:\" '100%' \",pattern:\" '1_[%_'  \"}",
-    statement:"SELECT * FROM `[true]` WHERE '100%' LIKE '1_[%_' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '100%' LIKE '1_[%_' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1558,7 +1558,7 @@ like::[
   },
   {
     name:"like-expression with ESCAPE specified that DO NOT match{text:\" '100%' \",pattern:\" '1%_[%1' \"}",
-    statement:"SELECT * FROM `[true]` WHERE '100%' LIKE '1%_[%1' ESCAPE '['",
+    statement:"SELECT * FROM [TRUE] WHERE '100%' LIKE '1%_[%1' ESCAPE '['",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1640,7 +1640,7 @@ like::[
   },
   {
       name:"More than one character given for ESCAPE",
-      statement:"SELECT * FROM `[true]` WHERE 'a' LIKE 'a' ESCAPE 'aa'",
+      statement:"SELECT * FROM [TRUE] WHERE 'a' LIKE 'a' ESCAPE 'aa'",
       assert:{
         evalMode:[
           EvalModeError,

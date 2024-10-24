@@ -23,14 +23,6 @@
 }
 
 {
-    name: "invalid DATE string using Ion literal",
-    statement: "DATE `2012-08-28`",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
     name: "invalid DATE string no starting single quotation",
     statement: "DATE 2021-03-10'",
     assert: {

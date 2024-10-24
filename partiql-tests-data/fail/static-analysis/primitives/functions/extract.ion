@@ -22,29 +22,29 @@ wrong_num_function_args::[
       },
     },
     {
-      name:"extract wrong number of arguments{sql:\"extract(`2017T`)\"}",
-      statement:"extract(`2017T`)",
+      name:"extract wrong number of arguments{sql:\"extract(DATE '2007-01-01')\"}",
+      statement:"extract(DATE '2007-01-01')",
       assert: {
         result: StaticAnalysisFail
       },
     },
     {
-      name:"extract wrong number of arguments{sql:\"extract(from `2017T`)\"}",
-      statement:"extract(from `2017T`)",
+      name:"extract wrong number of arguments{sql:\"extract(from DATE '2007-01-01')\"}",
+      statement:"extract(from DATE '2007-01-01')",
       assert: {
         result: StaticAnalysisFail
       },
     },
     {
-      name:"extract wrong number of arguments{sql:\"extract(year from `2017T`, 1)\"}",
-      statement:"extract(year from `2017T`, 1)",
+      name:"extract wrong number of arguments{sql:\"extract(year from DATE '2007-01-01', 1)\"}",
+      statement:"extract(year from DATE '2007-01-01', 1)",
       assert: {
         result: StaticAnalysisFail
       },
     },
     {
-      name:"extract wrong number of arguments{sql:\"extract(year, `2017T`)\"}",
-      statement:"extract(year, `2017T`)",
+      name:"extract wrong number of arguments{sql:\"extract(year, DATE '2007-01-01')\"}",
+      statement:"extract(year, DATE '2007-01-01')",
       assert: {
         result: StaticAnalysisFail
       },
@@ -62,29 +62,29 @@ invalid_function_args::[
       },
     },
     {
-      name:"extract wrong type of arguments{first:1,second:\"`2017T`\"}",
-      statement:"extract(1 from `2017T`)",
+      name:"extract wrong type of arguments{first:1,second:\"DATE '2007-01-01'\"}",
+      statement:"extract(1 from DATE '2007-01-01')",
       assert: {
         result: StaticAnalysisFail
       },
     },
     {
       name:"extract invalid time part{time_part:\"foo\",tt:\"IDENTIFIER\",tv:foo}",
-      statement:"extract(foo from `2017T`)",
+      statement:"extract(foo from DATE '2007-01-01')",
       assert: {
         result: StaticAnalysisFail
       },
     },
     {
       name:"extract invalid time part{time_part:\"null\",tt:\"NULL\",tv:null}",
-      statement:"extract(null from `2017T`)",
+      statement:"extract(null from DATE '2007-01-01')",
       assert: {
         result: StaticAnalysisFail
       },
     },
     {
       name:"extract invalid time part{time_part:\"missing\",tt:\"MISSING\",tv:null}",
-      statement:"extract(missing from `2017T`)",
+      statement:"extract(missing from DATE '2007-01-01')",
       assert: {
         result: StaticAnalysisFail
       },

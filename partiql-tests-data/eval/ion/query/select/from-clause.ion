@@ -1,0 +1,15 @@
+'various types in from clause'::[
+  {
+    name:"rangeOverSexp",
+    statement:"SELECT VALUE v FROM `(a b c)` AS v",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        a,
+        b,
+        c
+      ]
+    }
+  },
+]

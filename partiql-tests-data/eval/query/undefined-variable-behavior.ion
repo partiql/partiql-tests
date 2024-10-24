@@ -47,7 +47,7 @@ undefined_variable_behavior::[
   },
   {
     name:"undefinedUnqualifiedVariableInSelectWithUndefinedVariableBehaviorMissing",
-    statement:"SELECT s.a, s.undefined_variable, s.b FROM `[{a:100, b:200}]` s",
+    statement:"SELECT s.a, s.undefined_variable, s.b FROM [{'a':100, 'b':200}] s",
     assert:[
       {
         evalMode:EvalModeCoerce,
