@@ -24,30 +24,6 @@ abs::[
     }
   },
   {
-    name:"ABS(`1d0`) Ion DECIMAL",
-    statement:"ABS(`1d0`)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:1d0
-    }
-  },
-  {
-    name:"ABS(`1e0`) Ion FLOAT",
-    statement:"ABS(`1e0`)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:1e0
-    }
-  },
-  {
     name:"ABS(1.9999999999999999999900)",
     statement:"ABS(1.9999999999999999999900)",
     assert:{
@@ -84,30 +60,6 @@ abs::[
     }
   },
   {
-    name:"ABS(`-1d0`)",
-    statement:"ABS(`-1d0`)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:1d0
-    }
-  },
-  {
-    name:"ABS(`-1e0`)",
-    statement:"ABS(`-1e0`)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:1e0
-    }
-  },
-  {
     name:"ABS(-1.9999999999999999999900)",
     statement:"ABS(-1.9999999999999999999900)",
     assert:{
@@ -117,102 +69,6 @@ abs::[
         EvalModeError
       ],
       output:19999999999999999999900d-22
-    }
-  },
-  {
-    name:"ABS(`-0.`)",
-    statement:"ABS(`-0.`)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:0d0
-    }
-  },
-  {
-    name:"ABS(`-0d0`)",
-    statement:"ABS(`-0d0`)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:0d0
-    }
-  },
-  {
-    name:"ABS(`-0d-0`)",
-    statement:"ABS(`-0d-0`)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:0d0
-    }
-  },
-  {
-    name:"ABS(`-0.0d1`)",
-    statement:"ABS(`-0.0d1`)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:0d0
-    }
-  },
-  {
-    name:"ABS(`-0.0000`) preserve scale",
-    statement:"ABS(`-0.0000`)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:0d-4
-    }
-  },
-  {
-    name:"ABS(`-inf`) special value",
-    statement:"ABS(`-inf`)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:+inf
-    }
-  },
-  {
-    name:"ABS(`+inf`) special value",
-    statement:"ABS(`+inf`)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:+inf
-    }
-  },
-  {
-    name:"ABS(`nan`) special value",
-    statement:"ABS(`nan`)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:nan
     }
   },
   {

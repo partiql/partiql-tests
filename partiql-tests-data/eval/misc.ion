@@ -115,7 +115,7 @@ uncategorized::[
   },
   {
     name:"selectValueStructConstructorWithMissing",
-    statement:"SELECT VALUE {'x': a.x, 'y': a.y} FROM `[{x:5}, {y:6}]` AS a",
+    statement:"SELECT VALUE {'x': a.x, 'y': a.y} FROM [{'x':5}, {'y':6}] AS a",
     assert: [
       {
         evalMode:EvalModeCoerce,
@@ -223,7 +223,7 @@ uncategorized::[
   },
   {
     name:"emptySymbol",
-    statement:"SELECT \"\" FROM `{'': 1}`",
+    statement:"SELECT \"\" FROM {'': 1}",
     assert:[
       {
         evalMode:EvalModeCoerce,

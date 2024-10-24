@@ -2,21 +2,21 @@ invalid_function_args::[
   like::[
     {
       name:"Incorrect type for text",
-      statement:"SELECT * FROM `[true]` WHERE 1 LIKE '1'",
+      statement:"SELECT * FROM [TRUE] WHERE 1 LIKE '1'",
       assert: {
         result: StaticAnalysisFail
       },
     },
     {
       name:"Incorrect type for pattern",
-      statement:"SELECT * FROM `[true]` WHERE 'a' LIKE 2",
+      statement:"SELECT * FROM [TRUE] WHERE 'a' LIKE 2",
       assert: {
         result: StaticAnalysisFail
       },
     },
     {
       name:"Incorrect type for Escape",
-      statement:"SELECT * FROM `[true]` WHERE 'a' LIKE 'a' ESCAPE 3",
+      statement:"SELECT * FROM [TRUE] WHERE 'a' LIKE 'a' ESCAPE 3",
       assert: {
         result: StaticAnalysisFail
       },

@@ -1,7 +1,7 @@
 cardinality::[
   {
-    name:"cardinality valid cases{param:\"`[]`\",result:0}",
-    statement:"cardinality(`[]`)",
+    name:"cardinality valid cases{param:\"[]\",result:0}",
+    statement:"cardinality([])",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -24,8 +24,8 @@ cardinality::[
     }
   },
   {
-    name:"cardinality valid cases{param:\"`{}`\",result:0}",
-    statement:"cardinality(`{}`)",
+    name:"cardinality valid cases{param:\"{}\",result:0}",
+    statement:"cardinality({})",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -36,8 +36,8 @@ cardinality::[
     }
   },
   {
-    name:"cardinality valid cases{param:\"`[1]`\",result:1}",
-    statement:"cardinality(`[1]`)",
+    name:"cardinality valid cases{param:\"[1]\",result:1}",
+    statement:"cardinality([1])",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -60,8 +60,8 @@ cardinality::[
     }
   },
   {
-    name:"cardinality valid cases{param:\"`{a: 1}`\",result:1}",
-    statement:"cardinality(`{a: 1}`)",
+    name:"cardinality valid cases{param:\"{'a': 1}\",result:1}",
+    statement:"cardinality({'a': 1})",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -72,8 +72,8 @@ cardinality::[
     }
   },
   {
-    name:"cardinality valid cases{param:\"`[1, 1.0]`\",result:2}",
-    statement:"cardinality(`[1, 1.0]`)",
+    name:"cardinality valid cases{param:\"[1, 1.0]\",result:2}",
+    statement:"cardinality([1, 1.0])",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -96,8 +96,8 @@ cardinality::[
     }
   },
   {
-    name:"cardinality valid cases{param:\"`{a: 1, b: foo}`\",result:2}",
-    statement:"cardinality(`{a: 1, b: foo}`)",
+    name:"cardinality valid cases{param:\"{'a': 1, 'b': 'foo'}\",result:2}",
+    statement:"cardinality({'a': 1, 'b': 'foo'})",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -108,8 +108,8 @@ cardinality::[
     }
   },
   {
-    name:"cardinality valid cases{param:\"`[[], [1,2,3,4,[5,6], ()], ({a: 1, b: 2})]`\",result:3}",
-    statement:"cardinality(`[[], [1,2,3,4,[5,6], ()], ({a: 1, b: 2})]`)",
+    name:"cardinality valid cases{param:\"[[], [1,2,3,4,[5,6], ()], ({'a': 1, 'b': 2})]\",result:3}",
+    statement:"cardinality([[], [1,2,3,4,[5,6], ()], ({'a': 1, 'b': 2})])",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -120,8 +120,8 @@ cardinality::[
     }
   },
   {
-    name:"cardinality valid cases{param:\"`{a: 1, a: 2}`\",result:2}",
-    statement:"cardinality(`{a: 1, a: 2}`)",
+    name:"cardinality valid cases{param:\"{'a': 1, 'a': 2}\",result:2}",
+    statement:"cardinality({'a': 1, 'a': 2})",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -132,8 +132,8 @@ cardinality::[
     }
   },
   {
-    name:"cardinality valid cases{param:\"`[null]`\",result:1}",
-    statement:"cardinality(`[null]`)",
+    name:"cardinality valid cases{param:\"[null]\",result:1}",
+    statement:"cardinality([null])",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -156,8 +156,8 @@ cardinality::[
     }
   },
   {
-    name:"cardinality valid cases{param:\"`{a: null}`\",result:1}",
-    statement:"cardinality(`{a: null}`)",
+    name:"cardinality valid cases{param:\"{'a': null}\",result:1}",
+    statement:"cardinality({'a': null})",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -168,8 +168,8 @@ cardinality::[
     }
   },
   {
-    name:"cardinality valid cases{param:\"`[missing]`\",result:1}",
-    statement:"cardinality(`[missing]`)",
+    name:"cardinality valid cases{param:\"[missing]\",result:1}",
+    statement:"cardinality([missing])",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -182,18 +182,6 @@ cardinality::[
   {
     name:"cardinality valid cases{param:\"<<missing>>\",result:1}",
     statement:"cardinality(<<missing>>)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:1
-    }
-  },
-  {
-    name:"cardinality valid cases{param:\"`{a: missing}`\",result:1}",
-    statement:"cardinality(`{a: missing}`)",
     assert:{
       result:EvaluationSuccess,
       evalMode:[

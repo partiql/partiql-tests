@@ -286,21 +286,8 @@ envs::{
     ]
   },
   {
-    name:"rangeOverSexp",
-    statement:"SELECT VALUE v FROM `(a b c)` AS v",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        a,
-        b,
-        c
-      ]
-    }
-  },
-  {
     name:"rangeOverStruct",
-    statement:"SELECT VALUE v FROM `{a:5}` AS v",
+    statement:"SELECT VALUE v FROM {'a':5} AS v",
     assert: [
       {
         evalMode:EvalModeCoerce,
@@ -319,7 +306,7 @@ envs::{
   },
   {
     name:"rangeOverList",
-    statement:"SELECT VALUE v FROM `[1, 2, 3]` AS v",
+    statement:"SELECT VALUE v FROM [1, 2, 3] AS v",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -332,7 +319,7 @@ envs::{
   },
   {
     name:"rangeOverListWithAt",
-    statement:"SELECT VALUE i FROM `[1, 2, 3]` AT i",
+    statement:"SELECT VALUE i FROM [1, 2, 3] AT i",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -345,7 +332,7 @@ envs::{
   },
   {
     name:"rangeOverListWithAsAndAt",
-    statement:"SELECT VALUE [i, v] FROM `[1, 2, 3]` AS v AT i",
+    statement:"SELECT VALUE [i, v] FROM [1, 2, 3] AS v AT i",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -430,7 +417,7 @@ envs::{
   },
   {
     name:"rangeOverNestedWithAt",
-    statement:"SELECT VALUE [i, v] FROM (SELECT VALUE v FROM `[1, 2, 3]` AS v) AS v AT i",
+    statement:"SELECT VALUE [i, v] FROM (SELECT VALUE v FROM [1, 2, 3] AS v) AS v AT i",
     assert: [
       {
         evalMode:EvalModeCoerce,

@@ -8,8 +8,8 @@ wrong_num_function_args::[
       },
     },
     {
-      name:"exists wrong number of arguments{sql:\"exists(`[]`, 1)\"}",
-      statement:"exists(`[]`, 1)",
+      name:"exists wrong number of arguments{sql:\"exists([], 1)\"}",
+      statement:"exists([], 1)",
       assert: {
         result: StaticAnalysisFail
       },

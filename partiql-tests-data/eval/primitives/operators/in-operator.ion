@@ -79,7 +79,7 @@ envs::{
 in::[
   {
     name:"inPredicate",
-    statement:"SELECT VALUE b.title FROM stores[*].books[*] AS b WHERE b.price IN (5, `2e0`)",
+    statement:"SELECT VALUE b.title FROM stores[*].books[*] AS b WHERE b.price IN (5, 2e0)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -150,7 +150,7 @@ in::[
   },
   {
     name:"notInPredicate",
-    statement:"SELECT VALUE b.title FROM stores[*].books[*] AS b WHERE b.price NOT IN (5, `2e0`)",
+    statement:"SELECT VALUE b.title FROM stores[*].books[*] AS b WHERE b.price NOT IN (5, 2e0)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -241,7 +241,7 @@ in::[
   },
   {
     name:"inPredicateWithTableConstructor",
-    statement:"SELECT VALUE b.title FROM stores[*].books[*] AS b WHERE (b.title, b.price) IN (VALUES ('A', `5e0`), ('B', 3.0), ('X', 9.0))",
+    statement:"SELECT VALUE b.title FROM stores[*].books[*] AS b WHERE (b.title, b.price) IN (VALUES ('A', 5e0), ('B', 3.0), ('X', 9.0))",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -253,7 +253,7 @@ in::[
   },
   {
     name:"notInPredicateWithTableConstructor",
-    statement:"SELECT VALUE b.title FROM stores[*].books[*] AS b WHERE (b.title, b.price) NOT IN (VALUES ('A', `5e0`), ('B', 3.0), ('X', 9.0))",
+    statement:"SELECT VALUE b.title FROM stores[*].books[*] AS b WHERE (b.title, b.price) NOT IN (VALUES ('A', 5e0), ('B', 3.0), ('X', 9.0))",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,

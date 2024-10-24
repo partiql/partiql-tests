@@ -1,6 +1,6 @@
 {
     name: "IS operator expects type name",
-    statement: "NULL IS `null`",
+    statement: "NULL IS [null][0]",
     assert: {
         result: StaticAnalysisFail
     },
@@ -8,7 +8,7 @@
 
 {
     name: "IS NOT operator expects type name",
-    statement: "NULL IS NOT `null`",
+    statement: "NULL IS NOT [null][0]",
     assert: {
         result: StaticAnalysisFail
     },

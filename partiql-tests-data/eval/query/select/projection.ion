@@ -3,7 +3,7 @@
   // https://github.com/partiql/partiql-lang-kotlin/blob/main/lang/test/org/partiql/lang/eval/EvaluatorTestSuite.kt#L1059-L1104
   {
     name:"undefinedUnqualifiedVariable_inSelect_withProjectionOption",
-    statement:"SELECT s.a, s.undefined_variable, s.b FROM `[{a:100, b:200}]` s",
+    statement:"SELECT s.a, s.undefined_variable, s.b FROM [{'a':100, 'b':200}] s",
     assert: [
       {
         evalMode:EvalModeCoerce,
@@ -108,22 +108,6 @@
             1,
             2
           ]
-        }
-      ]
-    }
-  },
-  {
-    name:"projectOfSexp",
-    statement:"SELECT * FROM `(1 2)` as foo",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:$bag::[
-        {
-          _1:(
-            1
-            2
-          )
         }
       ]
     }

@@ -1,0 +1,102 @@
+edge_cases::[
+  // nan before -inf, then numeric values then +inf (ASC)
+  {
+    name:"nan before -inf, then numeric values then +inf (ASC)",
+    statement:"SELECT * FROM [{ 'a': 5 }, { 'a': -5e-1 }, { 'a': `-inf` }, { 'a': `nan` }, { 'a': 7 }, { 'a': `+inf` }, { 'a': 9 }] ORDER BY a",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': nan}, {'a': -inf}, {'a': -0.5}, {'a': 5}, {'a': 7}, {'a': 9}, {'a': +inf}]
+    }
+  },
+  // +inf before numeric values then -inf then nan (DESC)
+  {
+    name:"+inf before numeric values then -inf then nan (DESC)",
+    statement:"SELECT * FROM [{ 'a': 5 }, { 'a': -5e-1 }, { 'a': `-inf` }, { 'a': `nan` }, { 'a': 7 }, { 'a': `+inf` }, { 'a': 9 }] ORDER BY a DESC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': +inf}, {'a': 9}, {'a': 7}, {'a': 5}, {'a': -0.5}, {'a': -inf}, {'a': nan}]
+    }
+  },
+  // text types compared by lexicographical ordering of Unicode scalar (ASC)
+  {
+    name:"text types compared by lexicographical ordering of Unicode scalar (ASC)",
+    statement:'''SELECT * FROM [{ 'a': `'\uD83D\uDCA9'`}, { 'a': 'Z'}, { 'a': '9' }, { 'a': 'A'}, { 'a': `"\U0001F4A9"`}, { 'a': 'a'}, { 'a': 'z'}, { 'a': '0' }] ORDER BY a''',
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': '0'}, {'a': '9'}, {'a': 'A'}, {'a': 'Z'}, {'a': 'a'}, {'a': 'z'}, {'a': '\uD83D\uDCA9'}, {'a': "\U0001F4A9"}]
+    }
+  },
+  // text types compared by lexicographical ordering of Unicode scalar (DESC)
+  {
+    name:"text types compared by lexicographical ordering of Unicode scalar (DESC)",
+    statement:'''SELECT * FROM [{ 'a': `'\uD83D\uDCA9'`}, { 'a': 'Z'}, { 'a': '9' }, { 'a': 'A'}, { 'a': `"\U0001F4A9"`}, { 'a': 'a'}, { 'a': 'z'}, { 'a': '0' }] ORDER BY a DESC''',
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': '\uD83D\uDCA9'}, {'a': "\U0001F4A9"}, {'a': 'z'}, {'a': 'a'}, {'a': 'Z'}, {'a': 'A'}, {'a': '9'}, {'a': '0'}]
+    }
+  },
+  // LOB types follow their lexicographical ordering by octet (ASC)
+  {
+    name:"LOB types follow their lexicographical ordering by octet (ASC)",
+    statement:'''SELECT * FROM [{'a': `{{"Z"}}`}, {'a': `{{"a"}}`}, {'a': `{{"A"}}`}, {'a': `{{"z"}}`}] ORDER BY a''',
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': {{"A"}}}, {'a': {{"Z"}}}, {'a': {{"a"}}}, {'a': {{"z"}}}]
+    }
+  },
+  // LOB types should ordered (DESC)
+  {
+    name:"LOB types should ordered (DESC)",
+    statement:'''SELECT * FROM [{'a': `{{"Z"}}`}, {'a': `{{"a"}}`}, {'a': `{{"A"}}`}, {'a': `{{"z"}}`}] ORDER BY a DESC''',
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': {{"z"}}}, {'a': {{"a"}}}, {'a': {{"Z"}}}, {'a': {{"A"}}}]
+    }
+  },
+  // lists items should be ordered by data types (ASC) (nulls last as default for asc)
+  {
+    name:"lists items should be ordered by data types (ASC) (nulls last as default for asc)",
+    statement:"SELECT * FROM [{'a': ['a']}, {'a': [1]}, {'a': [true]}, {'a': [null]}, {'a': [{}]}, {'a': [<<>>]}, {'a': [`{{}}`]}, {'a': [[]]} ] ORDER BY a",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': [true]}, {'a': [1]}, {'a': ["a"]}, {'a': [{{}}]}, {'a': [[]]}, {'a': [{}]}, {'a': [$bag::[]]}, {'a': [null]}]
+    }
+  },
+  // lists items should be ordered by data types (DESC) (nulls first as default for desc)
+  {
+    name:"lists items should be ordered by data types (DESC) (nulls first as default for desc)",
+    statement:"SELECT * FROM [{'a': ['a']}, {'a': [1]}, {'a': [true]}, {'a': [null]}, {'a': [{}]}, {'a': [<<>>]}, {'a': [`{{}}`]}, {'a': [[]]} ] ORDER BY a DESC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': [null]}, {'a': [$bag::[]]}, {'a': [{}]}, {'a': [[]]}, {'a': [{{}}]}, {'a': ["a"]}, {'a': [1]}, {'a': [true]}]
+    }
+  },
+  // structs should be ordered by data types (ASC) (nulls last as default for asc)
+  {
+    name:"structs should be ordered by data types (ASC) (nulls last as default for asc)",
+    statement:"SELECT * FROM [{'a': {'a': 5}}, {'a': {'a': 'b'}}, {'a': {'a': true}}, {'a': {'a': []}}, {'a': {'a': {}}}, {'a': {'a': <<>>}}, {'a': {'a': `{{}}`}}, {'a': {'a': null}}] ORDER BY a",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': {'a': true}}, {'a': {'a': 5}}, {'a': {'a': "b"}}, {'a': {'a': {{}}}}, {'a': {'a': []}}, {'a': {'a': {}}}, {'a': {'a': $bag::[]}}, {'a': {'a': null}}]
+    }
+  },
+  // structs should be ordered by data types (DESC) (nulls first as default for desc)
+  {
+    name:"structs should be ordered by data types (DESC) (nulls first as default for desc)",
+    statement:"SELECT * FROM [{'a': {'a': 5}}, {'a': {'a': 'b'}}, {'a': {'a': true}}, {'a': {'a': []}}, {'a': {'a': {}}}, {'a': {'a': <<>>}}, {'a': {'a': `{{}}`}}, {'a': {'a': null}}] ORDER BY a DESC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'a': {'a': null}}, {'a': {'a': $bag::[]}}, {'a': {'a': {}}}, {'a': {'a': []}}, {'a': {'a': {{}}}}, {'a': {'a': "b"}}, {'a': {'a': 5}}, {'a': {'a': true}}]
+    }
+  },
+]
