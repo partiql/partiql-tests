@@ -1,0 +1,38 @@
+concat::[
+  {
+    name:"|| valid cases{lparam:\"`'a'`\",rparam:\"`'b'`\",result:\"ab\"}",
+    statement:"`'a'` || `'b'`",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"ab"
+    }
+  },
+  {
+    name:"|| valid cases{lparam:\"`'a'`\",rparam:\"'b'\",result:\"ab\"}",
+    statement:"`'a'` || 'b'",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"ab"
+    }
+  },
+  {
+    name:"|| valid cases{lparam:\"'a'\",rparam:\"`'b'`\",result:\"ab\"}",
+    statement:"'a' || `'b'`",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:"ab"
+    }
+  },
+]

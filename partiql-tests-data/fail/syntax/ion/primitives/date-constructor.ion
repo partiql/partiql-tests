@@ -1,0 +1,9 @@
+
+// TODO [joshsp] : In a lazy-document context, this is a data error, not a syntax error
+{
+    name: "invalid DATE string using Ion literal",
+    statement: "DATE `2012-08-28`",
+    assert: {
+        result: SyntaxFail
+    },
+}

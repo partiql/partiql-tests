@@ -1,0 +1,53 @@
+envs::{
+  d:3.,
+  f:2e0,
+  i:1,
+}
+
+nary::[
+  {
+    name:"equalListDifferentTypesTrue",
+    statement:"[1, 2e0, 'hello'] = [1.0, 2, `hello`]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"listDifferentTypesDifferentOrderFalse",
+    statement:"[1, 2e0, 'hello'] = [`hello`, 2, 1.0]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"equalBagDifferentTypesDifferentOrderTrue",
+    statement:"<<1, 2e0, 'hello'>> = <<`hello`, 2, 1.0>>",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"equalBagDifferentTypesWithNullMissingDifferentOrderTrue",
+    statement:"<<1, 2e0, 'hello', NULL, MISSING>> = <<MISSING, NULL, `hello`, 2, 1.0>>",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"equalListDifferentLengthsShortFirst",
+    statement:"[1.0, 2] = [1.0, 2, `hello`]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+]

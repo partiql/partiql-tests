@@ -59,7 +59,7 @@ pivot::[
   },
   {
     name:"pivotUnpivotWithWhereOrderByLimit",
-    statement:"PIVOT val AT 'new_' || name FROM UNPIVOT `{a:1, b:2, c:3, d:4, e:5, f: 6}` AS val AT name WHERE name <> 'b' AND val <> 3 ORDER BY val LIMIT 3",
+    statement:"PIVOT val AT 'new_' || name FROM UNPIVOT {'a':1, 'b':2, 'c':3, 'd':4, 'e':5, 'f': 6} AS val AT name WHERE name <> 'b' AND val <> 3 ORDER BY val LIMIT 3",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,

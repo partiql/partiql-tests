@@ -151,7 +151,7 @@ nary::[
   },
   {
     name:"notEqualIntFloat",
-    statement:"1 != `2e0`",
+    statement:"1 != 2e0",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -160,25 +160,16 @@ nary::[
   },
   {
     name:"notEqualIntFloatFalse",
-    statement:"1 != `1e0`",
+    statement:"1 != 1e0",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:false
-    }
-  },
-  {
-    name:"equalListDifferentTypesTrue",
-    statement:"[1, `2e0`, 'hello'] = [1.0, 2, `hello`]",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:true
     }
   },
   {
     name:"equalListDifferentTypesWithNullMissingTrue",
-    statement:"[1, `2e0`, 'hello', NULL, MISSING] = [1.0, 2, `hello`, NULL, MISSING]",
+    statement:"[1, 2e0, NULL, MISSING] = [1.0, 2, NULL, MISSING]",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -186,53 +177,18 @@ nary::[
     }
   },
   {
+    // TODO [joshps]: revisit this test. I cannot find support in the spec or elsewhere that `[NULL] = [MISSING]`
     name:"equalListDifferentTypesWithNullMissingEquivalenceTrue",
-    statement:"[1, `2e0`, 'hello', NULL] = [1.0, 2, `hello`, MISSING]",
+    statement:"[1, 2e0, NULL] = [1.0, 2, MISSING]",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:true
-    }
-  },
-  {
-    name:"listDifferentTypesDifferentOrderFalse",
-    statement:"[1, `2e0`, 'hello'] = [`hello`, 2, 1.0]",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:false
-    }
-  },
-  {
-    name:"equalBagDifferentTypesDifferentOrderTrue",
-    statement:"<<1, `2e0`, 'hello'>> = <<`hello`, 2, 1.0>>",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:true
-    }
-  },
-  {
-    name:"equalBagDifferentTypesWithNullMissingDifferentOrderTrue",
-    statement:"<<1, `2e0`, 'hello', NULL, MISSING>> = <<MISSING, NULL, `hello`, 2, 1.0>>",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:true
-    }
-  },
-  {
-    name:"equalListDifferentLengthsShortFirst",
-    statement:"[1.0, 2] = [1.0, 2, `hello`]",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:false
     }
   },
   {
     name:"equalListDifferentLengthsLongFirst",
-    statement:"[1, `2e0`, 'hello'] = [1, `2e0`]",
+    statement:"[1, 2e0, 'hello'] = [1, 2e0]",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -241,7 +197,7 @@ nary::[
   },
   {
     name:"equalTuplesDifferentTypesTrue",
-    statement:"{'a': 1, 'a': 10.0, 'b': `2e0`} = {'a': 1.0, 'a': 10, 'b': 2}",
+    statement:"{'a': 1, 'a': 10.0, 'b': 2e0} = {'a': 1.0, 'a': 10, 'b': 2}",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -250,7 +206,7 @@ nary::[
   },
   {
     name:"equalTuplesDifferentTypesDifferentOrderTrue",
-    statement:"{'a': 1, 'a': 10.0, 'b': `2e0`} = {'b': 2, 'a': 10, 'a': 1.0}",
+    statement:"{'a': 1, 'a': 10.0, 'b': 2e0} = {'b': 2, 'a': 10, 'a': 1.0}",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -259,7 +215,7 @@ nary::[
   },
   {
     name:"equalTuplesDifferentTypesDifferentOrderWithNullMissingTrue",
-    statement:"{'a': 1, 'a': 10.0, 'b': `2e0`, 'c': NULL, 'd': MISSING} = {'d': MISSING, 'c': NULL, 'b': 2, 'a': 10, 'a': 1.0}",
+    statement:"{'a': 1, 'a': 10.0, 'b': 2e0, 'c': NULL, 'd': MISSING} = {'d': MISSING, 'c': NULL, 'b': 2, 'a': 10, 'a': 1.0}",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -268,7 +224,7 @@ nary::[
   },
   {
     name:"equalTuplesDifferentTypesDifferentOrderWithNullMissingEquivalenceFalse",
-    statement:"{'a': 1, 'a': 10.0, 'b': `2e0`, 'c': NULL, 'd': NULL} = {'d': MISSING, 'c': MISSING, 'b': 2, 'a': 10, 'a': 1.0}",
+    statement:"{'a': 1, 'a': 10.0, 'b': 2e0, 'c': NULL, 'd': NULL} = {'d': MISSING, 'c': MISSING, 'b': 2, 'a': 10, 'a': 1.0}",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -295,7 +251,7 @@ nary::[
   },
   {
     name:"moreIntFloat",
-    statement:"3 > `2e0`",
+    statement:"3 > 2e0",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -304,7 +260,7 @@ nary::[
   },
   {
     name:"moreIntFloatFalse",
-    statement:"1 > `2e0`",
+    statement:"1 > 2e0",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -313,7 +269,7 @@ nary::[
   },
   {
     name:"lessIntFloat",
-    statement:"1 < `2e0`",
+    statement:"1 < 2e0",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -322,7 +278,7 @@ nary::[
   },
   {
     name:"lessIntFloatFalse",
-    statement:"3 < `2e0`",
+    statement:"3 < 2e0",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -331,7 +287,7 @@ nary::[
   },
   {
     name:"moreEqIntFloat",
-    statement:"3 >= `2e0`",
+    statement:"3 >= 2e0",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -340,7 +296,7 @@ nary::[
   },
   {
     name:"moreEqIntFloatFalse",
-    statement:"1 >= `2e0`",
+    statement:"1 >= 2e0",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -349,7 +305,7 @@ nary::[
   },
   {
     name:"lessEqIntFloat",
-    statement:"1 <= `2e0`",
+    statement:"1 <= 2e0",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -358,7 +314,7 @@ nary::[
   },
   {
     name:"lessEqIntFloatFalse",
-    statement:"5 <= `2e0`",
+    statement:"5 <= 2e0",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,

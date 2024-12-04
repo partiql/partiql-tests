@@ -23,14 +23,6 @@
 }
 
 {
-    name: "invalid TIME with Ion literal",
-    statement: "TIME `2012-12-12`",
-    assert: {
-        result: SyntaxFail
-    },
-}
-
-{
     name: "invalid TIME WITH TIME ZONE missing time string",
     statement: "TIME WITH TIME ZONE",
     assert: {

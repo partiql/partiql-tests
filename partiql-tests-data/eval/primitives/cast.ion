@@ -109,18 +109,6 @@
     }
   },
   {
-    name:"cast to int valid cases{value:\"`-9223372036854775808e0`\",result:-9223372036854775808}",
-    statement:"cast(`-9223372036854775808e0` as BIGINT)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:-9223372036854775808
-    }
-  },
-  {
     name:"cast to int valid cases{value:\"9223372036854775807.0\",result:9223372036854775807}",
     statement:"cast(9223372036854775807.0 as BIGINT)",
     assert:{
@@ -456,18 +444,6 @@
       output:-10
     }
   },
-  {
-    name:"cast to int valid cases{value:\" `\\\"100\\\"` \",result:100}",
-    statement:"cast( `\"100\"` as INT)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:100
-    }
-  },
 ]
 
 'cast-to-null'::[
@@ -572,66 +548,6 @@ cast_invalid::[
     ],
   },
   {
-    name:"cast to int invalid target type{value:\"`2017T`\",target:\"TIMESTAMP\"}",
-    statement:"cast(`2017T` as INT)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ],
-  },
-  {
-    name:"cast to int invalid target type{value:\" `{{\\\"\\\"}}` \",target:\"CLOB\"}",
-    statement:"cast( `{{\"\"}}` as INT)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ],
-  },
-  {
-    name:"cast to int invalid target type{value:\" `{{\\\"1\\\"}}` \",target:\"CLOB\"}",
-    statement:"cast( `{{\"1\"}}` as INT)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ],
-  },
-  {
-    name:"cast to int invalid target type{value:\"`{{}}`\",target:\"BLOB\"}",
-    statement:"cast(`{{}}` as INT)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ],
-  },
-  {
     name:"cast to int invalid target type{value:\"[1, 2]\",target:\"LIST\"}",
     statement:"cast([1, 2] as INT)",
     assert:[
@@ -664,51 +580,6 @@ cast_invalid::[
   {
     name:"cast to int invalid target type{value:\"[]\",target:\"LIST\"}",
     statement:"cast([] as INT)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ],
-  },
-  {
-    name:"cast to int invalid target type{value:\"`(1 2)`\",target:\"SEXP\"}",
-    statement:"cast(`(1 2)` as INT)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ],
-  },
-  {
-    name:"cast to int invalid target type{value:\"`(1)`\",target:\"SEXP\"}",
-    statement:"cast(`(1)` as INT)",
-    assert:[
-      {
-        evalMode:EvalModeError,
-        result:EvaluationFail
-      },
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      }
-    ],
-  },
-  {
-    name:"cast to int invalid target type{value:\"`()`\",target:\"SEXP\"}",
-    statement:"cast(`()` as INT)",
     assert:[
       {
         evalMode:EvalModeError,

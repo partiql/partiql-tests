@@ -1,7 +1,7 @@
 'empty-symbol'::[
   {
     name:"Empty Symbol in table",
-    statement:"SELECT \"\" FROM `{'': 1}`",
+    statement:"SELECT \"\" FROM {'': 1}",
     assert: [
       {
         result: EvaluationSuccess,

@@ -238,7 +238,7 @@ envs::{
   },
   {
     name:"selectListWithMissing",
-    statement:"SELECT a.x AS x, a.y AS y FROM `[{x:5}, {y:6}]` AS a",
+    statement:"SELECT a.x AS x, a.y AS y FROM [{'x':5}, {'y':6}] AS a",
     assert: [
       {
         evalMode:EvalModeCoerce,
@@ -539,7 +539,7 @@ select_join::[
   },
   {
     name:"correlatedJoinWithShadowedAttributes",
-    statement:"SELECT VALUE v FROM `[{v:5}]` AS item, @item.v AS v",
+    statement:"SELECT VALUE v FROM [{'v':5}] AS item, @item.v AS v",
     assert: [
       {
         evalMode:EvalModeCoerce,
@@ -556,7 +556,7 @@ select_join::[
   },
   {
     name:"correlatedJoinWithoutLexicalScope",
-    statement:"SELECT VALUE b FROM `[{b:5}]` AS item, item.b AS b",
+    statement:"SELECT VALUE b FROM [{'b':5}] AS item, item.b AS b",
     assert: [
       {
         evalMode:EvalModeCoerce,
@@ -573,7 +573,7 @@ select_join::[
   },
   {
     name:"joinWithShadowedGlobal", // 'a' is a global variable
-    statement:"SELECT VALUE b FROM `[{b:5}]` AS a, a.b AS b",
+    statement:"SELECT VALUE b FROM [{'b':5}] AS a, a.b AS b",
     assert: [
       {
         evalMode:EvalModeCoerce,
@@ -660,7 +660,7 @@ select_join::[
 'select distinct'::[
   {
     name:"selectDistinct",
-    statement:"SELECT DISTINCT t.a FROM `[{a: 1}, {a: 2}, {a: 1}]` t",
+    statement:"SELECT DISTINCT t.a FROM [{'a': 1}, {'a': 2}, {'a': 1}] t",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -676,7 +676,7 @@ select_join::[
   },
   {
     name:"selectDistinctWithAggregate",
-    statement:"SELECT SUM(DISTINCT t.a) AS a FROM `[{a:10}, {a:1}, {a:10}, {a:3}]` t",
+    statement:"SELECT SUM(DISTINCT t.a) AS a FROM [{'a':10}, {'a':1}, {'a':10}, {'a':3}] t",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -689,7 +689,7 @@ select_join::[
   },
   {
     name:"selectDistinctSubQuery",
-    statement:"SELECT * FROM (SELECT DISTINCT t.a FROM `[{a: 1}, {a: 2}, {a: 1}]` t)",
+    statement:"SELECT * FROM (SELECT DISTINCT t.a FROM [{'a': 1}, {'a': 2}, {'a': 1}] t)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -705,7 +705,7 @@ select_join::[
   },
   {
     name:"selectDistinctWithSubQuery",
-    statement:"SELECT DISTINCT * FROM (SELECT t.a FROM `[{a: 1}, {a: 2}, {a: 1}]` t)",
+    statement:"SELECT DISTINCT * FROM (SELECT t.a FROM [{'a': 1}, {'a': 2}, {'a': 1}] t)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -721,7 +721,7 @@ select_join::[
   },
   {
     name:"selectDistinctAggregationWithGroupBy",
-    statement:"SELECT t.a, COUNT(DISTINCT t.b) AS c FROM `[{a:1, b:10}, {a:1, b:10}, {a:1, b:20}, {a:2, b:10}, {a:2, b:10}]` t GROUP by t.a",
+    statement:"SELECT t.a, COUNT(DISTINCT t.b) AS c FROM [{'a':1, 'b':10}, {'a':1, 'b':10}, {'a':1, 'b':20}, {'a':2, 'b':10}, {'a':2, 'b':10}] t GROUP by t.a",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -739,7 +739,7 @@ select_join::[
   },
   {
     name:"selectDistinctWithGroupBy",
-    statement:"SELECT DISTINCT t.a, COUNT(t.b) AS c FROM `[{a:1, b:10}, {a:1, b:10}, {a:1, b:20}, {a:2, b:10}, {a:2, b:10}]` t GROUP by t.a",
+    statement:"SELECT DISTINCT t.a, COUNT(t.b) AS c FROM [{'a':1, 'b':10}, {'a':1, 'b':10}, {'a':1, 'b':20}, {'a':2, 'b':10}, {'a':2, 'b':10}] t GROUP by t.a",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -757,7 +757,7 @@ select_join::[
   },
   {
     name:"selectDistinctWithJoin",
-    statement:"SELECT DISTINCT * FROM `[1, 1, 1, 1, 2]` t1, `[2, 2, 2, 2, 1]` t2",
+    statement:"SELECT DISTINCT * FROM [1, 1, 1, 1, 2] t1, [2, 2, 2, 2, 1] t2",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -953,7 +953,7 @@ select_join::[
   },
   {
     name:"selectDistinctExpressionAndWhere",
-    statement:"SELECT DISTINCT (t.a + t.b) as c FROM `[{a: 1, b: 1}, {a: 2, b: 0}, {a: 0, b: 2}, {a: 2, b: 2}, {a: 0, b: 99}]` t WHERE t.a > 0",
+    statement:"SELECT DISTINCT (t.a + t.b) as c FROM [{'a': 1, 'b': 1}, {'a': 2, 'b': 0}, {'a': 0, 'b': 2}, {'a': 2, 'b': 2}, {'a': 0, 'b': 99}] t WHERE t.a > 0",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -969,7 +969,7 @@ select_join::[
   },
   {
     name:"selectDistinctExpression",
-    statement:"SELECT DISTINCT (t.a || t.b) as c FROM `[{a: \"1\", b: \"1\"}, {a: \"11\", b: \"\"}, {a: \"\", b: \"11\"}, {a: \"2\", b: \"2\"}]` t",
+    statement:"SELECT DISTINCT (t.a || t.b) as c FROM [{'a': \"1\", 'b': \"1\"}, {'a': \"11\", 'b': \"\"}, {'a': \"\", 'b': \"11\"}, {'a': \"2\", 'b': \"2\"}] t",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
