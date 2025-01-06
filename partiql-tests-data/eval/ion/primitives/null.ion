@@ -8,7 +8,7 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null
+      output:$ion::null
     }
   },
   {
@@ -20,7 +20,7 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null.bool
+      output:$ion::null.bool
     }
   },
   {
@@ -32,7 +32,7 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null.int
+      output:$ion::null.int
     }
   },
   {
@@ -44,7 +44,7 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null.decimal
+      output:$ion::null.decimal
     }
   },
   {
@@ -56,7 +56,7 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null.string
+      output:$ion::null.string
     }
   },
   {
@@ -68,7 +68,7 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null.symbol
+      output:$ion::null.symbol
     }
   },
   {
@@ -80,7 +80,7 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null.clob
+      output:$ion::null.clob
     }
   },
   {
@@ -92,7 +92,7 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null.blob
+      output:$ion::null.blob
     }
   },
   {
@@ -104,7 +104,7 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null.list
+      output:$ion::null.list
     }
   },
   {
@@ -116,7 +116,7 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null.struct
+      output:$ion::null.struct
     }
   },
   {
@@ -128,7 +128,7 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:null.sexp
+      output:$ion::null.sexp
     }
   },
   {

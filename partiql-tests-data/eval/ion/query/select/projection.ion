@@ -7,11 +7,11 @@
       result:EvaluationSuccess,
       output:$bag::[
         {
-          _1:(
-            1
-            2
-          )
-        }
+          _1:$ion::1
+        },
+        {
+          _1:$ion::2
+        },
       ]
     }
   },
