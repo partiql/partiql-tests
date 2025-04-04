@@ -6,9 +6,9 @@
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
-        a,
-        b,
-        c
+        $ion::a,
+        $ion::b,
+        $ion::c
       ]
     }
   },

@@ -8,7 +8,7 @@
         evalMode: EvalModeCoerce,
         output: $bag::[
           {
-          '': 1
+          '': $ion::1
           }
         ]
       },

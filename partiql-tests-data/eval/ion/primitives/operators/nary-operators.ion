@@ -7,7 +7,7 @@ envs::{
 nary::[
   {
     name:"equalListDifferentTypesTrue",
-    statement:"[1, 2e0, 'hello'] = [1.0, 2, `hello`]",
+    statement:"[1, 2e0, `hello`] = [1.0, 2, `hello`]",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -16,7 +16,7 @@ nary::[
   },
   {
     name:"listDifferentTypesDifferentOrderFalse",
-    statement:"[1, 2e0, 'hello'] = [`hello`, 2, 1.0]",
+    statement:"[1, 2e0, `hello`] = [`hello`, 2, 1.0]",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -25,7 +25,7 @@ nary::[
   },
   {
     name:"equalBagDifferentTypesDifferentOrderTrue",
-    statement:"<<1, 2e0, 'hello'>> = <<`hello`, 2, 1.0>>",
+    statement:"<<1, 2e0, `hello`>> = <<`hello`, 2, 1.0>>",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -34,7 +34,7 @@ nary::[
   },
   {
     name:"equalBagDifferentTypesWithNullMissingDifferentOrderTrue",
-    statement:"<<1, 2e0, 'hello', NULL, MISSING>> = <<MISSING, NULL, `hello`, 2, 1.0>>",
+    statement:"<<1, 2e0, `hello`, NULL, MISSING>> = <<MISSING, NULL, `hello`, 2, 1.0>>",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
