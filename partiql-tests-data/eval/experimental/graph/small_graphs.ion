@@ -390,7 +390,7 @@ small_graphs::[
     },
 
     {
-        name: "(N2D2 MATCH (x))",
+        name: "N: (N2D2 MATCH (x))",
         statement: '''(N2D2 MATCH (x))''',
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
@@ -399,7 +399,7 @@ small_graphs::[
         }
     },
     {
-        name: "(N2D2 MATCH -[y]-> )",
+        name: "E: (N2D2 MATCH -[y]-> )",
         statement: '''(N2D2 MATCH -[y]-> )''',
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
@@ -408,7 +408,7 @@ small_graphs::[
         }
     },
     {
-        name: "(N2D2 MATCH (x)-[y]->(z) )",
+        name: "L: (N2D2 MATCH (x)-[y]->(z) )",
         statement: '''(N2D2 MATCH (x)-[y]->(z) )''',
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
@@ -417,7 +417,7 @@ small_graphs::[
         }
     },
     {
-        name: "(N2D2 MATCH (x)-[y]->(x) )",
+        name: "Cycle: (N2D2 MATCH (x)-[y]->(x) )",
         statement: '''(N2D2 MATCH (x)-[y]->(x) )''',
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
@@ -426,7 +426,7 @@ small_graphs::[
         }
     },
     {
-        name: "(N2D2 MATCH (x1)-[y1]->(x2)-[y2]->(x3) )",
+        name: "L/L: (N2D2 MATCH (x1)-[y1]->(x2)-[y2]->(x3) )",
         statement: '''(N2D2 MATCH (x1)-[y1]->(x2)-[y2]->(x3) )''',
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
@@ -435,7 +435,7 @@ small_graphs::[
         }
     },
     {
-        name: "(N2D2 MATCH (x1)-[y1]->(x2)-[y2]-(x3) )",
+        name: "L/LUR: (N2D2 MATCH (x1)-[y1]->(x2)-[y2]-(x3) )",
         statement: '''(N2D2 MATCH (x1)-[y1]->(x2)-[y2]-(x3) )''',
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
@@ -447,7 +447,7 @@ small_graphs::[
         }
     },
     {
-        name: "(N2D2 MATCH (x1)-[y1]-(x2)-[y2]->(x3) )",
+        name: "LUR/L: (N2D2 MATCH (x1)-[y1]-(x2)-[y2]->(x3) )",
         statement: '''(N2D2 MATCH (x1)-[y1]-(x2)-[y2]->(x3) )''',
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
@@ -459,7 +459,7 @@ small_graphs::[
         }
     },
     {
-        name: "(N2D2 MATCH (x1)-[y1]-(x2)-[y2]-(x3) )",
+        name: "LUR/LUR: (N2D2 MATCH (x1)-[y1]-(x2)-[y2]-(x3) )",
         statement: '''(N2D2 MATCH (x1)-[y1]-(x2)-[y2]-(x3) )''',
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
@@ -476,7 +476,7 @@ small_graphs::[
     },
 
     {
-        name: "(N2D2c MATCH (x))",
+        name: "N: (N2D2c MATCH (x))",
         statement: '''(N2D2c MATCH (x))''',
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
@@ -485,7 +485,7 @@ small_graphs::[
         }
     },
     {
-        name: "(N2D2c MATCH -[y]-> )",
+        name: "E: (N2D2c MATCH -[y]-> )",
         statement: '''(N2D2c MATCH -[y]-> )''',
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
@@ -494,7 +494,7 @@ small_graphs::[
         }
     },
     {
-        name: "(N2D2c MATCH (x)-[y]->(z) )",
+        name: "L: (N2D2c MATCH (x)-[y]->(z) )",
         statement: '''(N2D2c MATCH (x)-[y]->(z) )''',
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
@@ -503,7 +503,7 @@ small_graphs::[
         }
     },
     {
-        name: "(N2D2c MATCH (x)-[y]->(x) )",
+        name: "Cycle: (N2D2c MATCH (x)-[y]->(x) )",
         statement: '''(N2D2c MATCH (x)-[y]->(x) )''',
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
@@ -512,7 +512,7 @@ small_graphs::[
         }
     },
     {
-        name: "(N2D2c MATCH (x1)-[y1]->(x2)-[y2]->(x3) )",
+        name: "L/L: (N2D2c MATCH (x1)-[y1]->(x2)-[y2]->(x3) )",
         statement: '''(N2D2c MATCH (x1)-[y1]->(x2)-[y2]->(x3) )''',
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
@@ -522,7 +522,7 @@ small_graphs::[
         }
     },
     {
-        name: "(N2D2c MATCH (x1)-[y1]->(x2)-[y2]->(x1) )",
+        name: "L/L Cycle: (N2D2c MATCH (x1)-[y1]->(x2)-[y2]->(x1) )",
         statement: '''(N2D2c MATCH (x1)-[y1]->(x2)-[y2]->(x1) )''',
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
@@ -532,7 +532,7 @@ small_graphs::[
         }
     },
     {
-        name: "(N2D2c MATCH (x1)-[y1]->(x2)-[y2]-(x3) )",
+        name: "L/LUR: (N2D2c MATCH (x1)-[y1]->(x2)-[y2]-(x3) )",
         statement: '''(N2D2c MATCH (x1)-[y1]->(x2)-[y2]-(x3) )''',
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
@@ -544,7 +544,7 @@ small_graphs::[
         }
     },
     {
-        name: "(N2D2c MATCH (x1)-[y1]-(x2)-[y2]->(x3) )",
+        name: "LUR/L: (N2D2c MATCH (x1)-[y1]-(x2)-[y2]->(x3) )",
         statement: '''(N2D2c MATCH (x1)-[y1]-(x2)-[y2]->(x3) )''',
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
@@ -556,7 +556,7 @@ small_graphs::[
         }
     },
     {
-        name: "(N2D2c MATCH (x1)-[y1]-(x2)-[y2]-(x3) )",
+        name: "LUR/LUR: (N2D2c MATCH (x1)-[y1]-(x2)-[y2]-(x3) )",
         statement: '''(N2D2c MATCH (x1)-[y1]-(x2)-[y2]-(x3) )''',
         assert: {
             evalMode: [EvalModeCoerce, EvalModeError],
