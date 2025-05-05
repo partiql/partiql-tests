@@ -137,4 +137,35 @@ gpml_paper::[
             ]
         }
     },
+    {
+        name: "node WHERE",
+        statement: '''SELECT *
+                      FROM (
+                        gpml MATCH (a WHERE a.owner='Jay')
+                      )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                 { 'a': { 'owner': "Jay", 'isBlocked': "yes" } }
+            ]
+        }
+    },
+    {
+        name: "edge WHERE",
+        statement: '''SELECT *
+                      FROM (
+                        gpml MATCH (a) -[ b:Transfer WHERE b.amount>9500000]-> ()
+                      )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[ 
+                 { 'a': { 'owner': "Mike", 'isBlocked': "no" }, 'b': { 'date': 2020-02-01, 'amount': 10000000.00 } },
+                 { 'a': { 'owner': "Aretha", 'isBlocked': "no" }, 'b': { 'date': 2020-03-01, 'amount': 10000000.00} },
+                 { 'a': { 'owner': "Jay", 'isBlocked': "yes" }, 'b': { 'date': 2020-04-01, 'amount': 10000000.00} },
+                 { 'a': { 'owner': "Dave", 'isBlocked': "no" }, 'b': { 'date': 2020-06-01, 'amount': 10000000.00} }
+            ]
+        }
+    },
 ]
