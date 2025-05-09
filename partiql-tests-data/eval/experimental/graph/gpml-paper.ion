@@ -202,4 +202,35 @@ gpml_paper::[
             ]
         }
     },
+    {
+        name: "pattern WHERE -- longer path",
+        statement: '''SELECT *
+                      FROM (
+                        gpml MATCH (src) -[ b:Transfer ]-> (dst) -[ x:hasPhone ]- (p:Phone) WHERE b.amount<9000000
+                      )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                 { 'src': { 'owner': "Scott", 'isBlocked': "no" }, 'b': { 'date': 2020-01-01, 'amount': 8000000.00 }, 'dst': { 'owner': "Mike", 'isBlocked': "no" }, 'p': { 'number': "222", 'isBlocked': "no" }  },
+                 { 'src': { 'owner': "Dave", 'isBlocked': "no" }, 'b': { 'date': 2020-07-01, 'amount': 4000000.00 }, 'dst': { 'owner': "Charles", 'isBlocked': "no" }, 'p': { 'number': "111", 'isBlocked': "no" }  },
+                 { 'src': { 'owner': "Mike", 'isBlocked': "no" }, 'b': { 'date': 2020-08-01, 'amount': 6000000.00 }, 'dst': { 'owner': "Charles", 'isBlocked': "no" }, 'p': { 'number': "111", 'isBlocked': "no" }  },
+            ]
+        }
+    },
+    {
+        name: "pattern WHERE -- longer path with AND",
+        statement: '''SELECT *
+                      FROM (
+                        gpml MATCH (src) -[ b:Transfer ]-> (dst) -[ x:hasPhone ]- (p:Phone) WHERE b.amount>9000000 AND p.number='222'
+                      )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                 { 'src': { 'owner': "Dave", 'isBlocked': "no" }, 'b': { 'date': 2020-06-01, 'amount': 10000000.00 }, 'dst': { 'owner': "Mike", 'isBlocked': "no" }, 'p': { 'number': "222", 'isBlocked': "no" }  },
+                 { 'src': { 'owner': "Mike", 'isBlocked': "no" }, 'b': { 'date': 2020-02-01, 'amount': 10000000.00 }, 'dst': { 'owner': "Aretha", 'isBlocked': "no" }, 'p': { 'number': "222", 'isBlocked': "no" }  },
+            ]
+        }
+    },
 ]
