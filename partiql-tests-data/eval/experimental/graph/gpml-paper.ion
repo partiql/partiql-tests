@@ -233,4 +233,70 @@ gpml_paper::[
             ]
         }
     },
+    {
+        name: "SEARCH MODE: 3 hop cycle: WALK",
+        // WALK specifies no filtering of matches
+        statement: '''SELECT *
+                      FROM (
+                        gpml MATCH WALK (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a)
+                      )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                 { 'a': { 'owner': "Scott", 'isBlocked': "no" } },
+                 { 'a': { 'owner': "Mike", 'isBlocked': "no" } },
+                 { 'a': { 'owner': "Charles", 'isBlocked': "no" } },
+            ]
+        }
+    },
+    {
+        name: "SEARCH MODE: 3 hop cycle: TRAIL",
+        // TRAIL specifies no repeated edges are allowed
+        statement: '''SELECT *
+                      FROM (
+                        gpml MATCH TRAIL (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a)
+                      )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                 { 'a': { 'owner': "Scott", 'isBlocked': "no" } },
+                 { 'a': { 'owner': "Mike", 'isBlocked': "no" } },
+                 { 'a': { 'owner': "Charles", 'isBlocked': "no" } },
+            ]
+        }
+    },
+    {
+        name: "SEARCH MODE: 3 hop cycle: ACYCLIC",
+        // ACYCLIC specifies no repeated nodes are allowed
+        statement: '''SELECT *
+                      FROM (
+                        gpml MATCH ACYCLIC (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a)
+                      )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+
+            ]
+        }
+    },
+    {
+        name: "SEARCH MODE: 3 hop cycle: SIMPLE",
+        // SIMPLE specifies no repeated nodes are allowed, except that the first and last node may match each other
+        statement: '''SELECT *
+                      FROM (
+                        gpml MATCH SIMPLE (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a)
+                      )''',
+        assert: {
+            evalMode: [EvalModeCoerce, EvalModeError],
+            result: EvaluationSuccess,
+            output: $bag::[
+                 { 'a': { 'owner': "Scott", 'isBlocked': "no" } },
+                 { 'a': { 'owner': "Mike", 'isBlocked': "no" } },
+                 { 'a': { 'owner': "Charles", 'isBlocked': "no" } },
+            ]
+        }
+    },
 ]
