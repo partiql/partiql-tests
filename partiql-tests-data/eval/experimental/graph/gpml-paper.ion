@@ -55,248 +55,569 @@ envs::{
 }
 
 gpml_paper::[
-    {
-        name: "label :City",
-        statement: '''SELECT *
-                      FROM (
-                        gpml MATCH (a) (-[:isLocatedIn]->(c:City))
-                      )''',
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[
-                 { 'a': { 'owner': "Aretha", 'isBlocked': "no" }, 'c': { 'name': "Ankh-Morpork" } },
-                 { 'a': { 'owner': "Jay", 'isBlocked': "yes" }, 'c': { 'name': "Ankh-Morpork" } }
-            ]
-        }
-    },
-    {
-        name: "label :Country",
-        statement: '''SELECT *
-                      FROM (
-                        gpml MATCH (a) (-[:isLocatedIn]->(c:Country))
-                      )''',
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[
-                 { 'a': { 'owner': "Scott", 'isBlocked': "no" }, 'c': { 'name': "Zembla" } },
-                 { 'a': { 'owner': "Aretha", 'isBlocked': "no" }, 'c': { 'name': "Ankh-Morpork" } },
-                 { 'a': { 'owner': "Mike", 'isBlocked': "no" }, 'c': { 'name': "Zembla" } },
-                 { 'a': { 'owner': "Jay", 'isBlocked': "yes" }, 'c': { 'name': "Ankh-Morpork" } },
-                 { 'a': { 'owner': "Charles", 'isBlocked': "no" }, 'c': { 'name': "Zembla" } }
-            ]
-        }
-    },
-    {
-        name: "label negation",
-        statement: '''SELECT *
-                      FROM (
-                        gpml MATCH (a) (-[:isLocatedIn]->(c:!City))
-                      )''',
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[
-                 { 'a': { 'owner': "Scott", 'isBlocked': "no" }, 'c': { 'name': "Zembla" } },
-                 { 'a': { 'owner': "Mike", 'isBlocked': "no" }, 'c': { 'name': "Zembla" } },
-                 { 'a': { 'owner': "Charles", 'isBlocked': "no" }, 'c': { 'name': "Zembla" } }
-            ]
-        }
-    },
-    {
-        name: "label disjunction",
-        statement: '''SELECT *
-                      FROM (
-                        gpml MATCH (a) (-[:isLocatedIn]->(c:City|Country))
-                      )''',
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[
-                 { 'a': { 'owner': "Scott", 'isBlocked': "no" }, 'c': { 'name': "Zembla" } },
-                 { 'a': { 'owner': "Aretha", 'isBlocked': "no" }, 'c': { 'name': "Ankh-Morpork" } },
-                 { 'a': { 'owner': "Mike", 'isBlocked': "no" }, 'c': { 'name': "Zembla" } },
-                 { 'a': { 'owner': "Jay", 'isBlocked': "yes" }, 'c': { 'name': "Ankh-Morpork" } },
-                 { 'a': { 'owner': "Charles", 'isBlocked': "no" }, 'c': { 'name': "Zembla" } }
-            ]
-        }
-    },
-    {
-        name: "label conjunction",
-        statement: '''SELECT *
-                      FROM (
-                        gpml MATCH (a) (-[:isLocatedIn]->(c:City&Country))
-                      )''',
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[
-                 { 'a': { 'owner': "Aretha", 'isBlocked': "no" }, 'c': { 'name': "Ankh-Morpork" } },
-                 { 'a': { 'owner': "Jay", 'isBlocked': "yes" }, 'c': { 'name': "Ankh-Morpork" } }
-            ]
-        }
-    },
-    {
-        name: "node WHERE",
-        statement: '''SELECT *
-                      FROM (
-                        gpml MATCH (a WHERE a.owner='Jay')
-                      )''',
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[
-                 { 'a': { 'owner': "Jay", 'isBlocked': "yes" } }
-            ]
-        }
-    },
-    {
-        name: "edge WHERE",
-        statement: '''SELECT *
-                      FROM (
-                        gpml MATCH (a) -[ b:Transfer WHERE b.amount>9500000]-> ()
-                      )''',
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[ 
-                 { 'a': { 'owner': "Mike", 'isBlocked': "no" }, 'b': { 'date': 2020-02-01, 'amount': 10000000.00 } },
-                 { 'a': { 'owner': "Aretha", 'isBlocked': "no" }, 'b': { 'date': 2020-03-01, 'amount': 10000000.00} },
-                 { 'a': { 'owner': "Jay", 'isBlocked': "yes" }, 'b': { 'date': 2020-04-01, 'amount': 10000000.00} },
-                 { 'a': { 'owner': "Dave", 'isBlocked': "no" }, 'b': { 'date': 2020-06-01, 'amount': 10000000.00} }
-            ]
-        }
-    },
-    {
-        name: "sub pattern WHERE",
-        statement: '''SELECT *
-                      FROM (
-                        gpml MATCH ((a) -[ b:Transfer ]-> () WHERE b.amount>9500000)
-                      )''',
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[ 
-                 { 'a': { 'owner': "Mike", 'isBlocked': "no" }, 'b': { 'date': 2020-02-01, 'amount': 10000000.00 } },
-                 { 'a': { 'owner': "Aretha", 'isBlocked': "no" }, 'b': { 'date': 2020-03-01, 'amount': 10000000.00} },
-                 { 'a': { 'owner': "Jay", 'isBlocked': "yes" }, 'b': { 'date': 2020-04-01, 'amount': 10000000.00} },
-                 { 'a': { 'owner': "Dave", 'isBlocked': "no" }, 'b': { 'date': 2020-06-01, 'amount': 10000000.00} }
-            ]
-        }
-    },
-    {
-        name: "pattern WHERE",
-        statement: '''SELECT *
-                      FROM (
-                        gpml MATCH (a) -[ b:Transfer ]-> () WHERE b.amount>9500000
-                      )''',
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[ 
-                 { 'a': { 'owner': "Mike", 'isBlocked': "no" }, 'b': { 'date': 2020-02-01, 'amount': 10000000.00 } },
-                 { 'a': { 'owner': "Aretha", 'isBlocked': "no" }, 'b': { 'date': 2020-03-01, 'amount': 10000000.00} },
-                 { 'a': { 'owner': "Jay", 'isBlocked': "yes" }, 'b': { 'date': 2020-04-01, 'amount': 10000000.00} },
-                 { 'a': { 'owner': "Dave", 'isBlocked': "no" }, 'b': { 'date': 2020-06-01, 'amount': 10000000.00} }
-            ]
-        }
-    },
-    {
-        name: "pattern WHERE -- longer path",
-        statement: '''SELECT *
-                      FROM (
-                        gpml MATCH (src) -[ b:Transfer ]-> (dst) -[ x:hasPhone ]- (p:Phone) WHERE b.amount<9000000
-                      )''',
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[
-                 { 'src': { 'owner': "Scott", 'isBlocked': "no" }, 'b': { 'date': 2020-01-01, 'amount': 8000000.00 }, 'dst': { 'owner': "Mike", 'isBlocked': "no" }, 'p': { 'number': "222", 'isBlocked': "no" }  },
-                 { 'src': { 'owner': "Dave", 'isBlocked': "no" }, 'b': { 'date': 2020-07-01, 'amount': 4000000.00 }, 'dst': { 'owner': "Charles", 'isBlocked': "no" }, 'p': { 'number': "111", 'isBlocked': "no" }  },
-                 { 'src': { 'owner': "Mike", 'isBlocked': "no" }, 'b': { 'date': 2020-08-01, 'amount': 6000000.00 }, 'dst': { 'owner': "Charles", 'isBlocked': "no" }, 'p': { 'number': "111", 'isBlocked': "no" }  },
-            ]
-        }
-    },
-    {
-        name: "pattern WHERE -- longer path with AND",
-        statement: '''SELECT *
-                      FROM (
-                        gpml MATCH (src) -[ b:Transfer ]-> (dst) -[ x:hasPhone ]- (p:Phone) WHERE b.amount>9000000 AND p.number='222'
-                      )''',
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[
-                 { 'src': { 'owner': "Dave", 'isBlocked': "no" }, 'b': { 'date': 2020-06-01, 'amount': 10000000.00 }, 'dst': { 'owner': "Mike", 'isBlocked': "no" }, 'p': { 'number': "222", 'isBlocked': "no" }  },
-                 { 'src': { 'owner': "Mike", 'isBlocked': "no" }, 'b': { 'date': 2020-02-01, 'amount': 10000000.00 }, 'dst': { 'owner': "Aretha", 'isBlocked': "no" }, 'p': { 'number': "222", 'isBlocked': "no" }  },
-            ]
-        }
-    },
-    {
-        name: "SEARCH MODE: 3 hop cycle: WALK",
-        // WALK specifies no filtering of matches
-        statement: '''SELECT *
-                      FROM (
-                        gpml MATCH WALK (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a)
-                      )''',
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[
-                 { 'a': { 'owner': "Scott", 'isBlocked': "no" } },
-                 { 'a': { 'owner': "Mike", 'isBlocked': "no" } },
-                 { 'a': { 'owner': "Charles", 'isBlocked': "no" } },
-            ]
-        }
-    },
-    {
-        name: "SEARCH MODE: 3 hop cycle: TRAIL",
-        // TRAIL specifies no repeated edges are allowed
-        statement: '''SELECT *
-                      FROM (
-                        gpml MATCH TRAIL (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a)
-                      )''',
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[
-                 { 'a': { 'owner': "Scott", 'isBlocked': "no" } },
-                 { 'a': { 'owner': "Mike", 'isBlocked': "no" } },
-                 { 'a': { 'owner': "Charles", 'isBlocked': "no" } },
-            ]
-        }
-    },
-    {
-        name: "SEARCH MODE: 3 hop cycle: ACYCLIC",
-        // ACYCLIC specifies no repeated nodes are allowed
-        statement: '''SELECT *
-                      FROM (
-                        gpml MATCH ACYCLIC (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a)
-                      )''',
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[
+    labels::[
+        {
+            name: "label :City",
+            statement: '''SELECT *
+                          FROM (
+                            gpml MATCH (a) (-[:isLocatedIn]->(c:City))
+                          )''',
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                     { 'a': { 'owner': "Aretha", 'isBlocked': "no" }, 'c': { 'name': "Ankh-Morpork" } },
+                     { 'a': { 'owner': "Jay", 'isBlocked': "yes" }, 'c': { 'name': "Ankh-Morpork" } }
+                ]
+            }
+        },
+        {
+            name: "label :Country",
+            statement: '''SELECT *
+                          FROM (
+                            gpml MATCH (a) (-[:isLocatedIn]->(c:Country))
+                          )''',
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                     { 'a': { 'owner': "Scott", 'isBlocked': "no" }, 'c': { 'name': "Zembla" } },
+                     { 'a': { 'owner': "Aretha", 'isBlocked': "no" }, 'c': { 'name': "Ankh-Morpork" } },
+                     { 'a': { 'owner': "Mike", 'isBlocked': "no" }, 'c': { 'name': "Zembla" } },
+                     { 'a': { 'owner': "Jay", 'isBlocked': "yes" }, 'c': { 'name': "Ankh-Morpork" } },
+                     { 'a': { 'owner': "Charles", 'isBlocked': "no" }, 'c': { 'name': "Zembla" } }
+                ]
+            }
+        },
+        {
+            name: "label negation",
+            statement: '''SELECT *
+                          FROM (
+                            gpml MATCH (a) (-[:isLocatedIn]->(c:!City))
+                          )''',
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                     { 'a': { 'owner': "Scott", 'isBlocked': "no" }, 'c': { 'name': "Zembla" } },
+                     { 'a': { 'owner': "Mike", 'isBlocked': "no" }, 'c': { 'name': "Zembla" } },
+                     { 'a': { 'owner': "Charles", 'isBlocked': "no" }, 'c': { 'name': "Zembla" } }
+                ]
+            }
+        },
+        {
+            name: "label disjunction",
+            statement: '''SELECT *
+                          FROM (
+                            gpml MATCH (a) (-[:isLocatedIn]->(c:City|Country))
+                          )''',
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                     { 'a': { 'owner': "Scott", 'isBlocked': "no" }, 'c': { 'name': "Zembla" } },
+                     { 'a': { 'owner': "Aretha", 'isBlocked': "no" }, 'c': { 'name': "Ankh-Morpork" } },
+                     { 'a': { 'owner': "Mike", 'isBlocked': "no" }, 'c': { 'name': "Zembla" } },
+                     { 'a': { 'owner': "Jay", 'isBlocked': "yes" }, 'c': { 'name': "Ankh-Morpork" } },
+                     { 'a': { 'owner': "Charles", 'isBlocked': "no" }, 'c': { 'name': "Zembla" } }
+                ]
+            }
+        },
+        {
+            name: "label conjunction",
+            statement: '''SELECT *
+                          FROM (
+                            gpml MATCH (a) (-[:isLocatedIn]->(c:City&Country))
+                          )''',
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                     { 'a': { 'owner': "Aretha", 'isBlocked': "no" }, 'c': { 'name': "Ankh-Morpork" } },
+                     { 'a': { 'owner': "Jay", 'isBlocked': "yes" }, 'c': { 'name': "Ankh-Morpork" } }
+                ]
+            }
+        },
+    ],
 
+    where::[
+        {
+            name: "node WHERE",
+            statement: '''SELECT *
+                          FROM (
+                            gpml MATCH (a WHERE a.owner='Jay')
+                          )''',
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                     { 'a': { 'owner': "Jay", 'isBlocked': "yes" } }
+                ]
+            }
+        },
+        {
+            name: "edge WHERE",
+            statement: '''SELECT *
+                          FROM (
+                            gpml MATCH (a) -[ b:Transfer WHERE b.amount>9500000]-> ()
+                          )''',
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                     { 'a': { 'owner': "Mike", 'isBlocked': "no" }, 'b': { 'date': 2020-02-01, 'amount': 10000000.00 } },
+                     { 'a': { 'owner': "Aretha", 'isBlocked': "no" }, 'b': { 'date': 2020-03-01, 'amount': 10000000.00} },
+                     { 'a': { 'owner': "Jay", 'isBlocked': "yes" }, 'b': { 'date': 2020-04-01, 'amount': 10000000.00} },
+                     { 'a': { 'owner': "Dave", 'isBlocked': "no" }, 'b': { 'date': 2020-06-01, 'amount': 10000000.00} }
+                ]
+            }
+        },
+        {
+            name: "sub pattern WHERE",
+            statement: '''SELECT *
+                          FROM (
+                            gpml MATCH ((a) -[ b:Transfer ]-> () WHERE b.amount>9500000)
+                          )''',
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                     { 'a': { 'owner': "Mike", 'isBlocked': "no" }, 'b': { 'date': 2020-02-01, 'amount': 10000000.00 } },
+                     { 'a': { 'owner': "Aretha", 'isBlocked': "no" }, 'b': { 'date': 2020-03-01, 'amount': 10000000.00} },
+                     { 'a': { 'owner': "Jay", 'isBlocked': "yes" }, 'b': { 'date': 2020-04-01, 'amount': 10000000.00} },
+                     { 'a': { 'owner': "Dave", 'isBlocked': "no" }, 'b': { 'date': 2020-06-01, 'amount': 10000000.00} }
+                ]
+            }
+        },
+        {
+            name: "pattern WHERE",
+            statement: '''SELECT *
+                          FROM (
+                            gpml MATCH (a) -[ b:Transfer ]-> () WHERE b.amount>9500000
+                          )''',
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                     { 'a': { 'owner': "Mike", 'isBlocked': "no" }, 'b': { 'date': 2020-02-01, 'amount': 10000000.00 } },
+                     { 'a': { 'owner': "Aretha", 'isBlocked': "no" }, 'b': { 'date': 2020-03-01, 'amount': 10000000.00} },
+                     { 'a': { 'owner': "Jay", 'isBlocked': "yes" }, 'b': { 'date': 2020-04-01, 'amount': 10000000.00} },
+                     { 'a': { 'owner': "Dave", 'isBlocked': "no" }, 'b': { 'date': 2020-06-01, 'amount': 10000000.00} }
+                ]
+            }
+        },
+        {
+            name: "pattern WHERE -- longer path",
+            statement: '''SELECT *
+                          FROM (
+                            gpml MATCH (src) -[ b:Transfer ]-> (dst) -[ x:hasPhone ]- (p:Phone) WHERE b.amount<9000000
+                          )''',
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                     { 'src': { 'owner': "Scott", 'isBlocked': "no" }, 'b': { 'date': 2020-01-01, 'amount': 8000000.00 }, 'dst': { 'owner': "Mike", 'isBlocked': "no" }, 'p': { 'number': "222", 'isBlocked': "no" }  },
+                     { 'src': { 'owner': "Dave", 'isBlocked': "no" }, 'b': { 'date': 2020-07-01, 'amount': 4000000.00 }, 'dst': { 'owner': "Charles", 'isBlocked': "no" }, 'p': { 'number': "111", 'isBlocked': "no" }  },
+                     { 'src': { 'owner': "Mike", 'isBlocked': "no" }, 'b': { 'date': 2020-08-01, 'amount': 6000000.00 }, 'dst': { 'owner': "Charles", 'isBlocked': "no" }, 'p': { 'number': "111", 'isBlocked': "no" }  },
+                ]
+            }
+        },
+        {
+            name: "pattern WHERE -- longer path with AND",
+            statement: '''SELECT *
+                          FROM (
+                            gpml MATCH (src) -[ b:Transfer ]-> (dst) -[ x:hasPhone ]- (p:Phone) WHERE b.amount>9000000 AND p.number='222'
+                          )''',
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                     { 'src': { 'owner': "Dave", 'isBlocked': "no" }, 'b': { 'date': 2020-06-01, 'amount': 10000000.00 }, 'dst': { 'owner': "Mike", 'isBlocked': "no" }, 'p': { 'number': "222", 'isBlocked': "no" }  },
+                     { 'src': { 'owner': "Mike", 'isBlocked': "no" }, 'b': { 'date': 2020-02-01, 'amount': 10000000.00 }, 'dst': { 'owner': "Aretha", 'isBlocked': "no" }, 'p': { 'number': "222", 'isBlocked': "no" }  },
+                ]
+            }
+        },
+    ],
+
+    mode_3_hop::[
+        equiv_class::{
+            // WALK specifies no filtering of matches
+            id: three_hop_cycle_mode_walk,
+            statements: [
+                '''SELECT *
+                   FROM (
+                       gpml MATCH WALK (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a)
+                   )''',
+                '''( gpml MATCH WALK (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a) )''',
+                /*TODO quantifiers:
+                '''SELECT * FROM ( gpml MATCH WALK (a) -[:Transfer]->{3,3} (a) )''',
+                '''              ( gpml MATCH WALK (a) -[:Transfer]->{3,3} (a) )''',
+                */
             ]
-        }
-    },
-    {
-        name: "SEARCH MODE: 3 hop cycle: SIMPLE",
-        // SIMPLE specifies no repeated nodes are allowed, except that the first and last node may match each other
-        statement: '''SELECT *
-                      FROM (
-                        gpml MATCH SIMPLE (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a)
-                      )''',
-        assert: {
-            evalMode: [EvalModeCoerce, EvalModeError],
-            result: EvaluationSuccess,
-            output: $bag::[
-                 { 'a': { 'owner': "Scott", 'isBlocked': "no" } },
-                 { 'a': { 'owner': "Mike", 'isBlocked': "no" } },
-                 { 'a': { 'owner': "Charles", 'isBlocked': "no" } },
+        },
+        {
+            name: "Equivs: SEARCH MODE: 3 hop cycle: WALK",
+            statement: three_hop_cycle_mode_walk,
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                     // Loop a1 -> a3 -> a5 -> a1
+                     { 'a': { 'owner': "Scott", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Mike", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Charles", 'isBlocked': "no" } },
+                ]
+            }
+        },
+
+        equiv_class::{
+            // TRAIL specifies no repeated edges are allowed
+            id: three_hop_cycle_mode_trail,
+            statements: [
+                '''SELECT *
+                   FROM (
+                       gpml MATCH TRAIL (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a)
+                   )''',
+                '''( gpml MATCH TRAIL (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a) )''',
+                /*TODO quantifiers:
+                '''SELECT * FROM ( gpml MATCH TRAIL (a) -[:Transfer]->{3,3} (a) )''',
+                '''              ( gpml MATCH TRAIL (a) -[:Transfer]->{3,3} (a) )''',
+                */
             ]
-        }
-    },
+        },
+        {
+            name: "Equivs: SEARCH MODE: 3 hop cycle: TRAIL",
+            statement: three_hop_cycle_mode_trail,
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                     // Loop a1 -> a3 -> a5 -> a1
+                     { 'a': { 'owner': "Scott", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Mike", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Charles", 'isBlocked': "no" } },
+                ]
+            }
+        },
+
+        equiv_class::{
+            // ACYCLIC specifies no repeated nodes are allowed
+            id: three_hop_cycle_mode_acyclic,
+            statements: [
+                '''SELECT *
+                   FROM (
+                       gpml MATCH ACYCLIC (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a)
+                   )''',
+                '''( gpml MATCH ACYCLIC (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a) )''',
+                /*TODO quantifiers:
+                '''SELECT * FROM ( gpml MATCH ACYCLIC (a) -[:Transfer]->{3,3} (a) )''',
+                '''              ( gpml MATCH ACYCLIC (a) -[:Transfer]->{3,3} (a) )''',
+                */
+            ]
+        },
+        {
+            name: "Equivs: SEARCH MODE: 3 hop cycle: ACYCLIC",
+            statement: three_hop_cycle_mode_acyclic,
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                    // No results expected since start and end node are same, ACYCLIC will reject
+                ]
+            }
+        },
+
+        equiv_class::{
+            // SIMPLE specifies no repeated nodes are allowed, except that the first and last node may match each other
+            id: three_hop_cycle_mode_simple,
+            statements: [
+                '''SELECT *
+                   FROM (
+                       gpml MATCH SIMPLE (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a)
+                   )''',
+                '''( gpml MATCH SIMPLE (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a) )''',
+                /*TODO quantifiers:
+                '''SELECT * FROM ( gpml MATCH SIMPLE (a) -[:Transfer]->{3,3} (a) )''',
+                '''              ( gpml MATCH SIMPLE (a) -[:Transfer]->{3,3} (a) )''',
+                */
+            ]
+        },
+        {
+            name: "Equivs: SEARCH MODE: 3 hop cycle: SIMPLE",
+            statement: three_hop_cycle_mode_simple,
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                     // Loop a1 -> a3 -> a5 -> a1
+                     { 'a': { 'owner': "Scott", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Mike", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Charles", 'isBlocked': "no" } },
+                ]
+            }
+        },
+    ],
+
+
+    mode_4_hop::[
+        equiv_class::{
+            // WALK specifies no filtering of matches
+            id: four_hop_cycle_mode_walk,
+            statements: [
+                '''SELECT *
+                   FROM (
+                       gpml MATCH WALK (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a)
+                   )''',
+                '''( gpml MATCH WALK (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a) )''',
+                /*TODO quantifiers:
+                '''SELECT * FROM ( gpml MATCH WALK (a) -[:Transfer]->{4,4} (a) )''',
+                '''              ( gpml MATCH WALK (a) -[:Transfer]->{4,4} (a) )''',
+                */
+            ]
+        },
+        {
+            name: "Equivs: SEARCH MODE: 4 hop cycle: WALK",
+            statement: four_hop_cycle_mode_walk,
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                     // Loop a2 -> a3 -> a4 -> a6 -> a1
+                     { 'a': { 'owner': "Aretha", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Mike", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Jay", 'isBlocked': "yes" } },
+                     { 'a': { 'owner': "Dave", 'isBlocked': "no" } },
+                ]
+            }
+        },
+
+        equiv_class::{
+            // TRAIL specifies no repeated edges are allowed
+            id: four_hop_cycle_mode_trail,
+            statements: [
+                '''SELECT *
+                   FROM (
+                       gpml MATCH TRAIL (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a)
+                   )''',
+                '''( gpml MATCH TRAIL (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a) )''',
+                /*TODO quantifiers:
+                '''SELECT * FROM ( gpml MATCH TRAIL (a) -[:Transfer]->{4,4} (a) )''',
+                '''              ( gpml MATCH TRAIL (a) -[:Transfer]->{4,4} (a) )''',
+                */
+            ]
+        },
+        {
+            name: "Equivs: SEARCH MODE: 4 hop cycle: TRAIL",
+            statement: four_hop_cycle_mode_trail,
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                     // Loop a2 -> a3 -> a4 -> a6 -> a1
+                     { 'a': { 'owner': "Aretha", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Mike", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Jay", 'isBlocked': "yes" } },
+                     { 'a': { 'owner': "Dave", 'isBlocked': "no" } },
+                ]
+            }
+        },
+
+        equiv_class::{
+            // ACYCLIC specifies no repeated nodes are allowed
+            id: four_hop_cycle_mode_acyclic,
+            statements: [
+                '''SELECT *
+                   FROM (
+                       gpml MATCH ACYCLIC (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a)
+                   )''',
+                '''( gpml MATCH ACYCLIC (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a) )''',
+                /*TODO quantifiers:
+                '''SELECT * FROM ( gpml MATCH ACYCLIC (a) -[:Transfer]->{4,4} (a) )''',
+                '''              ( gpml MATCH ACYCLIC (a) -[:Transfer]->{4,4} (a) )''',
+                */
+            ]
+        },
+        {
+            name: "Equivs: SEARCH MODE: 4 hop cycle: ACYCLIC",
+            statement: four_hop_cycle_mode_acyclic,
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                    // No results expected since start and end node are same, ACYCLIC will reject
+                ]
+            }
+        },
+
+        equiv_class::{
+            // SIMPLE specifies no repeated nodes are allowed, except that the first and last node may match each other
+            id: four_hop_cycle_mode_simple,
+            statements: [
+                '''SELECT *
+                   FROM (
+                       gpml MATCH SIMPLE (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a)
+                   )''',
+                '''( gpml MATCH SIMPLE (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a) )''',
+                /*TODO quantifiers:
+                '''SELECT * FROM ( gpml MATCH SIMPLE (a) -[:Transfer]->{4,4} (a) )''',
+                '''              ( gpml MATCH SIMPLE (a) -[:Transfer]->{4,4} (a) )''',
+                */
+            ]
+        },
+        {
+            name: "Equivs: SEARCH MODE: 4 hop cycle: SIMPLE",
+            statement: four_hop_cycle_mode_simple,
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                     // Loop a2 -> a3 -> a4 -> a6 -> a1
+                     { 'a': { 'owner': "Aretha", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Mike", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Jay", 'isBlocked': "yes" } },
+                     { 'a': { 'owner': "Dave", 'isBlocked': "no" } },
+                ]
+            }
+        },
+    ],
+
+
+
+    mode_6_hop::[
+        equiv_class::{
+            // WALK specifies no filtering of matches
+            id: six_hop_cycle_mode_walk,
+            statements: [
+                '''SELECT *
+                   FROM (
+                       gpml MATCH WALK (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a)
+                   )''',
+                '''( gpml MATCH WALK (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a) )''',
+                /*TODO quantifiers:
+                '''SELECT * FROM ( gpml MATCH WALK (a) -[:Transfer]->{6,6} (a) )''',
+                '''              ( gpml MATCH WALK (a) -[:Transfer]->{6,6} (a) )''',
+                */
+            ]
+        },
+        {
+            name: "Equivs: SEARCH MODE: 6 hop cycle: WALK",
+            statement: six_hop_cycle_mode_walk,
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                     // Loop a1 -> a3 -> a5 -> a1 (from 3-hop test) cycled 2x
+                     { 'a': { 'owner': "Scott", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Mike", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Charles", 'isBlocked': "no" } },
+                     // Loop a1 -> a3 -> a2 -> a4 -> a6 -> a5 -> a1
+                     { 'a': { 'owner': "Scott", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Mike", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Charles", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Aretha", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Jay", 'isBlocked': "yes" } },
+                     { 'a': { 'owner': "Dave", 'isBlocked': "no" } },
+                ]
+            }
+        },
+
+        equiv_class::{
+            // TRAIL specifies no repeated edges are allowed
+            id: six_hop_cycle_mode_trail,
+            statements: [
+                '''SELECT *
+                   FROM (
+                       gpml MATCH TRAIL (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a)
+                   )''',
+                '''( gpml MATCH TRAIL (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a) )''',
+                /*TODO quantifiers:
+                '''SELECT * FROM ( gpml MATCH TRAIL (a) -[:Transfer]->{6,6} (a) )''',
+                '''              ( gpml MATCH TRAIL (a) -[:Transfer]->{6,6} (a) )''',
+                */
+            ]
+        },
+        {
+            name: "Equivs: SEARCH MODE: 6 hop cycle: TRAIL",
+            statement: six_hop_cycle_mode_trail,
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                     // Loop a1 -> a3 -> a5 -> a1 (from 3-hop test) cycled 2x
+                        // above is rejected, as it would repeat edges
+
+                     // Loop a1 -> a3 -> a2 -> a4 -> a6 -> a5 -> a1
+                     { 'a': { 'owner': "Scott", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Mike", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Charles", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Aretha", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Jay", 'isBlocked': "yes" } },
+                     { 'a': { 'owner': "Dave", 'isBlocked': "no" } },
+                ]
+            }
+        },
+
+        equiv_class::{
+            // ACYCLIC specifies no repeated nodes are allowed
+            id: six_hop_cycle_mode_acyclic,
+            statements: [
+                '''SELECT *
+                   FROM (
+                       gpml MATCH ACYCLIC (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a)
+                   )''',
+                '''( gpml MATCH ACYCLIC (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a) )''',
+                /*TODO quantifiers:
+                '''SELECT * FROM ( gpml MATCH ACYCLIC (a) -[:Transfer]->{6,6} (a) )''',
+                '''              ( gpml MATCH ACYCLIC (a) -[:Transfer]->{6,6} (a) )''',
+                */
+            ]
+        },
+        {
+            name: "Equivs: SEARCH MODE: 6 hop cycle: ACYCLIC",
+            statement: six_hop_cycle_mode_acyclic,
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                    // No results expected since it would require cycling each node from 3-hop 2x, which `ACYCLIC` rejects
+                ]
+            }
+        },
+
+        equiv_class::{
+            // SIMPLE specifies no repeated nodes are allowed, except that the first and last node may match each other
+            id: six_hop_cycle_mode_simple,
+            statements: [
+                '''SELECT *
+                   FROM (
+                       gpml MATCH SIMPLE (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a)
+                   )''',
+                '''( gpml MATCH SIMPLE (a) -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> () -[ :Transfer]-> (a) )''',
+                /*TODO quantifiers:
+                '''SELECT * FROM ( gpml MATCH SIMPLE (a) -[:Transfer]->{6,6} (a) )''',
+                '''              ( gpml MATCH SIMPLE (a) -[:Transfer]->{6,6} (a) )''',
+                */
+            ]
+        },
+        {
+            name: "Equivs: SEARCH MODE: 6 hop cycle: SIMPLE",
+            statement: six_hop_cycle_mode_simple,
+            assert: {
+                evalMode: [EvalModeCoerce, EvalModeError],
+                result: EvaluationSuccess,
+                output: $bag::[
+                     // Loop a1 -> a3 -> a5 -> a1 (from 3-hop test) cycled 2x
+                        // above is rejected, as it would repeat internal nodes
+
+                     // Loop a1 -> a3 -> a2 -> a4 -> a6 -> a5 -> a1
+                     { 'a': { 'owner': "Scott", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Mike", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Charles", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Aretha", 'isBlocked': "no" } },
+                     { 'a': { 'owner': "Jay", 'isBlocked': "yes" } },
+                     { 'a': { 'owner': "Dave", 'isBlocked': "no" } },
+                ]
+            }
+        },
+    ],
 ]
