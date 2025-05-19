@@ -56,5 +56,95 @@ between::[
         "YOYO"
       ]
     }
+  },
+  {
+    name:"between same integer types",
+    statement:"1 BETWEEN -1 AND 1",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name:"between same decimal types",
+    statement:"1.0 BETWEEN -1.0 AND 1.0",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name:"between mixed types int decimal decimal",
+    statement:"1 BETWEEN -1.0 AND 1.0",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name:"between mixed types int int decimal",
+    statement:"1 BETWEEN -1 AND 1.0",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name:"between mixed types int decimal int",
+    statement:"1 BETWEEN -1.0 AND 1",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name:"between mixed types int int decimal false",
+    statement:"1 BETWEEN -1 AND 0.9",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name:"between mixed types int decimal decimal false",
+    statement:"1 BETWEEN -1.0 AND 0.9",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name:"between mixed types decimal int int false",
+    statement:"1.23 BETWEEN -1 AND 1",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name:"between mixed types decimal decimal int false",
+    statement:"1.23 BETWEEN -1.0 AND 1",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name:"between mixed types decimal int decimal false",
+    statement:"1.23 BETWEEN -1 AND 1.0",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: false
+    }
   }
 ]
