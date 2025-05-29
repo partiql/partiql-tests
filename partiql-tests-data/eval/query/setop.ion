@@ -1,0 +1,98 @@
+envs::{
+  tA:[
+    {'a': 1},
+    {'a': 2},
+    {'a': 3},
+    {'a': 4},
+    {'a': 5},
+    {'a': 6},
+    {'a': 7}
+  ],
+  tB:[
+    {'b': 1},
+    {'b': 2},
+    {'b': 3},
+    {'b': 4},
+    {'b': 5},
+    {'b': 6},
+    {'b': 7}
+  ],
+}
+
+union::[
+  {
+    name:"limit offset order by on union",
+    statement:'''
+    (
+      (SELECT a AS c FROM tA ORDER BY a LIMIT 4 OFFSET 1) -- [{'c': 2}, {'c': 3}, {'c': 4},{'c': 5}]
+      UNION
+      (SELECT b AS c FROM tB ORDER BY b LIMIT 4 OFFSET 3) -- [{'c': 4}, {'c': 5}, {'c': 6}, {'c': 7}]
+    ) ORDER BY c DESC LIMIT 100 OFFSET 1
+    ''',
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[
+        {
+          'c': 6
+        },
+        {
+          'c': 5
+        },
+        {
+          'c': 4
+        },
+        {
+          'c': 3
+        },
+        {
+          'c': 2
+        }
+      ]
+    }
+  },
+]
+
+intersect::[
+  {
+    name:"limit offset order by on intersect",
+    statement:'''
+    (
+      (SELECT a AS c FROM tA ORDER BY a LIMIT 4 OFFSET 1) -- [{'c': 2}, {'c': 3}, {'c': 4},{'c': 5}]
+      INTERSECT
+      (SELECT b AS c FROM tB ORDER BY b LIMIT 4 OFFSET 3) -- [{'c': 4}, {'c': 5}, {'c': 6}, {'c': 7}]
+    ) ORDER BY c DESC LIMIT 100 OFFSET 1
+    ''',
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[
+        {
+          'c': 4
+        },
+      ]
+    }
+  },
+]
+
+except::[
+  {
+    name:"limit offset order by on except",
+    statement:'''
+    (
+      (SELECT a AS c FROM tA ORDER BY a LIMIT 4 OFFSET 1) -- [{'c': 2}, {'c': 3}, {'c': 4},{'c': 5}]
+      EXCEPT
+      (SELECT b AS c FROM tB ORDER BY b LIMIT 4 OFFSET 3) -- [{'c': 4}, {'c': 5}, {'c': 6}, {'c': 7}]
+    ) ORDER BY c DESC LIMIT 100 OFFSET 1
+    ''',
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[
+        {
+          'c': 2
+        }
+      ]
+    }
+  },
+]
