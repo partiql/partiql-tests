@@ -444,3 +444,147 @@ envs::{
     ]
   }
 ]
+
+'auto-generated aliases'::[
+  {
+    name: "comma-join-auto-alias",
+    statement: "SELECT * FROM <<{'a': 1}>>, <<{'b': 2}>>",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[
+        {
+          'a': 1,
+          'b': 2
+        }
+      ]
+    }
+  },
+  {
+    name: "cross-join-nested-auto-alias",
+    statement: "SELECT * FROM <<{'a': 1}>> CROSS JOIN <<{'b': 2}>> CROSS JOIN <<{'c': 3}>>",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[
+        {
+          'a': 1,
+          'b': 2,
+          'c': 3
+        }
+      ]
+    }
+  },
+  {
+    name: "mixed-join-auto-alias",
+    statement: "SELECT * FROM <<{'a': 1}>> CROSS JOIN <<{'b': 2}>>, <<{'c': 3}>>",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[
+        {
+          'a': 1,
+          'b': 2,
+          'c': 3
+        }
+      ]
+    }
+  },
+  {
+    name: "comma-join-multiple-records-auto-alias",
+    statement: "SELECT * FROM <<{'x': 1}, {'x': 2}>>, <<{'y': 3}, {'y': 4}>>",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[
+        {
+          'x': 1,
+          'y': 3
+        },
+        {
+          'x': 1,
+          'y': 4
+        },
+        {
+          'x': 2,
+          'y': 3
+        },
+        {
+          'x': 2,
+          'y': 4
+        }
+      ]
+    }
+  },
+  {
+    name: "multiple-comma-join-auto-alias",
+    statement: "SELECT * FROM <<{'a': 1}>>, <<{'b': 2}>>, <<{'c': 3}>>, <<{'d': 4}>>",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[
+        {
+          'a': 1,
+          'b': 2,
+          'c': 3,
+          'd': 4
+        }
+      ]
+    }
+  },
+  {
+    name: "nested-parenthesized-joins-auto-alias",
+    statement: "SELECT * FROM (<<{'x': 1}>> CROSS JOIN <<{'y': 2}>>), <<{'z': 3}>>",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[
+        {
+          'x': 1,
+          'y': 2,
+          'z': 3
+        }
+      ]
+    }
+  },
+  {
+    name: "multiple-cross-join-multiple-records-auto-alias",
+    statement: "SELECT * FROM <<{'a': 1}>> CROSS JOIN <<{'a': 1}, {'b': 2}>> CROSS JOIN <<{'a': 1}, {'b': 2}, {'c': 3}>>",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[
+        {
+          'a': 1,
+          'a': 1,
+          'a': 1
+        },
+        {
+          'a': 1,
+          'a': 1,
+          'b': 2
+        },
+        {
+          'a': 1,
+          'a': 1,
+          'c': 3
+        },
+        {
+          'a': 1,
+          'a': 1,
+          'b': 2
+        },
+        {
+          'a': 1,
+          'b': 2,
+          'b': 2
+        },
+        {
+          'a': 1,
+          'b': 2,
+          'c': 3
+        }
+      ]
+    }
+  },
+]
