@@ -209,8 +209,32 @@ extract::[
       }
     },
     {
+      name:"EXTRACT(YEAR FROM INTERVAL '3-4' YEAR TO MONTH)",
+      statement:"EXTRACT(YEAR FROM INTERVAL '3-4' YEAR TO MONTH) = 3",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
       name:"EXTRACT(MONTH FROM DATE '2000-01-02')",
       statement:"EXTRACT(MONTH FROM DATE '2000-01-02') = 1",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
+      name:"EXTRACT(MONTH FROM INTERVAL '3-4' YEAR TO MONTH)",
+      statement:"EXTRACT(MONTH FROM INTERVAL '3-4' YEAR TO MONTH) = 4",
       assert:{
         result:EvaluationSuccess,
         evalMode:[
@@ -232,11 +256,35 @@ extract::[
         output:true
       }
     },
+    {
+      name:"EXTRACT(DAY FROM INTERVAL '3 4:5:6.789' DAY TO SECOND)",
+      statement:"EXTRACT(DAY FROM INTERVAL '3 4:5:6.789' DAY TO SECOND) = 3",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    }
   ],
   extract_time::[
     {
       name:"EXTRACT(HOUR FROM TIME '01:23:45.678')",
       statement:"EXTRACT(HOUR FROM TIME '01:23:45.678') = 1",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
+      name:"EXTRACT(HOUR FROM INTERVAL '3 4:5:6.789' DAY TO SECOND)",
+      statement:"EXTRACT(HOUR FROM INTERVAL '3 4:5:6.789' DAY TO SECOND) = 4",
       assert:{
         result:EvaluationSuccess,
         evalMode:[
@@ -259,8 +307,32 @@ extract::[
       }
     },
     {
+      name:"EXTRACT(MINUTE FROM INTERVAL '3 4:5:6.789' DAY TO SECOND)",
+      statement:"EXTRACT(MINUTE FROM INTERVAL '3 4:5:6.789' DAY TO SECOND) = 5",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
       name:"EXTRACT(SECOND FROM TIME '01:23:45.678')",
       statement:"EXTRACT(SECOND FROM TIME '01:23:45.678') = 45.678",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
+      name:"EXTRACT(SECOND FROM INTERVAL '3 4:5:6.789' DAY TO SECOND)",
+      statement:"EXTRACT(SECOND FROM INTERVAL '3 4:5:6.789' DAY TO SECOND) = 6.789",
       assert:{
         result:EvaluationSuccess,
         evalMode:[
@@ -308,6 +380,54 @@ extract::[
         output:true
       }
     },
+    {
+      name:"EXTRACT(DAY FROM INTERVAL '3 4:5:6.789' DAY TO SECOND(2))",
+      statement:"EXTRACT(DAY FROM INTERVAL '3 4:5:6.789' DAY TO SECOND(2)) = 3",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
+      name:"EXTRACT(HOUR FROM INTERVAL '3 4:5:6.789' DAY TO SECOND(2))",
+      statement:"EXTRACT(HOUR FROM INTERVAL '3 4:5:6.789' DAY TO SECOND(2)) = 4",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
+      name:"EXTRACT(MINUTE FROM INTERVAL '3 4:5:6.789' DAY TO SECOND(2))",
+      statement:"EXTRACT(MINUTE FROM INTERVAL '3 4:5:6.789' DAY TO SECOND(2)) = 5",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    },
+    {
+      name:"EXTRACT(SECOND FROM INTERVAL '3 4:5:6.789' DAY TO SECOND(2))",
+      statement:"EXTRACT(SECOND FROM INTERVAL '3 4:5:6.789' DAY TO SECOND(2)) = 6.78",
+      assert:{
+        result:EvaluationSuccess,
+        evalMode:[
+          EvalModeCoerce,
+          EvalModeError
+        ],
+        output:true
+      }
+    }
   ],
   extract_time_with_time_zone::[
     {
@@ -469,6 +589,96 @@ extract_invalid::[
   {
     name:"invalid extract day from time",
     statement:"EXTRACT(DAY FROM TIME '01:23:45.678')",
+    assert:[
+      {
+        result:EvaluationFail,
+        evalMode:EvalModeError
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"invalid extract year from day to second interval",
+    statement:"EXTRACT(YEAR FROM INTERVAL '3 4:5:6.789' DAY TO SECOND)",
+    assert:[
+      {
+        result:EvaluationFail,
+        evalMode:EvalModeError
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"invalid extract month from day to second interval",
+    statement:"EXTRACT(MONTH FROM INTERVAL '3 4:5:6.789' DAY TO SECOND)",
+    assert:[
+      {
+        result:EvaluationFail,
+        evalMode:EvalModeError
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"invalid extract day from year to month interval",
+    statement:"EXTRACT(DAY FROM INTERVAL '3-4' YEAR TO MONTH)",
+    assert:[
+      {
+        result:EvaluationFail,
+        evalMode:EvalModeError
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"invalid extract hour from year to month interval",
+    statement:"EXTRACT(HOUR FROM INTERVAL '3-4' YEAR TO MONTH)",
+    assert:[
+      {
+        result:EvaluationFail,
+        evalMode:EvalModeError
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"invalid extract minute from year to month interval",
+    statement:"EXTRACT(MINUTE FROM INTERVAL '3-4' YEAR TO MONTH)",
+    assert:[
+      {
+        result:EvaluationFail,
+        evalMode:EvalModeError
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"invalid extract second from year to month interval",
+    statement:"EXTRACT(SECOND FROM INTERVAL '3-4' YEAR TO MONTH)",
     assert:[
       {
         result:EvaluationFail,
