@@ -1,0 +1,422 @@
+overlaps::[
+  {
+    name:"overlaps with null in first period start",
+    statement:"[null, DATE '2023-01-31'] OVERLAPS [DATE '2023-01-01', DATE '2023-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"overlaps with null in first period end",
+    statement:"[DATE '2023-01-01', null] OVERLAPS [DATE '2023-01-01', DATE '2023-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"overlaps with null in second period start",
+    statement:"[DATE '2023-01-01', DATE '2023-01-31'] OVERLAPS [null, DATE '2023-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"overlaps with null in second period end",
+    statement:"[DATE '2023-01-01', DATE '2023-01-31'] OVERLAPS [DATE '2023-01-01', null]",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"overlaps with arrays with identical periods",
+    statement:"[DATE '2023-01-01', DATE '2023-01-31'] OVERLAPS [DATE '2023-01-01', DATE '2023-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with bags with identical periods",
+    statement:"<<DATE '2023-01-01', DATE '2023-01-31'>> OVERLAPS <<DATE '2023-01-01', DATE '2023-01-31'>>",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with array and bag with identical periods",
+    statement:"[DATE '2023-01-01', DATE '2023-01-31'] OVERLAPS <<DATE '2023-01-01', DATE '2023-01-31'>>",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with overlapping date periods",
+    statement:"[DATE '2023-01-15', DATE '2023-02-15'] OVERLAPS [DATE '2023-01-01', DATE '2023-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with non-overlapping date periods",
+    statement:"[DATE '2023-01-01', DATE '2023-01-31'] OVERLAPS [DATE '2023-02-01', DATE '2023-02-28']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"overlaps with touching date periods (end equals start)",
+    statement:"[DATE '2023-01-01', DATE '2023-01-31'] OVERLAPS [DATE '2023-01-31', DATE '2023-02-28']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"overlaps with reversed date period (end before start)",
+    statement:"[DATE '2023-01-31', DATE '2023-01-01'] OVERLAPS [DATE '2023-01-15', DATE '2023-02-15']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with date period containing another - returns true",
+    statement:"[DATE '2023-01-01', DATE '2023-01-31'] OVERLAPS [DATE '2023-01-10', DATE '2023-01-20']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with single point date periods that match",
+    statement:"[DATE '2023-01-15', DATE '2023-01-15'] OVERLAPS [DATE '2023-01-15', DATE '2023-01-15']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with single point date periods that don't match",
+    statement:"[DATE '2023-01-15', DATE '2023-01-15'] OVERLAPS [DATE '2023-01-16', DATE '2023-01-16']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"overlaps with overlapping date-interval period",
+    statement:"[DATE '2023-01-01', INTERVAL '30' DAY] OVERLAPS [DATE '2023-01-15', DATE '2023-02-15']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with non-overlapping date-interval period",
+    statement:"[DATE '2023-01-01', INTERVAL '10' DAY] OVERLAPS [DATE '2023-01-15', DATE '2023-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"overlaps with touching date-interval period",
+    statement:"[DATE '2023-01-01', INTERVAL '14' DAY] OVERLAPS [DATE '2023-01-15', DATE '2023-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"overlaps with both periods using intervals",
+    statement:"[DATE '2023-01-01', INTERVAL '30' DAY] OVERLAPS [DATE '2023-01-15', INTERVAL '30' DAY]",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with negative interval",
+    statement:"[DATE '2023-01-31', INTERVAL '-30' DAY] OVERLAPS [DATE '2023-01-15', DATE '2023-02-15']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with wrong collection size (first period has 1 element)",
+    statement:"[DATE '2023-01-01'] OVERLAPS [DATE '2023-01-01', DATE '2023-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"overlaps with wrong collection size (second period has 3 elements)",
+    statement:"[DATE '2023-01-01', DATE '2023-01-31'] OVERLAPS [DATE '2023-01-01', DATE '2023-01-15', DATE '2023-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"overlaps with empty collections",
+    statement:"[] OVERLAPS []",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"overlaps with zero-length interval",
+    statement:"[DATE '2023-01-15', INTERVAL '0' DAY] OVERLAPS [DATE '2023-01-15', DATE '2023-01-20']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with year intervals",
+    statement:"[DATE '2023-01-01', INTERVAL '1' YEAR] OVERLAPS [DATE '2023-06-01', DATE '2024-06-01']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with month intervals",
+    statement:"[DATE '2023-01-01', INTERVAL '6' MONTH] OVERLAPS [DATE '2023-03-01', DATE '2023-09-01']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with large negative interval",
+    statement:"[DATE '2023-12-31', INTERVAL '-99' DAY] OVERLAPS [DATE '2023-06-01', DATE '2023-08-01']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"overlaps with both periods reversed",
+    statement:"[DATE '2023-01-31', DATE '2023-01-01'] OVERLAPS [DATE '2023-02-28', DATE '2023-02-01']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"overlaps with one period inside another",
+    statement:"[DATE '2023-01-01', DATE '2023-01-31'] OVERLAPS [DATE '2023-01-05', DATE '2023-01-25']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with periods that share only one endpoint",
+    statement:"[DATE '2023-01-01', DATE '2023-01-15'] OVERLAPS [DATE '2023-01-15', DATE '2023-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"overlaps with leap year date",
+    statement:"[DATE '2024-02-28', DATE '2024-03-01'] OVERLAPS [DATE '2024-02-29', DATE '2024-03-02']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with cross-year boundary",
+    statement:"[DATE '2023-12-15', DATE '2024-01-15'] OVERLAPS [DATE '2023-12-31', DATE '2024-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with identical start times but different end times",
+    statement:"[DATE '2023-01-01', DATE '2023-01-15'] OVERLAPS [DATE '2023-01-01', DATE '2023-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with identical end times but different start times",
+    statement:"[DATE '2023-01-01', DATE '2023-01-31'] OVERLAPS [DATE '2023-01-15', DATE '2023-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with periods separated by exactly one day",
+    statement:"[DATE '2023-01-01', DATE '2023-01-15'] OVERLAPS [DATE '2023-01-16', DATE '2023-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"overlaps with long periods",
+    statement:"[DATE '2020-01-01', DATE '2025-12-31'] OVERLAPS [DATE '2023-01-01', DATE '2030-12-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  }
+]
