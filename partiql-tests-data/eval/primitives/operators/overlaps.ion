@@ -418,5 +418,53 @@ overlaps::[
       ],
       output:true
     }
-  }
+  },
+  {
+    name:"overlaps with overlapping time periods ",
+    statement:"[TIME '10:00:00', TIME '12:00:00'] OVERLAPS [TIME '11:00:00', TIME '13:00:00']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with non-overlapping time periods",
+    statement:"[TIME '10:00:00', TIME '11:00:00'] OVERLAPS [TIME '12:00:00', TIME '13:00:00']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
+  {
+    name:"overlaps with overlapping timestamp periods",
+    statement:"[TIMESTAMP '2023-01-01 10:00:00', TIMESTAMP '2023-01-01 12:00:00'] OVERLAPS [TIMESTAMP '2023-01-01 11:00:00', TIMESTAMP '2023-01-01 13:00:00']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with non-overlapping timestamp periods",
+    statement:"[TIMESTAMP '2023-01-01 10:00:00', TIMESTAMP '2023-01-01 11:00:00'] OVERLAPS [TIMESTAMP '2023-01-01 12:00:00', TIMESTAMP '2023-01-01 13:00:00']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:false
+    }
+  },
 ]
