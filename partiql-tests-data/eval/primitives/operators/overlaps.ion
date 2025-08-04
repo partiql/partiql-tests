@@ -1,53 +1,5 @@
 overlaps::[
   {
-    name:"overlaps with null in first period start",
-    statement:"[null, DATE '2023-01-31'] OVERLAPS [DATE '2023-01-01', DATE '2023-01-31']",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:null
-    }
-  },
-  {
-    name:"overlaps with null in first period end",
-    statement:"[DATE '2023-01-01', null] OVERLAPS [DATE '2023-01-01', DATE '2023-01-31']",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:null
-    }
-  },
-  {
-    name:"overlaps with null in second period start",
-    statement:"[DATE '2023-01-01', DATE '2023-01-31'] OVERLAPS [null, DATE '2023-01-31']",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:null
-    }
-  },
-  {
-    name:"overlaps with null in second period end",
-    statement:"[DATE '2023-01-01', DATE '2023-01-31'] OVERLAPS [DATE '2023-01-01', null]",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:null
-    }
-  },
-  {
     name:"overlaps with arrays with identical periods",
     statement:"[DATE '2023-01-01', DATE '2023-01-31'] OVERLAPS [DATE '2023-01-01', DATE '2023-01-31']",
     assert:{
@@ -519,7 +471,67 @@ overlaps::[
     }
   },
   {
-    name:"overlaps with missing in first argument",
+    name:"overlaps with overlapping and null in first argument",
+    statement:"[null, DATE '2023-01-15'] OVERLAPS [DATE '2023-01-01', DATE '2023-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with non-overlapping and null in first argument",
+    statement:"[null, DATE '2023-01-01'] OVERLAPS [DATE '2023-01-15', DATE '2023-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"overlaps with overlapping and null in second argument",
+    statement:"[DATE '2023-01-01', DATE '2023-01-31'] OVERLAPS [null, DATE '2023-01-15']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with non-overlapping and null in second argument",
+    statement:"[DATE '2023-01-01', DATE '2023-01-15'] OVERLAPS [null, DATE '2023-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"overlaps with both null in first argument",
+    statement:"[null, null] OVERLAPS [DATE '2023-01-01', DATE '2023-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"overlaps with overlapping and missing in first argument",
     statement:"[MISSING, DATE '2023-01-15'] OVERLAPS [DATE '2023-01-01', DATE '2023-01-31']",
     assert:{
       result:EvaluationSuccess,
@@ -527,11 +539,35 @@ overlaps::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$missing::null
+      output:true
     }
   },
   {
-    name:"overlaps with missing in second argument",
+    name:"overlaps with non-overlapping and missing in first argument",
+    statement:"[MISSING, DATE '2023-01-01'] OVERLAPS [DATE '2023-01-15', DATE '2023-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"overlaps with overlapping and missing in second argument",
+    statement:"[DATE '2023-01-01', DATE '2023-01-31'] OVERLAPS [MISSING, DATE '2023-01-15']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:true
+    }
+  },
+  {
+    name:"overlaps with non-overlapping and missing in second argument",
     statement:"[DATE '2023-01-01', DATE '2023-01-15'] OVERLAPS [MISSING, DATE '2023-01-31']",
     assert:{
       result:EvaluationSuccess,
@@ -539,7 +575,31 @@ overlaps::[
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$missing::null
+      output:null
+    }
+  },
+  {
+    name:"overlaps with both missing in first argument",
+    statement:"[MISSING, MISSING] OVERLAPS [DATE '2023-01-01', DATE '2023-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"overlaps with null & missing in first argument",
+    statement:"[null, MISSING] OVERLAPS [DATE '2023-01-01', DATE '2023-01-31']",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
     }
   },
   {
