@@ -4,7 +4,9 @@ envs::{
   i:1,
 }
 
+// SQL1999 6.30 Table 13
 logical::[
+  // NOT
   {
     name:"notTrue",
     statement:"not true",
@@ -24,6 +26,34 @@ logical::[
     }
   },
   {
+    name:"notNull",
+    statement:"not null",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"notMissing",
+    statement:"not missing",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$missing::null
+    }
+  },
+  // AND
+  {
+    name:"andTrueTrue",
+    statement:"true and true",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
     name:"andTrueFalse",
     statement:"true and false",
     assert:{
@@ -33,8 +63,135 @@ logical::[
     }
   },
   {
-    name:"andTrueTrue",
-    statement:"true and true",
+    name:"andTrueNull",
+    statement:"true and null",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"andTrueMissing",
+    statement:"true and missing",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"andFalseTrue",
+    statement:"false and true",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"andFalseFalse",
+    statement:"false and false",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"andFalseNull",
+    statement:"false and null",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"andFalseMissing",
+    statement:"false and missing",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"andNullTrue",
+    statement:"null and true",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"andNullFalse",
+    statement:"null and false",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"andNullNull",
+    statement:"null and null",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"andNullMissing",
+    statement:"null and missing",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"andMissingTrue",
+    statement:"missing and true",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"andMissingFalse",
+    statement:"missing and false",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"andMissingNull",
+    statement:"missing and null",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"andMissingMissing",
+    statement:"missing and missing",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  // OR
+  {
+    name:"orTrueTrue",
+    statement:"true or true",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -51,12 +208,129 @@ logical::[
     }
   },
   {
+    name:"orTrueNull",
+    statement:"true or null",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"orTrueMissing",
+    statement:"true or missing",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"orFalseTrue",
+    statement:"false or true",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
     name:"orFalseFalse",
     statement:"false or false",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:false
+    }
+  },
+  {
+    name:"orFalseNull",
+    statement:"false or null",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"orFalseMissing",
+    statement:"false or missing",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"orNullTrue",
+    statement:"null or true",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"orNullFalse",
+    statement:"null or false",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"orNullNull",
+    statement:"null or null",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"orNullMissing",
+    statement:"null or missing",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"orMissingTrue",
+    statement:"missing or true",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"orMissingFalse",
+    statement:"missing or false",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"orMissingNull",
+    statement:"missing or null",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"orMissingMissing",
+    statement:"missing or missing",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
     }
   },
   {
