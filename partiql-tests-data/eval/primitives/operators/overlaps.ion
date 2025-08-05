@@ -419,32 +419,50 @@ overlaps::[
   {
     name:"overlaps with null as first argument",
     statement:"null OVERLAPS [DATE '2023-01-01', DATE '2023-01-31']",
-    assert:[
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      },
-      {
-        result:EvaluationFail,
-        evalMode:EvalModeError,
-      }
-    ]
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
   },
   {
     name:"overlaps with null as second argument",
     statement:"[DATE '2023-01-01', DATE '2023-01-31'] OVERLAPS null",
-    assert:[
-      {
-        result:EvaluationSuccess,
-        evalMode:EvalModeCoerce,
-        output:$missing::null
-      },
-      {
-        result:EvaluationFail,
-        evalMode:EvalModeError,
-      }
-    ]
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:null
+    }
+  },
+  {
+    name:"overlaps with null as first argument and missing as second argument",
+    statement:"null OVERLAPS MISSING",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
+  },
+    {
+    name:"overlaps with missing as first argument and null as second argument",
+    statement:"MISSING OVERLAPS null",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$missing::null
+    }
   },
   {
     name:"overlaps with missing as first argument",
