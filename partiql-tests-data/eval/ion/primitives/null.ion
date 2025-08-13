@@ -396,7 +396,7 @@
     }
   },
   {
-    name:"null comparison{sql:\"`null.null` = MISSING\",result:missing::null}",
+    name:"null comparison{sql:\"`null.null` = MISSING\",result:null}",
     statement:"`null.null` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -404,11 +404,11 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$missing::null
+      output:null
     }
   },
   {
-    name:"null comparison{sql:\"`null.bool` = MISSING\",result:missing::null}",
+    name:"null comparison{sql:\"`null.bool` = MISSING\",result:null}",
     statement:"`null.bool` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -416,11 +416,11 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$missing::null
+      output:null
     }
   },
   {
-    name:"null comparison{sql:\"`null.int` = MISSING\",result:missing::null}",
+    name:"null comparison{sql:\"`null.int` = MISSING\",result:null}",
     statement:"`null.int` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -428,11 +428,11 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$missing::null
+      output:null
     }
   },
   {
-    name:"null comparison{sql:\"`null.decimal` = MISSING\",result:missing::null}",
+    name:"null comparison{sql:\"`null.decimal` = MISSING\",result:null}",
     statement:"`null.decimal` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -440,11 +440,11 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$missing::null
+      output:null
     }
   },
   {
-    name:"null comparison{sql:\"`null.string` = MISSING\",result:missing::null}",
+    name:"null comparison{sql:\"`null.string` = MISSING\",result:null}",
     statement:"`null.string` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -452,11 +452,11 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$missing::null
+      output:null
     }
   },
   {
-    name:"null comparison{sql:\"`null.symbol` = MISSING\",result:missing::null}",
+    name:"null comparison{sql:\"`null.symbol` = MISSING\",result:null}",
     statement:"`null.symbol` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -464,11 +464,11 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$missing::null
+      output:null
     }
   },
   {
-    name:"null comparison{sql:\"`null.clob` = MISSING\",result:missing::null}",
+    name:"null comparison{sql:\"`null.clob` = MISSING\",result:null}",
     statement:"`null.clob` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -476,11 +476,11 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$missing::null
+      output:null
     }
   },
   {
-    name:"null comparison{sql:\"`null.blob` = MISSING\",result:missing::null}",
+    name:"null comparison{sql:\"`null.blob` = MISSING\",result:null}",
     statement:"`null.blob` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -488,11 +488,11 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$missing::null
+      output:null
     }
   },
   {
-    name:"null comparison{sql:\"`null.list` = MISSING\",result:missing::null}",
+    name:"null comparison{sql:\"`null.list` = MISSING\",result:null}",
     statement:"`null.list` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -500,11 +500,11 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$missing::null
+      output:null
     }
   },
   {
-    name:"null comparison{sql:\"`null.struct` = MISSING\",result:missing::null}",
+    name:"null comparison{sql:\"`null.struct` = MISSING\",result:null}",
     statement:"`null.struct` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -512,11 +512,11 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$missing::null
+      output:null
     }
   },
   {
-    name:"null comparison{sql:\"`null.sexp` = MISSING\",result:missing::null}",
+    name:"null comparison{sql:\"`null.sexp` = MISSING\",result:null}",
     statement:"`null.sexp` = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -524,7 +524,7 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$missing::null
+      output:null
     }
   }
 ]

@@ -84,7 +84,7 @@
     }
   },
   {
-    name:"null comparison{sql:\"MISSING = NULL\",result:missing::null}",
+    name:"null comparison{sql:\"MISSING = NULL\",result:null}",
     statement:"MISSING = NULL",
     assert:{
       result:EvaluationSuccess,
@@ -92,11 +92,11 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$missing::null
+      output:null
     }
   },
   {
-    name:"null comparison{sql:\"NULL = MISSING\",result:missing::null}",
+    name:"null comparison{sql:\"NULL = MISSING\",result:null}",
     statement:"NULL = MISSING",
     assert:{
       result:EvaluationSuccess,
@@ -104,7 +104,7 @@
         EvalModeCoerce,
         EvalModeError
       ],
-      output:$missing::null
+      output:null
     }
   },
 ]
