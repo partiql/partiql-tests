@@ -40,7 +40,7 @@ logical::[
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:$missing::null
+      output:null
     }
   },
   // AND
