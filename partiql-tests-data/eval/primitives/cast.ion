@@ -446,6 +446,99 @@
   },
 ]
 
+'cast-to-datetime'::[
+  {
+    name:"cast to date valid cases{value:\"'2024-02-29'\"}",
+    statement:"cast('2024-02-29' as DATE)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$date::{
+        year:2024,
+        month:2,
+        day:29,
+      }
+    }
+  },
+  {
+    name: "cast to time valid cases{value:\"'12:34:56'\"}",
+    statement: "cast('12:34:56' as TIME)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: $time::{
+        hour: 12,
+        minute: 34,
+        second: 56.0,
+        offset: null.int
+      }
+    }
+  },
+  {
+    name: "cast to time with time zone valid cases{value:\"'12:34:56.789+05:30'\"}",
+    statement: "cast('12:34:56.789+05:30' as TIME WITH TIME ZONE)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: $time::{
+        hour: 12,
+        minute: 34,
+        second: 56.789,
+        offset: 330
+      }
+    }
+  },
+  {
+    name: "cast to timestamp valid cases{value:\"'2024-02-29 12:34:56'\"}",
+    statement: "cast('2024-02-29 12:34:56' as TIMESTAMP)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: $timestamp::{
+        year:2024,
+        month:2,
+        day:29,
+        hour: 12,
+        minute: 34,
+        second: 56.0,
+        offset: null.int
+      }
+    }
+  },
+  {
+    name: "cast to timestamp with time zone valid cases{value:\"'2024-02-29 12:34:56.789+05:30'\"}",
+    statement: "cast('2024-02-29 12:34:56.789+05:30' as TIMESTAMP WITH TIME ZONE)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: $timestamp::{
+        year:2024,
+        month:2,
+        day:29,
+        hour: 12,
+        minute: 34,
+        second: 56.789,
+        offset: 330
+      }
+    }
+  },
+]
+
 'cast-to-null'::[
   {
     name:"cast to NULL valid cases{value:\"NULL\"}",
@@ -670,6 +763,81 @@ cast_invalid::[
   {
     name:"cast to int invalid target type{value:\"<<>>\",target:\"BAG\"}",
     statement:"cast(<<>> as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\"'2024-02-29'\",target:\"DATE\"}",
+    statement:"cast('2024-02-29' as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\"'12:34:56'\",target:\"TIME\"}",
+    statement:"cast('12:34:56' as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\"'12:34:56.789+05:30'\",target:\"TIME WITH TIME ZONE\"}",
+    statement:"cast('12:34:56.789+05:30' as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\"'2024-02-29 12:34:56'\",target:\"TIMESTAMP\"}",
+    statement:"cast('2024-02-29 12:34:56' as INT)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ],
+  },
+  {
+    name:"cast to int invalid target type{value:\"'2024-02-29 12:34:56.789+05:30'\",target:\"TIMESTAMP WITH TIME ZONE\"}",
+    statement:"cast('2024-02-29 12:34:56.789+05:30' as INT)",
     assert:[
       {
         evalMode:EvalModeError,

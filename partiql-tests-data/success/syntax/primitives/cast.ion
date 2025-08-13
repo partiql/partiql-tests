@@ -77,3 +77,13 @@
         },
     ]
 }
+
+{
+    name: "CAST as DATE",
+    statement: "CAST(a AS DATE1)",
+    assert: [
+        {
+            result: SyntaxSuccess
+        },
+    ]
+}
