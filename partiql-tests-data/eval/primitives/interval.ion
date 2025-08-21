@@ -1,0 +1,148 @@
+interval::[
+  // Single Interval - Year-Month
+  {
+    name: "interval year",
+    statement: "INTERVAL '10' YEAR",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_ym::{ years: 10 }
+    }
+  },
+  {
+    name: "interval year positive",
+    statement: "INTERVAL '+5' YEAR",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_ym::{ sign: "+", years: 5 }
+    }
+  },
+  {
+    name: "interval year negative",
+    statement: "INTERVAL '-3' YEAR",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_ym::{ sign: "-", years: 3 }
+    }
+  },
+  {
+    name: "interval month positive",
+    statement: "INTERVAL '+8' MONTH",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_ym::{ sign: "+", months: 8 }
+    }
+  },
+  {
+    name: "interval month negative",
+    statement: "INTERVAL '-11' MONTH",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_ym::{ sign: "-", months: 11 }
+    }
+  },
+  // Single Interval - Day-Time
+  {
+    name: "interval day positive",
+    statement: "INTERVAL '+7' DAY",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", days: 7 }
+    }
+  },
+  {
+    name: "interval day negative",
+    statement: "INTERVAL '-4' DAY",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "-", days: 4 }
+    }
+  },
+  {
+    name: "interval hour positive",
+    statement: "INTERVAL '+12' HOUR",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", hours: 12 }
+    }
+  },
+  {
+    name: "interval hour negative",
+    statement: "INTERVAL '-6' HOUR",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "-", hours: 6 }
+    }
+  },
+  {
+    name: "interval minute positive",
+    statement: "INTERVAL '+30' MINUTE",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", minutes: 30 }
+    }
+  },
+  {
+    name: "interval minute negative",
+    statement: "INTERVAL '-45' MINUTE",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "-", minutes: 45 }
+    }
+  },
+  {
+    name: "interval second positive",
+    statement: "INTERVAL '+25' SECOND",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", seconds: 25 }
+    }
+  },
+  {
+    name: "interval second negative",
+    statement: "INTERVAL '-15' SECOND",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "-", seconds: 15 }
+    }
+  },
+  {
+    name: "interval nano",
+    statement: "INTERVAL '0.5' SECOND",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", nanos: 500000000 }
+    }
+  },
+  {
+    name: "interval nano positive",
+    statement: "INTERVAL '+0.5000000' SECOND",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", nanos: 500000000 }
+    }
+  },
+  {
+    name: "interval nano negative",
+    statement: "INTERVAL '-0.2500' SECOND",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "-", nanos: 250000000 }
+    }
+  },
+]
