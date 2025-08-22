@@ -196,11 +196,24 @@ $bag::[1, 2, 3]
 // missing -- null value annotated with $missing
 $missing::null
 
-// date -- string annotated with $date
-$date::'2022-02-22'
+// date -- struct annotated with $date
+$date::{ year: 2022, month: 2, day: 22 } // All fields are required
 
-// time -- string annotated with $time
-$time::'02:30:59'
+// time -- struct annotated with $time
+$time::{ hour: 2, minute: 30, second: 59.0, offset: 0 } // All fields are required, offset can be null
+
+// interval year-month -- struct annotated with $interval_ym
+// All fields are optional
+// Default value -- sign: "+", years(int): 0, months(int): 0
+// Normalization rules -- sign = "+"/"-"; 0 <= years <= 999999999; 0 <= months <= 11
+$interval_ym::{ sign: "+", years: 1, months: 6 }
+
+// interval day-time -- struct annotated with $interval_dt
+// All fields are optional
+// Default value -- sign: "+", days(int): 0, hours(int): 0, minutes(int): 0, seconds(int): 0, nanos(int): 0
+// Normalization rules -- sign = "+"/"-"; 0 <= days <= 999999999; 0 <= hours <= 23; 0 <= minutes <=  59;
+// 0 <= seconds <= 59; 0 <= nanos <= 999999999
+$interval_dt::{ sign: "+", days: 5, hours: 4, minutes: 30, seconds: 15, nanos: 500000000 }
 ```
 
 Similarly, graphs defined with the Ion-based format for "external" graphs 
