@@ -145,4 +145,344 @@ interval::[
       output: $interval_dt::{ sign: "-", nanos: 250000000 }
     }
   },
+  // Decimal precision tests
+  {
+    name: "interval second decimal microseconds",
+    statement: "INTERVAL '1.123456' SECOND",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", seconds: 1, nanos: 123456000 }
+    }
+  },
+  {
+    name: "interval second decimal nanoseconds - truncate",
+    statement: "INTERVAL '2.123456789' SECOND",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", seconds: 2, nanos: 123456000 }
+    }
+  },
+  {
+    name: "interval second negative decimal",
+    statement: "INTERVAL '-3.750' SECOND",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "-", seconds: 3, nanos: 750000000 }
+    }
+  },
+  // Mixed field tests - Year-Month
+  {
+    name: "interval year month mixed positive",
+    statement: "INTERVAL '+2-6' YEAR TO MONTH",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_ym::{ sign: "+", years: 2, months: 6 }
+    }
+  },
+  {
+    name: "interval year month mixed negative",
+    statement: "INTERVAL '-1-11' YEAR TO MONTH",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_ym::{ sign: "-", years: 1, months: 11 }
+    }
+  },
+  // Mixed field tests - Day-Time
+  {
+    name: "interval day hour mixed",
+    statement: "INTERVAL '5 12' DAY TO HOUR",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", days: 5, hours: 12 }
+    }
+  },
+  {
+    name: "interval day minute mixed",
+    statement: "INTERVAL '3 8:45' DAY TO MINUTE",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", days: 3, hours: 8, minutes: 45 }
+    }
+  },
+  {
+    name: "interval day second mixed",
+    statement: "INTERVAL '2 4:30:15' DAY TO SECOND",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", days: 2, hours: 4, minutes: 30, seconds: 15 }
+    }
+  },
+  {
+    name: "interval hour minute mixed",
+    statement: "INTERVAL '14:25' HOUR TO MINUTE",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", hours: 14, minutes: 25 }
+    }
+  },
+  {
+    name: "interval hour second mixed",
+    statement: "INTERVAL '6:30:45' HOUR TO SECOND",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", hours: 6, minutes: 30, seconds: 45 }
+    }
+  },
+  {
+    name: "interval minute second mixed",
+    statement: "INTERVAL '42:18' MINUTE TO SECOND",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", minutes: 42, seconds: 18 }
+    }
+  },
+  // Mixed with decimals
+  {
+    name: "interval day second with decimal",
+    statement: "INTERVAL '1 2:30:45.123' DAY TO SECOND",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", days: 1, hours: 2, minutes: 30, seconds: 45, nanos: 123000000 }
+    }
+  },
+  {
+    name: "interval hour second with decimal negative",
+    statement: "INTERVAL '-10:15:30.456789' HOUR TO SECOND",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "-", hours: 10, minutes: 15, seconds: 30, nanos: 456789000 }
+    }
+  },
+  {
+    name: "interval minute second with decimal",
+    statement: "INTERVAL '59:59.999999' MINUTE TO SECOND",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", minutes: 59, seconds: 59, nanos: 999999000 }
+    }
+  },
+  // Out of default precision - failure
+  {
+    name: "interval year-month - out of range",
+    statement: "INTERVAL '100-11' YEAR TO MONTH",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result:EvaluationFail
+    }
+  },
+  {
+    name: "interval month - out of range",
+    statement: "INTERVAL '100' MONTH",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result:EvaluationFail
+    }
+  },
+  {
+    name: "interval day - out of range",
+    statement: "INTERVAL '100' DAY",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result:EvaluationFail
+    }
+  },
+  {
+    name: "interval minute - out of range",
+    statement: "INTERVAL '100' MINUTE",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result:EvaluationFail
+    }
+  },
+  {
+    name: "interval second - out of range",
+    statement: "INTERVAL '100.123' SECOND",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result:EvaluationFail
+    }
+  },
+  {
+    name: "interval nano - out of range",
+    statement: "INTERVAL '1.1234567899' SECOND;",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result:EvaluationFail
+    }
+  },
+  {
+    name: "interval day-hour - out of range",
+    statement: "INTERVAL '1 24' DAY TO HOUR",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result:EvaluationFail
+    }
+  },
+  {
+    name: "interval day-minute - out of range",
+    statement: "INTERVAL '1 23:60' DAY TO MINUTE",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result:EvaluationFail
+    }
+  },
+  {
+    name: "interval hour-minute - out of range",
+    statement: "INTERVAL '100:59' HOUR TO MINUTE",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result:EvaluationFail
+    }
+  },
+  {
+    name: "interval day-second - out of range",
+    statement: "INTERVAL '100 2:30:45.123' DAY TO SECOND",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result:EvaluationFail
+    }
+  },
+  // Precision specification tests
+  {
+    name: "interval year to month with precision",
+    statement: "INTERVAL '999-11' YEAR(3) TO MONTH",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_ym::{ sign: "+", years: 999, months: 11 }
+    }
+  },
+  {
+    name: "interval day to hour with precision",
+    statement: "INTERVAL '999 23' DAY(3) TO HOUR",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", days: 999, hours: 23 }
+    }
+  },
+  {
+    name: "interval day to minute negative with precision",
+    statement: "INTERVAL '-999 23:59' DAY(3) TO MINUTE",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "-", days: 999, hours: 23, minutes: 59 }
+    }
+  },
+  {
+    name: "interval day to second with precision",
+    statement: "INTERVAL '999 23:59:59.123456789' DAY(3) TO SECOND(9)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", days: 999, hours: 23, minutes: 59, seconds: 59, nanos: 123456789 }
+    }
+  },
+  // Precision specification tests with flowing over
+  {
+    name: "interval month with precision - flow over",
+    statement: "INTERVAL '999' MONTH(3)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_ym::{ sign: "+", years: 83, months: 3 }
+    }
+  },
+  {
+    name: "interval month negative with precision - flow over",
+    statement: "INTERVAL '-1203' MONTH(4)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_ym::{ sign: "-", years: 100, months: 3 }
+    }
+  },
+  {
+    name: "interval hour with precision - flow over",
+    statement: "INTERVAL '999' HOUR(3)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", days: 41, hours: 15 }
+    }
+  },
+  {
+    name: "interval second with precision and fractional precision - flow over",
+    statement: "INTERVAL '999.123456' SECOND(3,6)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", minutes: 16, seconds: 39, nanos: 123456000 }
+    }
+  },
+  {
+    name: "interval second with precision and fractional precision - flow over",
+    statement: "INTERVAL '999999.123456' SECOND(6,6)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", days: 11, hours: 13, minutes: 46, seconds: 39, nanos: 123456000 }
+    }
+  },
+  {
+    name: "interval minute to second negative with precision - flow over",
+    statement: "INTERVAL '-999:59.123456789' MINUTE(3) TO SECOND(9)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "-", hours: 16, minutes: 39, seconds: 59, nanos: 123456789 }
+    }
+  },
+  {
+    name: "interval hour to second negative with precision - flow over",
+    statement: "INTERVAL '-999:59:59.123456789' HOUR(3) TO SECOND(9)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "-", days: 41, hours: 15, minutes: 59, seconds: 59, nanos: 123456789 }
+    }
+  },
+  // Precision specification tests with truncation
+  {
+    name: "interval second fractional precision - truncate",
+    statement: "INTERVAL '1.123456789' SECOND(2,3)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", seconds: 1, nanos: 123000000 }
+    }
+  },
+  {
+    name: "interval second fractional precision - truncate mixed flow over",
+    statement: "INTERVAL '123.123456789' SECOND(3,3)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "+", minutes: 2, seconds: 3, nanos: 123000000 }
+    }
+  },
+  {
+    name: "interval hour to second negative with precision - truncate mixed flow over",
+    statement: "INTERVAL '-999:59:59.123456789' HOUR(3) TO SECOND(5)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $interval_dt::{ sign: "-", days: 41, hours: 15, minutes: 59, seconds: 59, nanos: 123450000 }
+    }
+  },
 ]
