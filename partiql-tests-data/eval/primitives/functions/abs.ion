@@ -109,5 +109,474 @@ abs::[
         output:$missing::null
       }
     ]
+  },
+  // Tests for INTERVAL
+  {
+    name:"ABS(INTERVAL '1-6' YEAR TO MONTH)",
+    statement:"ABS(INTERVAL '1-6' YEAR TO MONTH)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_ym::{ sign: "+", years: 1, months: 6 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '+1-6' YEAR TO MONTH)",
+    statement:"ABS(INTERVAL '+1-6' YEAR TO MONTH)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_ym::{ sign: "+", years: 1, months: 6 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '-1-6' YEAR TO MONTH)",
+    statement:"ABS(INTERVAL '-1-6' YEAR TO MONTH)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_ym::{ sign: "+", years: 1, months: 6 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '100-6' YEAR(3) TO MONTH)",
+    statement:"ABS(INTERVAL '100-6' YEAR(3) TO MONTH)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_ym::{ sign: "+", years: 100, months: 6 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '-100-6' YEAR(3) TO MONTH)",
+    statement:"ABS(INTERVAL '-100-6' YEAR(3) TO MONTH)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_ym::{ sign: "+", years: 100, months: 6 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '5' YEAR)",
+    statement:"ABS(INTERVAL '5' YEAR)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_ym::{ sign: "+", years: 5 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '-5' YEAR)",
+    statement:"ABS(INTERVAL '-5' YEAR)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_ym::{ sign: "+", years: 5 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '100' MONTH(3))",
+    statement:"ABS(INTERVAL '100' MONTH(3))",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_ym::{ sign: "+", years: 8, months: 4 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '-100' MONTH(3))",
+    statement:"ABS(INTERVAL '-100' MONTH(3))",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_ym::{ sign: "+", years: 8, months: 4 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '0-0' YEAR TO MONTH)",
+    statement:"ABS(INTERVAL '0-0' YEAR TO MONTH)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_ym::{ sign: "+", years: 0, months: 0 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '5' DAY)",
+    statement:"ABS(INTERVAL '5' DAY)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", days: 5 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '-5' DAY)",
+    statement:"ABS(INTERVAL '-5' DAY)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", days: 5 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '100' DAY(3))",
+    statement:"ABS(INTERVAL '100' DAY(3))",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", days: 100 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '-100' DAY(3))",
+    statement:"ABS(INTERVAL '-100' DAY(3))",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", days: 100 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '3' HOUR)",
+    statement:"ABS(INTERVAL '3' HOUR)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", hours: 3 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '-3' HOUR)",
+    statement:"ABS(INTERVAL '-3' HOUR)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", hours: 3 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '30' MINUTE)",
+    statement:"ABS(INTERVAL '30' MINUTE)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", minutes: 30 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '-30' MINUTE)",
+    statement:"ABS(INTERVAL '-30' MINUTE)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", minutes: 30 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '45.123' SECOND)",
+    statement:"ABS(INTERVAL '45.123' SECOND)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", seconds: 45, nanos: 123000000 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '-45.123' SECOND)",
+    statement:"ABS(INTERVAL '-45.123' SECOND)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", seconds: 45, nanos: 123000000 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '123.456789' SECOND(3,6))",
+    statement:"ABS(INTERVAL '123.456789' SECOND(3,6))",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", minutes: 2, seconds: 3, nanos: 456789000 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '-123.456789' SECOND(3,6))",
+    statement:"ABS(INTERVAL '-123.456789' SECOND(3,6))",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", minutes: 2, seconds: 3, nanos: 456789000 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '1 2' DAY TO HOUR)",
+    statement:"ABS(INTERVAL '1 2' DAY TO HOUR)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", days: 1, hours: 2 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '-1 2' DAY TO HOUR)",
+    statement:"ABS(INTERVAL '-1 2' DAY TO HOUR)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", days: 1, hours: 2 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '1 2:30' DAY TO MINUTE)",
+    statement:"ABS(INTERVAL '1 2:30' DAY TO MINUTE)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", days: 1, hours: 2, minutes: 30 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '-1 2:30' DAY TO MINUTE)",
+    statement:"ABS(INTERVAL '-1 2:30' DAY TO MINUTE)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", days: 1, hours: 2, minutes: 30 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '100 10:30' DAY(3) TO MINUTE)",
+    statement:"ABS(INTERVAL '100 10:30' DAY(3) TO MINUTE)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", days: 100, hours: 10, minutes: 30 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '-100 10:30' DAY(3) TO MINUTE)",
+    statement:"ABS(INTERVAL '-100 10:30' DAY(3) TO MINUTE)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", days: 100, hours: 10, minutes: 30 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '1 2:30:45.567' DAY TO SECOND)",
+    statement:"ABS(INTERVAL '1 2:30:45.567' DAY TO SECOND)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", days: 1, hours: 2, minutes: 30, seconds: 45, nanos: 567000000 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '-1 2:30:45.567' DAY TO SECOND)",
+    statement:"ABS(INTERVAL '-1 2:30:45.567' DAY TO SECOND)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", days: 1, hours: 2, minutes: 30, seconds: 45, nanos: 567000000 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '100 10:30:45.123456' DAY(3) TO SECOND(6))",
+    statement:"ABS(INTERVAL '100 10:30:45.123456' DAY(3) TO SECOND(6))",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", days: 100, hours: 10, minutes: 30, seconds: 45, nanos: 123456000 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '-100 10:30:45.123456' DAY(3) TO SECOND(6))",
+    statement:"ABS(INTERVAL '-100 10:30:45.123456' DAY(3) TO SECOND(6))",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", days: 100, hours: 10, minutes: 30, seconds: 45, nanos: 123456000 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '2:30' HOUR TO MINUTE)",
+    statement:"ABS(INTERVAL '2:30' HOUR TO MINUTE)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", hours: 2, minutes: 30 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '-2:30' HOUR TO MINUTE)",
+    statement:"ABS(INTERVAL '-2:30' HOUR TO MINUTE)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", hours: 2, minutes: 30 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '2:30:45.789' HOUR TO SECOND)",
+    statement:"ABS(INTERVAL '2:30:45.789' HOUR TO SECOND)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", hours: 2, minutes: 30, seconds: 45, nanos: 789000000 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '-2:30:45.789' HOUR TO SECOND)",
+    statement:"ABS(INTERVAL '-2:30:45.789' HOUR TO SECOND)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", hours: 2, minutes: 30, seconds: 45, nanos: 789000000 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '30:45.123' MINUTE TO SECOND)",
+    statement:"ABS(INTERVAL '30:45.123' MINUTE TO SECOND)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", minutes: 30, seconds: 45, nanos: 123000000 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '-30:45.123' MINUTE TO SECOND)",
+    statement:"ABS(INTERVAL '-30:45.123' MINUTE TO SECOND)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", minutes: 30, seconds: 45, nanos: 123000000 }
+    }
+  },
+  {
+    name:"ABS(INTERVAL '0 0:0:0' DAY TO SECOND)",
+    statement:"ABS(INTERVAL '0 0:0:0' DAY TO SECOND)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 0 }
+    }
   }
 ]
