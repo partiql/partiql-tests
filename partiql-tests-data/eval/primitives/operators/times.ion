@@ -1,0 +1,429 @@
+times::[
+  // Interval * Number tests
+  {
+    name: "INTERVAL '3' YEAR * 2",
+    statement: "INTERVAL '3' YEAR * 2",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "+", years: 6, months: 0 }
+    }
+  },
+  {
+    name: "2 * INTERVAL '3' YEAR",
+    statement: "2 * INTERVAL '3' YEAR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "+", years: 6, months: 0 }
+    }
+  },
+  {
+    name: "INTERVAL '7' MONTH * 2",
+    statement: "INTERVAL '7' MONTH * 2",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "+", years: 1, months: 2 }
+    }
+  },
+  {
+    name: "2 * INTERVAL '7' MONTH",
+    statement: "2 * INTERVAL '7' MONTH",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "+", years: 1, months: 2 }
+    }
+  },
+  {
+    name: "INTERVAL '1-5' YEAR TO MONTH * 2",
+    statement: "INTERVAL '1-5' YEAR TO MONTH * 2",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "+", years: 2, months: 10 }
+    }
+  },
+  {
+    name: "2 * INTERVAL '1-5' YEAR TO MONTH",
+    statement: "2 * INTERVAL '1-5' YEAR TO MONTH",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "+", years: 2, months: 10 }
+    }
+  },
+  {
+    name: "INTERVAL '2' DAY * 20",
+    statement: "INTERVAL '2' DAY * 20",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 40, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "20 * INTERVAL '2' DAY",
+    statement: "20 * INTERVAL '2' DAY",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 40, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "INTERVAL '4' HOUR * 20",
+    statement: "INTERVAL '4' HOUR * 20",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 3, hours: 8, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "20 * INTERVAL '4' HOUR",
+    statement: "20 * INTERVAL '4' HOUR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 3, hours: 8, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "INTERVAL '5' MINUTE * 20",
+    statement: "INTERVAL '5' MINUTE * 20",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 1, minutes: 40, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "20 * INTERVAL '5' MINUTE",
+    statement: "20 * INTERVAL '5' MINUTE",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 1, minutes: 40, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "INTERVAL '10.5' SECOND * 20",
+    statement: "INTERVAL '10.5' SECOND * 20",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 3, seconds: 30, nanos: 0 }
+    }
+  },
+  {
+    name: "20 * INTERVAL '10.5' SECOND",
+    statement: "20 * INTERVAL '10.5' SECOND",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 3, seconds: 30, nanos: 0 }
+    }
+  },
+  {
+    name: "INTERVAL '2 4:5:10.5' DAY TO SECOND * 20",
+    statement: "INTERVAL '2 4:5:10.5' DAY TO SECOND * 20",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 43, hours: 9, minutes: 43, seconds: 30, nanos: 0 }
+    }
+  },
+  {
+    name: "20 * INTERVAL '2 4:5:10.5' DAY TO SECOND",
+    statement: "20 * INTERVAL '2 4:5:10.5' DAY TO SECOND",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 43, hours: 9, minutes: 43, seconds: 30, nanos: 0 }
+    }
+  },
+
+  // Interval * Zero tests
+  {
+    name: "INTERVAL '3' YEAR * 0",
+    statement: "INTERVAL '3' YEAR * 0",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "+", years: 0, months: 0 }
+    }
+  },
+  {
+    name: "0 * INTERVAL '3' YEAR",
+    statement: "0 * INTERVAL '3' YEAR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "+", years: 0, months: 0 }
+    }
+  },
+  {
+    name: "INTERVAL '2' DAY * 0",
+    statement: "INTERVAL '2' DAY * 0",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "0 * INTERVAL '2' DAY",
+    statement: "0 * INTERVAL '2' DAY",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+
+  // Interval * Negative tests
+  {
+    name: "INTERVAL '3' YEAR * -2",
+    statement: "INTERVAL '3' YEAR * -2",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "-", years: 6, months: 0 }
+    }
+  },
+  {
+    name: "-2 * INTERVAL '3' YEAR",
+    statement: "-2 * INTERVAL '3' YEAR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "-", years: 6, months: 0 }
+    }
+  },
+  {
+    name: "INTERVAL '7' MONTH * -2",
+    statement: "INTERVAL '7' MONTH * -2",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "-", years: 1, months: 2 }
+    }
+  },
+  {
+    name: "-2 * INTERVAL '7' MONTH",
+    statement: "-2 * INTERVAL '7' MONTH",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "-", years: 1, months: 2 }
+    }
+  },
+  {
+    name: "INTERVAL '2' DAY * -20",
+    statement: "INTERVAL '2' DAY * -20",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "-", days: 40, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "-20 * INTERVAL '2' DAY",
+    statement: "-20 * INTERVAL '2' DAY",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "-", days: 40, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+
+  // Interval * Decimal tests
+  {
+    name: "INTERVAL '3' YEAR * 2.1",
+    statement: "INTERVAL '3' YEAR * 2.1",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "+", years: 6, months: 3 }
+    }
+  },
+  {
+    name: "2.1 * INTERVAL '3' YEAR",
+    statement: "2.1 * INTERVAL '3' YEAR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "+", years: 6, months: 3 }
+    }
+  },
+  {
+    name: "INTERVAL '2' DAY * 2.1",
+    statement: "INTERVAL '2' DAY * 2.1",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 4, hours: 4, minutes: 48, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "2.1 * INTERVAL '2' DAY",
+    statement: "2.1 * INTERVAL '2' DAY",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 4, hours: 4, minutes: 48, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "INTERVAL '10.5' SECOND * 2.1",
+    statement: "INTERVAL '10.5' SECOND * 2.1",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 22, nanos: 50000000 }
+    }
+  },
+  {
+    name: "2.1 * INTERVAL '10.5' SECOND",
+    statement: "2.1 * INTERVAL '10.5' SECOND",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 22, nanos: 50000000 }
+    }
+  },
+
+  // Interval * Double tests
+  {
+    name: "INTERVAL '3' YEAR * 2.25e-1",
+    statement: "INTERVAL '3' YEAR * 2.25e-1",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "+", years: 0, months: 8 }
+    }
+  },
+  {
+    name: "2.25e-1 * INTERVAL '3' YEAR",
+    statement: "2.25e-1 * INTERVAL '3' YEAR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "+", years: 0, months: 8 }
+    }
+  },
+  {
+    name: "INTERVAL '2' DAY * 2.25e-1",
+    statement: "INTERVAL '2' DAY * 2.25e-1",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 10, minutes: 48, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "2.25e-1 * INTERVAL '2' DAY",
+    statement: "2.25e-1 * INTERVAL '2' DAY",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 10, minutes: 48, seconds: 0, nanos: 0 }
+    }
+  },
+
+  // Precision overflow failure cases
+  {
+    name: "INTERVAL '3' YEAR * 50",
+    statement: "INTERVAL '3' YEAR * 50",
+    assert: {
+      result: EvaluationFail,
+      evalMode: [EvalModeCoerce, EvalModeError]
+    }
+  },
+  {
+    name: "INTERVAL '2' DAY * 50",
+    statement: "INTERVAL '2' DAY * 50",
+    assert: {
+      result: EvaluationFail,
+      evalMode: [EvalModeCoerce, EvalModeError]
+    }
+  },
+
+  // Null cases - should return null in both strict and permissive modes
+  {
+    name: "INTERVAL '3' YEAR * NULL",
+    statement: "INTERVAL '3' YEAR * NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "NULL * INTERVAL '3' YEAR",
+    statement: "NULL * INTERVAL '3' YEAR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "INTERVAL '2' DAY * NULL",
+    statement: "INTERVAL '2' DAY * NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "NULL * INTERVAL '2' DAY",
+    statement: "NULL * INTERVAL '2' DAY",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+
+  // Missing cases - should return missing in both strict and permissive modes
+  {
+    name: "INTERVAL '3' YEAR * MISSING",
+    statement: "INTERVAL '3' YEAR * MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "MISSING * INTERVAL '3' YEAR",
+    statement: "MISSING * INTERVAL '3' YEAR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "INTERVAL '2' DAY * MISSING",
+    statement: "INTERVAL '2' DAY * MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "MISSING * INTERVAL '2' DAY",
+    statement: "MISSING * INTERVAL '2' DAY",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  }
+]
