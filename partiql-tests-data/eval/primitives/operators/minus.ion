@@ -85,6 +85,9 @@ minus::[
   },
   
   // Time - Year-Month interval failure cases
+  // WARNING: These tests conform with SQL-spec and current PLK implementation
+  // However, the behavior may change after formalizeing INTERVAL further
+  // See issue: https://github.com/partiql/partiql-lang/issues/100
   {
     name: "TIME '01:01:01.1' - INTERVAL '1' YEAR",
     statement: "TIME '01:01:01.1' - INTERVAL '1' YEAR",
