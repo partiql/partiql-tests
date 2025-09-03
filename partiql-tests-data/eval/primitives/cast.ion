@@ -681,5 +681,52 @@ cast_invalid::[
         output:$missing::null
       }
     ],
+  },
+  // Year-Month interval same-family casts (precision adjustments)
+  {
+    name: "CAST INTERVAL YEAR to INTERVAL YEAR with precision",
+    statement: "CAST(INTERVAL '1' YEAR AS INTERVAL YEAR(3))",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "+", years: 1, months: 0 }
+    }
+  },
+  {
+    name: "CAST INTERVAL MONTH to INTERVAL YEAR TO MONTH",
+    statement: "CAST(INTERVAL '13' MONTH AS INTERVAL YEAR TO MONTH)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "+", years: 1, months: 1 }
+    }
+  },
+  // Day-Time interval same-family casts (precision adjustments)
+  {
+    name: "CAST INTERVAL DAY to INTERVAL DAY with precision",
+    statement: "CAST(INTERVAL '1' DAY AS INTERVAL DAY(5))",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 1, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "CAST INTERVAL HOUR to INTERVAL DAY TO HOUR",
+    statement: "CAST(INTERVAL '25' HOUR AS INTERVAL DAY TO HOUR)",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 1, hours: 1, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "CAST INTERVAL SECOND with fractional precision",
+    statement: "CAST(INTERVAL '1.123456789' SECOND AS INTERVAL SECOND(3, 3))",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 1, nanos: 123000000 }
+    }
   }
 ]

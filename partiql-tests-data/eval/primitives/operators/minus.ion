@@ -1,0 +1,313 @@
+minus::[
+  // Date - Interval tests
+  {
+    name: "DATE '2025-01-01' - INTERVAL '1' YEAR",
+    statement: "DATE '2025-01-01' - INTERVAL '1' YEAR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $date::{ year: 2024, month: 1, day: 1 }
+    }
+  },
+  {
+    name: "DATE '2025-01-01' - INTERVAL '1' MONTH",
+    statement: "DATE '2025-01-01' - INTERVAL '1' MONTH",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $date::{ year: 2024, month: 12, day: 1 }
+    }
+  },
+  {
+    name: "DATE '2025-01-01' - INTERVAL '1-1' YEAR TO MONTH",
+    statement: "DATE '2025-01-01' - INTERVAL '1-1' YEAR TO MONTH",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $date::{ year: 2023, month: 12, day: 1 }
+    }
+  },
+  {
+    name: "DATE '2025-01-01' - INTERVAL '1' DAY",
+    statement: "DATE '2025-01-01' - INTERVAL '1' DAY",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $date::{ year: 2024, month: 12, day: 31 }
+    }
+  },
+  
+  // Time - Interval tests
+  {
+    name: "TIME '01:01:01.1' - INTERVAL '1' DAY",
+    statement: "TIME '01:01:01.1' - INTERVAL '1' DAY",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $time::{ hour: 1, minute: 1, second: 1.1, offset: null }
+    }
+  },
+  {
+    name: "TIME '01:01:01.1' - INTERVAL '1' HOUR",
+    statement: "TIME '01:01:01.1' - INTERVAL '1' HOUR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $time::{ hour: 0, minute: 1, second: 1.1, offset: null }
+    }
+  },
+  {
+    name: "TIME '01:01:01.1' - INTERVAL '1' MINUTE",
+    statement: "TIME '01:01:01.1' - INTERVAL '1' MINUTE",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $time::{ hour: 1, minute: 0, second: 1.1, offset: null }
+    }
+  },
+  {
+    name: "TIME '01:01:01.1' - INTERVAL '1.1' SECOND",
+    statement: "TIME '01:01:01.1' - INTERVAL '1.1' SECOND",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $time::{ hour: 1, minute: 1, second: 0.0, offset: null }
+    }
+  },
+  {
+    name: "TIME '01:01:01.1' - INTERVAL '25:25:14.2' HOUR TO SECOND",
+    statement: "TIME '01:01:01.1' - INTERVAL '25:25:14.2' HOUR TO SECOND",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $time::{ hour: 23, minute: 35, second: 46.9, offset: null }
+    }
+  },
+  
+  // Time - Year-Month interval failure cases
+  // WARNING: These tests conform with SQL-spec and current PLK implementation
+  // However, the behavior may change after formalizeing INTERVAL further
+  // See issue: https://github.com/partiql/partiql-lang/issues/100
+  {
+    name: "TIME '01:01:01.1' - INTERVAL '1' YEAR",
+    statement: "TIME '01:01:01.1' - INTERVAL '1' YEAR",
+    assert: [
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      },
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      }
+    ]
+  },
+  {
+    name: "TIME '01:01:01.1' - INTERVAL '1' MONTH",
+    statement: "TIME '01:01:01.1' - INTERVAL '1' MONTH",
+    assert: [
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      },
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      }
+    ]
+  },
+  {
+    name: "TIME '01:01:01.1' - INTERVAL '1-1' YEAR TO MONTH",
+    statement: "TIME '01:01:01.1' - INTERVAL '1-1' YEAR TO MONTH",
+    assert: [
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      },
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      }
+    ]
+  },
+  
+  // Timestamp - Interval tests
+  {
+    name: "TIMESTAMP '2025-01-01 01:01:01.1' - INTERVAL '1' YEAR",
+    statement: "TIMESTAMP '2025-01-01 01:01:01.1' - INTERVAL '1' YEAR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2024, month: 1, day: 1, hour: 1, minute: 1, second: 1.1, offset: null }
+    }
+  },
+  {
+    name: "TIMESTAMP '2025-01-01 01:01:01.1' - INTERVAL '1' MONTH",
+    statement: "TIMESTAMP '2025-01-01 01:01:01.1' - INTERVAL '1' MONTH",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2024, month: 12, day: 1, hour: 1, minute: 1, second: 1.1, offset: null }
+    }
+  },
+  {
+    name: "TIMESTAMP '2025-01-01 01:01:01.1' - INTERVAL '1' DAY",
+    statement: "TIMESTAMP '2025-01-01 01:01:01.1' - INTERVAL '1' DAY",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2024, month: 12, day: 31, hour: 1, minute: 1, second: 1.1, offset: null }
+    }
+  },
+  {
+    name: "TIMESTAMP '2025-01-01 01:01:01.1' - INTERVAL '1' HOUR",
+    statement: "TIMESTAMP '2025-01-01 01:01:01.1' - INTERVAL '1' HOUR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 0, minute: 1, second: 1.1, offset: null }
+    }
+  },
+  {
+    name: "TIMESTAMP '2025-01-01 01:01:01.1' - INTERVAL '1.1' SECOND",
+    statement: "TIMESTAMP '2025-01-01 01:01:01.1' - INTERVAL '1.1' SECOND",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 1, minute: 1, second: 0.0, offset: null }
+    }
+  },
+  {
+    name: "TIMESTAMP '2025-01-01 01:01:01.1' - INTERVAL '25:25:14.2' HOUR TO SECOND",
+    statement: "TIMESTAMP '2025-01-01 01:01:01.1' - INTERVAL '25:25:14.2' HOUR TO SECOND",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2024, month: 12, day: 30, hour: 23, minute: 35, second: 46.9, offset: null }
+    }
+  },
+  
+  // Interval - Interval Year-Month tests
+  {
+    name: "INTERVAL '1' YEAR - INTERVAL '1' YEAR",
+    statement: "INTERVAL '1' YEAR - INTERVAL '1' YEAR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "+", years: 0, months: 0 }
+    }
+  },
+  {
+    name: "INTERVAL '1' YEAR - INTERVAL '1' MONTH",
+    statement: "INTERVAL '1' YEAR - INTERVAL '1' MONTH",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "+", years: 0, months: 11 }
+    }
+  },
+  {
+    name: "INTERVAL '1' YEAR - INTERVAL '1-1' YEAR TO MONTH",
+    statement: "INTERVAL '1' YEAR - INTERVAL '1-1' YEAR TO MONTH",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "-", years: 0, months: 1 }
+    }
+  },
+  {
+    name: "INTERVAL '1' MONTH - INTERVAL '1' MONTH",
+    statement: "INTERVAL '1' MONTH - INTERVAL '1' MONTH",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "+", years: 0, months: 0 }
+    }
+  },
+  {
+    name: "INTERVAL '1' MONTH - INTERVAL '1-1' YEAR TO MONTH",
+    statement: "INTERVAL '1' MONTH - INTERVAL '1-1' YEAR TO MONTH",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "-", years: 1, months: 0 }
+    }
+  },
+  {
+    name: "INTERVAL '1-1' YEAR TO MONTH - INTERVAL '1-1' YEAR TO MONTH",
+    statement: "INTERVAL '1-1' YEAR TO MONTH - INTERVAL '1-1' YEAR TO MONTH",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_ym::{ sign: "+", years: 0, months: 0 }
+    }
+  },
+  
+  // Interval - Interval Day-Time tests
+  {
+    name: "INTERVAL '1' DAY - INTERVAL '1' DAY",
+    statement: "INTERVAL '1' DAY - INTERVAL '1' DAY",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "INTERVAL '1' DAY - INTERVAL '1' HOUR",
+    statement: "INTERVAL '1' DAY - INTERVAL '1' HOUR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 23, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "INTERVAL '1' DAY - INTERVAL '1.1' SECOND",
+    statement: "INTERVAL '1' DAY - INTERVAL '1.1' SECOND",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 23, minutes: 59, seconds: 58, nanos: 900000000 }
+    }
+  },
+  {
+    name: "INTERVAL '1' HOUR - INTERVAL '1' HOUR",
+    statement: "INTERVAL '1' HOUR - INTERVAL '1' HOUR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "INTERVAL '1.1' SECOND - INTERVAL '1.1' SECOND",
+    statement: "INTERVAL '1.1' SECOND - INTERVAL '1.1' SECOND",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "INTERVAL '1 1' DAY TO HOUR - INTERVAL '1 1' DAY TO HOUR",
+    statement: "INTERVAL '1 1' DAY TO HOUR - INTERVAL '1 1' DAY TO HOUR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "INTERVAL '1 1:1:1.1' DAY TO SECOND - INTERVAL '1 1:1:1.1' DAY TO SECOND",
+    statement: "INTERVAL '1 1:1:1.1' DAY TO SECOND - INTERVAL '1 1:1:1.1' DAY TO SECOND",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  }
+]
