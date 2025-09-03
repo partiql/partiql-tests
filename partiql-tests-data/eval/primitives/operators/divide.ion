@@ -222,6 +222,9 @@ divide::[
   },
 
   // Interval / Double tests
+  // WARNING: There exists some ambiguity in SQL-spec and these tests currently conform with PLK implementation
+  // which means rounding/truncation is an implementation-defined behavior
+  // See issue: https://github.com/partiql/partiql-lang/issues/100
   {
     name: "INTERVAL '3' YEAR / 2.25e-1",
     statement: "INTERVAL '3' YEAR / 2.25e-1",
@@ -510,6 +513,9 @@ divide::[
   },
 
   // Precision overflow tests (should fail)
+  // WARNING: There exists some ambiguity in SQL-spec and these tests currently conform with PLK implementation
+  // The behavior may change after formalizeing INTERVAL further
+  // See issue: https://github.com/partiql/partiql-lang/issues/100
   {
     name: "INTERVAL '3' YEAR / 0.03",
     statement: "INTERVAL '3' YEAR / 0.03",

@@ -276,6 +276,9 @@ interval::[
     }
   },
   // Out of default precision - failure
+  // WARNING: There exists some ambiguity in SQL-spec and these tests currently conform with PLK implementation
+  // The behavior may change after formalizeing INTERVAL further
+  // See issue: https://github.com/partiql/partiql-lang/issues/100
   {
     name: "interval year-month - out of range",
     statement: "INTERVAL '100-11' YEAR TO MONTH",
@@ -458,6 +461,9 @@ interval::[
     }
   },
   // Precision specification tests with truncation
+  // WARNING: There exists some ambiguity in SQL-spec and these tests currently conform with PLK implementation
+  // which means rounding/truncation is an implementation-defined behavior
+  // See issue: https://github.com/partiql/partiql-lang/issues/100
   {
     name: "interval second fractional precision - truncate",
     statement: "INTERVAL '1.123456789' SECOND(2,3)",
