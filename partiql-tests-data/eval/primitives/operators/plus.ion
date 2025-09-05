@@ -495,5 +495,103 @@ plus::[
       evalMode: [EvalModeCoerce, EvalModeError],
       output: $interval_dt::{ sign: "+", days: 2, hours: 2, minutes: 2, seconds: 2, nanos: 200000000 }
     }
+  },
+  
+  // Interval + NULL tests
+  {
+    name: "INTERVAL '3' YEAR + NULL",
+    statement: "INTERVAL '3' YEAR + NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "NULL + INTERVAL '3' YEAR",
+    statement: "NULL + INTERVAL '3' YEAR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "INTERVAL '3' DAY + NULL",
+    statement: "INTERVAL '3' DAY + NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "NULL + INTERVAL '3' DAY",
+    statement: "NULL + INTERVAL '3' DAY",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  
+  // DATE + NULL tests
+  {
+    name: "DATE '2025-01-01' + NULL",
+    statement: "DATE '2025-01-01' + NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "NULL + DATE '2025-01-01'",
+    statement: "NULL + DATE '2025-01-01'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  
+  // TIME + NULL tests
+  {
+    name: "TIME '01:01:01.111' + NULL",
+    statement: "TIME '01:01:01.111' + NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "NULL + TIME '01:01:01.111'",
+    statement: "NULL + TIME '01:01:01.111'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  
+  // TIMESTAMP + NULL tests
+  {
+    name: "TIMESTAMP '2025-01-01 01:01:01.111' + NULL",
+    statement: "TIMESTAMP '2025-01-01 01:01:01.111' + NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "NULL + TIMESTAMP '2025-01-01 01:01:01.111'",
+    statement: "NULL + TIMESTAMP '2025-01-01 01:01:01.111'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
   }
 ]

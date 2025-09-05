@@ -1,0 +1,151 @@
+and::[
+  // Basic AND truth table tests
+  {
+    name: "true AND true",
+    statement: "true AND true",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: true
+    }
+  },
+  {
+    name: "true AND false",
+    statement: "true AND false",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: false
+    }
+  },
+  {
+    name: "false AND true",
+    statement: "false AND true",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: false
+    }
+  },
+  {
+    name: "false AND false",
+    statement: "false AND false",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: false
+    }
+  },
+  
+  // AND with NULL tests
+  {
+    name: "true AND NULL",
+    statement: "true AND NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "NULL AND true",
+    statement: "NULL AND true",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "false AND NULL",
+    statement: "false AND NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: false
+    }
+  },
+  {
+    name: "NULL AND false",
+    statement: "NULL AND false",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: false
+    }
+  },
+  {
+    name: "NULL AND NULL",
+    statement: "NULL AND NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  
+  // AND with MISSING tests
+  {
+    name: "true AND MISSING",
+    statement: "true AND MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "MISSING AND true",
+    statement: "MISSING AND true",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "false AND MISSING",
+    statement: "false AND MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: false
+    }
+  },
+  {
+    name: "MISSING AND false",
+    statement: "MISSING AND false",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: false
+    }
+  },
+  {
+    name: "MISSING AND MISSING",
+    statement: "MISSING AND MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "NULL AND MISSING",
+    statement: "NULL AND MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "MISSING AND NULL",
+    statement: "MISSING AND NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  }
+]

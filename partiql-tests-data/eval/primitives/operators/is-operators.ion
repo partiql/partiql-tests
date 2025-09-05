@@ -119,4 +119,114 @@ is::[
       output: true
     }
   },
+  
+  // IS operator with BOOL type tests
+  {
+    name: "true is true",
+    statement: "true is true",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: true
+    }
+  },
+  {
+    name: "true is false",
+    statement: "true is false",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: false
+    }
+  },
+  {
+    name: "true is NULL",
+    statement: "true is NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: false
+    }
+  },
+  {
+    name: "false is true",
+    statement: "false is true",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: false
+    }
+  },
+  {
+    name: "false is false",
+    statement: "false is false",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: true
+    }
+  },
+  {
+    name: "false is null",
+    statement: "false is null",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: false
+    }
+  },
+  {
+    name: "null is true",
+    statement: "null is true",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: false
+    }
+  },
+  {
+    name: "null is false",
+    statement: "null is false",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: false
+    }
+  },
+  {
+    name: "null is null",
+    statement: "null is null",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output: true
+    }
+  }
 ]
