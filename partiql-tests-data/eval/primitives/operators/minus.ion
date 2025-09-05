@@ -409,5 +409,105 @@ minus::[
       evalMode: [EvalModeCoerce, EvalModeError],
       output: null
     }
+  },
+  
+  // DATE - MISSING tests
+  {
+    name: "DATE '2025-01-01' - MISSING",
+    statement: "DATE '2025-01-01' - MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "MISSING - DATE '2025-01-01'",
+    statement: "MISSING - DATE '2025-01-01'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  
+  // TIME - MISSING tests
+  {
+    name: "TIME '01:01:01.111' - MISSING",
+    statement: "TIME '01:01:01.111' - MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "MISSING - TIME '01:01:01.111'",
+    statement: "MISSING - TIME '01:01:01.111'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  
+  // TIMESTAMP - MISSING tests
+  {
+    name: "TIMESTAMP '2025-01-01 01:01:01.111' - MISSING",
+    statement: "TIMESTAMP '2025-01-01 01:01:01.111' - MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "MISSING - TIMESTAMP '2025-01-01 01:01:01.111'",
+    statement: "MISSING - TIMESTAMP '2025-01-01 01:01:01.111'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  
+  // INTERVAL YEAR - MISSING tests
+  {
+    name: "INTERVAL '1' YEAR - MISSING",
+    statement: "INTERVAL '1' YEAR - MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "MISSING - INTERVAL '1' YEAR",
+    statement: "MISSING - INTERVAL '1' YEAR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  
+  // INTERVAL DAY - MISSING tests
+  {
+    name: "INTERVAL '3' DAY - MISSING",
+    statement: "INTERVAL '3' DAY - MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "MISSING - INTERVAL '3' DAY",
+    statement: "MISSING - INTERVAL '3' DAY",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
   }
 ]
