@@ -8377,4 +8377,197 @@
       ]
     }
   },
+  {
+    name:"qualified GROUP BY with qualified SELECT",
+    statement:"SELECT T.col1, COUNT(*) as c FROM simple_1_col_1_group AS T GROUP BY T.col1",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          col1:1,
+          c:2
+        }
+      ]
+    }
+  },
+  {
+    name:"qualified GROUP BY with qualified SELECT and ORDER BY",
+    statement:"SELECT T.col1, MAX(T.col2) as m FROM simple_2_col_1_group T GROUP BY T.col1 ORDER BY T.col1 DESC",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:[
+        {
+          m:10,
+          col1:1
+        }
+      ]
+    }
+  },
+  {
+    name:"qualified GROUP BY with alias and SELECT with alias",
+    statement:"SELECT alias_col, COUNT(*) as c FROM simple_1_col_1_group AS T GROUP BY T.col1 AS alias_col",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$bag::[
+        {
+          alias_col:1,
+          c:2
+        }
+      ]
+    }
+  },
+  {
+    name:"qualified GROUP BY with alias and ORDER BY",
+    statement:"SELECT alias_col, MAX(T.col2) as m FROM simple_2_col_1_group AS T GROUP BY T.col1 AS alias_col ORDER BY T.col1 DESC",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:[
+        {
+          m:10,
+          alias_col:1
+        }
+      ]
+    }
+  },
+  {
+    name:"qualified GROUP BY with alias and ORDER BY with alias",
+    statement:"SELECT alias_col, MAX(T.col2) as m FROM simple_2_col_1_group AS T GROUP BY T.col1 AS alias_col ORDER BY alias_col DESC",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:[
+        {
+          m:10,
+          alias_col:1
+        }
+      ]
+    }
+  },
+  {
+    name:"qualified GROUP BY, SELECT and ORDER BY",
+    statement:"SELECT T.a, MAX(b) FROM <<{'a': 1, 'b': 2}, {'a': 3, 'b': 5}>> T GROUP BY T.a ORDER BY T.a",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:[
+        {
+          'a': 1,
+          '_1': 2
+        },
+        {
+          'a': 3,
+          '_1': 5
+        }
+      ]
+    }
+  },
+  {
+    name:"qualified SELECT and ORDER BY DESC",
+    statement:"SELECT T.a, MAX(b) FROM <<{'a': 1, 'b': 2}, {'a': 3, 'b': 5}>> T GROUP BY a ORDER BY a DESC",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:[
+        {
+          'a': 3,
+          '_1': 5
+        },
+        {
+          'a': 1,
+          '_1': 2
+        }
+      ]
+    }
+  },
+  {
+    name:"qualified GROUP BY, SELECT and ORDER BY with wrong qualifier - fail",
+    statement:"SELECT T.a, MAX(b) FROM <<{'a': 1, 'b': 2}, {'a': 3, 'b': 5}>> T GROUP BY T.a ORDER BY S.a",
+    assert:[
+      {
+        result:EvaluationFail,
+        evalMode:EvalModeError
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:[
+          {
+            'a': 1,
+            '_1': 2
+          },
+          {
+            'a': 3,
+            '_1': 5
+          }
+        ]
+      }
+    ]
+  },
+  {
+    name:"nested qualified GROUP BY, SELECT and ORDER BY DESC",
+    statement:"SELECT T.c.foo, MAX(b) FROM <<{'a': 1, 'b': 2, 'c': {'foo': 3}}, {'a': 3, 'b': 5, 'c': {'foo': 5}}>> T GROUP BY T.c.foo ORDER BY T.c.foo DESC",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:[
+        {
+          '_1': 5,
+          'foo': 5
+        },
+        {
+          '_1': 2,
+          'foo': 3
+        },
+      ]
+    }
+  },
+  {
+    name:"nested qualified GROUP BY with alias, SELECT and ORDER BY DESC",
+    statement:"SELECT alias, MAX(b) FROM <<{'a': 1, 'b': 2, 'c': {'foo': 3}}, {'a': 3, 'b': 5, 'c': {'foo': 5}}>> T GROUP BY T.c.foo AS alias ORDER BY alias DESC",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:[
+        {
+          '_1': 5,
+          'alias': 5
+        },
+        {
+          '_1': 2,
+          'alias': 3
+        },
+      ]
+    }
+  },
 ]
