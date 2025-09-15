@@ -8507,12 +8507,26 @@
   {
     name:"qualified GROUP BY, SELECT and ORDER BY with wrong qualifier - fail",
     statement:"SELECT T.a, MAX(b) FROM <<{'a': 1, 'b': 2}, {'a': 3, 'b': 5}>> T GROUP BY T.a ORDER BY S.a",
-    assert:{
-      result:EvaluationFail,
-      evalMode:[
-        EvalModeError
-      ]
-    }
+    assert:[
+      {
+        result:EvaluationFail,
+        evalMode:EvalModeError
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:[
+          {
+            'a': 1,
+            '_1': 2
+          },
+          {
+            'a': 3,
+            '_1': 5
+          }
+        ]
+      }
+    ]
   },
   {
     name:"nested qualified GROUP BY, SELECT and ORDER BY DESC",
