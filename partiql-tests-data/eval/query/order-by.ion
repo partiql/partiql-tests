@@ -238,7 +238,7 @@ simple::[
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:[{'supplierId': 10, '_1': 10000}, {'supplierId': 11, '_1': 100}]
+      output:[{'supplierId': 11, '_1': 10000}, {'supplierId': 10, '_1': 100}]
     }
   },
 ]
@@ -281,8 +281,8 @@ alias::[
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:[
-        {'supplierId': 10, 'max_stock': 10000},
-        {'supplierId': 11, 'max_stock': 100}
+        {'supplierId': 11, 'max_stock': 10000},
+        {'supplierId': 10, 'max_stock': 100}
       ]
     }
   },
