@@ -37,6 +37,35 @@ minus::[
     }
   },
   
+  // TIME WITHOUT TIME ZONE - Interval tests
+  {
+    name: "TIME WITHOUT TIME ZONE '01:01:01.1' - INTERVAL '1' HOUR",
+    statement: "TIME WITHOUT TIME ZONE '01:01:01.1' - INTERVAL '1' HOUR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $time::{ hour: 0, minute: 1, second: 1.1, offset: 0 }
+    }
+  },
+  {
+    name: "TIME WITHOUT TIME ZONE '01:01:01.1' - INTERVAL '1' MINUTE",
+    statement: "TIME WITHOUT TIME ZONE '01:01:01.1' - INTERVAL '1' MINUTE",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $time::{ hour: 1, minute: 0, second: 1.1, offset: 0 }
+    }
+  },
+  {
+    name: "TIME WITHOUT TIME ZONE '01:01:01.1' - INTERVAL '0.1' SECOND",
+    statement: "TIME WITHOUT TIME ZONE '01:01:01.1' - INTERVAL '0.1' SECOND",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $time::{ hour: 1, minute: 1, second: 1.0, offset: 0 }
+    }
+  },
+  
   // Time - Interval tests
   {
     name: "TIME '01:01:01.1' - INTERVAL '1' DAY",
@@ -132,6 +161,35 @@ minus::[
         output: $missing::null
       }
     ]
+  },
+  
+  // TIMESTAMP WITHOUT TIME ZONE - Interval tests
+  {
+    name: "TIMESTAMP WITHOUT TIME ZONE '2025-01-01 01:01:01.1' - INTERVAL '1' YEAR",
+    statement: "TIMESTAMP WITHOUT TIME ZONE '2025-01-01 01:01:01.1' - INTERVAL '1' YEAR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2024, month: 1, day: 1, hour: 1, minute: 1, second: 1.1, offset: 0 }
+    }
+  },
+  {
+    name: "TIMESTAMP WITHOUT TIME ZONE '2025-01-01 01:01:01.1' - INTERVAL '2' MONTH",
+    statement: "TIMESTAMP WITHOUT TIME ZONE '2025-01-01 01:01:01.1' - INTERVAL '2' MONTH",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2024, month: 11, day: 1, hour: 1, minute: 1, second: 1.1, offset: 0 }
+    }
+  },
+  {
+    name: "TIMESTAMP WITHOUT TIME ZONE '2025-01-01 01:01:01.1' - INTERVAL '1' DAY",
+    statement: "TIMESTAMP WITHOUT TIME ZONE '2025-01-01 01:01:01.1' - INTERVAL '1' DAY",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2024, month: 12, day: 31, hour: 1, minute: 1, second: 1.1, offset: 0 }
+    }
   },
   
   // Timestamp - Interval tests
