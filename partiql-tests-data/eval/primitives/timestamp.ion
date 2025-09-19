@@ -1,44 +1,153 @@
-time::[
-  {
-    name: "time simple",
-    statement: "TIME '01:01:01.111111111'",
-    assert: {
-      evalMode: [EvalModeCoerce, EvalModeError],
-      result: EvaluationSuccess,
-      output: $time::{ hour: 1, minute: 1, second: 1.111111111, offset: 0 }
-    }
-  },
-]
-timez::[
-  {
-    name: "timez simple",
-    statement: "TIME WITH TIME ZONE '01:01:01.111-00:01'",
-    assert: {
-      evalMode: [EvalModeCoerce, EvalModeError],
-      result: EvaluationSuccess,
-      output: $time::{ hour: 1, minute: 1, second: 1.111, offset: -1 }
-    }
-  },
-]
 timestamp::[
   {
-    name: "timestamp simple",
-    statement: "TIMESTAMP '2025-01-01 01:01:01'",
+    name: "timestamp no fractional seconds",
+    statement: "TIMESTAMP '2023-12-25 15:30:45'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2023, month: 12, day: 25, hour: 15, minute: 30, second: 45.0, offset: 0 }
+    }
+  },
+  {
+    name: "timestamp midnight",
+    statement: "TIMESTAMP '2024-01-01 00:00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2024, month: 1, day: 1, hour: 0, minute: 0, second: 0.0, offset: 0 }
+    }
+  },
+  {
+    name: "timestamp end of day",
+    statement: "TIMESTAMP '2024-12-31 23:59:59.999999999'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2024, month: 12, day: 31, hour: 23, minute: 59, second: 59.999999999, offset: 0 }
+    }
+  },
+  {
+    name: "timestamp with offset",
+    statement: "TIMESTAMP '2025-01-01 12:00:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 12, minute: 0, second: 0.0, offset: 0 }
+    }
+  },
+  // WARNING: There exists some ambiguity in SQL-spec and the following test currently conform with PLK implementation
+  // The fractional second precision is 9
+  {
+    name: "timestamp truncate",
+    statement: "TIMESTAMP '2025-01-01 23:59:59.999999999999'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 23, minute: 59, second: 59.999999999, offset: 0 }
+    }
+  },
+  // Explicit TIMESTAMP
+  {
+    name: "explicit timestamp simple",
+    statement: "TIMESTAMP WITHOUT TIME ZONE '2025-01-01 01:01:01'",
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
       output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 1, minute: 1, second: 1.0, offset: 0 }
     }
   },
-]
-timestampz::[
   {
-    name: "timestampz simple",
-    statement: "TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.111-00:01'",
+    name: "explicit timestamp no fractional seconds",
+    statement: "TIMESTAMP WITHOUT TIME ZONE '2023-12-25 15:30:45'",
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 1, minute: 1, second: 1.111, offset: -2 }
+      output: $timestamp::{ year: 2023, month: 12, day: 25, hour: 15, minute: 30, second: 45.0, offset: 0 }
+    }
+  },
+  {
+    name: "explicit timestamp midnight",
+    statement: "TIMESTAMP WITHOUT TIME ZONE '2024-01-01 00:00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2024, month: 1, day: 1, hour: 0, minute: 0, second: 0.0, offset: 0 }
+    }
+  },
+  {
+    name: "explicit timestamp end of day",
+    statement: "TIMESTAMP WITHOUT TIME ZONE '2024-12-31 23:59:59.999999999'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2024, month: 12, day: 31, hour: 23, minute: 59, second: 59.999999999, offset: 0 }
+    }
+  },
+  {
+    name: "explicit timestamp with offset - failure",
+    statement: "TIMESTAMP WITHOUT TIME ZONE '2025-01-01 12:00:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationFail
+    }
+  },
+  // WARNING: There exists some ambiguity in SQL-spec and the following test currently conform with PLK implementation
+  // The fractional second precision is 9
+  {
+    name: "explicit timestamp truncate",
+    statement: "TIMESTAMP WITHOUT TIME ZONE '2025-01-01 23:59:59.999999999999'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 23, minute: 59, second: 59.999999999, offset: 0 }
+    }
+  },
+]
+timestampz::[
+  {
+    name: "timestampz positive offset",
+    statement: "TIMESTAMP WITH TIME ZONE '2025-01-01 14:30:15+05:30'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 14, minute: 30, second: 15.0, offset: 330 }
+    }
+  },
+  {
+    name: "timestampz negative offset",
+    statement: "TIMESTAMP WITH TIME ZONE '2024-12-31 09:15:30-08:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2024, month: 12, day: 31, hour: 9, minute: 15, second: 30.0, offset: -480 }
+    }
+  },
+  {
+    name: "timestampz UTC",
+    statement: "TIMESTAMP WITH TIME ZONE '2025-06-15 12:00:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2025, month: 6, day: 15, hour: 12, minute: 0, second: 0.0, offset: 0 }
+    }
+  },
+  {
+    name: "timestampz without offset - failure",
+    statement: "TIMESTAMP WITH TIME ZONE '2025-01-01 12:00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationFail
+    }
+  },
+  // WARNING: There exists some ambiguity in SQL-spec and the following test currently conform with PLK implementation
+  // The fractional second precision is 9
+  {
+    name: "timestampz truncate",
+    statement: "TIMESTAMP WITH TIME ZONE '2025-01-01 23:59:59.999999999999+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 23, minute: 59, second: 59.999999999, offset: 0 }
     }
   },
 ]
