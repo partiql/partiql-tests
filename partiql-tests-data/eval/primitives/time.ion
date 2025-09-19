@@ -1,0 +1,163 @@
+time::[
+  {
+    name: "time simple",
+    statement: "TIME '01:01:01.111111111'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $time::{ hour: 1, minute: 1, second: 1.111111111, offset: 0 }
+    }
+  },
+  {
+    name: "time no fractional seconds",
+    statement: "TIME '12:30:45'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $time::{ hour: 12, minute: 30, second: 45.0, offset: 0 }
+    }
+  },
+  {
+    name: "time midnight",
+    statement: "TIME '00:00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $time::{ hour: 0, minute: 0, second: 0.0, offset: 0 }
+    }
+  },
+  {
+    name: "time end of day",
+    statement: "TIME '23:59:59.999999999'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $time::{ hour: 23, minute: 59, second: 59.999999999, offset: 0 }
+    }
+  },
+  {
+    name: "time with offset",
+    statement: "TIME '12:00:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $time::{ hour: 12, minute: 0, second: 0.0, offset: 0 }
+    }
+  },
+  // WARNING: There exists some ambiguity in SQL-spec and the following test currently conform with PLK implementation
+  // The fractional second precision is 9
+  {
+    name: "time truncate",
+    statement: "TIME '23:59:59.999999999999'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $time::{ hour: 23, minute: 59, second: 59.999999999, offset: 0 }
+    }
+  },
+  // Explicit TIME
+  {
+    name: "explicit time simple",
+    statement: "TIME WITHOUT TIME ZONE '01:01:01.111111111'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $time::{ hour: 1, minute: 1, second: 1.111111111, offset: 0 }
+    }
+  },
+  {
+    name: "explicit time no fractional seconds",
+    statement: "TIME WITHOUT TIME ZONE '12:30:45'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $time::{ hour: 12, minute: 30, second: 45.0, offset: 0 }
+    }
+  },
+  {
+    name: "explicit time midnight",
+    statement: "TIME WITHOUT TIME ZONE '00:00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $time::{ hour: 0, minute: 0, second: 0.0, offset: 0 }
+    }
+  },
+  {
+    name: "explicit time end of day",
+    statement: "TIME WITHOUT TIME ZONE '23:59:59.999999999'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $time::{ hour: 23, minute: 59, second: 59.999999999, offset: 0 }
+    }
+  },
+  {
+    name: "explicit time with offset - failure",
+    statement: "TIME WITHOUT TIME ZONE '12:00:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationFail
+    }
+  },
+  // WARNING: There exists some ambiguity in SQL-spec and the following test currently conform with PLK implementation
+  // The fractional second precision is 9
+  {
+    name: "explicit time truncate",
+    statement: "TIME WITHOUT TIME ZONE '23:59:59.999999999999'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $time::{ hour: 23, minute: 59, second: 59.999999999, offset: 0 }
+    }
+  },
+]
+
+timez::[
+  {
+    name: "timez positive offset",
+    statement: "TIME WITH TIME ZONE '14:30:15+05:30'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $time::{ hour: 14, minute: 30, second: 15.0, offset: 330 }
+    }
+  },
+  {
+    name: "timez negative offset",
+    statement: "TIME WITH TIME ZONE '09:15:30-08:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $time::{ hour: 9, minute: 15, second: 30.0, offset: -480 }
+    }
+  },
+  {
+    name: "timez UTC",
+    statement: "TIME WITH TIME ZONE '12:00:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $time::{ hour: 12, minute: 0, second: 0.0, offset: 0 }
+    }
+  },
+  {
+    name: "timez without offset - failure",
+    statement: "TIME WITH TIME ZONE '12:00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationFail
+    }
+  },
+  // WARNING: There exists some ambiguity in SQL-spec and the following test currently conform with PLK implementation
+  // The fractional second precision is 9
+  {
+    name: "timez truncate",
+    statement: "TIME WITH TIME ZONE '23:59:59.999999999999+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $time::{ hour: 23, minute: 59, second: 59.999999999, offset: 0 }
+    }
+  },
+]
