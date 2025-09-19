@@ -8570,4 +8570,47 @@
       ]
     }
   },
+  {
+    name:"qualified GROUP BY, SELECT and ORDER BY with explicit wrong case - fail",
+    statement:"SELECT \"t\".\"A\", MAX(T.b) FROM <<{'a': 1, 'b': 2}, {'a': 3, 'b': 5}>> T GROUP BY T.a ORDER BY T.a",
+    assert:[
+      {
+        result:EvaluationFail,
+        evalMode:EvalModeError
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:[
+          {
+            '_1': 2
+          },
+          {
+            '_1': 5
+          }
+        ]
+      }
+    ]
+  },
+  {
+    name:"qualified GROUP BY, SELECT and ORDER BY with mixed case",
+    statement:"SELECT t.A, MAX(T.b) FROM <<{'a': 1, 'b': 2}, {'a': 3, 'b': 5}>> T GROUP BY T.a ORDER BY T.a",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:[
+        {
+          'A': 1,
+          '_1': 2
+        },
+        {
+          'A': 3,
+          '_1': 5
+        }
+      ]
+    }
+  },
 ]
