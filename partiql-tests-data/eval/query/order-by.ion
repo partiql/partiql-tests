@@ -232,36 +232,33 @@ simple::[
       output:[{'supplierId': 10, n: 3}, {'supplierId': 11, 'n':2}]
     }
   },
-  // should order by aggregation function directly
   {
-    name:"order by aggregation function",
-    statement:"SELECT supplierId, MAX(price) FROM products GROUP BY supplierId ORDER BY MAX(price) DESC",
+    name:"order by aggregation function directly",
+    statement:"SELECT supplierId, MAX(numInStock) FROM products GROUP BY supplierId ORDER BY MAX(numInStock) DESC",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:[{'supplierId': 10, 'MAX': 15.0}, {'supplierId': 11, 'MAX': 15.0}]
+      output:[{'supplierId': 10, '_1': 10000}, {'supplierId': 11, '_1': 100}]
     }
   },
 ]
 
 alias::[
-  // ORDER BY alias from SELECT
   {
     name:"order by select alias",
-    statement:"SELECT productId AS pid, price AS cost FROM products ORDER BY pid",
+    statement:"SELECT productId AS pid, price AS cost FROM products ORDER BY pid DESC",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:[
-        {'pid': 1, 'cost': 5.0},
-        {'pid': 2, 'cost': 10.0},
-        {'pid': 3, 'cost': 15.0},
+        {'pid': 5, 'cost': 15.0},
         {'pid': 4, 'cost': 5.0},
-        {'pid': 5, 'cost': 15.0}
+        {'pid': 3, 'cost': 15.0},
+        {'pid': 2, 'cost': 10.0},
+        {'pid': 1, 'cost': 5.0}
       ]
     }
   },
-  // ORDER BY multiple aliases
   {
     name:"order by multiple aliases",
     statement:"SELECT supplierId AS sid, price AS cost FROM products ORDER BY cost DESC, sid ASC",
@@ -277,20 +274,18 @@ alias::[
       ]
     }
   },
-  // ORDER BY aggregation alias
   {
     name:"order by aggregation alias",
-    statement:"SELECT supplierId, MAX(price) AS max_price FROM products GROUP BY supplierId ORDER BY max_price DESC",
+    statement:"SELECT supplierId, MAX(numInStock) AS max_stock FROM products GROUP BY supplierId ORDER BY max_stock DESC",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:[
-        {'supplierId': 10, 'max_price': 15.0},
-        {'supplierId': 11, 'max_price': 15.0}
+        {'supplierId': 10, 'max_stock': 10000},
+        {'supplierId': 11, 'max_stock': 100}
       ]
     }
   },
-  // ORDER BY aggregation alias with GROUP BY alias
   {
     name:"order by aggregation alias with group by alias",
     statement:"SELECT supplierId AS sid, COUNT(*) AS product_count FROM products GROUP BY sid ORDER BY product_count DESC, sid",
@@ -303,7 +298,6 @@ alias::[
       ]
     }
   },
-  // ORDER BY alias in nested SFW
   {
     name:"order by alias in nested sfw",
     statement:"SELECT pid as p FROM (SELECT productId AS pid, price * 2 AS double_price FROM products ORDER BY double_price DESC) ORDER BY p",
@@ -319,7 +313,6 @@ alias::[
       ]
     }
   },
-  // ORDER BY expression alias
   {
     name:"order by expression alias",
     statement:"SELECT productId, price, (price * numInStock) AS total_value FROM products ORDER BY total_value DESC",
@@ -335,7 +328,6 @@ alias::[
       ]
     }
   },
-  // ORDER BY alias with aggregation in nested query
   {
     name:"order by alias with aggregation in nested query",
     statement:"SELECT categoryId AS cid, max_price AS price FROM (SELECT categoryId, MAX(price) AS max_price FROM products GROUP BY categoryId) ORDER BY cid, price",
@@ -343,8 +335,8 @@ alias::[
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:[
-        {'cid': 20, 'price': 15.0},
-        {'categoryId': 21, 'price': 15.0}
+        {'cid': 20, 'price': 10.0},
+        {'cid': 21, 'price': 15.0}
       ]
     }
   },
