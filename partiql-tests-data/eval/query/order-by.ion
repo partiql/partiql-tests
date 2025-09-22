@@ -241,6 +241,15 @@ simple::[
       output:[{'supplierId': 11, '_1': 10000}, {'supplierId': 10, '_1': 100}]
     }
   },
+  {
+    name:"order by different aggregation function from select",
+    statement:"SELECT supplierId, MAX(numInStock) FROM products GROUP BY supplierId ORDER BY COUNT(categoryId) DESC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{'supplierId': 10, '_1': 100}, {'supplierId': 11, '_1': 10000},]
+    }
+  }
 ]
 
 alias::[
