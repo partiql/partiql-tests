@@ -5,7 +5,7 @@ time::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: $time::{ hour: 1, minute: 1, second: 1.111111111, offset: 0 }
+      output: $time::{ hour: 1, minute: 1, second: 1.111111111, offset: null }
     }
   },
   {
@@ -14,7 +14,7 @@ time::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: $time::{ hour: 12, minute: 30, second: 45.0, offset: 0 }
+      output: $time::{ hour: 12, minute: 30, second: 45.0, offset: null }
     }
   },
   {
@@ -23,7 +23,7 @@ time::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: $time::{ hour: 0, minute: 0, second: 0.0, offset: 0 }
+      output: $time::{ hour: 0, minute: 0, second: 0.0, offset: null }
     }
   },
   {
@@ -32,7 +32,7 @@ time::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: $time::{ hour: 23, minute: 59, second: 59.999999999, offset: 0 }
+      output: $time::{ hour: 23, minute: 59, second: 59.999999999, offset: null }
     }
   },
   {
@@ -52,7 +52,7 @@ time::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: $time::{ hour: 23, minute: 59, second: 59.999999999, offset: 0 }
+      output: $time::{ hour: 23, minute: 59, second: 59.999999999, offset: null }
     }
   },
   // Explicit TIME
@@ -62,7 +62,7 @@ time::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: $time::{ hour: 1, minute: 1, second: 1.111111111, offset: 0 }
+      output: $time::{ hour: 1, minute: 1, second: 1.111111111, offset: null }
     }
   },
   {
@@ -71,7 +71,7 @@ time::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: $time::{ hour: 12, minute: 30, second: 45.0, offset: 0 }
+      output: $time::{ hour: 12, minute: 30, second: 45.0, offset: null }
     }
   },
   {
@@ -80,7 +80,7 @@ time::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: $time::{ hour: 0, minute: 0, second: 0.0, offset: 0 }
+      output: $time::{ hour: 0, minute: 0, second: 0.0, offset: null }
     }
   },
   {
@@ -89,7 +89,7 @@ time::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: $time::{ hour: 23, minute: 59, second: 59.999999999, offset: 0 }
+      output: $time::{ hour: 23, minute: 59, second: 59.999999999, offset: null }
     }
   },
   {
@@ -108,7 +108,7 @@ time::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: $time::{ hour: 23, minute: 59, second: 59.999999999, offset: 0 }
+      output: $time::{ hour: 23, minute: 59, second: 59.999999999, offset: null }
     }
   },
 ]

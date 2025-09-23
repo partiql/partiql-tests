@@ -44,7 +44,7 @@ minus::[
     assert: {
       result: EvaluationSuccess,
       evalMode: [EvalModeCoerce, EvalModeError],
-      output: $time::{ hour: 0, minute: 1, second: 1.1, offset: 0 }
+      output: $time::{ hour: 0, minute: 1, second: 1.1, offset: null }
     }
   },
   {
@@ -53,7 +53,7 @@ minus::[
     assert: {
       result: EvaluationSuccess,
       evalMode: [EvalModeCoerce, EvalModeError],
-      output: $time::{ hour: 1, minute: 0, second: 1.1, offset: 0 }
+      output: $time::{ hour: 1, minute: 0, second: 1.1, offset: null }
     }
   },
   {
@@ -62,7 +62,7 @@ minus::[
     assert: {
       result: EvaluationSuccess,
       evalMode: [EvalModeCoerce, EvalModeError],
-      output: $time::{ hour: 1, minute: 1, second: 1.0, offset: 0 }
+      output: $time::{ hour: 1, minute: 1, second: 1.0, offset: null }
     }
   },
   
@@ -170,7 +170,7 @@ minus::[
     assert: {
       result: EvaluationSuccess,
       evalMode: [EvalModeCoerce, EvalModeError],
-      output: $timestamp::{ year: 2024, month: 1, day: 1, hour: 1, minute: 1, second: 1.1, offset: 0 }
+      output: $timestamp::{ year: 2024, month: 1, day: 1, hour: 1, minute: 1, second: 1.1, offset: null }
     }
   },
   {
@@ -179,7 +179,7 @@ minus::[
     assert: {
       result: EvaluationSuccess,
       evalMode: [EvalModeCoerce, EvalModeError],
-      output: $timestamp::{ year: 2024, month: 11, day: 1, hour: 1, minute: 1, second: 1.1, offset: 0 }
+      output: $timestamp::{ year: 2024, month: 11, day: 1, hour: 1, minute: 1, second: 1.1, offset: null }
     }
   },
   {
@@ -188,7 +188,7 @@ minus::[
     assert: {
       result: EvaluationSuccess,
       evalMode: [EvalModeCoerce, EvalModeError],
-      output: $timestamp::{ year: 2024, month: 12, day: 31, hour: 1, minute: 1, second: 1.1, offset: 0 }
+      output: $timestamp::{ year: 2024, month: 12, day: 31, hour: 1, minute: 1, second: 1.1, offset: null }
     }
   },
   

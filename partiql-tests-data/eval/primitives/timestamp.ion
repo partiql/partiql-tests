@@ -5,7 +5,7 @@ timestamp::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: $timestamp::{ year: 2023, month: 12, day: 25, hour: 15, minute: 30, second: 45.0, offset: 0 }
+      output: $timestamp::{ year: 2023, month: 12, day: 25, hour: 15, minute: 30, second: 45.0, offset: null }
     }
   },
   {
@@ -14,7 +14,7 @@ timestamp::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: $timestamp::{ year: 2024, month: 1, day: 1, hour: 0, minute: 0, second: 0.0, offset: 0 }
+      output: $timestamp::{ year: 2024, month: 1, day: 1, hour: 0, minute: 0, second: 0.0, offset: null }
     }
   },
   {
@@ -23,7 +23,7 @@ timestamp::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: $timestamp::{ year: 2024, month: 12, day: 31, hour: 23, minute: 59, second: 59.999999999, offset: 0 }
+      output: $timestamp::{ year: 2024, month: 12, day: 31, hour: 23, minute: 59, second: 59.999999999, offset: null }
     }
   },
   {
@@ -43,7 +43,7 @@ timestamp::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 23, minute: 59, second: 59.999999999, offset: 0 }
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 23, minute: 59, second: 59.999999999, offset: null }
     }
   },
   // Explicit TIMESTAMP
@@ -53,7 +53,7 @@ timestamp::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 1, minute: 1, second: 1.0, offset: 0 }
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 1, minute: 1, second: 1.0, offset: null }
     }
   },
   {
@@ -62,7 +62,7 @@ timestamp::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: $timestamp::{ year: 2023, month: 12, day: 25, hour: 15, minute: 30, second: 45.0, offset: 0 }
+      output: $timestamp::{ year: 2023, month: 12, day: 25, hour: 15, minute: 30, second: 45.0, offset: null }
     }
   },
   {
@@ -71,7 +71,7 @@ timestamp::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: $timestamp::{ year: 2024, month: 1, day: 1, hour: 0, minute: 0, second: 0.0, offset: 0 }
+      output: $timestamp::{ year: 2024, month: 1, day: 1, hour: 0, minute: 0, second: 0.0, offset: null }
     }
   },
   {
@@ -80,7 +80,7 @@ timestamp::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: $timestamp::{ year: 2024, month: 12, day: 31, hour: 23, minute: 59, second: 59.999999999, offset: 0 }
+      output: $timestamp::{ year: 2024, month: 12, day: 31, hour: 23, minute: 59, second: 59.999999999, offset: null }
     }
   },
   {
@@ -99,7 +99,7 @@ timestamp::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 23, minute: 59, second: 59.999999999, offset: 0 }
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 23, minute: 59, second: 59.999999999, offset: null }
     }
   },
 ]
