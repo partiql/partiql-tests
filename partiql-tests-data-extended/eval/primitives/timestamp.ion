@@ -1,0 +1,34 @@
+// The behavior for precision & truncating is implementation-defined
+// Tests below following PLK implementations
+timestamp::[
+  {
+    name: "timestamp truncate",
+    statement: "TIMESTAMP '2025-01-01 23:59:59.999999999999'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 23, minute: 59, second: 59.999999999, offset: null }
+    }
+  },
+  {
+    name: "explicit timestamp truncate",
+    statement: "TIMESTAMP WITHOUT TIME ZONE '2025-01-01 23:59:59.999999999999'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 23, minute: 59, second: 59.999999999, offset: null }
+    }
+  },
+]
+
+timestampz::[
+  {
+    name: "timestampz truncate",
+    statement: "TIMESTAMP WITH TIME ZONE '2025-01-01 23:59:59.999999999999+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 23, minute: 59, second: 59.999999999, offset: 0 }
+    }
+  },
+]

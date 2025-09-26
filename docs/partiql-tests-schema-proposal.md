@@ -199,15 +199,17 @@ $missing::null
 // date -- struct annotated with $date
 $date::{ year: 2022, month: 2, day: 22 } // All fields are required
 
-// time/timez -- struct annotated with $time
-// hour: int, minute: int, second: decimal(scale<=9), offset: int? representing minutes
-// offset: null represents TIME (no timezone), offset: 0(default) represents TIMEZ (with timezone)
-$time::{ hour: 2, minute: 30, second: 59.0, offset: 0 } // All fields are required, offset can be null
+// TIME/TIMEZ -- struct annotated with $time
+// Fields: hour (int), minute (int), second (decimal, scale ≤ 9), offset (int?, minutes from UTC)
+// offset: null = TIME WITHOUT TIME ZONE
+// offset: int  = TIME WITH TIME ZONE (0 = UTC)
+$time::{ hour: 2, minute: 30, second: 59.0, offset: 0 } // All fields required; offset nullable
 
-// timestamp/timestampz -- struct annotated with $timestamp
-// year: int, month: int, day: int, hour: int, minute: int, second: decimal(scale<=9), offset: int? representing minutes
-// offset: null represents TIMESTAMP (no timezone), offset: 0(default) represents TIMESTAMPZ (with timezone)
-$timestamp::{ year: 2025, month: 1, day: 1, hour: 1, minute: 1, second: 1.111, offset: -2 } // All fields are required, offset can be null
+// TIMESTAMP/TIMESTAMPZ -- struct annotated with $timestamp
+// Fields: year (int), month (int), day (int), hour (int), minute (int), second (decimal, scale ≤ 9), offset (int?, minutes from UTC)
+// offset: null = TIMESTAMP WITHOUT TIME ZONE
+// offset: int  = TIMESTAMP WITH TIME ZONE (0 = UTC)
+$timestamp::{ year: 2025, month: 1, day: 1, hour: 1, minute: 1, second: 1.111, offset: -2 } // All fields required; offset nullable
 
 // interval year-month -- struct annotated with $interval_ym
 // All fields are optional

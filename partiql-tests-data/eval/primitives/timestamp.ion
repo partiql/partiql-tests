@@ -35,17 +35,6 @@ timestamp::[
       output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 12, minute: 0, second: 0.0, offset: 0 }
     }
   },
-  // WARNING: There exists some ambiguity in SQL-spec and the following test currently conform with PLK implementation
-  // The fractional second precision is 9
-  {
-    name: "timestamp truncate",
-    statement: "TIMESTAMP '2025-01-01 23:59:59.999999999999'",
-    assert: {
-      evalMode: [EvalModeCoerce, EvalModeError],
-      result: EvaluationSuccess,
-      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 23, minute: 59, second: 59.999999999, offset: null }
-    }
-  },
   // Explicit TIMESTAMP
   {
     name: "explicit timestamp simple",
@@ -91,18 +80,8 @@ timestamp::[
       result: EvaluationFail
     }
   },
-  // WARNING: There exists some ambiguity in SQL-spec and the following test currently conform with PLK implementation
-  // The fractional second precision is 9
-  {
-    name: "explicit timestamp truncate",
-    statement: "TIMESTAMP WITHOUT TIME ZONE '2025-01-01 23:59:59.999999999999'",
-    assert: {
-      evalMode: [EvalModeCoerce, EvalModeError],
-      result: EvaluationSuccess,
-      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 23, minute: 59, second: 59.999999999, offset: null }
-    }
-  },
 ]
+
 timestampz::[
   {
     name: "timestampz positive offset",
@@ -137,17 +116,6 @@ timestampz::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationFail
-    }
-  },
-  // WARNING: There exists some ambiguity in SQL-spec and the following test currently conform with PLK implementation
-  // The fractional second precision is 9
-  {
-    name: "timestampz truncate",
-    statement: "TIMESTAMP WITH TIME ZONE '2025-01-01 23:59:59.999999999999+00:00'",
-    assert: {
-      evalMode: [EvalModeCoerce, EvalModeError],
-      result: EvaluationSuccess,
-      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 23, minute: 59, second: 59.999999999, offset: 0 }
     }
   },
 ]
