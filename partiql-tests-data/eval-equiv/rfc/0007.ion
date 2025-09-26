@@ -68,7 +68,7 @@ bag::[
         ]
     },
     {
-        name: "Example 6 — Value Coercion",
+        name: "Example 6 — Value Coercion (multiple statements)",
         statement: example_6,
         assert: {
             evalMode: [EvalModeCoerce],
