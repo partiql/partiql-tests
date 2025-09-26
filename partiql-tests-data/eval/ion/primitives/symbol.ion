@@ -1,6 +1,6 @@
 'empty-symbol'::[
   {
-    name:"Empty Symbol in table",
+    name:"Empty Symbol in table (with ion data)",
     statement:"SELECT \"\" FROM `{'': 1}`",
     assert: [
       {

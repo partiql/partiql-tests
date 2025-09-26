@@ -692,7 +692,7 @@ extract_invalid::[
     ]
   },
   {
-    name:"invalid extract year from time",
+    name:"invalid extract year from time with time zone",
     statement:"EXTRACT(YEAR FROM TIME WITH TIME ZONE '01:23:45.678-06:30')",
     assert:[
       {

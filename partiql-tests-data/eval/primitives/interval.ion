@@ -425,7 +425,7 @@ interval::[
     }
   },
   {
-    name: "interval second with precision and fractional precision - flow over",
+    name: "interval second(3,6) with precision and fractional precision - flow over",
     statement: "INTERVAL '999.123456' SECOND(3,6)",
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
@@ -434,7 +434,7 @@ interval::[
     }
   },
   {
-    name: "interval second with precision and fractional precision - flow over",
+    name: "interval second(6,6) with precision and fractional precision - flow over",
     statement: "INTERVAL '999999.123456' SECOND(6,6)",
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],

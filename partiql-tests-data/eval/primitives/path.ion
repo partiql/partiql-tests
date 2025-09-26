@@ -889,7 +889,7 @@ pathUnpivotMissing::[
     }
   },
   {
-    name: "path expression with ambiguous table alias (lowercase)",
+    name: "path expression with ambiguous table alias (lowercase, quoted)",
     statement: "SELECT \"an_alias\".f FROM table1 AS an_alias, table2 AS AN_ALIAS",
     assert: {
       result: EvaluationSuccess,
@@ -942,7 +942,7 @@ pathUnpivotMissing::[
     },
   },
   {
-    name: "path expression with ambiguous table alias (lowercase)",
+    name: "path expression with ambiguous table alias (lowercase, unquoted)",
     statement: "SELECT an_alias.f FROM table1 AS an_alias, table2 AS AN_ALIAS",
     env: {
       table1: [
