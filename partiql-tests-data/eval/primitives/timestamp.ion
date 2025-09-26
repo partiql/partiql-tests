@@ -1,0 +1,121 @@
+timestamp::[
+  {
+    name: "timestamp no fractional seconds",
+    statement: "TIMESTAMP '2023-12-25 15:30:45'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2023, month: 12, day: 25, hour: 15, minute: 30, second: 45.0, offset: null }
+    }
+  },
+  {
+    name: "timestamp midnight",
+    statement: "TIMESTAMP '2024-01-01 00:00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2024, month: 1, day: 1, hour: 0, minute: 0, second: 0.0, offset: null }
+    }
+  },
+  {
+    name: "timestamp end of day",
+    statement: "TIMESTAMP '2024-12-31 23:59:59.999999999'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2024, month: 12, day: 31, hour: 23, minute: 59, second: 59.999999999, offset: null }
+    }
+  },
+  {
+    name: "timestamp with offset",
+    statement: "TIMESTAMP '2025-01-01 12:00:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 12, minute: 0, second: 0.0, offset: 0 }
+    }
+  },
+  // Explicit TIMESTAMP
+  {
+    name: "explicit timestamp simple",
+    statement: "TIMESTAMP WITHOUT TIME ZONE '2025-01-01 01:01:01'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 1, minute: 1, second: 1.0, offset: null }
+    }
+  },
+  {
+    name: "explicit timestamp no fractional seconds",
+    statement: "TIMESTAMP WITHOUT TIME ZONE '2023-12-25 15:30:45'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2023, month: 12, day: 25, hour: 15, minute: 30, second: 45.0, offset: null }
+    }
+  },
+  {
+    name: "explicit timestamp midnight",
+    statement: "TIMESTAMP WITHOUT TIME ZONE '2024-01-01 00:00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2024, month: 1, day: 1, hour: 0, minute: 0, second: 0.0, offset: null }
+    }
+  },
+  {
+    name: "explicit timestamp end of day",
+    statement: "TIMESTAMP WITHOUT TIME ZONE '2024-12-31 23:59:59.999999999'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2024, month: 12, day: 31, hour: 23, minute: 59, second: 59.999999999, offset: null }
+    }
+  },
+  {
+    name: "explicit timestamp with offset - failure",
+    statement: "TIMESTAMP WITHOUT TIME ZONE '2025-01-01 12:00:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationFail
+    }
+  },
+]
+
+timestampz::[
+  {
+    name: "timestampz positive offset",
+    statement: "TIMESTAMP WITH TIME ZONE '2025-01-01 14:30:15+05:30'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 14, minute: 30, second: 15.0, offset: 330 }
+    }
+  },
+  {
+    name: "timestampz negative offset",
+    statement: "TIMESTAMP WITH TIME ZONE '2024-12-31 09:15:30-08:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2024, month: 12, day: 31, hour: 9, minute: 15, second: 30.0, offset: -480 }
+    }
+  },
+  {
+    name: "timestampz UTC",
+    statement: "TIMESTAMP WITH TIME ZONE '2025-06-15 12:00:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $timestamp::{ year: 2025, month: 6, day: 15, hour: 12, minute: 0, second: 0.0, offset: 0 }
+    }
+  },
+  {
+    name: "timestampz without offset - failure",
+    statement: "TIMESTAMP WITH TIME ZONE '2025-01-01 12:00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationFail
+    }
+  },
+]

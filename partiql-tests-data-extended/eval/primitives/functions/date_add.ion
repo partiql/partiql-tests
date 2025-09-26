@@ -1119,36 +1119,99 @@ date_add_valid::[
 
 date_add_invalid::[
   {
-    name:"date_add invalid quantity{time_part:\"year\",quantity:9999}",
+    name:"date_add year 9999}",
     statement:"date_add(year, 9999, `9999-12-31T23:59:59Z`)",
     assert:{
+      result:EvaluationSuccess,
       evalMode:[
-        EvalModeError,
         EvalModeCoerce,
+        EvalModeError
       ],
-      result:EvaluationFail
+      output:$timestamp::{ year: 19998, month: 12, day: 31, hour: 23, minute: 59, second: 59.0, offset: null }
     },
   },
   {
-    name:"date_add invalid quantity{time_part:\"second\",quantity:1}",
+    name:"date_add overflow ion",
     statement:"date_add(second, 1, `9999-12-31T23:59:59Z`)",
     assert:{
+      result:EvaluationSuccess,
       evalMode:[
-        EvalModeError,
         EvalModeCoerce,
+        EvalModeError
       ],
-      result:EvaluationFail
+      output:$timestamp::{ year: 10000, month: 1, day: 1, hour: 0, minute: 0, second: 0.0, offset: null }
     },
   },
   {
-    name:"date_add invalid quantity{time_part:\"year\",quantity:-10000}",
+    name:"date_add year negative",
     statement:"date_add(year, -10000, `9999-12-31T23:59:59Z`)",
     assert:{
+      result:EvaluationSuccess,
       evalMode:[
-        EvalModeError,
         EvalModeCoerce,
+        EvalModeError
       ],
-      result:EvaluationFail
+      output:$timestamp::{ year: -1, month: 12, day: 31, hour: 23, minute: 59, second: 59.0, offset: null}
+    },
+  },
+  {
+    name:"date_add with timestamp",
+    statement:"date_add(year, 1, TIMESTAMP '2024-01-01 00:00:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$timestamp::{ year: 2025, month: 1, day: 1, hour: 0, minute: 0, second: 0.0, offset: null}
+    },
+  },
+  {
+    name:"date_add with timestamp negative",
+    statement:"date_add(year, -1, TIMESTAMP '2025-01-01 00:00:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$timestamp::{ year: 2024, month: 1, day: 1, hour: 0, minute: 0, second: 0.0, offset: null}
+    },
+  },
+  {
+    name:"date_add with timestampz",
+    statement:"date_add(year, 1, TIMESTAMP '2024-01-01 00:00:00+00:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$timestamp::{ year: 2025, month: 1, day: 1, hour: 0, minute: 0, second: 0.0, offset: null}
+    },
+  },
+  {
+    name:"date_add with explicit timestampz",
+    statement:"date_add(year, 1, TIMESTAMP WITH TIME ZONE '2024-01-01 00:00:00+00:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$timestamp::{ year: 2025, month: 1, day: 1, hour: 0, minute: 0, second: 0.0, offset: null}
+    },
+  },
+  {
+    name:"date_add with explicit timestamp with out time zone",
+    statement:"date_add(year, 1, TIMESTAMP WITHOUT TIME ZONE '2024-01-01 00:00:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:$timestamp::{ year: 2025, month: 1, day: 1, hour: 0, minute: 0, second: 0.0, offset: null}
     },
   }
 ]
