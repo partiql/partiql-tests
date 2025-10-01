@@ -53,9 +53,13 @@ class PartiQLTestDataValidator {
     private fun assertNoDuplicateName(testCases: List<TestCase>) {
         val nameGroups = testCases.groupBy { it.name }
         val duplicates = nameGroups.filter { it.value.size > 1 }
+
+        val locations = duplicates.map {
+            "Find '${it.key}' at (${it.value.mapIndexed { i, tc -> "Location${i}: " + tc.source }.joinToString(",") }"
+        }.joinToString("\n")
         assertTrue(
             duplicates.isEmpty(),
-            "Duplicate test names found:\n" + duplicates.map { "Find '${it.key}' at (${it.value.joinToString(",") { tc -> tc.source }})" }.joinToString("\n")
+            "Duplicate test names found:\n$locations"
         )
     }
 

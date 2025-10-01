@@ -9,7 +9,6 @@ import java.io.File
 import kotlin.collections.forEach
 import kotlin.collections.plus
 
-
 object TestLoader {
     private val ion = IonSystemBuilder.standard().build()
 
@@ -67,10 +66,10 @@ object TestLoader {
             }
             is IonStruct -> {
                 // environment, equivalence class, or test case. add to current namespace
-                if(data.typeAnnotations.isEmpty()) {
-                        // test case
-                        curNamespace.testCases += parseTestCase(data, curNamespace)
-                    }
+                if (data.typeAnnotations.isEmpty()) {
+                    // test case
+                    curNamespace.testCases += parseTestCase(data, curNamespace)
+                }
 
                 curNamespace
             }
@@ -84,11 +83,14 @@ object TestLoader {
     }
 
     private fun getNameSpaceName(ionList: IonList, prev: Namespace): String {
-        return prev.name + if(ionList.typeAnnotations.any()) "::${ionList.typeAnnotations[0]}" else ""
+        return prev.name + if (ionList.typeAnnotations.any()) "::${ionList.typeAnnotations[0]}" else ""
     }
 }
 
-data class TestCase(val source: String, val name: String)
+data class TestCase(
+    val source: String, // FileName::namespace
+    val name: String
+)
 
 data class Namespace(
     val name: String,
