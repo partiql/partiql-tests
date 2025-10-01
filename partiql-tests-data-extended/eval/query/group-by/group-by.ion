@@ -180,7 +180,7 @@
     }
   },
   {
-    name:"GROUP BY binding referenced in FROM clause",
+    name:"GROUP BY binding referenced in FROM clause - Extended",
     statement:"SELECT * FROM non_included_sales_report, gb_binding WHERE fiscal_year >= `2001T` GROUP BY rep AS gb_binding",
     assert:[
       {
@@ -195,7 +195,7 @@
     ]
   },
   {
-    name:"GROUP BY binding referenced in WHERE clause",
+    name:"GROUP BY binding referenced in WHERE clause - Extended",
     statement:"SELECT * FROM non_included_sales_report, gb_binding WHERE gb_binding = 1 GROUP BY rep AS gb_binding",
     assert:[
       {
@@ -210,7 +210,7 @@
     ]
   },
   {
-    name:"GROUP AS binding referenced in FROM clause",
+    name:"GROUP AS binding referenced in FROM clause - Extended",
     statement:"SELECT * FROM non_included_sales_report, gba_binding WHERE fiscal_year >= `2001T` GROUP BY rep GROUP AS gba_binding",
     assert:[
       {
@@ -225,7 +225,7 @@
     ]
   },
   {
-    name:"GROUP AS binding referenced in WHERE clause",
+    name:"GROUP AS binding referenced in WHERE clause - Extended",
     statement:"SELECT * FROM non_included_sales_report, gba_binding WHERE gba_binding = 1 GROUP BY rep GROUP AS gba_binding",
     assert:[
       {

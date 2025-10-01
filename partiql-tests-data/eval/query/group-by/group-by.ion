@@ -698,7 +698,7 @@
     }
   },
   {
-    name:"group by with where",
+    name:"group by with where fiscal_year >= DATE Literal",
     statement:"SELECT rep, SUM(total_sales) as total FROM sales_report WHERE fiscal_year >= DATE '2001-01-01' GROUP BY rep",
     assert:{
       result:EvaluationSuccess,
@@ -723,7 +723,7 @@
     }
   },
   {
-    name:"group by with group as and where",
+    name:"group by with group as and where fiscal_year >= DATE literal",
     statement:"SELECT rep, g FROM sales_report WHERE fiscal_year >= DATE '2001-01-01' GROUP BY rep GROUP AS g",
     assert:{
       result:EvaluationSuccess,
@@ -974,7 +974,7 @@
 
 'simple-group-by-fail'::[
   {
-    name:"GROUP BY binding referenced in FROM clause",
+    name:"GROUP BY binding referenced in FROM clause (DATE literal)",
     statement:"SELECT gb_binding FROM sales_report, gb_binding WHERE fiscal_year >= DATE '2001-01-01' GROUP BY rep AS gb_binding",
     assert:[
       {
@@ -1002,7 +1002,7 @@
     ]
   },
   {
-    name:"GROUP AS binding referenced in FROM clause",
+    name:"GROUP AS binding referenced in FROM clause (DATE literal)",
     statement:"SELECT rep, gba_binding FROM sales_report, gba_binding WHERE fiscal_year >= DATE '2001-01-01' GROUP BY rep GROUP AS gba_binding",
     assert:[
       {

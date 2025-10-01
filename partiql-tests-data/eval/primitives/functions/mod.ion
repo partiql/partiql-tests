@@ -72,18 +72,6 @@ mod::[
     }
   },
   {
-    name:"MOD(17, 1)",
-    statement:"MOD(17, 1)",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:0
-    }
-  },
-  {
     name:"MOD(17, 3)",
     statement:"MOD(17, 3)",
     assert:{

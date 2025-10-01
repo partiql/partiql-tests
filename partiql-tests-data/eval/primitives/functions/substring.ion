@@ -96,7 +96,8 @@ substring::[
     }
   },
   {
-    name:"substring valid cases 2 arguments with FROM syntax{target:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",start:\"40\",result:\"\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\"}",
+    // name:"substring valid cases 2 arguments with FROM syntax{target:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",start:\"40\",result:\"\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\"}"
+    name:"substring valid cases 2 arguments with FROM syntax{Complete Cyrillic Alphabet Substring Test - From Position 40 to End}",
     statement:"substring('ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя' FROM 40)",
     assert:{
       result:EvaluationSuccess,
@@ -120,7 +121,8 @@ substring::[
     }
   },
   {
-    name:"substring valid cases 2 arguments with FROM syntax{target:\"\\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\",start:\"17\",result:\"\\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\"}",
+    // name:"substring valid cases 2 arguments with FROM syntax{target:\"\\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\",start:\"17\",result:\"\\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\"}"
+    name:"substring valid cases 2 arguments with FROM syntax{Mathematical Bold Pangram Substring Test - From Position 17}",
     statement:"substring('𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫' FROM 17)",
     assert:{
       result:EvaluationSuccess,
@@ -240,7 +242,8 @@ substring::[
     }
   },
   {
-    name:"substring valid cases 2 arguments{target:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",start:\"40\",result:\"\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\"}",
+    // name:"substring valid cases 2 arguments{target:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",start:\"40\",result:\"\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\"}"
+    name:"substring valid cases 2 arguments{Complete Cyrillic Alphabet Substring Test FROM 40 to END}",
     statement:"substring('ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя', 40)",
     assert:{
       result:EvaluationSuccess,
@@ -264,7 +267,8 @@ substring::[
     }
   },
   {
-    name:"substring valid cases 2 arguments{target:\"\\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\",start:\"17\",result:\"\\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\"}",
+    // name:"substring valid cases 2 arguments{target:\"\\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\",start:\"17\",result:\"\\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\"}"
+    name:"substring valid cases 2 arguments{Mathematical Bold Pangram Substring Test - From Position 17}",
     statement:"substring('𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫', 17)",
     assert:{
       result:EvaluationSuccess,
@@ -504,7 +508,8 @@ substring::[
     }
   },
   {
-    name:"substring valid cases 3 arguments using FROM syntax{target:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",start:\"40\",quantity:\"999\",result:\"\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\"}",
+    // name:"substring valid cases 3 arguments using FROM syntax{target:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",start:\"40\",quantity:\"999\",result:\"\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\"}"
+    name:"substring valid cases 3 arguments using FROM syntax{Cyrillic alphabet substring test - extracting from position 40 to end, covering end of uppercase and all lowercase Cyrillic letters}",
     statement:"substring('ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя' FROM 40 FOR 999)",
     assert:{
       result:EvaluationSuccess,
@@ -516,7 +521,8 @@ substring::[
     }
   },
   {
-    name:"substring valid cases 3 arguments using FROM syntax{target:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",start:\"40\",quantity:\"4\",result:\"\\u0428\\u0429\\u042a\\u042b\"}",
+    // name:"substring valid cases 3 arguments using FROM syntax{target:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",start:\"40\",quantity:\"4\",result:\"\\u0428\\u0429\\u042a\\u042b\"}"
+    name:"substring valid cases 3 arguments using FROM syntax{Cyrillic Alphabet Substring Test - 4 Characters from Position 40}",
     statement:"substring('ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя' FROM 40 FOR 4)",
     assert:{
       result:EvaluationSuccess,
@@ -552,7 +558,8 @@ substring::[
     }
   },
   {
-    name:"substring valid cases 3 arguments using FROM syntax{target:\"\\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\",start:\"17\",quantity:\"999\",result:\"\\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\"}",
+    // name:"substring valid cases 3 arguments using FROM syntax{target:\"\\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\",start:\"17\",quantity:\"999\",result:\"\\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\"}"
+    name:"substring valid cases 3 arguments using FROM syntax{Mathematical Bold Pangram Substring Test - From Position 17 with 999 chars}",
     statement:"substring('𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫' FROM 17 FOR 999)",
     assert:{
       result:EvaluationSuccess,
@@ -564,7 +571,8 @@ substring::[
     }
   },
   {
-    name:"substring valid cases 3 arguments using FROM syntax{target:\"\\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\",start:\"17\",quantity:\"5\",result:\"\\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c\"}",
+    // name:"substring valid cases 3 arguments using FROM syntax{target:\"\\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\",start:\"17\",quantity:\"5\",result:\"\\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c\"}"
+    name:"substring valid cases 3 arguments using FROM syntax{Mathematical Bold Pangram Substring Test - From Position 17 with 5 chars}",
     statement:"substring('𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫' FROM 17 FOR 5)",
     assert:{
       result:EvaluationSuccess,
@@ -804,7 +812,8 @@ substring::[
     }
   },
   {
-    name:"substring valid cases 3 arguments{target:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",start:\"40\",quantity:\"999\",result:\"\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\"}",
+    // name:substring valid cases 3 arguments{target:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",start:\"40\",quantity:\"999\",result:\"\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\"}"
+    name:"substring valid cases 3 arguments{Cyrillic alphabet substring test FROM 40 with 999 characters}",
     statement:"substring('ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя', 40, 999)",
     assert:{
       result:EvaluationSuccess,
@@ -816,7 +825,8 @@ substring::[
     }
   },
   {
-    name:"substring valid cases 3 arguments{target:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",start:\"40\",quantity:\"4\",result:\"\\u0428\\u0429\\u042a\\u042b\"}",
+    // name:"substring valid cases 3 arguments{target:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",start:\"40\",quantity:\"4\",result:\"\\u0428\\u0429\\u042a\\u042b\"}",
+    name:"substring valid cases 3 arguments{Cyrillic alphabet substring test FROM 40 with 4 characters}",
     statement:"substring('ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя', 40, 4)",
     assert:{
       result:EvaluationSuccess,
@@ -852,7 +862,8 @@ substring::[
     }
   },
   {
-    name:"substring valid cases 3 arguments{target:\"\\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\",start:\"17\",quantity:\"999\",result:\"\\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\"}",
+    // name:"substring valid cases 3 arguments{target:\"\\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\",start:\"17\",quantity:\"999\",result:\"\\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\"}"
+    name:"substring valid cases 3 arguments{Mathematical Bold Pangram Substring Test - From Position 17 with 999 chars}",
     statement:"substring('𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫', 17, 999)",
     assert:{
       result:EvaluationSuccess,
@@ -864,7 +875,8 @@ substring::[
     }
   },
   {
-    name:"substring valid cases 3 arguments{target:\"\\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\",start:\"17\",quantity:\"5\",result:\"\\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c\"}",
+    // name:"substring valid cases 3 arguments{target:\"\\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b\",start:\"17\",quantity:\"5\",result:\"\\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c\"}"
+    name:"substring valid cases 3 arguments{Mathematical Bold Pangram Substring Test - From Position 17 with 5 chars}",
     statement:"substring('𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫', 17, 5)",
     assert:{
       result:EvaluationSuccess,

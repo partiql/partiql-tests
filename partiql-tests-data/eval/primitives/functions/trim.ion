@@ -72,7 +72,8 @@ trim::[
     }
   },
   {
-    name:"trim valid cases{spec:\"both\",to_remove:\"\\U0001f4a9\\U0001f638\",target:\"\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f6381\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f638a\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f6381\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f638\",result:\"1\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f638a\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f6381\"}",
+    //name:"trim valid cases{spec:\"both\",to_remove:\"\\U0001f4a9\\U0001f638\",target:\"\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f6381\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f638a\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f6381\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f638\",result:\"1\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f638a\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f6381\"}",
+    name:"trim valid cases{trim both emoji mixed characters - poop and grinning cat}",
     statement:"trim(both '💩😸' from '💩💩💩😸😸😸1💩💩💩😸😸😸a💩💩💩😸😸😸1💩💩💩😸😸😸')",
     assert:{
       result:EvaluationSuccess,
@@ -84,7 +85,8 @@ trim::[
     }
   },
   {
-    name:"trim valid cases{spec:\"leading\",to_remove:\"\\U0001f4a9\\U0001f638\",target:\"\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f6381\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f638a\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f6381\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f638\",result:\"1\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f638a\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f6381\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f638\"}",
+    // name:"trim valid cases{spec:\"leading\",to_remove:\"\\U0001f4a9\\U0001f638\",target:\"\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f6381\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f638a\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f6381\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f638\",result:\"1\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f638a\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f6381\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f638\"}",
+    name:"trim valid cases{Emoji leading trim test - removing poop and grinning cat face emojis from start of string}",
     statement:"trim(leading '💩😸' from '💩💩💩😸😸😸1💩💩💩😸😸😸a💩💩💩😸😸😸1💩💩💩😸😸😸')",
     assert:{
       result:EvaluationSuccess,
@@ -96,7 +98,8 @@ trim::[
     }
   },
   {
-    name:"trim valid cases{spec:\"trailing\",to_remove:\"\\U0001f4a9\\U0001f638\",target:\"\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f6381\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f638a\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f6381\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f638\",result:\"\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f6381\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f638a\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f6381\"}",
+    // name:"trim valid cases{spec:\"trailing\",to_remove:\"\\U0001f4a9\\U0001f638\",target:\"\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f6381\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f638a\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f6381\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f638\",result:\"\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f6381\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f638a\\U0001f4a9\\U0001f4a9\\U0001f4a9\\U0001f638\\U0001f638\\U0001f6381\"}",
+    name:"trim valid cases{Emoji trailing trim test - removing poop and grinning cat face emojis from end of string}",
     statement:"trim(trailing '💩😸' from '💩💩💩😸😸😸1💩💩💩😸😸😸a💩💩💩😸😸😸1💩💩💩😸😸😸')",
     assert:{
       result:EvaluationSuccess,

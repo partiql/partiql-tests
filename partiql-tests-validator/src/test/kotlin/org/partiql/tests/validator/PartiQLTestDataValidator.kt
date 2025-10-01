@@ -28,9 +28,10 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 private val PARTIQL_TEST_DATA_DIR = System.getenv("PARTIQL_TESTS_DATA")
+private val PARTIQL_TESTS_DATA_EXTENDED = System.getenv("PARTIQL_TESTS_DATA_EXTENDED")
 
 /**
- * Checks all the PartiQL conformance test data in [PARTIQL_TEST_DATA_DIR] conforms to the test data schema.
+ * Checks all the PartiQL conformance test data in [PARTIQL_TEST_DATA_DIR, PARTIQL_TESTS_DATA_EXTENDED] conforms to the test data schema.
  */
 class PartiQLTestDataValidator {
 
@@ -49,6 +50,19 @@ class PartiQLTestDataValidator {
         )
     }
 
+    private fun assertNoDuplicateName(testCases: List<TestCase>) {
+        val nameGroups = testCases.groupBy { it.name }
+        val duplicates = nameGroups.filter { it.value.size > 1 }
+
+        val locations = duplicates.map {
+            "Find '${it.key}' at (${it.value.mapIndexed { i, tc -> "Location$i: " + tc.source }.joinToString(", ") }"
+        }.joinToString("\n")
+        assertTrue(
+            duplicates.isEmpty(),
+            "Duplicate test names found:\n$locations"
+        )
+    }
+
     private fun assertViolationsOccurred(dataInIon: IonValue) {
         val violations = schema?.validate(dataInIon)
         assertNotNull(violations)
@@ -63,9 +77,33 @@ class PartiQLTestDataValidator {
         assertNoViolations(dataInIon)
     }
 
+    @ParameterizedTest
+    @ArgumentsSource(PartiQLTestDataExtendedCases::class)
+    fun validatePartiQLTestDataExtended(tc: File) {
+        val dataInIon = ion.loader.load(tc)
+        assertNoViolations(dataInIon)
+    }
+
+    @Test
+    fun validate_TestName_Uniqueness() {
+        val allTestCases: MutableList<TestCase> = mutableListOf()
+        allTestCases.addAll(TestLoader.load(PARTIQL_TEST_DATA_DIR))
+        allTestCases.addAll(TestLoader.load(PARTIQL_TESTS_DATA_EXTENDED))
+        assertNoDuplicateName(allTestCases)
+    }
+
     class PartiQLTestDataCases : ArgumentsProviderBase() {
         override fun getParameters(): List<Any> {
             return File(PARTIQL_TEST_DATA_DIR).walk()
+                .filter { it.isFile }
+                .filter { it.path.endsWith(".ion") }
+                .toList()
+        }
+    }
+
+    class PartiQLTestDataExtendedCases : ArgumentsProviderBase() {
+        override fun getParameters(): List<Any> {
+            return File(PARTIQL_TESTS_DATA_EXTENDED).walk()
                 .filter { it.isFile }
                 .filter { it.path.endsWith(".ion") }
                 .toList()
@@ -388,6 +426,23 @@ class PartiQLTestDataValidator {
     }
 
     // Negative tests
+    @Test
+    fun testLongTestNameFail() {
+        val testData =
+            """
+            {
+                // 10("some string".length) * 50 = 500 characters
+                name: "${"some string".repeat(50)}",
+                statement: "some string",
+                assert: {
+                    result: SyntaxSuccess
+                },
+            }
+            """
+        val dataInIon = ion.loader.load(testData)
+        assertViolationsOccurred(dataInIon)
+    }
+
     @Test
     fun testNonSpecifiedFieldInStructSchema() {
         val testData =
