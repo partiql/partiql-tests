@@ -698,7 +698,7 @@
     }
   },
   {
-    name:"group by with where fiscal_year >= ion timestamp",
+    name:"group by with where fiscal_year >= DATE Literal",
     statement:"SELECT rep, SUM(total_sales) as total FROM sales_report WHERE fiscal_year >= DATE '2001-01-01' GROUP BY rep",
     assert:{
       result:EvaluationSuccess,
@@ -723,7 +723,7 @@
     }
   },
   {
-    name:"group by with group as and where fiscal_year >= DATE",
+    name:"group by with group as and where fiscal_year >= DATE literal",
     statement:"SELECT rep, g FROM sales_report WHERE fiscal_year >= DATE '2001-01-01' GROUP BY rep GROUP AS g",
     assert:{
       result:EvaluationSuccess,

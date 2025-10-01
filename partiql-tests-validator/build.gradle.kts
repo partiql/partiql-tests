@@ -40,4 +40,5 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
     environment("PARTIQL_TESTS_DATA", file("../partiql-tests-data/").absolutePath)
+    environment("PARTIQL_TESTS_DATA_EXTENDED", file("../partiql-tests-data-extended/").absolutePath)
 }

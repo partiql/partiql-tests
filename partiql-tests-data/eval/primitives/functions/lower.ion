@@ -13,7 +13,7 @@ lower::[
   },
   {
     // name:"lower valid cases{in:\"\\xa1\\xa2\\xa3\\xa4\\xa5\\xa6\\xa7\\xa8\\xa9\\xaa\\xab\\xac\\xad\\xae\\xaf\\xb0\\xb1\\xb2\\xb3\\xb4\\xb5\\xb6\\xb7\\xb8\\xb9\\xba\\xbb\\xbc\\xbd\\xbe\\xbf\\xc0\\xc1\\xc2\\xc3\\xc4\\xc5\\xc6\\xc7\\xc8\\xc9\\xca\\xcb\\xcc\\xcd\\xce\\xcf\\xd0\\xd1\\xd2\\xd3\\xd4\\xd5\\xd6\\xd7\\xd8\\xd9\\xda\\xdb\\xdc\\xdd\\xde\\xe0\\xe1\\xe2\\xe3\\xe4\\xe5\\xe6\\xe7\\xe8\\xe9\\xea\\xeb\\xec\\xed\\xee\\xef\\xf0\\xf1\\xf2\\xf3\\xf4\\xf5\\xf6\\xf7\\xf8\\xf9\\xfa\\xfb\\xfc\\xfd\\xfe\\xff\",result:\"\\xa1\\xa2\\xa3\\xa4\\xa5\\xa6\\xa7\\xa8\\xa9\\xaa\\xab\\xac\\xad\\xae\\xaf\\xb0\\xb1\\xb2\\xb3\\xb4\\xb5\\xb6\\xb7\\xb8\\xb9\\xba\\xbb\\xbc\\xbd\\xbe\\xbf\\xe0\\xe1\\xe2\\xe3\\xe4\\xe5\\xe6\\xe7\\xe8\\xe9\\xea\\xeb\\xec\\xed\\xee\\xef\\xf0\\xf1\\xf2\\xf3\\xf4\\xf5\\xf6\\xd7\\xf8\\xf9\\xfa\\xfb\\xfc\\xfd\\xfe\\xe0\\xe1\\xe2\\xe3\\xe4\\xe5\\xe6\\xe7\\xe8\\xe9\\xea\\xeb\\xec\\xed\\xee\\xef\\xf0\\xf1\\xf2\\xf3\\xf4\\xf5\\xf6\\xf7\\xf8\\xf9\\xfa\\xfb\\xfc\\xfd\\xfe\\xff\"}",
-    name:"lower valid cases{Latin-1 Supplement Lowercase Test}",
+    name:"lower valid cases{Latin-1 Supplement}",
     statement:"lower('¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ')",
     assert:{
       result:EvaluationSuccess,
@@ -26,7 +26,7 @@ lower::[
   },
   {
     // name:"lower valid cases{in:\"\\u0100\\u0101\\u0102\\u0103\\u0104\\u0105\\u0106\\u0107\\u0108\\u0109\\u010a\\u010b\\u010c\\u010d\\u010e\\u010f\\u0110\\u0111\\u0112\\u0113\\u0114\\u0115\\u0116\\u0117\\u0118\\u0119\\u011a\\u011b\\u011c\\u011d\\u011e\\u011f\\u0120\\u0121\\u0122\\u0123\\u0124\\u0125\\u0126\\u0127\\u0128\\u0129\\u012a\\u012b\\u012c\\u012d\\u012e\\u012f\\u0130\\u0131\\u0132\\u0133\\u0134\\u0135\\u0136\\u0137\\u0138\\u0139\\u013a\\u013b\\u013c\\u013d\\u013e\\u013f\\u0140\\u0141\\u0142\\u0143\\u0144\\u0145\\u0146\\u0147\\u0148\\u014a\\u014b\\u014c\\u014d\\u014e\\u014f\\u0150\\u0151\\u0152\\u0153\\u0154\\u0155\\u0156\\u0157\\u0158\\u0159\\u015a\\u015b\\u015c\\u015d\\u015e\\u015f\\u0160\\u0161\\u0162\\u0163\\u0164\\u0165\\u0166\\u0167\\u0168\\u0169\\u016a\\u016b\\u016c\\u016d\\u016e\\u016f\\u0170\\u0171\\u0172\\u0173\\u0174\\u0175\\u0176\\u0177\\u0178\\u0179\\u017a\\u017b\\u017c\\u017d\\u017e\",result:\"\\u0101\\u0101\\u0103\\u0103\\u0105\\u0105\\u0107\\u0107\\u0109\\u0109\\u010b\\u010b\\u010d\\u010d\\u010f\\u010f\\u0111\\u0111\\u0113\\u0113\\u0115\\u0115\\u0117\\u0117\\u0119\\u0119\\u011b\\u011b\\u011d\\u011d\\u011f\\u011f\\u0121\\u0121\\u0123\\u0123\\u0125\\u0125\\u0127\\u0127\\u0129\\u0129\\u012b\\u012b\\u012d\\u012d\\u012f\\u012fi\\u0307\\u0131\\u0133\\u0133\\u0135\\u0135\\u0137\\u0137\\u0138\\u013a\\u013a\\u013c\\u013c\\u013e\\u013e\\u0140\\u0140\\u0142\\u0142\\u0144\\u0144\\u0146\\u0146\\u0148\\u0148\\u014b\\u014b\\u014d\\u014d\\u014f\\u014f\\u0151\\u0151\\u0153\\u0153\\u0155\\u0155\\u0157\\u0157\\u0159\\u0159\\u015b\\u015b\\u015d\\u015d\\u015f\\u015f\\u0161\\u0161\\u0163\\u0163\\u0165\\u0165\\u0167\\u0167\\u0169\\u0169\\u016b\\u016b\\u016d\\u016d\\u016f\\u016f\\u0171\\u0171\\u0173\\u0173\\u0175\\u0175\\u0177\\u0177\\xff\\u017a\\u017a\\u017c\\u017c\\u017e\\u017e\"}",
-    name:"lower valid cases{Latin Extended-A and Extended-B Lowercase Test}",
+    name:"lower valid cases{Latin Extended-A and Extended-B}",
     statement:"lower('ĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĲĳĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇňŊŋŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽž')",
     assert:{
       result:EvaluationSuccess,
@@ -39,7 +39,7 @@ lower::[
   },
   {
     // name:"lower valid cases{in:\"\\u0180\\u0181\\u0182\\u0183\\u0184\\u0185\\u0186\\u0187\\u0188\\u0189\\u018a\\u018b\\u018c\\u018d\\u018e\\u018f\\u0190\\u0191\\u0192\\u0193\\u0194\\u0195\\u0196\\u0197\\u0198\\u0199\\u019a\\u019b\\u019c\\u019d\\u019e\\u019f\\u01a0\\u01a1\\u01a2\\u01a3\\u01a4\\u01a5\\u01a6\\u01a7\\u01a8\\u01a9\\u01aa\\u01ab\\u01ac\\u01ad\\u01ae\\u01af\\u01b0\\u01b1\\u01b2\\u01b3\\u01b4\\u01b5\\u01b6\\u01b7\\u01b8\\u01b9\\u01ba\\u01bb\\u01bc\\u01bd\\u01be\\u01bf\\u01c0\\u01c1\\u01c2\\u01c3\\u01c4\\u01c5\\u01c6\\u01c7\\u01c8\\u01c9\\u01ca\\u01cb\\u01cc\\u01cd\\u01ce\\u01cf\\u01d0\\u01d1\\u01d2\\u01d3\\u01d4\\u01d5\\u01d6\\u01d7\\u01d8\\u01d9\\u01da\\u01db\\u01dc\\u01dd\\u01de\\u01df\\u01e0\\u01e1\\u01e2\\u01e3\\u01e4\\u01e5\\u01e6\\u01e7\\u01e8\\u01e9\\u01ea\\u01eb\\u01ec\\u01ed\\u01ee\\u01ef\\u01f0\\u01f1\\u01f2\\u01f3\\u01f4\\u01f5\\u01f6\\u01f7\\u01f8\\u01f9\\u01fa\\u01fb\\u01fc\\u01fd\\u01fe\\u01ff\\u0200\\u0201\\u0202\\u0203\\u0204\\u0205\\u0206\\u0207\\u0208\\u0209\\u020a\\u020b\\u020c\\u020d\\u020e\\u020f\\u0210\\u0211\\u0212\\u0213\\u0214\\u0215\\u0216\\u0217\\u0218\\u0219\\u021a\\u021b\\u021c\\u021d\\u021e\\u021f\\u0220\\u0221\\u0222\\u0223\\u0224\\u0225\\u0226\\u0227\\u0228\\u0229\\u022a\\u022b\\u022c\\u022d\\u022e\\u022f\\u0230\\u0231\\u0232\\u0233\\u0234\\u0235\\u0236\\u0237\\u0238\\u0239\\u023a\\u023b\\u023c\\u023d\\u023e\\u023f\\u0240\\u0241\\u0242\\u0243\\u0244\\u0245\\u0246\\u0247\\u0248\\u0249\\u024a\\u024b\\u024c\\u024d\\u024e\\u024f\",result:\"\\u0180\\u0253\\u0183\\u0183\\u0185\\u0185\\u0254\\u0188\\u0188\\u0256\\u0257\\u018c\\u018c\\u018d\\u01dd\\u0259\\u025b\\u0192\\u0192\\u0260\\u0263\\u0195\\u0269\\u0268\\u0199\\u0199\\u019a\\u019b\\u026f\\u0272\\u019e\\u0275\\u01a1\\u01a1\\u01a3\\u01a3\\u01a5\\u01a5\\u0280\\u01a8\\u01a8\\u0283\\u01aa\\u01ab\\u01ad\\u01ad\\u0288\\u01b0\\u01b0\\u028a\\u028b\\u01b4\\u01b4\\u01b6\\u01b6\\u0292\\u01b9\\u01b9\\u01ba\\u01bb\\u01bd\\u01bd\\u01be\\u01bf\\u01c0\\u01c1\\u01c2\\u01c3\\u01c6\\u01c6\\u01c6\\u01c9\\u01c9\\u01c9\\u01cc\\u01cc\\u01cc\\u01ce\\u01ce\\u01d0\\u01d0\\u01d2\\u01d2\\u01d4\\u01d4\\u01d6\\u01d6\\u01d8\\u01d8\\u01da\\u01da\\u01dc\\u01dc\\u01dd\\u01df\\u01df\\u01e1\\u01e1\\u01e3\\u01e3\\u01e5\\u01e5\\u01e7\\u01e7\\u01e9\\u01e9\\u01eb\\u01eb\\u01ed\\u01ed\\u01ef\\u01ef\\u01f0\\u01f3\\u01f3\\u01f3\\u01f5\\u01f5\\u0195\\u01bf\\u01f9\\u01f9\\u01fb\\u01fb\\u01fd\\u01fd\\u01ff\\u01ff\\u0201\\u0201\\u0203\\u0203\\u0205\\u0205\\u0207\\u0207\\u0209\\u0209\\u020b\\u020b\\u020d\\u020d\\u020f\\u020f\\u0211\\u0211\\u0213\\u0213\\u0215\\u0215\\u0217\\u0217\\u0219\\u0219\\u021b\\u021b\\u021d\\u021d\\u021f\\u021f\\u019e\\u0221\\u0223\\u0223\\u0225\\u0225\\u0227\\u0227\\u0229\\u0229\\u022b\\u022b\\u022d\\u022d\\u022f\\u022f\\u0231\\u0231\\u0233\\u0233\\u0234\\u0235\\u0236\\u0237\\u0238\\u0239\\u2c65\\u023c\\u023c\\u019a\\u2c66\\u023f\\u0240\\u0242\\u0242\\u0180\\u0289\\u028c\\u0247\\u0247\\u0249\\u0249\\u024b\\u024b\\u024d\\u024d\\u024f\\u024f\"}",
-    name:"lower valid cases{Latin Extended-B and IPA Extensions Lowercase Test}",
+    name:"lower valid cases{Latin Extended-B and IPA Extensions}",
     statement:"lower('ƀƁƂƃƄƅƆƇƈƉƊƋƌƍƎƏƐƑƒƓƔƕƖƗƘƙƚƛƜƝƞƟƠơƢƣƤƥƦƧƨƩƪƫƬƭƮƯưƱƲƳƴƵƶƷƸƹƺƻƼƽƾƿǀǁǂǃǄǅǆǇǈǉǊǋǌǍǎǏǐǑǒǓǔǕǖǗǘǙǚǛǜǝǞǟǠǡǢǣǤǥǦǧǨǩǪǫǬǭǮǯǰǱǲǳǴǵǶǷǸǹǺǻǼǽǾǿȀȁȂȃȄȅȆȇȈȉȊȋȌȍȎȏȐȑȒȓȔȕȖȗȘșȚțȜȝȞȟȠȡȢȣȤȥȦȧȨȩȪȫȬȭȮȯȰȱȲȳȴȵȶȷȸȹȺȻȼȽȾȿɀɁɂɃɄɅɆɇɈɉɊɋɌɍɎɏ')",
     assert:{
       result:EvaluationSuccess,
@@ -51,7 +51,8 @@ lower::[
     }
   },
   {
-    name:"lower valid cases{in:\"\\u2c60\\u2c61\\u2c62\\u2c63\\u2c64\\u2c65\\u2c66\\u2c67\\u2c68\\u2c69\\u2c6a\\u2c6b\\u2c6c\\u2c6d\\u2c6e\\u2c6f\\u2c70\\u2c71\\u2c72\\u2c73\\u2c74\\u2c75\\u2c76\\u2c77\\u2c78\\u2c79\\u2c7a\\u2c7b\\u2c7c\\u2c7d\\u2c7e\\u2c7f\",result:\"\\u2c61\\u2c61\\u026b\\u1d7d\\u027d\\u2c65\\u2c66\\u2c68\\u2c68\\u2c6a\\u2c6a\\u2c6c\\u2c6c\\u0251\\u0271\\u0250\\u0252\\u2c71\\u2c73\\u2c73\\u2c74\\u2c76\\u2c76\\u2c77\\u2c78\\u2c79\\u2c7a\\u2c7b\\u2c7c\\u2c7d\\u023f\\u0240\"}",
+    //name:"lower valid cases{in:\"\\u2c60\\u2c61\\u2c62\\u2c63\\u2c64\\u2c65\\u2c66\\u2c67\\u2c68\\u2c69\\u2c6a\\u2c6b\\u2c6c\\u2c6d\\u2c6e\\u2c6f\\u2c70\\u2c71\\u2c72\\u2c73\\u2c74\\u2c75\\u2c76\\u2c77\\u2c78\\u2c79\\u2c7a\\u2c7b\\u2c7c\\u2c7d\\u2c7e\\u2c7f\",result:\"\\u2c61\\u2c61\\u026b\\u1d7d\\u027d\\u2c65\\u2c66\\u2c68\\u2c68\\u2c6a\\u2c6a\\u2c6c\\u2c6c\\u0251\\u0271\\u0250\\u0252\\u2c71\\u2c73\\u2c73\\u2c74\\u2c76\\u2c76\\u2c77\\u2c78\\u2c79\\u2c7a\\u2c7b\\u2c7c\\u2c7d\\u023f\\u0240\"}",
+    name:"lower valid cases{Latin Extended-C}",
     statement:"lower('ⱠⱡⱢⱣⱤⱥⱦⱧⱨⱩⱪⱫⱬⱭⱮⱯⱰⱱⱲⱳⱴⱵⱶⱷⱸⱹⱺⱻⱼⱽⱾⱿ')",
     assert:{
       result:EvaluationSuccess,
@@ -63,7 +64,8 @@ lower::[
     }
   },
   {
-    name:"lower valid cases{in:\"\\u8a71\\u5bb6\\u8eab\\u5727\\u8cbb\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\\u3041\\u3066\\u30c8\\u30ad\\u307b\\u30c3\\u0394\\u03d5\\u03be\\u0391\",result:\"\\u8a71\\u5bb6\\u8eab\\u5727\\u8cbb\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\\u3041\\u3066\\u30c8\\u30ad\\u307b\\u30c3\\u03b4\\u03d5\\u03be\\u03b1\"}",
+    //name:"lower valid cases{in:\"\\u8a71\\u5bb6\\u8eab\\u5727\\u8cbb\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\\u3041\\u3066\\u30c8\\u30ad\\u307b\\u30c3\\u0394\\u03d5\\u03be\\u0391\",result:\"\\u8a71\\u5bb6\\u8eab\\u5727\\u8cbb\\u8c37\\u6599\\u6751\\u80fd\\u8a08\\u7a0e\\u91d1\\u3041\\u3066\\u30c8\\u30ad\\u307b\\u30c3\\u03b4\\u03d5\\u03be\\u03b1\"}",
+    name:"lower valid cases{Mixed CJK Hiragana Katakana and Greek}",
     statement:"lower('話家身圧費谷料村能計税金ぁてトキほッΔϕξΑ')",
     assert:{
       result:EvaluationSuccess,
@@ -1060,7 +1062,7 @@ lower::[
   },
   {
     // name:"lower valid cases{in:\"\\u0401\\u0402\\u0403\\u0404\\u0405\\u0406\\u0407\\u0408\\u0409\\u040a\\u040b\\u040c\\u040d\\u040e\\u040f\\u0410\\u0411\\u0412\\u0413\\u0414\\u0415\\u0416\\u0417\\u0418\\u0419\\u041a\\u041b\\u041c\\u041d\\u041e\\u041f\\u0420\\u0421\\u0422\\u0423\\u0424\\u0425\\u0426\\u0427\\u0428\\u0429\\u042a\\u042b\\u042c\\u042d\\u042e\\u042f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\",result:\"\\u0451\\u0452\\u0453\\u0454\\u0455\\u0456\\u0457\\u0458\\u0459\\u045a\\u045b\\u045c\\u045d\\u045e\\u045f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\\u0430\\u0431\\u0432\\u0433\\u0434\\u0435\\u0436\\u0437\\u0438\\u0439\\u043a\\u043b\\u043c\\u043d\\u043e\\u043f\\u0440\\u0441\\u0442\\u0443\\u0444\\u0445\\u0446\\u0447\\u0448\\u0449\\u044a\\u044b\\u044c\\u044d\\u044e\\u044f\"}",
-    name:"lower valid cases{Complete Cyrillic Alphabet Lowercase Test}",
+    name:"lower valid cases{Complete Cyrillic Alphabet}",
     statement:"lower('ЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя')",
     assert:{
       result:EvaluationSuccess,
@@ -1528,7 +1530,8 @@ lower::[
     }
   },
   {
-    name:"lower valid cases{in:\"\\u2764\\ufe0f \\U0001f494 \\U0001f48c \\U0001f495 \\U0001f49e \\U0001f493 \\U0001f497 \\U0001f496 \\U0001f498 \\U0001f49d \\U0001f49f \\U0001f49c \\U0001f49b \\U0001f49a \\U0001f499\",result:\"\\u2764\\ufe0f \\U0001f494 \\U0001f48c \\U0001f495 \\U0001f49e \\U0001f493 \\U0001f497 \\U0001f496 \\U0001f498 \\U0001f49d \\U0001f49f \\U0001f49c \\U0001f49b \\U0001f49a \\U0001f499\"}",
+    // name:"lower valid cases{in:\"\\u2764\\ufe0f \\U0001f494 \\U0001f48c \\U0001f495 \\U0001f49e \\U0001f493 \\U0001f497 \\U0001f496 \\U0001f498 \\U0001f49d \\U0001f49f \\U0001f49c \\U0001f49b \\U0001f49a \\U0001f499\",result:\"\\u2764\\ufe0f \\U0001f494 \\U0001f48c \\U0001f495 \\U0001f49e \\U0001f493 \\U0001f497 \\U0001f496 \\U0001f498 \\U0001f49d \\U0001f49f \\U0001f49c \\U0001f49b \\U0001f49a \\U0001f499\"}",
+    name:"lower valid cases{Heart and Love Emoji Symbols Test}",
     statement:"lower('❤️ 💔 💌 💕 💞 💓 💗 💖 💘 💝 💟 💜 💛 💚 💙')",
     assert:{
       result:EvaluationSuccess,
@@ -1564,7 +1567,8 @@ lower::[
     }
   },
   {
-    name:"lower valid cases{in:\"0\\ufe0f\\u20e3 1\\ufe0f\\u20e3 2\\ufe0f\\u20e3 3\\ufe0f\\u20e3 4\\ufe0f\\u20e3 5\\ufe0f\\u20e3 6\\ufe0f\\u20e3 7\\ufe0f\\u20e3 8\\ufe0f\\u20e3 9\\ufe0f\\u20e3 \\U0001f51f\",result:\"0\\ufe0f\\u20e3 1\\ufe0f\\u20e3 2\\ufe0f\\u20e3 3\\ufe0f\\u20e3 4\\ufe0f\\u20e3 5\\ufe0f\\u20e3 6\\ufe0f\\u20e3 7\\ufe0f\\u20e3 8\\ufe0f\\u20e3 9\\ufe0f\\u20e3 \\U0001f51f\"}",
+    //name:"lower valid cases{in:\"0\\ufe0f\\u20e3 1\\ufe0f\\u20e3 2\\ufe0f\\u20e3 3\\ufe0f\\u20e3 4\\ufe0f\\u20e3 5\\ufe0f\\u20e3 6\\ufe0f\\u20e3 7\\ufe0f\\u20e3 8\\ufe0f\\u20e3 9\\ufe0f\\u20e3 \\U0001f51f\",result:\"0\\ufe0f\\u20e3 1\\ufe0f\\u20e3 2\\ufe0f\\u20e3 3\\ufe0f\\u20e3 4\\ufe0f\\u20e3 5\\ufe0f\\u20e3 6\\ufe0f\\u20e3 7\\ufe0f\\u20e3 8\\ufe0f\\u20e3 9\\ufe0f\\u20e3 \\U0001f51f\"}",
+    name:"lower valid cases{Emoji Keycap Sequence and Symbol Test}",
     statement:"lower('0️⃣ 1️⃣ 2️⃣ 3️⃣ 4️⃣ 5️⃣ 6️⃣ 7️⃣ 8️⃣ 9️⃣ 🔟')",
     assert:{
       result:EvaluationSuccess,
@@ -1612,7 +1616,8 @@ lower::[
     }
   },
   {
-    name:"lower valid cases{in:\"\\uff34\\uff48\\uff45 \\uff51\\uff55\\uff49\\uff43\\uff4b \\uff42\\uff52\\uff4f\\uff57\\uff4e \\uff46\\uff4f\\uff58 \\uff4a\\uff55\\uff4d\\uff50\\uff53 \\uff2f\\uff36\\uff25\\uff32 \\uff34\\uff28\\uff25 \\uff4c\\uff41\\uff5a\\uff59 \\uff44\\uff4f\\uff47\",result:\"\\uff54\\uff48\\uff45 \\uff51\\uff55\\uff49\\uff43\\uff4b \\uff42\\uff52\\uff4f\\uff57\\uff4e \\uff46\\uff4f\\uff58 \\uff4a\\uff55\\uff4d\\uff50\\uff53 \\uff4f\\uff56\\uff45\\uff52 \\uff54\\uff48\\uff45 \\uff4c\\uff41\\uff5a\\uff59 \\uff44\\uff4f\\uff47\"}",
+    // name:"lower valid cases{in:\"\\uff34\\uff48\\uff45 \\uff51\\uff55\\uff49\\uff43\\uff4b \\uff42\\uff52\\uff4f\\uff57\\uff4e \\uff46\\uff4f\\uff58 \\uff4a\\uff55\\uff4d\\uff50\\uff53 \\uff2f\\uff36\\uff25\\uff32 \\uff34\\uff28\\uff25 \\uff4c\\uff41\\uff5a\\uff59 \\uff44\\uff4f\\uff47\",result:\"\\uff54\\uff48\\uff45 \\uff51\\uff55\\uff49\\uff43\\uff4b \\uff42\\uff52\\uff4f\\uff57\\uff4e \\uff46\\uff4f\\uff58 \\uff4a\\uff55\\uff4d\\uff50\\uff53 \\uff4f\\uff56\\uff45\\uff52 \\uff54\\uff48\\uff45 \\uff4c\\uff41\\uff5a\\uff59 \\uff44\\uff4f\\uff47\"}",
+    name:"lower valid cases{Fullwidth Latin Characters}",
     statement:"lower('Ｔｈｅ ｑｕｉｃｋ ｂｒｏｗｎ ｆｏｘ ｊｕｍｐｓ ＯＶＥＲ ＴＨＥ ｌａｚｙ ｄｏｇ')",
     assert:{
       result:EvaluationSuccess,

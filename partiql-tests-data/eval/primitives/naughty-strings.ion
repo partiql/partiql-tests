@@ -2778,7 +2778,8 @@
     }
   },
   {
-    name:"big list of naughty strings{str:\"\\u05d1\\u05b0\\u05bc\\u05e8\\u05b5\\u05d0\\u05e9\\u05b4\\u05c1\\u05d9\\u05ea, \\u05d1\\u05b8\\u05bc\\u05e8\\u05b8\\u05d0 \\u05d0\\u05b1\\u05dc\\u05b9\\u05d4\\u05b4\\u05d9\\u05dd, \\u05d0\\u05b5\\u05ea \\u05d4\\u05b7\\u05e9\\u05b8\\u05bc\\u05c1\\u05de\\u05b7\\u05d9\\u05b4\\u05dd, \\u05d5\\u05b0\\u05d0\\u05b5\\u05ea \\u05d4\\u05b8\\u05d0\\u05b8\\u05e8\\u05b6\\u05e5\"}",
+    // name:"big list of naughty strings{str:\"\\u05d1\\u05b0\\u05bc\\u05e8\\u05b5\\u05d0\\u05e9\\u05b4\\u05c1\\u05d9\\u05ea, \\u05d1\\u05b8\\u05bc\\u05e8\\u05b8\\u05d0 \\u05d0\\u05b1\\u05dc\\u05b9\\u05d4\\u05b4\\u05d9\\u05dd, \\u05d0\\u05b5\\u05ea \\u05d4\\u05b7\\u05e9\\u05b8\\u05bc\\u05c1\\u05de\\u05b7\\u05d9\\u05b4\\u05dd, \\u05d5\\u05b0\\u05d0\\u05b5\\u05ea \\u05d4\\u05b8\\u05d0\\u05b8\\u05e8\\u05b6\\u05e5\"}",
+    name:"big list of naughty strings{Hebrew Genesis 1:1 with vowel points}",
     statement:"{ 'literal': 'בְּרֵאשִׁית, בָּרָא אֱלֹהִים, אֵת הַשָּׁמַיִם, וְאֵת הָאָרֶץ', 'variable': env_str, 'concatenated': env_str || env_str }",
     env:{
       env_str:"בְּרֵאשִׁית, בָּרָא אֱלֹהִים, אֵת הַשָּׁמַיִם, וְאֵת הָאָרֶץ"
@@ -3258,7 +3259,8 @@
     }
   },
   {
-    name:"big list of naughty strings{str:\"\\U0001d413\\U0001d421\\U0001d41e \\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b \\U0001d42d\\U0001d421\\U0001d41e \\U0001d425\\U0001d41a\\U0001d433\\U0001d432 \\U0001d41d\\U0001d428\\U0001d420\"}",
+    // name:"big list of naughty strings{str:\"\\U0001d413\\U0001d421\\U0001d41e \\U0001d42a\\U0001d42e\\U0001d422\\U0001d41c\\U0001d424 \\U0001d41b\\U0001d42b\\U0001d428\\U0001d430\\U0001d427 \\U0001d41f\\U0001d428\\U0001d431 \\U0001d423\\U0001d42e\\U0001d426\\U0001d429\\U0001d42c \\U0001d428\\U0001d42f\\U0001d41e\\U0001d42b \\U0001d42d\\U0001d421\\U0001d41e \\U0001d425\\U0001d41a\\U0001d433\\U0001d432 \\U0001d41d\\U0001d428\\U0001d420\"}",
+    name:"big list of naughty strings{Mathematical Bold Italic pangram}",
     statement:"{ 'literal': '𝐓𝐡𝐞 𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫 𝐭𝐡𝐞 𝐥𝐚𝐳𝐲 𝐝𝐨𝐠', 'variable': env_str, 'concatenated': env_str || env_str }",
     env:{
       env_str:"𝐓𝐡𝐞 𝐪𝐮𝐢𝐜𝐤 𝐛𝐫𝐨𝐰𝐧 𝐟𝐨𝐱 𝐣𝐮𝐦𝐩𝐬 𝐨𝐯𝐞𝐫 𝐭𝐡𝐞 𝐥𝐚𝐳𝐲 𝐝𝐨𝐠"
@@ -3277,7 +3279,8 @@
     }
   },
   {
-    name:"big list of naughty strings{str:\"\\U0001d57f\\U0001d58d\\U0001d58a \\U0001d596\\U0001d59a\\U0001d58e\\U0001d588\\U0001d590 \\U0001d587\\U0001d597\\U0001d594\\U0001d59c\\U0001d593 \\U0001d58b\\U0001d594\\U0001d59d \\U0001d58f\\U0001d59a\\U0001d592\\U0001d595\\U0001d598 \\U0001d594\\U0001d59b\\U0001d58a\\U0001d597 \\U0001d599\\U0001d58d\\U0001d58a \\U0001d591\\U0001d586\\U0001d59f\\U0001d59e \\U0001d589\\U0001d594\\U0001d58c\"}",
+    // name:"big list of naughty strings{str:\"\\U0001d57f\\U0001d58d\\U0001d58a \\U0001d596\\U0001d59a\\U0001d58e\\U0001d588\\U0001d590 \\U0001d587\\U0001d597\\U0001d594\\U0001d59c\\U0001d593 \\U0001d58b\\U0001d594\\U0001d59d \\U0001d58f\\U0001d59a\\U0001d592\\U0001d595\\U0001d598 \\U0001d594\\U0001d59b\\U0001d58a\\U0001d597 \\U0001d599\\U0001d58d\\U0001d58a \\U0001d591\\U0001d586\\U0001d59f\\U0001d59e \\U0001d589\\U0001d594\\U0001d58c\"}",
+    name:"big list of naughty strings{Mathematical Sans-Serif Bold pangram}",
     statement:"{ 'literal': '𝕿𝖍𝖊 𝖖𝖚𝖎𝖈𝖐 𝖇𝖗𝖔𝖜𝖓 𝖋𝖔𝖝 𝖏𝖚𝖒𝖕𝖘 𝖔𝖛𝖊𝖗 𝖙𝖍𝖊 𝖑𝖆𝖟𝖞 𝖉𝖔𝖌', 'variable': env_str, 'concatenated': env_str || env_str }",
     env:{
       env_str:"𝕿𝖍𝖊 𝖖𝖚𝖎𝖈𝖐 𝖇𝖗𝖔𝖜𝖓 𝖋𝖔𝖝 𝖏𝖚𝖒𝖕𝖘 𝖔𝖛𝖊𝖗 𝖙𝖍𝖊 𝖑𝖆𝖟𝖞 𝖉𝖔𝖌"
@@ -3296,7 +3299,8 @@
     }
   },
   {
-    name:"big list of naughty strings{str:\"\\U0001d47b\\U0001d489\\U0001d486 \\U0001d492\\U0001d496\\U0001d48a\\U0001d484\\U0001d48c \\U0001d483\\U0001d493\\U0001d490\\U0001d498\\U0001d48f \\U0001d487\\U0001d490\\U0001d499 \\U0001d48b\\U0001d496\\U0001d48e\\U0001d491\\U0001d494 \\U0001d490\\U0001d497\\U0001d486\\U0001d493 \\U0001d495\\U0001d489\\U0001d486 \\U0001d48d\\U0001d482\\U0001d49b\\U0001d49a \\U0001d485\\U0001d490\\U0001d488\"}",
+    // name:"big list of naughty strings{str:\"\\U0001d47b\\U0001d489\\U0001d486 \\U0001d492\\U0001d496\\U0001d48a\\U0001d484\\U0001d48c \\U0001d483\\U0001d493\\U0001d490\\U0001d498\\U0001d48f \\U0001d487\\U0001d490\\U0001d499 \\U0001d48b\\U0001d496\\U0001d48e\\U0001d491\\U0001d494 \\U0001d490\\U0001d497\\U0001d486\\U0001d493 \\U0001d495\\U0001d489\\U0001d486 \\U0001d48d\\U0001d482\\U0001d49b\\U0001d49a \\U0001d485\\U0001d490\\U0001d488\"}",
+    name:"big list of naughty strings{Mathematical Sans-Serif Italic pangram}",
     statement:"{ 'literal': '𝑻𝒉𝒆 𝒒𝒖𝒊𝒄𝒌 𝒃𝒓𝒐𝒘𝒏 𝒇𝒐𝒙 𝒋𝒖𝒎𝒑𝒔 𝒐𝒗𝒆𝒓 𝒕𝒉𝒆 𝒍𝒂𝒛𝒚 𝒅𝒐𝒈', 'variable': env_str, 'concatenated': env_str || env_str }",
     env:{
       env_str:"𝑻𝒉𝒆 𝒒𝒖𝒊𝒄𝒌 𝒃𝒓𝒐𝒘𝒏 𝒇𝒐𝒙 𝒋𝒖𝒎𝒑𝒔 𝒐𝒗𝒆𝒓 𝒕𝒉𝒆 𝒍𝒂𝒛𝒚 𝒅𝒐𝒈"
@@ -3315,7 +3319,8 @@
     }
   },
   {
-    name:"big list of naughty strings{str:\"\\U0001d4e3\\U0001d4f1\\U0001d4ee \\U0001d4fa\\U0001d4fe\\U0001d4f2\\U0001d4ec\\U0001d4f4 \\U0001d4eb\\U0001d4fb\\U0001d4f8\\U0001d500\\U0001d4f7 \\U0001d4ef\\U0001d4f8\\U0001d501 \\U0001d4f3\\U0001d4fe\\U0001d4f6\\U0001d4f9\\U0001d4fc \\U0001d4f8\\U0001d4ff\\U0001d4ee\\U0001d4fb \\U0001d4fd\\U0001d4f1\\U0001d4ee \\U0001d4f5\\U0001d4ea\\U0001d503\\U0001d502 \\U0001d4ed\\U0001d4f8\\U0001d4f0\"}",
+    // name:"big list of naughty strings{str:\"\\U0001d4e3\\U0001d4f1\\U0001d4ee \\U0001d4fa\\U0001d4fe\\U0001d4f2\\U0001d4ec\\U0001d4f4 \\U0001d4eb\\U0001d4fb\\U0001d4f8\\U0001d500\\U0001d4f7 \\U0001d4ef\\U0001d4f8\\U0001d501 \\U0001d4f3\\U0001d4fe\\U0001d4f6\\U0001d4f9\\U0001d4fc \\U0001d4f8\\U0001d4ff\\U0001d4ee\\U0001d4fb \\U0001d4fd\\U0001d4f1\\U0001d4ee \\U0001d4f5\\U0001d4ea\\U0001d503\\U0001d502 \\U0001d4ed\\U0001d4f8\\U0001d4f0\"}",
+    name:"big list of naughty strings{Mathematical Bold Script Pangram}",
     statement:"{ 'literal': '𝓣𝓱𝓮 𝓺𝓾𝓲𝓬𝓴 𝓫𝓻𝓸𝔀𝓷 𝓯𝓸𝔁 𝓳𝓾𝓶𝓹𝓼 𝓸𝓿𝓮𝓻 𝓽𝓱𝓮 𝓵𝓪𝔃𝔂 𝓭𝓸𝓰', 'variable': env_str, 'concatenated': env_str || env_str }",
     env:{
       env_str:"𝓣𝓱𝓮 𝓺𝓾𝓲𝓬𝓴 𝓫𝓻𝓸𝔀𝓷 𝓯𝓸𝔁 𝓳𝓾𝓶𝓹𝓼 𝓸𝓿𝓮𝓻 𝓽𝓱𝓮 𝓵𝓪𝔃𝔂 𝓭𝓸𝓰"
@@ -3334,7 +3339,8 @@
     }
   },
   {
-    name:"big list of naughty strings{str:\"\\U0001d54b\\U0001d559\\U0001d556 \\U0001d562\\U0001d566\\U0001d55a\\U0001d554\\U0001d55c \\U0001d553\\U0001d563\\U0001d560\\U0001d568\\U0001d55f \\U0001d557\\U0001d560\\U0001d569 \\U0001d55b\\U0001d566\\U0001d55e\\U0001d561\\U0001d564 \\U0001d560\\U0001d567\\U0001d556\\U0001d563 \\U0001d565\\U0001d559\\U0001d556 \\U0001d55d\\U0001d552\\U0001d56b\\U0001d56a \\U0001d555\\U0001d560\\U0001d558\"}",
+    // name:"big list of naughty strings{str:\"\\U0001d54b\\U0001d559\\U0001d556 \\U0001d562\\U0001d566\\U0001d55a\\U0001d554\\U0001d55c \\U0001d553\\U0001d563\\U0001d560\\U0001d568\\U0001d55f \\U0001d557\\U0001d560\\U0001d569 \\U0001d55b\\U0001d566\\U0001d55e\\U0001d561\\U0001d564 \\U0001d560\\U0001d567\\U0001d556\\U0001d563 \\U0001d565\\U0001d559\\U0001d556 \\U0001d55d\\U0001d552\\U0001d56b\\U0001d56a \\U0001d555\\U0001d560\\U0001d558\"}",
+    name:"big list of naughty strings{Mathematical Double-Struck Pangram}",
     statement:"{ 'literal': '𝕋𝕙𝕖 𝕢𝕦𝕚𝕔𝕜 𝕓𝕣𝕠𝕨𝕟 𝕗𝕠𝕩 𝕛𝕦𝕞𝕡𝕤 𝕠𝕧𝕖𝕣 𝕥𝕙𝕖 𝕝𝕒𝕫𝕪 𝕕𝕠𝕘', 'variable': env_str, 'concatenated': env_str || env_str }",
     env:{
       env_str:"𝕋𝕙𝕖 𝕢𝕦𝕚𝕔𝕜 𝕓𝕣𝕠𝕨𝕟 𝕗𝕠𝕩 𝕛𝕦𝕞𝕡𝕤 𝕠𝕧𝕖𝕣 𝕥𝕙𝕖 𝕝𝕒𝕫𝕪 𝕕𝕠𝕘"
@@ -3353,7 +3359,8 @@
     }
   },
   {
-    name:"big list of naughty strings{str:\"\\U0001d683\\U0001d691\\U0001d68e \\U0001d69a\\U0001d69e\\U0001d692\\U0001d68c\\U0001d694 \\U0001d68b\\U0001d69b\\U0001d698\\U0001d6a0\\U0001d697 \\U0001d68f\\U0001d698\\U0001d6a1 \\U0001d693\\U0001d69e\\U0001d696\\U0001d699\\U0001d69c \\U0001d698\\U0001d69f\\U0001d68e\\U0001d69b \\U0001d69d\\U0001d691\\U0001d68e \\U0001d695\\U0001d68a\\U0001d6a3\\U0001d6a2 \\U0001d68d\\U0001d698\\U0001d690\"}",
+    // name:"big list of naughty strings{str:\"\\U0001d683\\U0001d691\\U0001d68e \\U0001d69a\\U0001d69e\\U0001d692\\U0001d68c\\U0001d694 \\U0001d68b\\U0001d69b\\U0001d698\\U0001d6a0\\U0001d697 \\U0001d68f\\U0001d698\\U0001d6a1 \\U0001d693\\U0001d69e\\U0001d696\\U0001d699\\U0001d69c \\U0001d698\\U0001d69f\\U0001d68e\\U0001d69b \\U0001d69d\\U0001d691\\U0001d68e \\U0001d695\\U0001d68a\\U0001d6a3\\U0001d6a2 \\U0001d68d\\U0001d698\\U0001d690\"}",
+    name:"big list of naughty strings{Mathematical Monospace Pangram}",
     statement:"{ 'literal': '𝚃𝚑𝚎 𝚚𝚞𝚒𝚌𝚔 𝚋𝚛𝚘𝚠𝚗 𝚏𝚘𝚡 𝚓𝚞𝚖𝚙𝚜 𝚘𝚟𝚎𝚛 𝚝𝚑𝚎 𝚕𝚊𝚣𝚢 𝚍𝚘𝚐', 'variable': env_str, 'concatenated': env_str || env_str }",
     env:{
       env_str:"𝚃𝚑𝚎 𝚚𝚞𝚒𝚌𝚔 𝚋𝚛𝚘𝚠𝚗 𝚏𝚘𝚡 𝚓𝚞𝚖𝚙𝚜 𝚘𝚟𝚎𝚛 𝚝𝚑𝚎 𝚕𝚊𝚣𝚢 𝚍𝚘𝚐"

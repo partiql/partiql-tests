@@ -37,7 +37,8 @@ type::{
     name: TestCase,
     type: struct,
     fields: {
-        name: { type: string, occurs: required },
+        // Junit test framework callbacks have 512 character limit on display name. Set to 350 to reverse some for system
+        name: { type: string, occurs: required, codepoint_length: range::[1, 350] },
         statement: {
             type: {
                 one_of: [
