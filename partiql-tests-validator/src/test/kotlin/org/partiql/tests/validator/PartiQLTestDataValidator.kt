@@ -50,10 +50,9 @@ class PartiQLTestDataValidator {
         )
     }
 
-    private fun assertNoDuplicateName(testCases : List<TestCase>) {
+    private fun assertNoDuplicateName(testCases: List<TestCase>) {
         val nameGroups = testCases.groupBy { it.name }
         val duplicates = nameGroups.filter { it.value.size > 1 }
-        
         assertTrue(
             duplicates.isEmpty(),
             "Duplicate test names found:\n" + duplicates.map { "Find '${it.key}' at (${it.value.joinToString(",") { tc -> tc.source }})" }.joinToString("\n")
@@ -82,13 +81,13 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun validate_PartiQLTestData_TestName_Uniqueness(){
+    fun validate_PartiQLTestData_TestName_Uniqueness() {
         val allTestCases = TestLoader.load(PARTIQL_TEST_DATA_DIR)
         assertNoDuplicateName(allTestCases)
     }
 
     @Test
-    fun validate_PartiQLTestDataExtended_TestName_Uniqueness(){
+    fun validate_PartiQLTestDataExtended_TestName_Uniqueness() {
         val allTestCases = TestLoader.load(PARTIQL_TESTS_DATA_EXTENDED)
         assertNoDuplicateName(allTestCases)
     }
