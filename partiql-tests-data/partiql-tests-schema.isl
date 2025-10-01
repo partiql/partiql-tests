@@ -37,7 +37,7 @@ type::{
     name: TestCase,
     type: struct,
     fields: {
-        // Junit test framework callbacks have 512 character limit on display name. Set to 350 to reverse some for system
+        // Junit test framework callbacks have 512 character limit on display name. Set length limit to 350 to reserve some for system
         name: { type: string, occurs: required, codepoint_length: range::[1, 350] },
         statement: {
             type: {

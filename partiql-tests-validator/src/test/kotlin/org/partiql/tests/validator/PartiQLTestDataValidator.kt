@@ -85,14 +85,10 @@ class PartiQLTestDataValidator {
     }
 
     @Test
-    fun validate_PartiQLTestData_TestName_Uniqueness() {
-        val allTestCases = TestLoader.load(PARTIQL_TEST_DATA_DIR)
-        assertNoDuplicateName(allTestCases)
-    }
-
-    @Test
-    fun validate_PartiQLTestDataExtended_TestName_Uniqueness() {
-        val allTestCases = TestLoader.load(PARTIQL_TESTS_DATA_EXTENDED)
+    fun validate_TestName_Uniqueness() {
+        val allTestCases: MutableList<TestCase> = mutableListOf()
+        allTestCases.addAll(TestLoader.load(PARTIQL_TEST_DATA_DIR))
+        allTestCases.addAll(TestLoader.load(PARTIQL_TESTS_DATA_EXTENDED))
         assertNoDuplicateName(allTestCases)
     }
 
@@ -435,8 +431,8 @@ class PartiQLTestDataValidator {
         val testData =
             """
             {
-                // 500 characters
-                name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem.",
+                // 10("some string".length) * 50 = 500 characters
+                name: "${"some string".repeat(50)}",
                 statement: "some string",
                 assert: {
                     result: SyntaxSuccess
