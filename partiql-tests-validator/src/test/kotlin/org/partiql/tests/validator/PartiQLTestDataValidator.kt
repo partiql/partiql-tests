@@ -55,7 +55,7 @@ class PartiQLTestDataValidator {
         val duplicates = nameGroups.filter { it.value.size > 1 }
 
         val locations = duplicates.map {
-            "Find '${it.key}' at (${it.value.mapIndexed { i, tc -> "Location${i}: " + tc.source }.joinToString(",") }"
+            "Find '${it.key}' at (${it.value.mapIndexed { i, tc -> "Location$i: " + tc.source }.joinToString(", ") }"
         }.joinToString("\n")
         assertTrue(
             duplicates.isEmpty(),
