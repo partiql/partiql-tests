@@ -369,3 +369,474 @@ minus::[
     }
   }
 ]
+
+  
+// Time subtraction tests
+time::[
+  // TIME - TIME tests
+  {
+    name: "TIME '10:30:00' - TIME '10:30:00'",
+    statement: "TIME '10:30:00' - TIME '10:30:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds:0,nanos:0 }
+    }
+  },
+  {
+    name: "TIME '14:45:30' - TIME '10:30:00'",
+    statement: "TIME '14:45:30' - TIME '10:30:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 4, minutes: 15, seconds:30,nanos:0 }
+    }
+  },
+  {
+    name: "TIME '10:30:00' - TIME '14:45:30'",
+    statement: "TIME '10:30:00' - TIME '14:45:30'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "-", days: 0, hours: 4, minutes: 15, seconds:30,nanos:0 }
+    }
+  },
+
+  // TIME - TIMEZ tests
+  {
+    name: "TIME '10:30:00' - TIME '10:30:00+00:00'",
+    statement: "TIME '10:30:00' - TIME '10:30:00+00:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds:0,nanos:0 }
+    }
+  },
+  {
+    name: "TIME '12:45:30' - TIME '09:45:30-03:00'",
+    statement: "TIME '12:45:30' - TIME '09:45:30-03:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds:0,nanos:0 }
+    }
+  },
+  {
+    name: "TIME '14:45:30' - TIME '10:30:00+00:00'",
+    statement: "TIME '14:45:30' - TIME '10:30:00+00:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 4, minutes: 15, seconds:30,nanos:0 }
+    }
+  },
+  {
+    name: "TIME '10:30:00' - TIME '14:45:30+00:00'",
+    statement: "TIME '10:30:00' - TIME '14:45:30+00:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "-", days: 0, hours: 4, minutes: 15, seconds:30,nanos:0 }
+    }
+  },
+
+  // TIMEZ - TIME tests
+  {
+    name: "TIME '10:30:00+00:00' - TIME '10:30:00'",
+    statement: "TIME '10:30:00+00:00' - TIME '10:30:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds:0,nanos:0 }
+    }
+  },
+  {
+    name: "TIME '08:15:45+02:00' - TIME '08:15:45'",
+    statement: "TIME '08:15:45+02:00' - TIME '08:15:45'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "-", days: 0, hours: 2, minutes: 0, seconds:0,nanos:0 }
+    }
+  },
+  {
+    name: "TIME '14:45:30+00:00' - TIME '10:30:00'",
+    statement: "TIME '14:45:30+00:00' - TIME '10:30:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 4, minutes: 15, seconds:30,nanos:0 }
+    }
+  },
+  {
+    name: "TIME '10:30:00+00:00' - TIME '14:45:30'",
+    statement: "TIME '10:30:00+00:00' - TIME '14:45:30'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "-", days: 0, hours: 4, minutes: 15, seconds:30,nanos:0 }
+    }
+  },
+
+  // TIMEZ - TIMEZ tests
+  {
+    name: "TIME '10:30:00+05:00' - TIME '10:30:00+05:00'",
+    statement: "TIME '10:30:00+05:00' - TIME '10:30:00+05:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds:0,nanos:0 }
+    }
+  },
+  {
+    name: "TIME '15:45:30-03:00' - TIME '15:45:30-03:00'",
+    statement: "TIME '15:45:30-03:00' - TIME '15:45:30-03:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds:0,nanos:0 }
+    }
+  },
+  {
+    name: "TIME '14:45:30+00:00' - TIME '10:30:00+00:00'",
+    statement: "TIME '14:45:30+00:00' - TIME '10:30:00+00:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 4, minutes: 15, seconds:30,nanos:0 }
+    }
+  },
+  {
+    name: "TIME '10:30:00+00:00' - TIME '14:45:30+00:00'",
+    statement: "TIME '10:30:00+00:00' - TIME '14:45:30+00:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "-", days: 0, hours: 4, minutes: 15, seconds:30,nanos:0 }
+    }
+  },
+  {
+    name: "TIME '10:00:00+01:00' - TIME '09:00:00+00:00'",
+    statement: "TIME '10:00:00+01:00' - TIME '09:00:00+00:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds:0,nanos:0 }
+    }
+  },
+  {
+    name: "TIME '14:30:15+02:00' - TIME '17:30:15+05:00'",
+    statement: "TIME '14:30:15+02:00' - TIME '17:30:15+05:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds:0,nanos:0 }
+    }
+  },
+  {
+    name: "TIME '10:30:00+05:00' - TIME '10:30:00-03:00'",
+    statement: "TIME '10:30:00+05:00' - TIME '10:30:00-03:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "-", days: 0, hours: 8, minutes: 0, seconds:0,nanos:0 }
+    }
+  }
+]
+
+// Date subtraction tests
+date::[
+  // DATE - DATE tests
+  {
+    name: "DATE '2025-01-15' - DATE '2025-01-15'",
+    statement: "DATE '2025-01-15' - DATE '2025-01-15'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "DATE '2025-01-20' - DATE '2025-01-15'",
+    statement: "DATE '2025-01-20' - DATE '2025-01-15'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 5, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "DATE '2025-01-15' - DATE '2025-01-20'",
+    statement: "DATE '2025-01-15' - DATE '2025-01-20'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "-", days: 5, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+
+  // DATE - TIMESTAMP tests
+  {
+    name: "DATE '2025-01-15' - TIMESTAMP '2025-01-15 00:00:00'",
+    statement: "DATE '2025-01-15' - TIMESTAMP '2025-01-15 00:00:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "DATE '2025-01-15' - TIMESTAMP '2025-01-14 12:30:45'",
+    statement: "DATE '2025-01-15' - TIMESTAMP '2025-01-14 12:30:45'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 11, minutes: 29, seconds: 15, nanos: 0 }
+    }
+  },
+  {
+    name: "DATE '2025-01-14' - TIMESTAMP '2025-01-15 12:30:45'",
+    statement: "DATE '2025-01-14' - TIMESTAMP '2025-01-15 12:30:45'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "-", days: 1, hours: 12, minutes: 30, seconds: 45, nanos: 0 }
+    }
+  },
+
+  // DATE - TIMESTAMPZ tests
+  {
+    name: "DATE '2025-01-15' - TIMESTAMP '2025-01-15 00:00:00+00:00'",
+    statement: "DATE '2025-01-15' - TIMESTAMP '2025-01-15 00:00:00+00:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "DATE '2025-01-15' - TIMESTAMP '2025-01-14 21:00:00+00:00'",
+    statement: "DATE '2025-01-15' - TIMESTAMP '2025-01-14 21:00:00+00:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 3, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "DATE '2025-01-14' - TIMESTAMP '2025-01-15 03:00:00+00:00'",
+    statement: "DATE '2025-01-14' - TIMESTAMP '2025-01-15 03:00:00+00:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "-", days: 1, hours: 3, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  }
+]
+
+// Timestamp subtraction tests
+timestamp::[
+  // TIMESTAMP - DATE tests
+  {
+    name: "TIMESTAMP '2025-01-15 00:00:00' - DATE '2025-01-15'",
+    statement: "TIMESTAMP '2025-01-15 00:00:00' - DATE '2025-01-15'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "TIMESTAMP '2025-01-15 12:30:45' - DATE '2025-01-14'",
+    statement: "TIMESTAMP '2025-01-15 12:30:45' - DATE '2025-01-14'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 1, hours: 12, minutes: 30, seconds: 45, nanos: 0 }
+    }
+  },
+  {
+    name: "TIMESTAMP '2025-01-14 12:30:45' - DATE '2025-01-15'",
+    statement: "TIMESTAMP '2025-01-14 12:30:45' - DATE '2025-01-15'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "-", days: 0, hours: 11, minutes: 29, seconds: 15, nanos: 0 }
+    }
+  },
+
+  // TIMESTAMP - TIMESTAMP tests
+  {
+    name: "TIMESTAMP '2025-01-15 12:30:45' - TIMESTAMP '2025-01-15 12:30:45'",
+    statement: "TIMESTAMP '2025-01-15 12:30:45' - TIMESTAMP '2025-01-15 12:30:45'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "TIMESTAMP '2025-01-15 15:45:30' - TIMESTAMP '2025-01-15 10:30:00'",
+    statement: "TIMESTAMP '2025-01-15 15:45:30' - TIMESTAMP '2025-01-15 10:30:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 5, minutes: 15, seconds: 30, nanos: 0 }
+    }
+  },
+  {
+    name: "TIMESTAMP '2025-01-15 10:30:00' - TIMESTAMP '2025-01-15 15:45:30'",
+    statement: "TIMESTAMP '2025-01-15 10:30:00' - TIMESTAMP '2025-01-15 15:45:30'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "-", days: 0, hours: 5, minutes: 15, seconds: 30, nanos: 0 }
+    }
+  },
+
+  // TIMESTAMP - TIMESTAMPZ tests
+  {
+    name: "TIMESTAMP '2025-01-15 12:30:45' - TIMESTAMP '2025-01-15 12:30:45+00:00'",
+    statement: "TIMESTAMP '2025-01-15 12:30:45' - TIMESTAMP '2025-01-15 12:30:45+00:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "TIMESTAMP '2025-01-15 15:45:30' - TIMESTAMP '2025-01-15 10:30:00+00:00'",
+    statement: "TIMESTAMP '2025-01-15 15:45:30' - TIMESTAMP '2025-01-15 10:30:00+00:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 5, minutes: 15, seconds: 30, nanos: 0 }
+    }
+  },
+  {
+    name: "TIMESTAMP '2025-01-15 10:30:00' - TIMESTAMP '2025-01-15 15:45:30+00:00'",
+    statement: "TIMESTAMP '2025-01-15 10:30:00' - TIMESTAMP '2025-01-15 15:45:30+00:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "-", days: 0, hours: 5, minutes: 15, seconds: 30, nanos: 0 }
+    }
+  }
+]
+
+// Timestampz subtraction tests
+timestampz::[
+  // TIMESTAMPZ - DATE tests
+  {
+    name: "TIMESTAMP '2025-01-15 00:00:00+00:00' - DATE '2025-01-15'",
+    statement: "TIMESTAMP '2025-01-15 00:00:00+00:00' - DATE '2025-01-15'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "TIMESTAMP '2025-01-15 15:30:45+00:00' - DATE '2025-01-14'",
+    statement: "TIMESTAMP '2025-01-15 15:30:45+00:00' - DATE '2025-01-14'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 1, hours: 15, minutes: 30, seconds: 45, nanos: 0 }
+    }
+  },
+  {
+    name: "TIMESTAMP '2025-01-14 08:15:30+00:00' - DATE '2025-01-15'",
+    statement: "TIMESTAMP '2025-01-14 08:15:30+00:00' - DATE '2025-01-15'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "-", days: 0, hours: 15, minutes: 44, seconds: 30, nanos: 0 }
+    }
+  },
+
+  // TIMESTAMPZ - TIMESTAMP tests
+  {
+    name: "TIMESTAMP '2025-01-15 12:30:45+00:00' - TIMESTAMP '2025-01-15 12:30:45'",
+    statement: "TIMESTAMP '2025-01-15 12:30:45+00:00' - TIMESTAMP '2025-01-15 12:30:45'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "TIMESTAMP '2025-01-15 15:45:30+00:00' - TIMESTAMP '2025-01-15 10:30:00'",
+    statement: "TIMESTAMP '2025-01-15 15:45:30+00:00' - TIMESTAMP '2025-01-15 10:30:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 5, minutes: 15, seconds: 30, nanos: 0 }
+    }
+  },
+  {
+    name: "TIMESTAMP '2025-01-15 10:30:00+00:00' - TIMESTAMP '2025-01-15 15:45:30'",
+    statement: "TIMESTAMP '2025-01-15 10:30:00+00:00' - TIMESTAMP '2025-01-15 15:45:30'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "-", days: 0, hours: 5, minutes: 15, seconds: 30, nanos: 0 }
+    }
+  },
+
+  // TIMESTAMPZ - TIMESTAMPZ tests
+  {
+    name: "TIMESTAMP '2025-01-15 12:30:45+05:00' - TIMESTAMP '2025-01-15 12:30:45+05:00'",
+    statement: "TIMESTAMP '2025-01-15 12:30:45+05:00' - TIMESTAMP '2025-01-15 12:30:45+05:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "TIMESTAMP '2025-01-15 15:45:30+00:00' - TIMESTAMP '2025-01-15 10:30:00+00:00'",
+    statement: "TIMESTAMP '2025-01-15 15:45:30+00:00' - TIMESTAMP '2025-01-15 10:30:00+00:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 5, minutes: 15, seconds: 30, nanos: 0 }
+    }
+  },
+  {
+    name: "TIMESTAMP '2025-01-15 10:30:00+00:00' - TIMESTAMP '2025-01-15 15:45:30+00:00'",
+    statement: "TIMESTAMP '2025-01-15 10:30:00+00:00' - TIMESTAMP '2025-01-15 15:45:30+00:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "-", days: 0, hours: 5, minutes: 15, seconds: 30, nanos: 0 }
+    }
+  },
+  {
+    name: "TIMESTAMP '2025-01-15 10:00:00+01:00' - TIMESTAMP '2025-01-15 09:00:00+00:00'",
+    statement: "TIMESTAMP '2025-01-15 10:00:00+01:00' - TIMESTAMP '2025-01-15 09:00:00+00:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "TIMESTAMP '2025-01-15 14:30:15+02:00' - TIMESTAMP '2025-01-15 17:30:15+05:00'",
+    statement: "TIMESTAMP '2025-01-15 14:30:15+02:00' - TIMESTAMP '2025-01-15 17:30:15+05:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "+", days: 0, hours: 0, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  },
+  {
+    name: "TIMESTAMP '2025-01-15 10:30:00+05:00' - TIMESTAMP '2025-01-15 10:30:00-03:00'",
+    statement: "TIMESTAMP '2025-01-15 10:30:00+05:00' - TIMESTAMP '2025-01-15 10:30:00-03:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $interval_dt::{ sign: "-", days: 0, hours: 8, minutes: 0, seconds: 0, nanos: 0 }
+    }
+  }
+]

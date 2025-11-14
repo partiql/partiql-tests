@@ -2029,3 +2029,369 @@ date_diff_invalid::[
     },
   }
 ]
+
+// Date difference tests - adapted from minus.ion
+date_diff_date_cases::[
+  {
+    name:"date_diff DATE cases - same dates",
+    statement:"date_diff(day, DATE '2025-01-15', DATE '2025-01-15')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:0
+    }
+  },
+  {
+    name:"date_diff DATE cases - 5 days difference",
+    statement:"date_diff(day, DATE '2025-01-15', DATE '2025-01-20')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:5
+    }
+  },
+  {
+    name:"date_diff DATE cases - negative 5 days difference",
+    statement:"date_diff(day, DATE '2025-01-20', DATE '2025-01-15')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:-5
+    }
+  },
+  {
+    name:"date_diff DATE cases - year difference",
+    statement:"date_diff(year, DATE '2024-01-01', DATE '2025-01-01')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:1
+    }
+  },
+  {
+    name:"date_diff DATE cases - month difference",
+    statement:"date_diff(month, DATE '2024-12-01', DATE '2025-01-01')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:1
+    }
+  }
+]
+
+// Time difference tests - adapted from minus.ion
+date_diff_time_cases::[
+  {
+    name:"date_diff TIME cases - same times",
+    statement:"date_diff(hour, TIME '10:30:00', TIME '10:30:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:0
+    }
+  },
+  {
+    name:"date_diff TIME cases - hour difference",
+    statement:"date_diff(hour, TIME '10:30:00', TIME '14:45:30')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:4
+    }
+  },
+  {
+    name:"date_diff TIME cases - minute difference",
+    statement:"date_diff(minute, TIME '10:30:00', TIME '14:45:30')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:255
+    }
+  },
+  {
+    name:"date_diff TIME cases - second difference",
+    statement:"date_diff(second, TIME '10:30:00', TIME '14:45:30')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:15330
+    }
+  },
+  {
+    name:"date_diff TIME cases - with timezone same UTC equivalent",
+    statement:"date_diff(hour, TIME '10:00:00+01:00', TIME '09:00:00+00:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:0
+    }
+  },
+  {
+    name:"date_diff TIME cases - with timezone difference",
+    statement:"date_diff(hour, TIME '10:30:00+05:00', TIME '10:30:00-03:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:8
+    }
+  }
+]
+
+// Timestamp difference tests - adapted from minus.ion
+date_diff_timestamp_cases::[
+  {
+    name:"date_diff TIMESTAMP cases - same timestamps",
+    statement:"date_diff(hour, TIMESTAMP '2025-01-15 12:30:45', TIMESTAMP '2025-01-15 12:30:45')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:0
+    }
+  },
+  {
+    name:"date_diff TIMESTAMP cases - hour difference",
+    statement:"date_diff(hour, TIMESTAMP '2025-01-15 10:30:00', TIMESTAMP '2025-01-15 15:45:30')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:5
+    }
+  },
+  {
+    name:"date_diff TIMESTAMP cases - day difference",
+    statement:"date_diff(day, TIMESTAMP '2025-01-14 12:30:45', TIMESTAMP '2025-01-15 12:30:45')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:1
+    }
+  },
+  {
+    name:"date_diff TIMESTAMP cases - minute difference",
+    statement:"date_diff(minute, TIMESTAMP '2025-01-15 10:30:00', TIMESTAMP '2025-01-15 15:45:30')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:315
+    }
+  },
+  {
+    name:"date_diff TIMESTAMP cases - second difference",
+    statement:"date_diff(second, TIMESTAMP '2025-01-15 10:30:00', TIMESTAMP '2025-01-15 15:45:30')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:18930
+    }
+  },
+  {
+    name:"date_diff TIMESTAMP cases - with timezone same UTC equivalent",
+    statement:"date_diff(hour, TIMESTAMP '2025-01-15 10:00:00+01:00', TIMESTAMP '2025-01-15 09:00:00+00:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:0
+    }
+  },
+  {
+    name:"date_diff TIMESTAMP cases - with timezone difference",
+    statement:"date_diff(hour, TIMESTAMP '2025-01-15 10:30:00+05:00', TIMESTAMP '2025-01-15 10:30:00-03:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:8
+    }
+  },
+  {
+    name:"date_diff TIMESTAMP cases - year difference",
+    statement:"date_diff(year, TIMESTAMP '2024-01-15 12:30:45', TIMESTAMP '2025-01-15 12:30:45')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:1
+    }
+  },
+  {
+    name:"date_diff TIMESTAMP cases - month difference",
+    statement:"date_diff(month, TIMESTAMP '2024-11-15 12:30:45', TIMESTAMP '2025-01-15 12:30:45')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:2
+    }
+  }
+]
+
+// Mixed type difference tests - comprehensive coverage
+date_diff_time_mixed_cases::[
+  // TIME diff TIMEZ cases
+  {
+    name:"date_diff TIME diff TIMEZ - same UTC equivalent",
+    statement:"date_diff(hour, TIME '10:30:00', TIME '10:30:00+00:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:0
+    }
+  },
+  {
+    name:"date_diff TIME diff TIMEZ - hour difference",
+    statement:"date_diff(hour, TIME '10:30:00', TIME '14:45:30+00:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:4
+    }
+  },
+  {
+    name:"date_diff TIME diff TIMEZ - timezone offset",
+    statement:"date_diff(hour, TIME '08:15:45', TIME '08:15:45+02:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:-2
+    }
+  },
+  // TIMEZ diff TIME cases
+  {
+    name:"date_diff TIMEZ diff TIME - same UTC equivalent",
+    statement:"date_diff(hour, TIME '10:30:00+00:00', TIME '10:30:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:0
+    }
+  },
+  {
+    name:"date_diff TIMEZ diff TIME - hour difference",
+    statement:"date_diff(hour, TIME '14:45:30+00:00', TIME '10:30:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:-4
+    }
+  }
+]
+
+date_diff_date_mixed_cases::[
+  // DATE diff TIMESTAMP cases
+  {
+    name:"date_diff DATE diff TIMESTAMP - same date",
+    statement:"date_diff(day, DATE '2025-01-15', TIMESTAMP '2025-01-15 00:00:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:0
+    }
+  },
+  {
+    name:"date_diff DATE diff TIMESTAMP - with time component",
+    statement:"date_diff(hour, DATE '2025-01-15', TIMESTAMP '2025-01-14 12:30:45')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:-11
+    }
+  },
+  // DATE diff TIMESTAMPZ cases
+  {
+    name:"date_diff DATE diff TIMESTAMPZ - same UTC",
+    statement:"date_diff(day, DATE '2025-01-15', TIMESTAMP '2025-01-15 00:00:00+00:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:0
+    }
+  },
+  {
+    name:"date_diff DATE diff TIMESTAMPZ - timezone difference",
+    statement:"date_diff(hour, DATE '2025-01-15', TIMESTAMP '2025-01-14 21:00:00+00:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:-3
+    }
+  }
+]
+
+date_diff_timestamp_mixed_cases::[
+  // TIMESTAMP diff DATE cases
+  {
+    name:"date_diff TIMESTAMP diff DATE - same date",
+    statement:"date_diff(day, TIMESTAMP '2025-01-15 00:00:00', DATE '2025-01-15')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:0
+    }
+  },
+  {
+    name:"date_diff TIMESTAMP diff DATE - with time component",
+    statement:"date_diff(hour, TIMESTAMP '2025-01-15 12:30:45', DATE '2025-01-14')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:-36
+    }
+  },
+  // TIMESTAMP diff TIMESTAMPZ cases
+  {
+    name:"date_diff TIMESTAMP diff TIMESTAMPZ - same UTC",
+    statement:"date_diff(hour, TIMESTAMP '2025-01-15 12:30:45', TIMESTAMP '2025-01-15 12:30:45+00:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:0
+    }
+  },
+  {
+    name:"date_diff TIMESTAMP diff TIMESTAMPZ - hour difference",
+    statement:"date_diff(hour, TIMESTAMP '2025-01-15 15:45:30', TIMESTAMP '2025-01-15 10:30:00+00:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:-5
+    }
+  }
+]
+
+date_diff_timestampz_mixed_cases::[
+  // TIMESTAMPZ diff DATE cases
+  {
+    name:"date_diff TIMESTAMPZ diff DATE - same date",
+    statement:"date_diff(day, TIMESTAMP '2025-01-15 00:00:00+00:00', DATE '2025-01-15')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:0
+    }
+  },
+  {
+    name:"date_diff TIMESTAMPZ diff DATE - with time component",
+    statement:"date_diff(hour, TIMESTAMP '2025-01-15 15:30:45+00:00', DATE '2025-01-14')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:-39
+    }
+  },
+  // TIMESTAMPZ diff TIMESTAMP cases
+  {
+    name:"date_diff TIMESTAMPZ diff TIMESTAMP - same UTC",
+    statement:"date_diff(hour, TIMESTAMP '2025-01-15 12:30:45+00:00', TIMESTAMP '2025-01-15 12:30:45')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:0
+    }
+  },
+  {
+    name:"date_diff TIMESTAMPZ diff TIMESTAMP - hour difference",
+    statement:"date_diff(hour, TIMESTAMP '2025-01-15 15:45:30+00:00', TIMESTAMP '2025-01-15 10:30:00')",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[EvalModeCoerce, EvalModeError],
+      output:-5
+    }
+  }
+]
