@@ -2395,3 +2395,187 @@ date_diff_timestampz_mixed_cases::[
     }
   }
 ]
+
+  // Incompatible type combinations - TIME/TIMEZ vs DATE/TIMESTAMP/TIMESTAMPZ
+Incompatible::[
+  {
+    name:"date_diff incompatible - TIME vs DATE",
+    statement:"date_diff(hour, TIME '10:30:00', DATE '2025-01-15')",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"date_diff incompatible - TIME vs TIMESTAMP",
+    statement:"date_diff(hour, TIME '10:30:00', TIMESTAMP '2025-01-15 15:45:30')",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"date_diff incompatible - TIME vs TIMESTAMPZ",
+    statement:"date_diff(hour, TIME '10:30:00', TIMESTAMP '2025-01-15 15:45:30+00:00')",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"date_diff incompatible - TIMEZ vs DATE",
+    statement:"date_diff(hour, TIME '10:30:00+02:00', DATE '2025-01-15')",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"date_diff incompatible - TIMEZ vs TIMESTAMP",
+    statement:"date_diff(hour, TIME '10:30:00+02:00', TIMESTAMP '2025-01-15 15:45:30')",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"date_diff incompatible - TIMEZ vs TIMESTAMPZ",
+    statement:"date_diff(hour, TIME '10:30:00+02:00', TIMESTAMP '2025-01-15 15:45:30+00:00')",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"date_diff incompatible - DATE vs TIME",
+    statement:"date_diff(hour, DATE '2025-01-15', TIME '10:30:00')",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"date_diff incompatible - TIMESTAMP vs TIME",
+    statement:"date_diff(hour, TIMESTAMP '2025-01-15 15:45:30', TIME '10:30:00')",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"date_diff incompatible - TIMESTAMPZ vs TIME",
+    statement:"date_diff(hour, TIMESTAMP '2025-01-15 15:45:30+00:00', TIME '10:30:00')",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"date_diff incompatible - DATE vs TIMEZ",
+    statement:"date_diff(hour, DATE '2025-01-15', TIME '10:30:00+02:00')",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"date_diff incompatible - TIMESTAMP vs TIMEZ",
+    statement:"date_diff(hour, TIMESTAMP '2025-01-15 15:45:30', TIME '10:30:00+02:00')",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"date_diff incompatible - TIMESTAMPZ vs TIMEZ",
+    statement:"date_diff(hour, TIMESTAMP '2025-01-15 15:45:30+00:00', TIME '10:30:00+02:00')",
+    assert:[
+      {
+        evalMode:EvalModeCoerce,
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result:EvaluationFail
+      }
+    ]
+  }
+]
