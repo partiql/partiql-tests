@@ -438,12 +438,12 @@ timetz_vs_timetz::[
   },
   // Less than tests
   {
-    name: "timetz_lt_true",
+    name: "timetz_lt_false",
     statement: "TIME '05:30:00+00:00' < TIME '10:30:00+05:00'",
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: true
+      output: false
     }
   },
   {
@@ -1313,7 +1313,7 @@ timestampz_vs_timestampz::[
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: true
+      output: false
     }
   },
   {
