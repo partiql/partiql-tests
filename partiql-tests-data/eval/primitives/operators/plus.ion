@@ -634,7 +634,7 @@ plus::[
       output: $interval_ym::{ sign: "+", years: 2, months: 2 }
     }
   },
-  
+
   // Interval + Interval Day-Time tests
   {
     name: "INTERVAL '1' DAY + INTERVAL '1' DAY",
@@ -715,6 +715,374 @@ plus::[
       result: EvaluationSuccess,
       evalMode: [EvalModeCoerce, EvalModeError],
       output: $interval_dt::{ sign: "+", days: 2, hours: 2, minutes: 2, seconds: 2, nanos: 200000000 }
+    }
+  },
+
+  // Interval + NULL tests
+  {
+    name: "INTERVAL '3' YEAR + NULL",
+    statement: "INTERVAL '3' YEAR + NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "NULL + INTERVAL '3' YEAR",
+    statement: "NULL + INTERVAL '3' YEAR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "INTERVAL '3' DAY + NULL",
+    statement: "INTERVAL '3' DAY + NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "NULL + INTERVAL '3' DAY",
+    statement: "NULL + INTERVAL '3' DAY",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "INTERVAL '3-1' YEAR TO MONTH + NULL",
+    statement: "INTERVAL '3-1' YEAR TO MONTH + NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "NULL + INTERVAL '3-1' YEAR TO MONTH",
+    statement: "NULL + INTERVAL '3-1' YEAR TO MONTH",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "INTERVAL '3 03:22:22.000' DAY TO SECOND + NULL",
+    statement: "INTERVAL '3 03:22:22.000' DAY TO SECOND + NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "NULL + INTERVAL '3 03:22:22.000' DAY TO SECOND",
+    statement: "NULL + INTERVAL '3 03:22:22.000' DAY TO SECOND",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+
+  // DATE + NULL tests
+  {
+    name: "DATE '2025-01-01' + NULL",
+    statement: "DATE '2025-01-01' + NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "NULL + DATE '2025-01-01'",
+    statement: "NULL + DATE '2025-01-01'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+
+  // TIME + NULL tests
+  {
+    name: "TIME '01:01:01.111' + NULL",
+    statement: "TIME '01:01:01.111' + NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "NULL + TIME '01:01:01.111'",
+    statement: "NULL + TIME '01:01:01.111'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+
+  // TIMEZ + NULL tests
+  {
+    name: "TIMEZ '01:01:01.111+05:00' + NULL",
+    statement: "TIMEZ '01:01:01.111+05:00' + NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "NULL + TIMEZ '01:01:01.111+05:00'",
+    statement: "NULL + TIMEZ '01:01:01.111+05:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+
+  // TIMESTAMP + NULL tests
+  {
+    name: "TIMESTAMP '2025-01-01 01:01:01.111' + NULL",
+    statement: "TIMESTAMP '2025-01-01 01:01:01.111' + NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "NULL + TIMESTAMP '2025-01-01 01:01:01.111'",
+    statement: "NULL + TIMESTAMP '2025-01-01 01:01:01.111'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+
+  // TIMESTAMPZ + NULL tests
+  {
+    name: "TIMESTAMPZ '2025-01-01 01:01:01.111+05:00' + NULL",
+    statement: "TIMESTAMPZ '2025-01-01 01:01:01.111+05:00' + NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+  {
+    name: "NULL + TIMESTAMPZ '2025-01-01 01:01:01.111+05:00'",
+    statement: "NULL + TIMESTAMPZ '2025-01-01 01:01:01.111+05:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: null
+    }
+  },
+
+  // Interval + MISSING tests
+  {
+    name: "INTERVAL '3' YEAR + MISSING",
+    statement: "INTERVAL '3' YEAR + MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "MISSING + INTERVAL '3' YEAR",
+    statement: "MISSING + INTERVAL '3' YEAR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "INTERVAL '3' DAY + MISSING",
+    statement: "INTERVAL '3' DAY + MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "MISSING + INTERVAL '3' DAY",
+    statement: "MISSING + INTERVAL '3' DAY",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "INTERVAL '3-1' YEAR TO MONTH + MISSING",
+    statement: "INTERVAL '3-1' YEAR TO MONTH + MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "MISSING + INTERVAL '3-1' YEAR TO MONTH",
+    statement: "MISSING + INTERVAL '3-1' YEAR TO MONTH",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "INTERVAL '3 03:22:22.000' DAY TO SECOND + MISSING",
+    statement: "INTERVAL '3 03:22:22.000' DAY TO SECOND + MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "MISSING + INTERVAL '3 03:22:22.000' DAY TO SECOND",
+    statement: "MISSING + INTERVAL '3 03:22:22.000' DAY TO SECOND",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+
+  // DATE + MISSING tests
+  {
+    name: "DATE '2025-01-01' + MISSING",
+    statement: "DATE '2025-01-01' + MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "MISSING + DATE '2025-01-01'",
+    statement: "MISSING + DATE '2025-01-01'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+
+  // TIME + MISSING tests
+  {
+    name: "TIME '01:01:01.111' + MISSING",
+    statement: "TIME '01:01:01.111' + MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "MISSING + TIME '01:01:01.111'",
+    statement: "MISSING + TIME '01:01:01.111'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+
+  // TIMEZ + MISSING tests
+  {
+    name: "TIMEZ '01:01:01.111+05:00' + MISSING",
+    statement: "TIMEZ '01:01:01.111+05:00' + MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "MISSING + TIMEZ '01:01:01.111+05:00'",
+    statement: "MISSING + TIMEZ '01:01:01.111+05:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+
+  // TIMESTAMP + MISSING tests
+  {
+    name: "TIMESTAMP '2025-01-01 01:01:01.111' + MISSING",
+    statement: "TIMESTAMP '2025-01-01 01:01:01.111' + MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "MISSING + TIMESTAMP '2025-01-01 01:01:01.111'",
+    statement: "MISSING + TIMESTAMP '2025-01-01 01:01:01.111'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+
+  // TIMESTAMPZ + MISSING tests
+  {
+    name: "TIMESTAMPZ '2025-01-01 01:01:01.111+05:00' + MISSING",
+    statement: "TIMESTAMPZ '2025-01-01 01:01:01.111+05:00' + MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "MISSING + TIMESTAMPZ '2025-01-01 01:01:01.111+05:00'",
+    statement: "MISSING + TIMESTAMPZ '2025-01-01 01:01:01.111+05:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+
+  // NULL + MISSING
+  {
+    name: "MISSING + NULL",
+    statement: "MISSING + NULL",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
+    }
+  },
+  {
+    name: "NULL + MISSING",
+    statement: "NULL + MISSING",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $missing::null
     }
   }
 ]
