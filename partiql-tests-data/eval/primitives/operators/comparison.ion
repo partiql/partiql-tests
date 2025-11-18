@@ -1,0 +1,1403 @@
+// TIME vs TIME comparisons
+time_vs_time::[
+  // Equality tests
+  {
+    name: "time_eq_same",
+    statement: "TIME '10:30:00' = TIME '10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_eq_different",
+    statement: "TIME '10:30:00' = TIME '14:45:30'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Inequality tests
+  {
+    name: "time_neq_different",
+    statement: "TIME '10:30:00' != TIME '14:45:30'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_neq_same",
+    statement: "TIME '10:30:00' != TIME '10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "time_neq_different_alt",
+    statement: "TIME '10:30:00' <> TIME '14:45:30'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_neq_same_alt",
+    statement: "TIME '10:30:00' <> TIME '10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Less than tests
+  {
+    name: "time_lt_true",
+    statement: "TIME '10:30:00' < TIME '14:45:30'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_lt_false",
+    statement: "TIME '14:45:30' < TIME '10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Greater than tests
+  {
+    name: "time_gt_true",
+    statement: "TIME '14:45:30' > TIME '10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_gt_false",
+    statement: "TIME '10:30:00' > TIME '14:45:30'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "time_precision_comparison",
+    statement: "TIME '10:30:00.123' > TIME '10:30:00.122'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // Less than or equal tests
+  {
+    name: "time_lte_true_less",
+    statement: "TIME '10:30:00' <= TIME '14:45:30'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_lte_true_equal",
+    statement: "TIME '10:30:00' <= TIME '10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_lte_false",
+    statement: "TIME '14:45:30' <= TIME '10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Greater than or equal tests
+  {
+    name: "time_gte_true_greater",
+    statement: "TIME '14:45:30' >= TIME '10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_gte_true_equal",
+    statement: "TIME '10:30:00' >= TIME '10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_gte_false",
+    statement: "TIME '10:30:00' >= TIME '14:45:30'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  }
+]
+
+// TIME vs TIMETZ comparisons
+time_vs_timetz::[
+  // Equality tests
+  {
+    name: "time_vs_timetz_eq_false",
+    statement: "TIME '10:30:00' = TIME '10:30:00+05:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "time_vs_timetz_utc_eq_true",
+    statement: "TIME '10:30:00' = TIME '10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_vs_timetz_nonzero_offset_eq_false",
+    statement: "TIME '10:30:00' = TIME '10:30:00+02:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Inequality tests
+  {
+    name: "time_vs_timetz_neq_true",
+    statement: "TIME '10:30:00' != TIME '10:30:00+05:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_vs_timetz_utc_neq_false",
+    statement: "TIME '10:30:00' != TIME '10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "time_vs_timetz_nonzero_offset_neq_true",
+    statement: "TIME '10:30:00' != TIME '10:30:00+02:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_vs_timetz_neq_true_alt",
+    statement: "TIME '10:30:00' <> TIME '10:30:00+05:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_vs_timetz_utc_neq_false_alt",
+    statement: "TIME '10:30:00' <> TIME '10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "time_vs_timetz_nonzero_offset_neq_true_alt",
+    statement: "TIME '10:30:00' <> TIME '10:30:00+02:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // Less than tests
+  {
+    name: "time_vs_timetz_lt",
+    statement: "TIME '10:30:00' < TIME '14:45:30-03:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_vs_timetz_utc_lt",
+    statement: "TIME '10:30:00' < TIME '14:45:30+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_vs_timetz_utc_lt_false",
+    statement: "TIME '14:45:30' < TIME '10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "time_vs_timetz_nonzero_offset_lt",
+    statement: "TIME '10:30:00' < TIME '14:45:30+02:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // Greater than tests
+  {
+    name: "time_vs_timetz_gt",
+    statement: "TIME '14:45:30' > TIME '05:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_vs_timetz_utc_gt",
+    statement: "TIME '14:45:30' > TIME '10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_vs_timetz_nonzero_offset_gt",
+    statement: "TIME '14:45:30' > TIME '10:30:00+02:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // Less than or equal tests
+  {
+    name: "time_vs_timetz_lte_true",
+    statement: "TIME '10:30:00' <= TIME '14:45:30+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_vs_timetz_utc_lte_true_equal",
+    statement: "TIME '10:30:00' <= TIME '10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_vs_timetz_lte_false",
+    statement: "TIME '14:45:30' <= TIME '10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Greater than or equal tests
+  {
+    name: "time_vs_timetz_gte_true",
+    statement: "TIME '14:45:30' >= TIME '10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_vs_timetz_utc_gte_true_equal",
+    statement: "TIME '10:30:00' >= TIME '10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "time_vs_timetz_gte_false",
+    statement: "TIME '10:30:00' >= TIME '14:45:30+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  }
+]
+
+// TIMETZ vs TIMETZ comparisons
+timetz_vs_timetz::[
+  // Equality tests
+  {
+    name: "timetz_eq_same",
+    statement: "TIME '10:30:00+05:00' = TIME '10:30:00+05:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timetz_eq_different",
+    statement: "TIME '10:30:00+05:00' = TIME '14:45:30-03:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "timetz_eq_utc_equivalent",
+    statement: "TIME '05:30:00+00:00' = TIME '05:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timetz_different_zones_same_utc",
+    statement: "TIME '10:00:00+01:00' = TIME '09:00:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timetz_same_localtime_different_zones_eq_false",
+    statement: "TIME '10:30:00+05:00' = TIME '10:30:00-03:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Inequality tests
+  {
+    name: "timetz_same_localtime_different_zones_neq_true",
+    statement: "TIME '10:30:00+05:00' != TIME '10:30:00-03:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timetz_same_localtime_different_zones_neq_true_alt",
+    statement: "TIME '10:30:00+05:00' <> TIME '10:30:00-03:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // Less than tests
+  {
+    name: "timetz_lt_false",
+    statement: "TIME '05:30:00+00:00' < TIME '10:30:00+05:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "timetz_same_localtime_different_zones_lt",
+    statement: "TIME '10:30:00+05:00' < TIME '10:30:00-03:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // Greater than tests
+  {
+    name: "timetz_gt_true",
+    statement: "TIME '14:45:30-03:00' > TIME '05:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timetz_same_localtime_different_zones_gt",
+    statement: "TIME '10:30:00-03:00' > TIME '10:30:00+05:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // Less than or equal tests
+  {
+    name: "timetz_lte_true_less",
+    statement: "TIME '05:30:00+00:00' <= TIME '10:30:00+05:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timetz_lte_true_equal",
+    statement: "TIME '10:00:00+01:00' <= TIME '09:00:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timetz_lte_false",
+    statement: "TIME '14:45:30-03:00' <= TIME '05:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Greater than or equal tests
+  {
+    name: "timetz_gte_true_greater",
+    statement: "TIME '14:45:30-03:00' >= TIME '05:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timetz_gte_true_equal",
+    statement: "TIME '10:00:00+01:00' >= TIME '09:00:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timetz_gte_false",
+    statement: "TIME '05:30:00+00:00' >= TIME '14:45:30-03:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  }
+]
+
+// DATE vs DATE comparisons
+date_vs_date::[
+  // Equality tests
+  {
+    name: "date_eq_same",
+    statement: "DATE '2023-05-15' = DATE '2023-05-15'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "date_eq_different",
+    statement: "DATE '2023-05-15' = DATE '2023-08-20'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Inequality tests
+  {
+    name: "date_neq_different",
+    statement: "DATE '2023-05-15' != DATE '2023-08-20'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "date_neq_same",
+    statement: "DATE '2023-05-15' != DATE '2023-05-15'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "date_neq_different_alt",
+    statement: "DATE '2023-05-15' <> DATE '2023-08-20'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "date_neq_same_alt",
+    statement: "DATE '2023-05-15' <> DATE '2023-05-15'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Less than tests
+  {
+    name: "date_lt_true",
+    statement: "DATE '2023-05-15' < DATE '2023-08-20'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "date_lt_false",
+    statement: "DATE '2023-08-20' < DATE '2023-05-15'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Greater than tests
+  {
+    name: "date_gt_true",
+    statement: "DATE '2023-08-20' > DATE '2023-05-15'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "date_gt_false",
+    statement: "DATE '2023-05-15' > DATE '2023-08-20'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Less than or equal tests
+  {
+    name: "date_lte_true_less",
+    statement: "DATE '2023-05-15' <= DATE '2023-08-20'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "date_lte_true_equal",
+    statement: "DATE '2023-05-15' <= DATE '2023-05-15'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "date_lte_false",
+    statement: "DATE '2023-08-20' <= DATE '2023-05-15'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Greater than or equal tests
+  {
+    name: "date_gte_true_greater",
+    statement: "DATE '2023-08-20' >= DATE '2023-05-15'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "date_gte_true_equal",
+    statement: "DATE '2023-05-15' >= DATE '2023-05-15'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "date_gte_false",
+    statement: "DATE '2023-05-15' >= DATE '2023-08-20'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  }
+]
+
+// DATE vs TIMESTAMP comparisons
+date_vs_timestamp::[
+  // Equality tests
+  {
+    name: "date_vs_timestamp_eq_true",
+    statement: "DATE '2023-05-15' = TIMESTAMP '2023-05-15 00:00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "date_vs_timestamp_eq_false",
+    statement: "DATE '2023-05-15' = TIMESTAMP '2023-05-15 10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Inequality tests
+  {
+    name: "date_vs_timestamp_neq_false",
+    statement: "DATE '2023-05-15' != TIMESTAMP '2023-05-15 00:00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "date_vs_timestamp_neq_true",
+    statement: "DATE '2023-05-15' != TIMESTAMP '2023-05-15 10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "date_vs_timestamp_neq_true_alt",
+    statement: "DATE '2023-05-15' <> TIMESTAMP '2023-05-15 10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // Less than tests
+  {
+    name: "date_vs_timestamp_lt_true",
+    statement: "DATE '2023-05-15' < TIMESTAMP '2023-05-15 10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "date_vs_timestamp_lt_false",
+    statement: "DATE '2023-05-15' < TIMESTAMP '2023-05-15 00:00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Greater than tests
+  {
+    name: "date_vs_timestamp_gt_false",
+    statement: "DATE '2023-05-15' > TIMESTAMP '2023-05-15 10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "date_vs_timestamp_gt_true",
+    statement: "DATE '2023-05-16' > TIMESTAMP '2023-05-15 23:59:59'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // Less than or equal tests
+  {
+    name: "date_vs_timestamp_lte_true_less",
+    statement: "DATE '2023-05-15' <= TIMESTAMP '2023-05-15 10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "date_vs_timestamp_lte_true_equal",
+    statement: "DATE '2023-05-15' <= TIMESTAMP '2023-05-15 00:00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // Greater than or equal tests
+  {
+    name: "date_vs_timestamp_gte_false",
+    statement: "DATE '2023-05-15' >= TIMESTAMP '2023-05-15 10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "date_vs_timestamp_gte_true_equal",
+    statement: "DATE '2023-05-15' >= TIMESTAMP '2023-05-15 00:00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  }
+]
+
+// DATE vs TIMESTAMPZ comparisons
+date_vs_timestampz::[
+  // Equality tests
+  {
+    name: "date_vs_timestampz_eq_true",
+    statement: "DATE '2023-05-15' = TIMESTAMP '2023-05-15 00:00:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "date_vs_timestampz_eq_false",
+    statement: "DATE '2023-05-15' = TIMESTAMP '2023-05-15 10:30:00+05:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Inequality tests
+  {
+    name: "date_vs_timestampz_neq_false",
+    statement: "DATE '2023-05-15' != TIMESTAMP '2023-05-15 00:00:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "date_vs_timestampz_neq_true",
+    statement: "DATE '2023-05-15' != TIMESTAMP '2023-05-15 10:30:00+05:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "date_vs_timestampz_neq_true_alt",
+    statement: "DATE '2023-05-15' <> TIMESTAMP '2023-05-15 10:30:00+05:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // Less than tests
+  {
+    name: "date_vs_timestampz_lt_true",
+    statement: "DATE '2023-05-15' < TIMESTAMP '2023-05-15 10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "date_vs_timestampz_lt_false",
+    statement: "DATE '2023-05-15' < TIMESTAMP '2023-05-15 00:00:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Greater than tests
+  {
+    name: "date_vs_timestampz_gt_false",
+    statement: "DATE '2023-05-15' > TIMESTAMP '2023-05-15 10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "date_vs_timestampz_gt_true",
+    statement: "DATE '2023-05-16' > TIMESTAMP '2023-05-15 23:59:59+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // Less than or equal tests
+  {
+    name: "date_vs_timestampz_lte_true_less",
+    statement: "DATE '2023-05-15' <= TIMESTAMP '2023-05-15 10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "date_vs_timestampz_lte_true_equal",
+    statement: "DATE '2023-05-15' <= TIMESTAMP '2023-05-15 00:00:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // Greater than or equal tests
+  {
+    name: "date_vs_timestampz_gte_false",
+    statement: "DATE '2023-05-15' >= TIMESTAMP '2023-05-15 10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "date_vs_timestampz_gte_true_equal",
+    statement: "DATE '2023-05-15' >= TIMESTAMP '2023-05-15 00:00:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  }
+]
+
+// TIMESTAMP vs TIMESTAMP comparisons
+timestamp_vs_timestamp::[
+  // Equality tests
+  {
+    name: "timestamp_eq_same",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' = TIMESTAMP '2023-05-15 10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestamp_eq_different",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' = TIMESTAMP '2023-05-15 14:45:30'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Inequality tests
+  {
+    name: "timestamp_neq_different",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' != TIMESTAMP '2023-05-15 14:45:30'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestamp_neq_same",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' != TIMESTAMP '2023-05-15 10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "timestamp_neq_different_alt",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' <> TIMESTAMP '2023-05-15 14:45:30'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestamp_neq_same_alt",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' <> TIMESTAMP '2023-05-15 10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Less than tests
+  {
+    name: "timestamp_lt_true",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' < TIMESTAMP '2023-05-15 14:45:30'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestamp_lt_false",
+    statement: "TIMESTAMP '2023-05-15 14:45:30' < TIMESTAMP '2023-05-15 10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Greater than tests
+  {
+    name: "timestamp_gt_true",
+    statement: "TIMESTAMP '2023-05-15 14:45:30' > TIMESTAMP '2023-05-15 10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestamp_gt_false",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' > TIMESTAMP '2023-05-15 14:45:30'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Less than or equal tests
+  {
+    name: "timestamp_lte_true_less",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' <= TIMESTAMP '2023-05-15 14:45:30'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestamp_lte_true_equal",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' <= TIMESTAMP '2023-05-15 10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestamp_lte_false",
+    statement: "TIMESTAMP '2023-05-15 14:45:30' <= TIMESTAMP '2023-05-15 10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Greater than or equal tests
+  {
+    name: "timestamp_gte_true_greater",
+    statement: "TIMESTAMP '2023-05-15 14:45:30' >= TIMESTAMP '2023-05-15 10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestamp_gte_true_equal",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' >= TIMESTAMP '2023-05-15 10:30:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestamp_gte_false",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' >= TIMESTAMP '2023-05-15 14:45:30'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  }
+]
+
+// TIMESTAMP vs TIMESTAMPZ comparisons
+timestamp_vs_timestampz::[
+  // Equality tests
+  {
+    name: "timestamp_vs_timestampz_eq_true",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' = TIMESTAMP '2023-05-15 10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestamp_vs_timestampz_eq_false",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' = TIMESTAMP '2023-05-15 10:30:00+05:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Inequality tests
+  {
+    name: "timestamp_vs_timestampz_neq_false",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' != TIMESTAMP '2023-05-15 10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "timestamp_vs_timestampz_neq_true",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' != TIMESTAMP '2023-05-15 10:30:00+05:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestamp_vs_timestampz_neq_true_alt",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' <> TIMESTAMP '2023-05-15 10:30:00+05:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // Less than tests
+  {
+    name: "timestamp_vs_timestampz_lt_true",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' < TIMESTAMP '2023-05-15 14:45:30+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestamp_vs_timestampz_lt_false",
+    statement: "TIMESTAMP '2023-05-15 14:45:30' < TIMESTAMP '2023-05-15 10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Greater than tests
+  {
+    name: "timestamp_vs_timestampz_gt_true",
+    statement: "TIMESTAMP '2023-05-15 14:45:30' > TIMESTAMP '2023-05-15 10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestamp_vs_timestampz_gt_false",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' > TIMESTAMP '2023-05-15 14:45:30+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Less than or equal tests
+  {
+    name: "timestamp_vs_timestampz_lte_true_less",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' <= TIMESTAMP '2023-05-15 14:45:30+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestamp_vs_timestampz_lte_true_equal",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' <= TIMESTAMP '2023-05-15 10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestamp_vs_timestampz_lte_false",
+    statement: "TIMESTAMP '2023-05-15 14:45:30' <= TIMESTAMP '2023-05-15 10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Greater than or equal tests
+  {
+    name: "timestamp_vs_timestampz_gte_true_greater",
+    statement: "TIMESTAMP '2023-05-15 14:45:30' >= TIMESTAMP '2023-05-15 10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestamp_vs_timestampz_gte_true_equal",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' >= TIMESTAMP '2023-05-15 10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestamp_vs_timestampz_gte_false",
+    statement: "TIMESTAMP '2023-05-15 10:30:00' >= TIMESTAMP '2023-05-15 14:45:30+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  }
+]
+
+// TIMESTAMPZ vs TIMESTAMPZ comparisons
+timestampz_vs_timestampz::[
+  // Equality tests
+  {
+    name: "timestampz_eq_same",
+    statement: "TIMESTAMP '2023-05-15 10:30:00+05:00' = TIMESTAMP '2023-05-15 10:30:00+05:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestampz_eq_different",
+    statement: "TIMESTAMP '2023-05-15 10:30:00+05:00' = TIMESTAMP '2023-05-15 14:45:30-03:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "timestampz_eq_utc_equivalent",
+    statement: "TIMESTAMP '2023-05-15 10:30:00+00:00' = TIMESTAMP '2023-05-15 10:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestampz_different_zones_same_utc",
+    statement: "TIMESTAMP '2023-05-15 10:00:00+01:00' = TIMESTAMP '2023-05-15 09:00:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestampz_same_localtime_different_zones_eq_false",
+    statement: "TIMESTAMP '2023-05-15 10:30:00+05:00' = TIMESTAMP '2023-05-15 10:30:00-03:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Inequality tests
+  {
+    name: "timestampz_same_localtime_different_zones_neq_true",
+    statement: "TIMESTAMP '2023-05-15 10:30:00+05:00' != TIMESTAMP '2023-05-15 10:30:00-03:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestampz_same_localtime_different_zones_neq_true_alt",
+    statement: "TIMESTAMP '2023-05-15 10:30:00+05:00' <> TIMESTAMP '2023-05-15 10:30:00-03:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // Less than tests
+  {
+    name: "timestampz_lt_true",
+    statement: "TIMESTAMP '2023-05-15 05:30:00+00:00' < TIMESTAMP '2023-05-15 10:30:00+05:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "timestampz_same_localtime_different_zones_lt",
+    statement: "TIMESTAMP '2023-05-15 10:30:00+05:00' < TIMESTAMP '2023-05-15 10:30:00-03:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // Greater than tests
+  {
+    name: "timestampz_gt_true",
+    statement: "TIMESTAMP '2023-05-15 14:45:30-03:00' > TIMESTAMP '2023-05-15 05:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestampz_same_localtime_different_zones_gt",
+    statement: "TIMESTAMP '2023-05-15 10:30:00-03:00' > TIMESTAMP '2023-05-15 10:30:00+05:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // Less than or equal tests
+  {
+    name: "timestampz_lte_true_less",
+    statement: "TIMESTAMP '2023-05-15 05:30:00+00:00' <= TIMESTAMP '2023-05-15 10:30:00+05:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestampz_lte_true_equal",
+    statement: "TIMESTAMP '2023-05-15 10:00:00+01:00' <= TIMESTAMP '2023-05-15 09:00:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestampz_lte_false",
+    statement: "TIMESTAMP '2023-05-15 14:45:30-03:00' <= TIMESTAMP '2023-05-15 05:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // Greater than or equal tests
+  {
+    name: "timestampz_gte_true_greater",
+    statement: "TIMESTAMP '2023-05-15 14:45:30-03:00' >= TIMESTAMP '2023-05-15 05:30:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestampz_gte_true_equal",
+    statement: "TIMESTAMP '2023-05-15 10:00:00+01:00' >= TIMESTAMP '2023-05-15 09:00:00+00:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "timestampz_gte_false",
+    statement: "TIMESTAMP '2023-05-15 05:30:00+00:00' >= TIMESTAMP '2023-05-15 14:45:30-03:00'",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  }
+]

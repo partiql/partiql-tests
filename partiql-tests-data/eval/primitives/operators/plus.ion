@@ -265,6 +265,63 @@ plus::[
       }
     ]
   },
+  
+  // Interval + Time with time zone tests
+  {
+    name: "INTERVAL '1' HOUR + TIME WITH TIME ZONE '01:01:01.1+05:00'",
+    statement: "INTERVAL '1' HOUR + TIME WITH TIME ZONE '01:01:01.1+05:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $time::{ hour: 2, minute: 1, second: 1.1, offset: 300 }
+    }
+  },
+  {
+    name: "TIME WITH TIME ZONE '01:01:01.1+05:00' + INTERVAL '1' HOUR",
+    statement: "TIME WITH TIME ZONE '01:01:01.1+05:00' + INTERVAL '1' HOUR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $time::{ hour: 2, minute: 1, second: 1.1, offset: 300 }
+    }
+  },
+  {
+    name: "INTERVAL '30' MINUTE + TIME WITH TIME ZONE '01:01:01.1-08:00'",
+    statement: "INTERVAL '30' MINUTE + TIME WITH TIME ZONE '01:01:01.1-08:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $time::{ hour: 1, minute: 31, second: 1.1, offset: -480 }
+    }
+  },
+  {
+    name: "TIME WITH TIME ZONE '01:01:01.1-08:00' + INTERVAL '30' MINUTE",
+    statement: "TIME WITH TIME ZONE '01:01:01.1-08:00' + INTERVAL '30' MINUTE",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $time::{ hour: 1, minute: 31, second: 1.1, offset: -480 }
+    }
+  },
+  {
+    name: "INTERVAL '2.5' SECOND + TIME WITH TIME ZONE '01:01:01.1+00:00'",
+    statement: "INTERVAL '2.5' SECOND + TIME WITH TIME ZONE '01:01:01.1+00:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $time::{ hour: 1, minute: 1, second: 3.6, offset: 0 }
+    }
+  },
+  {
+    name: "TIME WITH TIME ZONE '01:01:01.1+00:00' + INTERVAL '2.5' SECOND",
+    statement: "TIME WITH TIME ZONE '01:01:01.1+00:00' + INTERVAL '2.5' SECOND",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $time::{ hour: 1, minute: 1, second: 3.6, offset: 0 }
+    }
+  },
+  
   // TIMESTAMP WITHOUT TIME ZONE + Interval tests
   {
     name: "TIMESTAMP WITHOUT TIME ZONE '2025-01-01 01:01:01.1' + INTERVAL '1' YEAR",
@@ -382,6 +439,116 @@ plus::[
       result: EvaluationSuccess,
       evalMode: [EvalModeCoerce, EvalModeError],
       output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 1, minute: 1, second: 2.2, offset: null }
+    }
+  },
+  
+  // Interval + Timestamp with time zone tests
+  {
+    name: "INTERVAL '1' YEAR + TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1+05:00'",
+    statement: "INTERVAL '1' YEAR + TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1+05:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2026, month: 1, day: 1, hour: 1, minute: 1, second: 1.1, offset: 300 }
+    }
+  },
+  {
+    name: "TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1+05:00' + INTERVAL '1' YEAR",
+    statement: "TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1+05:00' + INTERVAL '1' YEAR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2026, month: 1, day: 1, hour: 1, minute: 1, second: 1.1, offset: 300 }
+    }
+  },
+  {
+    name: "INTERVAL '3' MONTH + TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1-08:00'",
+    statement: "INTERVAL '3' MONTH + TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1-08:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2025, month: 4, day: 1, hour: 1, minute: 1, second: 1.1, offset: -480 }
+    }
+  },
+  {
+    name: "TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1-08:00' + INTERVAL '3' MONTH",
+    statement: "TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1-08:00' + INTERVAL '3' MONTH",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2025, month: 4, day: 1, hour: 1, minute: 1, second: 1.1, offset: -480 }
+    }
+  },
+  {
+    name: "INTERVAL '7' DAY + TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1+00:00'",
+    statement: "INTERVAL '7' DAY + TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1+00:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2025, month: 1, day: 8, hour: 1, minute: 1, second: 1.1, offset: 0 }
+    }
+  },
+  {
+    name: "TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1+00:00' + INTERVAL '7' DAY",
+    statement: "TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1+00:00' + INTERVAL '7' DAY",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2025, month: 1, day: 8, hour: 1, minute: 1, second: 1.1, offset: 0 }
+    }
+  },
+  {
+    name: "INTERVAL '2' HOUR + TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1+02:30'",
+    statement: "INTERVAL '2' HOUR + TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1+02:30'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 3, minute: 1, second: 1.1, offset: 150 }
+    }
+  },
+  {
+    name: "TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1+02:30' + INTERVAL '2' HOUR",
+    statement: "TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1+02:30' + INTERVAL '2' HOUR",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 3, minute: 1, second: 1.1, offset: 150 }
+    }
+  },
+  {
+    name: "INTERVAL '45' MINUTE + TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1-05:30'",
+    statement: "INTERVAL '45' MINUTE + TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1-05:30'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 1, minute: 46, second: 1.1, offset: -330 }
+    }
+  },
+  {
+    name: "TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1-05:30' + INTERVAL '45' MINUTE",
+    statement: "TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1-05:30' + INTERVAL '45' MINUTE",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 1, minute: 46, second: 1.1, offset: -330 }
+    }
+  },
+  {
+    name: "INTERVAL '3.7' SECOND + TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1+00:00'",
+    statement: "INTERVAL '3.7' SECOND + TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1+00:00'",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 1, minute: 1, second: 4.8, offset: 0 }
+    }
+  },
+  {
+    name: "TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1+00:00' + INTERVAL '3.7' SECOND",
+    statement: "TIMESTAMP WITH TIME ZONE '2025-01-01 01:01:01.1+00:00' + INTERVAL '3.7' SECOND",
+    assert: {
+      result: EvaluationSuccess,
+      evalMode: [EvalModeCoerce, EvalModeError],
+      output: $timestamp::{ year: 2025, month: 1, day: 1, hour: 1, minute: 1, second: 4.8, offset: 0 }
     }
   },
   
