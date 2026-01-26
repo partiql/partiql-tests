@@ -1014,8 +1014,8 @@
     }
   },
   {
-    name:"max rep grouped by fiscal_year",
-    statement:"SELECT max(rep) FROM sales_report group by fiscal_year",
+    name:"max and min of rep grouped by fiscal_year",
+    statement:"SELECT max(rep), min(rep)) FROM sales_report group by fiscal_year",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
@@ -1024,42 +1024,23 @@
       ],
       output:$bag::[
         {
-          _1:"Meg"
+          _1:"Meg",
+          _2:"Bob"
         },
         {
-          _1:"Meg"
+          _1:"Meg",
+          _2:"Bob"
         },
         {
-          _1:"Meg"
+          _1:"Meg",
+          _2:"Bob"
         }
       ]
     }
   },
   {
-    name:"min rep grouped by fiscal_year",
-    statement:"SELECT min(rep) FROM sales_report group by fiscal_year",
-    assert:{
-      result:EvaluationSuccess,
-      evalMode:[
-        EvalModeCoerce,
-        EvalModeError
-      ],
-      output:$bag::[
-        {
-          _1:"Bob"
-        },
-        {
-          _1:"Bob"
-        },
-        {
-          _1:"Bob"
-        }
-      ]
-    }
-  },
-  {
-    name:"max created_date grouped by fiscal_year",
-    statement:"SELECT max(created_date) FROM sales_report group by fiscal_year",
+    name:"max and min of created_date grouped by fiscal_year",
+    statement:"SELECT max(created_date), min(created_date) FROM sales_report group by fiscal_year",
     assert:{
       result:EvaluationSuccess,
       evalMode:[
