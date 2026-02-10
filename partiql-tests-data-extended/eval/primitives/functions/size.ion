@@ -227,4 +227,52 @@ size::[
       output:$missing::null
     }
   },
+  {
+    name:"size with SELECT subquery{param:\"SELECT a FROM <<{'a': 1}>>\",result:1}",
+    statement:"size(SELECT a FROM <<{'a': 1}>>)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"size with SELECT subquery{param:\"SELECT a FROM <<{'a': 1}, {'a': 2}>>\",result:2}",
+    statement:"size(SELECT a FROM <<{'a': 1}, {'a': 2}>>)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:2
+    }
+  },
+  {
+    name:"size with SELECT subquery and WHERE{param:\"SELECT a FROM <<{'a': 1}, {'a': 2}>> WHERE a = 1\",result:1}",
+    statement:"size(SELECT a FROM <<{'a': 1}, {'a': 2}>> WHERE a = 1)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:1
+    }
+  },
+  {
+    name:"size with SELECT subquery empty result{param:\"SELECT a FROM <<{'a': 1}>> WHERE a = 2\",result:0}",
+    statement:"size(SELECT a FROM <<{'a': 1}>> WHERE a = 2)",
+    assert:{
+      result:EvaluationSuccess,
+      evalMode:[
+        EvalModeCoerce,
+        EvalModeError
+      ],
+      output:0
+    }
+  },
 ]
