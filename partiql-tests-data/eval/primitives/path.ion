@@ -962,3 +962,198 @@ pathUnpivotMissing::[
     }
   }
 ]
+
+
+// Tests for P392622965: MISSING datum field access in FROM clause
+// These tests verify that accessing fields on MISSING datum works in both SELECT and FROM clauses
+'path-missing-field-access-in-from-clause'::[
+  envs::{
+    test_data: [
+      { a: 1, b: { c: 10 } },
+      { a: 2 },  // missing 'b' field
+      { a: 3, b: { c: 30 } }
+    ],
+    nested_missing: [
+      { x: { y: { z: 1 } } },
+      { x: { } },  // missing 'y' field
+      { x: { y: { } } }  // missing 'z' field
+    ]
+  },
+  {
+    name: "access missing field in FROM clause with scan",
+    statement: "SELECT * FROM test_data AS t, t.nonexistent AS n",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
+          { a: 1, b: { c: 10 } },
+          { a: 2 },
+          { a: 3, b: { c: 30 } }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "access nested missing field in FROM clause with scan",
+    statement: "SELECT * FROM test_data AS t, t.nonexistent.nested AS n",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
+          { a: 1, b: { c: 10 } },
+          { a: 2 },
+          { a: 3, b: { c: 30 } }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "access deeply nested missing field in FROM clause",
+    statement: "SELECT * FROM test_data AS t, t.a.b.c.d.e.f AS deep",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
+          { a: 1, b: { c: 10 } },
+          { a: 2 },
+          { a: 3, b: { c: 30 } }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "access missing field in FROM with JOIN",
+    statement: "SELECT * FROM test_data AS t1, test_data AS t2, t1.nonexistent AS n",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
+          { a: 1, a: 1, b: { c: 10 }, b: { c: 10 } },
+          { a: 1, a: 2, b: { c: 10 } },
+          { a: 1, a: 3, b: { c: 10 }, b: { c: 30 } },
+          { a: 2, a: 1, b: { c: 10 } },
+          { a: 2, a: 2 },
+          { a: 2, a: 3, b: { c: 30 } },
+          { a: 3, a: 1, b: { c: 30 }, b: { c: 10 } },
+          { a: 3, a: 2, b: { c: 30 } },
+          { a: 3, a: 3, b: { c: 30 }, b: { c: 30 } }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "mixed existing and missing fields in FROM clause",
+    statement: "SELECT * FROM test_data AS t, t.b.nonexistent AS n",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
+          { a: 1, b: { c: 10 } },
+          { a: 2 },
+          { a: 3, b: { c: 30 } }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "access array index on missing field in FROM clause",
+    statement: "SELECT * FROM test_data AS t, t.nonexistent[0] AS x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
+          { a: 1, b: { c: 10 } },
+          { a: 2 },
+          { a: 3, b: { c: 30 } }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "access nested array index on missing field in FROM clause",
+    statement: "SELECT * FROM test_data AS t, t.nonexistent[0][1] AS x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
+          { a: 1, b: { c: 10 } },
+          { a: 2 },
+          { a: 3, b: { c: 30 } }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "access array index on nested missing field in FROM clause",
+    statement: "SELECT * FROM test_data AS t, t.nonexistent.nested[0] AS x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
+          { a: 1, b: { c: 10 } },
+          { a: 2 },
+          { a: 3, b: { c: 30 } }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "iterate over array index on missing field in FROM clause",
+    statement: "SELECT * FROM test_data AS t, @t.nonexistent[0] AS x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[
+          { a: 1, b: { c: 10 } },
+          { a: 2 },
+          { a: 3, b: { c: 30 } }
+        ]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  }
+]

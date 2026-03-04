@@ -1652,4 +1652,109 @@ lower::[
       output:$missing::null
     }
   },
+  {
+    name:"lower unsupported type{param:\"1\"}",
+    statement:"lower(1)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"lower unsupported type{param:\"1.0\"}",
+    statement:"lower(1.0)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"lower unsupported type{param:\"1e0\"}",
+    statement:"lower(1e0)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"lower unsupported type{param:\"true\"}",
+    statement:"lower(true)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"lower unsupported type{param:\"`[]`\"}",
+    statement:"lower(`[]`)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"lower unsupported type{param:\"`{}`\"}",
+    statement:"lower(`{}`)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"lower unsupported type{param:\"`()`\"}",
+    statement:"lower(`()`)",
+    assert:[
+      {
+        evalMode:EvalModeError,
+        result:EvaluationFail
+      },
+      {
+        result:EvaluationSuccess,
+        evalMode:EvalModeCoerce,
+        output:$missing::null
+      }
+    ]
+  },
 ]
