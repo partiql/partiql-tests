@@ -146,5 +146,196 @@ between::[
       result:EvaluationSuccess,
       output: false
     }
+  },
+  // TIME BETWEEN TIME AND TIME
+  {
+    name:"between time time time true",
+    statement:"TIME '12:00:00' BETWEEN TIME '10:00:00' AND TIME '14:00:00'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name:"between time time time false",
+    statement:"TIME '09:00:00' BETWEEN TIME '10:00:00' AND TIME '14:00:00'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name:"between time time time boundary",
+    statement:"TIME '10:00:00' BETWEEN TIME '10:00:00' AND TIME '14:00:00'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: true
+    }
+  },
+  // TIME BETWEEN TIMEZ AND TIMEZ
+  {
+    name:"between time timez timez true",
+    statement:"TIME '12:00:00' BETWEEN TIME WITH TIME ZONE '10:00:00+00:00' AND TIME WITH TIME ZONE '14:00:00+00:00'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name:"between time timez timez false",
+    statement:"TIME '09:00:00' BETWEEN TIME WITH TIME ZONE '10:00:00+00:00' AND TIME WITH TIME ZONE '14:00:00+00:00'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: false
+    }
+  },
+  // DATE BETWEEN TIMESTAMP AND TIMESTAMP
+  {
+    name:"between date timestamp timestamp true",
+    statement:"DATE '2025-01-15' BETWEEN TIMESTAMP '2025-01-01 00:00:00' AND TIMESTAMP '2025-01-31 23:59:59'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name:"between date timestamp timestamp false",
+    statement:"DATE '2025-02-15' BETWEEN TIMESTAMP '2025-01-01 00:00:00' AND TIMESTAMP '2025-01-31 23:59:59'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: false
+    }
+  },
+  // DATE BETWEEN TIMESTAMPZ AND TIMESTAMPZ
+  {
+    name:"between date timestampz timestampz true",
+    statement:"DATE '2025-01-15' BETWEEN TIMESTAMP WITH TIME ZONE '2025-01-01 00:00:00+00:00' AND TIMESTAMP WITH TIME ZONE '2025-01-31 23:59:59+00:00'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name:"between date timestampz timestampz false",
+    statement:"DATE '2025-02-15' BETWEEN TIMESTAMP WITH TIME ZONE '2025-01-01 00:00:00+00:00' AND TIMESTAMP WITH TIME ZONE '2025-01-31 23:59:59+00:00'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: false
+    }
+  },
+  // TIMESTAMP BETWEEN DATE AND DATE
+  {
+    name:"between timestamp date date true",
+    statement:"TIMESTAMP '2025-01-15 12:00:00' BETWEEN DATE '2025-01-01' AND DATE '2025-01-31'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name:"between timestamp date date false",
+    statement:"TIMESTAMP '2025-02-15 12:00:00' BETWEEN DATE '2025-01-01' AND DATE '2025-01-31'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: false
+    }
+  },
+  // TIMESTAMPZ BETWEEN DATE AND DATE
+  {
+    name:"between timestampz date date true",
+    statement:"TIMESTAMP WITH TIME ZONE '2025-01-15 12:00:00+00:00' BETWEEN DATE '2025-01-01' AND DATE '2025-01-31'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name:"between timestampz date date false",
+    statement:"TIMESTAMP WITH TIME ZONE '2025-02-15 12:00:00+00:00' BETWEEN DATE '2025-01-01' AND DATE '2025-01-31'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: false
+    }
+  },
+  // DATE BETWEEN DATE AND TIMESTAMP
+  {
+    name:"between date date timestamp true",
+    statement:"DATE '2025-01-15' BETWEEN DATE '2025-01-01' AND TIMESTAMP '2025-01-31 23:59:59'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: true
+    }
+  },
+  // TIMESTAMP BETWEEN DATE AND TIMESTAMP
+  {
+    name:"between timestamp date timestamp true",
+    statement:"TIMESTAMP '2025-01-15 12:00:00' BETWEEN DATE '2025-01-01' AND TIMESTAMP '2025-01-31 23:59:59'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: true
+    }
+  },
+  // TIMESTAMP BETWEEN TIMESTAMP AND DATE
+  {
+    name:"between timestamp timestamp date true",
+    statement:"TIMESTAMP '2025-01-15 12:00:00' BETWEEN TIMESTAMP '2025-01-01 00:00:00' AND DATE '2025-01-31'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: true
+    }
+  },
+  // DATE BETWEEN DATE AND DATE
+  {
+    name:"between date date date true",
+    statement:"DATE '2025-01-15' BETWEEN DATE '2025-01-01' AND DATE '2025-01-31'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name:"between date date date false",
+    statement:"DATE '2025-02-15' BETWEEN DATE '2025-01-01' AND DATE '2025-01-31'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: false
+    }
+  },
+  // TIMESTAMP BETWEEN TIMESTAMP AND TIMESTAMP
+  {
+    name:"between timestamp timestamp timestamp true",
+    statement:"TIMESTAMP '2025-01-15 12:00:00' BETWEEN TIMESTAMP '2025-01-01 00:00:00' AND TIMESTAMP '2025-01-31 23:59:59'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name:"between timestamp timestamp timestamp false",
+    statement:"TIMESTAMP '2025-02-15 12:00:00' BETWEEN TIMESTAMP '2025-01-01 00:00:00' AND TIMESTAMP '2025-01-31 23:59:59'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output: false
+    }
   }
 ]
