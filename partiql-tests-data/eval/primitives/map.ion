@@ -1,0 +1,464 @@
+envs::{
+  scores: $map::[["math", 90], ["science", 85], ["english", 72]],
+  prices: $map::[[1.5, "small"], [2.5, "medium"], [3.5, "large"]],
+  empty_map: $map::[],
+  data: [
+    { a: 1, b: null },
+  ],
+}
+
+map::[
+  // === Construction ===
+  {
+    name:"construct an empty map",
+    statement:"MAP { }",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$map::[]
+    }
+  },
+  {
+    name:"construct a map with string keys",
+    statement:"MAP { 'a': 1, 'b': 2, 'c': 3 }",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$map::[["a", 1], ["b", 2], ["c", 3]]
+    }
+  },
+  {
+    name:"construct a map with duplicate key keeps last value",
+    statement:"MAP { 'a': 1, 'a': 2 }",
+    assert:[
+      {
+        evalMode:[EvalModeCoerce],
+        result:EvaluationSuccess,
+        output:$map::[["a", 2]]
+      },
+      {
+        evalMode:[EvalModeError],
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"construct a map with explicit null value preserves the key",
+    statement:"MAP { 'a': 1, 'b': NULL, 'c': 3 }",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$map::[["a", 1], ["b", null], ["c", 3]]
+    }
+  },
+  {
+    name:"construct a map with explicit missing value drops the entry",
+    statement:"MAP { 'a': 1, 'b': MISSING, 'c': 3 }",
+    assert:[
+      {
+        evalMode:[EvalModeCoerce],
+        result:EvaluationSuccess,
+        output:$map::[["a", 1], ["c", 3]]
+      },
+      {
+        evalMode:[EvalModeError],
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"construct a map with evaluated null value preserves the key",
+    statement:"SELECT VALUE MAP { 'a': v.a, 'b': v.b } FROM data AS v",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[
+        $map::[["a", 1], ["b", null]]
+      ]
+    }
+  },
+  {
+    name:"construct a map with evaluated missing value drops the entry",
+    statement:"SELECT VALUE MAP { 'a': v.a, 'c': v.c } FROM data AS v",
+    assert:[
+      {
+        evalMode:[EvalModeCoerce],
+        result:EvaluationSuccess,
+        output:$bag::[
+          $map::[["a", 1]]
+        ]
+      },
+      {
+        evalMode:[EvalModeError],
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"construct a map with null key returns null map",
+    statement:"MAP { NULL: 1, 'b': 2 }",
+    assert:[
+      {
+        evalMode:[EvalModeCoerce, EvalModeError],
+        result:EvaluationSuccess,
+        output:null
+      }
+    ]
+  },
+  {
+    name:"construct a map with integer keys",
+    statement:"MAP { 1: 'one', 2: 'two', 3: 'three' }",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$map::[[1, "one"], [2, "two"], [3, "three"]]
+    }
+  },
+  {
+    name:"construct a map with decimal keys",
+    statement:"MAP { 1.5: 'small', 2.5: 'medium', 3.5: 'large' }",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$map::[[1.5, "small"], [2.5, "medium"], [3.5, "large"]]
+    }
+  },
+
+  // === Access ===
+  {
+    name:"access map by key returns the value",
+    statement:"MAP { 'a': 1, 'b': 2 }['a']",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:1
+    }
+  },
+  {
+    name:"access map by second key returns the value",
+    statement:"MAP { 'x': 10, 'y': 20 }['y']",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:20
+    }
+  },
+  {
+    name:"access map with key not found returns missing",
+    statement:"MAP { 'a': 1, 'b': 2 }['z']",
+    assert:[
+      {
+        evalMode:[EvalModeCoerce],
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode:[EvalModeError],
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"access map from environment variable",
+    statement:"scores['math']",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:90
+    }
+  },
+  {
+    name:"access map from environment variable with nonexistent key returns missing",
+    statement:"scores['history']",
+    assert:[
+      {
+        evalMode:[EvalModeCoerce],
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode:[EvalModeError],
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"select values from environment map",
+    statement:"SELECT scores[v] AS score FROM ['math', 'science'] AS v",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[{score: 90}, {score: 85}]
+    }
+  },
+  {
+    name:"filter environment map entries by value",
+    statement:"SELECT k AS subject FROM UNPIVOT scores AS s AT k WHERE s > 80",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[{subject: "math"}, {subject: "science"}]
+    }
+  },
+  {
+    name:"count entries in environment map",
+    statement:"SELECT COUNT(*) AS cnt FROM UNPIVOT scores AS s",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[{cnt: 3}]
+    }
+  },
+  {
+    name:"access map with integer key returns the value",
+    statement:"MAP { 1: 'one', 2: 'two', 3: 'three' }[2]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:"two"
+    }
+  },
+  {
+    name:"access map with integer key not found returns missing",
+    statement:"MAP { 1: 'one', 2: 'two' }[99]",
+    assert:[
+      {
+        evalMode:[EvalModeCoerce],
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode:[EvalModeError],
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"access decimal-keyed map from environment variable",
+    statement:"prices[2.5]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:"medium"
+    }
+  },
+  {
+    name:"access decimal-keyed map with nonexistent key returns missing",
+    statement:"prices[9.9]",
+    assert:[
+      {
+        evalMode:[EvalModeCoerce],
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode:[EvalModeError],
+        result:EvaluationFail
+      }
+    ]
+  },
+
+  // === size ===
+  {
+    name:"size of a map returns number of entries",
+    statement:"size(MAP { 'a': 1, 'b': 2, 'c': 3 })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:3
+    }
+  },
+  {
+    name:"size of an empty map returns zero",
+    statement:"size(MAP { })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:0
+    }
+  },
+
+  // === exists ===
+  {
+    name:"exists on a non-empty map returns true",
+    statement:"exists(MAP { 'a': 1 })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"exists on an empty map returns false",
+    statement:"exists(MAP { })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+
+  // === contains_key ===
+  {
+    name:"contains_key returns true when key exists",
+    statement:"contains_key(MAP { 'a': 1, 'b': 2 }, 'a')",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"contains_key returns false when key is absent",
+    statement:"contains_key(MAP { 'a': 1, 'b': 2 }, 'z')",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"contains_key with integer key returns true",
+    statement:"contains_key(MAP { 1: 'one', 2: 'two' }, 1)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"contains_key with decimal key returns true",
+    statement:"contains_key(prices, 2.5)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"contains_key with decimal key returns false when absent",
+    statement:"contains_key(prices, 9.9)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"contains_key with null key returns null",
+    statement:"contains_key(MAP { 'a': 1, 'b': 2 }, NULL)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"contains_key with missing key returns missing",
+    statement:"contains_key(MAP { 'a': 1, 'b': 2 }, MISSING)",
+    assert:[
+      {
+        evalMode:[EvalModeCoerce],
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode:[EvalModeError],
+        result:EvaluationFail
+      }
+    ]
+  },
+
+  // === map_get ===
+  {
+    name:"map_get returns the value for an existing key",
+    statement:"map_get(MAP { 'a': 1, 'b': 2 }, 'b')",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:2
+    }
+  },
+  {
+    name:"map_get with integer key returns the value",
+    statement:"map_get(MAP { 10: 'ten', 20: 'twenty' }, 10)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:"ten"
+    }
+  },
+  {
+    name:"map_get with decimal key returns the value",
+    statement:"map_get(prices, 3.5)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:"large"
+    }
+  },
+  {
+    name:"map_get with null key returns null",
+    statement:"map_get(MAP { 'a': 1, 'b': 2 }, NULL)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"map_get with missing key returns missing",
+    statement:"map_get(MAP { 'a': 1, 'b': 2 }, MISSING)",
+    assert:[
+      {
+        evalMode:[EvalModeCoerce],
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode:[EvalModeError],
+        result:EvaluationFail
+      }
+    ]
+  },
+
+  // === map_keys ===
+  {
+    name:"map_keys returns a bag of all keys",
+    statement:"map_keys(MAP { 'x': 1, 'y': 2 })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::["x", "y"]
+    }
+  },
+  {
+    name:"map_keys on decimal-keyed map returns all keys",
+    statement:"map_keys(prices)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[1.5, 2.5, 3.5]
+    }
+  },
+
+  // === map_values ===
+  {
+    name:"map_values returns a bag of all values",
+    statement:"map_values(MAP { 'x': 1, 'y': 2 })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[1, 2]
+    }
+  },
+  {
+    name:"map_values on decimal-keyed map returns all values",
+    statement:"map_values(prices)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::["small", "medium", "large"]
+    }
+  },
+]
