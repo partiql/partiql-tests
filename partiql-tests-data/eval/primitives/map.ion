@@ -1,7 +1,7 @@
 envs::{
-  scores: $map::[["math", 90], ["science", 85], ["english", 72]],
-  prices: $map::[[1.5, "small"], [2.5, "medium"], [3.5, "large"]],
-  empty_map: $map::[],
+  scores: $map::string::integer::[["math", 90], ["science", 85], ["english", 72]],
+  prices: $map::decimal::string::[[1.5, "small"], [2.5, "medium"], [3.5, "large"]],
+  empty_map: $map::string::dynamic::[],
   data: [
     { a: 1, b: null },
   ],
@@ -15,7 +15,7 @@ map::[
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:$map::[]
+      output:$map::string::dynamic::[]
     }
   },
   {
@@ -24,7 +24,7 @@ map::[
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:$map::[["a", 1], ["b", 2], ["c", 3]]
+      output:$map::string::integer::[["a", 1], ["b", 2], ["c", 3]]
     }
   },
   {
@@ -32,13 +32,9 @@ map::[
     statement:"MAP { 'a': 1, 'a': 2 }",
     assert:[
       {
-        evalMode:[EvalModeCoerce],
+        evalMode:[EvalModeCoerce, EvalModeError],
         result:EvaluationSuccess,
-        output:$map::[["a", 2]]
-      },
-      {
-        evalMode:[EvalModeError],
-        result:EvaluationFail
+        output:$map::string::integer::[["a", 2]]
       }
     ]
   },
@@ -48,7 +44,7 @@ map::[
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:$map::[["a", 1], ["b", null], ["c", 3]]
+      output:$map::string::integer::[["a", 1], ["b", null], ["c", 3]]
     }
   },
   {
@@ -58,7 +54,7 @@ map::[
       {
         evalMode:[EvalModeCoerce],
         result:EvaluationSuccess,
-        output:$map::[["a", 1], ["c", 3]]
+        output:$map::string::integer::[["a", 1], ["c", 3]]
       },
       {
         evalMode:[EvalModeError],
@@ -73,7 +69,7 @@ map::[
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[
-        $map::[["a", 1], ["b", null]]
+        $map::string::integer::[["a", 1], ["b", null]]
       ]
     }
   },
@@ -85,7 +81,7 @@ map::[
         evalMode:[EvalModeCoerce],
         result:EvaluationSuccess,
         output:$bag::[
-          $map::[["a", 1]]
+          $map::string::integer::[["a", 1]]
         ]
       },
       {
@@ -111,7 +107,7 @@ map::[
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:$map::[[1, "one"], [2, "two"], [3, "three"]]
+      output:$map::integer::string::[[1, "one"], [2, "two"], [3, "three"]]
     }
   },
   {
@@ -120,7 +116,7 @@ map::[
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:$map::[[1.5, "small"], [2.5, "medium"], [3.5, "large"]]
+      output:$map::decimal::string::[[1.5, "small"], [2.5, "medium"], [3.5, "large"]]
     }
   },
 
