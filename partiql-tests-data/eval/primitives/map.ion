@@ -2,8 +2,15 @@ envs::{
   scores: $map::string::integer::[["math", 90], ["science", 85], ["english", 72]],
   prices: $map::decimal::string::[[1.5, "small"], [2.5, "medium"], [3.5, "large"]],
   empty_map: $map::string::dynamic::[],
+  int_map: $map::integer::string::[[1, "one"], [2, "two"], [3, "three"]],
+  bool_map: $map::bool::string::[[true, "yes"], [false, "no"]],
   data: [
     { a: 1, b: null },
+  ],
+  students: [
+    { name: "Alice", scores: $map::string::integer::[["math", 90], ["science", 85], ["english", 72]], tags: $map::string::string::[["status", "active"], ["priority", "high"]] },
+    { name: "Bob", scores: $map::string::integer::[["math", 75], ["science", 92]], tags: $map::string::string::[["status", "active"]] },
+    { name: "Carol", scores: $map::string::integer::[["math", 88], ["science", 79], ["english", 95]], tags: $map::string::string::[["status", "inactive"], ["priority", "low"]] },
   ],
 }
 
@@ -52,13 +59,9 @@ map::[
     statement:"MAP { 'a': 1, 'b': MISSING, 'c': 3 }",
     assert:[
       {
-        evalMode:[EvalModeCoerce],
+        evalMode:[EvalModeCoerce, EvalModeError],
         result:EvaluationSuccess,
         output:$map::string::integer::[["a", 1], ["c", 3]]
-      },
-      {
-        evalMode:[EvalModeError],
-        result:EvaluationFail
       }
     ]
   },
@@ -86,7 +89,7 @@ map::[
       },
       {
         evalMode:[EvalModeError],
-        result:EvaluationFail
+        result:EvaluationFail,
       }
     ]
   },
@@ -117,6 +120,89 @@ map::[
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$map::decimal::string::[[1.5, "small"], [2.5, "medium"], [3.5, "large"]]
+    }
+  },
+  {
+    name:"construct a map with expression keys",
+    statement:"MAP { 1+1: 'two', 2+1: 'three' }",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$map::integer::string::[[2, "two"], [3, "three"]]
+    }
+  },
+  {
+    name:"construct a map with all MISSING values produces empty map",
+    statement:"MAP { 'a': MISSING, 'b': MISSING }",
+    assert:[
+      {
+        evalMode:[EvalModeCoerce, EvalModeError],
+        result:EvaluationSuccess,
+        output:$map::string::dynamic::[]
+      }
+    ]
+  },
+  {
+    name:"construct a map with compatible heterogeneous keys coerces to common type",
+    statement:"MAP { 2: 'two', 1.0: 'yes' }",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$map::decimal::string::[[2., "two"], [1.0, "yes"]]
+    }
+  },
+  {
+    name:"construct a map with compatible heterogeneous values coerces to common type",
+    statement:"MAP { 'a': 1, 'b': 2.0 }",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$map::string::decimal::[["a", 1.], ["b", 2.0]]
+    }
+  },
+  {
+    name:"construct a map with boolean keys",
+    statement:"MAP { TRUE: 'yes', FALSE: 'no' }",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$map::bool::string::[[true, "yes"], [false, "no"]]
+    }
+  },
+  {
+    name:"construct a map with date keys",
+    statement:"MAP { DATE '2024-01-01': 'new year', DATE '2024-12-25': 'christmas' }",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$map::date::string::[[2024-01-01, "new year"], [2024-12-25, "christmas"]]
+    }
+  },
+  {
+    name:"construct a map with bigint keys",
+    statement:"MAP { CAST(100 AS BIGINT): 'hundred', CAST(200 AS BIGINT): 'two hundred' }",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$map::bigint::string::[[100, "hundred"], [200, "two hundred"]]
+    }
+  },
+  {
+    name:"access map with time key",
+    statement:"MAP { TIME '08:00:00': 'morning', TIME '12:00:00': 'noon' }[TIME '08:00:00']",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:"morning"
+    }
+  },
+  {
+    name:"access map with timestamp key",
+    statement:"MAP { TIMESTAMP '2024-01-01 00:00:00': 'new year', TIMESTAMP '2024-12-25 00:00:00': 'christmas' }[TIMESTAMP '2024-12-25 00:00:00']",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:"christmas"
     }
   },
 
@@ -151,6 +237,32 @@ map::[
       {
         evalMode:[EvalModeError],
         result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"access map with null key returns missing",
+    statement:"MAP { 'a': 1 }[NULL]",
+    assert:[
+      {
+        evalMode:[EvalModeCoerce],
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode:[EvalModeError],
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"access map with missing key returns missing",
+    statement:"MAP { 'a': 1 }[MISSING]",
+    assert:[
+      {
+        evalMode:[EvalModeCoerce, EvalModeError],
+        result:EvaluationSuccess,
+        output:$missing::null
       }
     ]
   },
@@ -253,6 +365,60 @@ map::[
       }
     ]
   },
+  {
+    name:"access map with cross-type cast integer to decimal key",
+    statement:"MAP { 1.0: 'one', 2.0: 'two' }[1]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:"one"
+    }
+  },
+  {
+    name:"access map with explicit cast to different precision",
+    statement:"MAP { 2: 'two', 1.0: 'yes' }[CAST(1.0 AS DECIMAL(2,1))]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:"yes"
+    }
+  },
+  {
+    name:"access map with boolean key",
+    statement:"MAP { TRUE: 'yes', FALSE: 'no' }[TRUE]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:"yes"
+    }
+  },
+  {
+    name:"access map with date key",
+    statement:"MAP { DATE '2024-01-01': 'new year', DATE '2024-12-25': 'christmas' }[DATE '2024-12-25']",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:"christmas"
+    }
+  },
+  {
+    name:"access map with bigint key",
+    statement:"MAP { CAST(100 AS BIGINT): 'hundred', CAST(200 AS BIGINT): 'two hundred' }[CAST(100 AS BIGINT)]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:"hundred"
+    }
+  },
+  {
+    name:"access bool-keyed map from environment variable",
+    statement:"bool_map[TRUE]",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:"yes"
+    }
+  },
 
   // === size ===
   {
@@ -271,6 +437,42 @@ map::[
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:0
+    }
+  },
+  {
+    name:"size of a map with integer keys",
+    statement:"size(MAP { 1: 'a', 2: 'b' })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:2
+    }
+  },
+  {
+    name:"size of environment map",
+    statement:"size(scores)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:3
+    }
+  },
+  {
+    name:"size of map with boolean keys",
+    statement:"size(MAP { TRUE: 'yes', FALSE: 'no' })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:2
+    }
+  },
+  {
+    name:"size of map with date keys",
+    statement:"size(MAP { DATE '2024-01-01': 'a', DATE '2024-12-25': 'b' })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:2
     }
   },
 
@@ -293,11 +495,38 @@ map::[
       output:false
     }
   },
+  {
+    name:"exists on a map with integer keys returns true",
+    statement:"exists(MAP { 1: 'a', 2: 'b' })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"exists on a map with boolean keys returns true",
+    statement:"exists(MAP { TRUE: 'yes', FALSE: 'no' })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"exists on a map with date keys returns true",
+    statement:"exists(MAP { DATE '2024-01-01': 'a' })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
 
-  // === contains_key ===
+  // === map_contains_key ===
   {
-    name:"contains_key returns true when key exists",
-    statement:"contains_key(MAP { 'a': 1, 'b': 2 }, 'a')",
+    name:"map_contains_key returns true when key exists",
+    statement:"map_contains_key(MAP { 'a': 1, 'b': 2 }, 'a')",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -305,8 +534,8 @@ map::[
     }
   },
   {
-    name:"contains_key returns false when key is absent",
-    statement:"contains_key(MAP { 'a': 1, 'b': 2 }, 'z')",
+    name:"map_contains_key returns false when key is absent",
+    statement:"map_contains_key(MAP { 'a': 1, 'b': 2 }, 'z')",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -314,8 +543,8 @@ map::[
     }
   },
   {
-    name:"contains_key with integer key returns true",
-    statement:"contains_key(MAP { 1: 'one', 2: 'two' }, 1)",
+    name:"map_contains_key with integer key returns true",
+    statement:"map_contains_key(MAP { 1: 'one', 2: 'two' }, 1)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -323,8 +552,8 @@ map::[
     }
   },
   {
-    name:"contains_key with decimal key returns true",
-    statement:"contains_key(prices, 2.5)",
+    name:"map_contains_key with decimal key returns true",
+    statement:"map_contains_key(prices, 2.5)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -332,8 +561,8 @@ map::[
     }
   },
   {
-    name:"contains_key with decimal key returns false when absent",
-    statement:"contains_key(prices, 9.9)",
+    name:"map_contains_key with decimal key returns false when absent",
+    statement:"map_contains_key(prices, 9.9)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -341,8 +570,73 @@ map::[
     }
   },
   {
-    name:"contains_key with null key returns null",
-    statement:"contains_key(MAP { 'a': 1, 'b': 2 }, NULL)",
+    name:"map_contains_key with null key returns false",
+    statement:"map_contains_key(MAP { 'a': 1, 'b': 2 }, NULL)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"map_contains_key with missing key returns missing",
+    statement:"map_contains_key(MAP { 'a': 1, 'b': 2 }, MISSING)",
+    assert:[
+      {
+        evalMode:[EvalModeCoerce, EvalModeError],
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"map_contains_key with cross-type integer key matches decimal map",
+    statement:"map_contains_key(MAP { 1.0: 'a', 2.0: 'b' }, 1)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"map_contains_key with explicit cast to different precision",
+    statement:"map_contains_key(MAP { 1.0: 'a', 2.0: 'b' }, CAST(1.0 AS DECIMAL(2,1)))",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"map_contains_key with boolean key returns true",
+    statement:"map_contains_key(MAP { TRUE: 'yes', FALSE: 'no' }, FALSE)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"map_contains_key with date key returns true",
+    statement:"map_contains_key(MAP { DATE '2024-01-01': 'a', DATE '2024-12-25': 'b' }, DATE '2024-01-01')",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"map_contains_key on bool-keyed environment map",
+    statement:"map_contains_key(bool_map, FALSE)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"map_contains_key on NULL map returns NULL",
+    statement:"map_contains_key(NULL, 'a')",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
@@ -350,19 +644,13 @@ map::[
     }
   },
   {
-    name:"contains_key with missing key returns missing",
-    statement:"contains_key(MAP { 'a': 1, 'b': 2 }, MISSING)",
-    assert:[
-      {
-        evalMode:[EvalModeCoerce],
-        result:EvaluationSuccess,
-        output:$missing::null
-      },
-      {
-        evalMode:[EvalModeError],
-        result:EvaluationFail
-      }
-    ]
+    name:"map_contains_key on MISSING map returns MISSING",
+    statement:"map_contains_key(MISSING, 'a')",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$missing::null
+    }
   },
 
   // === map_get ===
@@ -394,17 +682,8 @@ map::[
     }
   },
   {
-    name:"map_get with null key returns null",
+    name:"map_get with null key returns missing",
     statement:"map_get(MAP { 'a': 1, 'b': 2 }, NULL)",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:null
-    }
-  },
-  {
-    name:"map_get with missing key returns missing",
-    statement:"map_get(MAP { 'a': 1, 'b': 2 }, MISSING)",
     assert:[
       {
         evalMode:[EvalModeCoerce],
@@ -416,6 +695,95 @@ map::[
         result:EvaluationFail
       }
     ]
+  },
+  {
+    name:"map_get with nonexistent key returns missing",
+    statement:"map_get(MAP { 'a': 1, 'b': 2 }, 'z')",
+    assert:[
+      {
+        evalMode:[EvalModeCoerce],
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode:[EvalModeError],
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"map_get with missing key returns missing",
+    statement:"map_get(MAP { 'a': 1, 'b': 2 }, MISSING)",
+    assert:[
+      {
+        evalMode:[EvalModeCoerce, EvalModeError],
+        result:EvaluationSuccess,
+        output:$missing::null
+      }
+    ]
+  },
+  {
+    name:"map_get with cross-type integer key matches decimal map",
+    statement:"map_get(MAP { 1.0: 'one', 2.0: 'two' }, 1)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:"one"
+    }
+  },
+  {
+    name:"map_get with explicit cast to different precision",
+    statement:"map_get(MAP { 1.0: 'one', 2.0: 'two' }, CAST(1.0 AS DECIMAL(2,1)))",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:"one"
+    }
+  },
+  {
+    name:"map_get with boolean key returns the value",
+    statement:"map_get(MAP { TRUE: 'yes', FALSE: 'no' }, TRUE)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:"yes"
+    }
+  },
+  {
+    name:"map_get with date key returns the value",
+    statement:"map_get(MAP { DATE '2024-01-01': 'new year', DATE '2024-12-25': 'christmas' }, DATE '2024-12-25')",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:"christmas"
+    }
+  },
+  {
+    name:"map_get on bool-keyed environment map",
+    statement:"map_get(bool_map, FALSE)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:"no"
+    }
+  },
+  {
+    name:"map_get on NULL map returns NULL",
+    statement:"map_get(NULL, 'a')",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"map_get on MISSING map returns MISSING",
+    statement:"map_get(MISSING, 'a')",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$missing::null
+    }
   },
 
   // === map_keys ===
@@ -429,12 +797,75 @@ map::[
     }
   },
   {
+    name:"map_keys on empty map returns empty bag",
+    statement:"map_keys(MAP { })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[]
+    }
+  },
+  {
+    name:"map_keys with integer keys",
+    statement:"map_keys(MAP { 1: 'a', 2: 'b' })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[1, 2]
+    }
+  },
+  {
     name:"map_keys on decimal-keyed map returns all keys",
     statement:"map_keys(prices)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[1.5, 2.5, 3.5]
+    }
+  },
+  {
+    name:"map_keys with boolean keys",
+    statement:"map_keys(MAP { TRUE: 'yes', FALSE: 'no' })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[true, false]
+    }
+  },
+  {
+    name:"map_keys with date keys",
+    statement:"map_keys(MAP { DATE '2024-01-01': 'a', DATE '2024-12-25': 'b' })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[2024-01-01, 2024-12-25]
+    }
+  },
+  {
+    name:"map_keys on bool-keyed environment map",
+    statement:"map_keys(bool_map)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[true, false]
+    }
+  },
+  {
+    name:"map_keys on NULL map returns NULL",
+    statement:"map_keys(NULL)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"map_keys on MISSING map returns MISSING",
+    statement:"map_keys(MISSING)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$missing::null
     }
   },
 
@@ -449,12 +880,448 @@ map::[
     }
   },
   {
+    name:"map_values on empty map returns empty bag",
+    statement:"map_values(MAP { })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[]
+    }
+  },
+  {
+    name:"map_values with integer keys",
+    statement:"map_values(MAP { 1: 'a', 2: 'b' })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::["a", "b"]
+    }
+  },
+  {
     name:"map_values on decimal-keyed map returns all values",
     statement:"map_values(prices)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::["small", "medium", "large"]
+    }
+  },
+  {
+    name:"map_values with boolean keys",
+    statement:"map_values(MAP { TRUE: 'yes', FALSE: 'no' })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::["yes", "no"]
+    }
+  },
+  {
+    name:"map_values on bool-keyed environment map",
+    statement:"map_values(bool_map)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::["yes", "no"]
+    }
+  },
+  {
+    name:"map_values on NULL map returns NULL",
+    statement:"map_values(NULL)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"map_values on MISSING map returns MISSING",
+    statement:"map_values(MISSING)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$missing::null
+    }
+  },
+
+  // === map_entries ===
+  {
+    name:"map_entries returns a bag of key-value structs",
+    statement:"map_entries(MAP { 'a': 1, 'b': 2 })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[{k: "a", v: 1}, {k: "b", v: 2}]
+    }
+  },
+  {
+    name:"map_entries on empty map returns empty bag",
+    statement:"map_entries(MAP { })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[]
+    }
+  },
+  {
+    name:"map_entries with integer keys",
+    statement:"map_entries(MAP { 1: 'a', 2: 'b' })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[{k: 1, v: "a"}, {k: 2, v: "b"}]
+    }
+  },
+
+  // === cardinality ===
+  {
+    name:"cardinality of a map returns number of entries",
+    statement:"cardinality(MAP { 'a': 1, 'b': 2, 'c': 3 })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:3
+    }
+  },
+  {
+    name:"cardinality of an empty map returns zero",
+    statement:"cardinality(MAP { })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:0
+    }
+  },
+  {
+    name:"cardinality of a map with integer keys",
+    statement:"cardinality(MAP { 1: 'a', 2: 'b', 3: 'c' })",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:3
+    }
+  },
+  {
+    name:"cardinality of environment map",
+    statement:"cardinality(scores)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:3
+    }
+  },
+
+  // === IS MAP ===
+  {
+    name:"map IS MAP with matching types returns true",
+    statement:"MAP { 'a': 1 } IS MAP<STRING, INTEGER>",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"struct IS MAP returns false",
+    statement:"{'a': 1} IS MAP<STRING, INTEGER>",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"integer IS MAP returns false",
+    statement:"42 IS MAP<STRING, INTEGER>",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"map IS MAP with integer keys returns true",
+    statement:"MAP { 1: 'one', 2: 'two' } IS MAP<INTEGER, STRING>",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"map IS MAP with mismatched value type returns false",
+    statement:"MAP { 'a': 1 } IS MAP<STRING, BIGINT>",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"map IS MAP with mismatched key type returns false",
+    statement:"MAP { 'a': 1 } IS MAP<INT, STRING>",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+
+  // === CAST ===
+  {
+    name:"cast struct to MAP with string keys",
+    statement:"CAST({'a': 1, 'b': 2} AS MAP<STRING, INTEGER>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$map::string::integer::[["a", 1], ["b", 2]]
+    }
+  },
+  {
+    name:"cast empty struct to MAP",
+    statement:"CAST({} AS MAP<STRING, INTEGER>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$map::string::integer::[]
+    }
+  },
+  {
+    name:"cast struct with duplicate keys to MAP keeps last value",
+    statement:"CAST({'a': 1, 'a': 2} AS MAP<STRING, INTEGER>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$map::string::integer::[["a", 2]]
+    }
+  },
+  {
+    name:"cast MAP to MAP with different key type",
+    statement:"CAST(MAP {1: 'one', 2: 'two'} AS MAP<STRING, STRING>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$map::string::string::[["1", "one"], ["2", "two"]]
+    }
+  },
+  {
+    name:"cast MAP to MAP with different value type",
+    statement:"CAST(MAP {'x': 10, 'y': 20} AS MAP<STRING, BIGINT>)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$map::string::bigint::[["x", 10], ["y", 20]]
+    }
+  },
+  {
+    name:"cast struct to MAP with non-string key type fails in strict",
+    statement:"CAST({'a': 1, 'b': 2} AS MAP<INTEGER, INTEGER>)",
+    assert:{
+      evalMode:[EvalModeError],
+      result:EvaluationFail
+    }
+  },
+
+  // === UNPIVOT ===
+  {
+    name:"unpivot literal map with string keys",
+    statement:"SELECT k, v FROM UNPIVOT MAP { 'a': 1, 'b': 2 } AS v AT k",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[{k: "a", v: 1}, {k: "b", v: 2}]
+    }
+  },
+  {
+    name:"unpivot empty map produces empty bag",
+    statement:"SELECT k, v FROM UNPIVOT MAP { } AS v AT k",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[]
+    }
+  },
+  {
+    name:"unpivot literal map with integer keys",
+    statement:"SELECT k, v FROM UNPIVOT MAP { 1: 'one', 2: 'two' } AS v AT k",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[{k: 1, v: "one"}, {k: 2, v: "two"}]
+    }
+  },
+  {
+    name:"unpivot literal map with decimal keys",
+    statement:"SELECT k, v FROM UNPIVOT MAP { 1.0: 'a', 2.5: 'b' } AS v AT k",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[{k: 1.0, v: "a"}, {k: 2.5, v: "b"}]
+    }
+  },
+  {
+    name:"unpivot environment map with filter",
+    statement:"SELECT k AS subject, v AS grade FROM UNPIVOT scores AS v AT k WHERE v >= 85",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[{subject: "math", grade: 90}, {subject: "science", grade: 85}]
+    }
+  },
+  {
+    name:"unpivot map with boolean keys",
+    statement:"SELECT k, v FROM UNPIVOT MAP { TRUE: 'yes', FALSE: 'no' } AS v AT k",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[{k: true, v: "yes"}, {k: false, v: "no"}]
+    }
+  },
+  {
+    name:"unpivot map with date keys",
+    statement:"SELECT k, v FROM UNPIVOT MAP { DATE '2024-01-01': 'new year', DATE '2024-12-25': 'christmas' } AS v AT k",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[{k: 2024-01-01, v: "new year"}, {k: 2024-12-25, v: "christmas"}]
+    }
+  },
+  {
+    name:"unpivot bool-keyed environment map",
+    statement:"SELECT k, v FROM UNPIVOT bool_map AS v AT k",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[{k: true, v: "yes"}, {k: false, v: "no"}]
+    }
+  },
+
+  // === Key type mismatch ===
+  {
+    name:"access integer-keyed map with incompatible string key fails",
+    statement:"MAP { 1: 'one', 2: 'two' }['1']",
+    assert:[
+      {
+        evalMode:[EvalModeCoerce],
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode:[EvalModeError],
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"map_get with incompatible string key on integer-keyed map fails",
+    statement:"map_get(MAP { 1: 'one', 2: 'two' }, '1')",
+    assert:[
+      {
+        evalMode:[EvalModeCoerce],
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode:[EvalModeError],
+        result:EvaluationFail
+      }
+    ]
+  },
+  {
+    name:"map_contains_key with incompatible string key on integer-keyed map returns false",
+    statement:"map_contains_key(MAP { 1: 'one', 2: 'two' }, '1')",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+
+  // === NULL/MISSING semantics ===
+  {
+    name:"MAP_GET on NULL map returns NULL (null propagation)",
+    statement:"map_get(NULL, 'a')",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+  {
+    name:"NULL IS MAP returns NULL",
+    statement:"NULL IS MAP<STRING, INTEGER>",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
+  },
+
+  // === Filtering by key/value (RFC examples) ===
+  {
+    name:"filter rows by map key value",
+    statement:"SELECT s.name FROM students AS s WHERE s.tags['status'] = 'active'",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[{name: "Alice"}, {name: "Bob"}]
+    }
+  },
+  {
+    name:"filter rows where key exists using map_contains_key",
+    statement:"SELECT s.name FROM students AS s WHERE map_contains_key(s.tags, 'priority')",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[{name: "Alice"}, {name: "Carol"}]
+    }
+  },
+  {
+    name:"filter with unpivot only entries with score above 80",
+    statement:"SELECT s.name, k AS subject, v AS score FROM students AS s, UNPIVOT s.scores AS v AT k WHERE v > 80",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[{name: "Alice", subject: "math", score: 90}, {name: "Alice", subject: "science", score: 85}, {name: "Bob", subject: "science", score: 92}, {name: "Carol", subject: "math", score: 88}, {name: "Carol", subject: "english", score: 95}]
+    }
+  },
+
+  // === Ordering by key/value ===
+  {
+    name:"order by map access value",
+    statement:"SELECT s.name, s.scores['math'] AS math FROM students AS s ORDER BY s.scores['math'] DESC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{name: "Alice", math: 90}, {name: "Carol", math: 88}, {name: "Bob", math: 75}]
+    }
+  },
+  {
+    name:"order unpivoted entries by key",
+    statement:"SELECT s.name, k AS subject, v AS score FROM students AS s, UNPIVOT s.scores AS v AT k ORDER BY k ASC, s.name ASC",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{name: "Alice", subject: "english", score: 72}, {name: "Carol", subject: "english", score: 95}, {name: "Alice", subject: "math", score: 90}, {name: "Bob", subject: "math", score: 75}, {name: "Carol", subject: "math", score: 88}, {name: "Alice", subject: "science", score: 85}, {name: "Bob", subject: "science", score: 92}, {name: "Carol", subject: "science", score: 79}]
+    }
+  },
+
+  // === Aggregation by key/value ===
+  {
+    name:"count entries per key across multiple maps",
+    statement:"SELECT k, COUNT(*) AS cnt FROM students AS s, UNPIVOT s.scores AS v AT k GROUP BY k",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[{k: "math", cnt: 3}, {k: "science", cnt: 3}, {k: "english", cnt: 2}]
+    }
+  },
+  {
+    name:"sum values grouped by key",
+    statement:"SELECT k, SUM(v) AS total FROM students AS s, UNPIVOT s.scores AS v AT k GROUP BY k",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[{k: "math", total: 253}, {k: "science", total: 256}, {k: "english", total: 167}]
     }
   },
 ]
