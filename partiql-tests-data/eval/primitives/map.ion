@@ -241,19 +241,13 @@ map::[
     ]
   },
   {
-    name:"access map with null key returns missing",
+    name:"access map with null key returns null",
     statement:"MAP { 'a': 1 }[NULL]",
-    assert:[
-      {
-        evalMode:[EvalModeCoerce],
-        result:EvaluationSuccess,
-        output:$missing::null
-      },
-      {
-        evalMode:[EvalModeError],
-        result:EvaluationFail
-      }
-    ]
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
   },
   {
     name:"access map with missing key returns missing",
@@ -570,12 +564,12 @@ map::[
     }
   },
   {
-    name:"map_contains_key with null key returns false",
+    name:"map_contains_key with null key returns null",
     statement:"map_contains_key(MAP { 'a': 1, 'b': 2 }, NULL)",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:false
+      output:null
     }
   },
   {
@@ -682,19 +676,13 @@ map::[
     }
   },
   {
-    name:"map_get with null key returns missing",
+    name:"map_get with null key returns null",
     statement:"map_get(MAP { 'a': 1, 'b': 2 }, NULL)",
-    assert:[
-      {
-        evalMode:[EvalModeCoerce],
-        result:EvaluationSuccess,
-        output:$missing::null
-      },
-      {
-        evalMode:[EvalModeError],
-        result:EvaluationFail
-      }
-    ]
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:null
+    }
   },
   {
     name:"map_get with nonexistent key returns missing",
