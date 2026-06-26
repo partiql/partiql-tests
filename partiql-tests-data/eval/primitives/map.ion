@@ -35,13 +35,17 @@ map::[
     }
   },
   {
-    name:"construct a map with duplicate key keeps last value",
+    name:"construct a map with duplicate key keeps last value in permissive and errors in strict",
     statement:"MAP { 'a': 1, 'a': 2 }",
     assert:[
       {
-        evalMode:[EvalModeCoerce, EvalModeError],
+        evalMode:[EvalModeCoerce],
         result:EvaluationSuccess,
         output:$map::string::integer::[["a", 2]]
+      },
+      {
+        evalMode:[EvalModeError],
+        result:EvaluationFail
       }
     ]
   },
@@ -94,13 +98,34 @@ map::[
     ]
   },
   {
-    name:"construct a map with null key returns null map",
+    name:"construct a map with null key drops entry in permissive",
     statement:"MAP { NULL: 1, 'b': 2 }",
     assert:[
       {
-        evalMode:[EvalModeCoerce, EvalModeError],
+        evalMode:[EvalModeCoerce],
+        result:EvaluationSuccess,
+        output:$map::string::integer::[["b", 2]]
+      },
+      {
+        evalMode:[EvalModeError],
         result:EvaluationSuccess,
         output:null
+      }
+    ]
+  },
+  {
+    name:"construct a map with missing key drops entry in permissive",
+    statement:"MAP { MISSING: 1, 'b': 2 }",
+    assert:[
+      {
+        evalMode:[EvalModeCoerce],
+        result:EvaluationSuccess,
+        output:$map::string::integer::[["b", 2]]
+      },
+      {
+        evalMode:[EvalModeError],
+        result:EvaluationSuccess,
+        output:$missing::null
       }
     ]
   },
@@ -1243,6 +1268,15 @@ map::[
       output:null
     }
   },
+  {
+    name:"MISSING IS MAP returns MISSING",
+    statement:"MISSING IS MAP<STRING, INTEGER>",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$missing::null
+    }
+  },
 
   // === Filtering by key/value (RFC examples) ===
   {
@@ -1310,6 +1344,100 @@ map::[
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
       output:$bag::[{k: "math", total: 253}, {k: "science", total: 256}, {k: "english", total: 167}]
+    }
+  },
+  {
+    name:"group by map access value",
+    statement:"SELECT s.scores['math'] AS math_score, COUNT(*) AS cnt FROM students AS s GROUP BY s.scores['math']",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:$bag::[{math_score: 90, cnt: 1}, {math_score: 75, cnt: 1}, {math_score: 88, cnt: 1}]
+    }
+  },
+
+  // === Equality ===
+  {
+    name:"equal maps with same entries are equal",
+    statement:"MAP { 'a': 1, 'b': 2 } = MAP { 'a': 1, 'b': 2 }",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"equal maps with different insertion order are equal",
+    statement:"MAP { 'b': 2, 'a': 1 } = MAP { 'a': 1, 'b': 2 }",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"maps with different values are not equal",
+    statement:"MAP { 'a': 1, 'b': 2 } = MAP { 'a': 1, 'b': 3 }",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"maps with different keys are not equal",
+    statement:"MAP { 'a': 1, 'b': 2 } = MAP { 'a': 1, 'c': 2 }",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"maps with different sizes are not equal",
+    statement:"MAP { 'a': 1 } = MAP { 'a': 1, 'b': 2 }",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:false
+    }
+  },
+  {
+    name:"empty maps are equal",
+    statement:"MAP { } = MAP { }",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"map equality with integer keys",
+    statement:"MAP { 1: 'one', 2: 'two' } = MAP { 2: 'two', 1: 'one' }",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+  {
+    name:"map not equal operator",
+    statement:"MAP { 'a': 1 } <> MAP { 'a': 2 }",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:true
+    }
+  },
+
+  // === ORDER BY map column ===
+  {
+    name:"order by map column sorts by entries",
+    statement:"SELECT v FROM << MAP { 'b': 2 }, MAP { 'a': 1 }, MAP { 'a': 1, 'b': 2 } >> AS v ORDER BY v",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:[{v: $map::string::integer::[["a", 1]]}, {v: $map::string::integer::[["a", 1], ["b", 2]]}, {v: $map::string::integer::[["b", 2]]}]
     }
   },
 ]
