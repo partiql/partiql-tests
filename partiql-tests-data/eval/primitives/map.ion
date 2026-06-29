@@ -1242,11 +1242,17 @@ map::[
   {
     name:"map_contains_key with incompatible string key on integer-keyed map returns false",
     statement:"map_contains_key(MAP { 1: 'one', 2: 'two' }, '1')",
-    assert:{
-      evalMode:[EvalModeCoerce, EvalModeError],
-      result:EvaluationSuccess,
-      output:false
-    }
+    assert:[
+      {
+        evalMode:[EvalModeCoerce],
+        result:EvaluationSuccess,
+        output:$missing::null
+      },
+      {
+        evalMode:[EvalModeError],
+        result:EvaluationFail
+      }
+    ]
   },
 
   // === NULL/MISSING semantics ===
