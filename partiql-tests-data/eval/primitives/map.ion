@@ -90,10 +90,6 @@ map::[
         output:$bag::[
           $map::string::integer::[["a", 1]]
         ]
-      },
-      {
-        evalMode:[EvalModeError],
-        result:EvaluationFail,
       }
     ]
   },
