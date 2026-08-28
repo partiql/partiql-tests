@@ -1,0 +1,402 @@
+// SQL style
+{
+  name: "TIMESTAMP WITHOUT TIME ZONE - SQL Style - No Second Precision ",
+  statement: "TIMESTAMP '2023-06-01 00:00:00",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITHOUT TIME ZONE - SQL Style - Arbitrary Second Precision",
+  statement: "TIMESTAMP '2023-06-01 00:00:00.00000000000",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITHOUT TIME ZONE - SQL Style - Precision Equals To Digit In Second Fraction",
+  statement: "TIMESTAMP(0) '2023-06-01 00:00:00",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITHOUT TIME ZONE - SQL Style - Precision Less Than Digit In Second Fraction",
+  statement: "TIMESTAMP(0) '2023-06-01 00:00:00.0000",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITHOUT TIME ZONE - SQL Style - Precision Bigger than Digit In Second Fraction",
+  statement: "TIMESTAMP(10) '2023-06-01 00:00:00.0000",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - SQL Style - No Second Precision ",
+  statement: "TIMESTAMP '2023-06-01 00:00:00+00:00",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - SQL Style - Arbitrary Second Precision",
+  statement: "TIMESTAMP '2023-06-01 00:00:00.00000000000+00:00",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - SQL Style - Precision Equals To Digit In Second Fraction",
+  statement: "TIMESTAMP(0) '2023-06-01 00:00:00+00:00",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - SQL Style - Precision Less Than Digit In Second Fraction",
+  statement: "TIMESTAMP(0) '2023-06-01 00:00:00.0000+00:00",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - SQL Style - Precision Bigger Than Digit In Second Fraction",
+  statement: "TIMESTAMP(10) '2023-06-01 00:00:00.0000+00:00",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+// RFC 3339 Style
+// Note RFC 3339 requires a "full time" which include timestamp
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - No Second Precision - Time ZONE INTERVAL - Captialized T",
+  statement: "TIMESTAMP '2023-06-01T00:00:00+00:00",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Arbitrary Second Precision - Time ZONE INTERVAL - Captialized T",
+  statement: "TIMESTAMP '2023-06-01T00:00:00.00000000000+00:00",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Equals To Digit In Second Fraction - Time ZONE INTERVAL - Captialized T",
+  statement: "TIMESTAMP(0) '2023-06-01T00:00:00+00:00",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Less Than Digit In Second Fraction - Time ZONE INTERVAL - Captialized T",
+  statement: "TIMESTAMP(0) '2023-06-01T00:00:00.0000+00:00",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Bigger Than Digit In Second Fraction - Time ZONE INTERVAL - Captialized T",
+  statement: "TIMESTAMP(10) '2023-06-01T00:00:00.0000+00:00",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - No Second Precision - Time ZONE INTERVAL - Lowercase t",
+  statement: "TIMESTAMP '2023-06-01t00:00:00+00:00",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Arbitrary Second Precision - Time ZONE INTERVAL - Lowercase t",
+  statement: "TIMESTAMP '2023-06-01t00:00:00.00000000000+00:00",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Equals To Digit In Second Fraction - Time ZONE INTERVAL - Lowercase t",
+  statement: "TIMESTAMP(0) '2023-06-01t00:00:00+00:00",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Less Than Digit In Second Fraction - Time ZONE INTERVAL - Lowercase t",
+  statement: "TIMESTAMP(0) '2023-06-01t00:00:00.0000+00:00",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Bigger Than Digit In Second Fraction - Time ZONE INTERVAL - Lowercase t",
+  statement: "TIMESTAMP(10) '2023-06-01t00:00:00.0000+00:00",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - No Second Precision - Captial Z for UTC - Captialized T",
+  statement: "TIMESTAMP '2023-06-01T00:00:00Z",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Arbitrary Second Precision - Captial Z for UTC - Captialized T",
+  statement: "TIMESTAMP '2023-06-01T00:00:00.00000000000Z",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Equals To Digit in Second Fraction - Captial Z for UTC - Captialized T",
+  statement: "TIMESTAMP(0) '2023-06-01T00:00:00Z",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Less Than Digit In Second Fraction - Captial Z for UTC - Captialized T",
+  statement: "TIMESTAMP(0) '2023-06-01T00:00:00.0000Z",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Bigger Than Digit In Second Fraction - Captial Z for UTC - Captialized T",
+  statement: "TIMESTAMP(10) '2023-06-01T00:00:00.0000Z",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - No Second Precision - Captial Z for UTC - Lowercase t",
+  statement: "TIMESTAMP '2023-06-01t00:00:00Z",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Arbitrary Second Precision - Captial Z for UTC - Lowercase t",
+  statement: "TIMESTAMP '2023-06-01t00:00:00.00000000000Z",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Equals To Digit In Second Fraction - Captial Z for UTC - Lowercase t",
+  statement: "TIMESTAMP(0) '2023-06-01t00:00:00Z",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Less Than Digit In Second Fraction - Captial Z for UTC - Lowercase t",
+  statement: "TIMESTAMP(0) '2023-06-01t00:00:00.0000Z",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Bigger Than Digit In Second Fraction - Captial Z for UTC - Lowercase t",
+  statement: "TIMESTAMP(10) '2023-06-01t00:00:00.0000Z",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - No Second Precision - Lowercase Z for UTC - Captialized T",
+  statement: "TIMESTAMP '2023-06-01T00:00:00z",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Arbitrary Second Precision - Lowercase Z for UTC - Captialized T",
+  statement: "TIMESTAMP '2023-06-01T00:00:00.00000000000z",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Equals To Digit In Second Fraction - Lowercase Z for UTC - Captialized T",
+  statement: "TIMESTAMP(0) '2023-06-01T00:00:00z",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Less Than Digit In Second Fraction - Lowercase Z for UTC - Captialized T",
+  statement: "TIMESTAMP(0) '2023-06-01T00:00:00.0000z",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Bigger Than Digit In Second Fraction - Lowercase Z for UTC - Captialized T",
+  statement: "TIMESTAMP(10) '2023-06-01T00:00:00.0000z",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - No Second Precision - Lowercase Z for UTC - Lowercase t",
+  statement: "TIMESTAMP '2023-06-01t00:00:00z",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Arbitrary Second Precision - Lowercase Z for UTC - Lowercase t",
+  statement: "TIMESTAMP '2023-06-01t00:00:00.00000000000z",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Equals To Digit In Second Fraction - Lowercase Z for UTC - Lowercase t",
+  statement: "TIMESTAMP(0) '2023-06-01t00:00:00z",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Less Than Digit In Second Fraction - Lowercase Z for UTC - Lowercase t",
+  statement: "TIMESTAMP(0) '2023-06-01t00:00:00.0000z",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
+
+{
+  name: "TIMESTAMP WITH TIME ZONE - RFC 3339 - Precision Bigger Than Digit In Second Fraction - Lowercase Z for UTC - Lowercase t",
+  statement: "TIMESTAMP(10) '2023-06-01t00:00:00.0000z",
+  assert: [
+    {
+      result: SyntaxSuccess
+    },
+  ]
+}
