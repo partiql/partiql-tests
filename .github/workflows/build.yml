@@ -4,7 +4,7 @@ on: [push, pull_request]
 jobs:
   build:
       name: Validate
-      runs-on: ubuntu-latest
+      runs-on: codebuild-partiql-tests-${{ github.run_id }}-${{ github.run_attempt }}
       strategy:
         matrix:
           java: [8, 11]
