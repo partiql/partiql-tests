@@ -608,3 +608,183 @@ edge_cases::[
     }
   },
 ]
+
+'sort-key-errors'::[
+  {
+    name: "order by out-of-range index",
+    statement: "SELECT VALUE x FROM <<2, 1>> AS x ORDER BY [1, 2][5], x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: [1, 2]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "order by out-of-range index on a row value",
+    statement: "SELECT VALUE t.x FROM <<{'x': 2, 'a': [1]}, {'x': 1, 'a': [1]}>> AS t ORDER BY t.a[5], t.x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: [1, 2]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "order by index that is not an integer",
+    statement: "SELECT VALUE x FROM <<2, 1>> AS x ORDER BY [1, 2][1.0], x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: [1, 2]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "order by out-of-range Ion index",
+    statement: "SELECT VALUE x FROM <<2, 1>> AS x ORDER BY `[1, 2]`[5], x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: [1, 2]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "order by missing struct key",
+    statement: "SELECT VALUE x FROM <<2, 1>> AS x ORDER BY {'a': 1}.b, x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: [1, 2]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "order by path on a scalar",
+    statement: "SELECT VALUE x FROM <<2, 1>> AS x ORDER BY x.a, x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: [1, 2]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "order by failed cast",
+    statement: "SELECT VALUE x FROM <<2, 1>> AS x ORDER BY CAST('a' AS INT), x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: [1, 2]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "order by failed cast inside case",
+    statement: "SELECT VALUE x FROM <<2, 1>> AS x ORDER BY CASE WHEN true THEN CAST('a' AS INT) END, x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: [1, 2]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "order by failed cast desc nulls first",
+    statement: "SELECT VALUE x FROM <<2, 1>> AS x ORDER BY CAST('a' AS INT) DESC NULLS FIRST, x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: [1, 2]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "order by mixed failing and valid keys",
+    statement: "SELECT VALUE t.x FROM <<{'x': 1, 'k': [3]}, {'x': 2, 'k': []}, {'x': 3, 'k': [1]}>> AS t ORDER BY t.k[0] NULLS FIRST, t.x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: [2, 3, 1]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "order by index",
+    statement: "SELECT VALUE t.x FROM <<{'x': 1, 'k': [3]}, {'x': 2, 'k': [1]}>> AS t ORDER BY t.k[0]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: [2, 1]
+    }
+  },
+  {
+    name: "order by Ion index",
+    statement: "SELECT VALUE t[0] FROM <<`[2]`, `[1]`>> AS t ORDER BY t[0]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: [1, 2]
+    }
+  },
+  {
+    name: "order by Ion index desc",
+    statement: "SELECT VALUE t[0] FROM <<`[1]`, `[2]`>> AS t ORDER BY t[0] DESC",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: [2, 1]
+    }
+  }
+]

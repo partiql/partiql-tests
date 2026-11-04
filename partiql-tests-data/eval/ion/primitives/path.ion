@@ -18,3 +18,444 @@
     },
   },
 ]
+
+'path-index'::[
+  {
+    name: "pathIndexIonListFirstElement",
+    statement: "`[1, 2]`[0]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 1
+    }
+  },
+  {
+    name: "pathIndexIonListLastElement",
+    statement: "`[1, 2]`[1]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 2
+    }
+  },
+  {
+    name: "pathIndexIonSexp",
+    statement: "`(1 2)`[1]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 2
+    }
+  },
+  {
+    name: "pathIndexIonNestedList",
+    statement: "`[[1, 2], [3, 4]]`[1][0]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 3
+    }
+  },
+  {
+    name: "pathIndexIonListThenDot",
+    statement: "`[{a: 1}, {a: 2}]`[1].a",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 2
+    }
+  },
+  {
+    name: "pathIndexIonDotThenList",
+    statement: "`{a: [1, 2]}`.a[1]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 2
+    }
+  },
+  {
+    name: "pathIndexIonDeepPath",
+    statement: "`{a: {b: [{c: [10, 20]}]}}`.a.b[0].c[1]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 20
+    }
+  },
+  {
+    name: "pathIndexIonStringElement",
+    statement: "`[\"x\", \"y\"]`[1]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: "y"
+    }
+  },
+  {
+    name: "pathIndexIonNullElement",
+    statement: "`[null, 1]`[0]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "pathIndexIonIntIndex",
+    statement: "`[1, 2]`[`1`]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 2
+    }
+  },
+  {
+    name: "pathIndexIonIntIndexOnList",
+    statement: "[10, 20][`1`]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 20
+    }
+  },
+  {
+    name: "pathIndexIonIndexFromIon",
+    statement: "`{a: [10, 20], i: 1}`.a[`{a: [10, 20], i: 1}`.i]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 20
+    }
+  },
+  {
+    name: "pathIndexIonBigintIndex",
+    statement: "`[1, 2]`[CAST(1 AS BIGINT)]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 2
+    }
+  },
+  {
+    name: "pathIndexIonFromClause",
+    statement: "SELECT VALUE t[0] FROM <<`[1]`, `[2, 3]`>> AS t",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[1, 2]
+    }
+  },
+  {
+    name: "pathIndexIonFromIonBag",
+    statement: "SELECT VALUE t[1] FROM `[[1, 2], [3, 4]]` AS t",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[2, 4]
+    }
+  },
+  {
+    name: "pathIndexIonNullList",
+    statement: "`null.list`[0] IS NULL AND NOT (`null.list`[0] IS MISSING)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "pathIndexIonNullSexp",
+    statement: "`null.sexp`[0] IS NULL AND NOT (`null.sexp`[0] IS MISSING)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "pathIndexIonOutOfBoundsHigh",
+    statement: "`[1, 2]`[2]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexIonOutOfBoundsLow",
+    statement: "`[1, 2]`[-1]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexIonEmptyList",
+    statement: "`[]`[0]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexIonEmptySexp",
+    statement: "`()`[0]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexIonBeyond32BitIndex",
+    statement: "`[1, 2]`[`4294967296`]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexIonBeyond64BitIndex",
+    statement: "`[1, 2]`[`18446744073709551616`]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexIonDecimalIndex",
+    statement: "`[1, 2]`[`1.0`]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexIonFloatIndex",
+    statement: "`[1, 2]`[`1e0`]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexIonStringIndex",
+    statement: "`[1, 2]`[`\"1\"`]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexIonSymbolIndex",
+    statement: "`[1, 2]`[`a`]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexIonListIndex",
+    statement: "`[1, 2]`[`[0]`]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexIonStruct",
+    statement: "`{a: 1}`[0]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexIonInt",
+    statement: "`1`[0]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexIonString",
+    statement: "`\"ab\"`[0]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexIonSymbol",
+    statement: "`ab`[0]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexIonBlob",
+    statement: "`{{aGVsbG8=}}`[0]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexIonUntypedNull",
+    statement: "`null`[0]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexIonNullStruct",
+    statement: "`null.struct`[0]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexIonNullInt",
+    statement: "`null.int`[0]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  }
+]
