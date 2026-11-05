@@ -1,10 +1,21 @@
 name: PartiQL Tests Validator
-on: [push, pull_request]
+# `push` runs only for `main`; feature branches are covered by `pull_request`. This avoids running the workflow twice
+# (once per event) for each push to a branch with an open PR.
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+permissions:
+  contents: read
 
 jobs:
   build:
       name: Validate
       runs-on: codebuild-partiql-tests-${{ github.run_id }}-${{ github.run_attempt }}
+      # Fails a hung build (a run takes a few minutes). It starts once a runner picks up the job, so it does not cover a
+      # runner that never starts.
+      timeout-minutes: 30
       strategy:
         matrix:
           java: [8, 11]
@@ -12,6 +23,8 @@ jobs:
       steps:
         - name: Check out code
           uses: actions/checkout@v3
+          with:
+            persist-credentials: false
 
         - name: Setup java ${{ matrix.java }}
           uses: actions/setup-java@v3
