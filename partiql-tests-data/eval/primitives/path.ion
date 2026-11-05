@@ -1267,6 +1267,10 @@ pathUnpivotMissing::[
       output: $bag::[2, 4]
     }
   },
+  // A null of array type has no element, so indexing it gives NULL. This follows SQL:2023
+  // section 6.25 (<array element reference>), General Rule 1. It needs an implementation to keep
+  // the type of a null: a null that is not an array follows the spec's rule for array navigation
+  // on wrongly typed data instead (see pathIndexOnNull and pathIndexOnMissing).
   {
     name: "pathIndexNullArray",
     statement: "CAST(NULL AS LIST)[0]",
@@ -1480,8 +1484,11 @@ pathUnpivotMissing::[
       }
     ]
   },
+  // NULL and MISSING are not arrays, so the spec's rule for array navigation on wrongly typed data
+  // applies: MISSING in permissive mode, an error in type checking mode. A null of array type is
+  // different (see pathIndexNullArray).
   {
-    name: "pathNullIndexIsMissing",
+    name: "pathIndexOnNull",
     statement: "(NULL)[0] IS MISSING",
     assert: [
       {
@@ -1496,7 +1503,7 @@ pathUnpivotMissing::[
     ]
   },
   {
-    name: "pathMissingIndexIsMissing",
+    name: "pathIndexOnMissing",
     statement: "(MISSING)[0] IS MISSING",
     assert: [
       {

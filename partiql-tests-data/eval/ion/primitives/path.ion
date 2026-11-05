@@ -155,6 +155,9 @@
       output: $bag::[2, 4]
     }
   },
+  // An Ion null.list or null.sexp is a null of array type, so indexing it gives NULL (SQL:2023
+  // section 6.25, General Rule 1). Untyped and non-list Ion nulls follow the spec's rule for
+  // array navigation on wrongly typed data (see pathIndexIonUntypedNull and the cases after it).
   {
     name: "pathIndexIonNullList",
     statement: "`null.list`[0] IS NULL AND NOT (`null.list`[0] IS MISSING)",
@@ -413,6 +416,8 @@
       }
     ]
   },
+  // Ion nulls that are not lists or S-expressions are not arrays: MISSING in permissive mode, an
+  // error in type checking mode (see pathIndexIonNullList for null.list).
   {
     name: "pathIndexIonUntypedNull",
     statement: "`null`[0]",
