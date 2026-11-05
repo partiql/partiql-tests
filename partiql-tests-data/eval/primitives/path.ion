@@ -1157,3 +1157,364 @@ pathUnpivotMissing::[
     ]
   }
 ]
+
+'path-index'::[
+  {
+    name: "pathIndexListFirstElement",
+    statement: "[1, 2, 3][0]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 1
+    }
+  },
+  {
+    name: "pathIndexListLastElement",
+    statement: "[1, 2, 3][2]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 3
+    }
+  },
+  {
+    name: "pathIndexNestedList",
+    statement: "[[1, 2], [3, 4]][1][0]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 3
+    }
+  },
+  {
+    name: "pathIndexListThenDot",
+    statement: "[{'a': 1}, {'a': 2}][1].a",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 2
+    }
+  },
+  {
+    name: "pathIndexDotThenList",
+    statement: "{'a': [1, 2]}.a[1]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 2
+    }
+  },
+  {
+    name: "pathIndexEnvNested",
+    statement: "stores[0].books[1].categories[1]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: "comedy"
+    }
+  },
+  {
+    name: "pathIndexTinyintIndex",
+    statement: "[10, 20][CAST(1 AS TINYINT)]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 20
+    }
+  },
+  {
+    name: "pathIndexSmallintIndex",
+    statement: "[10, 20][CAST(1 AS SMALLINT)]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 20
+    }
+  },
+  {
+    name: "pathIndexBigintIndex",
+    statement: "[10, 20][CAST(1 AS BIGINT)]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 20
+    }
+  },
+  {
+    name: "pathIndexExpressionIndex",
+    statement: "[10, 20, 30][1 + 1]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 30
+    }
+  },
+  {
+    name: "pathIndexVariableIndex",
+    statement: "SELECT VALUE [10, 20, 30][t.i] FROM [{'i': 0}, {'i': 2}] AS t",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[10, 30]
+    }
+  },
+  {
+    name: "pathIndexOnRowValue",
+    statement: "SELECT VALUE t.a[1] FROM [{'a': [1, 2]}, {'a': [3, 4]}] AS t",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[2, 4]
+    }
+  },
+  // A null of array type has no element, so indexing it gives NULL. This follows SQL:2023
+  // section 6.25 (<array element reference>), General Rule 1. It needs an implementation to keep
+  // the type of a null: a null that is not an array follows the spec's rule for array navigation
+  // on wrongly typed data instead (see pathIndexOnNull and pathIndexOnMissing).
+  {
+    name: "pathIndexNullArray",
+    statement: "CAST(NULL AS LIST)[0]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "pathIndexNullArrayIsNull",
+    statement: "CAST(NULL AS LIST)[0] IS NULL AND NOT (CAST(NULL AS LIST)[0] IS MISSING)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "pathIndexListOutOfBoundsHigh",
+    statement: "[1, 2, 3][3]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexListOutOfBoundsLow",
+    statement: "[1, 2, 3][-1]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexEmptyList",
+    statement: "[][0]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexBeyond32BitIndex",
+    statement: "[10, 20][4294967296]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexBeyond32BitIndexPlusOne",
+    statement: "[10, 20][4294967297]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexBeyond32BitNegativeIndex",
+    statement: "[10, 20][-4294967296]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexBigintMaxIndex",
+    statement: "[10, 20][9223372036854775807]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexDecimalIndex",
+    statement: "[1, 2, 3][1.0]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexFloatIndex",
+    statement: "[1, 2, 3][CAST(1 AS DOUBLE PRECISION)]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexBoolIndex",
+    statement: "[1, 2, 3][true]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexOnInteger",
+    statement: "(1)[0]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexOnString",
+    statement: "'ab'[0]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexOnStructEmpty",
+    statement: "{}[0]",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  // NULL and MISSING are not arrays, so the spec's rule for array navigation on wrongly typed data
+  // applies: MISSING in permissive mode, an error in type checking mode. A null of array type is
+  // different (see pathIndexNullArray).
+  {
+    name: "pathIndexOnNull",
+    statement: "(NULL)[0] IS MISSING",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: true
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "pathIndexOnMissing",
+    statement: "(MISSING)[0] IS MISSING",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: true
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  }
+]
