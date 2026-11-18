@@ -1,3 +1,18 @@
+// Conformance tests for the JSON type, from the JSON type RFC, partiql/partiql-lang#107.
+// They cover the rules the RFC has decided. A rule it has not decided yet is a commented-out
+// /* TODO: ... */ placeholder that names the open question, and becomes a test once it is decided.
+// Section numbers such as §6.36 refer to SQL:2023, ISO/IEC 9075-2:2023.
+//
+// Values of type JSON are written with the $json annotation, defined in
+// docs/partiql-tests-schema-proposal.md. The exact JSON text a function writes is not specified,
+// so a test that gets JSON text back parses it with JSON(...) and compares the $json value, or
+// only checks that the result IS STRING.
+//
+// Path steps are always written as (JSON(...)).x: whether the parentheses can be left out is an
+// open question in the RFC.
+
+// payload holds JSON text in a STRING. The other variables have no schema, so their type is
+// not known at compile time, and each row is checked at runtime.
 envs::{
   payload: "{\"id\": 7, \"customer\": {\"name\": \"Bob\", \"Tier\": \"gold\"}, \"items\": [{\"sku\": \"A1\", \"price\": 10.5}, {\"sku\": \"B2\", \"price\": 4}], \"note\": null}",
   t: { i: 1, s: "1" },
@@ -42,6 +57,7 @@ envs::{
       output: $json::null
     }
   },
+  // An SQL/JSON null is a value, not SQL NULL (§4.48.3).
   {
     name: "json parse null IS NULL is false",
     statement: "JSON('null') IS NULL",
@@ -51,6 +67,8 @@ envs::{
       output: false
     }
   },
+  // A JSON number gets the type of the PartiQL literal written the same way: 7 INT, 10.5 DECIMAL, a
+  // 23-digit integer DECIMAL (written 12345678901234567890123. in Ion), 1e3 FLOAT.
   {
     name: "json parse number types",
     statement: "JSON('[7, 10.5, 12345678901234567890123, 1e3]')",
@@ -78,6 +96,8 @@ envs::{
       output: $json::{ a: 1, b: 2 }
     }
   },
+  // Type checking mode only. Permissive mode is an open question, in the placeholder at the end of this
+  // list.
   {
     name: "json parse WITH UNIQUE KEYS and a duplicate key",
     statement: "JSON('{\"a\": 1, \"a\": 2}' WITH UNIQUE KEYS)",
@@ -94,6 +114,7 @@ envs::{
       result: EvaluationFail
     }
   },
+  // Like a failed CAST: MISSING in permissive mode, an error in type checking mode.
   {
     name: "json parse invalid text",
     statement: "JSON('abc')",
@@ -127,6 +148,7 @@ envs::{
       output: $missing::null
     }
   },
+  // strs holds a string with JSON text and the number 5. Only the number is MISSING.
   {
     name: "json parse an input whose type is not known and is not a string",
     statement: "SELECT VALUE JSON(x) IS MISSING FROM strs AS x",
@@ -184,6 +206,7 @@ envs::{
 ]
 
 'json-serialize'::[
+  // The exact text is not specified, so the test parses it back (§9.43).
   {
     name: "json serialize then parse gives an equal item",
     statement: "JSON(JSON_SERIALIZE(JSON('{\"a\": [1, \"x\", null]}')))",
@@ -202,6 +225,7 @@ envs::{
       output: true
     }
   },
+  // A datetime has no JSON text, so serializing it fails (§9.43).
   {
     name: "json serialize an item holding a datetime",
     statement: "JSON_SERIALIZE(JSON_SCALAR(DATE '2024-01-01'))",
@@ -274,6 +298,7 @@ envs::{
       output: $json::true
     }
   },
+  // SQL:2023 keeps a datetime as a datetime scalar (§6.41).
   {
     name: "json scalar DATE stays a datetime",
     statement: "JSON_SCALAR(DATE '2024-01-01')",
@@ -283,6 +308,7 @@ envs::{
       output: $json::$date::{ year: 2024, month: 1, day: 1 }
     }
   },
+  // SQL NULL, not SQL/JSON null (§6.41).
   {
     name: "json scalar NULL is SQL NULL",
     statement: "JSON_SCALAR(NULL)",
@@ -313,6 +339,7 @@ envs::{
       output: $json::[1]
     }
   },
+  // Allowed: a NULL literal is not a value expression, so the CAST table does not apply (§6.13).
   {
     name: "json cast NULL to JSON",
     statement: "CAST(NULL AS JSON)",
@@ -322,6 +349,7 @@ envs::{
       output: null
     }
   },
+  // Only JSON to JSON is a valid CAST. A string must use JSON(...) instead.
   {
     name: "json cast an input whose type is not known to JSON",
     statement: "SELECT VALUE CAST(x AS JSON) IS MISSING FROM strs AS x",

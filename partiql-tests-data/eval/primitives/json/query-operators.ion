@@ -1,3 +1,18 @@
+// Conformance tests for the JSON type, from the JSON type RFC, partiql/partiql-lang#107.
+// They cover the rules the RFC has decided. A rule it has not decided yet is a commented-out
+// /* TODO: ... */ placeholder that names the open question, and becomes a test once it is decided.
+// Section numbers such as §6.36 refer to SQL:2023, ISO/IEC 9075-2:2023.
+//
+// Values of type JSON are written with the $json annotation, defined in
+// docs/partiql-tests-schema-proposal.md. The exact JSON text a function writes is not specified,
+// so a test that gets JSON text back parses it with JSON(...) and compares the $json value, or
+// only checks that the result IS STRING.
+//
+// Path steps are always written as (JSON(...)).x: whether the parentheses can be left out is an
+// open question in the RFC.
+
+// payload holds JSON text in a STRING. The other variables have no schema, so their type is
+// not known at compile time, and each row is checked at runtime.
 envs::{
   payload: "{\"id\": 7, \"customer\": {\"name\": \"Bob\", \"Tier\": \"gold\"}, \"items\": [{\"sku\": \"A1\", \"price\": 10.5}, {\"sku\": \"B2\", \"price\": 4}], \"note\": null}",
   t: { i: 1, s: "1" },
@@ -24,6 +39,7 @@ envs::{
       output: "Bob"
     }
   },
+  // RETURNING defaults to STRING (ID074).
   {
     name: "json value returns a STRING by default",
     statement: "JSON_VALUE(JSON(payload), 'lax $.id')",
@@ -69,6 +85,7 @@ envs::{
       output: 0
     }
   },
+  // An object is an error for JSON_VALUE, and ON ERROR defaults to NULL.
   {
     name: "json value an object gives NULL",
     statement: "JSON_VALUE(payload, 'lax $.customer')",
@@ -87,6 +104,8 @@ envs::{
       output: null
     }
   },
+  // An error inside a query operator goes to ON ERROR in both modes, including invalid input text
+  // (§9.47).
   {
     name: "json value invalid text gives NULL in both modes",
     statement: "JSON_VALUE('abc', 'lax $.a')",
@@ -149,6 +168,7 @@ envs::{
       output: $json::{ name: "Bob", Tier: "gold" }
     }
   },
+  // JSON_QUERY returns JSON for a JSON input and a STRING for a string input (§6.35).
   {
     name: "json query string input returns a STRING",
     statement: "JSON_QUERY('{\"a\": [1]}', 'lax $.a') IS STRING",
@@ -167,6 +187,7 @@ envs::{
       output: $json::[1]
     }
   },
+  // jq holds a JSON object and a string with the same text.
   {
     name: "json query input type not known decides per row",
     statement: "SELECT VALUE JSON_QUERY(x, 'lax $.a') IS STRING FROM jq AS x",
@@ -194,6 +215,7 @@ envs::{
       output: $json::[10.5, 4]
     }
   },
+  // A single item is not wrapped, even a scalar (§9.44).
   {
     name: "json query conditional wrapper on one item",
     statement: "JSON_QUERY(JSON(payload), 'lax $.id' WITH CONDITIONAL ARRAY WRAPPER)",
@@ -212,6 +234,7 @@ envs::{
       output: $json::[7]
     }
   },
+  // A string scalar keeps its JSON quotes with a string result type (§6.35).
   {
     name: "json query KEEP QUOTES by default",
     statement: "JSON_QUERY(JSON(payload), 'lax $.customer.name' RETURNING STRING)",
@@ -257,6 +280,7 @@ envs::{
       output: false
     }
   },
+  // In strict mode a missing member is an error, and ON ERROR defaults to FALSE.
   {
     name: "json exists strict mode error gives FALSE",
     statement: "JSON_EXISTS(payload, 'strict $.age')",

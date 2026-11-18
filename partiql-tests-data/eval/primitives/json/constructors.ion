@@ -1,3 +1,18 @@
+// Conformance tests for the JSON type, from the JSON type RFC, partiql/partiql-lang#107.
+// They cover the rules the RFC has decided. A rule it has not decided yet is a commented-out
+// /* TODO: ... */ placeholder that names the open question, and becomes a test once it is decided.
+// Section numbers such as §6.36 refer to SQL:2023, ISO/IEC 9075-2:2023.
+//
+// Values of type JSON are written with the $json annotation, defined in
+// docs/partiql-tests-schema-proposal.md. The exact JSON text a function writes is not specified,
+// so a test that gets JSON text back parses it with JSON(...) and compares the $json value, or
+// only checks that the result IS STRING.
+//
+// Path steps are always written as (JSON(...)).x: whether the parentheses can be left out is an
+// open question in the RFC.
+
+// payload holds JSON text in a STRING. The other variables have no schema, so their type is
+// not known at compile time, and each row is checked at runtime.
 envs::{
   payload: "{\"id\": 7, \"customer\": {\"name\": \"Bob\", \"Tier\": \"gold\"}, \"items\": [{\"sku\": \"A1\", \"price\": 10.5}, {\"sku\": \"B2\", \"price\": 4}], \"note\": null}",
   t: { i: 1, s: "1" },
@@ -15,6 +30,7 @@ envs::{
 }
 
 'json-constructors'::[
+  // With no JSON input and no RETURNING, a constructor returns JSON text as a STRING (§6.34).
   {
     name: "json object returns a STRING by default",
     statement: "JSON_OBJECT('id' : 7) IS STRING",
@@ -51,6 +67,7 @@ envs::{
       output: $json::{ id: 7 }
     }
   },
+  // A value of type JSON as an input makes the result JSON (§6.34).
   {
     name: "json object with a JSON input returns JSON",
     statement: "JSON_OBJECT('c' : JSON('{\"a\": 1}'))",
@@ -78,6 +95,7 @@ envs::{
       output: $json::{ id: 7 }
     }
   },
+  // A MISSING value is left out, as a MISSING attribute is left out of a tuple.
   {
     name: "json object MISSING value is left out",
     statement: "JSON_OBJECT('id' : 7, 'note' : MISSING RETURNING JSON)",
@@ -87,6 +105,7 @@ envs::{
       output: $json::{ id: 7 }
     }
   },
+  // An error in both modes (§6.34).
   {
     name: "json object NULL key",
     statement: "JSON_OBJECT(NULL : 7)",
@@ -95,6 +114,8 @@ envs::{
       result: EvaluationFail
     }
   },
+  // t has no attribute k. Like a tuple attribute name: left out in permissive mode, an error in type
+  // checking mode.
   {
     name: "json object MISSING key",
     statement: "JSON_OBJECT(t.k : 1, 'b' : 2 RETURNING JSON)",
@@ -110,6 +131,7 @@ envs::{
       }
     ]
   },
+  // A plain string becomes an SQL/JSON string.
   {
     name: "json object a string value is not parsed",
     statement: "JSON_OBJECT('c' : '{\"a\": 1}' RETURNING JSON)",
@@ -128,6 +150,7 @@ envs::{
       output: $json::{ c: { a: 1 } }
     }
   },
+  // A plain datetime input is cast to a string (§6.34). JSON_SCALAR keeps it, in the next tests.
   {
     name: "json object a datetime value becomes a string",
     statement: "JSON_OBJECT('d' : DATE '2024-01-01' RETURNING JSON)",
@@ -137,6 +160,7 @@ envs::{
       output: $json::{ d: "2024-01-01" }
     }
   },
+  // The result of a constructor or JSON_QUERY implies FORMAT JSON when it is an input (§10.12).
   {
     name: "json object a nested constructor result is parsed",
     statement: "JSON_OBJECT('c' : JSON_OBJECT('a' : 1) RETURNING JSON)",
@@ -155,6 +179,7 @@ envs::{
       output: $json::{ c: [1] }
     }
   },
+  // Only a direct result implies FORMAT JSON. After || it is a plain string, so c holds a string.
   {
     name: "json object a string built from a constructor result is not parsed",
     statement: "JSON_VALUE(JSON_OBJECT('c' : (JSON_OBJECT('a' : 1) || '') RETURNING JSON), 'lax $.c.type()')",
@@ -200,6 +225,7 @@ envs::{
       output: $json::[1, "x"]
     }
   },
+  // A query is not an input value, so the result is always a STRING (§6.34).
   {
     name: "json array over a query returns a STRING",
     statement: "JSON_ARRAY(SELECT VALUE x FROM <<1>> AS x) IS STRING",
@@ -218,6 +244,7 @@ envs::{
       output: $json::[1]
     }
   },
+  // jmixed holds a JSON object and a string. Each row decides its result type.
   {
     name: "json object input type not known decides per row",
     statement: "SELECT VALUE JSON_OBJECT('c' : x) IS STRING FROM jmixed AS x",
@@ -234,6 +261,7 @@ envs::{
 ]
 
 'json-aggregates'::[
+  // Two equal values, so the test does not depend on the order of the rows.
   {
     name: "json arrayagg text parses back",
     statement: "SELECT VALUE JSON(JSON_ARRAYAGG(x)) FROM <<'a', 'a'>> AS x",
@@ -252,6 +280,7 @@ envs::{
       output: $bag::[$json::[1]]
     }
   },
+  // §10.11.
   {
     name: "json arrayagg over no rows is NULL",
     statement: "SELECT VALUE JSON_ARRAYAGG(x) FROM <<>> AS x",
@@ -261,6 +290,8 @@ envs::{
       output: $bag::[null]
     }
   },
+  // Group 1 holds two strings, so the result is a STRING. Group 2 holds a value of type JSON, so the
+  // result is JSON.
   {
     name: "json arrayagg input type not known decides per group",
     statement: "SELECT g, JSON_ARRAYAGG(t.v) IS STRING AS s FROM groups AS t GROUP BY t.g AS g",

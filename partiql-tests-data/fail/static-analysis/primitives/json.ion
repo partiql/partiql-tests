@@ -1,4 +1,18 @@
+// Conformance tests for the JSON type, from the JSON type RFC, partiql/partiql-lang#107.
+// They cover the rules the RFC has decided. A rule it has not decided yet is a commented-out
+// /* TODO: ... */ placeholder that names the open question, and becomes a test once it is decided.
+// Section numbers such as §6.36 refer to SQL:2023, ISO/IEC 9075-2:2023.
+//
+// Values of type JSON are written with the $json annotation, defined in
+// docs/partiql-tests-schema-proposal.md. The exact JSON text a function writes is not specified,
+// so a test that gets JSON text back parses it with JSON(...) and compares the $json value, or
+// only checks that the result IS STRING.
+//
+// Path steps are always written as (JSON(...)).x: whether the parentheses can be left out is an
+// open question in the RFC.
+
 'json-static-analysis'::[
+  // JSON(...) takes a string (§6.40).
   {
     name: "json static analysis JSON(42)",
     statement: "JSON(42)",
@@ -6,6 +20,7 @@
       result: StaticAnalysisFail
     }
   },
+  // JSON_SERIALIZE takes a value of type JSON, not a string (§6.38).
   {
     name: "json static analysis JSON_SERIALIZE('{\"a\": 1}')",
     statement: "JSON_SERIALIZE('{\"a\": 1}')",
@@ -13,6 +28,7 @@
       result: StaticAnalysisFail
     }
   },
+  // JSON_SCALAR takes a string, number, boolean or datetime (§6.41).
   {
     name: "json static analysis JSON_SCALAR(INTERVAL '1' DAY)",
     statement: "JSON_SCALAR(INTERVAL '1' DAY)",
@@ -20,6 +36,7 @@
       result: StaticAnalysisFail
     }
   },
+  // JSON_SCALAR does not take a value of type JSON (§6.41).
   {
     name: "json static analysis JSON_SCALAR(JSON('1'))",
     statement: "JSON_SCALAR(JSON('1'))",
@@ -27,6 +44,7 @@
       result: StaticAnalysisFail
     }
   },
+  // A query operator takes a string or a value of type JSON (§10.14).
   {
     name: "json static analysis JSON_VALUE(7, 'lax $')",
     statement: "JSON_VALUE(7, 'lax $')",
@@ -34,6 +52,7 @@
       result: StaticAnalysisFail
     }
   },
+  // is_valid_json takes a string or a value of type JSON.
   {
     name: "json static analysis is_valid_json(1)",
     statement: "is_valid_json(1)",
@@ -41,6 +60,7 @@
       result: StaticAnalysisFail
     }
   },
+  // Only JSON can be CAST to JSON. Use JSON(...) on a string (§6.13).
   {
     name: "json static analysis CAST('{}' AS JSON)",
     statement: "CAST('{}' AS JSON)",
@@ -48,6 +68,7 @@
       result: StaticAnalysisFail
     }
   },
+  // JSON can only be CAST to JSON. Use JSON_SERIALIZE or JSON_VALUE (§6.13).
   {
     name: "json static analysis CAST(JSON('1') AS STRING)",
     statement: "CAST(JSON('1') AS STRING)",
@@ -55,6 +76,7 @@
       result: StaticAnalysisFail
     }
   },
+  // A value of type JSON and a value of another type are not comparable.
   {
     name: "json static analysis JSON('7') = 7",
     statement: "JSON('7') = 7",
@@ -62,6 +84,7 @@
       result: StaticAnalysisFail
     }
   },
+  // If one input is JSON, every input must be JSON (§9.5).
   {
     name: "json static analysis COALESCE(JSON('null'), 'none')",
     statement: "COALESCE(JSON('null'), 'none')",
@@ -69,6 +92,7 @@
       result: StaticAnalysisFail
     }
   },
+  // If one result is JSON, every result must be JSON (§9.5).
   {
     name: "json static analysis CASE WHEN true THEN JSON('1') ELSE 'a' END",
     statement: "CASE WHEN true THEN JSON('1') ELSE 'a' END",
