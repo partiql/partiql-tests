@@ -1,32 +1,23 @@
-// Conformance tests for the JSON type, from the JSON type RFC, partiql/partiql-lang#107.
-// They cover the rules the RFC has decided. A rule it has not decided yet is a commented-out
-// /* TODO: ... */ placeholder that names the open question, and becomes a test once it is decided.
-// Section numbers such as §6.36 refer to SQL:2023, ISO/IEC 9075-2:2023.
+// Conformance tests for the JSON type, from the JSON type RFC, partiql/partiql-lang#107. They cover
+// the rules the RFC has decided. A rule it has not decided yet is a commented-out /* TODO: ... */
+// placeholder that names the open question, and becomes a test once it is decided.
+//
+// Section numbers such as §6.36 refer to SQL:2023, ISO/IEC 9075-2:2023. ID and IA numbers name a
+// choice SQL:2023 leaves to the implementation.
 //
 // Values of type JSON are written with the $json annotation, defined in
-// docs/partiql-tests-schema-proposal.md. The exact JSON text a function writes is not specified,
-// so a test that gets JSON text back parses it with JSON(...) and compares the $json value, or
-// only checks that the result IS STRING.
+// docs/partiql-tests-schema-proposal.md. The exact JSON text a function writes is not specified, so
+// a test that gets JSON text back parses it with JSON(...) and matches the $json value, or only
+// checks that the result IS STRING.
 //
-// Path steps are always written as (JSON(...)).x: whether the parentheses can be left out is an
-// open question in the RFC.
+// Path steps are always written as (JSON(...)).x, because whether the parentheses can be left out
+// is an open question in the RFC.
 
-// payload holds JSON text in a STRING. The other variables have no schema, so their type is
-// not known at compile time, and each row is checked at runtime.
+// No variable in envs has a schema, so its type is not known at compile time, and each value is
+// checked at runtime.
+//   strs: a string holding JSON text, and the number 5
 envs::{
-  payload: "{\"id\": 7, \"customer\": {\"name\": \"Bob\", \"Tier\": \"gold\"}, \"items\": [{\"sku\": \"A1\", \"price\": 10.5}, {\"sku\": \"B2\", \"price\": 4}], \"note\": null}",
-  t: { i: 1, s: "1" },
-  nums: [5],
-  strs: ["{\"a\": 1}", 5],
-  jmixed: [$json::{ a: 1 }, "abc"],
-  jq: [$json::{ a: [1] }, "{\"a\": [1]}"],
-  jnum: [$json::5],
-  groups: [
-    { g: 1, v: "a" },
-    { g: 1, v: "b" },
-    { g: 2, v: $json::1 },
-    { g: 2, v: "c" }
-  ]
+  strs: ["{\"a\": 1}", 5]
 }
 
 'json-parse'::[
@@ -67,27 +58,6 @@ envs::{
       output: false
     }
   },
-  // A JSON number gets the type of the PartiQL literal written the same way: 7 INT, 10.5 DECIMAL, a
-  // 23-digit integer DECIMAL (written 12345678901234567890123. in Ion), 1e3 FLOAT.
-  {
-    name: "json parse number types",
-    statement: "JSON('[7, 10.5, 12345678901234567890123, 1e3]')",
-    assert: {
-      evalMode: [EvalModeCoerce, EvalModeError],
-      result: EvaluationSuccess,
-      output: $json::[7, 10.5, 12345678901234567890123., 1e3]
-    }
-  },
-  // Like the literal 3000000000, which does not fit in 32 bits.
-  {
-    name: "json parse a number too large for INT is BIGINT",
-    statement: "JSON('3000000000')",
-    assert: {
-      evalMode: [EvalModeCoerce, EvalModeError],
-      result: EvaluationSuccess,
-      output: $json::3000000000
-    }
-  },
   {
     name: "json parse an empty object",
     statement: "JSON('{}')",
@@ -104,6 +74,74 @@ envs::{
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
       output: $json::[]
+    }
+  },
+  // A JSON number gets the type of the PartiQL literal written the same way: 7 INT, 10.5 DECIMAL, a
+  // 23-digit integer DECIMAL (written 12345678901234567890123. in Ion), 1e3 FLOAT.
+  {
+    name: "json parse number types",
+    statement: "JSON('[7, 10.5, 12345678901234567890123, 1e3]')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[7, 10.5, 12345678901234567890123., 1e3]
+    }
+  },
+  // INT is 32 bits, so this is the largest INT.
+  {
+    name: "json parse the largest INT",
+    statement: "JSON('2147483647')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::2147483647
+    }
+  },
+  {
+    name: "json parse the smallest INT",
+    statement: "JSON('-2147483648')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::-2147483648
+    }
+  },
+  // Too large for INT, so BIGINT, like the literal 2147483648.
+  {
+    name: "json parse one more than the largest INT is BIGINT",
+    statement: "JSON('2147483648')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::2147483648
+    }
+  },
+  {
+    name: "json parse one less than the smallest INT is BIGINT",
+    statement: "JSON('-2147483649')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::-2147483649
+    }
+  },
+  {
+    name: "json parse the largest BIGINT",
+    statement: "JSON('9223372036854775807')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::9223372036854775807
+    }
+  },
+  // Too large for BIGINT, so DECIMAL, written as an Ion decimal.
+  {
+    name: "json parse one more than the largest BIGINT is DECIMAL",
+    statement: "JSON('9223372036854775808')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::9223372036854775808.
     }
   },
   {
@@ -124,8 +162,8 @@ envs::{
       output: $json::{ a: 1, b: 2 }
     }
   },
-  // Type checking mode only. Permissive mode is an open question, in the placeholder at the end of this
-  // list.
+  // Type checking mode only. Permissive mode is open question 3, in a placeholder at the end of
+  // this list.
   {
     name: "json parse WITH UNIQUE KEYS and a duplicate key",
     statement: "JSON('{\"a\": 1, \"a\": 2}' WITH UNIQUE KEYS)",
@@ -141,22 +179,6 @@ envs::{
       evalMode: EvalModeError,
       result: EvaluationFail
     }
-  },
-  // Like a failed CAST: MISSING in permissive mode, an error in type checking mode.
-  {
-    name: "json parse invalid text",
-    statement: "JSON('abc')",
-    assert: [
-      {
-        evalMode: EvalModeCoerce,
-        result: EvaluationSuccess,
-        output: $missing::null
-      },
-      {
-        evalMode: EvalModeError,
-        result: EvaluationFail
-      }
-    ]
   },
   {
     name: "json parse NULL",
@@ -176,7 +198,7 @@ envs::{
       output: $missing::null
     }
   },
-  // strs holds a string with JSON text and the number 5. Only the number is MISSING.
+  // Only the number 5 is not a string.
   {
     name: "json parse an input whose type is not known and is not a string",
     statement: "SELECT VALUE JSON(x) IS MISSING FROM strs AS x",
@@ -192,9 +214,10 @@ envs::{
       }
     ]
   },
-  /* TODO: open question in partiql/partiql-lang#107: a JSON number too large for its type. The proposal is below. The alternative gives the FLOAT Infinity.
+  /* TODO: open question 1 in partiql/partiql-lang#107, a JSON number too large for its type. The
+     proposal is below. The alternative gives the FLOAT Infinity.
   {
-    name: "json parse a number too large for its type",
+    name: "json parse a FLOAT too large for its type",
     statement: "JSON('{\"x\": 1e400}')",
     assert: [
       {
@@ -209,7 +232,33 @@ envs::{
     ]
   }
   */
-  /* TODO: open question in partiql/partiql-lang#107: duplicate keys when parsing. The proposal keeps every member, below. The alternative keeps only the last, so the result is { a: 2 }.
+  /* TODO: open question 1 in partiql/partiql-lang#107, a JSON number too large for its type, here a
+     DECIMAL with more than 38 digits. The proposal is below.
+  {
+    name: "json parse a DECIMAL too large for its type",
+    statement: "JSON('1234567890123456789012345678901234567890.5')",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  }
+  */
+  /* TODO: not specified yet in partiql/partiql-lang#107: a FLOAT too small to represent, such as
+     1e-400. It is not too large for its type, so the open question on large numbers does not cover
+     it.
+  */
+  /* TODO: not specified yet in partiql/partiql-lang#107: a lone surrogate escape such as "\uD800".
+     RFC 8259 §8.2 allows the text but leaves its meaning open.
+  */
+  /* TODO: open question 2 in partiql/partiql-lang#107, duplicate keys when parsing. The proposal
+     keeps every member, below. The alternative keeps only the last, so the result is { a: 2 }.
   {
     name: "json parse keeps every member of a duplicate key",
     statement: "JSON('{\"a\": 1, \"a\": 2}')",
@@ -220,17 +269,114 @@ envs::{
     }
   }
   */
-  /* TODO: open question in partiql/partiql-lang#107: WITH UNIQUE KEYS and a duplicate key in permissive mode. The proposal is below. The alternative raises an error. Type checking mode is decided, in the tests above.
+  /* TODO: open question 3 in partiql/partiql-lang#107, WITH UNIQUE KEYS and a duplicate key in
+     permissive mode. The proposal is below. The alternative raises an error in both modes.
   {
     name: "json parse WITH UNIQUE KEYS and a duplicate key in permissive mode",
-    statement: "JSON('{\"a\": 1, \"a\": 2}' WITH UNIQUE KEYS) IS MISSING",
+    statement: "JSON('{\"a\": 1, \"a\": 2}' WITH UNIQUE KEYS)",
     assert: {
-      evalMode: [EvalModeCoerce, EvalModeError],
+      evalMode: EvalModeCoerce,
       result: EvaluationSuccess,
-      output: true
+      output: $missing::null
     }
   }
   */
+]
+
+'json-parse-invalid-text'::[
+  // Text that is not valid JSON text (RFC 8259) is like a failed CAST: MISSING in permissive mode,
+  // an error in type checking mode.
+  {
+    name: "json parse invalid text",
+    statement: "JSON('abc')",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "json parse an unclosed object",
+    statement: "JSON('{\"a\": 1')",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "json parse text after the value",
+    statement: "JSON('[1] x')",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "json parse a number with a leading zero",
+    statement: "JSON('01')",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  // JSON text has no NaN or Infinity.
+  {
+    name: "json parse NaN",
+    statement: "JSON('NaN')",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "json parse a bad escape in a string",
+    statement: "JSON('\"\\x\"')",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  }
 ]
 
 'json-serialize'::[
@@ -354,7 +500,10 @@ envs::{
       result: EvaluationSuccess,
       output: $missing::null
     }
-  }
+  },
+  /* TODO: a $json form for other number types, such as JSON_SCALAR(CAST(7 AS SMALLINT)). The schema
+     doc has Ion forms only for INT, BIGINT, DECIMAL and FLOAT
+  */
 ]
 
 'json-cast'::[
@@ -377,7 +526,7 @@ envs::{
       output: null
     }
   },
-  // Only JSON to JSON is a valid CAST. A string must use JSON(...) instead.
+  // Only JSON can be CAST to JSON. A string must use JSON(...) instead.
   {
     name: "json cast an input whose type is not known to JSON",
     statement: "SELECT VALUE CAST(x AS JSON) IS MISSING FROM strs AS x",

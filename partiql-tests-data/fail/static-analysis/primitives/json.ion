@@ -1,15 +1,17 @@
-// Conformance tests for the JSON type, from the JSON type RFC, partiql/partiql-lang#107.
-// They cover the rules the RFC has decided. A rule it has not decided yet is a commented-out
-// /* TODO: ... */ placeholder that names the open question, and becomes a test once it is decided.
-// Section numbers such as §6.36 refer to SQL:2023, ISO/IEC 9075-2:2023.
+// Conformance tests for the JSON type, from the JSON type RFC, partiql/partiql-lang#107. They cover
+// the rules the RFC has decided. A rule it has not decided yet is a commented-out /* TODO: ... */
+// placeholder that names the open question, and becomes a test once it is decided.
+//
+// Section numbers such as §6.36 refer to SQL:2023, ISO/IEC 9075-2:2023. ID and IA numbers name a
+// choice SQL:2023 leaves to the implementation.
 //
 // Values of type JSON are written with the $json annotation, defined in
-// docs/partiql-tests-schema-proposal.md. The exact JSON text a function writes is not specified,
-// so a test that gets JSON text back parses it with JSON(...) and compares the $json value, or
-// only checks that the result IS STRING.
+// docs/partiql-tests-schema-proposal.md. The exact JSON text a function writes is not specified, so
+// a test that gets JSON text back parses it with JSON(...) and matches the $json value, or only
+// checks that the result IS STRING.
 //
-// Path steps are always written as (JSON(...)).x: whether the parentheses can be left out is an
-// open question in the RFC.
+// Path steps are always written as (JSON(...)).x, because whether the parentheses can be left out
+// is an open question in the RFC.
 
 'json-static-analysis'::[
   // JSON(...) takes a string (§6.40).
@@ -76,14 +78,6 @@
       result: StaticAnalysisFail
     }
   },
-  // A value of type JSON and a value of another type are not comparable.
-  {
-    name: "json static analysis JSON('7') = 7",
-    statement: "JSON('7') = 7",
-    assert: {
-      result: StaticAnalysisFail
-    }
-  },
   // If one input is JSON, every input must be JSON (§9.5).
   {
     name: "json static analysis COALESCE(JSON('null'), 'none')",
@@ -96,6 +90,46 @@
   {
     name: "json static analysis CASE WHEN true THEN JSON('1') ELSE 'a' END",
     statement: "CASE WHEN true THEN JSON('1') ELSE 'a' END",
+    assert: {
+      result: StaticAnalysisFail
+    }
+  },
+  // If one input is JSON, every input must be JSON (§9.5).
+  {
+    name: "json static analysis NULLIF(JSON('1'), 'a')",
+    statement: "NULLIF(JSON('1'), 'a')",
+    assert: {
+      result: StaticAnalysisFail
+    }
+  },
+  // If one input of a set operation is JSON, every input must be JSON (§9.5).
+  {
+    name: "json static analysis (SELECT VALUE JSON('1') FROM <<1>> AS x) UNION ALL (SELECT VALUE 'a' FROM <<1>> AS y)",
+    statement: "(SELECT VALUE JSON('1') FROM <<1>> AS x) UNION ALL (SELECT VALUE 'a' FROM <<1>> AS y)",
+    assert: {
+      result: StaticAnalysisFail
+    }
+  },
+  // SUM, AVG and the other numeric aggregates do not accept JSON.
+  {
+    name: "json static analysis SELECT SUM(JSON('1')) AS s FROM <<1>> AS x",
+    statement: "SELECT SUM(JSON('1')) AS s FROM <<1>> AS x",
+    assert: {
+      result: StaticAnalysisFail
+    }
+  },
+  // OMIT QUOTES is not allowed with RETURNING JSON (§6.35).
+  {
+    name: "json static analysis JSON_QUERY(JSON('{}'), 'lax $' RETURNING JSON OMIT QUOTES)",
+    statement: "JSON_QUERY(JSON('{}'), 'lax $' RETURNING JSON OMIT QUOTES)",
+    assert: {
+      result: StaticAnalysisFail
+    }
+  },
+  // A quotes clause cannot follow WITH ... WRAPPER (§6.35).
+  {
+    name: "json static analysis JSON_QUERY('{}', 'lax $' WITH WRAPPER KEEP QUOTES)",
+    statement: "JSON_QUERY('{}', 'lax $' WITH WRAPPER KEEP QUOTES)",
     assert: {
       result: StaticAnalysisFail
     }

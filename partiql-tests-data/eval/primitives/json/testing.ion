@@ -1,32 +1,25 @@
-// Conformance tests for the JSON type, from the JSON type RFC, partiql/partiql-lang#107.
-// They cover the rules the RFC has decided. A rule it has not decided yet is a commented-out
-// /* TODO: ... */ placeholder that names the open question, and becomes a test once it is decided.
-// Section numbers such as §6.36 refer to SQL:2023, ISO/IEC 9075-2:2023.
+// Conformance tests for the JSON type, from the JSON type RFC, partiql/partiql-lang#107. They cover
+// the rules the RFC has decided. A rule it has not decided yet is a commented-out /* TODO: ... */
+// placeholder that names the open question, and becomes a test once it is decided.
+//
+// Section numbers such as §6.36 refer to SQL:2023, ISO/IEC 9075-2:2023. ID and IA numbers name a
+// choice SQL:2023 leaves to the implementation.
 //
 // Values of type JSON are written with the $json annotation, defined in
-// docs/partiql-tests-schema-proposal.md. The exact JSON text a function writes is not specified,
-// so a test that gets JSON text back parses it with JSON(...) and compares the $json value, or
-// only checks that the result IS STRING.
+// docs/partiql-tests-schema-proposal.md. The exact JSON text a function writes is not specified, so
+// a test that gets JSON text back parses it with JSON(...) and matches the $json value, or only
+// checks that the result IS STRING.
 //
-// Path steps are always written as (JSON(...)).x: whether the parentheses can be left out is an
-// open question in the RFC.
+// Path steps are always written as (JSON(...)).x, because whether the parentheses can be left out
+// is an open question in the RFC.
 
-// payload holds JSON text in a STRING. The other variables have no schema, so their type is
-// not known at compile time, and each row is checked at runtime.
+// No variable in envs has a schema, so its type is not known at compile time, and each value is
+// checked at runtime.
+//   strs: a string holding JSON text, and the number 5
+//   jmixed: a value of type JSON and a string
 envs::{
-  payload: "{\"id\": 7, \"customer\": {\"name\": \"Bob\", \"Tier\": \"gold\"}, \"items\": [{\"sku\": \"A1\", \"price\": 10.5}, {\"sku\": \"B2\", \"price\": 4}], \"note\": null}",
-  t: { i: 1, s: "1" },
-  nums: [5],
   strs: ["{\"a\": 1}", 5],
-  jmixed: [$json::{ a: 1 }, "abc"],
-  jq: [$json::{ a: [1] }, "{\"a\": [1]}"],
-  jnum: [$json::5],
-  groups: [
-    { g: 1, v: "a" },
-    { g: 1, v: "b" },
-    { g: 2, v: $json::1 },
-    { g: 2, v: "c" }
-  ]
+  jmixed: [$json::{ a: 1 }, "abc"]
 }
 
 'json-is-valid-json'::[
@@ -97,6 +90,24 @@ envs::{
   {
     name: "json is_valid_json invalid text",
     statement: "is_valid_json('abc')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json is_valid_json an unclosed object",
+    statement: "is_valid_json('{\"a\": 1')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json is_valid_json a number with a leading zero",
+    statement: "is_valid_json('01')",
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
@@ -176,7 +187,9 @@ envs::{
       output: $missing::null
     }
   },
-  /* TODO: open question in partiql/partiql-lang#107: is_valid_json on an input whose type is not known and is neither a string nor JSON. The proposal gives false, below. The alternative gives MISSING in permissive mode and an error in type checking mode.
+  /* TODO: open question 4 in partiql/partiql-lang#107, is_valid_json on an input whose type is not
+     known and is neither a string nor JSON. The proposal gives false, below. The alternative gives
+     MISSING in permissive mode and an error in type checking mode.
   {
     name: "json is_valid_json input type not known",
     statement: "SELECT VALUE is_valid_json(x) FROM strs AS x",
@@ -199,7 +212,7 @@ envs::{
       output: true
     }
   },
-  // A type test: a STRING is not JSON, whatever text it holds.
+  // A type test: a string is not JSON, whatever text it holds.
   {
     name: "json is_json_type on a string holding JSON text",
     statement: "is_json_type('{}')",

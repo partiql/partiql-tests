@@ -1,32 +1,27 @@
-// Conformance tests for the JSON type, from the JSON type RFC, partiql/partiql-lang#107.
-// They cover the rules the RFC has decided. A rule it has not decided yet is a commented-out
-// /* TODO: ... */ placeholder that names the open question, and becomes a test once it is decided.
-// Section numbers such as §6.36 refer to SQL:2023, ISO/IEC 9075-2:2023.
+// Conformance tests for the JSON type, from the JSON type RFC, partiql/partiql-lang#107. They cover
+// the rules the RFC has decided. A rule it has not decided yet is a commented-out /* TODO: ... */
+// placeholder that names the open question, and becomes a test once it is decided.
+//
+// Section numbers such as §6.36 refer to SQL:2023, ISO/IEC 9075-2:2023. ID and IA numbers name a
+// choice SQL:2023 leaves to the implementation.
 //
 // Values of type JSON are written with the $json annotation, defined in
-// docs/partiql-tests-schema-proposal.md. The exact JSON text a function writes is not specified,
-// so a test that gets JSON text back parses it with JSON(...) and compares the $json value, or
-// only checks that the result IS STRING.
+// docs/partiql-tests-schema-proposal.md. The exact JSON text a function writes is not specified, so
+// a test that gets JSON text back parses it with JSON(...) and matches the $json value, or only
+// checks that the result IS STRING.
 //
-// Path steps are always written as (JSON(...)).x: whether the parentheses can be left out is an
-// open question in the RFC.
+// Path steps are always written as (JSON(...)).x, because whether the parentheses can be left out
+// is an open question in the RFC.
 
-// payload holds JSON text in a STRING. The other variables have no schema, so their type is
-// not known at compile time, and each row is checked at runtime.
+// No variable in envs has a schema, so its type is not known at compile time, and each value is
+// checked at runtime.
+//   payload: JSON text in a string
+//   nums: the number 5
+//   jq: a value of type JSON and a string with the same text
 envs::{
   payload: "{\"id\": 7, \"customer\": {\"name\": \"Bob\", \"Tier\": \"gold\"}, \"items\": [{\"sku\": \"A1\", \"price\": 10.5}, {\"sku\": \"B2\", \"price\": 4}], \"note\": null}",
-  t: { i: 1, s: "1" },
   nums: [5],
-  strs: ["{\"a\": 1}", 5],
-  jmixed: [$json::{ a: 1 }, "abc"],
-  jq: [$json::{ a: [1] }, "{\"a\": [1]}"],
-  jnum: [$json::5],
-  groups: [
-    { g: 1, v: "a" },
-    { g: 1, v: "b" },
-    { g: 2, v: $json::1 },
-    { g: 2, v: "c" }
-  ]
+  jq: [$json::{ a: [1] }, "{\"a\": [1]}"]
 }
 
 'json-value'::[
@@ -39,7 +34,7 @@ envs::{
       output: "Bob"
     }
   },
-  // RETURNING defaults to STRING (ID074).
+  // RETURNING defaults to STRING. SQL:2023 leaves the default type to the implementation (ID074).
   {
     name: "json value returns a STRING by default",
     statement: "JSON_VALUE(JSON(payload), 'lax $.id')",
@@ -102,6 +97,24 @@ envs::{
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
       output: null
+    }
+  },
+  // 3000000000 does not fit in INT, so the cast fails, and the error goes to ON ERROR.
+  {
+    name: "json value a value that can't convert gives NULL",
+    statement: "JSON_VALUE('{\"n\": 3000000000}', 'lax $.n' RETURNING INT)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json value a value that can't convert with ERROR ON ERROR",
+    statement: "JSON_VALUE('{\"n\": 3000000000}', 'lax $.n' RETURNING INT ERROR ON ERROR)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationFail
     }
   },
   // An error inside a query operator goes to ON ERROR in both modes, including invalid input text
@@ -187,7 +200,6 @@ envs::{
       output: $json::[1]
     }
   },
-  // jq holds a JSON object and a string with the same text.
   {
     name: "json query input type not known decides per row",
     statement: "SELECT VALUE JSON_QUERY(x, 'lax $.a') IS STRING FROM jq AS x",
@@ -215,14 +227,34 @@ envs::{
       output: $json::[10.5, 4]
     }
   },
-  // A single item is not wrapped, even a scalar (§9.44).
+  // A result of type JSON does not wrap a single item (§9.44).
   {
-    name: "json query conditional wrapper on one item",
+    name: "json query conditional wrapper on one item with a JSON result",
     statement: "JSON_QUERY(JSON(payload), 'lax $.id' WITH CONDITIONAL ARRAY WRAPPER)",
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
       output: $json::7
+    }
+  },
+  // A string result wraps a single scalar (§9.49).
+  {
+    name: "json query conditional wrapper on one scalar with a string result",
+    statement: "JSON(JSON_QUERY('{\"id\": 7}', 'lax $.id' WITH CONDITIONAL ARRAY WRAPPER))",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[7]
+    }
+  },
+  // A string result does not wrap a single array or object (§9.49).
+  {
+    name: "json query conditional wrapper on one object with a string result",
+    statement: "JSON(JSON_QUERY('{\"c\": {\"a\": 1}}', 'lax $.c' WITH CONDITIONAL ARRAY WRAPPER))",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ a: 1 }
     }
   },
   {
@@ -234,7 +266,7 @@ envs::{
       output: $json::[7]
     }
   },
-  // A string scalar keeps its JSON quotes with a string result type (§6.35).
+  // This test matches the JSON text itself, because the quotes are what it tests (§6.35).
   {
     name: "json query KEEP QUOTES by default",
     statement: "JSON_QUERY(JSON(payload), 'lax $.customer.name' RETURNING STRING)",
@@ -252,13 +284,114 @@ envs::{
       result: EvaluationSuccess,
       output: "Bob"
     }
+  },
+  // ON EMPTY defaults to NULL.
+  {
+    name: "json query no member gives NULL",
+    statement: "JSON_QUERY(JSON(payload), 'lax $.age')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json query EMPTY ARRAY ON EMPTY",
+    statement: "JSON_QUERY(JSON(payload), 'lax $.age' EMPTY ARRAY ON EMPTY)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[]
+    }
+  },
+  {
+    name: "json query EMPTY OBJECT ON EMPTY",
+    statement: "JSON_QUERY(JSON(payload), 'lax $.age' EMPTY OBJECT ON EMPTY)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{}
+    }
+  },
+  {
+    name: "json query ERROR ON EMPTY",
+    statement: "JSON_QUERY(JSON(payload), 'lax $.age' ERROR ON EMPTY)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationFail
+    }
+  },
+  // Several items without a wrapper are an error.
+  {
+    name: "json query EMPTY ARRAY ON ERROR",
+    statement: "JSON_QUERY(JSON(payload), 'lax $.items[*].price' EMPTY ARRAY ON ERROR)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[]
+    }
+  },
+  {
+    name: "json query ERROR ON ERROR",
+    statement: "JSON_QUERY(JSON(payload), 'lax $.items[*].price' ERROR ON ERROR)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationFail
+    }
+  },
+  {
+    name: "json query invalid text gives NULL in both modes",
+    statement: "JSON_QUERY('abc', 'lax $.a')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  // A datetime has no JSON text, so a string result is an error, which ON ERROR handles (§9.43,
+  // §9.49).
+  {
+    name: "json query a datetime RETURNING STRING gives NULL",
+    statement: "JSON_QUERY(JSON('{\"d\": \"2024-01-01\"}'), 'lax $.d.date()' RETURNING STRING)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json query NULL input",
+    statement: "JSON_QUERY(NULL, 'lax $.a')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json query MISSING input",
+    statement: "JSON_QUERY(MISSING, 'lax $.a')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $missing::null
+    }
+  },
+  {
+    name: "json query input whose type is not known and is not a string or JSON",
+    statement: "SELECT VALUE JSON_QUERY(x, 'lax $') IS MISSING FROM nums AS x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[true]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   }
-]
-
-'json-passing'::[
-
-  /* TODO: not specified yet in partiql/partiql-lang#107: PASSING of SQL NULL, MISSING, a tuple, an array, a bag or an Ion value. Add PASSING tests for strings, numbers, booleans and datetimes with them.
-  */
 ]
 
 'json-exists'::[
@@ -291,6 +424,33 @@ envs::{
     }
   },
   {
+    name: "json exists TRUE ON ERROR",
+    statement: "JSON_EXISTS(payload, 'strict $.age' TRUE ON ERROR)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // UNKNOWN is the boolean NULL.
+  {
+    name: "json exists UNKNOWN ON ERROR",
+    statement: "JSON_EXISTS(payload, 'strict $.age' UNKNOWN ON ERROR)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json exists ERROR ON ERROR",
+    statement: "JSON_EXISTS(payload, 'strict $.age' ERROR ON ERROR)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationFail
+    }
+  },
+  {
     name: "json exists invalid text gives FALSE",
     statement: "JSON_EXISTS('abc', 'lax $.a')",
     assert: {
@@ -298,5 +458,90 @@ envs::{
       result: EvaluationSuccess,
       output: false
     }
+  },
+  {
+    name: "json exists NULL input",
+    statement: "JSON_EXISTS(NULL, 'lax $.a')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json exists MISSING input",
+    statement: "JSON_EXISTS(MISSING, 'lax $.a')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $missing::null
+    }
+  },
+  {
+    name: "json exists input whose type is not known and is not a string or JSON",
+    statement: "SELECT VALUE JSON_EXISTS(x, 'lax $') IS MISSING FROM nums AS x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[true]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   }
+]
+
+'json-passing'::[
+  // PASSING x AS i binds the path variable $i (§9.46).
+  {
+    name: "json passing a number",
+    statement: "JSON_VALUE((JSON(payload)), 'lax $.items[$i].sku' PASSING 1 AS i)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: "B2"
+    }
+  },
+  {
+    name: "json passing a string",
+    statement: "JSON_VALUE(JSON('{}'), 'lax $s' PASSING 'x' AS s)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: "x"
+    }
+  },
+  {
+    name: "json passing a boolean",
+    statement: "JSON_VALUE(JSON('{}'), 'lax $b' PASSING true AS b)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: "true"
+    }
+  },
+  {
+    name: "json passing a value of type JSON",
+    statement: "JSON_VALUE(JSON('{}'), 'lax $j.a' PASSING JSON('{\"a\": 5}') AS j)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: "5"
+    }
+  },
+  {
+    name: "json passing a datetime keeps it a datetime",
+    statement: "JSON_VALUE(JSON('{}'), 'lax $d.type()' PASSING DATE '2024-01-01' AS d)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: "date"
+    }
+  },
+  /* TODO: not specified yet in partiql/partiql-lang#107: PASSING of SQL NULL, MISSING, a tuple, an
+     array, a bag or an Ion value.
+  */
 ]
