@@ -223,7 +223,38 @@ $interval_ym::{ sign: "+", years: 1, months: 6 }
 // Normalization rules -- sign = "+"/"-"; 0 <= days <= 999999999; 0 <= hours <= 23; 0 <= minutes <=  59;
 // 0 <= seconds <= 59; 0 <= nanos <= 999999999
 $interval_dt::{ sign: "+", days: 5, hours: 4, minutes: 30, seconds: 15, nanos: 500000000 }
+
+// JSON -- an Ion value annotated with $json, read as an SQL/JSON item of type JSON
+// struct  = SQL/JSON object. Field order is kept, and repeated field names are all kept
+// list    = SQL/JSON array
+// string  = SQL/JSON string
+// bool    = SQL/JSON boolean
+// int     = SQL/JSON number of type INT      (JSON text 7)
+// decimal = SQL/JSON number of type DECIMAL  (JSON text 10.5)
+// float   = SQL/JSON number of type FLOAT    (JSON text 1e3)
+// null    = SQL/JSON null, which is not SQL NULL (untyped null only)
+// $date, $time, $timestamp = an SQL/JSON datetime scalar
+// Not allowed inside: typed nulls, Ion timestamps, symbols, blobs, clobs, s-expressions,
+// any other annotation, and a nested $json
+$json::{ id: 7, items: [ { sku: "A1", price: 10.5 } ], note: null }
+$json::{ a: 1, a: 2 }                                   // a repeated key, both members kept
+$json::null                                             // SQL/JSON null
+$json::"Bob"                                            // an SQL/JSON string
+$json::{ d: $date::{ year: 2024, month: 1, day: 1 } }   // an object holding a DATE
+$json::$date::{ year: 2024, month: 1, day: 1 }         // an SQL/JSON scalar that is a DATE
 ```
+
+SQL `NULL` and `MISSING` of type `JSON` are written as for any other type, `null` and `$missing::null`. The `$json`
+annotation marks only SQL/JSON items, so a test can tell a value of type `JSON` from a tuple or an Ion value.
+
+Two `$json` values are equal when:
+- they are objects with the same members, counted with repeats, in any order;
+- they are arrays with equal elements in the same order;
+- they are numbers of the same type and value, so `$json::7` and `$json::7.0` differ;
+- or they are equal strings, equal booleans, equal datetimes, or both SQL/JSON null.
+
+The exact text of serialized JSON (member order, whitespace, number spelling) is not specified. A test that checks a
+function returning JSON text should parse it, as in `JSON(JSON_OBJECT('a' : 1))`, and compare the `$json` value.
 
 Similarly, graphs defined with the Ion-based format for "external" graphs 
 ([org.partiql.schemas/graph.isl](https://github.com/partiql/partiql-lang-kotlin/blob/main/partiql-lang/src/main/resources/org/partiql/schemas/graph.isl))
