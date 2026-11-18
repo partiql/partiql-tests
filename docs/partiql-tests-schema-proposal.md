@@ -223,7 +223,72 @@ $interval_ym::{ sign: "+", years: 1, months: 6 }
 // Normalization rules -- sign = "+"/"-"; 0 <= days <= 999999999; 0 <= hours <= 23; 0 <= minutes <=  59;
 // 0 <= seconds <= 59; 0 <= nanos <= 999999999
 $interval_dt::{ sign: "+", days: 5, hours: 4, minutes: 30, seconds: 15, nanos: 500000000 }
+
+// JSON -- an Ion value annotated with $json, read as an SQL/JSON item of type JSON
+// struct  = SQL/JSON object. Field order is kept, and repeated field names are all kept
+// list    = SQL/JSON array
+// string  = SQL/JSON string
+// bool    = SQL/JSON boolean
+// int     = SQL/JSON number with the type of the same PartiQL literal: INT if it fits in
+//           32 bits, otherwise BIGINT (like JSON('7') and JSON('3000000000'))
+// decimal = SQL/JSON number of type DECIMAL, with the same scale (like JSON('10.5')).
+//           An integer too large for BIGINT is written as a decimal, such as 12345678901234567890123.
+// float   = SQL/JSON number of type FLOAT (like JSON('1e3'))
+// null    = SQL/JSON null (untyped null only)
+// $date, $time, $timestamp
+//         = SQL/JSON datetime scalar
+$json::{ id: 7, items: [ { sku: "A1", price: 10.5 } ], note: null }
+$json::{}                                                // an empty object
+$json::[]                                                // an empty array
+$json::{ a: 1, a: 2 }                                    // a repeated key, both members kept
+$json::3000000000                                        // a number of type BIGINT
+$json::12345678901234567890123.                          // a number of type DECIMAL
+$json::null                                              // SQL/JSON null, not SQL NULL
+$json::"Bob"                                             // an SQL/JSON string
+$json::{ d: $date::{ year: 2024, month: 1, day: 1 } }    // an object holding a DATE
+$json::$date::{ year: 2024, month: 1, day: 1 }           // an SQL/JSON scalar that is a DATE
+$json::$time::{ hour: 2, minute: 30, second: 59.0, offset: -480 }
+                                                         // a TIME WITH TIME ZONE
 ```
+
+This annotation follows the JSON type RFC, [partiql/partiql-lang#107](https://github.com/partiql/partiql-lang/pull/107), and
+changes with it. How duplicate keys are kept is still an open question there.
+
+**Annotations.** `$json` is the outermost annotation. The only annotation allowed after it is `$date`, `$time` or
+`$timestamp`, on the value itself or on a value inside it. The other PartiQL annotations (`$missing`, `$bag`, `$map`,
+`$interval_ym`, `$interval_dt` and `$graph`) are not allowed anywhere inside a `$json` value, and neither is a nested
+`$json`.
+
+**Not allowed inside a `$json` value**, at any depth: typed nulls such as `null.int`, Ion timestamps, symbol values such
+as `abc` or `'abc'` (field names are fine, and become object keys), blobs, clobs, s-expressions, the floats `nan`,
+`+inf` and `-inf` (JSON text can't write them), and the annotations above. A test file with any of these is invalid, and
+a runner fails to load it.
+
+**Null.** `$json::null` is SQL/JSON null. This is an exception to the other annotations, where `$date::null` or
+`$bag::null` is an SQL `NULL` of that type. JSON has no typed-null form: an SQL `NULL` of type `JSON` is written as a
+plain `null`, and `MISSING` as `$missing::null`. The rule works both ways: an expected `$json::null` never matches an
+SQL `NULL`, and an expected plain `null` never matches an SQL/JSON null.
+
+**Matching results.** A test runner matches an expected `$json` value with an actual result as follows. This is not
+PartiQL's `=` on JSON, which the RFC leaves unspecified.
+
+- The actual result must have type `JSON`. An expected `$json` value never matches a value of another type, such as a
+  tuple or a string.
+- Objects match when they have the same members, counted with repeats, in any order. Member order is kept when a value
+  is loaded, because a path step on a repeated key returns the first member. A test that checks which member comes first
+  does it through a path step, not through the expected object.
+- Arrays match when their elements match in the same order.
+- Numbers match when they have the same type and the same value. Only `INT`, `BIGINT`, `DECIMAL` and `FLOAT` have a
+  `$json` form, so a test can't yet expect a number of another type, such as `SMALLINT` or `REAL`. A DECIMAL must also have the same scale, so `10.5` and
+  `10.50` differ. A FLOAT `-0e0` and `0e0` differ.
+- Datetimes match when they have the same type and every field is the same. A DATE never matches a TIMESTAMP, an offset
+  of `null` never matches an offset of `0`, and two times at the same instant with different offsets differ.
+- Strings and booleans match when they are equal. SQL/JSON null matches only SQL/JSON null.
+
+**JSON text.** The exact text a function writes (member order, whitespace, how a number is spelled) is not specified.
+A test that gets JSON text back parses it with `JSON(...)`, as in `JSON(JSON_OBJECT('a' : 1))`, and matches the `$json`
+value. Because a number can be spelled more than one way, such a test holds only strings, booleans, nulls and
+integers.
 
 Similarly, graphs defined with the Ion-based format for "external" graphs 
 ([org.partiql.schemas/graph.isl](https://github.com/partiql/partiql-lang-kotlin/blob/main/partiql-lang/src/main/resources/org/partiql/schemas/graph.isl))
