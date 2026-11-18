@@ -259,9 +259,10 @@ changes with it. How duplicate keys are kept is still an open question there.
 `$interval_ym`, `$interval_dt` and `$graph`) are not allowed anywhere inside a `$json` value, and neither is a nested
 `$json`.
 
-**Not allowed inside a `$json` value**, at any depth: typed nulls such as `null.int`, Ion timestamps, symbols, blobs,
-clobs, s-expressions, the floats `nan`, `+inf` and `-inf` (JSON text can't write them), and the annotations above. A test
-file with any of these is invalid, and a runner fails to load it.
+**Not allowed inside a `$json` value**, at any depth: typed nulls such as `null.int`, Ion timestamps, symbol values such
+as `abc` or `'abc'` (field names are fine, and become object keys), blobs, clobs, s-expressions, the floats `nan`,
+`+inf` and `-inf` (JSON text can't write them), and the annotations above. A test file with any of these is invalid, and
+a runner fails to load it.
 
 **Null.** `$json::null` is SQL/JSON null. This is an exception to the other annotations, where `$date::null` or
 `$bag::null` is an SQL `NULL` of that type. JSON has no typed-null form: an SQL `NULL` of type `JSON` is written as a
