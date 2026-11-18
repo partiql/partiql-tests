@@ -1,0 +1,430 @@
+// Conformance tests for the JSON type, from the JSON type RFC, partiql/partiql-lang#107. They cover
+// the rules the RFC has decided. A rule it has not decided yet is a commented-out /* TODO: ... */
+// placeholder that names the open question, and becomes a test once it is decided.
+//
+// Section numbers such as §6.36 refer to SQL:2023, ISO/IEC 9075-2:2023. ID and IA numbers name a
+// choice SQL:2023 leaves to the implementation.
+//
+// Values of type JSON are written with the $json annotation, defined in
+// docs/partiql-tests-schema-proposal.md. The exact JSON text a function writes is not specified, so
+// a test that gets JSON text back parses it with JSON(...) and matches the $json value, or only
+// checks that the result IS STRING.
+//
+// Path steps are always written as (JSON(...)).x, because whether the parentheses can be left out
+// is an open question in the RFC.
+
+// No variable in envs has a schema, so its type is not known at compile time, and each value is
+// checked at runtime.
+//   t: a tuple whose i is the number 1 and s the string '1'
+//   jmixed: a value of type JSON and a string
+//   groups: rows whose v is a string, or in group 2 one value of type JSON
+envs::{
+  t: { i: 1, s: "1" },
+  jmixed: [$json::{ a: 1 }, "abc"],
+  groups: [
+    { g: 1, v: "a" },
+    { g: 1, v: "b" },
+    { g: 2, v: $json::1 },
+    { g: 2, v: "c" }
+  ]
+}
+
+'json-constructors'::[
+  // With no JSON input and no RETURNING, a constructor returns JSON text as a STRING (§6.34).
+  {
+    name: "json object returns a STRING by default",
+    statement: "JSON_OBJECT('id' : 7) IS STRING",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json object text parses back",
+    statement: "JSON(JSON_OBJECT('id' : 7, 'name' : 'Bob'))",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ id: 7, name: "Bob" }
+    }
+  },
+  {
+    name: "json object RETURNING JSON",
+    statement: "JSON_OBJECT('id' : 7 RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ id: 7 }
+    }
+  },
+  {
+    name: "json object KEY VALUE syntax",
+    statement: "JSON_OBJECT(KEY 'id' VALUE 7 RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ id: 7 }
+    }
+  },
+  // A value of type JSON as an input makes the result JSON (§6.34).
+  {
+    name: "json object with a JSON input returns JSON",
+    statement: "JSON_OBJECT('c' : JSON('{\"a\": 1}'))",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ c: { a: 1 } }
+    }
+  },
+  {
+    name: "json object NULL ON NULL by default",
+    statement: "JSON_OBJECT('id' : 7, 'note' : NULL RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ id: 7, note: null }
+    }
+  },
+  {
+    name: "json object ABSENT ON NULL",
+    statement: "JSON_OBJECT('id' : 7, 'note' : NULL ABSENT ON NULL RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ id: 7 }
+    }
+  },
+  // A MISSING value is left out, as a MISSING attribute is left out of a tuple.
+  {
+    name: "json object MISSING value is left out",
+    statement: "JSON_OBJECT('id' : 7, 'note' : MISSING RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ id: 7 }
+    }
+  },
+  // An error in both modes (§6.34). A planner may also reject it at compile time.
+  {
+    name: "json object NULL key",
+    statement: "JSON_OBJECT(NULL : 7)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationFail
+    }
+  },
+  // t has no attribute k. Like a tuple attribute name: left out in permissive mode, an error in
+  // type checking mode.
+  {
+    name: "json object MISSING key",
+    statement: "JSON_OBJECT(t.k : 1, 'b' : 2 RETURNING JSON)",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $json::{ b: 2 }
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  // WITHOUT UNIQUE KEYS is the default (§6.34).
+  {
+    name: "json object a repeated key keeps both members",
+    statement: "JSON_OBJECT('a' : 1, 'a' : 2 RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ a: 1, a: 2 }
+    }
+  },
+  // Type checking mode only. Permissive mode is open question 3, in a placeholder at the end of
+  // this list.
+  {
+    name: "json object WITH UNIQUE KEYS and a repeated key",
+    statement: "JSON_OBJECT('a' : 1, 'a' : 2 WITH UNIQUE KEYS RETURNING JSON)",
+    assert: {
+      evalMode: EvalModeError,
+      result: EvaluationFail
+    }
+  },
+  {
+    name: "json object a string value is not parsed",
+    statement: "JSON_OBJECT('c' : '{\"a\": 1}' RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ c: "{\"a\": 1}" }
+    }
+  },
+  {
+    name: "json object FORMAT JSON parses a string value",
+    statement: "JSON_OBJECT('c' : '{\"a\": 1}' FORMAT JSON RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ c: { a: 1 } }
+    }
+  },
+  // The result of a constructor or JSON_QUERY implies FORMAT JSON when it is an input (§10.12).
+  {
+    name: "json object a nested constructor result is parsed",
+    statement: "JSON_OBJECT('c' : JSON_OBJECT('a' : 1) RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ c: { a: 1 } }
+    }
+  },
+  {
+    name: "json object a JSON_QUERY result is parsed",
+    statement: "JSON_OBJECT('c' : JSON_QUERY('{\"a\": [1]}', 'lax $.a') RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ c: [1] }
+    }
+  },
+  // Only a direct result implies FORMAT JSON. After || it is a plain string, so c holds a string.
+  {
+    name: "json object a string built from a constructor result is not parsed",
+    statement: "JSON_VALUE(JSON_OBJECT('c' : (JSON_OBJECT('a' : 1) || '') RETURNING JSON), 'lax $.c.type()')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: "string"
+    }
+  },
+  // A plain datetime input is cast to a string (§6.34). JSON_SCALAR keeps it, in the next test.
+  {
+    name: "json object a datetime value becomes a string",
+    statement: "JSON_OBJECT('d' : DATE '2024-01-01' RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ d: "2024-01-01" }
+    }
+  },
+  {
+    name: "json object JSON_SCALAR keeps a datetime",
+    statement: "JSON_OBJECT('d' : JSON_SCALAR(DATE '2024-01-01'))",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ d: $date::{ year: 2024, month: 1, day: 1 } }
+    }
+  },
+  {
+    name: "json array ABSENT ON NULL by default",
+    statement: "JSON_ARRAY(1, NULL, 'x' RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[1, "x"]
+    }
+  },
+  {
+    name: "json array NULL ON NULL",
+    statement: "JSON_ARRAY(1, NULL, 'x' NULL ON NULL RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[1, null, "x"]
+    }
+  },
+  {
+    name: "json array MISSING is left out",
+    statement: "JSON_ARRAY(1, MISSING, 'x' NULL ON NULL RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[1, "x"]
+    }
+  },
+  // A query is not an input value, so the result is always a STRING (§6.34).
+  {
+    name: "json array over a query returns a STRING",
+    statement: "JSON_ARRAY(SELECT VALUE x FROM <<1>> AS x) IS STRING",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json array over a query parses back",
+    statement: "JSON(JSON_ARRAY(SELECT VALUE x FROM <<1>> AS x))",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[1]
+    }
+  },
+  // Each row decides its result type.
+  {
+    name: "json object input type not known decides per row",
+    statement: "SELECT VALUE JSON_OBJECT('c' : x) IS STRING FROM jmixed AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[false, true]
+    }
+  },
+  /* TODO: open question 3 in partiql/partiql-lang#107, WITH UNIQUE KEYS and a repeated key in
+     permissive mode. The proposal is below. The alternative raises an error in both modes.
+  {
+    name: "json object WITH UNIQUE KEYS and a repeated key in permissive mode",
+    statement: "JSON_OBJECT('a' : 1, 'a' : 2 WITH UNIQUE KEYS RETURNING JSON)",
+    assert: {
+      evalMode: EvalModeCoerce,
+      result: EvaluationSuccess,
+      output: $missing::null
+    }
+  }
+  */
+  /* TODO: not specified yet in partiql/partiql-lang#107: constructor inputs that are an interval, a
+     binary value, a tuple, an array, a bag or an Ion value.
+  */
+]
+
+'json-arrayagg'::[
+  {
+    name: "json arrayagg returns a STRING by default",
+    statement: "SELECT JSON_ARRAYAGG(x) IS STRING AS a FROM <<1>> AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ a: true }]
+    }
+  },
+  // Two equal values, so the test does not depend on the order of the rows.
+  {
+    name: "json arrayagg text parses back",
+    statement: "SELECT JSON(JSON_ARRAYAGG(x)) AS a FROM <<'a', 'a'>> AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ a: $json::["a", "a"] }]
+    }
+  },
+  {
+    name: "json arrayagg ABSENT ON NULL by default",
+    statement: "SELECT JSON_ARRAYAGG(x RETURNING JSON) AS a FROM <<NULL, 1>> AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ a: $json::[1] }]
+    }
+  },
+  {
+    name: "json arrayagg NULL ON NULL",
+    statement: "SELECT JSON_ARRAYAGG(x NULL ON NULL RETURNING JSON) AS a FROM <<NULL>> AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ a: $json::[null] }]
+    }
+  },
+  // With ORDER BY, the elements follow the sort keys (§10.11, T813).
+  {
+    name: "json arrayagg ORDER BY",
+    statement: "SELECT JSON_ARRAYAGG(x ORDER BY x RETURNING JSON) AS a FROM <<2, 1, 3>> AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ a: $json::[1, 2, 3] }]
+    }
+  },
+  {
+    name: "json arrayagg ORDER BY DESC",
+    statement: "SELECT JSON_ARRAYAGG(x ORDER BY x DESC RETURNING JSON) AS a FROM <<2, 1, 3>> AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ a: $json::[3, 2, 1] }]
+    }
+  },
+  // §10.11.
+  {
+    name: "json arrayagg over no rows is NULL",
+    statement: "SELECT JSON_ARRAYAGG(x) AS a FROM <<>> AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ a: null }]
+    }
+  },
+  // Group 1 holds only strings, so the result is a STRING. Group 2 holds a value of type JSON, so
+  // it is JSON.
+  {
+    name: "json arrayagg input type not known decides per group",
+    statement: "SELECT g, JSON_ARRAYAGG(r.v) IS STRING AS s FROM groups AS r GROUP BY r.g AS g",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ g: 1, s: true }, { g: 2, s: false }]
+    }
+  }
+]
+
+'json-objectagg'::[
+  {
+    name: "json objectagg returns a STRING by default",
+    statement: "SELECT JSON_OBJECTAGG(r.k : r.v) IS STRING AS o FROM <<{'k': 'a', 'v': 1}>> AS r",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ o: true }]
+    }
+  },
+  // Members match in any order, so the test does not depend on the order of the rows.
+  {
+    name: "json objectagg RETURNING JSON",
+    statement: "SELECT JSON_OBJECTAGG(r.k : r.v RETURNING JSON) AS o FROM <<{'k': 'a', 'v': 1}, {'k': 'b', 'v': 2}>> AS r",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ o: $json::{ a: 1, b: 2 } }]
+    }
+  },
+  {
+    name: "json objectagg with a JSON input returns JSON",
+    statement: "SELECT JSON_OBJECTAGG(r.k : JSON('[1]')) AS o FROM <<{'k': 'a'}>> AS r",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ o: $json::{ a: [1] } }]
+    }
+  },
+  {
+    name: "json objectagg NULL ON NULL by default",
+    statement: "SELECT JSON_OBJECTAGG(r.k : r.v RETURNING JSON) AS o FROM <<{'k': 'a', 'v': NULL}>> AS r",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ o: $json::{ a: null } }]
+    }
+  },
+  {
+    name: "json objectagg ABSENT ON NULL",
+    statement: "SELECT JSON_OBJECTAGG(r.k : r.v ABSENT ON NULL RETURNING JSON) AS o FROM <<{'k': 'a', 'v': NULL}>> AS r",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ o: $json::{} }]
+    }
+  },
+  // §10.11.
+  {
+    name: "json objectagg over no rows is NULL",
+    statement: "SELECT JSON_OBJECTAGG(r.k : r.v) AS o FROM <<>> AS r",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ o: null }]
+    }
+  }
+]

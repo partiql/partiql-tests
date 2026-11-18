@@ -1,0 +1,246 @@
+// Conformance tests for the JSON type, from the JSON type RFC, partiql/partiql-lang#107. They cover
+// the rules the RFC has decided. A rule it has not decided yet is a commented-out /* TODO: ... */
+// placeholder that names the open question, and becomes a test once it is decided.
+//
+// Section numbers such as §6.36 refer to SQL:2023, ISO/IEC 9075-2:2023. ID and IA numbers name a
+// choice SQL:2023 leaves to the implementation.
+//
+// Values of type JSON are written with the $json annotation, defined in
+// docs/partiql-tests-schema-proposal.md. The exact JSON text a function writes is not specified, so
+// a test that gets JSON text back parses it with JSON(...) and matches the $json value, or only
+// checks that the result IS STRING.
+//
+// Path steps are always written as (JSON(...)).x, because whether the parentheses can be left out
+// is an open question in the RFC.
+
+// No variable in envs has a schema, so its type is not known at compile time, and each value is
+// checked at runtime.
+//   payload: JSON text in a string
+//   t: a tuple whose i is the number 1 and s the string '1'
+envs::{
+  payload: "{\"id\": 7, \"customer\": {\"name\": \"Bob\", \"Tier\": \"gold\"}, \"items\": [{\"sku\": \"A1\", \"price\": 10.5}, {\"sku\": \"B2\", \"price\": 4}], \"note\": null}",
+  t: { i: 1, s: "1" }
+}
+
+'json-accessor'::[
+  // A chain of steps means JSON_QUERY with 'lax $...', WITH CONDITIONAL ARRAY WRAPPER, NULL ON
+  // EMPTY and NULL ON ERROR (§6.36). The result has type JSON, so a single item is not wrapped
+  // (§9.44).
+  {
+    name: "json accessor member steps",
+    statement: "(JSON(payload)).customer.name",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::"Bob"
+    }
+  },
+  // No case folding on JSON keys (§6.36, NOTE 198). On a tuple this step would match any case.
+  {
+    name: "json accessor unquoted key matches exact case",
+    statement: "(JSON(payload)).customer.tier",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json accessor quoted key",
+    statement: "(JSON(payload)).customer.\"Tier\"",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::"gold"
+    }
+  },
+  // SQL NULL, not MISSING as on a tuple, because of NULL ON EMPTY (§6.36).
+  {
+    name: "json accessor no member gives NULL in both modes",
+    statement: "(JSON(payload)).customer.age",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  // A PartiQL extension: x['name'] means x."name", as on a tuple.
+  {
+    name: "json accessor bracket key",
+    statement: "(JSON(payload)).customer['Tier']",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::"gold"
+    }
+  },
+  {
+    name: "json accessor bracket key matches exact case",
+    statement: "(JSON(payload)).customer['tier']",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json accessor bracket key from a CAST",
+    statement: "(JSON(payload)).customer[CAST('Tier' AS STRING)]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::"gold"
+    }
+  },
+  {
+    name: "json accessor array step",
+    statement: "(JSON(payload)).items[0].sku",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::"A1"
+    }
+  },
+  {
+    name: "json accessor array step returns an object",
+    statement: "(JSON(payload)).items[0]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ sku: "A1", price: 10.5 }
+    }
+  },
+  {
+    name: "json accessor index out of range gives NULL",
+    statement: "(JSON(payload)).items[5]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json accessor index from an expression",
+    statement: "(JSON(payload)).items[t.i].sku",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::"B2"
+    }
+  },
+  // t.s is the string '1'. The error goes to NULL ON ERROR.
+  {
+    name: "json accessor index that is not a number gives NULL",
+    statement: "(JSON(payload)).items[t.s]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  // Lax mode runs a member step on each element, and the results are wrapped (§4.48.5).
+  {
+    name: "json accessor lax member step on an array",
+    statement: "(JSON(payload)).items.price",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[10.5, 4]
+    }
+  },
+  // Lax mode treats a non-array as a one-element array.
+  {
+    name: "json accessor lax array step on a non-array",
+    statement: "(JSON(payload)).id[0]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::7
+    }
+  },
+  {
+    name: "json accessor SQL/JSON null member",
+    statement: "(JSON(payload)).note",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::null
+    }
+  },
+  {
+    name: "json accessor SQL/JSON null member IS NULL is false",
+    statement: "(JSON(payload)).note IS NULL",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // As for JSON_QUERY, a NULL input gives NULL.
+  {
+    name: "json accessor on a NULL of type JSON",
+    statement: "(CAST(NULL AS JSON)).a",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  // A path step on a string keeps today's behavior. It is never parsed as JSON.
+  {
+    name: "json accessor a string is not parsed",
+    statement: "payload.customer",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  /* TODO: open question 2 in partiql/partiql-lang#107, duplicate keys when parsing. The proposal
+     keeps every member, and a step returns the first, below. The alternative keeps only the last,
+     so the result is JSON 2.
+  {
+    name: "json accessor a duplicate key returns the first member",
+    statement: "(JSON('{\"a\": 1, \"a\": 2}')).a",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::1
+    }
+  }
+  */
+  /* TODO: open question 5 in partiql/partiql-lang#107, a path step directly after JSON(...) or
+     JSON_SCALAR(...) without parentheses. The proposal allows it, below. The alternative makes it a
+     syntax error.
+  {
+    name: "json accessor a step directly after JSON(...)",
+    statement: "JSON(payload).customer.name",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::"Bob"
+    }
+  }
+  */
+  /* TODO: open question 5 in partiql/partiql-lang#107, the same question for JSON_SCALAR(...). The
+     proposal allows it, below.
+  {
+    name: "json accessor a step directly after JSON_SCALAR(...)",
+    statement: "JSON_SCALAR(5)[0]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::5
+    }
+  }
+  */
+  /* TODO: not specified yet in partiql/partiql-lang#107: wildcards, ranges, .'name' and item
+     methods as path steps, such as (JSON(payload)).items[*].
+  */
+]

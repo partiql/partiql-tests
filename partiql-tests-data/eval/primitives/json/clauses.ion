@@ -1,0 +1,141 @@
+// Conformance tests for the JSON type, from the JSON type RFC, partiql/partiql-lang#107. They cover
+// the rules the RFC has decided. A rule it has not decided yet is a commented-out /* TODO: ... */
+// placeholder that names the open question, and becomes a test once it is decided.
+//
+// Section numbers such as §6.36 refer to SQL:2023, ISO/IEC 9075-2:2023. ID and IA numbers name a
+// choice SQL:2023 leaves to the implementation.
+//
+// Values of type JSON are written with the $json annotation, defined in
+// docs/partiql-tests-schema-proposal.md. The exact JSON text a function writes is not specified, so
+// a test that gets JSON text back parses it with JSON(...) and matches the $json value, or only
+// checks that the result IS STRING.
+//
+// Path steps are always written as (JSON(...)).x, because whether the parentheses can be left out
+// is an open question in the RFC.
+
+// No variable in envs has a schema, so its type is not known at compile time, and each value is
+// checked at runtime.
+//   payload: JSON text in a string
+//   jnum: the SQL/JSON number 5
+envs::{
+  payload: "{\"id\": 7, \"customer\": {\"name\": \"Bob\", \"Tier\": \"gold\"}, \"items\": [{\"sku\": \"A1\", \"price\": 10.5}, {\"sku\": \"B2\", \"price\": 4}], \"note\": null}",
+  jnum: [$json::5]
+}
+
+'json-clauses'::[
+  {
+    name: "json FROM iterates an SQL/JSON array",
+    statement: "SELECT JSON_VALUE(i, 'lax $.sku') AS sku, n FROM (JSON(payload)).items AS i AT n",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ sku: "A1", n: 0 }, { sku: "B2", n: 1 }]
+    }
+  },
+  // PartiQL's rule for a value that is not a collection: one row in permissive mode, an error in
+  // type checking mode.
+  {
+    name: "json FROM over a value that is not an array",
+    statement: "SELECT VALUE JSON_VALUE(x, 'lax $.a') FROM JSON('{\"a\": 1}') AS x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::["1"]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  // A value of type JSON is not a boolean, so the condition is not true.
+  {
+    name: "json WHERE an SQL/JSON true leaves the row out",
+    statement: "SELECT VALUE 1 FROM <<1>> AS x WHERE JSON('true')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[]
+    }
+  },
+  {
+    name: "json HAVING an SQL/JSON true leaves the group out",
+    statement: "SELECT VALUE g FROM <<1>> AS x GROUP BY x AS g HAVING JSON('true')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[]
+    }
+  },
+  {
+    name: "json ON an SQL/JSON true joins no rows",
+    statement: "SELECT VALUE a FROM <<1>> AS a JOIN <<2>> AS b ON JSON('true')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[]
+    }
+  },
+  // COUNT counts the SQL/JSON null, which is a value, and skips SQL NULL.
+  {
+    name: "json COUNT counts an SQL/JSON null",
+    statement: "SELECT COUNT(x) AS c FROM [JSON('1'), NULL, JSON('null')] AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ c: 2 }]
+    }
+  },
+  {
+    name: "json IS STRUCT is false",
+    statement: "(JSON(payload)).customer IS STRUCT",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json IS LIST is false",
+    statement: "(JSON(payload)).items IS LIST",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json IS STRING is false",
+    statement: "JSON('\"a\"') IS STRING",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  // jnum holds the SQL/JSON number 5. It is not converted to INT 5 to make + work.
+  {
+    name: "json a value of type JSON is never converted",
+    statement: "SELECT VALUE (x + 1) IS MISSING FROM jnum AS x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[true]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  /* TODO: not specified yet in partiql/partiql-lang#107: comparing, grouping and ordering values of
+     type JSON, with each other or with another type: =, IN, DISTINCT, GROUP BY, ORDER BY, MIN, MAX
+     and the set operations that remove duplicates. For JSON('7') = 7, PartiQL's equality would give
+     false, as for 5 = 'a', while SQL:2023 rejects a JSON operand without T879 (§9.11).
+  */
+  /* TODO: not specified yet in partiql/partiql-lang#107: how CAST maps an Ion value to JSON, such
+     as CAST(`{a: 1}` AS JSON).
+  */
+]
