@@ -1,0 +1,210 @@
+envs::{
+  payload: "{\"id\": 7, \"customer\": {\"name\": \"Bob\", \"Tier\": \"gold\"}, \"items\": [{\"sku\": \"A1\", \"price\": 10.5}, {\"sku\": \"B2\", \"price\": 4}], \"note\": null}",
+  t: { i: 1, s: "1" },
+  nums: [5],
+  strs: ["{\"a\": 1}", 5],
+  jmixed: [$json::{ a: 1 }, "abc"],
+  jq: [$json::{ a: [1] }, "{\"a\": [1]}"],
+  jnum: [$json::5],
+  groups: [
+    { g: 1, v: "a" },
+    { g: 1, v: "b" },
+    { g: 2, v: $json::1 },
+    { g: 2, v: "c" }
+  ]
+}
+
+'json-accessor'::[
+  {
+    name: "json accessor member steps",
+    statement: "(JSON(payload)).customer.name",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::"Bob"
+    }
+  },
+  {
+    name: "json accessor unquoted key matches exact case",
+    statement: "(JSON(payload)).customer.tier",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json accessor quoted key",
+    statement: "(JSON(payload)).customer.\"Tier\"",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::"gold"
+    }
+  },
+  {
+    name: "json accessor no member gives NULL in both modes",
+    statement: "(JSON(payload)).customer.age",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json accessor bracket key",
+    statement: "(JSON(payload)).customer['Tier']",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::"gold"
+    }
+  },
+  {
+    name: "json accessor bracket key matches exact case",
+    statement: "(JSON(payload)).customer['tier']",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json accessor bracket key from a CAST",
+    statement: "(JSON(payload)).customer[CAST('Tier' AS STRING)]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::"gold"
+    }
+  },
+  {
+    name: "json accessor array step",
+    statement: "(JSON(payload)).items[0].sku",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::"A1"
+    }
+  },
+  {
+    name: "json accessor array step returns an object",
+    statement: "(JSON(payload)).items[0]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ sku: "A1", price: 10.5 }
+    }
+  },
+  {
+    name: "json accessor index out of range gives NULL",
+    statement: "(JSON(payload)).items[5]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json accessor index from an expression",
+    statement: "(JSON(payload)).items[t.i].sku",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::"B2"
+    }
+  },
+  {
+    name: "json accessor index that is not a number gives NULL",
+    statement: "(JSON(payload)).items[t.s]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json accessor lax member step on an array",
+    statement: "(JSON(payload)).items.price",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[10.5, 4]
+    }
+  },
+  {
+    name: "json accessor lax member step on an array of strings",
+    statement: "(JSON(payload)).items.sku",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::["A1", "B2"]
+    }
+  },
+  {
+    name: "json accessor lax array step on a non-array",
+    statement: "(JSON(payload)).id[0]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::7
+    }
+  },
+  {
+    name: "json accessor SQL/JSON null member",
+    statement: "(JSON(payload)).note",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::null
+    }
+  },
+  {
+    name: "json accessor SQL/JSON null member IS NULL is false",
+    statement: "(JSON(payload)).note IS NULL",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json accessor a string is not parsed",
+    statement: "payload.customer",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  /* TODO: open question in partiql/partiql-lang#107: duplicate keys when parsing. The proposal keeps every member, and a step returns the first, below. The alternative keeps only the last, so the result is JSON 2.
+  {
+    name: "json accessor a duplicate key returns the first member",
+    statement: "(JSON('{\"a\": 1, \"a\": 2}')).a",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::1
+    }
+  }
+  */
+  /* TODO: open question in partiql/partiql-lang#107: a path step directly after JSON(...) without parentheses. The proposal allows it, below. The alternative makes it a syntax error.
+  {
+    name: "json accessor a step directly after JSON(...)",
+    statement: "JSON(payload).customer.name",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::"Bob"
+    }
+  }
+  */
+  /* TODO: not specified yet in partiql/partiql-lang#107: wildcards, ranges, .'name' and item methods as path steps, such as (JSON(payload)).items[*].
+  */
+]

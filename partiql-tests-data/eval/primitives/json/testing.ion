@@ -1,0 +1,230 @@
+envs::{
+  payload: "{\"id\": 7, \"customer\": {\"name\": \"Bob\", \"Tier\": \"gold\"}, \"items\": [{\"sku\": \"A1\", \"price\": 10.5}, {\"sku\": \"B2\", \"price\": 4}], \"note\": null}",
+  t: { i: 1, s: "1" },
+  nums: [5],
+  strs: ["{\"a\": 1}", 5],
+  jmixed: [$json::{ a: 1 }, "abc"],
+  jq: [$json::{ a: [1] }, "{\"a\": [1]}"],
+  jnum: [$json::5],
+  groups: [
+    { g: 1, v: "a" },
+    { g: 1, v: "b" },
+    { g: 2, v: $json::1 },
+    { g: 2, v: "c" }
+  ]
+}
+
+'json-is-valid-json'::[
+  {
+    name: "json is_valid_json valid text",
+    statement: "is_valid_json('[1, 2]')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json is_valid_json VALUE",
+    statement: "is_valid_json('7', VALUE)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json is_valid_json OBJECT",
+    statement: "is_valid_json('{\"a\": 1}', OBJECT)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json is_valid_json OBJECT on an array",
+    statement: "is_valid_json('[1, 2]', OBJECT)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json is_valid_json ARRAY",
+    statement: "is_valid_json('[1, 2]', ARRAY)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json is_valid_json SCALAR on null",
+    statement: "is_valid_json('null', SCALAR)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json is_valid_json SCALAR on a string",
+    statement: "is_valid_json('\"abc\"', SCALAR)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json is_valid_json invalid text",
+    statement: "is_valid_json('abc')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json is_valid_json duplicate key without the unique check",
+    statement: "is_valid_json('{\"a\": 1, \"a\": 2}')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json is_valid_json unique check and a duplicate key",
+    statement: "is_valid_json('{\"a\": 1, \"a\": 2}', OBJECT, TRUE)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json is_valid_json unique check and a nested duplicate key",
+    statement: "is_valid_json('{\"a\": {\"b\": 1, \"b\": 2}}', VALUE, TRUE)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json is_valid_json unique check and no duplicate",
+    statement: "is_valid_json('{\"a\": 1, \"b\": 2}', OBJECT, TRUE)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json is_valid_json unique check FALSE",
+    statement: "is_valid_json('{\"a\": 1, \"a\": 2}', OBJECT, FALSE)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json is_valid_json on a value of type JSON",
+    statement: "is_valid_json(JSON('[1, 2]'), ARRAY)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json is_valid_json NULL",
+    statement: "is_valid_json(NULL)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json is_valid_json MISSING",
+    statement: "is_valid_json(MISSING)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $missing::null
+    }
+  },
+  /* TODO: open question in partiql/partiql-lang#107: is_valid_json on an input whose type is not known and is neither a string nor JSON. The proposal gives false, below. The alternative gives MISSING in permissive mode and an error in type checking mode.
+  {
+    name: "json is_valid_json input type not known",
+    statement: "SELECT VALUE is_valid_json(x) FROM strs AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[true, false]
+    }
+  }
+  */
+]
+
+'json-is-json-type'::[
+  {
+    name: "json is_json_type on JSON",
+    statement: "is_json_type(JSON('{}'))",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json is_json_type on a string holding JSON text",
+    statement: "is_json_type('{}')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json is_json_type on an SQL/JSON null",
+    statement: "is_json_type(JSON('null'))",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json is_json_type NULL",
+    statement: "is_json_type(NULL)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json is_json_type MISSING",
+    statement: "is_json_type(MISSING)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $missing::null
+    }
+  },
+  {
+    name: "json is_json_type input type not known",
+    statement: "SELECT VALUE is_json_type(x) FROM jmixed AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[true, false]
+    }
+  }
+]

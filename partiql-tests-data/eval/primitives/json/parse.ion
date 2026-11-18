@@ -1,0 +1,340 @@
+envs::{
+  payload: "{\"id\": 7, \"customer\": {\"name\": \"Bob\", \"Tier\": \"gold\"}, \"items\": [{\"sku\": \"A1\", \"price\": 10.5}, {\"sku\": \"B2\", \"price\": 4}], \"note\": null}",
+  t: { i: 1, s: "1" },
+  nums: [5],
+  strs: ["{\"a\": 1}", 5],
+  jmixed: [$json::{ a: 1 }, "abc"],
+  jq: [$json::{ a: [1] }, "{\"a\": [1]}"],
+  jnum: [$json::5],
+  groups: [
+    { g: 1, v: "a" },
+    { g: 1, v: "b" },
+    { g: 2, v: $json::1 },
+    { g: 2, v: "c" }
+  ]
+}
+
+'json-parse'::[
+  {
+    name: "json parse an object",
+    statement: "JSON('{\"a\": 1, \"b\": [true, null, \"x\"]}')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ a: 1, b: [true, null, "x"] }
+    }
+  },
+  {
+    name: "json parse a string scalar",
+    statement: "JSON('\"abc\"')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::"abc"
+    }
+  },
+  {
+    name: "json parse null is an SQL/JSON null",
+    statement: "JSON('null')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::null
+    }
+  },
+  {
+    name: "json parse null IS NULL is false",
+    statement: "JSON('null') IS NULL",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json parse number types",
+    statement: "JSON('[7, 10.5, 12345678901234567890123, 1e3]')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[7, 10.5, 12345678901234567890123., 1e3]
+    }
+  },
+  {
+    name: "json parse FORMAT JSON changes nothing",
+    statement: "JSON('[1]' FORMAT JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[1]
+    }
+  },
+  {
+    name: "json parse WITH UNIQUE KEYS and no duplicate",
+    statement: "JSON('{\"a\": 1, \"b\": 2}' WITH UNIQUE KEYS)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ a: 1, b: 2 }
+    }
+  },
+  {
+    name: "json parse WITH UNIQUE KEYS and a duplicate key",
+    statement: "JSON('{\"a\": 1, \"a\": 2}' WITH UNIQUE KEYS)",
+    assert: {
+      evalMode: EvalModeError,
+      result: EvaluationFail
+    }
+  },
+  {
+    name: "json parse WITH UNIQUE KEYS and a nested duplicate key",
+    statement: "JSON('{\"a\": {\"b\": 1, \"b\": 2}}' WITH UNIQUE KEYS)",
+    assert: {
+      evalMode: EvalModeError,
+      result: EvaluationFail
+    }
+  },
+  {
+    name: "json parse invalid text",
+    statement: "JSON('abc')",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "json parse NULL",
+    statement: "JSON(NULL)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json parse MISSING",
+    statement: "JSON(MISSING)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $missing::null
+    }
+  },
+  {
+    name: "json parse an input whose type is not known and is not a string",
+    statement: "SELECT VALUE JSON(x) IS MISSING FROM strs AS x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[false, true]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  /* TODO: open question in partiql/partiql-lang#107: a JSON number too large for its type. The proposal is below. The alternative gives the FLOAT Infinity.
+  {
+    name: "json parse a number too large for its type",
+    statement: "JSON('{\"x\": 1e400}')",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  }
+  */
+  /* TODO: open question in partiql/partiql-lang#107: duplicate keys when parsing. The proposal keeps every member, below. The alternative keeps only the last, so the result is { a: 2 }.
+  {
+    name: "json parse keeps every member of a duplicate key",
+    statement: "JSON('{\"a\": 1, \"a\": 2}')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ a: 1, a: 2 }
+    }
+  }
+  */
+  /* TODO: open question in partiql/partiql-lang#107: WITH UNIQUE KEYS and a duplicate key in permissive mode. The proposal is below. The alternative raises an error. Type checking mode is decided, in the tests above.
+  {
+    name: "json parse WITH UNIQUE KEYS and a duplicate key in permissive mode",
+    statement: "JSON('{\"a\": 1, \"a\": 2}' WITH UNIQUE KEYS) IS MISSING",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  }
+  */
+]
+
+'json-serialize'::[
+  {
+    name: "json serialize then parse gives an equal item",
+    statement: "JSON(JSON_SERIALIZE(JSON('{\"a\": [1, \"x\", null]}')))",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ a: [1, "x", null] }
+    }
+  },
+  {
+    name: "json serialize returns a STRING",
+    statement: "JSON_SERIALIZE(JSON('{\"a\": 1}')) IS STRING",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json serialize an item holding a datetime",
+    statement: "JSON_SERIALIZE(JSON_SCALAR(DATE '2024-01-01'))",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "json serialize NULL",
+    statement: "JSON_SERIALIZE(CAST(NULL AS JSON))",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json serialize MISSING",
+    statement: "JSON_SERIALIZE(MISSING)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $missing::null
+    }
+  }
+]
+
+'json-scalar'::[
+  {
+    name: "json scalar INT",
+    statement: "JSON_SCALAR(7)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::7
+    }
+  },
+  {
+    name: "json scalar DECIMAL",
+    statement: "JSON_SCALAR(10.5)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::10.5
+    }
+  },
+  {
+    name: "json scalar STRING",
+    statement: "JSON_SCALAR('Bob')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::"Bob"
+    }
+  },
+  {
+    name: "json scalar BOOL",
+    statement: "JSON_SCALAR(true)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::true
+    }
+  },
+  {
+    name: "json scalar DATE stays a datetime",
+    statement: "JSON_SCALAR(DATE '2024-01-01')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::$date::{ year: 2024, month: 1, day: 1 }
+    }
+  },
+  {
+    name: "json scalar NULL is SQL NULL",
+    statement: "JSON_SCALAR(NULL)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json scalar MISSING",
+    statement: "JSON_SCALAR(MISSING)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $missing::null
+    }
+  }
+]
+
+'json-cast'::[
+  {
+    name: "json cast JSON to JSON",
+    statement: "CAST(JSON('[1]') AS JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[1]
+    }
+  },
+  {
+    name: "json cast NULL to JSON",
+    statement: "CAST(NULL AS JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json cast an input whose type is not known to JSON",
+    statement: "SELECT VALUE CAST(x AS JSON) IS MISSING FROM strs AS x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[true, true]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  }
+]

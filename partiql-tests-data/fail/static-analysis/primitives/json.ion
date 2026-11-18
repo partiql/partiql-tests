@@ -1,0 +1,79 @@
+'json-static-analysis'::[
+  {
+    name: "json static analysis JSON(42)",
+    statement: "JSON(42)",
+    assert: {
+      result: StaticAnalysisFail
+    }
+  },
+  {
+    name: "json static analysis JSON_SERIALIZE('{\"a\": 1}')",
+    statement: "JSON_SERIALIZE('{\"a\": 1}')",
+    assert: {
+      result: StaticAnalysisFail
+    }
+  },
+  {
+    name: "json static analysis JSON_SCALAR(INTERVAL '1' DAY)",
+    statement: "JSON_SCALAR(INTERVAL '1' DAY)",
+    assert: {
+      result: StaticAnalysisFail
+    }
+  },
+  {
+    name: "json static analysis JSON_SCALAR(JSON('1'))",
+    statement: "JSON_SCALAR(JSON('1'))",
+    assert: {
+      result: StaticAnalysisFail
+    }
+  },
+  {
+    name: "json static analysis JSON_VALUE(7, 'lax $')",
+    statement: "JSON_VALUE(7, 'lax $')",
+    assert: {
+      result: StaticAnalysisFail
+    }
+  },
+  {
+    name: "json static analysis is_valid_json(1)",
+    statement: "is_valid_json(1)",
+    assert: {
+      result: StaticAnalysisFail
+    }
+  },
+  {
+    name: "json static analysis CAST('{}' AS JSON)",
+    statement: "CAST('{}' AS JSON)",
+    assert: {
+      result: StaticAnalysisFail
+    }
+  },
+  {
+    name: "json static analysis CAST(JSON('1') AS STRING)",
+    statement: "CAST(JSON('1') AS STRING)",
+    assert: {
+      result: StaticAnalysisFail
+    }
+  },
+  {
+    name: "json static analysis JSON('7') = 7",
+    statement: "JSON('7') = 7",
+    assert: {
+      result: StaticAnalysisFail
+    }
+  },
+  {
+    name: "json static analysis COALESCE(JSON('null'), 'none')",
+    statement: "COALESCE(JSON('null'), 'none')",
+    assert: {
+      result: StaticAnalysisFail
+    }
+  },
+  {
+    name: "json static analysis CASE WHEN true THEN JSON('1') ELSE 'a' END",
+    statement: "CASE WHEN true THEN JSON('1') ELSE 'a' END",
+    assert: {
+      result: StaticAnalysisFail
+    }
+  }
+]

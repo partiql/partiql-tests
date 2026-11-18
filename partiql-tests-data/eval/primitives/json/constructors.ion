@@ -1,0 +1,273 @@
+envs::{
+  payload: "{\"id\": 7, \"customer\": {\"name\": \"Bob\", \"Tier\": \"gold\"}, \"items\": [{\"sku\": \"A1\", \"price\": 10.5}, {\"sku\": \"B2\", \"price\": 4}], \"note\": null}",
+  t: { i: 1, s: "1" },
+  nums: [5],
+  strs: ["{\"a\": 1}", 5],
+  jmixed: [$json::{ a: 1 }, "abc"],
+  jq: [$json::{ a: [1] }, "{\"a\": [1]}"],
+  jnum: [$json::5],
+  groups: [
+    { g: 1, v: "a" },
+    { g: 1, v: "b" },
+    { g: 2, v: $json::1 },
+    { g: 2, v: "c" }
+  ]
+}
+
+'json-constructors'::[
+  {
+    name: "json object returns a STRING by default",
+    statement: "JSON_OBJECT('id' : 7) IS STRING",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json object text parses back",
+    statement: "JSON(JSON_OBJECT('id' : 7, 'name' : 'Bob'))",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ id: 7, name: "Bob" }
+    }
+  },
+  {
+    name: "json object RETURNING JSON",
+    statement: "JSON_OBJECT('id' : 7 RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ id: 7 }
+    }
+  },
+  {
+    name: "json object KEY VALUE syntax",
+    statement: "JSON_OBJECT(KEY 'id' VALUE 7 RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ id: 7 }
+    }
+  },
+  {
+    name: "json object with a JSON input returns JSON",
+    statement: "JSON_OBJECT('c' : JSON('{\"a\": 1}'))",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ c: { a: 1 } }
+    }
+  },
+  {
+    name: "json object NULL ON NULL by default",
+    statement: "JSON_OBJECT('id' : 7, 'note' : NULL RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ id: 7, note: null }
+    }
+  },
+  {
+    name: "json object ABSENT ON NULL",
+    statement: "JSON_OBJECT('id' : 7, 'note' : NULL ABSENT ON NULL RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ id: 7 }
+    }
+  },
+  {
+    name: "json object MISSING value is left out",
+    statement: "JSON_OBJECT('id' : 7, 'note' : MISSING RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ id: 7 }
+    }
+  },
+  {
+    name: "json object NULL key",
+    statement: "JSON_OBJECT(NULL : 7)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationFail
+    }
+  },
+  {
+    name: "json object MISSING key",
+    statement: "JSON_OBJECT(t.k : 1, 'b' : 2 RETURNING JSON)",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $json::{ b: 2 }
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "json object a string value is not parsed",
+    statement: "JSON_OBJECT('c' : '{\"a\": 1}' RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ c: "{\"a\": 1}" }
+    }
+  },
+  {
+    name: "json object FORMAT JSON parses a string value",
+    statement: "JSON_OBJECT('c' : '{\"a\": 1}' FORMAT JSON RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ c: { a: 1 } }
+    }
+  },
+  {
+    name: "json object a datetime value becomes a string",
+    statement: "JSON_OBJECT('d' : DATE '2024-01-01' RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ d: "2024-01-01" }
+    }
+  },
+  {
+    name: "json object a nested constructor result is parsed",
+    statement: "JSON_OBJECT('c' : JSON_OBJECT('a' : 1) RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ c: { a: 1 } }
+    }
+  },
+  {
+    name: "json object a JSON_QUERY result is parsed",
+    statement: "JSON_OBJECT('c' : JSON_QUERY('{\"a\": [1]}', 'lax $.a') RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ c: [1] }
+    }
+  },
+  {
+    name: "json object a string built from a constructor result is not parsed",
+    statement: "JSON_VALUE(JSON_OBJECT('c' : (JSON_OBJECT('a' : 1) || '') RETURNING JSON), 'lax $.c.type()')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: "string"
+    }
+  },
+  {
+    name: "json object JSON_SCALAR keeps a datetime",
+    statement: "JSON_OBJECT('d' : JSON_SCALAR(DATE '2024-01-01'))",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ d: $date::{ year: 2024, month: 1, day: 1 } }
+    }
+  },
+  {
+    name: "json array ABSENT ON NULL by default",
+    statement: "JSON_ARRAY(1, NULL, 'x' RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[1, "x"]
+    }
+  },
+  {
+    name: "json array NULL ON NULL",
+    statement: "JSON_ARRAY(1, NULL, 'x' NULL ON NULL RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[1, null, "x"]
+    }
+  },
+  {
+    name: "json array MISSING is left out",
+    statement: "JSON_ARRAY(1, MISSING, 'x' NULL ON NULL RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[1, "x"]
+    }
+  },
+  {
+    name: "json array over a query returns a STRING",
+    statement: "JSON_ARRAY(SELECT VALUE x FROM <<1>> AS x) IS STRING",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json array over a query parses back",
+    statement: "JSON(JSON_ARRAY(SELECT VALUE x FROM <<1>> AS x))",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[1]
+    }
+  },
+  {
+    name: "json object input type not known decides per row",
+    statement: "SELECT VALUE JSON_OBJECT('c' : x) IS STRING FROM jmixed AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[false, true]
+    }
+  },
+  /* TODO: not specified yet in partiql/partiql-lang#107: constructor inputs that are an interval, a binary value, a tuple, an array, a bag or an Ion value.
+  */
+  /* TODO: not specified yet in partiql/partiql-lang#107: the exact JSON text a constructor or JSON_SERIALIZE writes (member order, whitespace, number spelling).
+  */
+]
+
+'json-aggregates'::[
+  {
+    name: "json arrayagg text parses back",
+    statement: "SELECT VALUE JSON(JSON_ARRAYAGG(x)) FROM <<'a', 'a'>> AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[$json::["a", "a"]]
+    }
+  },
+  {
+    name: "json arrayagg ABSENT ON NULL by default",
+    statement: "SELECT VALUE JSON(JSON_ARRAYAGG(x)) FROM <<NULL, 1>> AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[$json::[1]]
+    }
+  },
+  {
+    name: "json arrayagg over no rows is NULL",
+    statement: "SELECT VALUE JSON_ARRAYAGG(x) FROM <<>> AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[null]
+    }
+  },
+  {
+    name: "json arrayagg input type not known decides per group",
+    statement: "SELECT g, JSON_ARRAYAGG(t.v) IS STRING AS s FROM groups AS t GROUP BY t.g AS g",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ g: 1, s: true }, { g: 2, s: false }]
+    }
+  }
+]

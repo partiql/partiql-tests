@@ -1,0 +1,106 @@
+envs::{
+  payload: "{\"id\": 7, \"customer\": {\"name\": \"Bob\", \"Tier\": \"gold\"}, \"items\": [{\"sku\": \"A1\", \"price\": 10.5}, {\"sku\": \"B2\", \"price\": 4}], \"note\": null}",
+  t: { i: 1, s: "1" },
+  nums: [5],
+  strs: ["{\"a\": 1}", 5],
+  jmixed: [$json::{ a: 1 }, "abc"],
+  jq: [$json::{ a: [1] }, "{\"a\": [1]}"],
+  jnum: [$json::5],
+  groups: [
+    { g: 1, v: "a" },
+    { g: 1, v: "b" },
+    { g: 2, v: $json::1 },
+    { g: 2, v: "c" }
+  ]
+}
+
+'json-clauses'::[
+  {
+    name: "json FROM iterates an SQL/JSON array",
+    statement: "SELECT JSON_VALUE(i, 'lax $.sku') AS sku, n FROM (JSON(payload)).items AS i AT n",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ sku: "A1", n: 0 }, { sku: "B2", n: 1 }]
+    }
+  },
+  {
+    name: "json FROM over a value that is not an array",
+    statement: "SELECT VALUE JSON_VALUE(x, 'lax $.a') FROM JSON('{\"a\": 1}') AS x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::["1"]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "json WHERE an SQL/JSON true leaves the row out",
+    statement: "SELECT VALUE 1 FROM <<1>> AS x WHERE JSON('true')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[]
+    }
+  },
+  {
+    name: "json COUNT counts an SQL/JSON null",
+    statement: "SELECT COUNT(x) AS c FROM [JSON('1'), NULL, JSON('null')] AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ c: 2 }]
+    }
+  },
+  {
+    name: "json IS STRUCT is false",
+    statement: "(JSON(payload)).customer IS STRUCT",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json IS LIST is false",
+    statement: "(JSON(payload)).items IS LIST",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json IS STRING is false",
+    statement: "JSON('\"a\"') IS STRING",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json a value of type JSON is never converted",
+    statement: "SELECT VALUE (x + 1) IS MISSING FROM jnum AS x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[true]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  /* TODO: not specified yet in partiql/partiql-lang#107: comparing, grouping and ordering values of type JSON (=, IN, DISTINCT, GROUP BY, ORDER BY, MIN, MAX, set operations).
+  */
+  /* TODO: not specified yet in partiql/partiql-lang#107: how CAST maps an Ion value to JSON, such as CAST(`{a: 1}` AS JSON).
+  */
+]
