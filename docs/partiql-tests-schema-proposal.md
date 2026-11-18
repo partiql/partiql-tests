@@ -231,7 +231,7 @@ $interval_dt::{ sign: "+", days: 5, hours: 4, minutes: 30, seconds: 15, nanos: 5
 // bool    = SQL/JSON boolean
 // int     = SQL/JSON number with the type of the same PartiQL literal: INT if it fits in
 //           32 bits, otherwise BIGINT (like JSON('7') and JSON('3000000000'))
-// decimal = SQL/JSON number of type DECIMAL, with the same precision and scale (like JSON('10.5')).
+// decimal = SQL/JSON number of type DECIMAL, with the same scale (like JSON('10.5')).
 //           An integer too large for BIGINT is written as a decimal, such as 12345678901234567890123.
 // float   = SQL/JSON number of type FLOAT (like JSON('1e3'))
 // null    = SQL/JSON null (untyped null only)
@@ -265,7 +265,8 @@ file with any of these is invalid, and a runner fails to load it.
 
 **Null.** `$json::null` is SQL/JSON null. This is an exception to the other annotations, where `$date::null` or
 `$bag::null` is an SQL `NULL` of that type. JSON has no typed-null form: an SQL `NULL` of type `JSON` is written as a
-plain `null`, and `MISSING` as `$missing::null`.
+plain `null`, and `MISSING` as `$missing::null`. The rule works both ways: an expected `$json::null` never matches an
+SQL `NULL`, and an expected plain `null` never matches an SQL/JSON null.
 
 **Matching results.** A test runner matches an expected `$json` value with an actual result as follows. This is not
 PartiQL's `=` on JSON, which the RFC leaves unspecified.
@@ -276,7 +277,8 @@ PartiQL's `=` on JSON, which the RFC leaves unspecified.
   is loaded, because a path step on a repeated key returns the first member. A test that checks which member comes first
   does it through a path step, not through the expected object.
 - Arrays match when their elements match in the same order.
-- Numbers match when they have the same type and the same value. A DECIMAL must also have the same scale, so `10.5` and
+- Numbers match when they have the same type and the same value. Only `INT`, `BIGINT`, `DECIMAL` and `FLOAT` have a
+  `$json` form, so a test can't yet expect a number of another type, such as `SMALLINT` or `REAL`. A DECIMAL must also have the same scale, so `10.5` and
   `10.50` differ. A FLOAT `-0e0` and `0e0` differ.
 - Datetimes match when they have the same type and every field is the same. A DATE never matches a TIMESTAMP, an offset
   of `null` never matches an offset of `0`, and two times at the same instant with different offsets differ.
