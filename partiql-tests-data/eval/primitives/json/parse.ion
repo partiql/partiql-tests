@@ -78,6 +78,34 @@ envs::{
       output: $json::[7, 10.5, 12345678901234567890123., 1e3]
     }
   },
+  // Like the literal 3000000000, which does not fit in 32 bits.
+  {
+    name: "json parse a number too large for INT is BIGINT",
+    statement: "JSON('3000000000')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::3000000000
+    }
+  },
+  {
+    name: "json parse an empty object",
+    statement: "JSON('{}')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{}
+    }
+  },
+  {
+    name: "json parse an empty array",
+    statement: "JSON('[]')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[]
+    }
+  },
   {
     name: "json parse FORMAT JSON changes nothing",
     statement: "JSON('[1]' FORMAT JSON)",
