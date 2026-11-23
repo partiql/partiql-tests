@@ -141,8 +141,7 @@ envs::{
       output: $json::{ a: 1, a: 2 }
     }
   },
-  // Type checking mode only. Permissive mode is open question 3, in a placeholder at the end of
-  // this list.
+  // Type checking mode. Permissive mode gives MISSING, in a later test.
   {
     name: "json object WITH UNIQUE KEYS and a repeated key",
     statement: "JSON_OBJECT('a' : 1, 'a' : 2 WITH UNIQUE KEYS RETURNING JSON)",
