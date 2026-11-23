@@ -1,6 +1,6 @@
 // Conformance tests for the JSON type, from the JSON type RFC, partiql/partiql-lang#107. They cover
-// the rules the RFC has decided. A rule it has not decided yet is a commented-out /* TODO: ... */
-// placeholder that names the open question, and becomes a test once it is decided.
+// the rules the RFC has decided. A rule it leaves for later is a commented-out /* TODO: ... */
+// placeholder, and becomes a test once it is specified.
 //
 // Section numbers such as §6.36 refer to SQL:2023, ISO/IEC 9075-2:2023. ID and IA numbers name a
 // choice SQL:2023 leaves to the implementation.
@@ -10,8 +10,8 @@
 // a test that gets JSON text back parses it with JSON(...) and matches the $json value, or only
 // checks that the result IS STRING.
 //
-// Path steps are always written as (JSON(...)).x, because whether the parentheses can be left out
-// is an open question in the RFC.
+// Path steps are written as (JSON(...)).x. The RFC allows the parentheses to be left out, and
+// json-accessor tests that form too.
 
 // No variable in envs has a schema, so its type is not known at compile time, and each value is
 // checked at runtime.
@@ -273,8 +273,7 @@ envs::{
       output: $bag::[false, true]
     }
   },
-  /* TODO: open question 3 in partiql/partiql-lang#107, WITH UNIQUE KEYS and a repeated key in
-     permissive mode. The proposal is below. The alternative raises an error in both modes.
+  // Like invalid text, MISSING in permissive mode.
   {
     name: "json object WITH UNIQUE KEYS and a repeated key in permissive mode",
     statement: "JSON_OBJECT('a' : 1, 'a' : 2 WITH UNIQUE KEYS RETURNING JSON)",
@@ -283,10 +282,55 @@ envs::{
       result: EvaluationSuccess,
       output: $missing::null
     }
-  }
-  */
-  /* TODO: not specified yet in partiql/partiql-lang#107: constructor inputs that are an interval, a
-     binary value, a tuple, an array, a bag or an Ion value.
+  },
+  // ABSENT ON NULL checks each value after it becomes an SQL/JSON item, so an SQL/JSON null is left
+  // out too (§6.34 General Rule 3.c).
+  {
+    name: "json array ABSENT ON NULL drops an SQL/JSON null",
+    statement: "JSON_ARRAY(JSON('null') RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[]
+    }
+  },
+  {
+    name: "json array NULL ON NULL keeps an SQL/JSON null",
+    statement: "JSON_ARRAY(JSON('null') NULL ON NULL RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[null]
+    }
+  },
+  // An input of another SQL type is cast to a string (§6.34 General Rule F.IV.2).
+  {
+    name: "json object an interval input becomes a string",
+    statement: "JSON_VALUE(JSON_OBJECT('i' : INTERVAL '1' DAY RETURNING JSON), 'lax $.i.type()')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: "string"
+    }
+  },
+  // PartiQL's literal 1e400 is Infinity, which JSON text can't hold.
+  {
+    name: "json array Infinity is not accepted",
+    statement: "JSON_ARRAY(1e400 RETURNING JSON)",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  /* TODO: not specified yet in partiql/partiql-lang#107: constructor inputs that are a tuple, an
+     array, a bag or an Ion value.
   */
 ]
 

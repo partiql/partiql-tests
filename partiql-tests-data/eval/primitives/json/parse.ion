@@ -1,6 +1,6 @@
 // Conformance tests for the JSON type, from the JSON type RFC, partiql/partiql-lang#107. They cover
-// the rules the RFC has decided. A rule it has not decided yet is a commented-out /* TODO: ... */
-// placeholder that names the open question, and becomes a test once it is decided.
+// the rules the RFC has decided. A rule it leaves for later is a commented-out /* TODO: ... */
+// placeholder, and becomes a test once it is specified.
 //
 // Section numbers such as §6.36 refer to SQL:2023, ISO/IEC 9075-2:2023. ID and IA numbers name a
 // choice SQL:2023 leaves to the implementation.
@@ -10,8 +10,8 @@
 // a test that gets JSON text back parses it with JSON(...) and matches the $json value, or only
 // checks that the result IS STRING.
 //
-// Path steps are always written as (JSON(...)).x, because whether the parentheses can be left out
-// is an open question in the RFC.
+// Path steps are written as (JSON(...)).x. The RFC allows the parentheses to be left out, and
+// json-accessor tests that form too.
 
 // No variable in envs has a schema, so its type is not known at compile time, and each value is
 // checked at runtime.
@@ -77,7 +77,7 @@ envs::{
     }
   },
   // A JSON number gets the type of the PartiQL literal written the same way: 7 INT, 10.5 DECIMAL, a
-  // 23-digit integer DECIMAL (written 12345678901234567890123. in Ion), 1e3 FLOAT.
+  // 23-digit integer DECIMAL (written 12345678901234567890123. in Ion), 1e3 DOUBLE PRECISION.
   {
     name: "json parse number types",
     statement: "JSON('[7, 10.5, 12345678901234567890123, 1e3]')",
@@ -162,22 +162,84 @@ envs::{
       output: $json::{ a: 1, b: 2 }
     }
   },
-  // Type checking mode only. Permissive mode is open question 3, in a placeholder at the end of
-  // this list.
+  // A duplicate key under WITH UNIQUE KEYS counts as invalid text: MISSING in permissive mode, an
+  // error in type checking mode.
   {
     name: "json parse WITH UNIQUE KEYS and a duplicate key",
     statement: "JSON('{\"a\": 1, \"a\": 2}' WITH UNIQUE KEYS)",
-    assert: {
-      evalMode: EvalModeError,
-      result: EvaluationFail
-    }
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   {
     name: "json parse WITH UNIQUE KEYS and a nested duplicate key",
     statement: "JSON('{\"a\": {\"b\": 1, \"b\": 2}}' WITH UNIQUE KEYS)",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  // WITHOUT UNIQUE KEYS, the default, keeps every member (UA057).
+  {
+    name: "json parse keeps every member of a duplicate key",
+    statement: "JSON('{\"a\": 1, \"a\": 2}')",
     assert: {
-      evalMode: EvalModeError,
-      result: EvaluationFail
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ a: 1, a: 2 }
+    }
+  },
+  // A number with an exponent is a DOUBLE PRECISION. One out of its range is not accepted, as
+  // SQL:2023 says for an approximate literal (§5.3 Syntax Rule 30).
+  {
+    name: "json parse a number too large for DOUBLE PRECISION",
+    statement: "JSON('{\"x\": 1e400}')",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  // Not an error: the value rounds to 0 (§5.3 NOTE 130).
+  {
+    name: "json parse a number too close to zero becomes 0",
+    statement: "JSON('1e-400')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::0e0
+    }
+  },
+  // A number without an exponent stays exact however many digits it has (§5.3 Syntax Rule 29). The
+  // test reads it back as a STRING, so no DECIMAL limit applies.
+  {
+    name: "json parse an exact number beyond 38 digits stays exact",
+    statement: "JSON_VALUE(JSON('{\"x\": 1234567890123456789012345678901234567890.5}'), 'lax $.x' RETURNING STRING)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: "1234567890123456789012345678901234567890.5"
     }
   },
   {
@@ -214,72 +276,8 @@ envs::{
       }
     ]
   },
-  /* TODO: open question 1 in partiql/partiql-lang#107, a JSON number too large for its type. The
-     proposal is below. The alternative gives the FLOAT Infinity.
-  {
-    name: "json parse a FLOAT too large for its type",
-    statement: "JSON('{\"x\": 1e400}')",
-    assert: [
-      {
-        evalMode: EvalModeCoerce,
-        result: EvaluationSuccess,
-        output: $missing::null
-      },
-      {
-        evalMode: EvalModeError,
-        result: EvaluationFail
-      }
-    ]
-  }
-  */
-  /* TODO: open question 1 in partiql/partiql-lang#107, a JSON number too large for its type, here a
-     DECIMAL with more than 38 digits. The proposal is below.
-  {
-    name: "json parse a DECIMAL too large for its type",
-    statement: "JSON('1234567890123456789012345678901234567890.5')",
-    assert: [
-      {
-        evalMode: EvalModeCoerce,
-        result: EvaluationSuccess,
-        output: $missing::null
-      },
-      {
-        evalMode: EvalModeError,
-        result: EvaluationFail
-      }
-    ]
-  }
-  */
-  /* TODO: not specified yet in partiql/partiql-lang#107: a FLOAT too small to represent, such as
-     1e-400. It is not too large for its type, so the open question on large numbers does not cover
-     it.
-  */
   /* TODO: not specified yet in partiql/partiql-lang#107: a lone surrogate escape such as "\uD800".
      RFC 8259 §8.2 allows the text but leaves its meaning open.
-  */
-  /* TODO: open question 2 in partiql/partiql-lang#107, duplicate keys when parsing. The proposal
-     keeps every member, below. The alternative keeps only the last, so the result is { a: 2 }.
-  {
-    name: "json parse keeps every member of a duplicate key",
-    statement: "JSON('{\"a\": 1, \"a\": 2}')",
-    assert: {
-      evalMode: [EvalModeCoerce, EvalModeError],
-      result: EvaluationSuccess,
-      output: $json::{ a: 1, a: 2 }
-    }
-  }
-  */
-  /* TODO: open question 3 in partiql/partiql-lang#107, WITH UNIQUE KEYS and a duplicate key in
-     permissive mode. The proposal is below. The alternative raises an error in both modes.
-  {
-    name: "json parse WITH UNIQUE KEYS and a duplicate key in permissive mode",
-    statement: "JSON('{\"a\": 1, \"a\": 2}' WITH UNIQUE KEYS)",
-    assert: {
-      evalMode: EvalModeCoerce,
-      result: EvaluationSuccess,
-      output: $missing::null
-    }
-  }
   */
 ]
 
@@ -500,6 +498,23 @@ envs::{
       result: EvaluationSuccess,
       output: $missing::null
     }
+  },
+  // PartiQL's literal 1e400 is Infinity. JSON text can't hold it, so it can't become an SQL/JSON
+  // scalar.
+  {
+    name: "json scalar Infinity is not accepted",
+    statement: "JSON_SCALAR(1e400)",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   /* TODO: a $json form for other number types, such as JSON_SCALAR(CAST(7 AS SMALLINT)). The schema
      doc has Ion forms only for INT, BIGINT, DECIMAL and FLOAT

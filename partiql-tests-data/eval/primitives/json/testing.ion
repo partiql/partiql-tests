@@ -1,6 +1,6 @@
 // Conformance tests for the JSON type, from the JSON type RFC, partiql/partiql-lang#107. They cover
-// the rules the RFC has decided. A rule it has not decided yet is a commented-out /* TODO: ... */
-// placeholder that names the open question, and becomes a test once it is decided.
+// the rules the RFC has decided. A rule it leaves for later is a commented-out /* TODO: ... */
+// placeholder, and becomes a test once it is specified.
 //
 // Section numbers such as §6.36 refer to SQL:2023, ISO/IEC 9075-2:2023. ID and IA numbers name a
 // choice SQL:2023 leaves to the implementation.
@@ -10,8 +10,8 @@
 // a test that gets JSON text back parses it with JSON(...) and matches the $json value, or only
 // checks that the result IS STRING.
 //
-// Path steps are always written as (JSON(...)).x, because whether the parentheses can be left out
-// is an open question in the RFC.
+// Path steps are written as (JSON(...)).x. The RFC allows the parentheses to be left out, and
+// json-accessor tests that form too.
 
 // No variable in envs has a schema, so its type is not known at compile time, and each value is
 // checked at runtime.
@@ -169,6 +169,17 @@ envs::{
       output: true
     }
   },
+  // A value of type JSON is not parsed again, so the unique-keys check does not run on it (§8.22
+  // General Rule 2b).
+  {
+    name: "json is_valid_json unique check on a value of type JSON",
+    statement: "is_valid_json(JSON('{\"a\": 1, \"a\": 2}'), VALUE, TRUE)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
   {
     name: "json is_valid_json NULL",
     statement: "is_valid_json(NULL)",
@@ -187,25 +198,29 @@ envs::{
       output: $missing::null
     }
   },
-  /* TODO: open question 4 in partiql/partiql-lang#107, is_valid_json on an input whose type is not
-     known and is neither a string nor JSON. The proposal gives false, below. The alternative gives
-     MISSING in permissive mode and an error in type checking mode.
+  // Only the number 5 is neither a string nor JSON: MISSING in permissive mode, an error in type
+  // checking mode.
   {
     name: "json is_valid_json input type not known",
-    statement: "SELECT VALUE is_valid_json(x) FROM strs AS x",
-    assert: {
-      evalMode: [EvalModeCoerce, EvalModeError],
-      result: EvaluationSuccess,
-      output: $bag::[true, false]
-    }
+    statement: "SELECT VALUE is_valid_json(x) IS MISSING FROM strs AS x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[false, true]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   }
-  */
 ]
 
-'json-is-json-type'::[
+'json-instanceof'::[
   {
-    name: "json is_json_type on JSON",
-    statement: "is_json_type(JSON('{}'))",
+    name: "json instanceof JSON on JSON",
+    statement: "instanceof(JSON('{}'), JSON)",
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
@@ -214,8 +229,8 @@ envs::{
   },
   // A type test: a string is not JSON, whatever text it holds.
   {
-    name: "json is_json_type on a string holding JSON text",
-    statement: "is_json_type('{}')",
+    name: "json instanceof JSON on a string holding JSON text",
+    statement: "instanceof('{}', JSON)",
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
@@ -223,8 +238,8 @@ envs::{
     }
   },
   {
-    name: "json is_json_type on an SQL/JSON null",
-    statement: "is_json_type(JSON('null'))",
+    name: "json instanceof JSON on an SQL/JSON null",
+    statement: "instanceof(JSON('null'), JSON)",
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
@@ -232,8 +247,8 @@ envs::{
     }
   },
   {
-    name: "json is_json_type NULL",
-    statement: "is_json_type(NULL)",
+    name: "json instanceof JSON NULL",
+    statement: "instanceof(NULL, JSON)",
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
@@ -241,8 +256,8 @@ envs::{
     }
   },
   {
-    name: "json is_json_type MISSING",
-    statement: "is_json_type(MISSING)",
+    name: "json instanceof JSON MISSING",
+    statement: "instanceof(MISSING, JSON)",
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
@@ -250,8 +265,17 @@ envs::{
     }
   },
   {
-    name: "json is_json_type input type not known",
-    statement: "SELECT VALUE is_json_type(x) FROM jmixed AS x",
+    name: "json instanceof JSON on a number",
+    statement: "instanceof(5, JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json instanceof JSON input type not known",
+    statement: "SELECT VALUE instanceof(x, JSON) FROM jmixed AS x",
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
