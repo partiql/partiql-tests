@@ -17,9 +17,13 @@
 // checked at runtime.
 //   payload: JSON text in a string
 //   t: a tuple whose i is the number 1 and s the string '1'
+//   xs: a value of type JSON and a tuple, with the same key Tier
+//   jx: a value of type JSON
 envs::{
   payload: "{\"id\": 7, \"customer\": {\"name\": \"Bob\", \"Tier\": \"gold\"}, \"items\": [{\"sku\": \"A1\", \"price\": 10.5}, {\"sku\": \"B2\", \"price\": 4}], \"note\": null}",
-  t: { i: 1, s: "1" }
+  t: { i: 1, s: "1" },
+  xs: [$json::{ Tier: "gold" }, { Tier: "gold" }],
+  jx: [$json::{ Tier: "gold" }]
 }
 
 'json-accessor'::[
@@ -231,6 +235,45 @@ envs::{
       result: EvaluationSuccess,
       output: $json::5
     }
+  },
+  // The type of x is not known at compile time, so each row follows its own value. On the value of
+  // type JSON the step matches exact case, and on the tuple any case.
+  {
+    name: "json accessor a step on a value whose type is not known follows each row",
+    statement: "SELECT VALUE x.tier FROM xs AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[null, "gold"]
+    }
+  },
+  // A value of type JSON at runtime follows the rules for a declared JSON expression: SQL NULL, in
+  // both modes.
+  {
+    name: "json accessor no member on a value whose type is not known gives NULL",
+    statement: "SELECT VALUE x.age FROM jx AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[null]
+    }
+  },
+  // SQL NULL from the value of type JSON, and MISSING from the tuple, which is an error in type
+  // checking mode.
+  {
+    name: "json accessor no member on a value whose type is not known follows each row",
+    statement: "SELECT VALUE x.age IS MISSING FROM xs AS x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[false, true]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   /* TODO: not specified yet in partiql/partiql-lang#107: wildcards, ranges, .'name' and item
      methods as path steps, such as (JSON(payload)).items[*].
