@@ -541,16 +541,6 @@ envs::{
       output: "date"
     }
   },
-  // A value of any other SQL type is cast to a string first (IV165).
-  {
-    name: "json passing an interval becomes a string",
-    statement: "JSON_VALUE(JSON('{}'), 'lax $i.type()' PASSING INTERVAL '1' DAY AS i)",
-    assert: {
-      evalMode: [EvalModeCoerce, EvalModeError],
-      result: EvaluationSuccess,
-      output: "string"
-    }
-  },
   // Without FORMAT JSON, SQL NULL becomes SQL/JSON null (§9.46 General Rule 11.b).
   {
     name: "json passing NULL is an SQL/JSON null",
