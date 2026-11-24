@@ -130,11 +130,21 @@ envs::{
       }
     ]
   },
-  // If one input of CASE, COALESCE, NULLIF or a set operation has type JSON, all must, but NULL and
-  // MISSING literals are allowed (§9.5).
+  // If one input of CASE, COALESCE, NULLIF or a set operation has type JSON, all must, but NULL
+  // (§9.5) and MISSING literals are allowed. MISSING is PartiQL's own rule.
   {
     name: "json COALESCE with a NULL literal",
     statement: "COALESCE(NULL, JSON('1'))",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::1
+    }
+  },
+  // JSON('1') = NULL is not true, so NULLIF returns its first input.
+  {
+    name: "json NULLIF with a NULL literal",
+    statement: "NULLIF(JSON('1'), NULL)",
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
@@ -178,6 +188,15 @@ envs::{
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
       output: { a: $json::1, b: 2 }
+    }
+  },
+  {
+    name: "json a bag constructor accepts a mix",
+    statement: "<<JSON('1'), 2>>",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[$json::1, 2]
     }
   },
   /* TODO: not specified yet in partiql/partiql-lang#107: comparing, grouping and ordering values of
