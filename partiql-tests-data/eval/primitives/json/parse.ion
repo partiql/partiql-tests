@@ -1,0 +1,561 @@
+// Conformance tests for the JSON type, from the JSON type RFC, partiql/partiql-lang#107. They cover
+// the rules the RFC has decided. A rule it leaves for later is a commented-out /* TODO: ... */
+// placeholder, and becomes a test once it is specified.
+//
+// Section numbers such as §6.36 refer to SQL:2023, ISO/IEC 9075-2:2023. ID and IA numbers name a
+// choice SQL:2023 leaves to the implementation.
+//
+// Values of type JSON are written with the $json annotation, defined in
+// docs/partiql-tests-schema-proposal.md. The exact JSON text a function writes is not specified, so
+// a test that gets JSON text back parses it with JSON(...) and matches the $json value, or only
+// checks that the result IS STRING.
+//
+// Path steps are written as (JSON(...)).x. The RFC allows the parentheses to be left out, and
+// json-accessor tests that form too.
+
+// No variable in envs has a schema, so its type is not known at compile time, and each value is
+// checked at runtime.
+//   strs: a string holding JSON text, and the number 5
+//   t: a tuple whose d is a DOUBLE PRECISION that is Infinity
+envs::{
+  strs: ["{\"a\": 1}", 5],
+  t: { d: +inf }
+}
+
+'json-parse'::[
+  {
+    name: "json parse an object",
+    statement: "JSON('{\"a\": 1, \"b\": [true, null, \"x\"]}')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ a: 1, b: [true, null, "x"] }
+    }
+  },
+  {
+    name: "json parse a string scalar",
+    statement: "JSON('\"abc\"')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::"abc"
+    }
+  },
+  {
+    name: "json parse null is an SQL/JSON null",
+    statement: "JSON('null')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::null
+    }
+  },
+  // An SQL/JSON null is a value, not SQL NULL (§4.48.3).
+  {
+    name: "json parse null IS NULL is false",
+    statement: "JSON('null') IS NULL",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json parse an empty object",
+    statement: "JSON('{}')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{}
+    }
+  },
+  {
+    name: "json parse an empty array",
+    statement: "JSON('[]')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[]
+    }
+  },
+  // A JSON number gets the type of the PartiQL literal written the same way: 7 INT, 10.5 DECIMAL, a
+  // 23-digit integer DECIMAL (written 12345678901234567890123. in Ion), 1e3 DOUBLE PRECISION.
+  {
+    name: "json parse number types",
+    statement: "JSON('[7, 10.5, 12345678901234567890123, 1e3]')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[7, 10.5, 12345678901234567890123., 1e3]
+    }
+  },
+  // INT is 32 bits, so this is the largest INT.
+  {
+    name: "json parse the largest INT",
+    statement: "JSON('2147483647')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::2147483647
+    }
+  },
+  {
+    name: "json parse the smallest INT",
+    statement: "JSON('-2147483648')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::-2147483648
+    }
+  },
+  // Too large for INT, so BIGINT, like the literal 2147483648.
+  {
+    name: "json parse one more than the largest INT is BIGINT",
+    statement: "JSON('2147483648')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::2147483648
+    }
+  },
+  {
+    name: "json parse one less than the smallest INT is BIGINT",
+    statement: "JSON('-2147483649')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::-2147483649
+    }
+  },
+  {
+    name: "json parse the largest BIGINT",
+    statement: "JSON('9223372036854775807')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::9223372036854775807
+    }
+  },
+  // Too large for BIGINT, so DECIMAL, written as an Ion decimal.
+  {
+    name: "json parse one more than the largest BIGINT is DECIMAL",
+    statement: "JSON('9223372036854775808')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::9223372036854775808.
+    }
+  },
+  {
+    name: "json parse FORMAT JSON changes nothing",
+    statement: "JSON('[1]' FORMAT JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[1]
+    }
+  },
+  {
+    name: "json parse WITH UNIQUE KEYS and no duplicate",
+    statement: "JSON('{\"a\": 1, \"b\": 2}' WITH UNIQUE KEYS)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ a: 1, b: 2 }
+    }
+  },
+  // A duplicate key under WITH UNIQUE KEYS counts as invalid text: MISSING in permissive mode, an
+  // error in type checking mode.
+  {
+    name: "json parse WITH UNIQUE KEYS and a duplicate key",
+    statement: "JSON('{\"a\": 1, \"a\": 2}' WITH UNIQUE KEYS)",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "json parse WITH UNIQUE KEYS and a nested duplicate key",
+    statement: "JSON('{\"a\": {\"b\": 1, \"b\": 2}}' WITH UNIQUE KEYS)",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  // WITHOUT UNIQUE KEYS, the default, keeps every member (UA057).
+  {
+    name: "json parse keeps every member of a duplicate key",
+    statement: "JSON('{\"a\": 1, \"a\": 2}')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ a: 1, a: 2 }
+    }
+  },
+  // A number with an exponent is a DOUBLE PRECISION. One out of its range is not accepted, as
+  // SQL:2023 says for an approximate literal (§5.3 Syntax Rule 30).
+  {
+    name: "json parse a number too large for DOUBLE PRECISION",
+    statement: "JSON('{\"x\": 1e400}')",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  // Not an error: the value rounds to 0 (§5.3 NOTE 130).
+  {
+    name: "json parse a number too close to zero becomes 0",
+    statement: "JSON('1e-400')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::0e0
+    }
+  },
+  // A number without an exponent stays exact however many digits it has (§5.3 Syntax Rule 29). The
+  // test checks the item itself: a CAST, such as RETURNING STRING, would follow the limits of DECIMAL.
+  {
+    name: "json parse an exact number beyond 38 digits stays exact",
+    statement: "(JSON('{\"x\": 1234567890123456789012345678901234567890.5}')).x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::1234567890123456789012345678901234567890.5
+    }
+  },
+  {
+    name: "json parse NULL",
+    statement: "JSON(NULL)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json parse MISSING",
+    statement: "JSON(MISSING)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $missing::null
+    }
+  },
+  // Only the number 5 is not a string.
+  {
+    name: "json parse an input whose type is not known and is not a string",
+    statement: "SELECT VALUE JSON(x) IS MISSING FROM strs AS x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[false, true]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  /* TODO: not specified yet in partiql/partiql-lang#107: a lone surrogate escape such as "\uD800".
+     RFC 8259 §8.2 allows the text but leaves its meaning open.
+  */
+]
+
+'json-parse-invalid-text'::[
+  // Text that is not valid JSON text (RFC 8259) is like a failed CAST: MISSING in permissive mode,
+  // an error in type checking mode.
+  {
+    name: "json parse invalid text",
+    statement: "JSON('abc')",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "json parse an unclosed object",
+    statement: "JSON('{\"a\": 1')",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "json parse text after the value",
+    statement: "JSON('[1] x')",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "json parse a number with a leading zero",
+    statement: "JSON('01')",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  // JSON text has no NaN or Infinity.
+  {
+    name: "json parse NaN",
+    statement: "JSON('NaN')",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "json parse a bad escape in a string",
+    statement: "JSON('\"\\x\"')",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  }
+]
+
+'json-serialize'::[
+  // The exact text is not specified, so the test parses it back (§9.43).
+  {
+    name: "json serialize then parse gives an equal item",
+    statement: "JSON(JSON_SERIALIZE(JSON('{\"a\": [1, \"x\", null]}')))",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{ a: [1, "x", null] }
+    }
+  },
+  {
+    name: "json serialize returns a STRING",
+    statement: "JSON_SERIALIZE(JSON('{\"a\": 1}')) IS STRING",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // A datetime has no JSON text, so serializing it fails (§9.43).
+  {
+    name: "json serialize an item holding a datetime",
+    statement: "JSON_SERIALIZE(JSON_SCALAR(DATE '2024-01-01'))",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  {
+    name: "json serialize NULL",
+    statement: "JSON_SERIALIZE(CAST(NULL AS JSON))",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json serialize MISSING",
+    statement: "JSON_SERIALIZE(MISSING)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $missing::null
+    }
+  }
+]
+
+'json-scalar'::[
+  {
+    name: "json scalar INT",
+    statement: "JSON_SCALAR(7)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::7
+    }
+  },
+  {
+    name: "json scalar DECIMAL",
+    statement: "JSON_SCALAR(10.5)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::10.5
+    }
+  },
+  {
+    name: "json scalar STRING",
+    statement: "JSON_SCALAR('Bob')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::"Bob"
+    }
+  },
+  {
+    name: "json scalar BOOL",
+    statement: "JSON_SCALAR(true)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::true
+    }
+  },
+  // SQL:2023 keeps a datetime as a datetime scalar (§6.41).
+  {
+    name: "json scalar DATE stays a datetime",
+    statement: "JSON_SCALAR(DATE '2024-01-01')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::$date::{ year: 2024, month: 1, day: 1 }
+    }
+  },
+  // SQL NULL, not SQL/JSON null (§6.41).
+  {
+    name: "json scalar NULL is SQL NULL",
+    statement: "JSON_SCALAR(NULL)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json scalar MISSING",
+    statement: "JSON_SCALAR(MISSING)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $missing::null
+    }
+  },
+  // t.d is Infinity. JSON text can't hold it, so it can't become an SQL/JSON scalar.
+  {
+    name: "json scalar Infinity is not accepted",
+    statement: "JSON_SCALAR(t.d)",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  /* TODO: a $json form for other number types, such as JSON_SCALAR(CAST(7 AS SMALLINT)). The schema
+     doc has Ion forms only for INT, BIGINT, DECIMAL and FLOAT
+  */
+]
+
+'json-cast'::[
+  {
+    name: "json cast JSON to JSON",
+    statement: "CAST(JSON('[1]') AS JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[1]
+    }
+  },
+  // Allowed: a NULL literal is not a value expression, so the CAST table does not apply (§6.13).
+  {
+    name: "json cast NULL to JSON",
+    statement: "CAST(NULL AS JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  // Only JSON can be CAST to JSON. A string must use JSON(...) instead.
+  {
+    name: "json cast an input whose type is not known to JSON",
+    statement: "SELECT VALUE CAST(x AS JSON) IS MISSING FROM strs AS x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[true, true]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  }
+]

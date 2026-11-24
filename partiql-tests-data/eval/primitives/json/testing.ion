@@ -1,0 +1,285 @@
+// Conformance tests for the JSON type, from the JSON type RFC, partiql/partiql-lang#107. They cover
+// the rules the RFC has decided. A rule it leaves for later is a commented-out /* TODO: ... */
+// placeholder, and becomes a test once it is specified.
+//
+// Section numbers such as §6.36 refer to SQL:2023, ISO/IEC 9075-2:2023. ID and IA numbers name a
+// choice SQL:2023 leaves to the implementation.
+//
+// Values of type JSON are written with the $json annotation, defined in
+// docs/partiql-tests-schema-proposal.md. The exact JSON text a function writes is not specified, so
+// a test that gets JSON text back parses it with JSON(...) and matches the $json value, or only
+// checks that the result IS STRING.
+//
+// Path steps are written as (JSON(...)).x. The RFC allows the parentheses to be left out, and
+// json-accessor tests that form too.
+
+// No variable in envs has a schema, so its type is not known at compile time, and each value is
+// checked at runtime.
+//   strs: a string holding JSON text, and the number 5
+//   jmixed: a value of type JSON and a string
+envs::{
+  strs: ["{\"a\": 1}", 5],
+  jmixed: [$json::{ a: 1 }, "abc"]
+}
+
+'json-is-valid-json'::[
+  {
+    name: "json is_valid_json valid text",
+    statement: "is_valid_json('[1, 2]')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json is_valid_json VALUE",
+    statement: "is_valid_json('7', VALUE)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json is_valid_json OBJECT",
+    statement: "is_valid_json('{\"a\": 1}', OBJECT)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json is_valid_json OBJECT on an array",
+    statement: "is_valid_json('[1, 2]', OBJECT)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json is_valid_json ARRAY",
+    statement: "is_valid_json('[1, 2]', ARRAY)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // null counts as a scalar here (§8.22).
+  {
+    name: "json is_valid_json SCALAR on null",
+    statement: "is_valid_json('null', SCALAR)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json is_valid_json SCALAR on a string",
+    statement: "is_valid_json('\"abc\"', SCALAR)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json is_valid_json invalid text",
+    statement: "is_valid_json('abc')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json is_valid_json an unclosed object",
+    statement: "is_valid_json('{\"a\": 1')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json is_valid_json a number with a leading zero",
+    statement: "is_valid_json('01')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json is_valid_json duplicate key without the unique check",
+    statement: "is_valid_json('{\"a\": 1, \"a\": 2}')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // The third argument TRUE is SQL:2023's WITH UNIQUE KEYS (§8.22).
+  {
+    name: "json is_valid_json unique check and a duplicate key",
+    statement: "is_valid_json('{\"a\": 1, \"a\": 2}', OBJECT, TRUE)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json is_valid_json unique check and a nested duplicate key",
+    statement: "is_valid_json('{\"a\": {\"b\": 1, \"b\": 2}}', VALUE, TRUE)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json is_valid_json unique check and no duplicate",
+    statement: "is_valid_json('{\"a\": 1, \"b\": 2}', OBJECT, TRUE)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json is_valid_json unique check FALSE",
+    statement: "is_valid_json('{\"a\": 1, \"a\": 2}', OBJECT, FALSE)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json is_valid_json on a value of type JSON",
+    statement: "is_valid_json(JSON('[1, 2]'), ARRAY)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // A value of type JSON is not parsed again, so the unique-keys check does not run on it (§8.22
+  // General Rule 2b).
+  {
+    name: "json is_valid_json unique check on a value of type JSON",
+    statement: "is_valid_json(JSON('{\"a\": 1, \"a\": 2}'), VALUE, TRUE)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json is_valid_json NULL",
+    statement: "is_valid_json(NULL)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json is_valid_json MISSING",
+    statement: "is_valid_json(MISSING)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $missing::null
+    }
+  },
+  // Only the number 5 is neither a string nor JSON: MISSING in permissive mode, an error in type
+  // checking mode.
+  {
+    name: "json is_valid_json input type not known",
+    statement: "SELECT VALUE is_valid_json(x) IS MISSING FROM strs AS x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[false, true]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  }
+]
+
+'json-instanceof'::[
+  {
+    name: "json instanceof JSON on JSON",
+    statement: "instanceof(JSON('{}'), JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  // A type test: a string is not JSON, whatever text it holds.
+  {
+    name: "json instanceof JSON on a string holding JSON text",
+    statement: "instanceof('{}', JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json instanceof JSON on an SQL/JSON null",
+    statement: "instanceof(JSON('null'), JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: true
+    }
+  },
+  {
+    name: "json instanceof JSON NULL",
+    statement: "instanceof(NULL, JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
+  {
+    name: "json instanceof JSON MISSING",
+    statement: "instanceof(MISSING, JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $missing::null
+    }
+  },
+  {
+    name: "json instanceof JSON on a number",
+    statement: "instanceof(5, JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: false
+    }
+  },
+  {
+    name: "json instanceof JSON input type not known",
+    statement: "SELECT VALUE instanceof(x, JSON) FROM jmixed AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[true, false]
+    }
+  }
+]
