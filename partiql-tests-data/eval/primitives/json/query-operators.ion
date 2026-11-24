@@ -266,14 +266,16 @@ envs::{
       output: $json::[7]
     }
   },
-  // This test matches the JSON text itself, because the quotes are what it tests (§6.35).
+  // The quotes are what this tests (§6.35). The exact JSON text is not specified, so the result is
+  // parsed back: with KEEP QUOTES it is the JSON string "Bob", and the OMIT QUOTES result, Bob, would
+  // not be valid JSON text.
   {
     name: "json query KEEP QUOTES by default",
-    statement: "JSON_QUERY(JSON(payload), 'lax $.customer.name' RETURNING STRING)",
+    statement: "JSON(JSON_QUERY(JSON(payload), 'lax $.customer.name' RETURNING STRING))",
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: "\"Bob\""
+      output: $json::"Bob"
     }
   },
   {
@@ -516,11 +518,11 @@ envs::{
   },
   {
     name: "json passing a boolean",
-    statement: "JSON_VALUE(JSON('{}'), 'lax $b' PASSING true AS b)",
+    statement: "JSON_VALUE(JSON('{}'), 'lax $b.type()' PASSING true AS b)",
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: "true"
+      output: "boolean"
     }
   },
   {

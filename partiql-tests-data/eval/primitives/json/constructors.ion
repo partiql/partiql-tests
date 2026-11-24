@@ -302,7 +302,7 @@ envs::{
       output: $json::[null]
     }
   },
-  // An input of another SQL type is cast to a string (§6.34 General Rule F.IV.2).
+  // An input of another SQL type is cast to a string (§6.34 General Rule 2.d.ii.1.F.IV.2, ID100).
   {
     name: "json object an interval input becomes a string",
     statement: "JSON_VALUE(JSON_OBJECT('i' : INTERVAL '1' DAY RETURNING JSON), 'lax $.i.type()')",

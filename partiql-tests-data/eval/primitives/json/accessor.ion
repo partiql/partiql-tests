@@ -35,7 +35,7 @@ envs::{
       output: $json::"Bob"
     }
   },
-  // No case folding on JSON keys (§6.36, NOTE 198). On a tuple this step would match any case.
+  // No case folding on JSON keys (§6.36, NOTE 199). On a tuple this step would match any case.
   {
     name: "json accessor unquoted key matches exact case",
     statement: "(JSON(payload)).customer.tier",

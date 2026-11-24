@@ -16,7 +16,7 @@
 'json-static-analysis'::[
   // JSON(...) takes a string (§6.40).
   {
-    name: "json static analysis JSON(42)",
+    name: "json static analysis JSON(...) rejects an INT",
     statement: "JSON(42)",
     assert: {
       result: StaticAnalysisFail
@@ -24,7 +24,7 @@
   },
   // JSON_SERIALIZE takes a value of type JSON, not a string (§6.38).
   {
-    name: "json static analysis JSON_SERIALIZE('{\"a\": 1}')",
+    name: "json static analysis JSON_SERIALIZE rejects a STRING",
     statement: "JSON_SERIALIZE('{\"a\": 1}')",
     assert: {
       result: StaticAnalysisFail
@@ -32,7 +32,7 @@
   },
   // JSON_SCALAR takes a string, number, boolean or datetime (§6.41).
   {
-    name: "json static analysis JSON_SCALAR(INTERVAL '1' DAY)",
+    name: "json static analysis JSON_SCALAR rejects an INTERVAL",
     statement: "JSON_SCALAR(INTERVAL '1' DAY)",
     assert: {
       result: StaticAnalysisFail
@@ -40,7 +40,7 @@
   },
   // JSON_SCALAR does not take a value of type JSON (§6.41).
   {
-    name: "json static analysis JSON_SCALAR(JSON('1'))",
+    name: "json static analysis JSON_SCALAR rejects a value of type JSON",
     statement: "JSON_SCALAR(JSON('1'))",
     assert: {
       result: StaticAnalysisFail
@@ -48,7 +48,7 @@
   },
   // A query operator takes a string or a value of type JSON (§10.14).
   {
-    name: "json static analysis JSON_VALUE(7, 'lax $')",
+    name: "json static analysis JSON_VALUE rejects an INT",
     statement: "JSON_VALUE(7, 'lax $')",
     assert: {
       result: StaticAnalysisFail
@@ -56,7 +56,7 @@
   },
   // is_valid_json takes a string or a value of type JSON.
   {
-    name: "json static analysis is_valid_json(1)",
+    name: "json static analysis is_valid_json rejects an INT",
     statement: "is_valid_json(1)",
     assert: {
       result: StaticAnalysisFail
@@ -64,7 +64,7 @@
   },
   // Only JSON can be CAST to JSON. Use JSON(...) on a string (§6.13).
   {
-    name: "json static analysis CAST('{}' AS JSON)",
+    name: "json static analysis CAST rejects a STRING to JSON",
     statement: "CAST('{}' AS JSON)",
     assert: {
       result: StaticAnalysisFail
@@ -72,7 +72,7 @@
   },
   // JSON can only be CAST to JSON. Use JSON_SERIALIZE or JSON_VALUE (§6.13).
   {
-    name: "json static analysis CAST(JSON('1') AS STRING)",
+    name: "json static analysis CAST rejects JSON to STRING",
     statement: "CAST(JSON('1') AS STRING)",
     assert: {
       result: StaticAnalysisFail
@@ -80,7 +80,7 @@
   },
   // If one input is JSON, every input must be JSON (§9.5).
   {
-    name: "json static analysis COALESCE(JSON('null'), 'none')",
+    name: "json static analysis COALESCE rejects JSON with a STRING",
     statement: "COALESCE(JSON('null'), 'none')",
     assert: {
       result: StaticAnalysisFail
@@ -88,7 +88,7 @@
   },
   // If one result is JSON, every result must be JSON (§9.5).
   {
-    name: "json static analysis CASE WHEN true THEN JSON('1') ELSE 'a' END",
+    name: "json static analysis CASE rejects JSON with a STRING",
     statement: "CASE WHEN true THEN JSON('1') ELSE 'a' END",
     assert: {
       result: StaticAnalysisFail
@@ -96,7 +96,7 @@
   },
   // If one input is JSON, every input must be JSON (§9.5).
   {
-    name: "json static analysis NULLIF(JSON('1'), 'a')",
+    name: "json static analysis NULLIF rejects JSON with a STRING",
     statement: "NULLIF(JSON('1'), 'a')",
     assert: {
       result: StaticAnalysisFail
@@ -104,15 +104,15 @@
   },
   // If one input of a set operation is JSON, every input must be JSON (§9.5).
   {
-    name: "json static analysis (SELECT VALUE JSON('1') FROM <<1>> AS x) UNION ALL (SELECT VALUE 'a' FROM <<1>> AS y)",
-    statement: "(SELECT VALUE JSON('1') FROM <<1>> AS x) UNION ALL (SELECT VALUE 'a' FROM <<1>> AS y)",
+    name: "json static analysis UNION ALL rejects a JSON column and a STRING column",
+    statement: "SELECT JSON('1') AS a FROM <<1>> AS x UNION ALL SELECT 'a' AS a FROM <<1>> AS y",
     assert: {
       result: StaticAnalysisFail
     }
   },
   // SUM, AVG and the other numeric aggregates do not accept JSON.
   {
-    name: "json static analysis SELECT SUM(JSON('1')) AS s FROM <<1>> AS x",
+    name: "json static analysis SUM rejects JSON",
     statement: "SELECT SUM(JSON('1')) AS s FROM <<1>> AS x",
     assert: {
       result: StaticAnalysisFail
@@ -120,7 +120,7 @@
   },
   // OMIT QUOTES is not allowed with RETURNING JSON (§6.35).
   {
-    name: "json static analysis JSON_QUERY(JSON('{}'), 'lax $' RETURNING JSON OMIT QUOTES)",
+    name: "json static analysis JSON_QUERY rejects OMIT QUOTES with RETURNING JSON",
     statement: "JSON_QUERY(JSON('{}'), 'lax $' RETURNING JSON OMIT QUOTES)",
     assert: {
       result: StaticAnalysisFail
@@ -128,7 +128,7 @@
   },
   // A quotes clause cannot follow WITH ... WRAPPER (§6.35).
   {
-    name: "json static analysis JSON_QUERY('{}', 'lax $' WITH WRAPPER KEEP QUOTES)",
+    name: "json static analysis JSON_QUERY rejects a quotes clause after WITH WRAPPER",
     statement: "JSON_QUERY('{}', 'lax $' WITH WRAPPER KEEP QUOTES)",
     assert: {
       result: StaticAnalysisFail

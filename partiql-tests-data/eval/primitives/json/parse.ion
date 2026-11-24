@@ -234,14 +234,14 @@ envs::{
     }
   },
   // A number without an exponent stays exact however many digits it has (§5.3 Syntax Rule 29). The
-  // test reads it back as a STRING, so no DECIMAL limit applies.
+  // test checks the item itself: a CAST, such as RETURNING STRING, would follow the limits of DECIMAL.
   {
     name: "json parse an exact number beyond 38 digits stays exact",
-    statement: "JSON_VALUE(JSON('{\"x\": 1234567890123456789012345678901234567890.5}'), 'lax $.x' RETURNING STRING)",
+    statement: "(JSON('{\"x\": 1234567890123456789012345678901234567890.5}')).x",
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
-      output: "1234567890123456789012345678901234567890.5"
+      output: $json::1234567890123456789012345678901234567890.5
     }
   },
   {
