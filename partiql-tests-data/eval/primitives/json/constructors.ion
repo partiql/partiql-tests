@@ -15,11 +15,11 @@
 
 // No variable in envs has a schema, so its type is not known at compile time, and each value is
 // checked at runtime.
-//   t: a tuple whose i is the number 1 and s the string '1'
+//   t: a tuple whose i is the number 1, s the string '1' and d a DOUBLE PRECISION that is Infinity
 //   jmixed: a value of type JSON and a string
 //   groups: rows whose v is a string, or in group 2 one value of type JSON
 envs::{
-  t: { i: 1, s: "1" },
+  t: { i: 1, s: "1", d: +inf },
   jmixed: [$json::{ a: 1 }, "abc"],
   groups: [
     { g: 1, v: "a" },
@@ -312,10 +312,10 @@ envs::{
       output: "string"
     }
   },
-  // PartiQL's literal 1e400 is Infinity, which JSON text can't hold.
+  // t.d is Infinity, which JSON text can't hold.
   {
     name: "json array Infinity is not accepted",
-    statement: "JSON_ARRAY(1e400 RETURNING JSON)",
+    statement: "JSON_ARRAY(t.d RETURNING JSON)",
     assert: [
       {
         evalMode: EvalModeCoerce,

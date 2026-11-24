@@ -16,8 +16,10 @@
 // No variable in envs has a schema, so its type is not known at compile time, and each value is
 // checked at runtime.
 //   strs: a string holding JSON text, and the number 5
+//   t: a tuple whose d is a DOUBLE PRECISION that is Infinity
 envs::{
-  strs: ["{\"a\": 1}", 5]
+  strs: ["{\"a\": 1}", 5],
+  t: { d: +inf }
 }
 
 'json-parse'::[
@@ -499,11 +501,10 @@ envs::{
       output: $missing::null
     }
   },
-  // PartiQL's literal 1e400 is Infinity. JSON text can't hold it, so it can't become an SQL/JSON
-  // scalar.
+  // t.d is Infinity. JSON text can't hold it, so it can't become an SQL/JSON scalar.
   {
     name: "json scalar Infinity is not accepted",
-    statement: "JSON_SCALAR(1e400)",
+    statement: "JSON_SCALAR(t.d)",
     assert: [
       {
         evalMode: EvalModeCoerce,
