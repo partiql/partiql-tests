@@ -194,6 +194,16 @@ basic::[
       result:EvaluationSuccess,
       output:1.00000000000000000000000000000000000000000001
     }
+  },
+  // ABS has the type of its input (SQL:2023 §6.31 Syntax Rule 11), so it keeps every digit of the literal.
+  {
+    name:"abs of a decimal literal past 38 digits stays exact",
+    statement:"ABS(-1234567890123456789012345678901234567890.5)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:1234567890123456789012345678901234567890.5
+    }
   }
 ]
 
