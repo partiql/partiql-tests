@@ -175,22 +175,34 @@ basic::[
       }
     }
   },
+  // An exact numeric literal is represented exactly, with every digit after the point as its scale, also past 38
+  // digits (SQL:2023 §5.3 Syntax Rule 29). These used to expect the literal rounded to 38 digits.
   {
-    name:"decimalRoundUp",
+    name:"decimal literal past 38 digits stays exact, not rounded up",
     statement:"1.9999999999999999999999999999999999999999999999",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:2.0000000000000000000000000000000000000
+      output:1.9999999999999999999999999999999999999999999999
     }
   },
   {
-    name:"decimalRoundDown",
+    name:"decimal literal past 38 digits stays exact, not rounded down",
     statement:"1.00000000000000000000000000000000000000000001",
     assert:{
       evalMode:[EvalModeCoerce, EvalModeError],
       result:EvaluationSuccess,
-      output:1.0000000000000000000000000000000000000
+      output:1.00000000000000000000000000000000000000000001
+    }
+  },
+  // ABS has the type of its input (SQL:2023 §6.31 Syntax Rule 11), so it keeps every digit of the literal.
+  {
+    name:"abs of a decimal literal past 38 digits stays exact",
+    statement:"ABS(-1234567890123456789012345678901234567890.5)",
+    assert:{
+      evalMode:[EvalModeCoerce, EvalModeError],
+      result:EvaluationSuccess,
+      output:1234567890123456789012345678901234567890.5
     }
   }
 ]
