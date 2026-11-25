@@ -415,6 +415,22 @@ envs::{
       }
     ]
   },
+  // Also when the datetime is inside the item.
+  {
+    name: "json serialize an object holding a datetime",
+    statement: "JSON_SERIALIZE(JSON_OBJECT('d' : JSON_SCALAR(DATE '2024-01-01')))",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $missing::null
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
   {
     name: "json serialize NULL",
     statement: "JSON_SERIALIZE(CAST(NULL AS JSON))",

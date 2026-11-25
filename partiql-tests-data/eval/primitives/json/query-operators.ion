@@ -80,6 +80,26 @@ envs::{
       output: 0
     }
   },
+  // In lax mode a missing member finds nothing, and ON EMPTY applies. In strict mode it is an
+  // error, and ON ERROR applies (§9.46).
+  {
+    name: "json value strict mode a missing member goes to ON ERROR",
+    statement: "JSON_VALUE(payload, 'strict $.age' RETURNING INT DEFAULT 1 ON EMPTY DEFAULT 2 ON ERROR)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 2
+    }
+  },
+  {
+    name: "json value lax mode a missing member goes to ON EMPTY",
+    statement: "JSON_VALUE(payload, 'lax $.age' RETURNING INT DEFAULT 1 ON EMPTY DEFAULT 2 ON ERROR)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: 1
+    }
+  },
   // An object is an error for JSON_VALUE, and ON ERROR defaults to NULL.
   {
     name: "json value an object gives NULL",
@@ -266,6 +286,16 @@ envs::{
       output: $json::[7]
     }
   },
+  // A string input gives a string result, which the test parses back.
+  {
+    name: "json query unconditional wrapper with a string result",
+    statement: "JSON(JSON_QUERY(payload, 'lax $.id' WITH WRAPPER))",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[7]
+    }
+  },
   // The quotes are what this tests (§6.35). The exact JSON text is not specified, so the result is
   // parsed back: with KEEP QUOTES it is the JSON string "Bob", and the OMIT QUOTES result, Bob, would
   // not be valid JSON text.
@@ -313,6 +343,25 @@ envs::{
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
       output: $json::{}
+    }
+  },
+  // As for JSON_VALUE: ON ERROR in strict mode, ON EMPTY in lax mode (§9.46).
+  {
+    name: "json query strict mode a missing member goes to ON ERROR",
+    statement: "JSON_QUERY(JSON(payload), 'strict $.age' EMPTY ARRAY ON EMPTY EMPTY OBJECT ON ERROR)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{}
+    }
+  },
+  {
+    name: "json query lax mode a missing member goes to ON EMPTY",
+    statement: "JSON_QUERY(JSON(payload), 'lax $.age' EMPTY ARRAY ON EMPTY EMPTY OBJECT ON ERROR)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::[]
     }
   },
   {
@@ -565,6 +614,16 @@ envs::{
   {
     name: "json passing a string FORMAT JSON is parsed",
     statement: "JSON_VALUE(JSON('{}'), 'lax $s.a' PASSING '{\"a\": 5}' FORMAT JSON AS s)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: "5"
+    }
+  },
+  // A constructor result implies FORMAT JSON, so it is parsed (§10.12).
+  {
+    name: "json passing a constructor result parses it",
+    statement: "JSON_VALUE(JSON('{}'), 'lax $s.a' PASSING JSON_OBJECT('a' : 5) AS s)",
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,

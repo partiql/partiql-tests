@@ -255,6 +255,16 @@ envs::{
       output: null
     }
   },
+  // SQL NULL gives NULL, also when its type is JSON.
+  {
+    name: "json instanceof JSON on an SQL NULL of type JSON",
+    statement: "instanceof(CAST(NULL AS JSON), JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: null
+    }
+  },
   {
     name: "json instanceof JSON MISSING",
     statement: "instanceof(MISSING, JSON)",

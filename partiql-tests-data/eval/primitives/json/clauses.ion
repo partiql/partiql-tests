@@ -130,9 +130,69 @@ envs::{
       }
     ]
   },
+  // If one input of CASE, COALESCE or a set operation has type JSON, all must, but NULL
+  // (§9.5) and MISSING literals are allowed. MISSING is PartiQL's own rule.
+  {
+    name: "json COALESCE with a NULL literal",
+    statement: "COALESCE(NULL, JSON('1'))",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::1
+    }
+  },
+  {
+    name: "json CASE with a MISSING literal",
+    statement: "CASE WHEN true THEN JSON('1') ELSE MISSING END",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::1
+    }
+  },
+  // JSON_VALUE returns a STRING, so mixing it with a string is fine. $.note is an SQL/JSON null, so
+  // JSON_VALUE gives NULL.
+  {
+    name: "json COALESCE of JSON_VALUE and a string",
+    statement: "COALESCE(JSON_VALUE(payload, 'lax $.note'), 'none')",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: "none"
+    }
+  },
+  // PartiQL's array, bag and tuple constructors still accept a mix of JSON and other types.
+  {
+    name: "json an array constructor accepts a mix",
+    statement: "[JSON('1'), 2]",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: [$json::1, 2]
+    }
+  },
+  {
+    name: "json a tuple constructor accepts a mix",
+    statement: "{'a': JSON('1'), 'b': 2}",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: { a: $json::1, b: 2 }
+    }
+  },
+  {
+    name: "json a bag constructor accepts a mix",
+    statement: "<<JSON('1'), 2>>",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[$json::1, 2]
+    }
+  },
   /* TODO: not specified yet in partiql/partiql-lang#107: comparing, grouping and ordering values of
-     type JSON, with each other or with another type: =, IN, DISTINCT, GROUP BY, ORDER BY, MIN, MAX
-     and the set operations that remove duplicates. For JSON('7') = 7, PartiQL's equality would give
+     type JSON, with each other or with another type: =, IN, NULLIF, DISTINCT, GROUP BY, ORDER BY, MIN,
+     MAX and the set operations that remove duplicates. NULLIF(V1, V2) means CASE WHEN V1 = V2 THEN
+     NULL ELSE V1 END (§6.12), so it is a comparison. For JSON('7') = 7, PartiQL's equality would give
      false, as for 5 = 'a', while SQL:2023 rejects a JSON operand without T879 (§9.11).
   */
   /* TODO: not specified yet in partiql/partiql-lang#107: how CAST maps an Ion value to JSON, such

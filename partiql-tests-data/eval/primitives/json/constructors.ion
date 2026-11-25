@@ -302,6 +302,16 @@ envs::{
       output: $json::[null]
     }
   },
+  // The same for JSON_OBJECT (§6.34 General Rule 3.c).
+  {
+    name: "json object ABSENT ON NULL drops an SQL/JSON null",
+    statement: "JSON_OBJECT('a' : JSON('null') ABSENT ON NULL RETURNING JSON)",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $json::{}
+    }
+  },
   // An input of another SQL type is cast to a string (§6.34 General Rule 2.d.ii.1.F.IV.2, ID100).
   {
     name: "json object an interval input becomes a string",
@@ -400,6 +410,37 @@ envs::{
       output: $bag::[{ a: null }]
     }
   },
+  // NULL only when there are no rows (§10.11 General Rule 5.f). Otherwise ABSENT ON NULL leaves
+  // the NULL values out, and the array is empty (General Rule 5.g).
+  {
+    name: "json arrayagg over rows that are all NULL is an empty array",
+    statement: "SELECT JSON_ARRAYAGG(x RETURNING JSON) AS a FROM <<NULL, NULL>> AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ a: $json::[] }]
+    }
+  },
+  // ABSENT ON NULL also leaves out an SQL/JSON null (§10.11 General Rule 5.g).
+  {
+    name: "json arrayagg ABSENT ON NULL drops an SQL/JSON null",
+    statement: "SELECT JSON_ARRAYAGG(x) AS a FROM [JSON('null'), JSON('1')] AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ a: $json::[1] }]
+    }
+  },
+  // A MISSING value is left out, whichever null clause is used.
+  {
+    name: "json arrayagg MISSING is left out",
+    statement: "SELECT JSON_ARRAYAGG(CASE WHEN x = 2 THEN MISSING ELSE x END NULL ON NULL RETURNING JSON) AS a FROM <<1, 2>> AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ a: $json::[1] }]
+    }
+  },
   // Group 1 holds only strings, so the result is a STRING. Group 2 holds a value of type JSON, so
   // it is JSON.
   {
@@ -459,6 +500,77 @@ envs::{
       result: EvaluationSuccess,
       output: $bag::[{ o: $json::{} }]
     }
+  },
+  // §10.11 General Rule 4.b.ii.4.B. The value has type JSON, so the result is JSON.
+  {
+    name: "json objectagg ABSENT ON NULL drops an SQL/JSON null",
+    statement: "SELECT JSON_OBJECTAGG(x : JSON('null') ABSENT ON NULL) AS o FROM <<'a'>> AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ o: $json::{} }]
+    }
+  },
+  {
+    name: "json objectagg MISSING value is left out",
+    statement: "SELECT JSON_OBJECTAGG(x : CASE WHEN x = 'b' THEN MISSING ELSE 1 END NULL ON NULL RETURNING JSON) AS o FROM <<'a', 'b'>> AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ o: $json::{ a: 1 } }]
+    }
+  },
+  // As in JSON_OBJECT: left out in permissive mode, an error in type checking mode.
+  {
+    name: "json objectagg MISSING key",
+    statement: "SELECT JSON_OBJECTAGG(CASE WHEN x = 'b' THEN MISSING ELSE x END : 1 RETURNING JSON) AS o FROM <<'a', 'b'>> AS x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[{ o: $json::{ a: 1 } }]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
+  },
+  // An error in both modes (§10.11 General Rule 4.b.ii.2.B).
+  {
+    name: "json objectagg NULL key",
+    statement: "SELECT JSON_OBJECTAGG(CASE WHEN x = 'b' THEN NULL ELSE x END : 1 RETURNING JSON) AS o FROM <<'a', 'b'>> AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationFail
+    }
+  },
+  // WITHOUT UNIQUE KEYS is the default (§10.11).
+  {
+    name: "json objectagg a repeated key keeps both members",
+    statement: "SELECT JSON_OBJECTAGG(x : 1 RETURNING JSON) AS o FROM <<'a', 'a'>> AS x",
+    assert: {
+      evalMode: [EvalModeCoerce, EvalModeError],
+      result: EvaluationSuccess,
+      output: $bag::[{ o: $json::{ a: 1, a: 1 } }]
+    }
+  },
+  // §10.11 General Rule 4.b.ii.3. In permissive mode the aggregate is MISSING, so the select list
+  // leaves o out.
+  {
+    name: "json objectagg WITH UNIQUE KEYS and a repeated key",
+    statement: "SELECT JSON_OBJECTAGG(x : 1 WITH UNIQUE KEYS RETURNING JSON) AS o FROM <<'a', 'a'>> AS x",
+    assert: [
+      {
+        evalMode: EvalModeCoerce,
+        result: EvaluationSuccess,
+        output: $bag::[{}]
+      },
+      {
+        evalMode: EvalModeError,
+        result: EvaluationFail
+      }
+    ]
   },
   // §10.11.
   {
