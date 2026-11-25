@@ -130,21 +130,11 @@ envs::{
       }
     ]
   },
-  // If one input of CASE, COALESCE, NULLIF or a set operation has type JSON, all must, but NULL
+  // If one input of CASE, COALESCE or a set operation has type JSON, all must, but NULL
   // (§9.5) and MISSING literals are allowed. MISSING is PartiQL's own rule.
   {
     name: "json COALESCE with a NULL literal",
     statement: "COALESCE(NULL, JSON('1'))",
-    assert: {
-      evalMode: [EvalModeCoerce, EvalModeError],
-      result: EvaluationSuccess,
-      output: $json::1
-    }
-  },
-  // JSON('1') = NULL is not true, so NULLIF returns its first input.
-  {
-    name: "json NULLIF with a NULL literal",
-    statement: "NULLIF(JSON('1'), NULL)",
     assert: {
       evalMode: [EvalModeCoerce, EvalModeError],
       result: EvaluationSuccess,
@@ -200,8 +190,9 @@ envs::{
     }
   },
   /* TODO: not specified yet in partiql/partiql-lang#107: comparing, grouping and ordering values of
-     type JSON, with each other or with another type: =, IN, DISTINCT, GROUP BY, ORDER BY, MIN, MAX
-     and the set operations that remove duplicates. For JSON('7') = 7, PartiQL's equality would give
+     type JSON, with each other or with another type: =, IN, NULLIF, DISTINCT, GROUP BY, ORDER BY, MIN,
+     MAX and the set operations that remove duplicates. NULLIF(V1, V2) means CASE WHEN V1 = V2 THEN
+     NULL ELSE V1 END (§6.12), so it is a comparison. For JSON('7') = 7, PartiQL's equality would give
      false, as for 5 = 'a', while SQL:2023 rejects a JSON operand without T879 (§9.11).
   */
   /* TODO: not specified yet in partiql/partiql-lang#107: how CAST maps an Ion value to JSON, such
